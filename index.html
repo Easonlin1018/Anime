@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v7.1</title>
+    <title>全自動動漫追番基地 v7.2</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -100,12 +100,12 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v7.1</h1>
+    <h1>🎬 全自動動漫追番基地 v7.2</h1>
 
     <!-- 新增區塊 -->
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增</div>
-        <input type="text" id="search-input" placeholder="輸入動漫關鍵字（如：青之箱）">
+        <input type="text" id="search-input" placeholder="輸入動漫關鍵字">
         <button id="search-btn" onclick="searchAnime()">🔍 自動搜尋並加入</button>
     </div>
 
@@ -140,24 +140,24 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v7_1')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v7_2')) || [];
 
-// 完美繼承轉移舊版本資料
+// 完美無縫繼承轉移舊版本資料
 if (animeList.length === 0) {
-    const oldKeys = ['anime_list_v7_0', 'anime_list_v6_9', 'anime_list_v6_8'];
+    const oldKeys = ['anime_list_v7_1', 'anime_list_v7_0', 'anime_list_v6_9', 'anime_list_v6_8'];
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) {
             animeList = JSON.parse(localStorage.getItem(key));
             break;
         }
     }
-    localStorage.setItem('anime_list_v7_1', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_2', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v7_1', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_2', JSON.stringify(animeList));
     renderList();
 }
 
@@ -172,7 +172,6 @@ function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle,
     let cleanTitle = currentTitle.replace(/\s*第[一二三四五六七八九十0-9]+[季期]\s*$/g, "");
     cleanTitle = cleanTitle.replace(/\s*Season\s*[0-9]+\s*$/gi, "");
 
-    // ✨ v7.1 修復：更加精準的季度判定，移除單獨 \b2\b 避免誤判標題自帶數字（如：2番目）
     if (combined.includes("season 2") || combined.includes("2nd season") || combined.includes("第2期") || combined.includes("第二期") || combined.includes("第2季") || combined.includes("第二季") || combined.includes("續") || combined.includes("续") || /part\s*2\b/.test(combined)) {
         return cleanTitle + " 第二季";
     } else if (combined.includes("season 3") || combined.includes("3rd season") || combined.includes("第3期") || combined.includes("第三期") || combined.includes("第3季") || combined.includes("第三季")) {
@@ -387,27 +386,46 @@ function renderList() {
     document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
 }
 
-// 🚀 v7.1 核心強效導正系統
+// 🚀 v7.2 核心強效導正防線
 async function autoRefreshAndCheck() {
     let changed = false;
     for (let anime of animeList) {
         let lowerTitle = anime.title.toLowerCase();
 
-        // 1. 🔥【強效導正防線一：艾莉同學繁中導正】
+        // 1. 艾莉同學繁中導正
         if (lowerTitle.includes("時々ボソッと") || lowerTitle.includes("ロシア語")) {
             anime.title = "不時輕聲地以俄語遮羞的鄰座艾莉同學 第二季";
             changed = true;
         }
 
-        // 2. 🔥【強效導正防線二：青之箱日文強制翻轉繁中】
+        // 2. 青之箱日文強制翻轉繁中
         if (lowerTitle.includes("アオのハコ") || lowerTitle.includes("blue box")) {
             anime.title = "青之箱 第二季";
             changed = true;
         }
 
-        // 3. 🔥【強效導正防線三：修復第二可愛被誤判成第二季的 Bug】
+        // 3. 修復第二可愛被誤判成第二季的 Bug
         if (lowerTitle.includes("2番目に可愛い") && anime.title.includes("第二季")) {
             anime.title = "我成了班上第二可愛女生的朋友";
+            changed = true;
+        }
+
+        // 4. 🔥【強效導正防線四：《總之就是非常可愛》全系列繁中識別分家】
+        if (lowerTitle.includes("总之就是非常可爱") || lowerTitle.includes("總之就是非常可愛") || lowerTitle.includes("tonikaku")) {
+            let eps = Number(anime.episodes);
+            if (eps === 12) {
+                if (anime.title.includes("2") || anime.title.includes("第二季")) {
+                    anime.title = "總之就是非常可愛 第二季";
+                } else {
+                    anime.title = "總之就是非常可愛 第一季";
+                }
+            } else if (eps === 1) {
+                anime.title = "總之就是非常可愛 OVA特別篇";
+            } else if (eps === 4) {
+                anime.title = "總之就是非常可愛 女高中生篇";
+            } else {
+                anime.title = "總之就是非常可愛";
+            }
             changed = true;
         }
 
@@ -441,8 +459,8 @@ async function autoRefreshAndCheck() {
                     changed = true;
                 }
 
-                // 基礎翻譯修復（跳過已被我們本地強制鎖定的三大特例）
-                if (!anime.title.includes("艾莉同學") && !anime.title.includes("青之箱") && !anime.title.includes("第二可愛")) {
+                // 基礎翻譯修復（跳過已被我們本地強制鎖定的特例）
+                if (!anime.title.includes("艾莉同學") && !anime.title.includes("青之箱") && !anime.title.includes("第二可愛") && !anime.title.includes("總之就是非常可愛")) {
                     let baseChinese = anime.title;
                     if (media.synonyms && media.synonyms.length > 0) {
                         const chiSyn = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s));
@@ -461,7 +479,6 @@ async function autoRefreshAndCheck() {
 }
 
 renderList();
-// 網頁開啟 1 秒後，自動啟動太空雷達導正所有動漫狀態
 setTimeout(autoRefreshAndCheck, 1000);
 </script>
 </body>
