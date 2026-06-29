@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v6.7</title>
+    <title>全自動動漫追番基地 v6.8</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -98,7 +98,7 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v6.7</h1>
+    <h1>🎬 全自動動漫追番基地 v6.8</h1>
 
     <!-- 新增區塊 -->
     <div class="section">
@@ -138,18 +138,18 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v6_7')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v6_8')) || [];
 
-// 從舊版 v6.6 順暢轉移資料
-if (animeList.length === 0 && localStorage.getItem('anime_list_v6_6')) {
-    animeList = JSON.parse(localStorage.getItem('anime_list_v6_6'));
-    localStorage.setItem('anime_list_v6_7', JSON.stringify(animeList));
+// 從舊版 v6.7 完美相容轉移資料
+if (animeList.length === 0 && localStorage.getItem('anime_list_v6_7')) {
+    animeList = JSON.parse(localStorage.getItem('anime_list_v6_7'));
+    localStorage.setItem('anime_list_v6_8', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v6_7', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v6_8', JSON.stringify(animeList));
     renderList();
 }
 
@@ -159,7 +159,25 @@ function showToast(msg) {
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
-// 升級版搜尋：支援父級中文名稱傳遞、加入中文別名抓取
+// 核心智慧季數判斷後綴器
+function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle, extraKeyword = "") {
+    const combined = `${nativeTitle} ${englishTitle || ''} ${romajiTitle || ''} ${extraKeyword}`.toLowerCase();
+    
+    // 先把標題尾端可能重複黏上的「第X季」或「Season X」切乾淨，以便重新精準分配
+    let cleanTitle = currentTitle.replace(/\s*第[一二三四五六七八九十0-9]+[季期]\s*$/g, "");
+    cleanTitle = cleanTitle.replace(/\s*Season\s*[0-9]+\s*$/gi, "");
+
+    // 智能比對多國語系關鍵字
+    if (combined.includes("season 2") || combined.includes("第2期") || combined.includes("第二期") || /\b2\b|ⅱ|②/.test(combined) || combined.includes("續") || combined.includes("续")) {
+        return cleanTitle + " 第二季";
+    } else if (combined.includes("season 3") || combined.includes("第3期") || combined.includes("第三期") || /\b3\b|ⅲ|③/.test(combined)) {
+        return cleanTitle + " 第三季";
+    } else if (combined.includes("season 4") || combined.includes("第4期") || combined.includes("第四期") || /\b4\b|ⅳ|④/.test(combined)) {
+        return cleanTitle + " 第四季";
+    }
+    return cleanTitle; // 第一季或找不到續作標籤則維持原樣
+}
+
 async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle = null) {
     const input = keyword || document.getElementById('search-input').value.trim();
     if(!input) return;
@@ -169,7 +187,6 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
         searchBtn.innerText = "⚡ 正在連網抓取資料...";
     }
 
-    // 增加了 synonyms 的查詢
     const query = `
     query ($search: String) {
       Media (search: $search, type: ANIME) {
@@ -211,22 +228,19 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
                 return;
             }
 
-            // ✨ 核心中文化篩選邏輯
             let chosenTitle = media.title.native;
             if (media.synonyms && media.synonyms.length > 0) {
-                // 利用正規表達式尋找含有中文字（Hanzi）的別名
                 const chiSyn = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s));
                 if (chiSyn) chosenTitle = chiSyn;
             }
             
-            // 如果沒撈到中文別名，但是有上游給的中文名（通常是自動續作），就自動組合
             if (chosenTitle === media.title.native) {
-                if (parentChineseTitle) {
-                    chosenTitle = parentChineseTitle + " 第二季";
-                } else if (keyword && /[\u4e00-\u9fa5]/.test(keyword)) {
-                    chosenTitle = keyword; // 如果使用者輸入的就是中文，直接沿用
-                }
+                if (parentChineseTitle) chosenTitle = parentChineseTitle;
+                else if (keyword && /[\u4e00-\u9fa5]/.test(keyword)) chosenTitle = keyword;
             }
+
+            // 注入核心季數防護邏輯
+            chosenTitle = applySeasonSuffix(chosenTitle, media.title.native, media.title.english, media.title.romaji, keyword || "");
 
             let category = 'watching';
             if(media.status === 'NOT_YET_RELEASED') category = 'waiting';
@@ -239,7 +253,7 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
 
             const newAnime = {
                 id: media.id,
-                title: chosenTitle, // 儲存漂亮的中文標題！
+                title: chosenTitle,
                 status: media.status,
                 episodes: media.episodes || "??",
                 watched: 0,
@@ -275,7 +289,6 @@ async function checkAndAddSequel(anime, isQuiet = false) {
             if (!isQuiet) {
                 showToast(`🎉 偵測到有全新續作！<br>已自動將續作加入【敲碗等待開播】。`);
             }
-            // 💡 關鍵傳遞：將目前的中文名傳給下一季，確保下一季也能完美中文化
             await searchAnime(sequelNode.title.native, true, anime.title);
         }
     }
@@ -365,34 +378,35 @@ function renderList() {
     document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
 }
 
-// 🚀 特殊核心功能：自動把原本在畫面上的舊日文標題轉化成中文
-async function autoTranslateExisting() {
+// 🚀 v6.8 核心自動修復功能：掃描全清單，把因缺漏季數而撞名的動漫全部導正
+async function autoTranslateAndRepair() {
     let changed = false;
     for (let anime of animeList) {
-        // 如果偵測到名字裡包含日文假名（平假名/片假名），就代表它是舊的日文資料
-        if (/[\u3040-\u309F\u30A0-\u30FF]/.test(anime.title)) {
-            const query = `query ($id: Int) { Media (id: $id, type: ANIME) { title { native } synonyms } }`;
-            try {
-                const response = await fetch('https://graphql.anilist.co', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query, variables: { id: anime.id } })
-                });
-                const resData = await response.json();
-                const media = resData.data.Media;
-                if (media && media.synonyms) {
+        const query = `query ($id: Int) { Media (id: $id, type: ANIME) { title { native english romaji } synonyms } }`;
+        try {
+            const response = await fetch('https://graphql.anilist.co', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query, variables: { id: anime.id } })
+            });
+            const resData = await response.json();
+            const media = resData.data.Media;
+            if (media) {
+                let baseChinese = anime.title;
+                if (media.synonyms && media.synonyms.length > 0) {
                     const chiSyn = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s));
-                    if (chiSyn) {
-                        anime.title = chiSyn;
-                        changed = true;
-                    } else if (anime.title.includes("Season 2") || anime.title.includes("第2期")) {
-                        // 如果是第二季且沒中文，就用通俗中文暫代
-                        anime.title = "鄰座的艾莉同學 第二季";
-                        changed = true;
-                    }
+                    if (chiSyn) baseChinese = chiSyn;
                 }
-            } catch (e) { console.error(e); }
-        }
+                
+                // 重新交給防護盾比對，確保一定帶有正確的季數
+                let repairedTitle = applySeasonSuffix(baseChinese, media.title.native, media.title.english, media.title.romaji, anime.title);
+                
+                if (anime.title !== repairedTitle) {
+                    anime.title = repairedTitle;
+                    changed = true;
+                }
+            }
+        } catch (e) { console.error(e); }
     }
     if (changed) {
         saveAndRender();
@@ -400,8 +414,8 @@ async function autoTranslateExisting() {
 }
 
 renderList();
-// 網頁載入後 1 秒鐘，偷偷在背景把所有日文名字自動洗成中文！
-setTimeout(autoTranslateExisting, 1000);
+// 網頁開啟後 1 秒，自動在背景體檢並幫所有遺失季數的動漫補上後綴！
+setTimeout(autoTranslateAndRepair, 1000);
 </script>
 </body>
 </html>
