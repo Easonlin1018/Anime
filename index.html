@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v8.1</title>
+    <title>全自動動漫追番基地 v8.2</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -28,7 +28,7 @@
         .section-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-color); display: flex; justify-content: space-between; }
         input, button { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); box-sizing: border-box; }
         button { background-color: #2563eb; color: white; font-weight: bold; border: none; cursor: pointer; }
-        button:disabled { background-color: #475569; }
+        button:disabled { background-color: #475569; cursor: not-allowed; }
         .anime-item { background: var(--bg-color); padding: 12px; border-radius: 8px; margin-bottom: 8px; border: 1px solid var(--border-color); }
         .anime-title { font-weight: bold; margin-bottom: 6px; line-height: 1.4; }
         .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
@@ -45,7 +45,7 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v8.1</h1>
+    <h1>🎬 全自動動漫追番基地 v8.2</h1>
 
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增 (智慧破譯版)</div>
@@ -75,21 +75,21 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v8_1')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v8_2')) || [];
 
-// 完美轉移繼承舊版資料
+// 完美轉移舊版本數據
+const oldKeys = ['anime_list_v8_1', 'anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8'];
 if (animeList.length === 0) {
-    const oldKeys = ['anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8', 'anime_list_v7_7'];
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) { animeList = JSON.parse(localStorage.getItem(key)); break; }
     }
-    localStorage.setItem('anime_list_v8_1', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_2', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v8_1', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_2', JSON.stringify(animeList));
     renderList();
 }
 
@@ -115,10 +115,10 @@ function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle)
     return cleanTitle;
 }
 
-// 🎬 核心智慧搜尋 (支援關鍵字或直接指定高精度 ID)
+// 🎬 核心智慧搜尋 (已徹底修復按鈕死鎖 Bug)
 async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle = null, targetId = null) {
     let input = keyword || document.getElementById('search-input').value.trim();
-    if(!input && !targetId) return;
+    if(!input && !targetId) return false;
     
     if (!isQuiet && !targetId) {
         searchBtn.disabled = true;
@@ -128,7 +128,6 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
     let wikiJaTitle = null;
     let wikiZhTitle = null;
 
-    // 只有在非 ID 查詢時才啟動維基匹配，100% 避免因日文長標題導致的文字搜尋故障
     if (!targetId) {
         try {
             const wikiSearchUrl = `https://zh.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(input)}&format=json&origin=*`;
@@ -153,7 +152,6 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
 
     let query, variables;
     if (targetId) {
-        // ✨ 強效優化：直接用 ID 與國際資料庫對齊，杜絕文字配對失敗
         query = `query ($id: Int) { Media (id: $id, type: ANIME) { id title { native english romaji } synonyms status episodes startDate { year month day } relations { edges { relationType node { id title { native english romaji } status } } } } }`;
         variables = { id: targetId };
     } else {
@@ -205,33 +203,36 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
             animeList.push(newAnime); saveAndRender();
             if(!keyword && !isQuiet) document.getElementById('search-input').value = "";
             
-            // 🎯 精準提示分流狀態
             let catNames = { waiting: '⏳ 敲碗等待開播', watching: '⚡ 正在連載 / 正在追', backlog: '🎬 官方已完結（補番中）' };
-            showToast(`🛰️ 偵測並成功加入續作：<br><b style="color:#60a5fa;">《${chosenTitle}》</b><br>已依最新狀態放入 <b>${catNames[category]}</b> 區！`);
+            if (!isQuiet) showToast(`🛰️ 偵測並成功加入作品：<br><b style="color:#60a5fa;">《${chosenTitle}》</b><br>已依最新狀態放入 <b>${catNames[category]}</b> 區！`);
 
             if (category !== 'waiting') await checkAndAddSequel(newAnime, true);
+            
+            // ✨ 核心修復：成功退出前，也強制解鎖按鈕
+            if (!isQuiet) { searchBtn.disabled = false; searchBtn.innerText = "🔍 智慧網格搜尋"; }
             return true;
         }
-    } catch (error) { if (!isQuiet) showToast("❌ 發生未知連線錯誤。"); }
+    } catch (error) { 
+        if (!isQuiet) showToast("❌ 發生未知連線錯誤。"); 
+    }
+    
+    // ✨ 核心修復：兜底保護，無論如何此處一定會解除鎖定
     if (!isQuiet) { searchBtn.disabled = false; searchBtn.innerText = "🔍 智慧網格搜尋"; }
     return false;
 }
 
-// 🛰️ 續作高精度 ID 綁定觸發器
 async function checkAndAddSequel(anime, isQuiet = false) {
     if (!anime.relations || anime.relations.length === 0) return false;
     const sequelEdge = anime.relations.find(edge => edge.relationType === 'SEQUEL');
     if (sequelEdge) {
         const sequelNode = sequelEdge.node;
         if (!animeList.some(a => a.id === sequelNode.id)) {
-            // 直接拋送 ID 做高精度置入
             return await searchAnime(null, isQuiet, anime.title, sequelNode.id);
         }
     }
     return false;
 }
 
-// 🛰️ 手動點擊雷達掃描按鈕函數
 async function manualScanSequels() {
     showToast("🛰️ 正在手動啟動高精度雷達...<br>正在逐一比對【已追完】清單中的大數據續作情報...");
     let foundAny = false;
@@ -253,7 +254,6 @@ async function manualScanSequels() {
                     if (sequelEdge) {
                         const sequelNode = sequelEdge.node;
                         if (!animeList.some(a => a.id === sequelNode.id)) {
-                            // 只要有一部成功置入，標記設為 true
                             let success = await searchAnime(null, true, anime.title, sequelNode.id);
                             if(success) foundAny = true;
                         }
@@ -263,13 +263,11 @@ async function manualScanSequels() {
         }
     }
     
-    // 如果全部都對比過，且沒有任何可以加入的新番，反饋提示使用者
     if (!foundAny) {
         setTimeout(() => { showToast("🛰️ 雷達全網掃描完畢！<br>目前清單內的所有已追完動漫，在國際資料庫上皆無未入庫的全新續作情報。"); }, 1200);
     }
 }
 
-// 背景靜默雷達自動掃描
 async function autoScanSequels() {
     for (let anime of animeList) {
         if (anime.category === 'completed') {
@@ -343,7 +341,6 @@ function exportData() { if (animeList.length === 0) return; const dataStr = "dat
 function importData(e) { const file = e.target.files[0]; if (!file) return; const r = new FileReader(); r.onload = function(evt) { try { const list = JSON.parse(evt.target.result); if (Array.isArray(list)) { animeList = list; saveAndRender(); } } catch(err) {} }; r.readAsText(file); }
 
 renderList();
-// 網頁載入 1.5 秒後，背景雷達靜默安全掃描
 setTimeout(autoScanSequels, 1500);
 </script>
 </body>
