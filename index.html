@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v8.2</title>
+    <title>全自動動漫追番基地 v8.3</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -45,11 +45,11 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v8.2</h1>
+    <h1>🎬 全自動動漫追番基地 v8.3</h1>
 
     <div class="section">
-        <div class="section-title">➕ 一鍵自動化新增 (智慧破譯版)</div>
-        <input type="text" id="search-input" placeholder="輸入動漫稱呼（系統將自動聯動破譯）">
+        <div class="section-title">➕ 一鍵自動化新增 (智慧破譯跨國版)</div>
+        <input type="text" id="search-input" placeholder="輸入動漫稱呼（支援中/日/英、簡稱、錯字容錯）">
         <button id="search-btn" onclick="searchAnime()">🔍 智慧網格搜尋</button>
     </div>
 
@@ -75,21 +75,21 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v8_2')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v8_3')) || [];
 
-// 完美轉移舊版本數據
-const oldKeys = ['anime_list_v8_1', 'anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8'];
+// 完美跨版本數據無縫轉移
+const oldKeys = ['anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8'];
 if (animeList.length === 0) {
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) { animeList = JSON.parse(localStorage.getItem(key)); break; }
     }
-    localStorage.setItem('anime_list_v8_2', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_3', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v8_2', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_3', JSON.stringify(animeList));
     renderList();
 }
 
@@ -115,7 +115,7 @@ function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle)
     return cleanTitle;
 }
 
-// 🎬 核心智慧搜尋 (已徹底修復按鈕死鎖 Bug)
+// 🎬 核心智慧搜尋引擎 v8.3 (新增全球雙軌模糊防線)
 async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle = null, targetId = null) {
     let input = keyword || document.getElementById('search-input').value.trim();
     if(!input && !targetId) return false;
@@ -130,6 +130,7 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
 
     if (!targetId) {
         try {
+            // 第一重防線：維基百科精準對齊
             const wikiSearchUrl = `https://zh.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(input)}&format=json&origin=*`;
             const searchRes = await fetch(wikiSearchUrl);
             const searchData = await searchRes.json();
@@ -169,6 +170,7 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
         let resData = await response.json();
         let media = resData.data ? resData.data.Media : null;
 
+        // 第二重防線：日語翻譯碰撞 (解決日文原名檢索)
         if (!media && !targetId) {
             let translatedJa = await translateText(input, "ja");
             if (translatedJa) {
@@ -177,8 +179,17 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
             }
         }
 
+        // ✨第三重全新防線：歐美大數據英文模糊搜尋 (絕殺漢字/平假名錯亂、字詞些微落差)
+        if (!media && !targetId) {
+            let translatedEn = await translateText(input, "en");
+            if (translatedEn) {
+                response = await fetch('https://graphql.anilist.co', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query, variables: { search: translatedEn } }) });
+                resData = await response.json(); media = resData.data ? resData.data.Media : null;
+            }
+        }
+
         if(!media) {
-            if (!isQuiet) showToast("❌ 搜尋失敗，找不到該作品。");
+            if (!isQuiet) showToast("❌ 智慧網格多軌搜尋皆失敗。<br>請嘗試輸入更準確的官方全名或日文名稱！");
         } else {
             if(animeList.some(a => a.id === media.id)) {
                 if(!keyword && !targetId && !isQuiet) showToast("💡 清單中已經有這部作品囉！");
@@ -208,7 +219,6 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
 
             if (category !== 'waiting') await checkAndAddSequel(newAnime, true);
             
-            // ✨ 核心修復：成功退出前，也強制解鎖按鈕
             if (!isQuiet) { searchBtn.disabled = false; searchBtn.innerText = "🔍 智慧網格搜尋"; }
             return true;
         }
@@ -216,7 +226,6 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
         if (!isQuiet) showToast("❌ 發生未知連線錯誤。"); 
     }
     
-    // ✨ 核心修復：兜底保護，無論如何此處一定會解除鎖定
     if (!isQuiet) { searchBtn.disabled = false; searchBtn.innerText = "🔍 智慧網格搜尋"; }
     return false;
 }
@@ -328,20 +337,4 @@ function renderList() {
     const lists = { watching: '', backlog: '', waiting: '', completed: '' };
     animeList.forEach(anime => {
         let actionButtons = (anime.category === 'watching' || anime.category === 'backlog') ? `<button onclick="updateProgress(${anime.id}, 1)">➕ 看了 1 集</button><button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 追完</button>` : (anime.category === 'waiting' ? `<div class="status-radar">🛰️ 智慧雷達自動監測中...</div>` : `<button onclick="moveCategory(${anime.id}, 'watching')">🔄 重看</button>`);
-        const html = `<div class="anime-item"><div class="anime-title">${anime.title}</div><div class="anime-meta">${(anime.category === 'watching' || anime.category === 'backlog') ? `進度：${anime.watched} / ${anime.episodes} 集` : (anime.category === 'waiting' ? `預計開播：<span style="color:#f59e0b;font-weight:bold;">${anime.airDate}</span>` : `✨ 全 ${anime.episodes} 集觀看完畢`)}</div><div class="btn-group">${actionButtons}<button class="btn-edit" onclick="editTitle(${anime.id})">✏️ 改名</button><button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️ 刪除</button></div></div>`;
-        if(lists[anime.category] !== undefined) lists[anime.category] += html;
-    });
-    document.getElementById('list-watching').innerHTML = lists.watching || '<div style="color:#64748b;font-size:12px;">暫無連載中動漫</div>';
-    document.getElementById('list-backlog').innerHTML = lists.backlog || '<div style="color:#64748b;font-size:12px;">暫無補番中動漫</div>';
-    document.getElementById('list-waiting').innerHTML = lists.waiting || '<div style="color:#64748b;font-size:12px;">暫無敲碗中動漫</div>';
-    document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
-}
-
-function exportData() { if (animeList.length === 0) return; const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(animeList)); const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", `anime_backup.json`); dl.click(); }
-function importData(e) { const file = e.target.files[0]; if (!file) return; const r = new FileReader(); r.onload = function(evt) { try { const list = JSON.parse(evt.target.result); if (Array.isArray(list)) { animeList = list; saveAndRender(); } } catch(err) {} }; r.readAsText(file); }
-
-renderList();
-setTimeout(autoScanSequels, 1500);
-</script>
-</body>
-</html>
+        const html = `<div class="anime-item"><div class="anime-title">${anime.title}</div><div class="anime-meta">${(anime.category === 'watching' || anime.category === 'backlog') ? `進度：${anime.watched} / ${anime.episodes} 集` : (anime.category === 'waiting' ? `預計開播：<span style="color:#f59e0b;font-weight:bold;">${anime.airDate}</span>` : `✨ 全 ${anime.episodes} 集觀看完畢`)}</div><div
