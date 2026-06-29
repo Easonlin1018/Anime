@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v8.4</title>
+    <title>全自動動漫追番基地 v8.5</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -46,11 +46,11 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v8.4</h1>
+    <h1>🎬 全自動動漫追番基地 v8.5</h1>
 
     <div class="section">
-        <div class="section-title">➕ 一鍵自動化新增 (毫秒級流暢版)</div>
-        <input type="text" id="search-input" placeholder="輸入動漫稱呼（支援中/日/英、錯字容錯）">
+        <div class="section-title">➕ 一鍵自動化新增 (智慧格式分流版)</div>
+        <input type="text" id="search-input" placeholder="輸入動漫稱呼（外傳/OVA將自動精準標記）">
         <button id="search-btn" onclick="searchAnime()">🔍 智慧網格搜尋</button>
     </div>
 
@@ -76,31 +76,30 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v8_4')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v8_5')) || [];
 let toastTimer = null;
 
-// 完美跨版本數據自動繼承
-const oldKeys = ['anime_list_v8_3', 'anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8'];
+// 完美跨版本數據自動無縫繼承
+const oldKeys = ['anime_list_v8_4', 'anime_list_v8_3', 'anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8'];
 if (animeList.length === 0) {
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) { try { animeList = JSON.parse(localStorage.getItem(key)); break; } catch(e){} }
     }
-    localStorage.setItem('anime_list_v8_4', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_5', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v8_4', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_5', JSON.stringify(animeList));
     renderList();
 }
 
-// 💡 升級：智慧型吐司通知（3秒後自動淡出消失）
 function showToast(msg) { 
     clearTimeout(toastTimer);
     document.getElementById('toast-msg').innerHTML = msg; 
     document.getElementById('toast-box').style.display = 'block'; 
-    toastTimer = setTimeout(closeToast, 3200); 
+    toastTimer = setTimeout(closeToast, 3500); 
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
@@ -115,19 +114,49 @@ async function translateText(text, toLang = "zh-TW") {
 
 function hasJapaneseKana(str) { return /[\u3040-\u309F\u30A0-\u30FF]/.test(str); }
 
-function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle) {
-    const combined = `${nativeTitle} ${englishTitle || ''} ${romajiTitle || ''}`.toLowerCase();
-    let cleanTitle = currentTitle.replace(/\s*第[一二三四五六七八九十0-9]+[季期]\s*$/g, "").replace(/\s*Season\s*[0-9]+\s*$/gi, "");
-    if (combined.includes("season 2") || combined.includes("2nd season") || combined.includes("第2期") || combined.includes("第二季") || combined.includes("續")) return cleanTitle + " 第二季";
-    if (combined.includes("season 3") || combined.includes("3rd season") || combined.includes("第3期") || combined.includes("第三季")) return cleanTitle + " 第三季";
-    return cleanTitle;
+// ✨ 核心升級：動態格式分流與核心標籤引擎
+function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
+    let combinedText = `${media.title.native} ${media.title.english || ''} ${media.title.romaji || ''}`.toLowerCase();
+    let coreTitle = wikiZhTitle || googleZhTitle || media.title.native;
+    
+    // 如果存在父級名稱，繼承其核心乾淨名稱，確保系列命名的一致性
+    if (parentChineseTitle) {
+        coreTitle = parentChineseTitle.replace(/\s*第[一二三四五六七八九十0-9]+[季期]\s*$/g, "")
+                                      .replace(/\s*Season\s*[0-9]+\s*$/gi, "")
+                                      .replace(/\s*\(.*\)$/g, "")
+                                      .trim();
+    }
+    
+    // 1. 判定標準季度續作
+    if (combinedText.includes("season 2") || combinedText.includes("2nd season") || combinedText.includes("第2期") || combinedText.includes("第二季") || combinedText.includes("續")) {
+        return coreTitle + " 第二季";
+    }
+    if (combinedText.includes("season 3") || combinedText.includes("3rd season") || combinedText.includes("第3期") || combinedText.includes("第三季")) {
+        return coreTitle + " 第三季";
+    }
+    if (combinedText.includes("season 4") || combinedText.includes("4th season") || combinedText.includes("第4期") || combinedText.includes("第四季")) {
+        return coreTitle + " 第四季";
+    }
+    
+    // 2. 如果是雷達觸發的關聯作品，但不是標準季度，依據格式(Format)與年份進行精準標籤化
+    if (parentChineseTitle) {
+        let yearSuffix = (media.startDate && media.startDate.year) ? ` - ${media.startDate.year}年` : "";
+        if (media.format === 'OVA') return `${coreTitle} (OVA${yearSuffix})`;
+        if (media.format === 'SPECIAL') return `${coreTitle} (特別篇${yearSuffix})`;
+        if (media.format === 'MOVIE') return `${coreTitle} (劇場版${yearSuffix})`;
+        if (media.format === 'ONA') return `${coreTitle} (ONA外傳${yearSuffix})`;
+        
+        // 分割放送或特殊TV續篇
+        return `${coreTitle} (續篇${yearSuffix})`;
+    }
+    
+    return coreTitle;
 }
 
-// 🎬 核心智慧搜尋引擎 v8.4 (異步多軌解鎖版)
+// 🎬 智慧搜尋引擎 v8.5 (引進 format 與雙軌時間軸大數據)
 async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle = null, targetId = null) {
     let input = keyword || document.getElementById('search-input').value.trim();
     
-    // 💡 修復：留白防呆提示，避免點擊沒反應感
     if(!input && !targetId) {
         if (!isQuiet) showToast("⚠️ 請先輸入動漫名稱再點擊搜尋哦！");
         return false;
@@ -163,13 +192,14 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
         } catch (e) { console.error(e); }
     }
 
+    // GraphQL 注入 format 與 startDate 數據
     let query, variables;
     if (targetId) {
-        query = `query ($id: Int) { Media (id: $id, type: ANIME) { id title { native english romaji } synonyms status episodes startDate { year month day } relations { edges { relationType node { id title { native english romaji } status } } } } }`;
+        query = `query ($id: Int) { Media (id: $id, type: ANIME) { id format title { native english romaji } synonyms status episodes startDate { year month day } relations { edges { relationType node { id format title { native english romaji } status } } } } }`;
         variables = { id: targetId };
     } else {
         let finalSearchKey = wikiJaTitle || input;
-        query = `query ($search: String) { Media (search: $search, type: ANIME) { id title { native english romaji } synonyms status episodes startDate { year month day } relations { edges { relationType node { id title { native english romaji } status } } } } }`;
+        query = `query ($search: String) { Media (search: $search, type: ANIME) { id format title { native english romaji } synonyms status episodes startDate { year month day } relations { edges { relationType node { id format title { native english romaji } status } } } } }`;
         variables = { search: finalSearchKey };
     }
 
@@ -199,7 +229,7 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
         }
 
         if(!media) {
-            if (!isQuiet) showToast("❌ 智慧網格多軌搜尋皆失敗。<br>請嘗試輸入更準確的官方全名或日文名稱！");
+            if (!isQuiet) showToast("❌ 智慧網格搜尋失敗，找不到該作品。");
         } else {
             if(animeList.some(a => a.id === media.id)) {
                 if(!keyword && !targetId && !isQuiet) showToast("💡 清單中已經有這部作品囉！");
@@ -207,30 +237,28 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
                 return true;
             }
 
-            let chosenTitle = parentChineseTitle || wikiZhTitle;
-            if (!chosenTitle) {
-                if (media.synonyms && media.synonyms.length > 0) chosenTitle = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s) && !hasJapaneseKana(s));
-                if (!chosenTitle || hasJapaneseKana(chosenTitle)) {
-                    let googleZh = await translateText(media.title.native, "zh-TW"); chosenTitle = googleZh || media.title.native;
-                }
+            let googleZh = null;
+            if (!wikiZhTitle) {
+                if (media.synonyms && media.synonyms.length > 0) wikiZhTitle = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s) && !hasJapaneseKana(s));
+                if (!wikiZhTitle) googleZh = await translateText(media.title.native, "zh-TW");
             }
 
-            chosenTitle = applySeasonSuffix(chosenTitle, media.title.native, media.title.english, media.title.romaji);
+            // 呼叫全新的格式判別引擎
+            let finalTitle = generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZh);
 
             let category = (media.status === 'NOT_YET_RELEASED') ? 'waiting' : ((media.status === 'FINISHED') ? 'backlog' : 'watching');
             let airDate = (media.startDate && media.startDate.year) ? `${media.startDate.year}年${media.startDate.month || '?'}月` : "未定";
 
-            const newAnime = { id: media.id, title: chosenTitle, status: media.status, episodes: media.episodes || "??", watched: 0, category: category, airDate: airDate, relations: media.relations ? media.relations.edges : [] };
+            const newAnime = { id: media.id, title: finalTitle, status: media.status, episodes: media.episodes || "??", watched: 0, category: category, airDate: airDate, relations: media.relations ? media.relations.edges : [] };
             animeList.push(newAnime); saveAndRender();
             if(!keyword && !isQuiet) document.getElementById('search-input').value = "";
             
             let catNames = { waiting: '⏳ 敲碗等待開播', watching: '⚡ 正在連載 / 正在追', backlog: '🎬 官方已完結（補番中）' };
-            if (!isQuiet) showToast(`🛰️ 偵測並成功加入作品：<br><b style="color:#60a5fa;">《${chosenTitle}》</b><br>已依狀態放入 <b>${catNames[category]}</b> ！`);
+            if (!isQuiet) showToast(`🛰️ 偵測並成功加入作品：<br><b style="color:#60a5fa;">《${finalTitle}》</b><br>已依狀態放入 <b>${catNames[category]}</b> ！`);
 
-            // ✨ 核心優復：主片入庫後「立刻解鎖按鈕」，不用在原地苦等後續的續作比對
             if (!isQuiet) { searchBtn.disabled = false; searchBtn.innerText = "🔍 智慧網格搜尋"; }
 
-            // 💡 續作抓取改為背景異步處理（移除 await）
+            // 背景安靜執行續作與外傳深度追蹤
             if (category !== 'waiting') checkAndAddSequel(newAnime, true);
             
             return true;
@@ -261,7 +289,7 @@ async function manualScanSequels() {
     
     for (let anime of animeList) {
         if (anime && anime.category === 'completed') {
-            const query = `query ($id: Int) { Media (id: $id, type: ANIME) { relations { edges { relationType node { id title { native english romaji } status } } } } }`;
+            const query = `query ($id: Int) { Media (id: $id, type: ANIME) { id format title { native english romaji } startDate { year } relations { edges { relationType node { id format title { native english romaji } status } } } } }`;
             try {
                 const response = await fetch('https://graphql.anilist.co', {
                     method: 'POST',
@@ -286,14 +314,14 @@ async function manualScanSequels() {
     }
     
     if (!foundAny) {
-        setTimeout(() => { showToast("🛰️ 雷達全網掃描完畢！<br>目前清單內的所有已追完動漫，皆無全新的續作情報。"); }, 1200);
+        setTimeout(() => { showToast("🛰️ 雷達全網掃描完畢！<br>目前清單內的所有已追完動漫，皆無未入庫的全新關聯續作。"); }, 1200);
     }
 }
 
 async function autoScanSequels() {
     for (let anime of animeList) {
         if (anime && anime.category === 'completed') {
-            const query = `query ($id: Int) { Media (id: $id, type: ANIME) { relations { edges { relationType node { id title { native english romaji } status } } } } }`;
+            const query = `query ($id: Int) { Media (id: $id, type: ANIME) { id format title { native english romaji } startDate { year } relations { edges { relationType node { id format title { native english romaji } status } } } } }`;
             try {
                 const response = await fetch('https://graphql.anilist.co', {
                     method: 'POST',
@@ -351,7 +379,7 @@ function renderList() {
     if (!Array.isArray(animeList)) animeList = [];
     
     animeList.forEach(anime => {
-        if (!anime) return; // 💡 防呆保護，避免髒數據卡死渲染
+        if (!anime) return;
         let actionButtons = (anime.category === 'watching' || anime.category === 'backlog') ? `<button onclick="updateProgress(${anime.id}, 1)">➕ 看了 1 集</button><button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 追完</button>` : (anime.category === 'waiting' ? `<div class="status-radar">🛰️ 智慧雷達自動監測中...</div>` : `<button onclick="moveCategory(${anime.id}, 'watching')">🔄 重看</button>`);
         const html = `<div class="anime-item"><div class="anime-title">${anime.title}</div><div class="anime-meta">${(anime.category === 'watching' || anime.category === 'backlog') ? `進度：${anime.watched} / ${anime.episodes} 集` : (anime.category === 'waiting' ? `預計開播：<span style="color:#f59e0b;font-weight:bold;">${anime.airDate}</span>` : `✨ 全 ${anime.episodes} 集觀看完畢`)}</div><div class="btn-group">${actionButtons}<button class="btn-edit" onclick="editTitle(${anime.id})">✏️ 改名</button><button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️ 刪除</button></div></div>`;
         if(lists[anime.category] !== undefined) lists[anime.category] += html;
