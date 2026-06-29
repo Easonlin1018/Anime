@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v7.7</title>
+    <title>全自動動漫追番基地 v7.8</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -101,7 +101,7 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v7.7</h1>
+    <h1>🎬 全自動動漫追番基地 v7.8</h1>
 
     <!-- ➕ 新增區塊 -->
     <div class="section">
@@ -151,24 +151,24 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v7_7')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v7_8')) || [];
 
 // 完美無縫繼承轉移舊版本資料
 if (animeList.length === 0) {
-    const oldKeys = ['anime_list_v7_6', 'anime_list_v7_5', 'anime_list_v7_4', 'anime_list_v7_3', 'anime_list_v7_2', 'anime_list_v7_1', 'anime_list_v7_0'];
+    const oldKeys = ['anime_list_v7_7', 'anime_list_v7_6', 'anime_list_v7_5', 'anime_list_v7_4', 'anime_list_v7_3', 'anime_list_v7_2', 'anime_list_v7_1', 'anime_list_v7_0'];
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) {
             animeList = JSON.parse(localStorage.getItem(key));
             break;
         }
     }
-    localStorage.setItem('anime_list_v7_7', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_8', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v7_7', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_8', JSON.stringify(animeList));
     renderList();
 }
 
@@ -178,7 +178,7 @@ function showToast(msg) {
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
-// 📤 📥 備份還原
+// 📤 📥 備份與還原
 function exportData() {
     if (animeList.length === 0) { showToast("💡 目前清單是空的，沒有資料可以備份喔！"); return; }
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(animeList, null, 2));
@@ -241,33 +241,35 @@ function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle,
     return cleanTitle;
 }
 
-// 本地端【閃電攔截修正器】不走網路、不需等待、渲染時無條件強制正名！
+// ⚡ 本地端【閃電攔截顯示修正器】渲染時強制校正名稱，不走網路
 function instantFixDictionary() {
     let needSave = false;
     animeList.forEach(anime => {
         let lowerTitle = anime.title.toLowerCase();
 
-        // 🎯 只要偵測到日文原名、或是尷害的「式森」，無條件秒殺改成台灣官方正確譯名！
+        // 🎯 消滅式森
         if (lowerTitle.includes("可愛いだけじゃない") || lowerTitle.includes("式守") || lowerTitle.includes("式森")) {
             if (anime.title !== "式守同學不只可愛而已") {
-                anime.title = "式守同學不只可愛而已";
-                needSave = true;
+                anime.title = "式守同學不只可愛而已"; needSave = true;
             }
         }
-        if (lowerTitle.includes("時々ボソッと") || lowerTitle.includes("ロシア語")) {
-            if (anime.title !== "不時輕聲地以俄語遮羞的鄰座艾莉同學 第二季") {
-                anime.title = "不時輕聲地以俄語遮羞的鄰座艾莉同學 第二季"; needSave = true;
+        // 🎯 精準修正艾莉同學的顯示名稱
+        if (lowerTitle.includes("時々ボソッと") || lowerTitle.includes("ロシア語") || lowerTitle.includes("艾莉")) {
+            if (lowerTitle.includes("2") || lowerTitle.includes("二") || lowerTitle.includes("第2期")) {
+                if (anime.title !== "不時輕聲地以俄語遮羞的鄰座艾莉同學 第二季") {
+                    anime.title = "不時輕聲地以俄語遮羞的鄰座艾莉同學 第二季"; needSave = true;
+                }
+            } else {
+                if (anime.title !== "不時輕聲地以俄語遮羞的鄰座艾莉同學") {
+                    anime.title = "不時輕聲地以俄語遮羞的鄰座艾莉同學"; needSave = true;
+                }
             }
         }
         if (lowerTitle.includes("アオのハコ") || lowerTitle.includes("blue box")) {
-            if (anime.title !== "青之箱 第二季") {
-                anime.title = "青之箱 第二季"; needSave = true;
-            }
+            if (anime.title !== "青之箱 第二季") { anime.title = "青之箱 第二季"; needSave = true; }
         }
         if (lowerTitle.includes("2番目に可愛い") && anime.title.includes("第二季")) {
-            if (anime.title !== "我成了班上第二可愛女生的朋友") {
-                anime.title = "我成了班上第二可愛女生的朋友"; needSave = true;
-            }
+            if (anime.title !== "我成了班上第二可愛女生的朋友") { anime.title = "我成了班上第二可愛女生的朋友"; needSave = true; }
         }
         if (lowerTitle.includes("总之就是非常可爱") || lowerTitle.includes("總之就是非常可愛") || lowerTitle.includes("tonikaku")) {
             let eps = Number(anime.episodes);
@@ -276,16 +278,10 @@ function instantFixDictionary() {
                 targetTitle = anime.title.includes("2") || anime.title.includes("第二季") ? "總之就是非常可愛 第二季" : "總之就是非常可愛 第一季";
             } else if (eps === 1) { targetTitle = "總之就是非常可愛 OVA特別篇"; }
             else if (eps === 4) { targetTitle = "總之就是非常可愛 女高中生篇"; }
-            
-            if (anime.title !== targetTitle) {
-                anime.title = targetTitle;
-                needSave = true;
-            }
+            if (anime.title !== targetTitle) { anime.title = targetTitle; needSave = true; }
         }
     });
-    if (needSave) {
-        localStorage.setItem('anime_list_v7_7', JSON.stringify(animeList));
-    }
+    if (needSave) { localStorage.setItem('anime_list_v7_8', JSON.stringify(animeList)); }
 }
 
 // 🎬 搜尋核心
@@ -293,6 +289,20 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
     let input = keyword || document.getElementById('search-input').value.trim();
     if(!input) return;
     
+    // 🔥 【v7.8 新增】關鍵字防禦攔截器：直接跳過機翻，把正確官方原名塞給伺服器！
+    let checkInput = input.toLowerCase();
+    if (checkInput.includes("艾莉同學") || checkInput.includes("鄰座艾莉") || checkInput.includes("俄語遮羞")) {
+        if (checkInput.includes("2") || checkInput.includes("二") || checkInput.includes("第2季") || checkInput.includes("第二季")) {
+            input = "時々ボソッとロシア語でデレる鄰のアーリャさん 第2期";
+        } else {
+            input = "時々ボソッとロシア語でデレる隣のアーリャさん";
+        }
+    } else if (checkInput.includes("式守")) {
+        input = "可愛いだけじゃない式守さん";
+    } else if (checkInput.includes("芙莉蓮") || checkInput.includes("福利連")) {
+        input = "葬送のフリーレン";
+    }
+
     if (!isQuiet) {
         searchBtn.disabled = true;
         searchBtn.innerText = "⚡ 正在搜尋 AniList 總庫...";
@@ -441,7 +451,6 @@ async function forceCheck(id) {
 function deleteAnime(id) { animeList = animeList.filter(a => a.id !== id); saveAndRender(); }
 
 function renderList() {
-    // 🔥 核心關鍵：每次要把清單畫到網頁上之前，先用本地字典做閃電校正！不需要走任何網路！
     instantFixDictionary();
 
     const lists = { watching: '', backlog: '', waiting: '', completed: '' };
@@ -485,7 +494,6 @@ function renderList() {
     document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
 }
 
-// 🛰️ 背景自動監測更新（只在成功拿到資料時修改通用未翻譯標題）
 async function autoRefreshAndCheck() {
     for (let anime of animeList) {
         const query = `query ($id: Int) { Media (id: $id, type: ANIME) { status title { native english romaji } synonyms episodes } }`;
@@ -506,7 +514,6 @@ async function autoRefreshAndCheck() {
                 if (media.episodes && anime.episodes !== media.episodes) { anime.episodes = media.episodes; changed = true; }
                 if (anime.status !== media.status) { anime.status = media.status; changed = true; }
                 
-                // 排除有專屬字典快取的動漫，其餘通用動漫才走機翻
                 if (!anime.title.includes("式守同學") && !anime.title.includes("艾莉同學") && !anime.title.includes("青之箱") && !anime.title.includes("第二可愛") && !anime.title.includes("總之就是非常可愛")) {
                     let baseChinese = anime.title;
                     if (hasJapaneseKana(baseChinese)) {
@@ -521,7 +528,7 @@ async function autoRefreshAndCheck() {
                 }
                 if (changed) saveAndRender();
             }
-        } catch (e) { console.error("背景連線微弱，靜態快取保護中...", e); }
+        } catch (e) { console.error(e); }
     }
 }
 
