@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v6.0</title>
+    <title>全自動動漫追番基地 v6.5</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -48,7 +48,7 @@
             display: flex;
             justify-content: space-between;
         }
-        input, select, button {
+        input, button {
             width: 100%;
             padding: 12px;
             margin-bottom: 10px;
@@ -75,15 +75,16 @@
         }
         .anime-title { font-weight: bold; margin-bottom: 6px; }
         .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
-        .btn-group { display: flex; gap: 5px; }
-        .btn-group button { padding: 6px; font-size: 12px; margin: 0; }
+        .btn-group { display: flex; gap: 5px; flex-wrap: wrap; }
+        .btn-group button { padding: 6px; font-size: 12px; margin: 0; width: auto; flex: 1; min-width: 60px; }
         .btn-del { background-color: var(--accent-color); }
         .btn-next { background-color: #16a34a; }
+        .btn-scan { background-color: #7c3aed; }
         .toast {
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             padding: 20px;
             border-radius: 12px;
             border: 1px solid var(--accent-color);
@@ -97,30 +98,36 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v6.0</h1>
+    <h1>🎬 全自動動漫追番基地 v6.5</h1>
 
     <!-- 新增區塊 -->
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增</div>
         <input type="text" id="search-input" placeholder="輸入動漫關鍵字（如：艾莉同學）">
-        <button id="search-btn" onclick="searchAnime()">⚡ 正在連網抓取資料...</button>
+        <button id="search-btn" onclick="searchAnime()">🔍 自動搜尋並加入</button>
     </div>
 
-    <!-- 追番區塊 -->
+    <!-- 1. 連載區 -->
     <div class="section">
         <div class="section-title">⚡ 正在連載 / 正在追</div>
         <div id="list-watching"></div>
     </div>
 
-    <!-- 敲碗區塊 -->
+    <!-- 2. 補番區（新增：區隔官方已完結但你還沒看透的番） -->
+    <div class="section">
+        <div class="section-title">🎬 官方已完結（補番中）</div>
+        <div id="list-backlog"></div>
+    </div>
+
+    <!-- 3. 敲碗區 -->
     <div class="section">
         <div class="section-title">⏳ 敲碗等待開播</div>
         <div id="list-waiting"></div>
     </div>
 
-    <!-- 完結區塊 -->
+    <!-- 4. 追完區（個人真正看完了） -->
     <div class="section">
-        <div class="section-title">🎉 已完結 / 追完</div>
+        <div class="section-title">🎉 已追完 / 看完了</div>
         <div id="list-completed"></div>
     </div>
 </div>
@@ -131,12 +138,24 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v6')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v6_5')) || [];
+
+// 相容舊版資料轉移
+if (animeList.length === 0 && localStorage.getItem('anime_list_v6')) {
+    animeList = JSON.parse(localStorage.getItem('anime_list_v6'));
+    // 修正舊資料的分類
+    animeList.forEach(a => {
+        if (a.category === 'completed' && a.watched === 0) {
+            a.category = 'backlog';
+        }
+    });
+    localStorage.setItem('anime_list_v6_5', JSON.stringify(animeList));
+}
+
 const searchBtn = document.getElementById('search-btn');
-searchBtn.innerText = "🔍 自動搜尋並加入";
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v6', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v6_5', JSON.stringify(animeList));
     renderList();
 }
 
@@ -146,12 +165,14 @@ function showToast(msg) {
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
-async function searchAnime(keyword = null) {
+async function searchAnime(keyword = null, isQuiet = false) {
     const input = keyword || document.getElementById('search-input').value.trim();
     if(!input) return;
     
-    searchBtn.disabled = true;
-    searchBtn.innerText = "⚡ 正在連網抓取資料...";
+    if (!isQuiet) {
+        searchBtn.disabled = true;
+        searchBtn.innerText = "⚡ 正在連網抓取資料...";
+    }
 
     const query = `
     query ($search: String) {
@@ -185,19 +206,18 @@ async function searchAnime(keyword = null) {
         const media = resData.data.Media;
 
         if(!media) {
-            showToast("❌ 找不到該作品。請嘗試縮短關鍵字（例如只打：艾莉同學）。");
+            if (!isQuiet) showToast("❌ 找不到該作品。請縮短關鍵字再試試。");
         } else {
-            // 檢查是否重複
             if(animeList.some(a => a.id === media.id)) {
-                if(!keyword) showToast("💡 清單中已經有這部作品囉！");
-                searchBtn.disabled = false;
-                searchBtn.innerText = "🔍 自動搜尋並加入";
+                if(!keyword && !isQuiet) showToast("💡 清單中已經有這部作品囉！");
+                if (!isQuiet) { searchBtn.disabled = false; searchBtn.innerText = "🔍 自動搜尋並加入"; }
                 return;
             }
 
+            // 精準分流狀態
             let category = 'watching';
             if(media.status === 'NOT_YET_RELEASED') category = 'waiting';
-            if(media.status === 'FINISHED') category = 'completed';
+            if(media.status === 'FINISHED') category = 'backlog'; // 官方已完結的番，預設進補番區
 
             let airDate = "未定";
             if(media.startDate && media.startDate.year) {
@@ -209,35 +229,42 @@ async function searchAnime(keyword = null) {
                 title: media.title.native,
                 status: media.status,
                 episodes: media.episodes || "??",
-                watched: category === 'completed' ? (media.episodes || 0) : 0,
+                watched: 0,
                 category: category,
                 airDate: airDate,
-                relations: media.relations.edges
+                relations: media.relations ? media.relations.edges : []
             };
 
             animeList.push(newAnime);
             saveAndRender();
-            if(!keyword) document.getElementById('search-input').value = "";
+            if(!keyword && !isQuiet) document.getElementById('search-input').value = "";
+            
+            // 如果拉進來直接就是待播番，不需要掃續作
+            if (category !== 'waiting') {
+                await checkAndAddSequel(newAnime, true);
+            }
         }
     } catch (error) {
-        showToast("❌ 連線失敗，請檢查網路。");
+        if (!isQuiet) showToast("❌ 連線失敗，請檢查網路。");
     }
-    searchBtn.disabled = false;
-    searchBtn.innerText = "🔍 自動搜尋並加入";
+    if (!isQuiet) {
+        searchBtn.disabled = false;
+        searchBtn.innerText = "🔍 自動搜尋並加入";
+    }
 }
 
-// 核心功能：當移到已完結時，自動雷達搜尋續作
-async function checkAndAddSequel(anime) {
-    if (!anime.relations) return;
+// 核心修復：精準抓取續作文字標題
+async function checkAndAddSequel(anime, isQuiet = false) {
+    if (!anime.relations || anime.relations.length === 0) return;
     
-    // 找出關係是 SEQUEL (續作) 且還沒開播的作品
     const sequelEdge = anime.relations.find(edge => edge.relationType === 'SEQUEL');
     if (sequelEdge) {
         const sequelNode = sequelEdge.node;
-        // 如果這部續作還沒加入過清單，就自動幫忙搜尋並加進敲碗區
         if (!animeList.some(a => a.id === sequelNode.id)) {
-            showToast(`🎉 偵測到《${anime.title}》有全新續作！<br>系統已自動將《${sequelNode.title}》加入【敲碗等待開播】區！`);
-            await searchAnime(sequelNode.title);
+            if (!isQuiet) {
+                showToast(`🎉 偵測到《${anime.title}》有全新續作！<br>已自動將《${sequelNode.title.native}》加入【敲碗等待開播】。`);
+            }
+            await searchAnime(sequelNode.title.native, true);
         }
     }
 }
@@ -246,10 +273,9 @@ function moveCategory(id, newCat) {
     const anime = animeList.find(a => a.id === id);
     if(anime) {
         anime.category = newCat;
-        if(newCat === 'completed' && typeof anime.episodes === 'number') {
+        if(newCat === 'completed') {
             anime.watched = anime.episodes;
-            // 觸發續作檢查
-            checkAndAddSequel(anime);
+            checkAndAddSequel(anime, false);
         }
         saveAndRender();
     }
@@ -261,9 +287,17 @@ function updateProgress(id, delta) {
         anime.watched = Math.max(0, anime.watched + delta);
         if(typeof anime.episodes === 'number' && anime.watched >= anime.episodes) {
             anime.category = 'completed';
-            checkAndAddSequel(anime);
+            checkAndAddSequel(anime, false);
         }
         saveAndRender();
+    }
+}
+
+async function forceCheck(id) {
+    const anime = animeList.find(a => a.id === id);
+    if (anime) {
+        showToast(`🛰️ 正在為《${anime.title}》強制雷達掃描續作...`);
+        await checkAndAddSequel(anime, false);
     }
 }
 
@@ -273,26 +307,29 @@ function deleteAnime(id) {
 }
 
 function renderList() {
-    const lists = { watching: '', waiting: '', completed: '' };
+    const lists = { watching: '', backlog: '', waiting: '', completed: '' };
     
     animeList.forEach(anime => {
         let actionButtons = '';
-        if(anime.category === 'watching') {
+        if(anime.category === 'watching' || anime.category === 'backlog') {
             actionButtons = `
                 <button onclick="updateProgress(${anime.id}, 1)">➕ 看了 1 集</button>
-                <button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎬 完結</button>
+                <button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 追完</button>
             `;
         } else if(anime.category === 'waiting') {
             actionButtons = `<button class="btn-next" onclick="moveCategory(${anime.id}, 'watching')">📺 開播移至連載</button>`;
         } else if(anime.category === 'completed') {
-            actionButtons = `<button onclick="moveCategory(${anime.id}, 'watching')">🔄 重看</button>`;
+            actionButtons = `
+                <button onclick="moveCategory(${anime.id}, 'watching')">🔄 重看</button>
+                <button class="btn-scan" onclick="forceCheck(${anime.id})">🛰️ 查續作</button>
+            `;
         }
 
         const html = `
             <div class="anime-item">
                 <div class="anime-title">${anime.title}</div>
                 <div class="anime-meta">
-                    ${anime.category === 'watching' ? `進度：${anime.watched} / ${anime.episodes} 集` : ''}
+                    ${(anime.category === 'watching' || anime.category === 'backlog') ? `進度：${anime.watched} / ${anime.episodes} 集` : ''}
                     ${anime.category === 'waiting' ? `預計開播：<span style="color:#f59e0b;font-weight:bold;">${anime.airDate}</span>` : ''}
                     ${anime.category === 'completed' ? `✨ 全 ${anime.episodes} 集觀看完畢` : ''}
                 </div>
@@ -306,12 +343,26 @@ function renderList() {
     });
 
     document.getElementById('list-watching').innerHTML = lists.watching || '<div style="color:#64748b;font-size:12px;">暫無連載中動漫</div>';
+    document.getElementById('list-backlog').innerHTML = lists.backlog || '<div style="color:#64748b;font-size:12px;">暫無補番中動漫</div>';
     document.getElementById('list-waiting').innerHTML = lists.waiting || '<div style="color:#64748b;font-size:12px;">暫無敲碗中動漫</div>';
-    document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已完結動漫</div>';
+    document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
 }
 
-// 初始渲染
+// 網頁載入時自動背景修復：掃描有沒有漏掉的續作
+async function autoScan() {
+    for (let anime of animeList) {
+        if (anime.category === 'completed') {
+            const sequelEdge = anime.relations ? anime.relations.find(edge => edge.relationType === 'SEQUEL') : null;
+            if (sequelEdge && !animeList.some(a => a.id === sequelEdge.node.id)) {
+                await checkAndAddSequel(anime, true);
+            }
+        }
+    }
+}
+
+// 初始執行
 renderList();
+setTimeout(autoScan, 1500); // 延遲1.5秒偷偷在背景幫你補抓第二季
 </script>
 </body>
 </html>
