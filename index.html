@@ -3,422 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的全自動動漫追番基地</title>
+    <title>全自動動漫追番基地 v6.0</title>
     <style>
         :root {
-            --bg-color: #1a1a2e;
-            --card-color: #16213e;
-            --accent-color: #e94560;
-            --text-color: #ffffff;
-            --success-color: #4cd137;
-            --info-color: #00a8ff;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #ef4444;
+            --border-color: #334155;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 15px;
-        }
-        h1, h2 { text-align: center; color: var(--accent-color); margin-bottom: 10px; }
-        h1 { font-size: 22px; }
-        h2 { font-size: 16px; border-bottom: 2px solid var(--accent-color); padding-bottom: 5px; margin-top: 20px; }
-        
-        .input-section {
-            background: var(--card-color);
-            padding: 15px;
-            border-radius: 12px;
-            max-width: 500px;
-            margin: 0 auto 20px auto;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .input-section h3 { margin-top: 0; color: #fff; font-size: 15px; }
-        .input-section input, .input-section select, .input-section button {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 6px;
-            border: 1px solid #2e3852;
-            background-color: #0f172a;
-            color: white;
-            box-sizing: border-box;
-            font-size: 13px;
-        }
-        .input-section button {
-            background-color: var(--accent-color);
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-        .input-section button:disabled { background-color: #475569; }
-        
-        .sync-banner {
-            text-align: center;
-            font-size: 12px;
-            color: var(--info-color);
-            margin-bottom: 10px;
-            font-weight: bold;
-            padding: 6px;
-            background: rgba(0, 168, 255, 0.1);
-            border-radius: 6px;
-        }
-        
-        .app-container {
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .list-column {
-            background: var(--card-color);
-            border-radius: 12px;
-            padding: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-        .anime-card {
-            background: #0f3460;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        .anime-title { font-weight: bold; font-size: 16px; color: #fff; }
-        .anime-meta { font-size: 12px; color: #cbd5e1; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
-        
-        .time-badge {
-            display: inline-block;
-            background-color: #1e293b;
-            padding: 5px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-top: 6px;
-            font-weight: bold;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .time-badge.today { background-color: var(--success-color); color: #000; }
-        .time-badge.countdown { background-color: var(--info-color); color: #fff; }
-        .time-badge.finished { background-color: #475569; color: #cbd5e1; }
-        
-        .ep-section { margin-top: 10px; border-top: 1px solid #2e3852; padding-top: 8px; }
-        .ep-title { font-size: 13px; color: #94a3b8; margin-bottom: 5px; }
-        .ep-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-        .ep-box {
-            width: 32px;
-            height: 32px;
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 4px;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 12px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .section-title {
+            font-size: 16px;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .ep-box.watched {
-            background-color: var(--success-color);
-            border-color: var(--success-color);
-            color: #000;
-        }
-        
-        .card-controls {
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-color);
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
         }
-        .status-select-inline {
-            padding: 4px 8px;
-            font-size: 12px;
-            background: #1e293b;
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #2563eb;
             color: white;
-            border: 1px solid #334155;
-            border-radius: 4px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
-        .delete-btn { background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 15px; }
+        button:disabled { background-color: #475569; }
+        .anime-item {
+            background: var(--bg-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .anime-title { font-weight: bold; margin-bottom: 6px; }
+        .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+        .btn-group { display: flex; gap: 5px; }
+        .btn-group button { padding: 6px; font-size: 12px; margin: 0; }
+        .btn-del { background-color: var(--accent-color); }
+        .btn-next { background-color: #16a34a; }
+        .toast {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--accent-color);
+            text-align: center;
+            display: none;
+            z-index: 100;
+            width: 80%; max-width: 300px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>🎬 全自動動漫追番基地 v5.1</h1>
-    <div id="syncStatus" class="sync-banner">🌐 正在連線 AniList 同步最新開播課表...</div>
+<div class="container">
+    <h1>🎬 全自動動漫追番基地 v6.0</h1>
+
+    <!-- 新增區塊 -->
+    <div class="section">
+        <div class="section-title">➕ 一鍵自動化新增</div>
+        <input type="text" id="search-input" placeholder="輸入動漫關鍵字（如：艾莉同學）">
+        <button id="search-btn" onclick="searchAnime()">⚡ 正在連網抓取資料...</button>
+    </div>
+
+    <!-- 追番區塊 -->
+    <div class="section">
+        <div class="section-title">⚡ 正在連載 / 正在追</div>
+        <div id="list-watching"></div>
+    </div>
+
+    <!-- 敲碗區塊 -->
+    <div class="section">
+        <div class="section-title">⏳ 敲碗等待開播</div>
+        <div id="list-waiting"></div>
+    </div>
+
+    <!-- 完結區塊 -->
+    <div class="section">
+        <div class="section-title">🎉 已完結 / 追完</div>
+        <div id="list-completed"></div>
+    </div>
+</div>
+
+<div id="toast-box" class="toast">
+    <div id="toast-msg"></div>
+    <button style="margin-top:15px; width:auto; padding:5px 15px;" onclick="closeToast()">關閉</button>
+</div>
+
+<script>
+let animeList = JSON.parse(localStorage.getItem('anime_list_v6')) || [];
+const searchBtn = document.getElementById('search-btn');
+searchBtn.innerText = "🔍 自動搜尋並加入";
+
+function saveAndRender() {
+    localStorage.setItem('anime_list_v6', JSON.stringify(animeList));
+    renderList();
+}
+
+function showToast(msg) {
+    document.getElementById('toast-msg').innerHTML = msg;
+    document.getElementById('toast-box').style.display = 'block';
+}
+function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
+
+async function searchAnime(keyword = null) {
+    const input = keyword || document.getElementById('search-input').value.trim();
+    if(!input) return;
     
-    <div class="input-section">
-        <h3>➕ 一鍵自動化新增</h3>
-        <input type="text" id="animeTitle" placeholder="輸入動漫名稱（中/英/日文皆可），自動抓取全集數...">
-        <select id="animeStatus">
-            <option value="toWatch">📝 準備要看</option>
-            <option value="current">⚡ 正在連載 / 正在追</option>
-            <option value="upcoming">⏳ 敲碗等待開播</option>
-            <option value="completed">🎉 已完結/追完</option>
-        </select>
-        <input type="text" id="animeNotes" placeholder="隨手備註（可不填）">
-        <button id="addBtn" onclick="addAnime()">🔍 自動搜尋並加入</button>
-    </div>
+    searchBtn.disabled = true;
+    searchBtn.innerText = "⚡ 正在連網抓取資料...";
 
-    <div class="app-container">
-        <div class="list-column">
-            <h2>📝 準備要看</h2>
-            <div id="toWatchList"></div>
-        </div>
-        <div class="list-column">
-            <h2>⚡ 正在連載 / 正在追</h2>
-            <div id="currentList"></div>
-        </div>
-        <div class="list-column">
-            <h2>⏳ 敲碗等待開播</h2>
-            <div id="upcomingList"></div>
-        </div>
-        <div class="list-column">
-            <h2>🎉 已完結 / 追完</h2>
-            <div id="completedList"></div>
-        </div>
-    </div>
-
-    <script>
-        let myAnimeData = [];
-        
-        // 安全包裹儲存空間，避免任何環境下崩潰
-        try {
-            myAnimeData = JSON.parse(localStorage.getItem('myAnimeList')) || [];
-        } catch (e) {
-            myAnimeData = [];
-        }
-
-        async function fetchAniListInfo(title) {
-            const query = `
-            query ($search: String) {
-              Media (search: $search, type: ANIME) {
-                id
-                title { native english romaji }
-                status
-                episodes
-                nextAiringEpisode { airingAt episode timeUntilAiring }
-              }
+    const query = `
+    query ($search: String) {
+      Media (search: $search, type: ANIME) {
+        id
+        title { native }
+        status
+        episodes
+        startDate { year month day }
+        relations {
+          edges {
+            relationType
+            node {
+              id
+              title { native }
+              status
+              startDate { year month day }
             }
-            `;
-            try {
-                const response = await fetch('https://graphql.anilist.co', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({ query: query, variables: { search: title } })
-                });
-                const json = await response.json();
-                return json.data ? json.data.Media : null;
-            } catch (e) {
-                return null;
-            }
+          }
         }
+      }
+    }`;
 
-        async function refreshAnimeById(aniListId) {
-            const query = `
-            query ($id: Int) {
-              Media (id: $id, type: ANIME) { status episodes nextAiringEpisode { airingAt episode } }
-            }
-            `;
-            try {
-                const response = await fetch('https://graphql.anilist.co', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({ query: query, variables: { id: aniListId } })
-                });
-                const json = await response.json();
-                return json.data ? json.data.Media : null;
-            } catch (e) {
-                return null;
-            }
-        }
+    try {
+        const response = await fetch('https://graphql.anilist.co', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query, variables: { search: input } })
+        });
+        const resData = await response.json();
+        const media = resData.data.Media;
 
-        function saveAndRender() {
-            try { localStorage.setItem('myAnimeList', JSON.stringify(myAnimeData)); } catch (e) {}
-            renderLists();
-        }
-
-        async function addAnime() {
-            const titleInput = document.getElementById('animeTitle');
-            const statusInput = document.getElementById('animeStatus');
-            const notesInput = document.getElementById('animeNotes');
-            const addBtn = document.getElementById('addBtn');
-            const title = titleInput.value.trim();
-            if (!title) return alert('請輸入動漫名字！');
-
-            addBtn.innerText = '⚡ 正在連網抓取資料...';
-            addBtn.disabled = true;
-
-            const info = await fetchAniListInfo(title);
-
-            if (!info) {
-                alert('❌ 找不到該作品或連線失敗。若在捷徑內執行，請改用方案一的網頁版。');
-                addBtn.innerText = '🔍 自動搜尋並加入';
-                addBtn.disabled = false;
+        if(!media) {
+            showToast("❌ 找不到該作品。請嘗試縮短關鍵字（例如只打：艾莉同學）。");
+        } else {
+            // 檢查是否重複
+            if(animeList.some(a => a.id === media.id)) {
+                if(!keyword) showToast("💡 清單中已經有這部作品囉！");
+                searchBtn.disabled = false;
+                searchBtn.innerText = "🔍 自動搜尋並加入";
                 return;
             }
-            
+
+            let category = 'watching';
+            if(media.status === 'NOT_YET_RELEASED') category = 'waiting';
+            if(media.status === 'FINISHED') category = 'completed';
+
+            let airDate = "未定";
+            if(media.startDate && media.startDate.year) {
+                airDate = `${media.startDate.year}年${media.startDate.month || '?'}月`;
+            }
+
             const newAnime = {
-                id: Date.now(),
-                title: title,
-                status: statusInput.value,
-                aniListId: info.id,
-                aniListStatus: info.status,
-                totalEps: info.episodes || 0,
-                nextEpTime: info.nextAiringEpisode ? (Date.now() + info.nextAiringEpisode.timeUntilAiring * 1000) : null,
-                nextEpNum: info.nextAiringEpisode ? info.nextAiringEpisode.episode : null,
-                notes: notesInput.value || '',
-                watchedEps: [],
-                officialName: info.title.native || info.title.english
+                id: media.id,
+                title: media.title.native,
+                status: media.status,
+                episodes: media.episodes || "??",
+                watched: category === 'completed' ? (media.episodes || 0) : 0,
+                category: category,
+                airDate: airDate,
+                relations: media.relations.edges
             };
 
-            myAnimeData.push(newAnime);
-            titleInput.value = ''; notesInput.value = '';
-            addBtn.innerText = '🔍 自動搜尋並加入';
-            addBtn.disabled = false;
-            
+            animeList.push(newAnime);
             saveAndRender();
+            if(!keyword) document.getElementById('search-input').value = "";
+        }
+    } catch (error) {
+        showToast("❌ 連線失敗，請檢查網路。");
+    }
+    searchBtn.disabled = false;
+    searchBtn.innerText = "🔍 自動搜尋並加入";
+}
+
+// 核心功能：當移到已完結時，自動雷達搜尋續作
+async function checkAndAddSequel(anime) {
+    if (!anime.relations) return;
+    
+    // 找出關係是 SEQUEL (續作) 且還沒開播的作品
+    const sequelEdge = anime.relations.find(edge => edge.relationType === 'SEQUEL');
+    if (sequelEdge) {
+        const sequelNode = sequelEdge.node;
+        // 如果這部續作還沒加入過清單，就自動幫忙搜尋並加進敲碗區
+        if (!animeList.some(a => a.id === sequelNode.id)) {
+            showToast(`🎉 偵測到《${anime.title}》有全新續作！<br>系統已自動將《${sequelNode.title}》加入【敲碗等待開播】區！`);
+            await searchAnime(sequelNode.title);
+        }
+    }
+}
+
+function moveCategory(id, newCat) {
+    const anime = animeList.find(a => a.id === id);
+    if(anime) {
+        anime.category = newCat;
+        if(newCat === 'completed' && typeof anime.episodes === 'number') {
+            anime.watched = anime.episodes;
+            // 觸發續作檢查
+            checkAndAddSequel(anime);
+        }
+        saveAndRender();
+    }
+}
+
+function updateProgress(id, delta) {
+    const anime = animeList.find(a => a.id === id);
+    if(anime) {
+        anime.watched = Math.max(0, anime.watched + delta);
+        if(typeof anime.episodes === 'number' && anime.watched >= anime.episodes) {
+            anime.category = 'completed';
+            checkAndAddSequel(anime);
+        }
+        saveAndRender();
+    }
+}
+
+function deleteAnime(id) {
+    animeList = animeList.filter(a => a.id !== id);
+    saveAndRender();
+}
+
+function renderList() {
+    const lists = { watching: '', waiting: '', completed: '' };
+    
+    animeList.forEach(anime => {
+        let actionButtons = '';
+        if(anime.category === 'watching') {
+            actionButtons = `
+                <button onclick="updateProgress(${anime.id}, 1)">➕ 看了 1 集</button>
+                <button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎬 完結</button>
+            `;
+        } else if(anime.category === 'waiting') {
+            actionButtons = `<button class="btn-next" onclick="moveCategory(${anime.id}, 'watching')">📺 開播移至連載</button>`;
+        } else if(anime.category === 'completed') {
+            actionButtons = `<button onclick="moveCategory(${anime.id}, 'watching')">🔄 重看</button>`;
         }
 
-        async function syncAllOnLoad() {
-            const banner = document.getElementById('syncStatus');
-            if(!banner) return;
-            try {
-                const syncPromises = myAnimeData.map(async (item) => {
-                    if (item.aniListId) {
-                        const fresh = await refreshAnimeById(item.aniListId);
-                        if (fresh) {
-                            item.aniListStatus = fresh.status;
-                            item.totalEps = fresh.episodes || item.totalEps;
-                            if (fresh.nextAiringEpisode) {
-                                item.nextEpTime = Date.now() + (fresh.nextAiringEpisode.airingAt - Math.floor(Date.now()/1000)) * 1000;
-                                item.nextEpNum = fresh.nextAiringEpisode.episode;
-                            } else {
-                                item.nextEpTime = null; item.nextEpNum = null;
-                            }
-                        }
-                    }
-                });
+        const html = `
+            <div class="anime-item">
+                <div class="anime-title">${anime.title}</div>
+                <div class="anime-meta">
+                    ${anime.category === 'watching' ? `進度：${anime.watched} / ${anime.episodes} 集` : ''}
+                    ${anime.category === 'waiting' ? `預計開播：<span style="color:#f59e0b;font-weight:bold;">${anime.airDate}</span>` : ''}
+                    ${anime.category === 'completed' ? `✨ 全 ${anime.episodes} 集觀看完畢` : ''}
+                </div>
+                <div class="btn-group">
+                    ${actionButtons}
+                    <button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️ 刪除</button>
+                </div>
+            </div>
+        `;
+        if(lists[anime.category] !== undefined) lists[anime.category] += html;
+    });
 
-                await Promise.all(syncPromises);
-                banner.style.color = '#4cd137';
-                banner.innerText = '✅ 雲端課表已同步完成';
-            } catch (e) {
-                banner.innerText = '❌ 環境不支援雲端連線';
-            }
-            setTimeout(() => { banner.style.display = 'none'; }, 2000);
-            saveAndRender();
-        }
+    document.getElementById('list-watching').innerHTML = lists.watching || '<div style="color:#64748b;font-size:12px;">暫無連載中動漫</div>';
+    document.getElementById('list-waiting').innerHTML = lists.waiting || '<div style="color:#64748b;font-size:12px;">暫無敲碗中動漫</div>';
+    document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已完結動漫</div>';
+}
 
-        function toggleEpisode(animeId, epNum) {
-            const item = myAnimeData.find(a => a.id === animeId);
-            if (item) {
-                if (!item.watchedEps) item.watchedEps = [];
-                const index = item.watchedEps.indexOf(epNum);
-                if (index > -1) item.watchedEps.splice(index, 1);
-                else item.watchedEps.push(epNum);
-                saveAndRender();
-            }
-        }
-
-        function updateStatus(animeId, newStatus) {
-            const item = myAnimeData.find(a => a.id === animeId);
-            if (item) { item.status = newStatus; saveAndRender(); }
-        }
-
-        function deleteAnime(animeId) {
-            if(confirm('確定要刪除這部作品嗎？')) {
-                myAnimeData = myAnimeData.filter(a => a.id !== animeId);
-                saveAndRender();
-            }
-        }
-
-        function renderLists() {
-            document.getElementById('toWatchList').innerHTML = '';
-            document.getElementById('currentList').innerHTML = '';
-            document.getElementById('upcomingList').innerHTML = '';
-            document.getElementById('completedList').innerHTML = '';
-
-            myAnimeData.forEach(function(item) {
-                const card = document.createElement('div');
-                card.className = 'anime-card';
-                
-                let timeBadgeHtml = '';
-                if (item.aniListStatus === 'FINISHED') {
-                    timeBadgeHtml = '<div class="time-badge finished">🎉 雲端情報：官方公告本季已全集完結</div>';
-                } else if (item.aniListStatus === 'NOT_YET_RELEASED') {
-                    timeBadgeHtml = '<div class="time-badge countdown">⏳ 雲端情報：下季新番企劃中，等待開播排程</div>';
-                } else if (item.nextEpTime) {
-                    const diff = item.nextEpTime - Date.now();
-                    if (diff > 0) {
-                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        timeBadgeHtml = '<div class="time-badge countdown">⚡ 最新追蹤：第 ' + item.nextEpNum + ' 集將在 ' + days + ' 天 ' + hours + ' 小時後更新</div>';
-                    } else {
-                        timeBadgeHtml = '<div class="time-badge today">✨ 🌟 最新第 ' + (item.nextEpNum || '') + ' 集預計已開播！快去收看！</div>';
-                    }
-                } else {
-                    timeBadgeHtml = '<div class="time-badge finished">📺 連載中 (自動追蹤排程中)</div>';
-                }
-
-                let metaHtml = '<div class="anime-meta">';
-                if (item.officialName) metaHtml += '<span>原名: ' + item.officialName + '</span>';
-                if (item.notes) metaHtml += '<span>💬 備註: ' + item.notes + '</span>';
-                metaHtml += '</div>';
-                
-                let displayEps = item.totalEps;
-                if ((!displayEps || displayEps === 0) && item.nextEpNum) {
-                    displayEps = item.nextEpNum - 1;
-                }
-
-                let epHtml = '';
-                if (displayEps > 0) {
-                    const countWatched = item.watchedEps ? item.watchedEps.length : 0;
-                    epHtml += '<div class="ep-section">';
-                    epHtml += '<div class="ep-title">📊 觀看進度 (點擊集數打勾): ' + countWatched + ' / ' + displayEps + ' 集</div>';
-                    epHtml += '<div class="ep-grid">';
-                    for (let i = 1; i <= displayEps; i++) {
-                        const isWatched = item.watchedEps && item.watchedEps.indexOf(i) > -1;
-                        const watchedClass = isWatched ? ' watched' : '';
-                        epHtml += '<div class="ep-box' + watchedClass + '" onclick="toggleEpisode(' + item.id + ', ' + i + ')">' + i + '</div>';
-                    }
-                    epHtml += '</div></div>';
-                } else {
-                    epHtml += '<div class="ep-section"><div class="ep-title">📊 觀看進度：自動分析集數中...</div></div>';
-                }
-
-                const currentStatus = item.status || 'toWatch';
-                const statusSelectHtml = '<select class="status-select-inline" onchange="updateStatus(' + item.id + ', this.value)">' +
-                    '<option value="toWatch"' + (currentStatus === 'toWatch' ? ' selected' : '') + '>📝 準備要看</option>' +
-                    '<option value="current"' + (currentStatus === 'current' ? ' selected' : '') + '>⚡ 正在連載</option>' +
-                    '<option value="upcoming"' + (currentStatus === 'upcoming' ? ' selected' : '') + '>⏳ 敲碗等待</option>' +
-                    '<option value="completed"' + (currentStatus === 'completed' ? ' selected' : '') + '>🎉 已完結</option>' +
-                    '</select>';
-
-                card.innerHTML = 
-                    '<div class="card-header">' +
-                        '<div>' +
-                            '<div class="anime-title">' + item.title + '</div>' +
-                            metaHtml +
-                            timeBadgeHtml +
-                        '</div>' +
-                    '</div>' +
-                    epHtml + 
-                    '<div class="card-controls">' +
-                        statusSelectHtml +
-                        '<button class="delete-btn" onclick="deleteAnime(' + item.id + ')">🗑️</button>' +
-                    '</div>';
-
-                const targetColumn = currentStatus + 'List';
-                if (document.getElementById(targetColumn)) {
-                    document.getElementById(targetColumn).appendChild(card);
-                } else {
-                    document.getElementById('toWatchList').appendChild(card);
-                }
-            });
-        }
-
-        renderLists();
-        syncAllOnLoad();
-    </script>
+// 初始渲染
+renderList();
+</script>
 </body>
 </html>
