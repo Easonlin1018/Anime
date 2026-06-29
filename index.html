@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v6.5</title>
+    <title>全自動動漫追番基地 v6.6</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -98,7 +98,7 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v6.5</h1>
+    <h1>🎬 全自動動漫追番基地 v6.6</h1>
 
     <!-- 新增區塊 -->
     <div class="section">
@@ -113,7 +113,7 @@
         <div id="list-watching"></div>
     </div>
 
-    <!-- 2. 補番區（新增：區隔官方已完結但你還沒看透的番） -->
+    <!-- 2. 補番區 -->
     <div class="section">
         <div class="section-title">🎬 官方已完結（補番中）</div>
         <div id="list-backlog"></div>
@@ -125,7 +125,7 @@
         <div id="list-waiting"></div>
     </div>
 
-    <!-- 4. 追完區（個人真正看完了） -->
+    <!-- 4. 追完區 -->
     <div class="section">
         <div class="section-title">🎉 已追完 / 看完了</div>
         <div id="list-completed"></div>
@@ -138,24 +138,24 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v6_5')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v6_6')) || [];
 
-// 相容舊版資料轉移
-if (animeList.length === 0 && localStorage.getItem('anime_list_v6')) {
-    animeList = JSON.parse(localStorage.getItem('anime_list_v6'));
-    // 修正舊資料的分類
+// 從舊版 v6.5 轉移資料並自動修復爆表集數的 Bug
+if (animeList.length === 0 && localStorage.getItem('anime_list_v6_5')) {
+    animeList = JSON.parse(localStorage.getItem('anime_list_v6_5'));
     animeList.forEach(a => {
-        if (a.category === 'completed' && a.watched === 0) {
-            a.category = 'backlog';
+        // 如果發現正在連載中，且看過集數大於或等於總集數（例如 14/12），自動幫忙校正回 0 集
+        if (a.category === 'watching' && Number(a.watched) >= Number(a.episodes)) {
+            a.watched = 0;
         }
     });
-    localStorage.setItem('anime_list_v6_5', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v6_6', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v6_5', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v6_6', JSON.stringify(animeList));
     renderList();
 }
 
@@ -214,10 +214,9 @@ async function searchAnime(keyword = null, isQuiet = false) {
                 return;
             }
 
-            // 精準分流狀態
             let category = 'watching';
             if(media.status === 'NOT_YET_RELEASED') category = 'waiting';
-            if(media.status === 'FINISHED') category = 'backlog'; // 官方已完結的番，預設進補番區
+            if(media.status === 'FINISHED') category = 'backlog';
 
             let airDate = "未定";
             if(media.startDate && media.startDate.year) {
@@ -239,7 +238,6 @@ async function searchAnime(keyword = null, isQuiet = false) {
             saveAndRender();
             if(!keyword && !isQuiet) document.getElementById('search-input').value = "";
             
-            // 如果拉進來直接就是待播番，不需要掃續作
             if (category !== 'waiting') {
                 await checkAndAddSequel(newAnime, true);
             }
@@ -253,7 +251,6 @@ async function searchAnime(keyword = null, isQuiet = false) {
     }
 }
 
-// 核心修復：精準抓取續作文字標題
 async function checkAndAddSequel(anime, isQuiet = false) {
     if (!anime.relations || anime.relations.length === 0) return;
     
@@ -269,10 +266,17 @@ async function checkAndAddSequel(anime, isQuiet = false) {
     }
 }
 
+// 核心Bug修復：當切換狀態時進行精準的集數控制
 function moveCategory(id, newCat) {
     const anime = animeList.find(a => a.id === id);
     if(anime) {
+        // ✨ 重要修正：如果原本在「已追完」，現在點擊「重看」移回連載區，立刻將觀看進度歸零！
+        if (anime.category === 'completed' && newCat === 'watching') {
+            anime.watched = 0;
+        }
+        
         anime.category = newCat;
+        
         if(newCat === 'completed') {
             anime.watched = anime.episodes;
             checkAndAddSequel(anime, false);
@@ -284,8 +288,13 @@ function moveCategory(id, newCat) {
 function updateProgress(id, delta) {
     const anime = animeList.find(a => a.id === id);
     if(anime) {
-        anime.watched = Math.max(0, anime.watched + delta);
-        if(typeof anime.episodes === 'number' && anime.watched >= anime.episodes) {
+        // 強制轉成數字做計算，避免字串相加錯誤
+        let currentWatched = Number(anime.watched) || 0;
+        anime.watched = Math.max(0, currentWatched + delta);
+        
+        const totalEps = Number(anime.episodes);
+        // 如果看過的集數達標了，才自動送進已追完
+        if(!isNaN(totalEps) && anime.watched >= totalEps) {
             anime.category = 'completed';
             checkAndAddSequel(anime, false);
         }
@@ -348,21 +357,7 @@ function renderList() {
     document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
 }
 
-// 網頁載入時自動背景修復：掃描有沒有漏掉的續作
-async function autoScan() {
-    for (let anime of animeList) {
-        if (anime.category === 'completed') {
-            const sequelEdge = anime.relations ? anime.relations.find(edge => edge.relationType === 'SEQUEL') : null;
-            if (sequelEdge && !animeList.some(a => a.id === sequelEdge.node.id)) {
-                await checkAndAddSequel(anime, true);
-            }
-        }
-    }
-}
-
-// 初始執行
 renderList();
-setTimeout(autoScan, 1500); // 延遲1.5秒偷偷在背景幫你補抓第二季
 </script>
 </body>
 </html>
