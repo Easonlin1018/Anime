@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v7.3</title>
+    <title>全自動動漫追番基地 v7.4</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -81,7 +81,7 @@
         .btn-del { background-color: var(--accent-color); }
         .btn-next { background-color: #16a34a; }
         .btn-scan { background-color: #7c3aed; }
-        .btn-backup { background-color: #0d9488; } /* 備份專用青綠色 */
+        .btn-backup { background-color: #0d9488; }
         .status-radar { font-size: 12px; color: #a855f7; font-weight: bold; padding: 6px 0; }
         .toast {
             position: fixed;
@@ -101,16 +101,16 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v7.3</h1>
+    <h1>🎬 全自動動漫追番基地 v7.4</h1>
 
     <!-- ➕ 新增區塊 -->
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增</div>
-        <input type="text" id="search-input" placeholder="輸入動漫關鍵字">
+        <input type="text" id="search-input" placeholder="輸入動漫關鍵字（中/日/英皆可）">
         <button id="search-btn" onclick="searchAnime()">🔍 自動搜尋並加入</button>
     </div>
 
-    <!-- ⚙️ 備份還原區（新加入功能！） -->
+    <!-- ⚙️ 備份還原區 -->
     <div class="section">
         <div class="section-title">⚙️ 資料備份與移轉</div>
         <div style="display: flex; gap: 10px;">
@@ -151,24 +151,24 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v7_3')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v7_4')) || [];
 
 // 完美無縫繼承轉移舊版本資料
 if (animeList.length === 0) {
-    const oldKeys = ['anime_list_v7_2', 'anime_list_v7_1', 'anime_list_v7_0', 'anime_list_v6_9', 'anime_list_v6_8'];
+    const oldKeys = ['anime_list_v7_3', 'anime_list_v7_2', 'anime_list_v7_1', 'anime_list_v7_0'];
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) {
             animeList = JSON.parse(localStorage.getItem(key));
             break;
         }
     }
-    localStorage.setItem('anime_list_v7_3', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_4', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v7_3', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_4', JSON.stringify(animeList));
     renderList();
 }
 
@@ -178,29 +178,23 @@ function showToast(msg) {
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
-// 💾 功能 A：匯出備份檔案
+// 📥 📤 備份還原模組
 function exportData() {
-    if (animeList.length === 0) {
-        showToast("💡 目前清單是空的，沒有資料可以備份喔！");
-        return;
-    }
+    if (animeList.length === 0) { showToast("💡 目前清單是空的，沒有資料可以備份喔！"); return; }
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(animeList, null, 2));
     const downloadAnchor = document.createElement('a');
     const date = new Date().toISOString().slice(0, 10);
-    
     downloadAnchor.setAttribute("href", dataStr);
     downloadAnchor.setAttribute("download", `anime_list_backup_${date}.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
-    showToast("🎉 備份檔案已成功下載！<br>更新前請妥善保存此檔案。");
+    showToast("🎉 備份檔案已成功下載！");
 }
 
-// 📂 功能 B：匯入備份檔案並套用
 function importData(event) {
     const file = event.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = function(e) {
         try {
@@ -211,15 +205,28 @@ function importData(event) {
                     saveAndRender();
                     showToast("🎉 資料還原成功！已完美套用備份進度。");
                 }
-            } else {
-                showToast("❌ 檔案格式不正確，還原失敗。");
-            }
-        } catch (err) {
-            showToast("❌ 讀取檔案失敗，請確保這是正確的備份 JSON 檔。");
-        }
+            } else { showToast("❌ 檔案格式不正確。"); }
+        } catch (err) { showToast("❌ 讀取檔案失敗。"); }
     };
     reader.readAsText(file);
-    event.target.value = ''; // 清空選擇，讓同一個檔案可以重複觸發匯入
+    event.target.value = '';
+}
+
+// 🌐 核心雲端翻譯引擎
+async function translateText(text, langPair) {
+    try {
+        const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`);
+        const data = await response.json();
+        if (data && data.responseData && data.responseData.translatedText) {
+            // 解析 HTML 實體編碼字元（避免出現 &#39; 之類的符號）
+            const txt = data.responseData.translatedText;
+            const doc = new DOMParser().parseFromString(txt, "text/html");
+            return doc.documentElement.textContent;
+        }
+    } catch (e) {
+        console.error("翻譯引擎暫時休眠...", e);
+    }
+    return null;
 }
 
 function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle, extraKeyword = "") {
@@ -235,13 +242,14 @@ function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle,
     return cleanTitle;
 }
 
+// 🎬 智慧型多國語系雙向搜尋核心
 async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle = null) {
-    const input = keyword || document.getElementById('search-input').value.trim();
+    let input = keyword || document.getElementById('search-input').value.trim();
     if(!input) return;
     
     if (!isQuiet) {
         searchBtn.disabled = true;
-        searchBtn.innerText = "⚡ 正在連網抓取資料...";
+        searchBtn.innerText = "⚡ 正在搜尋 AniList 總庫...";
     }
 
     const query = `
@@ -254,30 +262,47 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
         episodes
         startDate { year month day }
         relations {
-          edges {
-            relationType
-            node {
-              id
-              title { native }
-              status
-              startDate { year month day }
-            }
-          }
+          edges { relationType node { id title { native } status startDate { year month day } } }
         }
       }
     }`;
 
+    async function fetchFromAniList(searchKey) {
+        try {
+            const response = await fetch('https://graphql.anilist.co', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query, variables: { search: searchKey } })
+            });
+            const resData = await response.json();
+            return resData.data ? resData.data.Media : null;
+        } catch (e) { return null; }
+    }
+
     try {
-        const response = await fetch('https://graphql.anilist.co', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query, variables: { search: input } })
-        });
-        const resData = await response.json();
-        const media = resData.data.Media;
+        // 1. 嘗試直接搜尋
+        let media = await fetchFromAniList(input);
+
+        // 2. 如果直接查查不到，且輸入包含中文，啟動「智慧日/英文變身雷達」
+        if (!media && /[\u4e00-\u9fa5]/.test(input)) {
+            if (!isQuiet) searchBtn.innerText = "🌐 中文查無結果，正在變身日文搜尋...";
+            let translatedJa = await translateText(input, "zh|ja");
+            if (translatedJa) {
+                media = await fetchFromAniList(translatedJa);
+            }
+            
+            // 3. 如果變身日文還抓不到，試試英文（AniList 的英文索引最全）
+            if (!media) {
+                if (!isQuiet) searchBtn.innerText = "🌐 正在變身英文進行終極追蹤...";
+                let translatedEn = await translateText(input, "zh|en");
+                if (translatedEn) {
+                    media = await fetchFromAniList(translatedEn);
+                }
+            }
+        }
 
         if(!media) {
-            if (!isQuiet) showToast("❌ 找不到該作品。請縮短關鍵字再試試。");
+            if (!isQuiet) showToast("❌ 全球資料庫都翻遍了，還是找不到這部作品。<br>請嘗試縮短關鍵字！");
         } else {
             if(animeList.some(a => a.id === media.id)) {
                 if(!keyword && !isQuiet) showToast("💡 清單中已經有這部作品囉！");
@@ -285,18 +310,28 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
                 return;
             }
 
-            let chosenTitle = media.title.native;
+            // 【翻譯回中文邏輯】
+            let chosenTitle = null;
+            
+            // 先看 AniList 內建有沒有別名是中文
             if (media.synonyms && media.synonyms.length > 0) {
-                const chiSyn = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s));
-                if (chiSyn) chosenTitle = chiSyn;
+                chosenTitle = media.synonyms.find(s => /[\u4e00-\u9fa5]/.test(s));
             }
             
-            if (chosenTitle === media.title.native) {
-                if (parentChineseTitle) chosenTitle = parentChineseTitle;
-                else if (keyword && /[\u4e00-\u9fa5]/.test(keyword)) chosenTitle = keyword;
+            // 如果沒內建中文，且當初使用者輸入的就是中文，直接套用使用者輸入的當主標題
+            if (!chosenTitle && /[\u4e00-\u9fa5]/.test(input)) {
+                chosenTitle = input;
+            }
+            
+            // 如果完全找不到中文，就把查到的日文官方名字「翻回繁體中文」！
+            if (!chosenTitle) {
+                if (!isQuiet) searchBtn.innerText = "🇹🇼 成功捕獲！正在將結果翻譯回中文...";
+                let translatedZh = await translateText(media.title.native, "ja|zh-TW");
+                chosenTitle = translatedZh || media.title.native; // 失敗才退回日文
             }
 
-            chosenTitle = applySeasonSuffix(chosenTitle, media.title.native, media.title.english, media.title.romaji, keyword || "");
+            if (parentChineseTitle) chosenTitle = parentChineseTitle;
+            chosenTitle = applySeasonSuffix(chosenTitle, media.title.native, media.title.english, media.title.romaji, input || "");
 
             let category = 'watching';
             if(media.status === 'NOT_YET_RELEASED') category = 'waiting';
@@ -327,7 +362,7 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
             }
         }
     } catch (error) {
-        if (!isQuiet) showToast("❌ 連線失敗，請檢查網路。");
+        if (!isQuiet) showToast("❌ 發生未知連線錯誤。");
     }
     if (!isQuiet) {
         searchBtn.disabled = false;
@@ -487,22 +522,11 @@ async function autoRefreshAndCheck() {
             const media = resData.data.Media;
             if (media) {
                 if (anime.category === 'waiting') {
-                    if (media.status === 'RELEASING') {
-                        anime.category = 'watching';
-                        changed = true;
-                    } else if (media.status === 'FINISHED') {
-                        anime.category = 'backlog';
-                        changed = true;
-                    }
+                    if (media.status === 'RELEASING') { anime.category = 'watching'; changed = true; }
+                    else if (media.status === 'FINISHED') { anime.category = 'backlog'; changed = true; }
                 }
-                if (media.episodes && anime.episodes !== media.episodes) {
-                    anime.episodes = media.episodes;
-                    changed = true;
-                }
-                if (anime.status !== media.status) {
-                    anime.status = media.status;
-                    changed = true;
-                }
+                if (media.episodes && anime.episodes !== media.episodes) { anime.episodes = media.episodes; changed = true; }
+                if (anime.status !== media.status) { anime.status = media.status; changed = true; }
                 if (!anime.title.includes("艾莉同學") && !anime.title.includes("青之箱") && !anime.title.includes("第二可愛") && !anime.title.includes("總之就是非常可愛")) {
                     let baseChinese = anime.title;
                     if (media.synonyms && media.synonyms.length > 0) {
@@ -510,10 +534,7 @@ async function autoRefreshAndCheck() {
                         if (chiSyn) baseChinese = chiSyn;
                     }
                     let repairedTitle = applySeasonSuffix(baseChinese, media.title.native, media.title.english, media.title.romaji, anime.title);
-                    if (anime.title !== repairedTitle) {
-                        anime.title = repairedTitle;
-                        changed = true;
-                    }
+                    if (anime.title !== repairedTitle) { anime.title = repairedTitle; changed = true; }
                 }
             }
         } catch (e) { console.error(e); }
