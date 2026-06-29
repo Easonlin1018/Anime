@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v7.2</title>
+    <title>全自動動漫追番基地 v7.3</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -81,6 +81,7 @@
         .btn-del { background-color: var(--accent-color); }
         .btn-next { background-color: #16a34a; }
         .btn-scan { background-color: #7c3aed; }
+        .btn-backup { background-color: #0d9488; } /* 備份專用青綠色 */
         .status-radar { font-size: 12px; color: #a855f7; font-weight: bold; padding: 6px 0; }
         .toast {
             position: fixed;
@@ -100,13 +101,23 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v7.2</h1>
+    <h1>🎬 全自動動漫追番基地 v7.3</h1>
 
-    <!-- 新增區塊 -->
+    <!-- ➕ 新增區塊 -->
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增</div>
         <input type="text" id="search-input" placeholder="輸入動漫關鍵字">
         <button id="search-btn" onclick="searchAnime()">🔍 自動搜尋並加入</button>
+    </div>
+
+    <!-- ⚙️ 備份還原區（新加入功能！） -->
+    <div class="section">
+        <div class="section-title">⚙️ 資料備份與移轉</div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn-backup" onclick="exportData()" style="margin-bottom:0;">📤 匯出資料檔案</button>
+            <input type="file" id="import-file" style="display:none;" onchange="importData(event)">
+            <button class="btn-edit" onclick="document.getElementById('import-file').click()" style="margin-bottom:0;">📥 匯入檔案還原</button>
+        </div>
     </div>
 
     <!-- 1. 連載區 -->
@@ -140,24 +151,24 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v7_2')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v7_3')) || [];
 
 // 完美無縫繼承轉移舊版本資料
 if (animeList.length === 0) {
-    const oldKeys = ['anime_list_v7_1', 'anime_list_v7_0', 'anime_list_v6_9', 'anime_list_v6_8'];
+    const oldKeys = ['anime_list_v7_2', 'anime_list_v7_1', 'anime_list_v7_0', 'anime_list_v6_9', 'anime_list_v6_8'];
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) {
             animeList = JSON.parse(localStorage.getItem(key));
             break;
         }
     }
-    localStorage.setItem('anime_list_v7_2', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_3', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v7_2', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v7_3', JSON.stringify(animeList));
     renderList();
 }
 
@@ -166,6 +177,50 @@ function showToast(msg) {
     document.getElementById('toast-box').style.display = 'block';
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
+
+// 💾 功能 A：匯出備份檔案
+function exportData() {
+    if (animeList.length === 0) {
+        showToast("💡 目前清單是空的，沒有資料可以備份喔！");
+        return;
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(animeList, null, 2));
+    const downloadAnchor = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `anime_list_backup_${date}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    showToast("🎉 備份檔案已成功下載！<br>更新前請妥善保存此檔案。");
+}
+
+// 📂 功能 B：匯入備份檔案並套用
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedList = JSON.parse(e.target.result);
+            if (Array.isArray(importedList)) {
+                if (confirm("⚠️ 確定要匯入此檔案嗎？這將會完全覆蓋目前的清單資料！")) {
+                    animeList = importedList;
+                    saveAndRender();
+                    showToast("🎉 資料還原成功！已完美套用備份進度。");
+                }
+            } else {
+                showToast("❌ 檔案格式不正確，還原失敗。");
+            }
+        } catch (err) {
+            showToast("❌ 讀取檔案失敗，請確保這是正確的備份 JSON 檔。");
+        }
+    };
+    reader.readAsText(file);
+    event.target.value = ''; // 清空選擇，讓同一個檔案可以重複觸發匯入
+}
 
 function applySeasonSuffix(currentTitle, nativeTitle, englishTitle, romajiTitle, extraKeyword = "") {
     const combined = `${nativeTitle} ${englishTitle || ''} ${romajiTitle || ''} ${extraKeyword}`.toLowerCase();
@@ -386,31 +441,23 @@ function renderList() {
     document.getElementById('list-completed').innerHTML = lists.completed || '<div style="color:#64748b;font-size:12px;">暫無已追完動漫</div>';
 }
 
-// 🚀 v7.2 核心強效導正防線
 async function autoRefreshAndCheck() {
     let changed = false;
     for (let anime of animeList) {
         let lowerTitle = anime.title.toLowerCase();
 
-        // 1. 艾莉同學繁中導正
         if (lowerTitle.includes("時々ボソッと") || lowerTitle.includes("ロシア語")) {
             anime.title = "不時輕聲地以俄語遮羞的鄰座艾莉同學 第二季";
             changed = true;
         }
-
-        // 2. 青之箱日文強制翻轉繁中
         if (lowerTitle.includes("アオのハコ") || lowerTitle.includes("blue box")) {
             anime.title = "青之箱 第二季";
             changed = true;
         }
-
-        // 3. 修復第二可愛被誤判成第二季的 Bug
         if (lowerTitle.includes("2番目に可愛い") && anime.title.includes("第二季")) {
             anime.title = "我成了班上第二可愛女生的朋友";
             changed = true;
         }
-
-        // 4. 🔥【強效導正防線四：《總之就是非常可愛》全系列繁中識別分家】
         if (lowerTitle.includes("总之就是非常可爱") || lowerTitle.includes("總之就是非常可愛") || lowerTitle.includes("tonikaku")) {
             let eps = Number(anime.episodes);
             if (eps === 12) {
@@ -439,7 +486,6 @@ async function autoRefreshAndCheck() {
             const resData = await response.json();
             const media = resData.data.Media;
             if (media) {
-                // 自動開播移位
                 if (anime.category === 'waiting') {
                     if (media.status === 'RELEASING') {
                         anime.category = 'watching';
@@ -449,7 +495,6 @@ async function autoRefreshAndCheck() {
                         changed = true;
                     }
                 }
-
                 if (media.episodes && anime.episodes !== media.episodes) {
                     anime.episodes = media.episodes;
                     changed = true;
@@ -458,8 +503,6 @@ async function autoRefreshAndCheck() {
                     anime.status = media.status;
                     changed = true;
                 }
-
-                // 基礎翻譯修復（跳過已被我們本地強制鎖定的特例）
                 if (!anime.title.includes("艾莉同學") && !anime.title.includes("青之箱") && !anime.title.includes("第二可愛") && !anime.title.includes("總之就是非常可愛")) {
                     let baseChinese = anime.title;
                     if (media.synonyms && media.synonyms.length > 0) {
