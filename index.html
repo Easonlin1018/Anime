@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v8.8</title>
+    <title>全自動動漫追番基地 v8.9</title>
+    
+    <link rel="apple-touch-icon" href="https://img.icons8.com/fluent/180/000000/anime.png">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluent/48/000000/anime.png">
+
     <style>
         :root {
             --bg-color: #0f172a;
@@ -11,6 +15,7 @@
             --text-color: #f8fafc;
             --accent-color: #ef4444;
             --border-color: #334155;
+            --radar-color: #10b981;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -23,14 +28,24 @@
             align-items: center;
         }
         .container { width: 100%; max-width: 500px; }
-        h1 { text-align: center; color: var(--accent-color); font-size: 24px; margin-bottom: 20px; }
-        .section { background-color: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 20px; border: 1px solid var(--border-color); }
-        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-color); display: flex; justify-content: space-between; }
+        h1 { text-align: center; color: var(--accent-color); font-size: 24px; margin-bottom: 20px; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+        .section { background-color: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-color); display: flex; justify-content: space-between; align-items: center; }
         input, button { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); box-sizing: border-box; }
-        button { background-color: #2563eb; color: white; font-weight: bold; border: none; cursor: pointer; transition: background 0.2s; }
-        button:active { filter: brightness(0.8); }
+        button { background-color: #2563eb; color: white; font-weight: bold; border: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        button:active { filter: brightness(0.8); transform: scale(0.98); }
         button:disabled { background-color: #475569; cursor: not-allowed; }
         
+        /* 🛰️ 酷炫雷達核心外觀 */
+        .radar-panel { border: 1px solid var(--radar-color); background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent); }
+        .radar-title { border-bottom-color: var(--radar-color); color: var(--radar-color); text-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+        .radar-status { font-size: 11px; background: rgba(16, 185, 129, 0.15); color: var(--radar-color); padding: 2px 8px; border-radius: 20px; border: 1px solid var(--radar-color); animation: pulse 2s infinite; }
+        .radar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .radar-hub-btn { font-size: 12px; padding: 8px; background: #111827; border: 1px solid #10b98133; color: #a7f3d0; margin: 0; }
+        .radar-hub-btn:hover { background: #10b98122; border-color: var(--radar-color); }
+        
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
         /* 🎬 大圖書館同狀態摺疊收納外觀 */
         .series-group { background-color: #111827; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
         .series-group[open] { border-color: #7c3aed; box-shadow: 0 0 12px rgba(124, 58, 237, 0.3); }
@@ -41,11 +56,11 @@
         details[open] .series-summary::after { content: '收起 ▴'; color: #f43f5e; }
         .series-content { padding: 10px; background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border-color); }
         
-        .anime-item { background: var(--bg-color); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 2px; }
+        .anime-item { background: var(--bg-color); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 2px; position: relative; }
         .series-content .anime-item { border-left: 4px solid #7c3aed; background: #1e293b; } 
         
         .anime-title { font-weight: bold; margin-bottom: 6px; line-height: 1.4; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+        .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
         .btn-group { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
         .btn-group button { padding: 6px; font-size: 12px; margin: 0; width: auto; flex: 1; min-width: 55px; }
         .btn-edit { background-color: #0284c7; }
@@ -54,6 +69,9 @@
         .btn-scan { background-color: #7c3aed; margin-bottom: 12px; font-size: 14px; }
         .btn-backup { background-color: #0d9488; }
         .btn-review { background-color: #8b5cf6; } 
+        .btn-popup { background-color: #ec4899; color: white; font-weight: bold; } /* 快閃店粉紅爆裂按鈕 */
+        .btn-popup:hover { background-color: #db2777; box-shadow: 0 0 8px rgba(236, 72, 153, 0.5); }
+        
         .badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: white; white-space: nowrap; }
         .toast { position: fixed; top: 40%; left: 50%; transform: translate(-50%, -50%); background: rgba(15, 23, 42, 0.95); padding: 20px; border-radius: 12px; border: 2px solid var(--accent-color); text-align: center; display: none; z-index: 100; width: 80%; max-width: 300px; line-height: 1.6; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); }
     </style>
@@ -61,7 +79,24 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v8.8</h1>
+    <h1>🎬 全自動動漫追番基地 v8.9</h1>
+
+    <div class="section radar-panel">
+        <div class="section-title radar-title">
+            <span>🛰️ 台灣實時動漫快閃店雷達</span>
+            <span class="radar-status">⚡ 監測網格 ACTIVE</span>
+        </div>
+        <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px; line-height: 1.5;">
+            已為您自動與台灣四大展演聖地進行特展網格對接，點擊下方中心可直接穿透監測當季總表：
+        </div>
+        <div class="radar-grid">
+            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=華山文創園區+快閃店+動漫', '_blank')">⛩️ 華山 網格中心</button>
+            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=松山文創園區+快閃店+動漫', '_blank')">🏭 松菸 網格中心</button>
+            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=三創生活園區+快閃店+動漫', '_blank')">🧬 三創 網格中心</button>
+            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=台北大巨蛋+快閃店+動漫', '_blank')">🏟️ 大巨蛋 網格中心</button>
+        </div>
+        <button style="background-color: var(--radar-color); color: #0f172a; font-size: 13px;" onclick="scanAllPopups()">📡 啟動全庫存快閃店交叉自動搜尋</button>
+    </div>
 
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增 (同狀態收納版)</div>
@@ -79,7 +114,6 @@
         </div>
     </div>
 
-    <!-- 填裝板塊 -->
     <div class="section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
     <div class="section"><div class="section-title">🎬 官方已完結（補番中）</div><div id="list-backlog"></div></div>
     <div class="section"><div class="section-title">🧠 溫故知新（需要複習區）</div><div id="list-review"></div></div>
@@ -93,22 +127,22 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v8_8')) || [];
+let animeList = JSON.parse(localStorage.getItem('anime_list_v8_9')) || [];
 let toastTimer = null;
 
-// 大數據繼承
-const oldKeys = ['anime_list_v8_7', 'anime_list_v8_6', 'anime_list_v8_5', 'anime_list_v8_4', 'anime_list_v8_3', 'anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0', 'anime_list_v7_9', 'anime_list_v7_8'];
+// 大數據向下相容繼承
+const oldKeys = ['anime_list_v8_8', 'anime_list_v8_7', 'anime_list_v8_6', 'anime_list_v8_5', 'anime_list_v8_4', 'anime_list_v8_3', 'anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0'];
 if (animeList.length === 0) {
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) { try { animeList = JSON.parse(localStorage.getItem(key)); break; } catch(e){} }
     }
-    localStorage.setItem('anime_list_v8_8', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_9', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v8_8', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v8_9', JSON.stringify(animeList));
     renderList();
 }
 
@@ -116,7 +150,7 @@ function showToast(msg) {
     clearTimeout(toastTimer);
     document.getElementById('toast-msg').innerHTML = msg; 
     document.getElementById('toast-box').style.display = 'block'; 
-    toastTimer = setTimeout(closeToast, 3500); 
+    toastTimer = setTimeout(closeToast, 4000); 
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
@@ -136,6 +170,28 @@ function getCoreTitle(title) {
                 .replace(/\s*Season\s*[0-9]+\s*$/gi, "")
                 .replace(/\s*\(.*\)$/g, "")
                 .trim();
+}
+
+// 📡 雷達發射：一鍵交叉自動搜尋特定動漫快閃店
+function lookupPopup(title) {
+    const core = getCoreTitle(title);
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(core)}+快閃店+台灣+2026`;
+    window.open(googleSearchUrl, '_blank');
+}
+
+// 📡 雷達全彈發射：自動將目前清單中所有「核心動漫名稱」打包並進行快閃店大盤點
+function scanAllPopups() {
+    if (animeList.length === 0) { showToast("⚠️ 雷達監測庫存為空！請先加入動漫作品再執行掃描。"); return; }
+    
+    // 提取所有不重複的核心作品名稱
+    const cores = Array.from(new Set(animeList.map(a => getCoreTitle(a.title))));
+    showToast(`📡 正在分析 ${cores.length} 個動漫核心網格...<br>即將自動開啟大數據搜尋進行交叉比對！`);
+    
+    // 為了防瀏覽器阻擋彈跳視窗，我們直接開啟一個包含所有關鍵字組合的總體搜尋
+    const combinedQuery = cores.slice(0, 5).join(' OR ');
+    const finalUrl = `https://www.google.com/search?q=(${encodeURIComponent(combinedQuery)})+快閃店+台灣+2026`;
+    
+    setTimeout(() => { window.open(finalUrl, '_blank'); }, 1200);
 }
 
 function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
@@ -270,22 +326,6 @@ async function manualScanSequels() {
     if (!foundAny) { setTimeout(() => { showToast("🛰️ 雷達全網掃描完畢！目前清單內皆無未入庫的全新關聯續作。"); }, 1200); }
 }
 
-async function autoScanSequels() {
-    for (let anime of animeList) {
-        if (anime && anime.category === 'completed') {
-            const query = `query ($id: Int) { Media (id: $id, type: ANIME) { id format title { native english romaji } startDate { year } relations { edges { relationType node { id format title { native english romaji } status } } } } }`;
-            try {
-                const response = await fetch('https://graphql.anilist.co', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query, variables: { id: anime.id } }) });
-                const resData = await response.json(); const media = resData.data ? resData.data.Media : null;
-                if (media && media.relations) {
-                    anime.relations = media.relations.edges; const sequelEdge = anime.relations.find(edge => edge.relationType === 'SEQUEL');
-                    if (sequelEdge && !animeList.some(a => a.id === sequelEdge.node.id)) { await searchAnime(null, true, anime.title, sequelEdge.node.id); }
-                }
-            } catch (e) { console.error(e); }
-        }
-    }
-}
-
 function editTitle(id) { const anime = animeList.find(a => a.id === id); if (anime) { const newTitle = prompt(`請輸入新名字：`, anime.title); if (newTitle && newTitle.trim() !== "") { anime.title = newTitle.trim(); saveAndRender(); } } }
 
 function moveCategory(id, newCat) { 
@@ -319,9 +359,9 @@ function buildSingleAnimeItemHtml(anime) {
     
     let actionButtons = '';
     if (anime.category === 'watching' || anime.category === 'backlog') {
-        actionButtons = `<button onclick="updateProgress(${anime.id}, 1)">➕ 看了 1 集</button><button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 追完</button>`;
+        actionButtons = `<button onclick="updateProgress(${anime.id}, 1)">➕ 1 集</button><button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 追完</button>`;
     } else if (anime.category === 'review') {
-        actionButtons = `<button onclick="updateProgress(${anime.id}, 1)">➕ 複習 1 集</button><button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 複習完</button>`;
+        actionButtons = `<button onclick="updateProgress(${anime.id}, 1)">➕ 複習 1</button><button class="btn-next" onclick="moveCategory(${anime.id}, 'completed')">🎉 完畢</button>`;
     } else if (anime.category === 'waiting') {
         actionButtons = `<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中...</div>`;
     } else if (anime.category === 'completed') {
@@ -340,15 +380,14 @@ function buildSingleAnimeItemHtml(anime) {
             <div class="anime-meta">${metaText}</div>
             <div class="btn-group">
                 ${actionButtons}
-                <button class="btn-edit" onclick="editTitle(${anime.id})">✏️ 改名</button>
-                <button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️ 刪除</button>
+                <button class="btn-popup" onclick="lookupPopup('${anime.title}')">🛍️ 查快閃店</button>
+                <button class="btn-edit" onclick="editTitle(${anime.id})">✏️</button>
+                <button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️</button>
             </div>
         </div>`;
 }
 
-// 🎬 核心分流與同狀態打包引擎 v8.8
 function renderList() {
-    // 先死死記住使用者目前展開了哪些摺疊狀態（格式鎖定：狀態_系列名）
     const openGroups = new Set();
     document.querySelectorAll('details.series-group[open]').forEach(detail => {
         openGroups.add(detail.getAttribute('data-groupkey'));
@@ -359,35 +398,29 @@ function renderList() {
     
     if (!Array.isArray(animeList)) animeList = [];
     
-    // 1. 第一步：先徹底分流到各自的狀態板塊
     animeList.forEach(anime => {
         if (anime && categories[anime.category] !== undefined) {
             categories[anime.category].push(anime);
         }
     });
 
-    // 2. 第二步：在每個狀態板塊內部，單獨對同系列名稱進行打包
     for (let cat in categories) {
         const itemsInCat = categories[cat];
         const seriesMap = {};
         
-        // 按照核心名字歸類
         itemsInCat.forEach(anime => {
             let core = getCoreTitle(anime.title);
             if (!seriesMap[core]) seriesMap[core] = [];
             seriesMap[core].push(anime);
         });
 
-        // 渲染該板塊內部的卡片或收納箱
         for (let core in seriesMap) {
             let subItems = seriesMap[core];
-            let groupKey = `${cat}_${core}`; // 狀態+名字雙重鎖定 Key
+            let groupKey = `${cat}_${core}`;
 
-            // 如果該狀態下只有 1 部作品，維持精美單卡
             if (subItems.length === 1) {
                 sectionHtml[cat] += buildSingleAnimeItemHtml(subItems[0]);
             } 
-            // 如果該狀態下有 2 部以上作品，原地合體成特定狀態的大箱子！
             else {
                 let innerContentHtml = subItems.map(a => buildSingleAnimeItemHtml(a)).join('');
                 let isKeepOpen = openGroups.has(groupKey) ? 'open' : '';
@@ -395,7 +428,7 @@ function renderList() {
                 let accordionHtml = `
                     <details class="series-group" data-groupkey="${groupKey}" ${isKeepOpen}>
                         <summary class="series-summary">
-                            <span>📦 ${core} <small style="color:#94a3b8; font-weight:normal; margin-left:6px;">(共 ${subItems.length} 部作品)</small></span>
+                            <span>📦 ${core} <small style="color:#94a3b8; font-weight:normal; margin-left:6px;">(共 ${subItems.length} 部)</small></span>
                         </summary>
                         <div class="series-content">
                             ${innerContentHtml}
@@ -418,7 +451,6 @@ function exportData() { if (animeList.length === 0) return; const dataStr = "dat
 function importData(e) { const file = e.target.files[0]; if (!file) return; const r = new FileReader(); r.onload = function(evt) { try { const list = JSON.parse(evt.target.result); if (Array.isArray(list)) { animeList = list; saveAndRender(); } } catch(err) {} }; r.readAsText(file); }
 
 renderList();
-setTimeout(autoScanSequels, 1500);
 </script>
 </body>
 </html>
