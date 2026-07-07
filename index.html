@@ -132,25 +132,15 @@
 </div>
 
 <script>
-// 🧠 核心黑科技：台灣實時快閃店特展核心資料庫
-// 你可以在這裡隨時增加、修改最新活動，系統會全自動用關鍵字核對並當場顯示！
+// === RADAR_DB_START ===
 const TAIWAN_POPUP_DATABASE = {
-    "葬送的芙莉蓮": {
-        time: "2026年06月15日 ～ 2026年08月31日",
-        location: "台北華山1914文創園區 中4B館",
-        status: "🔥 官方期間限定特展・實時熱播中"
-    },
-    "五等分": {
-        time: "2026年07月10日 ～ 2026年08月09日",
-        location: "台中中友百貨 C棟13F (翻轉動漫祭)",
-        status: "⏳ 實體限定周邊快閃・即將開展"
-    },
-    "聲之形": {
-        time: "2026年08月01日 ～ 2026年08月15日",
-        location: "台北三創生活園區 1F 十二立方",
-        status: "✨ 10週年經典重映聯名特展"
+    "範例動漫": {
+        time: "等待機器人半夜更新",
+        location: "偵測中",
+        status: "📡 正在等待首次自動化排程同步..."
     }
 };
+// === RADAR_DB_END ===
 
 let animeList = JSON.parse(localStorage.getItem('anime_list_v9_0')) || [];
 let toastTimer = null;
