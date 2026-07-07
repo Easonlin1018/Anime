@@ -1,9 +1,9 @@
 name: 🛰️ 每日全自動動漫快閃店雷達同步
 
 on:
+  workflow_dispatch: {}
   schedule:
-    - cron: '0 16 * * *' # 每天台灣時間半夜 12 點自動執行
-  workflow_dispatch: # 允許手動點擊按鈕執行
+    - cron: '0 16 * * *'
 
 jobs:
   build:
@@ -29,4 +29,3 @@ jobs:
         git config --local user.name "GitHub Action Bot"
         git add index.html
         git diff --quiet && git diff --staged --quiet || (git commit -m "🛰️ 雷達自動同步：更新線下最新快閃店資料" && git push)
-
