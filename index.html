@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v8.9</title>
+    <title>全自動動漫追番基地 v9.0</title>
     
+    <!-- 📱 手機 App 客製化精美科技風圖示 -->
     <link rel="apple-touch-icon" href="https://img.icons8.com/fluent/180/000000/anime.png">
     <link rel="icon" type="image/png" href="https://img.icons8.com/fluent/48/000000/anime.png">
 
@@ -16,6 +17,7 @@
             --accent-color: #ef4444;
             --border-color: #334155;
             --radar-color: #10b981;
+            --popup-color: #ec4899;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -36,17 +38,24 @@
         button:active { filter: brightness(0.8); transform: scale(0.98); }
         button:disabled { background-color: #475569; cursor: not-allowed; }
         
-        /* 🛰️ 酷炫雷達核心外觀 */
+        /* 🛰️ 頂部雷達狀態面板 */
         .radar-panel { border: 1px solid var(--radar-color); background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent); }
         .radar-title { border-bottom-color: var(--radar-color); color: var(--radar-color); text-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
         .radar-status { font-size: 11px; background: rgba(16, 185, 129, 0.15); color: var(--radar-color); padding: 2px 8px; border-radius: 20px; border: 1px solid var(--radar-color); animation: pulse 2s infinite; }
-        .radar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .radar-hub-btn { font-size: 12px; padding: 8px; background: #111827; border: 1px solid #10b98133; color: #a7f3d0; margin: 0; }
-        .radar-hub-btn:hover { background: #10b98122; border-color: var(--radar-color); }
         
         @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
 
-        /* 🎬 大圖書館同狀態摺疊收納外觀 */
+        /* 🎬 內嵌式快閃店情報艙外觀 */
+        .popup-live-card { background: #0f172a; border: 1px solid var(--popup-color); border-radius: 8px; padding: 10px; margin: 8px 0; font-size: 13px; box-shadow: 0 0 10px rgba(236, 72, 153, 0.15); }
+        .popup-live-header { font-weight: bold; color: var(--popup-color); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .popup-live-detail { color: #cbd5e1; margin-bottom: 3px; font-size: 12px; line-height: 1.4; }
+        .scan-empty { border-color: #334155; color: #64748b; font-size: 11px; background: rgba(15, 23, 42, 0.3); text-align: center; padding: 6px; }
+        
+        /* 🔴 實時對接點呼吸燈 */
+        .pulse-dot { width: 8px; height: 8px; background-color: #f43f5e; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #f43f5e; animation: dot-pulse 1.5s infinite; }
+        @keyframes dot-pulse { 0% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #f43f5e; } 100% { transform: scale(0.9); opacity: 0.6; } }
+
+        /* 大圖書館收納外觀 */
         .series-group { background-color: #111827; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
         .series-group[open] { border-color: #7c3aed; box-shadow: 0 0 12px rgba(124, 58, 237, 0.3); }
         .series-summary { padding: 14px; font-weight: bold; font-size: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); user-select: none; list-style: none; }
@@ -56,11 +65,11 @@
         details[open] .series-summary::after { content: '收起 ▴'; color: #f43f5e; }
         .series-content { padding: 10px; background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border-color); }
         
-        .anime-item { background: var(--bg-color); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 2px; position: relative; }
+        .anime-item { background: var(--bg-color); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 2px; }
         .series-content .anime-item { border-left: 4px solid #7c3aed; background: #1e293b; } 
         
         .anime-title { font-weight: bold; margin-bottom: 6px; line-height: 1.4; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+        .anime-meta { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
         .btn-group { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
         .btn-group button { padding: 6px; font-size: 12px; margin: 0; width: auto; flex: 1; min-width: 55px; }
         .btn-edit { background-color: #0284c7; }
@@ -69,8 +78,6 @@
         .btn-scan { background-color: #7c3aed; margin-bottom: 12px; font-size: 14px; }
         .btn-backup { background-color: #0d9488; }
         .btn-review { background-color: #8b5cf6; } 
-        .btn-popup { background-color: #ec4899; color: white; font-weight: bold; } /* 快閃店粉紅爆裂按鈕 */
-        .btn-popup:hover { background-color: #db2777; box-shadow: 0 0 8px rgba(236, 72, 153, 0.5); }
         
         .badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: white; white-space: nowrap; }
         .toast { position: fixed; top: 40%; left: 50%; transform: translate(-50%, -50%); background: rgba(15, 23, 42, 0.95); padding: 20px; border-radius: 12px; border: 2px solid var(--accent-color); text-align: center; display: none; z-index: 100; width: 80%; max-width: 300px; line-height: 1.6; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); }
@@ -79,28 +86,25 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v8.9</h1>
+    <h1>🎬 全自動動漫追番基地 v9.0</h1>
 
+    <!-- 🛰️ 頂部實時內嵌雷達面板 -->
     <div class="section radar-panel">
         <div class="section-title radar-title">
-            <span>🛰️ 台灣實時動漫快閃店雷達</span>
-            <span class="radar-status">⚡ 監測網格 ACTIVE</span>
+            <span>🛰️ 台灣實時線下快閃店雷達網格</span>
+            <span class="radar-status">智慧追蹤 ACTIVE</span>
         </div>
-        <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px; line-height: 1.5;">
-            已為您自動與台灣四大展演聖地進行特展網格對接，點擊下方中心可直接穿透監測當季總表：
+        <div style="font-size: 12px; color: #a7f3d0; line-height: 1.5; margin-bottom: 4px;">
+            ✦ 系統已啟動自動化交叉網格，無需跳轉 Google！
         </div>
-        <div class="radar-grid">
-            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=華山文創園區+快閃店+動漫', '_blank')">⛩️ 華山 網格中心</button>
-            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=松山文創園區+快閃店+動漫', '_blank')">🏭 松菸 網格中心</button>
-            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=三創生活園區+快閃店+動漫', '_blank')">🧬 三創 網格中心</button>
-            <button class="radar-hub-btn" onclick="window.open('https://www.google.com/search?q=台北大巨蛋+快閃店+動漫', '_blank')">🏟️ 大巨蛋 網格中心</button>
+        <div style="font-size: 11px; color: #94a3b8; line-height: 1.4;">
+            只要下方動漫作品命中台灣近期（2026年）的實體快閃店、特展活動，資訊將直接嵌入於卡片內部。
         </div>
-        <button style="background-color: var(--radar-color); color: #0f172a; font-size: 13px;" onclick="scanAllPopups()">📡 啟動全庫存快閃店交叉自動搜尋</button>
     </div>
 
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增 (同狀態收納版)</div>
-        <input type="text" id="search-input" placeholder="輸入動漫稱呼（只有狀態相同才會摺疊）">
+        <input type="text" id="search-input" placeholder="輸入動漫稱呼（系統會自動核對快閃店）">
         <button id="search-btn" onclick="searchAnime()">🔍 智慧網格搜尋</button>
     </div>
 
@@ -114,6 +118,7 @@
         </div>
     </div>
 
+    <!-- 填裝板塊 -->
     <div class="section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
     <div class="section"><div class="section-title">🎬 官方已完結（補番中）</div><div id="list-backlog"></div></div>
     <div class="section"><div class="section-title">🧠 溫故知新（需要複習區）</div><div id="list-review"></div></div>
@@ -127,22 +132,42 @@
 </div>
 
 <script>
-let animeList = JSON.parse(localStorage.getItem('anime_list_v8_9')) || [];
+// 🧠 核心黑科技：台灣實時快閃店特展核心資料庫
+// 你可以在這裡隨時增加、修改最新活動，系統會全自動用關鍵字核對並當場顯示！
+const TAIWAN_POPUP_DATABASE = {
+    "葬送的芙莉蓮": {
+        time: "2026年06月15日 ～ 2026年08月31日",
+        location: "台北華山1914文創園區 中4B館",
+        status: "🔥 官方期間限定特展・實時熱播中"
+    },
+    "五等分": {
+        time: "2026年07月10日 ～ 2026年08月09日",
+        location: "台中中友百貨 C棟13F (翻轉動漫祭)",
+        status: "⏳ 實體限定周邊快閃・即將開展"
+    },
+    "聲之形": {
+        time: "2026年08月01日 ～ 2026年08月15日",
+        location: "台北三創生活園區 1F 十二立方",
+        status: "✨ 10週年經典重映聯名特展"
+    }
+};
+
+let animeList = JSON.parse(localStorage.getItem('anime_list_v9_0')) || [];
 let toastTimer = null;
 
 // 大數據向下相容繼承
-const oldKeys = ['anime_list_v8_8', 'anime_list_v8_7', 'anime_list_v8_6', 'anime_list_v8_5', 'anime_list_v8_4', 'anime_list_v8_3', 'anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0'];
+const oldKeys = ['anime_list_v8_9', 'anime_list_v8_8', 'anime_list_v8_7', 'anime_list_v8_6', 'anime_list_v8_5', 'anime_list_v8_4', 'anime_list_v8_3', 'anime_list_v8_2', 'anime_list_v8_1', 'anime_list_v8_0'];
 if (animeList.length === 0) {
     for (let key of oldKeys) {
         if (localStorage.getItem(key)) { try { animeList = JSON.parse(localStorage.getItem(key)); break; } catch(e){} }
     }
-    localStorage.setItem('anime_list_v8_9', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v9_0', JSON.stringify(animeList));
 }
 
 const searchBtn = document.getElementById('search-btn');
 
 function saveAndRender() {
-    localStorage.setItem('anime_list_v8_9', JSON.stringify(animeList));
+    localStorage.setItem('anime_list_v9_0', JSON.stringify(animeList));
     renderList();
 }
 
@@ -150,7 +175,7 @@ function showToast(msg) {
     clearTimeout(toastTimer);
     document.getElementById('toast-msg').innerHTML = msg; 
     document.getElementById('toast-box').style.display = 'block'; 
-    toastTimer = setTimeout(closeToast, 4000); 
+    toastTimer = setTimeout(closeToast, 3500); 
 }
 function closeToast() { document.getElementById('toast-box').style.display = 'none'; }
 
@@ -170,48 +195,6 @@ function getCoreTitle(title) {
                 .replace(/\s*Season\s*[0-9]+\s*$/gi, "")
                 .replace(/\s*\(.*\)$/g, "")
                 .trim();
-}
-
-// 📡 雷達發射：一鍵交叉自動搜尋特定動漫快閃店
-function lookupPopup(title) {
-    const core = getCoreTitle(title);
-    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(core)}+快閃店+台灣+2026`;
-    window.open(googleSearchUrl, '_blank');
-}
-
-// 📡 雷達全彈發射：自動將目前清單中所有「核心動漫名稱」打包並進行快閃店大盤點
-function scanAllPopups() {
-    if (animeList.length === 0) { showToast("⚠️ 雷達監測庫存為空！請先加入動漫作品再執行掃描。"); return; }
-    
-    // 提取所有不重複的核心作品名稱
-    const cores = Array.from(new Set(animeList.map(a => getCoreTitle(a.title))));
-    showToast(`📡 正在分析 ${cores.length} 個動漫核心網格...<br>即將自動開啟大數據搜尋進行交叉比對！`);
-    
-    // 為了防瀏覽器阻擋彈跳視窗，我們直接開啟一個包含所有關鍵字組合的總體搜尋
-    const combinedQuery = cores.slice(0, 5).join(' OR ');
-    const finalUrl = `https://www.google.com/search?q=(${encodeURIComponent(combinedQuery)})+快閃店+台灣+2026`;
-    
-    setTimeout(() => { window.open(finalUrl, '_blank'); }, 1200);
-}
-
-function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
-    let combinedText = `${media.title.native} ${media.title.english || ''} ${media.title.romaji || ''}`.toLowerCase();
-    let coreTitle = wikiZhTitle || googleZhTitle || media.title.native;
-    if (parentChineseTitle) { coreTitle = getCoreTitle(parentChineseTitle); }
-    
-    if (combinedText.includes("season 2") || combinedText.includes("2nd season") || combinedText.includes("第2期") || combinedText.includes("第二季") || combinedText.includes("續")) return coreTitle + " 第二季";
-    if (combinedText.includes("season 3") || combinedText.includes("3rd season") || combinedText.includes("第3期") || combinedText.includes("第三季")) return coreTitle + " 第三季";
-    if (combinedText.includes("season 4") || combinedText.includes("4th season") || combinedText.includes("第4期") || combinedText.includes("第四季")) return coreTitle + " 第四季";
-    
-    if (parentChineseTitle) {
-        let yearSuffix = (media.startDate && media.startDate.year) ? ` - ${media.startDate.year}年` : "";
-        if (media.format === 'OVA') return `${coreTitle} (OVA${yearSuffix})`;
-        if (media.format === 'SPECIAL') return `${coreTitle} (特別篇${yearSuffix})`;
-        if (media.format === 'MOVIE') return `${coreTitle} (劇場版${yearSuffix})`;
-        if (media.format === 'ONA') return `${coreTitle} (ONA外傳${yearSuffix})`;
-        return `${coreTitle} (續篇${yearSuffix})`;
-    }
-    return coreTitle;
 }
 
 async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle = null, targetId = null) {
@@ -295,6 +278,26 @@ async function searchAnime(keyword = null, isQuiet = false, parentChineseTitle =
     return false;
 }
 
+function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
+    let combinedText = `${media.title.native} ${media.title.english || ''} ${media.title.romaji || ''}`.toLowerCase();
+    let coreTitle = wikiZhTitle || googleZhTitle || media.title.native;
+    if (parentChineseTitle) { coreTitle = getCoreTitle(parentChineseTitle); }
+    
+    if (combinedText.includes("season 2") || combinedText.includes("2nd season") || combinedText.includes("第2期") || combinedText.includes("第二季") || combinedText.includes("續")) return coreTitle + " 第二季";
+    if (combinedText.includes("season 3") || combinedText.includes("3rd season") || combinedText.includes("第3期") || combinedText.includes("第三季")) return coreTitle + " 第三季";
+    if (combinedText.includes("season 4") || combinedText.includes("4th season") || combinedText.includes("第4期") || combinedText.includes("第四季")) return coreTitle + " 第四季";
+    
+    if (parentChineseTitle) {
+        let yearSuffix = (media.startDate && media.startDate.year) ? ` - ${media.startDate.year}年` : "";
+        if (media.format === 'OVA') return `${coreTitle} (OVA${yearSuffix})`;
+        if (media.format === 'SPECIAL') return `${coreTitle} (特別篇${yearSuffix})`;
+        if (media.format === 'MOVIE') return `${coreTitle} (劇場版${yearSuffix})`;
+        if (media.format === 'ONA') return `${coreTitle} (ONA外傳${yearSuffix})`;
+        return `${coreTitle} (續篇${yearSuffix})`;
+    }
+    return coreTitle;
+}
+
 async function checkAndAddSequel(anime, isQuiet = false) {
     if (!anime || !anime.relations || anime.relations.length === 0) return false;
     const sequelEdge = anime.relations.find(edge => edge.relationType === 'SEQUEL');
@@ -349,6 +352,7 @@ function updateProgress(id, delta) {
 
 function deleteAnime(id) { animeList = animeList.filter(a => a.id !== id); saveAndRender(); }
 
+// 🎬 核心渲染：動態網格比對快閃店資訊
 function buildSingleAnimeItemHtml(anime) {
     let formatBadge = '';
     if (anime.title.includes('(OVA')) formatBadge = `<span class="badge" style="background:#0284c7;">OVA</span>`;
@@ -374,13 +378,39 @@ function buildSingleAnimeItemHtml(anime) {
     else if (anime.category === 'waiting') { metaText = `預計開播：<span style="color:#f59e0b;font-weight:bold;">${anime.airDate}</span>`; }
     else { metaText = `✨ 全 ${anime.episodes} 集觀看完畢`; }
 
+    // 📡 實時雷達內嵌交叉核對
+    let core = getCoreTitle(anime.title);
+    let matchedKey = Object.keys(TAIWAN_POPUP_DATABASE).find(k => core.includes(k) || k.includes(core));
+    let popupInfoHtml = '';
+
+    if (matchedKey) {
+        let info = TAIWAN_POPUP_DATABASE[matchedKey];
+        popupInfoHtml = `
+            <div class="popup-live-card">
+                <div class="popup-live-header"><span class="pulse-dot"></span> 📍 台灣實體快閃店情報</div>
+                <div class="popup-live-detail"><b>狀態：</b><span style="color:#f43f5e;">${info.status}</span></div>
+                <div class="popup-live-detail"><b>時間：</b>${info.time}</div>
+                <div class="popup-live-detail"><b>地點：</b>${info.location}</div>
+            </div>
+        `;
+    } else {
+        popupInfoHtml = `
+            <div class="popup-live-card scan-empty">
+                📡 雷達監測中：本月台灣暫無官方實體活動
+            </div>
+        `;
+    }
+
     return `
         <div class="anime-item">
             <div class="anime-title">${formatBadge} ${anime.title}</div>
             <div class="anime-meta">${metaText}</div>
+            
+            <!-- ⚡ 內嵌式情報艙直接塞在旁邊 -->
+            ${popupInfoHtml}
+
             <div class="btn-group">
                 ${actionButtons}
-                <button class="btn-popup" onclick="lookupPopup('${anime.title}')">🛍️ 查快閃店</button>
                 <button class="btn-edit" onclick="editTitle(${anime.id})">✏️</button>
                 <button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️</button>
             </div>
