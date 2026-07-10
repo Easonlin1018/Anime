@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v8.8</title>
+    <title>全自動動漫追番基地 v8.9</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -25,8 +25,9 @@
         .container { width: 100%; max-width: 500px; }
         h1 { text-align: center; color: var(--accent-color); font-size: 24px; margin-bottom: 20px; }
         .section { background-color: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 20px; border: 1px solid var(--border-color); }
-        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-color); display: flex; justify-content: space-between; }
-        input, button { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); box-sizing: border-box; }
+        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-color); display: flex; justify-content: space-between; align-items: center; }
+        input, textarea, button { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); box-sizing: border-box; }
+        textarea { resize: vertical; min-height: 100px; font-family: inherit; font-size: 14px; line-height: 1.5; }
         button { background-color: #2563eb; color: white; font-weight: bold; border: none; cursor: pointer; transition: background 0.2s; }
         button:active { filter: brightness(0.8); }
         button:disabled { background-color: #475569; cursor: not-allowed; }
@@ -52,6 +53,8 @@
         .btn-del { background-color: var(--accent-color); }
         .btn-next { background-color: #16a34a; }
         .btn-scan { background-color: #7c3aed; margin-bottom: 12px; font-size: 14px; }
+        .btn-batch { background-color: #f59e0b; color: #0f172a; }
+        .btn-batch:hover { background-color: #d97706; }
         .btn-backup { background-color: #0d9488; }
         .btn-review { background-color: #8b5cf6; } 
         .badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: white; white-space: nowrap; }
@@ -61,12 +64,18 @@
 <body>
 
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v8.8</h1>
+    <h1>🎬 全自動動漫追番基地 v8.9</h1>
 
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增 (同狀態收納版)</div>
-        <input type="text" id="search-input" placeholder="輸入動漫稱呼（只有狀態相同才會摺疊）">
+        <input type="text" id="search-input" placeholder="輸入單部動漫稱呼（只有狀態相同才會摺疊）">
         <button id="search-btn" onclick="searchAnime()">🔍 智慧網格搜尋</button>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🚀 批次自動化多載入網格</div>
+        <textarea id="batch-input" placeholder="在此處貼入大量動漫名稱&#10;每行一部作品，例如：&#10;葬送的芙莉蓮&#10;五等分的新娘&#10;聲之形"></textarea>
+        <button id="batch-btn" class="btn-batch" onclick="batchSearchAnime()">⚡ 啟動批次雷達搜尋</button>
     </div>
 
     <div class="section">
@@ -79,7 +88,6 @@
         </div>
     </div>
 
-    <!-- 填裝板塊 -->
     <div class="section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
     <div class="section"><div class="section-title">🎬 官方已完結（補番中）</div><div id="list-backlog"></div></div>
     <div class="section"><div class="section-title">🧠 溫故知新（需要複習區）</div><div id="list-review"></div></div>
@@ -106,6 +114,7 @@ if (animeList.length === 0) {
 }
 
 const searchBtn = document.getElementById('search-btn');
+const batchBtn = document.getElementById('batch-btn');
 
 function saveAndRender() {
     localStorage.setItem('anime_list_v8_8', JSON.stringify(animeList));
@@ -130,6 +139,37 @@ async function translateText(text, toLang = "zh-TW") {
 }
 
 function hasJapaneseKana(str) { return /[\u3040-\u309F\u30A0-\u30FF]/.test(str); }
+
+// 批次搜尋核心控制
+async function batchSearchAnime() {
+    const inputArea = document.getElementById('batch-input');
+    const lines = inputArea.value.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    
+    if (lines.length === 0) {
+        showToast("⚠️ 大文字框內沒有偵測到任何動漫名稱哦！");
+        return;
+    }
+    
+    batchBtn.disabled = true;
+    let successCount = 0;
+    
+    for (let i = 0; i < lines.length; i++) {
+        const currentTitle = lines[i];
+        batchBtn.innerText = `⚡ 正在批次排程中 (${i + 1}/${lines.length})...\n《${currentTitle}》`;
+        
+        // 呼叫原本高精度網格搜尋核心（傳入 Quiet 模式避免彈出過多單個 Toast）
+        let success = await searchAnime(currentTitle, true);
+        if (success) successCount++;
+        
+        // 微小延遲防止 API 速率被鎖
+        await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    
+    batchBtn.disabled = false;
+    batchBtn.innerText = "⚡ 啟動批次雷達搜尋";
+    inputArea.value = ""; // 清空輸入框
+    showToast(`🎉 批次對接完畢！<br>成功入庫 <b style="color:#22c55e;">${successCount}</b> / ${lines.length} 部作品。`);
+}
 
 function getCoreTitle(title) {
     return title.replace(/\s*第[一二三四五六七八九十0-9]+[季期]\s*$/g, "")
@@ -346,9 +386,8 @@ function buildSingleAnimeItemHtml(anime) {
         </div>`;
 }
 
-// 🎬 核心分流與同狀態打包引擎 v8.8
+// 🎬 核心分流與同狀態打包引擎 v8.9
 function renderList() {
-    // 先死死記住使用者目前展開了哪些摺疊狀態（格式鎖定：狀態_系列名）
     const openGroups = new Set();
     document.querySelectorAll('details.series-group[open]').forEach(detail => {
         openGroups.add(detail.getAttribute('data-groupkey'));
@@ -359,35 +398,29 @@ function renderList() {
     
     if (!Array.isArray(animeList)) animeList = [];
     
-    // 1. 第一步：先徹底分流到各自的狀態板塊
     animeList.forEach(anime => {
         if (anime && categories[anime.category] !== undefined) {
             categories[anime.category].push(anime);
         }
     });
 
-    // 2. 第二步：在每個狀態板塊內部，單獨對同系列名稱進行打包
     for (let cat in categories) {
         const itemsInCat = categories[cat];
         const seriesMap = {};
         
-        // 按照核心名字歸類
         itemsInCat.forEach(anime => {
             let core = getCoreTitle(anime.title);
             if (!seriesMap[core]) seriesMap[core] = [];
             seriesMap[core].push(anime);
         });
 
-        // 渲染該板塊內部的卡片或收納箱
         for (let core in seriesMap) {
             let subItems = seriesMap[core];
-            let groupKey = `${cat}_${core}`; // 狀態+名字雙重鎖定 Key
+            let groupKey = `${cat}_${core}`;
 
-            // 如果該狀態下只有 1 部作品，維持精美單卡
             if (subItems.length === 1) {
                 sectionHtml[cat] += buildSingleAnimeItemHtml(subItems[0]);
             } 
-            // 如果該狀態下有 2 部以上作品，原地合體成特定狀態的大箱子！
             else {
                 let innerContentHtml = subItems.map(a => buildSingleAnimeItemHtml(a)).join('');
                 let isKeepOpen = openGroups.has(groupKey) ? 'open' : '';
