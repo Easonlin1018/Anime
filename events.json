@@ -2,14 +2,14 @@
   "meta": {
     "sourceName": "巴哈姆特 GNN RSS",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": null,
-    "lastSuccessfulUpdateAt": null,
-    "fetchStatus": "not-run",
-    "fetchedNewsCount": 0,
+    "updatedAt": "2026-07-10T12:21:06.219Z",
+    "lastSuccessfulUpdateAt": "2026-07-10T12:21:06.219Z",
+    "fetchStatus": "success",
+    "fetchedNewsCount": 30,
     "matchedEventCount": 0,
     "storedEventCount": 0,
     "keepDays": 180,
-    "note": "尚未執行 GitHub Actions。請到 Actions 頁面手動執行「更新巴哈姆特動漫活動」。"
+    "note": "此清單是從新聞標題與摘要自動篩選，活動日期與地點請以巴哈姆特原文及主辦方公告為準。"
   },
   "events": []
 }
