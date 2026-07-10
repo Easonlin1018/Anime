@@ -3,24 +3,40 @@
     "schemaVersion": 3,
     "sourceName": "巴哈姆特 GNN RSS＋公開標籤頁",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-10T13:11:29.677Z",
-    "lastSuccessfulUpdateAt": "2026-07-10T13:11:29.677Z",
+    "updatedAt": "2026-07-10T13:16:11.776Z",
+    "lastSuccessfulUpdateAt": "2026-07-10T13:16:11.776Z",
     "fetchStatus": "partial",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "uniqueNewsCount": 235,
     "articleCandidateCount": 150,
-    "articleFetchSuccessCount": 48,
-    "articleFetchFailureCount": 102,
-    "matchedEventCount": 14,
+    "articleFetchSuccessCount": 44,
+    "articleFetchFailureCount": 106,
+    "matchedEventCount": 11,
     "storedEventCount": 14,
     "expiredRemovedCount": 0,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 0,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 30,
+    "nonActivityRemovedCount": 29,
     "sourceErrors": [
+      {
+        "source": "文章 gnn-307058",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306932",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306831",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306806",
+        "error": "HTTP 429 Too Many Requests"
+      },
       {
         "source": "文章 gnn-306762",
         "error": "HTTP 429 Too Many Requests"
@@ -124,22 +140,6 @@
       {
         "source": "文章 gnn-304960",
         "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-304896",
-        "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-304886",
-        "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-304827",
-        "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-304822",
-        "error": "HTTP 429 Too Many Requests"
       }
     ],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
@@ -167,8 +167,8 @@
       "dateConfidence": "high",
       "dateSource": "2026 年 7 月 3 日至 7 月 19 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307118",
@@ -190,8 +190,8 @@
       "dateConfidence": "high",
       "dateSource": "7/1 至 8/31",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307265",
@@ -213,8 +213,8 @@
       "dateConfidence": "high",
       "dateSource": "6/26~8/11",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307727",
@@ -236,8 +236,8 @@
       "dateConfidence": "medium",
       "dateSource": "即日起",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-306806",
@@ -305,8 +305,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307928",
@@ -328,8 +328,8 @@
       "dateConfidence": "medium",
       "dateSource": "2026 年 7 月 25 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307935",
@@ -351,8 +351,8 @@
       "dateConfidence": "medium",
       "dateSource": "8 月 2 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307452",
@@ -374,8 +374,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307564",
@@ -397,8 +397,8 @@
       "dateConfidence": "medium",
       "dateSource": "8 月 31 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307058",
@@ -443,8 +443,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     },
     {
       "id": "gnn-307829",
@@ -466,8 +466,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-10T13:11:29.677Z",
-      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+      "discoveredAt": "2026-07-10T13:16:11.776Z",
+      "lastSeenAt": "2026-07-10T13:16:11.776Z"
     }
   ]
 }
