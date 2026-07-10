@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v9.0.0</title>
+    <title>全自動動漫追番基地 v9.1.0</title>
 
     <style>
         :root {
@@ -262,6 +262,39 @@
 
         .event-card.high { border-left-color: #22c55e; }
         .event-card.candidate { border-left-color: #f59e0b; }
+        .event-card.upcoming { border-left-color: #38bdf8; }
+
+        .event-date {
+            margin: 8px 0;
+            padding: 8px 9px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.09);
+            color: #bae6fd;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .event-state {
+            font-size: 10px;
+            padding: 3px 7px;
+            border-radius: 999px;
+            font-weight: bold;
+        }
+
+        .event-state.ongoing {
+            background: #14532d;
+            color: #bbf7d0;
+        }
+
+        .event-state.upcoming {
+            background: #164e63;
+            color: #a5f3fc;
+        }
+
+        .event-state.unknown {
+            background: #78350f;
+            color: #fde68a;
+        }
 
         .event-title {
             font-size: 15px;
@@ -335,7 +368,7 @@
 
 <body>
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v9.0.0</h1>
+    <h1>🎬 全自動動漫追番基地 v9.1.0</h1>
 
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
@@ -1182,10 +1215,10 @@ function importData(event) {
 }
 
 function formatEventDate(value) {
-    if (!value) return "發布日期不明";
+    if (!value) return "日期不明";
 
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "發布日期不明";
+    const date = new Date(value.length === 10 ? `${value}T00:00:00Z` : value);
+    if (Number.isNaN(date.getTime())) return "日期不明";
 
     return new Intl.DateTimeFormat("zh-TW", {
         year: "numeric",
@@ -1193,6 +1226,73 @@ function formatEventDate(value) {
         day: "2-digit",
         timeZone: "Asia/Taipei"
     }).format(date);
+}
+
+function todayDateKey() {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Taipei",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    }).formatToParts(new Date());
+
+    const values = Object.fromEntries(
+        parts
+            .filter(part => part.type !== "literal")
+            .map(part => [part.type, part.value])
+    );
+
+    return `${values.year}-${values.month}-${values.day}`;
+}
+
+function isVisibleEvent(event) {
+    const today = todayDateKey();
+
+    if (event.eventStatus === "expired") return false;
+    if (event.eventEndDate && event.eventEndDate < today) return false;
+
+    return true;
+}
+
+function eventStatusInfo(event) {
+    if (event.eventStatus === "ongoing") {
+        return { label: "🟢 進行中", className: "ongoing" };
+    }
+
+    if (event.eventStatus === "ongoing-unconfirmed") {
+        return { label: "🟢 可能進行中", className: "ongoing" };
+    }
+
+    if (event.eventStatus === "upcoming") {
+        return { label: "🔵 即將開始", className: "upcoming" };
+    }
+
+    return { label: "🟡 日期待確認", className: "unknown" };
+}
+
+function formatEventPeriod(event) {
+    if (event.eventStartDate && event.eventEndDate) {
+        return `${formatEventDate(event.eventStartDate)} ～ ${formatEventDate(event.eventEndDate)}`;
+    }
+
+    if (event.eventStartDate) {
+        return `${formatEventDate(event.eventStartDate)} 起（結束日期待確認）`;
+    }
+
+    return "活動期間待確認，請查看原文";
+}
+
+function eventSortValue(event) {
+    const statusRank = {
+        ongoing: 0,
+        "ongoing-unconfirmed": 1,
+        upcoming: 2,
+        "date-unknown": 3
+    };
+
+    const rank = statusRank[event.eventStatus] ?? 9;
+    const date = event.eventStartDate || event.publishedAt || "9999-12-31";
+    return { rank, date };
 }
 
 function fillEventFilters() {
@@ -1242,27 +1342,28 @@ function updateEventStatus() {
 
     if (eventMeta.fetchStatus === "error") {
         status.innerHTML =
-            `❌ 本次自動更新失敗，但舊資料仍保留。<br>` +
+            `❌ 本次自動更新失敗，但上一版有效資料仍保留。<br>` +
             `${escapeHtml(eventMeta.lastError || "")}`;
         return;
     }
 
     if (eventMeta.fetchStatus === "not-run") {
         status.innerHTML =
-            "⚠️ 尚未執行活動更新。請到 GitHub Actions 執行「更新巴哈姆特動漫活動」。";
+            "⚠️ 已清除舊的錯誤活動資料。請到 GitHub Actions 執行一次「更新巴哈姆特動漫活動」。";
         return;
     }
 
     const statusText =
         eventMeta.fetchStatus === "partial"
-            ? "⚠️ 部分來源讀取失敗，已顯示成功取得的資料"
-            : "✅ 活動資料更新正常";
+            ? "⚠️ 部分文章讀取失敗，已顯示成功確認的活動"
+            : "✅ 已排除過期、回顧與舊年份活動";
 
     status.innerHTML =
         `${statusText}<br>` +
         `最後更新：${escapeHtml(updateTime)}｜` +
-        `目前保存：${Number(eventMeta.storedEventCount || eventList.length)} 則｜` +
-        `本次標籤頁：${Number(eventMeta.fetchedTagItemCount || 0)} 筆`;
+        `目前顯示：${Number(eventMeta.storedEventCount || eventList.length)} 則<br>` +
+        `本次排除過期：${Number(eventMeta.expiredRemovedCount || 0)} 則｜` +
+        `排除落幕／回顧：${Number(eventMeta.recapRemovedCount || 0)} 則`;
 }
 
 function renderEvents() {
@@ -1270,32 +1371,44 @@ function renderEvents() {
     const location = document.getElementById("event-location").value;
     const type = document.getElementById("event-type").value;
 
-    const filtered = eventList.filter(event => {
-        const text = `${event.title || ""} ${event.summary || ""}`.toLowerCase();
+    const filtered = eventList
+        .filter(isVisibleEvent)
+        .filter(event => {
+            const text = `${event.title || ""} ${event.summary || ""}`.toLowerCase();
 
-        return (
-            (!keyword || text.includes(keyword)) &&
-            (!type || event.type === type) &&
-            (
-                !location ||
+            return (
+                (!keyword || text.includes(keyword)) &&
+                (!type || event.type === type) &&
                 (
-                    Array.isArray(event.locations) &&
-                    event.locations.includes(location)
+                    !location ||
+                    (
+                        Array.isArray(event.locations) &&
+                        event.locations.includes(location)
+                    )
                 )
-            )
-        );
-    });
+            );
+        })
+        .sort((a, b) => {
+            const valueA = eventSortValue(a);
+            const valueB = eventSortValue(b);
+
+            if (valueA.rank !== valueB.rank) {
+                return valueA.rank - valueB.rank;
+            }
+
+            return valueA.date.localeCompare(valueB.date);
+        });
 
     document.getElementById("event-count").textContent =
-        `顯示 ${filtered.length} / ${eventList.length} 則活動消息`;
+        `顯示 ${filtered.length} / ${eventList.length} 則近期活動消息`;
 
     const container = document.getElementById("event-list");
 
     if (filtered.length === 0) {
         container.innerHTML = `
             <div class="empty">
-                目前沒有符合條件的活動消息。<br>
-                若剛更新程式，請先到 GitHub Actions 執行一次更新。
+                目前沒有符合條件的近期活動。<br>
+                若剛更新檔案，請先到 GitHub Actions 執行一次更新。
             </div>
         `;
         return;
@@ -1305,16 +1418,27 @@ function renderEvents() {
         const locations = Array.isArray(event.locations)
             ? event.locations
             : [];
+        const state = eventStatusInfo(event);
+        const cardClass = event.eventStatus === "upcoming"
+            ? "upcoming"
+            : event.confidence === "high"
+                ? "high"
+                : "candidate";
 
         return `
-            <article class="event-card ${event.confidence === "high" ? "high" : "candidate"}">
+            <article class="event-card ${cardClass}">
                 <div class="event-title">${escapeHtml(event.title)}</div>
 
                 <div class="event-badges">
                     <span class="event-badge">${escapeHtml(event.type || "活動")}</span>
+                    <span class="event-state ${state.className}">${state.label}</span>
                     ${locations.map(item =>
                         `<span class="event-badge location">📍 ${escapeHtml(item)}</span>`
                     ).join("")}
+                </div>
+
+                <div class="event-date">
+                    📅 活動期間：${escapeHtml(formatEventPeriod(event))}
                 </div>
 
                 <div class="event-meta">
@@ -1357,7 +1481,7 @@ async function loadEvents(showMessage = false) {
         const data = await response.json();
         eventMeta = data?.meta || {};
         eventList = Array.isArray(data?.events)
-            ? data.events
+            ? data.events.filter(isVisibleEvent)
             : [];
 
         fillEventFilters();
@@ -1365,7 +1489,7 @@ async function loadEvents(showMessage = false) {
         renderEvents();
 
         if (showMessage) {
-            showToast(`🇹🇼 已重新載入 ${eventList.length} 則活動消息！`);
+            showToast(`🇹🇼 已重新載入 ${eventList.length} 則近期活動！`);
         }
     } catch (error) {
         status.innerHTML =
