@@ -3,22 +3,402 @@
     "schemaVersion": 3,
     "sourceName": "巴哈姆特 GNN RSS＋公開標籤頁",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": null,
-    "lastSuccessfulUpdateAt": null,
-    "fetchStatus": "not-run",
-    "fetchedRssCount": 0,
-    "fetchedTagItemCount": 0,
-    "uniqueNewsCount": 0,
-    "articleCandidateCount": 0,
-    "articleFetchSuccessCount": 0,
-    "articleFetchFailureCount": 0,
-    "matchedEventCount": 0,
-    "storedEventCount": 0,
+    "updatedAt": "2026-07-10T13:08:19.018Z",
+    "lastSuccessfulUpdateAt": "2026-07-10T13:08:19.018Z",
+    "fetchStatus": "partial",
+    "fetchedRssCount": 30,
+    "fetchedTagItemCount": 205,
+    "uniqueNewsCount": 235,
+    "articleCandidateCount": 150,
+    "articleFetchSuccessCount": 44,
+    "articleFetchFailureCount": 106,
+    "matchedEventCount": 11,
+    "storedEventCount": 11,
     "expiredRemovedCount": 0,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 0,
-    "sourceErrors": [],
-    "note": "已重設舊資料。請到 GitHub Actions 執行一次更新，只會保留進行中、即將開始或近期日期待確認的活動。"
+    "missingDateRemovedCount": 0,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 29,
+    "sourceErrors": [
+      {
+        "source": "文章 gnn-307058",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306932",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306831",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306806",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306762",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306754",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306752",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306686",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306600",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306463",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306449",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306369",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306360",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306262",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-306166",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305965",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305696",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305645",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305475",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305347",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305336",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305335",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305266",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305244",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305237",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305101",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305080",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305032",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-305019",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-304960",
+        "error": "HTTP 429 Too Many Requests"
+      }
+    ],
+    "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
-  "events": []
+  "events": [
+    {
+      "id": "gnn-307614",
+      "title": "《KPOP 獵魔女團》一週年官方快閃店 7 月 3 日台北站開幕前夕 週邊商品搶先看",
+      "summary": "由韓國 bemyfriends 企劃與 Netflix 合作推出的《KPOP 獵魔女團》一週年紀念官方快閃店，五月起正式展開亞洲巡迴，並確定於台北、台中、高雄三座城市接力登場。台北首站由將於 2026 年 7 月 3 日至 7 月 19 日進駐台北「DREAM PLAZA」，而這次 GNN 也在快閃店正式開幕前受邀前往一探究竟，就讓我們一起來看看本次快閃店究竟推出了哪些商品吧。 《",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307614",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-02T07:35:30.000Z",
+      "eventStartDate": "2026-07-03",
+      "eventEndDate": "2026-07-19",
+      "eventStatus": "ongoing",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 3 日至 7 月 19 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307118",
+      "title": "卡娜赫拉的小動物「小日常研究室」快閃店 7/1 台南新天地療癒登場",
+      "summary": "卡娜赫拉的小動物「小日常研究室」快閃店，宣布 7/1 至 8/31 期間進駐台南新光三越新天地的消息，現場將打造五大拍照打卡點，並推出近 30 款全新周邊。 療癒日常正式展開！入口處「主視覺打卡牆」所有小動物們開心迎接粉絲，一起來看看小動物們的小日常都在做些什麼唷！右手邊「窗邊日常」中粉紫",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307118",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台南"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-24T08:43:36.000Z",
+      "eventStartDate": "2026-07-01",
+      "eventEndDate": "2026-08-31",
+      "eventStatus": "ongoing",
+      "dateConfidence": "high",
+      "dateSource": "7/1 至 8/31",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307265",
+      "title": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店即日起在台開幕《飆馬野郎》複製原畫展同步開展",
+      "summary": "累計發行突破一億冊的《JOJO 的奇妙冒險》6/26～8/11 帶著快閃店與複製原畫展現身台北南西新光三越 9 樓。快閃店以被譽為經典的《JOJO 的奇妙冒險 星塵遠征軍》為主題打造 7 大打卡點，集結空條承太郎等人氣角色的「主角立牌區」與替身同步現身，還可坐上賭桌「GOOD！賭局開始」親身感受這場宿命對決。快閃店共推出近百款全新周邊。而",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307265",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-26T04:33:54.000Z",
+      "eventStartDate": "2026-06-26",
+      "eventEndDate": "2026-08-11",
+      "eventStatus": "ongoing",
+      "dateConfidence": "high",
+      "dateSource": "6/26~8/11",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307727",
+      "title": "《全知讀者視角》期間快閃店今日開幕結合三大主題抽卡與限定周邊等 官方公布首日熱銷 Top 5",
+      "summary": "由台灣角川主辦、改編自韓國現象級作品的《全知讀者視角》期間限定快閃店今（4）日起在台北華山 1914 文化創意產業園區登場，現場結合 94 坪展區展現角色與趣味活動，還有三大主題抽卡區與各式各樣周邊精品等，一開幕就吸引眾多讀者湧入感受作品的世界觀。 《全知讀者視角》期間限定快閃店今日起在「台北華山 1914 文化創意產業園",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307727",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-04T10:59:18.000Z",
+      "eventStartDate": "2026-07-04",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "dateConfidence": "medium",
+      "dateSource": "即日起",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307872",
+      "title": "【漫博 26】台灣角川 2026 台北漫畫博覽會首賣精品情報公開",
+      "summary": "「2026 台北漫畫博覽會」將於 7/23 起在台北世貿一館舉行，台灣角川今日公開超過百款的漫博首賣及會場限定的動漫周邊精品，提供給有興趣的人參考。 青春戀愛喜劇《不時輕聲地以俄語遮羞的鄰座艾莉同學》原作系列推出極具收藏價值的複製原畫、拼裝式壓克力立牌等豪華新品；王道後宮戀愛經典《DATE",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307872",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-07T08:52:42.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "dateConfidence": "medium",
+      "dateSource": "7/23",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307928",
+      "title": "【漫博 26】《落第忍者亂太郎》作者尼子騷兵衛將登台舉辦舞台對談及粉絲交流活動",
+      "summary": "為紀念《落第忍者亂太郎》漫畫連載 40 週年，2026 漫畫博覽會日本館舉辦《落第忍者亂太郎》海外首次原畫展的同時，更特別邀請作者尼子騷兵衛來台，於 2026 年 7 月 25 日（六）舉辦兩場限定舞台活動，透過與台灣粉絲近距離交流，傳遞其創作歷程與作品背後的精彩故事。 第一場活動將於 7 月 25 日（六）12:00 登場，特別邀請以《用九柑仔",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307928",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-08T08:48:52.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 7 月 25 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307935",
+      "title": "《華納兄弟探索卡通萌友會 夏日大冒險》與《小小兵＆大怪獸》雙主題快閃店聯手登場",
+      "summary": "台灣娛樂品牌「野獸國」宣布，即日起於三創生活園區 1F「十二立方」推出雙主題快閃店《華納兄弟探索卡通萌友會：夏日大冒險》與《小小兵＆大怪獸》的消息，活動將會持續至 8 月 2 日為止。 本次特別針對暑期休閒需求，精心規劃兩大主題區域： 華納兄弟探索卡通萌友會： 匯集華納兄弟探索旗下的三大經典 IP《探險活寶》、《湯姆貓",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307935",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-08T09:36:24.000Z",
+      "eventStartDate": "2026-08-02",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 2 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307452",
+      "title": "舞台劇《排球少年》及川徹《藍色監獄》雪宮劍優演員遊馬晃祐 8/23 再次來台舉辦見面會",
+      "summary": "曾於《排球少年！！》舞台劇飾演及川徹、《BLEACH》飾演市丸銀、《藍色監獄》飾演雪宮劍優的日本演員遊馬晃祐（Asuma Kosuke），今年八月將再度來到台灣，舉辦粉絲見面會「ASUMA KOSUKE See You Again in Taipei 2026」。這是繼 2025 年 12 月首次來台後，相隔不到一年再次與台北粉絲相見。 去年台北見面會尾聲，遊",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307452",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：見面會",
+      "sourceTag": "見面會",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-30T04:03:31.000Z",
+      "eventStartDate": "2026-08-23",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "dateConfidence": "medium",
+      "dateSource": "8/23",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307564",
+      "title": "卡娜赫拉的小動物「小日常研究室」快閃店 今日起於台南新光三越新天地登場",
+      "summary": "卡娜赫拉的小動物「小日常研究室」快閃店，今日起正式於台南新光三越新天地登場，活動將會持續至 8 月 31 日為止，現場除了有多樣拍照打卡點外，同時也推出近 30 款全新周邊。 首先在拍照打卡點的部分，入口處「主視覺打卡牆」所有小動物們開心迎接粉絲，右手邊「窗邊日常」中粉紫小屋搭配盛開花朵，P 助與粉紅兔兔早已把整張臉",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307564",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台南"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-01T09:51:17.000Z",
+      "eventStartDate": "2026-08-31",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 31 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307210",
+      "title": "【漫博 26】「Ukiyo-e Art 歌姬東海道 初音未來」全台獨家登場 雪初音等周邊將於日本直販攤位販售",
+      "summary": "日本直販將於「2026 年第 25 屆漫畫博會」ICHIBAN JAPAN 日本館展區登場，本次攤位預計販售多款「Ukiyo-e Art 歌姫東海道 初音未来」、雪初音、以及《賽馬娘 Pretty Derby》等周邊商品。 自江戶時代以來，傳承超越400多年傳統技術的職人們，與虛擬歌手「初音未來」攜手合作，共同推出此次聯名企劃。由人間國寶",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307210",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-25T07:36:10.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    },
+    {
+      "id": "gnn-307829",
+      "title": "【漫博 26】《Gachiakuta》恩琴聲優小西克幸將受邀來台舉辦見面會",
+      "summary": "羚邦宣布，將於今年 7 月的漫畫博覽會中邀請到動畫《Gachiakuta》中飾演恩琴的聲優小西克幸來台灣舉辦見面會。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。從奈落（底層）爬起來！一切都是為了改變這個「糞土般的世界」！《GACHIAKUTA》以生活在罪犯後裔聚集的貧民窟孤兒少年「路德」為主角，展開的熱血戰鬥冒險故事。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307829",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "見面會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-07T02:37:56.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-10T13:08:19.018Z",
+      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+    }
+  ]
 }
