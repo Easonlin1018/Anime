@@ -3,40 +3,24 @@
     "schemaVersion": 3,
     "sourceName": "巴哈姆特 GNN RSS＋公開標籤頁",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-10T13:08:19.018Z",
-    "lastSuccessfulUpdateAt": "2026-07-10T13:08:19.018Z",
+    "updatedAt": "2026-07-10T13:11:29.677Z",
+    "lastSuccessfulUpdateAt": "2026-07-10T13:11:29.677Z",
     "fetchStatus": "partial",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "uniqueNewsCount": 235,
     "articleCandidateCount": 150,
-    "articleFetchSuccessCount": 44,
-    "articleFetchFailureCount": 106,
-    "matchedEventCount": 11,
-    "storedEventCount": 11,
+    "articleFetchSuccessCount": 48,
+    "articleFetchFailureCount": 102,
+    "matchedEventCount": 14,
+    "storedEventCount": 14,
     "expiredRemovedCount": 0,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 0,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 29,
+    "nonActivityRemovedCount": 30,
     "sourceErrors": [
-      {
-        "source": "文章 gnn-307058",
-        "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-306932",
-        "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-306831",
-        "error": "HTTP 429 Too Many Requests"
-      },
-      {
-        "source": "文章 gnn-306806",
-        "error": "HTTP 429 Too Many Requests"
-      },
       {
         "source": "文章 gnn-306762",
         "error": "HTTP 429 Too Many Requests"
@@ -140,6 +124,22 @@
       {
         "source": "文章 gnn-304960",
         "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-304896",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-304886",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-304827",
+        "error": "HTTP 429 Too Many Requests"
+      },
+      {
+        "source": "文章 gnn-304822",
+        "error": "HTTP 429 Too Many Requests"
       }
     ],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
@@ -167,8 +167,8 @@
       "dateConfidence": "high",
       "dateSource": "2026 年 7 月 3 日至 7 月 19 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307118",
@@ -190,8 +190,8 @@
       "dateConfidence": "high",
       "dateSource": "7/1 至 8/31",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307265",
@@ -213,8 +213,8 @@
       "dateConfidence": "high",
       "dateSource": "6/26~8/11",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307727",
@@ -236,8 +236,54 @@
       "dateConfidence": "medium",
       "dateSource": "即日起",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+    },
+    {
+      "id": "gnn-306806",
+      "title": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎原畫展 6/26 同步登場",
+      "summary": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，宣布將自 6 月 26 起於台北南西新光三越登場的消息。快閃店的部分這次將打造多個打卡點以及近百款週邊商品，而複製原畫展則是預定集結超過 60 幅的複製原畫於活動展出。 在快閃店打卡點的部分，一進店就看見集結空條承太郎與白金之星等六位主角及",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=306806",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-17T03:54:24.000Z",
+      "eventStartDate": "2026-06-26",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "dateConfidence": "medium",
+      "dateSource": "6/26",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+    },
+    {
+      "id": "gnn-306932",
+      "title": "「孤獨搖滾！動畫展」7 月 20 日台中中友百貨登場 預售票 6/24 正式啟售",
+      "summary": "《孤獨搖滾！》動畫展第二站即將於 7 月 20 日於台中中友百貨登場，本次展覽將完整重現在日本九大展區，讓粉絲可以從不同角度感受小孤獨的音樂歷程。另外角色們手持台灣美食的「台灣限定專屬立繪」周邊商品也將同步登場，還有日本空運來台的限量周邊。 「《孤獨搖滾！》動畫展」共規劃九大特色展區，「小孤獨的衣櫥」從牆上的",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=306932",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-18T10:00:58.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307872",
@@ -259,8 +305,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307928",
@@ -282,8 +328,8 @@
       "dateConfidence": "medium",
       "dateSource": "2026 年 7 月 25 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307935",
@@ -305,8 +351,8 @@
       "dateConfidence": "medium",
       "dateSource": "8 月 2 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307452",
@@ -328,8 +374,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307564",
@@ -351,8 +397,31 @@
       "dateConfidence": "medium",
       "dateSource": "8 月 31 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
+    },
+    {
+      "id": "gnn-307058",
+      "title": "【漫博 26】日本女子樂團「DARUMA Rollin'」再次來台 漫博日本館舞台開唱",
+      "summary": "DARUMA Rollin'是2025年在日本成立的3人女子樂團，成員包括主唱0C（ぜろしー）、吉他手Natsumi及鼓手SAE。她們曾為2026年春季在世界各地播出的動畫《雞鬥士》演唱主題曲〈What's a Hero?〉，這首歌曲在YouTube上突破一百五十萬次觀看。 2024年12月，經歷了0C的前身樂團CODE OF ZERO解散後，面對全新的活動，三位",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=307058",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-06-23T06:43:34.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307210",
@@ -374,8 +443,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     },
     {
       "id": "gnn-307829",
@@ -397,8 +466,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-10T13:08:19.018Z",
-      "lastSeenAt": "2026-07-10T13:08:19.018Z"
+      "discoveredAt": "2026-07-10T13:11:29.677Z",
+      "lastSeenAt": "2026-07-10T13:11:29.677Z"
     }
   ]
 }
