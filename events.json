@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "sourceName": "巴哈姆特 GNN RSS",
+    "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
+    "updatedAt": null,
+    "lastSuccessfulUpdateAt": null,
+    "fetchStatus": "not-run",
+    "fetchedNewsCount": 0,
+    "matchedEventCount": 0,
+    "storedEventCount": 0,
+    "keepDays": 180,
+    "note": "尚未執行 GitHub Actions。請到 Actions 頁面手動執行「更新巴哈姆特動漫活動」。"
+  },
+  "events": []
+}
