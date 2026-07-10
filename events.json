@@ -2,14 +2,16 @@
   "meta": {
     "sourceName": "巴哈姆特 GNN RSS",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-10T12:21:06.219Z",
-    "lastSuccessfulUpdateAt": "2026-07-10T12:21:06.219Z",
+    "updatedAt": "2026-07-10T12:29:01.545Z",
+    "lastSuccessfulUpdateAt": "2026-07-10T12:29:01.545Z",
     "fetchStatus": "success",
     "fetchedNewsCount": 30,
     "matchedEventCount": 0,
+    "highConfidenceCount": 0,
+    "candidateCount": 0,
     "storedEventCount": 0,
     "keepDays": 180,
-    "note": "此清單是從新聞標題與摘要自動篩選，活動日期與地點請以巴哈姆特原文及主辦方公告為準。"
+    "note": "此清單是從新聞標題與摘要自動篩選；活動日期、地點及入場方式請以巴哈姆特原文與主辦方公告為準。"
   },
   "events": []
 }
