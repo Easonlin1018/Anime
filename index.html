@@ -366,6 +366,13 @@
             font-weight: bold;
         }
 
+        .event-link.disabled {
+            background: #475569;
+            color: #cbd5e1;
+            cursor: not-allowed;
+            opacity: .65;
+        }
+
         .empty {
             color: #64748b;
             font-size: 12px;
@@ -2329,18 +2336,103 @@ function regionGroupOf(location) {
     return "unknown";
 }
 
-function eventVenueText(event) {
-    return event.venue || `${(event.locations || []).join(" ")} ${event.title}`.trim();
+const BROAD_EVENT_LOCATIONS = new Set([
+    "台灣", "全台", "北部", "中部", "南部", "東部",
+    "台北", "臺北", "新北", "桃園", "新竹", "苗栗", "台中", "臺中",
+    "彰化", "南投", "雲林", "嘉義", "台南", "臺南", "高雄", "屏東",
+    "宜蘭", "花蓮", "台東", "臺東", "澎湖", "金門", "連江", "基隆"
+]);
+
+function cleanEventLocationValue(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function isBroadEventLocation(value) {
+    const clean = cleanEventLocationValue(value).replace(/[縣市]$/, "");
+    return BROAD_EVENT_LOCATIONS.has(clean) || BROAD_EVENT_LOCATIONS.has(cleanEventLocationValue(value));
+}
+
+function isLikelyEventAddress(value) {
+    const clean = cleanEventLocationValue(value);
+    if (!clean || clean.length > 100) return false;
+    return /(?:縣|市).{0,18}(?:區|鄉|鎮|市).{0,30}(?:路|街|大道|巷|弄).{0,20}(?:號|樓)|(?:路|街|大道).{0,25}\d+(?:之\d+)?號/.test(clean);
+}
+
+function isLikelyVenueName(value) {
+    const clean = cleanEventLocationValue(value);
+    if (!clean || clean.length > 40 || isBroadEventLocation(clean)) return false;
+    if (/[！!？?｜|]/.test(clean) || /(?:登場|曝光|開跑|熱門話題|限定周邊|免費逛|活動資訊|新聞)/.test(clean)) return false;
+    return /(?:館|中心|會館|展場|會展|世貿|百貨|商場|廣場|公園|園區|文創|松菸|華山|三創|劇場|飯店|酒店|大學|車站|店)$/.test(clean);
+}
+
+function extractExplicitEventLocation(event) {
+    const source = cleanEventLocationValue(`${event?.locationName || ""} ${event?.summary || ""}`);
+    const addressMatch = source.match(/(?:地址|地點|會場)\s*[：:]\s*([^。；;\n]{6,100})/);
+    const address = addressMatch && isLikelyEventAddress(addressMatch[1])
+        ? cleanEventLocationValue(addressMatch[1])
+        : "";
+    const venueMatch = source.match(/(?:場館|會場|地點)\s*[：:]\s*([^。；;\n]{2,40})/);
+    const venue = venueMatch && isLikelyVenueName(venueMatch[1])
+        ? cleanEventLocationValue(venueMatch[1])
+        : "";
+    return { address, venue };
+}
+
+function getEventLocationDetails(event) {
+    const extracted = extractExplicitEventLocation(event);
+    const locationValues = Array.isArray(event?.locations) ? event.locations : [];
+    const addressCandidates = [event?.address, event?.locationAddress, ...locationValues];
+    const address = addressCandidates.map(cleanEventLocationValue).find(isLikelyEventAddress) ||
+        (isLikelyEventAddress(event?.locationName) ? cleanEventLocationValue(event.locationName) : "") ||
+        extracted.address;
+    const venue = [event?.venue, event?.venueName, ...locationValues]
+        .map(cleanEventLocationValue)
+        .find(isLikelyVenueName) || extracted.venue;
+    const region = [
+        event?.city,
+        event?.region,
+        ...locationValues
+    ].map(cleanEventLocationValue).find(Boolean) || "";
+    const locationName = cleanEventLocationValue(event?.locationName);
+    const specificLocationName = !isBroadEventLocation(locationName) &&
+        (isLikelyVenueName(locationName) || isLikelyEventAddress(locationName))
+        ? locationName
+        : "";
+    return { address, venue, region, locationName: specificLocationName };
+}
+
+function getEventMapDestination(event) {
+    const { address, venue, region, locationName } = getEventLocationDetails(event);
+    if (address) return address;
+    if (venue && region && !venue.includes(region)) return `${venue} ${region}`;
+    if (venue) return venue;
+    return locationName;
 }
 
 function eventMapUrl(event) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(eventVenueText(event))}`;
+    const destination = getEventMapDestination(event);
+    return destination
+        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destination)}`
+        : "";
 }
 
 function eventDirectionsUrl(event) {
-    const destination = encodeURIComponent(eventVenueText(event));
-    const origin = eventSettings.region ? `&origin=${encodeURIComponent(eventSettings.region)}` : "";
-    return `https://www.google.com/maps/dir/?api=1${origin}&destination=${destination}&travelmode=transit`;
+    const destination = getEventMapDestination(event);
+    return destination
+        ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`
+        : "";
+}
+
+function eventMapActions(event) {
+    const mapUrl = eventMapUrl(event);
+    const directionsUrl = eventDirectionsUrl(event);
+    if (!mapUrl || !directionsUrl) {
+        const hint = "目前沒有可導航的場館或地址";
+        return `<span class="event-link disabled" aria-disabled="true" title="${hint}">🗺️ 地圖</span>
+            <span class="event-link disabled" aria-disabled="true" title="${hint}">🚆 導航</span>`;
+    }
+    return `<a class="event-link" href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener noreferrer">🗺️ 地圖</a>
+        <a class="event-link" href="${escapeHtml(directionsUrl)}" target="_blank" rel="noopener noreferrer">🚆 導航</a>`;
 }
 
 function eventTransportHint(event) {
@@ -2399,9 +2491,10 @@ function editEvent(id) {
     const start = prompt("開始日期 YYYY-MM-DD（可留空）", current.eventStartDate || ""); if (start === null) return;
     const end = prompt("結束日期 YYYY-MM-DD（可留空）", current.eventEndDate || ""); if (end === null) return;
     const location = prompt("地區，多個請用逗號分隔", (current.locations || []).join(",")); if (location === null) return;
-    const venue = prompt("場館名稱（可留空）", current.venue || ""); if (venue === null) return;
+    const venue = prompt("場館名稱（可留空）", current.venue || current.venueName || ""); if (venue === null) return;
+    const address = prompt("完整地址（可留空）", current.address || ""); if (address === null) return;
     const admissionType = prompt("入場方式：免費入場／購票入場／需預約／消費入場／抽選制／整理券／待確認", current.admissionType || "待確認"); if (admissionType === null) return;
-    eventOverrides[id] = { ...eventOverrides[id], title:title.trim() || current.title, eventStartDate:start.trim() || null, eventEndDate:end.trim() || null, locations:location.split(/[,，]/).map(x => x.trim()).filter(Boolean), venue:venue.trim(), admissionType:admissionType.trim() || "待確認" };
+    eventOverrides[id] = { ...eventOverrides[id], title:title.trim() || current.title, eventStartDate:start.trim() || null, eventEndDate:end.trim() || null, locations:location.split(/[,，]/).map(x => x.trim()).filter(Boolean), venue:venue.trim(), address:address.trim(), admissionType:admissionType.trim() || "待確認" };
     saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("✏️ 活動資料已在本機修正");
 }
 
@@ -2457,12 +2550,15 @@ function renderEvents() {
     if (!filtered.length) { container.innerHTML='<div class="empty">目前沒有符合條件的活動。</div>'; return; }
     container.innerHTML = filtered.map(event => {
         const pref=eventPreference(event.id), matches=matchingAnime(event), state=eventStatusInfo(event);
+        const locationDetails = getEventLocationDetails(event);
         const cardClass = `${event.eventStatus === "upcoming" ? "upcoming" : event.confidence === "high" ? "high" : "candidate"} ${matches.length ? "matched" : ""}`;
         return `<article class="event-card ${cardClass}">
             <div class="event-title">${escapeHtml(event.title)}</div>
             <div class="event-badges"><span class="event-badge">${escapeHtml(event.type || "活動")}</span><span class="event-state ${state.className}">${state.label}</span><span class="event-badge event-countdown">⏳ ${escapeHtml(eventCountdown(event))}</span><span class="event-badge event-admission">🎟️ ${escapeHtml(event.admissionType || "待確認")}${event.feeText ? `・${escapeHtml(event.feeText)}` : ""}</span>${(event.locations||[]).map(x=>`<span class="event-badge location">📍 ${escapeHtml(x)}</span>`).join("")}${matches.length?`<span class="event-badge event-match">💜 ${escapeHtml(matches.map(x=>x.title).join("、"))}</span>`:""}</div>
             <div class="event-date">📅 活動期間：${escapeHtml(formatEventPeriod(event))}</div>
-            ${event.venue ? `<div class="event-meta">🏢 場館：${escapeHtml(event.venue)}</div>` : ""}
+            ${locationDetails.venue ? `<div class="event-meta">🏢 場館：${escapeHtml(locationDetails.venue)}</div>` : ""}
+            ${locationDetails.address ? `<div class="event-meta">📍 地址：${escapeHtml(locationDetails.address)}</div>` : ""}
+            ${!locationDetails.venue && !locationDetails.address ? '<div class="event-meta">📍 地點待確認</div>' : ""}
             <div class="event-travel">🚆 ${escapeHtml(eventTransportHint(event))}</div>
             <div class="event-meta">📰 ${escapeHtml(formatEventDate(event.publishedAt))}<br>來源：${escapeHtml(event.source || "公開來源")}${event.discoverySource?`｜${escapeHtml(event.discoverySource)}`:""}</div>
             ${event.summary?`<div class="event-summary">${escapeHtml(event.summary)}</div>`:""}
@@ -2475,8 +2571,7 @@ function renderEvents() {
                 <button class="hide" onclick="updateEventPreference('${event.id}',{dismissed:true})">🙈 隱藏</button>
             </div>
             <a class="event-link" href="${escapeHtml(event.url)}" target="_blank" rel="noopener noreferrer">查看原始公告</a>
-            <a class="event-link" href="${escapeHtml(eventMapUrl(event))}" target="_blank" rel="noopener noreferrer">🗺️ 地圖</a>
-            <a class="event-link" href="${escapeHtml(eventDirectionsUrl(event))}" target="_blank" rel="noopener noreferrer">🚆 導航</a>
+            ${eventMapActions(event)}
         </article>`;
     }).join("");
 }
