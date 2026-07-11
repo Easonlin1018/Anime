@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v10.0.0</title>
+    <title>全自動動漫追番基地 v10.1.0</title>
 
     <style>
         :root {
@@ -240,7 +240,7 @@
 
         .event-controls {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
             gap: 7px;
             margin-bottom: 10px;
         }
@@ -391,6 +391,62 @@
         .tiny-note { color:#94a3b8; font-size:11px; line-height:1.6; margin:8px 0; }
         .archive-title { margin:16px 0 8px; font-weight:bold; color:#c4b5fd; }
 
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .calendar-day {
+            background: #111827;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            min-height: 110px;
+            padding: 9px;
+        }
+
+        .calendar-day.today { border-color: #38bdf8; }
+        .calendar-day-title { font-size: 12px; font-weight: bold; color: #93c5fd; margin-bottom: 7px; }
+        .calendar-anime { background: #1e293b; border-radius: 7px; padding: 7px; margin-bottom: 6px; font-size: 11px; line-height: 1.45; }
+        .calendar-time { color: #fcd34d; font-weight: bold; }
+        .anime-extra { margin: 7px 0; padding: 8px; border-radius: 7px; background: rgba(15,23,42,.65); font-size: 11px; line-height: 1.65; color: #cbd5e1; }
+        .platform-links { display:flex; flex-wrap:wrap; gap:5px; margin-top:5px; }
+        .platform-link { display:inline-block; padding:3px 7px; border-radius:999px; background:#164e63; color:#a5f3fc; text-decoration:none; font-size:10px; }
+        .work-event-search { display:grid; grid-template-columns:1fr auto; gap:8px; margin-bottom:10px; }
+        .work-event-search input, .work-event-search button { margin-bottom:0; }
+        .work-event-search button { width:auto; }
+        .event-travel { color:#a5b4fc; font-size:11px; margin:7px 0; }
+        .event-admission { background:#713f12; color:#fef3c7; }
+        .bottom-nav { display:none; }
+
+        @media (max-width: 760px) {
+            body { padding-bottom: 78px; }
+            .calendar-grid { grid-template-columns: 1fr; }
+            .work-event-search { grid-template-columns: 1fr; }
+            .bottom-nav {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 90;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 1px;
+                background: #0f172a;
+                border-top: 1px solid #334155;
+                padding: 7px 6px max(7px, env(safe-area-inset-bottom));
+            }
+            .bottom-nav button {
+                margin: 0;
+                padding: 7px 2px;
+                border-radius: 7px;
+                background: #1e293b;
+                font-size: 10px;
+                min-width: 0;
+            }
+        }
+
         @media (max-width: 600px) {
             .event-controls { grid-template-columns: 1fr; }
         }
@@ -399,9 +455,9 @@
 
 <body>
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v10.0.0</h1>
+    <h1>🎬 全自動動漫追番基地 v10.1.0</h1>
 
-    <div class="section">
+    <div class="section" id="add-section">
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
         <input type="text" id="search-input" placeholder="輸入單部動漫名稱">
         <button id="search-btn" onclick="searchAnime()">🔍 智慧網格搜尋</button>
@@ -424,7 +480,7 @@
         <button id="batch-btn" class="btn-batch" onclick="batchSearchAnime()">⚡ 啟動批次雷達搜尋</button>
     </div>
 
-    <div class="section">
+    <div class="section" id="settings-section">
         <div class="section-title">⚙️ 資料控制與智慧雷達</div>
         <button class="btn-scan" onclick="manualScanSequels()">🛰️ 立即手動主動偵測續作</button>
 
@@ -435,9 +491,19 @@
         </div>
     </div>
 
-    <div class="section">
+
+    <div class="section" id="calendar-section">
         <div class="section-title">
-            <span>🇹🇼 台灣動漫活動雷達 v10</span>
+            <span>📅 新番播出日曆</span>
+            <button onclick="syncAnimeMetadata(true)" style="width:auto;margin:0;padding:6px 9px;font-size:11px;background:#0d9488;">同步集數</button>
+        </div>
+        <div id="calendar-status" class="event-status">正在整理追番播出資訊……</div>
+        <div id="airing-calendar" class="calendar-grid"></div>
+    </div>
+
+    <div class="section" id="events-section">
+        <div class="section-title">
+            <span>🇹🇼 台灣動漫活動雷達 v10.1</span>
             <button onclick="loadEvents(true)" style="width:auto;margin:0;padding:6px 9px;font-size:11px;background:#7c3aed;">重新載入</button>
         </div>
 
@@ -462,10 +528,17 @@
 
         <div class="location-chips" id="location-chips"></div>
 
+        <div class="work-event-search">
+            <input id="work-event-input" list="anime-title-options" type="search" placeholder="輸入作品名稱，直接找該作品的活動">
+            <datalist id="anime-title-options"></datalist>
+            <button onclick="searchEventsByWork()">🎪 查作品活動</button>
+        </div>
+
         <div class="event-controls">
-            <input id="event-keyword" type="search" placeholder="搜尋活動或作品">
+            <input id="event-keyword" type="search" placeholder="搜尋活動、作品或場館">
             <select id="event-location"><option value="">全部地區</option></select>
             <select id="event-type"><option value="">全部類型</option></select>
+            <select id="event-admission"><option value="">全部入場方式</option></select>
         </div>
 
         <div class="tiny-note">收藏、修正、隱藏與去過狀態會保存在這台裝置。Discord、Telegram、Email 通知可透過 GitHub Secrets 啟用。</div>
@@ -473,12 +546,20 @@
         <div id="event-list"></div>
     </div>
 
-    <div class="section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
+    <div class="section" id="anime-section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
     <div class="section"><div class="section-title">🎬 官方已完結（補番中）</div><div id="list-backlog"></div></div>
     <div class="section"><div class="section-title">🧠 溫故知新（需要複習區）</div><div id="list-review"></div></div>
     <div class="section"><div class="section-title">⏳ 敲碗等待開播</div><div id="list-waiting"></div></div>
     <div class="section"><div class="section-title">🎉 已追完 / 看完了</div><div id="list-completed"></div></div>
 </div>
+
+<nav class="bottom-nav" aria-label="手機版導覽">
+    <button onclick="scrollToSection('anime-section')">🎬<br>追番</button>
+    <button onclick="scrollToSection('calendar-section')">📅<br>日曆</button>
+    <button onclick="scrollToSection('events-section')">🎪<br>活動</button>
+    <button onclick="openFavoriteEvents()">⭐<br>收藏</button>
+    <button onclick="scrollToSection('settings-section')">⚙️<br>設定</button>
+</nav>
 
 <div id="toast-box" class="toast">
     <div id="toast-msg"></div>
@@ -498,6 +579,8 @@ let eventList = [];
 let eventArchive = [];
 let eventMeta = {};
 let eventTab = "all";
+let animeSyncing = false;
+const ANIME_SYNC_KEY = "anime_metadata_sync_v10_1";
 const EVENT_PREFS_KEY = "anime_event_prefs_v10";
 const EVENT_OVERRIDES_KEY = "anime_event_overrides_v10";
 const EVENT_SETTINGS_KEY = "anime_event_settings_v10";
@@ -769,42 +852,45 @@ async function searchWikipedia(input) {
     }
 }
 
+const MEDIA_FIELDS = `
+    id format
+    title { native english romaji }
+    status episodes
+    startDate { year month day }
+    endDate { year month day }
+    nextAiringEpisode { airingAt episode timeUntilAiring }
+    externalLinks { site url type }
+    relations {
+        edges {
+            relationType
+            node {
+                id format
+                title { native english romaji }
+                status
+            }
+        }
+    }
+`;
+
 const SEARCH_QUERY = `
 query ($search: String) {
     Media(search: $search, type: ANIME) {
-        id format
-        title { native english romaji }
-        status episodes
-        startDate { year month day }
-        relations {
-            edges {
-                relationType
-                node {
-                    id format
-                    title { native english romaji }
-                    status
-                }
-            }
-        }
+        ${MEDIA_FIELDS}
     }
 }`;
 
 const ID_QUERY = `
 query ($id: Int) {
     Media(id: $id, type: ANIME) {
-        id format
-        title { native english romaji }
-        status episodes
-        startDate { year month day }
-        relations {
-            edges {
-                relationType
-                node {
-                    id format
-                    title { native english romaji }
-                    status
-                }
-            }
+        ${MEDIA_FIELDS}
+    }
+}`;
+
+const ANIME_BATCH_QUERY = `
+query ($ids: [Int]) {
+    Page(page: 1, perPage: 50) {
+        media(id_in: $ids, type: ANIME) {
+            ${MEDIA_FIELDS}
         }
     }
 }`;
@@ -825,6 +911,52 @@ async function requestAniList(query, variables) {
 
     const data = await response.json();
     return data?.data?.Media || null;
+}
+
+async function requestAniListMediaPage(ids) {
+    const response = await fetchWithTimeout(
+        "https://graphql.anilist.co",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({ query: ANIME_BATCH_QUERY, variables: { ids } })
+        },
+        20000
+    );
+    const data = await response.json();
+    if (data?.errors?.length) throw new Error(data.errors[0].message || "AniList 批次同步失敗");
+    return Array.isArray(data?.data?.Page?.media) ? data.data.Page.media : [];
+}
+
+function normalizeStreamingLinks(links) {
+    const known = ["巴哈姆特", "bahamut", "netflix", "disney", "crunchyroll", "youtube", "bilibili", "amazon", "hami", "friDay", "myvideo", "catchplay"];
+    const unique = new Map();
+    for (const link of Array.isArray(links) ? links : []) {
+        if (!link?.url || !link?.site) continue;
+        const site = String(link.site);
+        const isStreaming = String(link.type || "").toUpperCase() === "STREAMING" || known.some(name => site.toLowerCase().includes(name.toLowerCase()));
+        if (isStreaming && !unique.has(site)) unique.set(site, { site, url: link.url });
+    }
+    return [...unique.values()].slice(0, 8);
+}
+
+function releasedEpisodeCount(media, existing = {}) {
+    if (media?.nextAiringEpisode?.episode) return Math.max(0, Number(media.nextAiringEpisode.episode) - 1);
+    if (media?.status === "FINISHED" && Number(media?.episodes) > 0) return Number(media.episodes);
+    return Number(existing.releasedEpisodes) || 0;
+}
+
+function applyMediaMetadata(anime, media) {
+    anime.status = media.status || anime.status || "UNKNOWN";
+    if (Number(media.episodes) > 0) anime.episodes = Number(media.episodes);
+    anime.releasedEpisodes = releasedEpisodeCount(media, anime);
+    anime.nextEpisode = media.nextAiringEpisode?.episode || null;
+    anime.nextAiringAt = media.nextAiringEpisode?.airingAt || null;
+    anime.streamingLinks = normalizeStreamingLinks(media.externalLinks);
+    anime.lastMetadataSync = new Date().toISOString();
+    anime.relations = Array.isArray(media.relations?.edges) ? media.relations.edges : anime.relations || [];
+    if (anime.category === "waiting" && media.status === "RELEASING") anime.category = "watching";
+    return anime;
 }
 
 async function searchAnime(
@@ -938,6 +1070,13 @@ async function searchAnime(
             watched: 0,
             category,
             airDate,
+            releasedEpisodes: releasedEpisodeCount(media),
+            nextEpisode: media.nextAiringEpisode?.episode || null,
+            nextAiringAt: media.nextAiringEpisode?.airingAt || null,
+            streamingLinks: normalizeStreamingLinks(media.externalLinks),
+            rating: null,
+            note: "",
+            customPlatform: "",
             relations: Array.isArray(media.relations?.edges)
                 ? media.relations.edges
                 : []
@@ -1030,6 +1169,108 @@ async function manualScanSequels() {
             : "🛰️ 掃描完成，目前沒有未入庫的續作。",
         5000
     );
+}
+
+function formatAiringDateTime(timestamp) {
+    if (!timestamp) return "尚無播出時間";
+    return new Intl.DateTimeFormat("zh-TW", {
+        timeZone: "Asia/Taipei", weekday: "short", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false
+    }).format(new Date(Number(timestamp) * 1000));
+}
+
+function renderAiringCalendar() {
+    const container = document.getElementById("airing-calendar");
+    const status = document.getElementById("calendar-status");
+    if (!container || !status) return;
+    const scheduled = animeList.filter(anime => anime.nextAiringAt).sort((a,b) => a.nextAiringAt - b.nextAiringAt);
+    const weekdays = ["週一","週二","週三","週四","週五","週六","週日"];
+    const groups = Object.fromEntries(weekdays.map(day => [day, []]));
+    for (const anime of scheduled) {
+        const date = new Date(Number(anime.nextAiringAt) * 1000);
+        const day = new Intl.DateTimeFormat("zh-TW", { timeZone:"Asia/Taipei", weekday:"short" }).format(date).replace("星期", "週");
+        (groups[day] ||= []).push(anime);
+    }
+    const today = new Intl.DateTimeFormat("zh-TW", { timeZone:"Asia/Taipei", weekday:"short" }).format(new Date()).replace("星期", "週");
+    container.innerHTML = weekdays.map(day => `<div class="calendar-day ${day===today?'today':''}"><div class="calendar-day-title">${day}${day===today?'・今天':''}</div>${groups[day].length ? groups[day].map(anime => `<div class="calendar-anime"><b>${escapeHtml(anime.title)}</b><br><span class="calendar-time">第 ${escapeHtml(anime.nextEpisode || '?')} 集</span><br>${escapeHtml(formatAiringDateTime(anime.nextAiringAt))}</div>`).join('') : '<div class="empty" style="padding:7px 0">暫無資料</div>'}</div>`).join('');
+    const last = localStorage.getItem(ANIME_SYNC_KEY);
+    status.innerHTML = `已取得 ${scheduled.length} 部作品的下集時間｜${last ? `上次同步：${escapeHtml(formatEventDate(last))}` : '尚未同步集數'}`;
+}
+
+async function syncAnimeMetadata(showMessage = false) {
+    if (animeSyncing) return;
+    const ids = animeList.map(anime => Number(anime.id)).filter(Number.isFinite);
+    if (ids.length === 0) {
+        renderAiringCalendar();
+        if (showMessage) showToast("目前沒有動漫可以同步。");
+        return;
+    }
+    animeSyncing = true;
+    const status = document.getElementById("calendar-status");
+    if (status) status.textContent = "正在從 AniList 同步集數、下集時間與觀看平台……";
+    try {
+        let synced = 0;
+        for (let i = 0; i < ids.length; i += 50) {
+            const mediaList = await requestAniListMediaPage(ids.slice(i, i + 50));
+            for (const media of mediaList) {
+                const anime = animeList.find(item => Number(item.id) === Number(media.id));
+                if (anime) { applyMediaMetadata(anime, media); synced++; }
+            }
+            if (i + 50 < ids.length) await delay(800);
+        }
+        const now = new Date().toISOString();
+        localStorage.setItem(ANIME_SYNC_KEY, now);
+        saveAndRender();
+        renderAiringCalendar();
+        if (showMessage) showToast(`✅ 已同步 ${synced} 部作品的播出資訊！`, 4500);
+    } catch (error) {
+        console.error(error);
+        if (status) status.textContent = `同步失敗：${error.message}`;
+        if (showMessage) showToast("❌ 集數同步失敗，稍後再試。", 4500);
+    } finally {
+        animeSyncing = false;
+    }
+}
+
+function maybeAutoSyncAnimeMetadata() {
+    const last = Date.parse(localStorage.getItem(ANIME_SYNC_KEY) || "");
+    if (!Number.isFinite(last) || Date.now() - last > 6 * 60 * 60 * 1000) syncAnimeMetadata(false);
+    else renderAiringCalendar();
+}
+
+function editAnimeReview(id) {
+    const anime = animeList.find(item => Number(item.id) === Number(id));
+    if (!anime) return;
+    const ratingInput = prompt("評分 0～10（留空可清除）", anime.rating ?? "");
+    if (ratingInput === null) return;
+    const note = prompt("觀看筆記／短評", anime.note || "");
+    if (note === null) return;
+    const platform = prompt("自訂觀看平台（例如：巴哈動畫瘋、Netflix）", anime.customPlatform || "");
+    if (platform === null) return;
+    const rating = ratingInput.trim() === "" ? null : Math.max(0, Math.min(10, Number(ratingInput)));
+    anime.rating = Number.isFinite(rating) ? rating : null;
+    anime.note = note.trim();
+    anime.customPlatform = platform.trim();
+    saveAndRender();
+}
+
+function searchEventsByWork(title = null) {
+    const input = document.getElementById("work-event-input");
+    const keyword = String(title ?? input?.value ?? "").trim();
+    if (!keyword) return showToast("請先輸入作品名稱。");
+    if (input) input.value = keyword;
+    document.getElementById("event-keyword").value = getCoreTitle(keyword);
+    setEventTab("all");
+    scrollToSection("events-section");
+    renderEvents();
+}
+
+function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+function openFavoriteEvents() {
+    setEventTab("want");
+    scrollToSection("events-section");
 }
 
 function editTitle(id) {
@@ -1141,12 +1382,21 @@ function buildAnimeItem(anime) {
         meta = `✨ 全 ${escapeHtml(anime.episodes)} 集觀看完畢`;
     }
 
+    const platformLinks = (anime.streamingLinks || []).map(link => `<a class="platform-link" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.site)}</a>`).join("");
+    const released = Number(anime.releasedEpisodes) || 0;
+    const nextInfo = anime.nextAiringAt ? `下集：第 ${escapeHtml(anime.nextEpisode || "?")} 集・${escapeHtml(formatAiringDateTime(anime.nextAiringAt))}` : "下集時間待更新";
+    const reviewInfo = anime.rating !== null && anime.rating !== undefined ? `⭐ ${escapeHtml(anime.rating)}/10${anime.note ? `｜${escapeHtml(anime.note)}` : ""}` : (anime.note ? escapeHtml(anime.note) : "尚未評分");
+    const customPlatform = anime.customPlatform ? `<span class="platform-link">${escapeHtml(anime.customPlatform)}</span>` : "";
+
     return `
         <div class="anime-item">
             <div class="anime-title">${badge}<span>${escapeHtml(anime.title)}</span></div>
             <div class="anime-meta">${meta}</div>
+            <div class="anime-extra">📡 目前已播：${released || "?"} 集｜${nextInfo}<br>📝 ${reviewInfo}<div class="platform-links">${platformLinks}${customPlatform}</div></div>
             <div class="btn-group">
                 ${actions}
+                <button class="btn-review" onclick="editAnimeReview(${anime.id})">⭐ 評分筆記</button>
+                <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getCoreTitle(anime.title))}'))">🎪 查活動</button>
                 <button class="btn-edit" onclick="editTitle(${anime.id})">✏️ 改名</button>
                 <button class="btn-del" onclick="deleteAnime(${anime.id})">🗑️ 刪除</button>
             </div>
@@ -1218,6 +1468,9 @@ function renderList() {
             html ||
             `<div class="empty">${emptyMessages[category]}</div>`;
     }
+    const dataList = document.getElementById("anime-title-options");
+    if (dataList) dataList.innerHTML = animeList.map(anime => `<option value="${escapeHtml(anime.title)}"></option>`).join("");
+    renderAiringCalendar();
 }
 
 function exportData() {
@@ -1346,7 +1599,7 @@ function normalizeMatchText(value) {
 }
 
 function matchingAnime(event) {
-    const text = normalizeMatchText(`${event.title} ${event.summary}`);
+    const text = normalizeMatchText(`${event.title} ${event.summary} ${(event.workTitles || []).join(" ")}`);
     return animeList.filter(anime => {
         const title = normalizeMatchText(getCoreTitle(anime.title));
         return title.length >= 3 && text.includes(title);
@@ -1407,18 +1660,60 @@ function quickLocation(location) {
     renderEvents();
 }
 
+const REGION_GROUPS = {
+    north: ["台北","新北","桃園","新竹","基隆","宜蘭"],
+    central: ["苗栗","台中","彰化","南投","雲林"],
+    south: ["嘉義","台南","高雄","屏東"],
+    east: ["花蓮","台東"]
+};
+
+function regionGroupOf(location) {
+    for (const [group, names] of Object.entries(REGION_GROUPS)) if (names.some(name => String(location || "").includes(name))) return group;
+    return "unknown";
+}
+
+function eventVenueText(event) {
+    return event.venue || `${(event.locations || []).join(" ")} ${event.title}`.trim();
+}
+
+function eventMapUrl(event) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(eventVenueText(event))}`;
+}
+
+function eventDirectionsUrl(event) {
+    const destination = encodeURIComponent(eventVenueText(event));
+    const origin = eventSettings.region ? `&origin=${encodeURIComponent(eventSettings.region)}` : "";
+    return `https://www.google.com/maps/dir/?api=1${origin}&destination=${destination}&travelmode=transit`;
+}
+
+function eventTransportHint(event) {
+    const home = eventSettings.region || "";
+    const destination = (event.locations || [])[0] || "";
+    if (!home) return "設定我的地區後，可顯示交通距離分類";
+    if (destination.includes(home) || home.includes(destination)) return "同地區活動，通常較方便前往";
+    const homeGroup = regionGroupOf(home), destinationGroup = regionGroupOf(destination);
+    if (homeGroup !== "unknown" && homeGroup === destinationGroup) return "同區域跨縣市，建議查看大眾運輸路線";
+    if (destination === "全台" || destination === "台灣") return "多地點活動，請查看原文選擇最近場次";
+    return "跨區距離較遠，建議先查看交通時間與末班車";
+}
+
 function fillEventFilters() {
     const locationSelect = document.getElementById("event-location");
     const typeSelect = document.getElementById("event-type");
+    const admissionSelect = document.getElementById("event-admission");
     const all = [...eventList, ...eventArchive].map(applyEventOverride);
     const locations = [...new Set(all.flatMap(event => Array.isArray(event.locations) ? event.locations : []))].sort();
     const types = [...new Set(all.map(event => event.type).filter(Boolean))].sort();
+    const admissions = [...new Set(all.map(event => event.admissionType || "待確認").filter(Boolean))].sort();
     const oldLocation = locationSelect.value || eventSettings.region || "";
     const oldType = typeSelect.value;
+    const oldAdmission = admissionSelect?.value || "";
     locationSelect.innerHTML = '<option value="">全部地區</option>' + locations.map(x => `<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
     typeSelect.innerHTML = '<option value="">全部類型</option>' + types.map(x => `<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
-    if ([...locationSelect.options].some(o => o.value === oldLocation)) locationSelect.value = oldLocation;
-    typeSelect.value = oldType;
+    if (admissionSelect) admissionSelect.innerHTML = '<option value="">全部入場方式</option>' + admissions.map(x => `<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+    locationSelect.value = locations.includes(oldLocation) ? oldLocation : "";
+    typeSelect.value = types.includes(oldType) ? oldType : "";
+    if (admissionSelect) admissionSelect.value = admissions.includes(oldAdmission) ? oldAdmission : "";
     fillLocationChips();
 }
 
@@ -1427,6 +1722,10 @@ function updateEventStatus() {
     const updateTime = eventMeta.updatedAt ? formatEventDate(eventMeta.updatedAt) : "尚未更新";
     if (eventMeta.fetchStatus === "error") {
         status.innerHTML = `❌ 本次自動更新失敗，但上一版有效資料仍保留。<br>${escapeHtml(eventMeta.lastError || "")}`;
+        return;
+    }
+    if (!eventMeta.updatedAt || eventMeta.fetchStatus === "not-run") {
+        status.innerHTML = "⚠️ 活動資料尚未執行更新。請到 GitHub Actions 執行『更新多來源動漫活動』。";
         return;
     }
     const statusText = eventMeta.fetchStatus === "partial"
@@ -1443,7 +1742,9 @@ function editEvent(id) {
     const start = prompt("開始日期 YYYY-MM-DD（可留空）", current.eventStartDate || ""); if (start === null) return;
     const end = prompt("結束日期 YYYY-MM-DD（可留空）", current.eventEndDate || ""); if (end === null) return;
     const location = prompt("地區，多個請用逗號分隔", (current.locations || []).join(",")); if (location === null) return;
-    eventOverrides[id] = { ...eventOverrides[id], title:title.trim() || current.title, eventStartDate:start.trim() || null, eventEndDate:end.trim() || null, locations:location.split(/[,，]/).map(x => x.trim()).filter(Boolean) };
+    const venue = prompt("場館名稱（可留空）", current.venue || ""); if (venue === null) return;
+    const admissionType = prompt("入場方式：免費入場／購票入場／需預約／消費入場／抽選制／整理券／待確認", current.admissionType || "待確認"); if (admissionType === null) return;
+    eventOverrides[id] = { ...eventOverrides[id], title:title.trim() || current.title, eventStartDate:start.trim() || null, eventEndDate:end.trim() || null, locations:location.split(/[,，]/).map(x => x.trim()).filter(Boolean), venue:venue.trim(), admissionType:admissionType.trim() || "待確認" };
     saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("✏️ 活動資料已在本機修正");
 }
 
@@ -1453,7 +1754,7 @@ function markEventEnded(id) {
 }
 
 function exportEventData() {
-    const payload = { version:10, prefs:eventPrefs, overrides:eventOverrides, settings:eventSettings };
+    const payload = { version:"10.1", prefs:eventPrefs, overrides:eventOverrides, settings:eventSettings };
     const blob = new Blob([JSON.stringify(payload,null,2)], {type:"application/json"});
     const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `anime_event_data_${todayDateKey()}.json`; link.click(); URL.revokeObjectURL(link.href);
 }
@@ -1467,8 +1768,10 @@ function importEventData(inputEvent) {
 
 function renderEvents() {
     const keyword = document.getElementById("event-keyword").value.trim().toLowerCase();
+    const normalizedKeyword = normalizeMatchText(keyword);
     const location = document.getElementById("event-location").value;
     const type = document.getElementById("event-type").value;
+    const admission = document.getElementById("event-admission")?.value || "";
     const source = eventTab === "archive" ? eventArchive : eventList;
     const filtered = source.map(applyEventOverride).filter(event => {
         const pref = eventPreference(event.id);
@@ -1478,8 +1781,9 @@ function renderEvents() {
         if (eventTab === "visited" && pref.state !== "visited") return false;
         if (eventTab === "matched" && matches.length === 0) return false;
         if (eventTab !== "archive" && (pref.dismissed || isExpiredEvent(event))) return false;
-        const text = `${event.title || ""} ${event.summary || ""}`.toLowerCase();
-        return (!keyword || text.includes(keyword)) && (!type || event.type === type) && (!location || (event.locations || []).includes(location));
+        const text = `${event.title || ""} ${event.summary || ""} ${event.venue || ""} ${(event.workTitles || []).join(" ")}`.toLowerCase();
+        const normalizedText = normalizeMatchText(text);
+        return (!keyword || text.includes(keyword) || (normalizedKeyword.length >= 2 && normalizedText.includes(normalizedKeyword))) && (!type || event.type === type) && (!admission || (event.admissionType || "待確認") === admission) && (!location || (event.locations || []).includes(location));
     }).sort((a,b) => { const A=eventSortValue(a), B=eventSortValue(b); return A.rank-B.rank || A.date.localeCompare(B.date); });
 
     document.getElementById("event-count").textContent = `顯示 ${filtered.length} 則｜收藏 ${Object.values(eventPrefs).filter(x=>x.state==='want').length}｜要去 ${Object.values(eventPrefs).filter(x=>x.state==='going').length}`;
@@ -1490,8 +1794,10 @@ function renderEvents() {
         const cardClass = `${event.eventStatus === "upcoming" ? "upcoming" : event.confidence === "high" ? "high" : "candidate"} ${matches.length ? "matched" : ""}`;
         return `<article class="event-card ${cardClass}">
             <div class="event-title">${escapeHtml(event.title)}</div>
-            <div class="event-badges"><span class="event-badge">${escapeHtml(event.type || "活動")}</span><span class="event-state ${state.className}">${state.label}</span><span class="event-badge event-countdown">⏳ ${escapeHtml(eventCountdown(event))}</span>${(event.locations||[]).map(x=>`<span class="event-badge location">📍 ${escapeHtml(x)}</span>`).join("")}${matches.length?`<span class="event-badge event-match">💜 ${escapeHtml(matches.map(x=>x.title).join("、"))}</span>`:""}</div>
+            <div class="event-badges"><span class="event-badge">${escapeHtml(event.type || "活動")}</span><span class="event-state ${state.className}">${state.label}</span><span class="event-badge event-countdown">⏳ ${escapeHtml(eventCountdown(event))}</span><span class="event-badge event-admission">🎟️ ${escapeHtml(event.admissionType || "待確認")}${event.feeText ? `・${escapeHtml(event.feeText)}` : ""}</span>${(event.locations||[]).map(x=>`<span class="event-badge location">📍 ${escapeHtml(x)}</span>`).join("")}${matches.length?`<span class="event-badge event-match">💜 ${escapeHtml(matches.map(x=>x.title).join("、"))}</span>`:""}</div>
             <div class="event-date">📅 活動期間：${escapeHtml(formatEventPeriod(event))}</div>
+            ${event.venue ? `<div class="event-meta">🏢 場館：${escapeHtml(event.venue)}</div>` : ""}
+            <div class="event-travel">🚆 ${escapeHtml(eventTransportHint(event))}</div>
             <div class="event-meta">📰 ${escapeHtml(formatEventDate(event.publishedAt))}<br>來源：${escapeHtml(event.source || "公開來源")}${event.discoverySource?`｜${escapeHtml(event.discoverySource)}`:""}</div>
             ${event.summary?`<div class="event-summary">${escapeHtml(event.summary)}</div>`:""}
             <div class="event-actions">
@@ -1503,6 +1809,8 @@ function renderEvents() {
                 <button class="hide" onclick="updateEventPreference('${event.id}',{dismissed:true})">🙈 隱藏</button>
             </div>
             <a class="event-link" href="${escapeHtml(event.url)}" target="_blank" rel="noopener noreferrer">查看原始公告</a>
+            <a class="event-link" href="${escapeHtml(eventMapUrl(event))}" target="_blank" rel="noopener noreferrer">🗺️ 地圖</a>
+            <a class="event-link" href="${escapeHtml(eventDirectionsUrl(event))}" target="_blank" rel="noopener noreferrer">🚆 導航</a>
         </article>`;
     }).join("");
 }
@@ -1527,10 +1835,13 @@ document.getElementById("search-input").addEventListener("keydown", event => {
 document.getElementById("event-keyword").addEventListener("input", renderEvents);
 document.getElementById("event-location").addEventListener("change", () => { fillLocationChips(); renderEvents(); });
 document.getElementById("event-type").addEventListener("change", renderEvents);
+document.getElementById("event-admission").addEventListener("change", renderEvents);
+document.getElementById("work-event-input").addEventListener("keydown", event => { if (event.key === "Enter") { event.preventDefault(); searchEventsByWork(); } });
 
 loadStoredAnime();
 renderList();
 loadEvents();
+maybeAutoSyncAnimeMetadata();
 </script>
 </body>
 </html>

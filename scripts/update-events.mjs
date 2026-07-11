@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 const RSS_URL =
     process.env.BAHAMUT_RSS_URL ||
@@ -175,7 +175,7 @@ const fetchHeaders = {
     "User-Agent":
         "Mozilla/5.0 (X11; Linux x86_64) " +
         "AppleWebKit/537.36 Chrome/126 Safari/537.36 " +
-        "TaiwanAnimeEventRadar/3.0",
+        "TaiwanAnimeEventRadar/3.1",
     "Accept":
         "text/html,application/xhtml+xml,application/rss+xml," +
         "application/xml;q=0.9,*/*;q=0.8",
@@ -388,6 +388,52 @@ function detectLocations(text) {
     }
 
     return [...new Set(locations)];
+}
+
+const venueNames = [
+    "華山 1914 文化創意產業園區", "華山1914文化創意產業園區", "華山 1914", "華山1914",
+    "松山文創園區", "松菸", "三創生活園區", "台北世貿一館", "臺北世貿一館",
+    "南港展覽館", "花博爭艷館", "花博爭豔館", "台北地下街", "臺北地下街",
+    "中山地下街", "誠品生活南西", "新光三越台北南西店", "新光三越台南新天地",
+    "新光三越信義新天地", "DREAM PLAZA", "夢時代購物中心", "高雄夢時代",
+    "駁二藝術特區", "高雄流行音樂中心", "漢神巨蛋", "華泰名品城",
+    "LaLaport 台中", "台中中友百貨", "中友百貨", "巨城購物中心", "Big City 遠東巨城"
+];
+
+function extractVenue(text) {
+    const source = String(text || "");
+    const normalized = normalizeText(source);
+    for (const venue of venueNames) {
+        if (normalized.includes(normalizeText(venue))) return venue;
+    }
+    const genericPatterns = [
+        /(?:台北|臺北|新北|桃園|新竹|台中|臺中|台南|臺南|高雄)?[^，。；\n]{0,18}(?:新光三越|遠東百貨|誠品生活|SOGO|LaLaport|夢時代|大遠百)[^，。；\n]{0,14}/i,
+        /(?:華山|松菸|三創|駁二|世貿|展覽館|文化中心|流行音樂中心)[^，。；\n]{0,18}/i
+    ];
+    for (const pattern of genericPatterns) {
+        const match = source.match(pattern)?.[0]?.replace(/^[\s，、。；：:]+|[\s，、。；：:]+$/g, "").trim();
+        if (match && match.length >= 2 && match.length <= 45) return match;
+    }
+    return "";
+}
+
+function extractAdmission(text) {
+    const source = String(text || "");
+    let admissionType = "待確認";
+    if (/(?:免費入場|免費參觀|免門票|自由入場|入場免費|免費活動)/i.test(source)) admissionType = "免費入場";
+    else if (/(?:抽選|抽籤|中選|得獎者|名額抽出)/i.test(source)) admissionType = "抽選制";
+    else if (/(?:整理券|號碼牌|入場券發放|排隊券)/i.test(source)) admissionType = "整理券";
+    else if (/(?:事前預約|線上預約|預約制|需預約|預約入場)/i.test(source)) admissionType = "需預約";
+    else if (/(?:低消|消費滿|憑消費|購買指定商品|消費入場)/i.test(source)) admissionType = "消費入場";
+    else if (/(?:門票|售票|票價|購票|預售票|全票|套票)/i.test(source)) admissionType = "購票入場";
+
+    const feeMatch = source.match(/(?:NT\$|NTD\s*|新台幣\s*)?\d{2,5}\s*元(?:\s*(?:起|以上))?/i)?.[0] || "";
+    return { admissionType, feeText: feeMatch.replace(/\s+/g, " ").trim() };
+}
+
+function extractWorkTitles(text) {
+    const titles = [...String(text || "").matchAll(/《([^》]{1,80})》/g)].map(match => match[1].trim()).filter(Boolean);
+    return [...new Set(titles)].slice(0, 8);
 }
 
 function parseJsonLd(html) {
@@ -925,6 +971,9 @@ function evaluateArticle(item, today, counters) {
         type,
         today
     );
+    const venue = extractVenue(`${title} ${summary} ${body.slice(0, 2600)}`);
+    const admission = extractAdmission(`${title} ${summary} ${body.slice(0, 2600)}`);
+    const workTitles = extractWorkTitles(`${title} ${summary}`);
 
     if (!status.keep) {
         counters[`${status.reason}Removed`] =
@@ -949,6 +998,10 @@ function evaluateArticle(item, today, counters) {
         eventStartDate: dateInfo.startDate,
         eventEndDate: dateInfo.endDate,
         eventStatus: status.status,
+        venue,
+        admissionType: admission.admissionType,
+        feeText: admission.feeText,
+        workTitles,
         dateConfidence: dateInfo.dateConfidence,
         dateSource: dateInfo.dateSource,
         verification:
