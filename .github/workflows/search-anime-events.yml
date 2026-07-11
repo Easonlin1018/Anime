@@ -1,0 +1,67 @@
+name: 即時搜尋指定動漫活動 v10.5
+
+on:
+  repository_dispatch:
+    types: [anime-event-search]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: anime-event-live-search
+  cancel-in-progress: false
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - name: 下載儲存庫
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 設定 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 即時搜尋作品活動
+        env:
+          QUERY: ${{ github.event.client_payload.query }}
+          REQUEST_ID: ${{ github.event.client_payload.requestId }}
+          MAX_RSS_QUERIES: "18"
+          MAX_ARTICLE_FETCHES: "28"
+          ARTICLE_DELAY_MS: "650"
+          UNDATED_MAX_AGE_DAYS: "180"
+          SINGLE_DATE_GRACE_DAYS: "21"
+          SEARCH_HISTORY_DAYS: "420"
+        run: node scripts/search-anime-events.mjs
+
+      - name: 儲存搜尋結果與活動快取
+        shell: bash
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add events.json search-results
+
+          if git diff --cached --quiet; then
+            echo "沒有需要提交的變更"
+            exit 0
+          fi
+
+          git commit -m "即時搜尋動漫活動：${{ github.event.client_payload.query }}"
+
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "推送衝突，第 ${attempt} 次重新同步"
+            git pull --rebase origin main
+            sleep $((attempt * 3))
+          done
+
+          echo "三次推送皆失敗"
+          exit 1
