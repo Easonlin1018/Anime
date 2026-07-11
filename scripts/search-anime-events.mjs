@@ -12,6 +12,9 @@ const REQUEST_ID = String(process.env.REQUEST_ID || "")
 const MAX_RSS_QUERIES = Number(process.env.MAX_RSS_QUERIES || 18);
 const MAX_ARTICLE_FETCHES = Number(process.env.MAX_ARTICLE_FETCHES || 28);
 const ARTICLE_DELAY_MS = Number(process.env.ARTICLE_DELAY_MS || 650);
+const UNDATED_MAX_AGE_DAYS = Number(process.env.UNDATED_MAX_AGE_DAYS || 180);
+const SINGLE_DATE_GRACE_DAYS = Number(process.env.SINGLE_DATE_GRACE_DAYS || 21);
+const SEARCH_HISTORY_DAYS = Number(process.env.SEARCH_HISTORY_DAYS || 420);
 
 if (!QUERY) throw new Error("缺少 QUERY");
 if (!REQUEST_ID) throw new Error("缺少 REQUEST_ID");
@@ -43,7 +46,7 @@ const VENUES = [
     "統一時代百貨", "誠品生活", "台北地下街", "臺北地下街"
 ];
 
-const USER_AGENT = "AnimeEventRadar/10.4 (+https://github.com/Easonlin1018/Anime)";
+const USER_AGENT = "AnimeEventRadar/10.5 (+https://github.com/Easonlin1018/Anime)";
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 function normalize(value) {
@@ -94,6 +97,44 @@ function hash(value) {
 function safeDate(value) {
     const date = new Date(value);
     return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function taiwanToday() {
+    return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Taipei",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    }).format(new Date());
+}
+
+function dateKeyToUtc(value) {
+    const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return null;
+    const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function daysBetweenDateKeys(a, b) {
+    const left = dateKeyToUtc(a);
+    const right = dateKeyToUtc(b);
+    if (!left || !right) return null;
+    return Math.round((left.getTime() - right.getTime()) / 86400000);
+}
+
+function daysSince(value) {
+    const date = safeDate(value);
+    if (!date) return null;
+    return Math.floor((Date.now() - date.getTime()) / 86400000);
+}
+
+function currentTaiwanYear() {
+    return Number(taiwanToday().slice(0, 4));
+}
+
+function googleAfterDate() {
+    const date = new Date(Date.now() - SEARCH_HISTORY_DAYS * 86400000);
+    return date.toISOString().slice(0, 10);
 }
 
 async function fetchText(url, { attempts = 3, timeout = 22000 } = {}) {
@@ -243,11 +284,15 @@ function buildSearchQueries(aliases) {
     const useful = aliases.filter(usableAlias).slice(0, 9);
     const queries = [];
     const add = (engine, label, query, url) => queries.push({ engine, label, query, url });
+    const year = currentTaiwanYear();
+    const nextYear = year + 1;
+    const after = googleAfterDate();
 
     for (const alias of useful) {
         const quoted = `"${alias.replace(/"/g, "")}"`;
-        const q1 = `${quoted} 台灣 (漫博 OR 動漫節 OR 快閃店 OR 展覽 OR 簽名會 OR 主題店)`;
-        const q2 = `${quoted} (漫畫博覽會 OR 台北國際動漫節 OR 台中國際動漫節 OR 攤位 OR 舞台活動)`;
+        const eventWords = `(漫博 OR 動漫節 OR 快閃店 OR 展覽 OR 簽名會 OR 主題店 OR 攤位 OR 舞台活動)`;
+        const q1 = `${quoted} 台灣 ${eventWords} (${year} OR ${nextYear}) after:${after}`;
+        const q2 = `${quoted} (漫畫博覽會 OR 台北國際動漫節 OR 台中國際動漫節 OR 攤位 OR 舞台活動) (${year} OR ${nextYear})`;
         add("Google News", alias, q1, `https://news.google.com/rss/search?q=${encodeURIComponent(q1)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant`);
         add("Bing News", alias, q2, `https://www.bing.com/news/search?q=${encodeURIComponent(q2)}&format=rss&setlang=zh-hant&cc=tw`);
         if (queries.length >= MAX_RSS_QUERIES) break;
@@ -393,14 +438,85 @@ function detectAdmission(text) {
     return "待確認";
 }
 
-function eventStatus(start, end) {
-    const today = new Intl.DateTimeFormat("en-CA", {
-        timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit"
-    }).format(new Date());
+function eventStatus(start, end, publishedAt, corpus = "") {
+    const today = taiwanToday();
     if (end && end < today) return "expired";
     if (start && start > today) return "upcoming";
+
+    if (start && !end) {
+        const daysAfterStart = daysBetweenDateKeys(today, start);
+        if (daysAfterStart !== null && daysAfterStart > SINGLE_DATE_GRACE_DAYS) {
+            const openEnded = /即日起|起至|開始販售|開幕|長期|常設|持續舉辦|展期未定/.test(String(corpus));
+            const recentPublication = (daysSince(publishedAt) ?? 9999) <= UNDATED_MAX_AGE_DAYS;
+            if (!openEnded || !recentPublication) return "expired";
+            return "ongoing-unconfirmed";
+        }
+        return "ongoing-unconfirmed";
+    }
+
     if (start || end) return "ongoing";
     return "date-unknown";
+}
+
+function explicitYears(text) {
+    return [...String(text || "").matchAll(/(?:^|\D)(20\d{2})(?:\D|$)/g)]
+        .map(match => Number(match[1]))
+        .filter(year => year >= 2000 && year <= currentTaiwanYear() + 3);
+}
+
+function candidateRecency(item, dates, corpus) {
+    const today = taiwanToday();
+    const year = currentTaiwanYear();
+    const publicationAge = daysSince(item.publishedAt);
+    const years = explicitYears(corpus);
+    const newestExplicitYear = years.length ? Math.max(...years) : null;
+
+    if (dates.end && dates.end < today) {
+        return { keep:false, reason:"活動結束日期已過" };
+    }
+
+    if (dates.start && !dates.end) {
+        const daysAfterStart = daysBetweenDateKeys(today, dates.start);
+        if (daysAfterStart !== null && daysAfterStart > SINGLE_DATE_GRACE_DAYS) {
+            const openEnded = /即日起|起至|長期|常設|持續舉辦|展期未定/.test(String(corpus));
+            if (!openEnded || (publicationAge ?? 9999) > UNDATED_MAX_AGE_DAYS) {
+                return { keep:false, reason:"只有舊的開始日期，未提供仍在進行的證據" };
+            }
+        }
+    }
+
+    if (!dates.start && !dates.end) {
+        if (publicationAge === null || publicationAge > UNDATED_MAX_AGE_DAYS) {
+            return { keep:false, reason:`無活動日期且新聞超過 ${UNDATED_MAX_AGE_DAYS} 天` };
+        }
+        if (newestExplicitYear !== null && newestExplicitYear < year) {
+            return { keep:false, reason:`文章只出現過去年份 ${newestExplicitYear}` };
+        }
+    }
+
+    if (dates.start && dates.start.slice(0, 4) < String(year) && !dates.end) {
+        const daysAfterStart = daysBetweenDateKeys(today, dates.start);
+        if (daysAfterStart !== null && daysAfterStart > SINGLE_DATE_GRACE_DAYS) {
+            return { keep:false, reason:"活動開始日期屬於過去年度" };
+        }
+    }
+
+    return { keep:true, reason:"目前或未來活動" };
+}
+
+function isStoredLiveSearchEvent(event) {
+    return event?.sourceTag === "即時搜尋" || String(event?.discoverySource || "").startsWith("即時搜尋：");
+}
+
+function staleStoredLiveSearchEvent(event) {
+    if (!isStoredLiveSearchEvent(event)) return false;
+    const corpus = [event.title, event.summary, event.searchCorpus].filter(Boolean).join(" ");
+    const dates = {
+        start: event.eventStartDate || null,
+        end: event.eventEndDate || null
+    };
+    const recency = candidateRecency({ publishedAt:event.publishedAt }, dates, corpus);
+    return !recency.keep || eventStatus(dates.start, dates.end, event.publishedAt, corpus) === "expired";
 }
 
 function sourceNameFromTitle(title, fallback) {
@@ -418,6 +534,8 @@ function evaluateCandidate(item, aliases, article) {
     if (!hasTaiwan) return null;
 
     const dates = extractDates(corpus, item.publishedAt);
+    const recency = candidateRecency(item, dates, corpus);
+    if (!recency.keep) return null;
     const locations = extractLocations(corpus);
     const venue = extractVenue(corpus);
     const fullArticle = Boolean(article?.text && article.text.length > 500);
@@ -452,7 +570,7 @@ function evaluateCandidate(item, aliases, article) {
         publishedAt: item.publishedAt,
         eventStartDate: dates.start,
         eventEndDate: dates.end,
-        eventStatus: eventStatus(dates.start, dates.end),
+        eventStatus: eventStatus(dates.start, dates.end, item.publishedAt, corpus),
         dateConfidence: dates.start || dates.end ? "medium" : "unknown",
         dateSource: dates.source,
         verification: fullArticle
@@ -461,6 +579,7 @@ function evaluateCandidate(item, aliases, article) {
         searchCorpus: truncate(corpus, 12000),
         liveSearchQuery: QUERY,
         liveSearchRequestId: REQUEST_ID,
+        recencyReason: recency.reason,
         discoveredAt: new Date().toISOString(),
         lastSeenAt: new Date().toISOString()
     };
@@ -534,7 +653,9 @@ async function main() {
 
     const prelim = deduped.filter(item => {
         const corpus = `${item.title} ${item.description}`;
-        return matchedAliases(corpus, aliases).length > 0 && containsAny(corpus, EVENT_TERMS);
+        if (matchedAliases(corpus, aliases).length === 0 || !containsAny(corpus, EVENT_TERMS)) return false;
+        const dates = extractDates(corpus, item.publishedAt);
+        return candidateRecency(item, dates, corpus).keep;
     });
 
     const found = [];
@@ -555,7 +676,13 @@ async function main() {
         .sort((a, b) => (b.confidenceScore || 0) - (a.confidenceScore || 0));
 
     const existing = await readEvents();
-    const merged = mergeEvents(existing.events, uniqueFound);
+    const staleLiveEvents = existing.events.filter(staleStoredLiveSearchEvent);
+    const activeExistingEvents = existing.events.filter(event => !staleStoredLiveSearchEvent(event));
+    const merged = mergeEvents(activeExistingEvents, uniqueFound);
+    const archiveMap = new Map((existing.archive || []).map(event => [event.id || event.url, event]));
+    for (const event of staleLiveEvents) {
+        archiveMap.set(event.id || event.url, { ...event, eventStatus:"expired", archivedAt:new Date().toISOString() });
+    }
     const completedAt = new Date().toISOString();
 
     await writeJson(EVENTS_FILE, {
@@ -564,14 +691,15 @@ async function main() {
             liveSearchUpdatedAt: completedAt,
             liveSearchQuery: QUERY,
             liveSearchResultCount: uniqueFound.length,
-            liveSearchAddedCount: merged.added
+            liveSearchAddedCount: merged.added,
+            liveSearchStaleRemovedCount: staleLiveEvents.length
         },
         events: merged.events,
-        archive: existing.archive
+        archive: [...archiveMap.values()]
     });
 
     await writeJson(path.join(RESULTS_DIR, `${REQUEST_ID}.json`), {
-        schemaVersion: 1,
+        schemaVersion: 2,
         status: "complete",
         requestId: REQUEST_ID,
         query: QUERY,
@@ -587,6 +715,7 @@ async function main() {
         articleFetchesAttempted: Math.min(prelim.length, MAX_ARTICLE_FETCHES),
         events: uniqueFound,
         addedToEventsJson: merged.added,
+        staleLiveEventsRemoved: staleLiveEvents.length,
         errors: errors.slice(0, 20),
         startedAt,
         completedAt,
@@ -595,13 +724,13 @@ async function main() {
             : `已即時搜尋 ${aliases.length} 個作品名稱與 ${searchQueries.length} 個活動來源，但沒有找到明確提及作品的活動。`
     });
 
-    console.log(JSON.stringify({ query: QUERY, aliases: aliases.length, sources: searchQueries.length, events: uniqueFound.length, added: merged.added }, null, 2));
+    console.log(JSON.stringify({ query: QUERY, aliases: aliases.length, sources: searchQueries.length, events: uniqueFound.length, added: merged.added, staleRemoved: staleLiveEvents.length }, null, 2));
 }
 
 main().catch(async error => {
     const resultFile = path.join(RESULTS_DIR, `${REQUEST_ID}.json`);
     await writeJson(resultFile, {
-        schemaVersion: 1,
+        schemaVersion: 2,
         status: "error",
         requestId: REQUEST_ID,
         query: QUERY,

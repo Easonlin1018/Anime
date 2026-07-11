@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v10.4.0</title>
+    <title>全自動動漫追番基地 v10.5.0</title>
 
     <style>
         :root {
@@ -470,7 +470,7 @@
 
 <body>
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v10.4.0</h1>
+    <h1>🎬 全自動動漫追番基地 v10.5.0</h1>
 
     <div class="section" id="add-section">
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
@@ -518,7 +518,7 @@
 
     <div class="section" id="events-section">
         <div class="section-title">
-            <span>🇹🇼 台灣動漫活動雷達 v10.4</span>
+            <span>🇹🇼 台灣動漫活動雷達 v10.5</span>
             <button onclick="loadEvents(true)" style="width:auto;margin:0;padding:6px 9px;font-size:11px;background:#7c3aed;">重新載入</button>
         </div>
 
@@ -1333,7 +1333,7 @@ async function configureLiveSearch() {
         const data = await response.json().catch(() => ({}));
         if (!response.ok || !data.ok) throw new Error(data.error || `HTTP ${response.status}`);
         localStorage.setItem(LIVE_SEARCH_API_KEY, clean);
-        setLiveSearchStatus("✅ 即時搜尋後端連線成功。之後輸入任何動漫都會啟動真正的外部搜尋。", "success");
+        setLiveSearchStatus("✅ 即時搜尋後端連線成功。搜尋只保留目前與未來活動，舊年度結果會自動排除。", "success");
         showToast("⚡ 即時搜尋後端已設定完成！", 4500);
     } catch (error) {
         setLiveSearchStatus(`❌ 無法連線到這個 Worker：${escapeHtml(error.message)}`, "error");
@@ -1414,8 +1414,9 @@ async function pollLiveSearchResult(pending, button = null) {
             if (count > 0) {
                 setLiveSearchStatus(
                     `✅ 即時搜尋完成：檢查 ${Number(result.sourcesChecked || 0)} 個搜尋來源、` +
-                    `${Number(result.candidateArticles || 0)} 篇候選文章，找到 ${count} 個明確提及作品的活動。` +
-                    `${added ? `<br>其中 ${added} 個已立即加入目前清單。` : ""}`,
+                    `${Number(result.candidateArticles || 0)} 篇候選文章，找到 ${count} 個目前或未來的確認活動。` +
+                    `${added ? `<br>其中 ${added} 個已立即加入目前清單。` : ""}` +
+                    `${Number(result.staleLiveEventsRemoved || 0) ? `<br>已自動移除 ${Number(result.staleLiveEventsRemoved)} 個過期的舊搜尋結果。` : ""}`,
                     "success"
                 );
                 showToast(`🎪 即時找到 ${count} 個相關活動！`, 5500);
@@ -1516,6 +1517,14 @@ async function searchEventsByWork(title = null) {
         setEventTab("all");
         scrollToSection("events-section");
         renderEvents();
+
+        const beforeCleanup = eventList.length;
+        eventList = eventList.filter(event => !isOldLiveSearchEvent(event));
+        const removedOldCount = beforeCleanup - eventList.length;
+        if (removedOldCount > 0) {
+            fillEventFilters();
+            renderEvents();
+        }
 
         const localMatchedCount = eventList.filter(
             event => eventMatchesWorkTerms(event, terms)
@@ -2102,9 +2111,34 @@ function matchingAnime(event) {
     }).slice(0, 3);
 }
 
+function isOldLiveSearchEvent(event) {
+    const isLive = event?.sourceTag === "即時搜尋" || String(event?.discoverySource || "").startsWith("即時搜尋：");
+    if (!isLive) return false;
+
+    const today = todayDateKey();
+    if (event.eventEndDate && event.eventEndDate < today) return true;
+
+    if (event.eventStartDate && !event.eventEndDate) {
+        const daysAfterStart = dateDiffDays(today, event.eventStartDate);
+        const corpus = eventSearchText(event);
+        const openEnded = /即日起|起至|長期|常設|持續舉辦|展期未定/.test(corpus);
+        if (daysAfterStart > 21 && !openEnded) return true;
+    }
+
+    if (!event.eventStartDate && !event.eventEndDate) {
+        const published = Date.parse(event.publishedAt || "");
+        if (!Number.isFinite(published) || Date.now() - published > 180 * 86400000) return true;
+        const currentYear = Number(today.slice(0,4));
+        const years = [...eventSearchText(event).matchAll(/(?:^|\D)(20\d{2})(?:\D|$)/g)].map(match => Number(match[1]));
+        if (years.length && Math.max(...years) < currentYear) return true;
+    }
+
+    return false;
+}
+
 function isExpiredEvent(event) {
     const today = todayDateKey();
-    return event.eventStatus === "expired" || Boolean(event.eventEndDate && event.eventEndDate < today);
+    return event.eventStatus === "expired" || Boolean(event.eventEndDate && event.eventEndDate < today) || isOldLiveSearchEvent(event);
 }
 
 function eventStatusInfo(event) {
