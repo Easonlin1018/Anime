@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v10.3.0</title>
+    <title>全自動動漫追番基地 v10.4.0</title>
 
     <style>
         :root {
@@ -413,9 +413,24 @@
         .anime-extra { margin: 7px 0; padding: 8px; border-radius: 7px; background: rgba(15,23,42,.65); font-size: 11px; line-height: 1.65; color: #cbd5e1; }
         .platform-links { display:flex; flex-wrap:wrap; gap:5px; margin-top:5px; }
         .platform-link { display:inline-block; padding:3px 7px; border-radius:999px; background:#164e63; color:#a5f3fc; text-decoration:none; font-size:10px; }
-        .work-event-search { display:grid; grid-template-columns:1fr auto; gap:8px; margin-bottom:10px; }
+        .work-event-search { display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:8px; margin-bottom:8px; }
         .work-event-search input, .work-event-search button { margin-bottom:0; }
         .work-event-search button { width:auto; }
+        .live-search-status {
+            display:none;
+            margin:0 0 10px;
+            padding:9px 11px;
+            border-radius:8px;
+            border:1px solid #334155;
+            background:#111827;
+            color:#cbd5e1;
+            font-size:11px;
+            line-height:1.6;
+        }
+        .live-search-status.running { display:block; border-color:#0369a1; background:#082f49; color:#bae6fd; }
+        .live-search-status.success { display:block; border-color:#047857; background:#052e2b; color:#a7f3d0; }
+        .live-search-status.warning { display:block; border-color:#a16207; background:#422006; color:#fde68a; }
+        .live-search-status.error { display:block; border-color:#b91c1c; background:#450a0a; color:#fecaca; }
         .event-travel { color:#a5b4fc; font-size:11px; margin:7px 0; }
         .event-admission { background:#713f12; color:#fef3c7; }
         .bottom-nav { display:none; }
@@ -455,7 +470,7 @@
 
 <body>
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v10.3.0</h1>
+    <h1>🎬 全自動動漫追番基地 v10.4.0</h1>
 
     <div class="section" id="add-section">
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
@@ -503,7 +518,7 @@
 
     <div class="section" id="events-section">
         <div class="section-title">
-            <span>🇹🇼 台灣動漫活動雷達 v10.3</span>
+            <span>🇹🇼 台灣動漫活動雷達 v10.4</span>
             <button onclick="loadEvents(true)" style="width:auto;margin:0;padding:6px 9px;font-size:11px;background:#7c3aed;">重新載入</button>
         </div>
 
@@ -529,10 +544,12 @@
         <div class="location-chips" id="location-chips"></div>
 
         <div class="work-event-search">
-            <input id="work-event-input" list="anime-title-options" type="search" placeholder="輸入作品名稱，直接找該作品的活動">
+            <input id="work-event-input" list="anime-title-options" type="search" placeholder="輸入任意作品，立即上網搜尋相關活動">
             <datalist id="anime-title-options"></datalist>
-            <button id="work-event-btn" onclick="searchEventsByWork()">🎪 智慧查作品活動</button>
+            <button id="work-event-btn" onclick="searchEventsByWork()">⚡ 即時搜尋作品活動</button>
+            <button onclick="configureLiveSearch()" style="background:#475569;">⚙️ 搜尋設定</button>
         </div>
+        <div id="live-search-status" class="live-search-status"></div>
 
         <div class="event-controls">
             <input id="event-keyword" type="search" placeholder="搜尋活動、作品或場館">
@@ -582,7 +599,9 @@ let eventTab = "all";
 let activeWorkSearch = { query: "", terms: [] };
 let animeSyncing = false;
 const ANIME_SYNC_KEY = "anime_metadata_sync_v10_1";
-const WORK_ALIAS_CACHE_KEY = "anime_work_alias_cache_v10_3";
+const WORK_ALIAS_CACHE_KEY = "anime_work_alias_cache_v10_4";
+const LIVE_SEARCH_API_KEY = "anime_live_search_api_v10_4";
+const LIVE_SEARCH_PENDING_KEY = "anime_live_search_pending_v10_4";
 const EVENT_PREFS_KEY = "anime_event_prefs_v10";
 const EVENT_OVERRIDES_KEY = "anime_event_overrides_v10";
 const EVENT_SETTINGS_KEY = "anime_event_settings_v10";
@@ -1281,6 +1300,199 @@ function editAnimeReview(id) {
     saveAndRender();
 }
 
+function setLiveSearchStatus(message, type = "running") {
+    const box = document.getElementById("live-search-status");
+    if (!box) return;
+    box.className = `live-search-status ${type}`;
+    box.innerHTML = message;
+}
+
+function liveSearchApiUrl() {
+    return String(localStorage.getItem(LIVE_SEARCH_API_KEY) || "")
+        .trim()
+        .replace(/\/+$/, "");
+}
+
+async function configureLiveSearch() {
+    const current = liveSearchApiUrl();
+    const value = prompt(
+        "貼上 Cloudflare Worker 網址，例如：https://anime-event-live-search.你的帳號.workers.dev\n留空可清除設定。",
+        current
+    );
+    if (value === null) return;
+
+    const clean = String(value).trim().replace(/\/+$/, "");
+    if (!clean) {
+        localStorage.removeItem(LIVE_SEARCH_API_KEY);
+        setLiveSearchStatus("已清除即時搜尋 API。", "warning");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${clean}/health`, { cache:"no-store" });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        localStorage.setItem(LIVE_SEARCH_API_KEY, clean);
+        setLiveSearchStatus("✅ 即時搜尋後端連線成功。之後輸入任何動漫都會啟動真正的外部搜尋。", "success");
+        showToast("⚡ 即時搜尋後端已設定完成！", 4500);
+    } catch (error) {
+        setLiveSearchStatus(`❌ 無法連線到這個 Worker：${escapeHtml(error.message)}`, "error");
+    }
+}
+
+function mergeLiveSearchEvents(events) {
+    if (!Array.isArray(events) || !events.length) return 0;
+    const map = new Map();
+    const keyFor = event => event.url || event.id || `${normalizeMatchText(event.title)}|${event.eventStartDate || ""}`;
+    eventList.forEach(event => map.set(keyFor(event), event));
+    let added = 0;
+
+    events.forEach(event => {
+        const key = keyFor(event);
+        const previous = map.get(key);
+        if (previous) {
+            map.set(key, {
+                ...previous,
+                ...event,
+                id: previous.id || event.id,
+                discoveredAt: previous.discoveredAt || event.discoveredAt,
+                workTitles: [...new Set([...(previous.workTitles || []), ...(event.workTitles || [])])],
+                matchedAliases: [...new Set([...(previous.matchedAliases || []), ...(event.matchedAliases || [])])]
+            });
+        } else {
+            map.set(key, event);
+            added++;
+        }
+    });
+
+    eventList = [...map.values()];
+    return added;
+}
+
+async function pollLiveSearchResult(pending, button = null) {
+    const started = Date.now();
+    const timeout = 7 * 60 * 1000;
+    let attempts = 0;
+
+    while (Date.now() - started < timeout) {
+        attempts++;
+        const elapsed = Math.max(1, Math.round((Date.now() - started) / 1000));
+        setLiveSearchStatus(
+            `⚡ GitHub Actions 正在搜尋「${escapeHtml(pending.query)}」的多語言名稱、新聞來源與文章全文……<br>` +
+            `已等待 ${elapsed} 秒；完成後結果會自動出現，不必手動重新整理。`,
+            "running"
+        );
+
+        try {
+            const response = await fetch(`${pending.resultUrl}?t=${Date.now()}`, { cache:"no-store" });
+            if (response.status === 404) {
+                await new Promise(resolve => setTimeout(resolve, 3500));
+                continue;
+            }
+            if (!response.ok) throw new Error(`結果檔 HTTP ${response.status}`);
+            const result = await response.json();
+
+            if (result.status === "error") {
+                throw new Error(result.message || "即時搜尋失敗");
+            }
+            if (result.status !== "complete") {
+                await new Promise(resolve => setTimeout(resolve, 3500));
+                continue;
+            }
+
+            localStorage.removeItem(LIVE_SEARCH_PENDING_KEY);
+            const allTerms = normalizeAnimeAliasList([
+                ...(activeWorkSearch.terms || []),
+                ...(Array.isArray(result.aliases) ? result.aliases : [])
+            ]).flatMap(deriveAliasVariants);
+            activeWorkSearch = { query: pending.query, terms:[...new Set(allTerms)].slice(0, 500) };
+            const added = mergeLiveSearchEvents(result.events);
+            fillEventFilters();
+            renderEvents();
+
+            const count = Array.isArray(result.events) ? result.events.length : 0;
+            if (count > 0) {
+                setLiveSearchStatus(
+                    `✅ 即時搜尋完成：檢查 ${Number(result.sourcesChecked || 0)} 個搜尋來源、` +
+                    `${Number(result.candidateArticles || 0)} 篇候選文章，找到 ${count} 個明確提及作品的活動。` +
+                    `${added ? `<br>其中 ${added} 個已立即加入目前清單。` : ""}`,
+                    "success"
+                );
+                showToast(`🎪 即時找到 ${count} 個相關活動！`, 5500);
+            } else {
+                setLiveSearchStatus(
+                    `⚠️ 即時搜尋已完成，不是只查本機資料。系統檢查了 ` +
+                    `${Number(result.aliases?.length || 0)} 個作品名稱、${Number(result.sourcesChecked || 0)} 個搜尋來源，` +
+                    `目前仍沒有找到文章明確提及這部作品。`,
+                    "warning"
+                );
+                showToast("即時外部搜尋完成，目前沒有確認結果。", 5000);
+            }
+            return result;
+        } catch (error) {
+            if (/HTTP 404/.test(error.message)) {
+                await new Promise(resolve => setTimeout(resolve, 3500));
+                continue;
+            }
+            localStorage.removeItem(LIVE_SEARCH_PENDING_KEY);
+            setLiveSearchStatus(`❌ 即時搜尋失敗：${escapeHtml(error.message)}`, "error");
+            throw error;
+        }
+    }
+
+    localStorage.removeItem(LIVE_SEARCH_PENDING_KEY);
+    throw new Error("搜尋超過 7 分鐘仍未完成，請到 GitHub Actions 查看執行狀態。 ");
+}
+
+async function startLiveEventSearch(query, button = null) {
+    const api = liveSearchApiUrl();
+    if (!api) {
+        setLiveSearchStatus(
+            "⚠️ 現在尚未設定即時搜尋後端，所以網站只能比對 events.json。請按右邊的「⚙️ 搜尋設定」，貼上 Cloudflare Worker 網址。",
+            "warning"
+        );
+        return null;
+    }
+
+    setLiveSearchStatus(`⚡ 正在要求後端即時搜尋「${escapeHtml(query)}」……`, "running");
+    const response = await fetch(`${api}/search`, {
+        method:"POST",
+        headers:{ "content-type":"application/json" },
+        body:JSON.stringify({ query })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data.ok) {
+        throw new Error(data.error || `啟動搜尋失敗：HTTP ${response.status}`);
+    }
+
+    const pending = {
+        requestId:data.requestId,
+        query,
+        resultUrl:data.resultUrl,
+        createdAt:new Date().toISOString()
+    };
+    localStorage.setItem(LIVE_SEARCH_PENDING_KEY, JSON.stringify(pending));
+    return await pollLiveSearchResult(pending, button);
+}
+
+async function resumePendingLiveSearch() {
+    let pending;
+    try {
+        pending = JSON.parse(localStorage.getItem(LIVE_SEARCH_PENDING_KEY) || "null");
+    } catch {
+        pending = null;
+    }
+    if (!pending?.resultUrl || !pending?.query) return;
+    const age = Date.now() - new Date(pending.createdAt || 0).getTime();
+    if (!Number.isFinite(age) || age > 20 * 60 * 1000) {
+        localStorage.removeItem(LIVE_SEARCH_PENDING_KEY);
+        return;
+    }
+    pollLiveSearchResult(pending).catch(error => {
+        setLiveSearchStatus(`❌ 無法恢復上次搜尋：${escapeHtml(error.message)}`, "error");
+    });
+}
+
 async function searchEventsByWork(title = null) {
     const input = document.getElementById("work-event-input");
     const button = document.getElementById("work-event-btn");
@@ -1294,10 +1506,8 @@ async function searchEventsByWork(title = null) {
     if (input) input.value = keyword;
     if (button) {
         button.disabled = true;
-        button.textContent = "🔎 正在解析作品別名…";
+        button.textContent = "🔎 正在解析作品名稱…";
     }
-
-    showToast("🔎 正在查詢中文、日文、英文名稱與同義名稱……", 5000);
 
     try {
         const terms = await resolveWorkAliases(keyword);
@@ -1307,20 +1517,31 @@ async function searchEventsByWork(title = null) {
         scrollToSection("events-section");
         renderEvents();
 
-        const matchedCount = eventList.filter(
+        const localMatchedCount = eventList.filter(
             event => eventMatchesWorkTerms(event, terms)
         ).length;
 
-        showToast(
-            matchedCount > 0
-                ? `🎪 找到 ${matchedCount} 個可能相關活動。`
-                : "目前資料中沒有比對到這部作品；可能是來源尚未抓到，或主辦方尚未公布作品名單。",
-            5500
-        );
+        if (localMatchedCount > 0) {
+            setLiveSearchStatus(
+                `📦 目前 events.json 已有 ${localMatchedCount} 個可能相關活動；正在繼續即時上網搜尋有沒有更多結果。`,
+                "running"
+            );
+        } else {
+            setLiveSearchStatus(
+                "📦 現有 events.json 沒有結果，現在開始真正的外部即時搜尋。",
+                "running"
+            );
+        }
+
+        if (button) button.textContent = "⚡ 正在上網搜尋…";
+        await startLiveEventSearch(keyword, button);
+    } catch (error) {
+        setLiveSearchStatus(`❌ ${escapeHtml(error.message)}`, "error");
+        showToast(`❌ ${escapeHtml(error.message)}`, 5000);
     } finally {
         if (button) {
             button.disabled = false;
-            button.textContent = "🎪 智慧查作品活動";
+            button.textContent = "⚡ 即時搜尋作品活動";
         }
     }
 }
@@ -2133,7 +2354,7 @@ document.getElementById("work-event-input").addEventListener("keydown", event =>
 
 loadStoredAnime();
 renderList();
-loadEvents();
+loadEvents().finally(resumePendingLiveSearch);
 maybeAutoSyncAnimeMetadata();
 </script>
 </body>
