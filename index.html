@@ -178,6 +178,20 @@
             margin-bottom: 8px;
         }
 
+        .anime-list-toolbar {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(150px, .8fr) auto;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .anime-list-toolbar input,
+        .anime-list-toolbar select,
+        .anime-list-toolbar button { margin: 0; min-width: 0; }
+        .anime-list-toolbar button { width: auto; white-space: nowrap; background: #475569; }
+        .anime-list-summary { color: #94a3b8; font-size: 12px; margin: 0 0 12px; }
+        .anime-list-no-results { display: none; }
+
         .btn-group {
             display: flex;
             gap: 5px;
@@ -464,6 +478,9 @@
 
         @media (max-width: 600px) {
             .event-controls { grid-template-columns: 1fr; }
+            .anime-list-toolbar { grid-template-columns: 1fr; }
+            .anime-list-toolbar button { width: 100%; }
+            .btn-group button { flex: 1 1 calc(50% - 5px); min-width: 0; }
         }
     </style>
 </head>
@@ -564,7 +581,24 @@
     </div>
 
     <div class="section" id="anime-section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
-    <div class="section"><div class="section-title">🎬 官方已完結（補番中）</div><div id="list-backlog"></div></div>
+    <div class="section" id="backlog-section">
+        <div class="section-title">🎬 官方已完結（補番中）</div>
+        <div class="anime-list-toolbar" role="search" aria-label="搜尋與排序動漫">
+            <input id="anime-list-search" type="search" placeholder="搜尋作品名稱、別名、平台或筆記" autocomplete="off">
+            <select id="anime-list-sort" aria-label="動漫排序方式">
+                <option value="watching-first">正在看優先</option>
+                <option value="recent-watched">最近觀看</option>
+                <option value="name">名稱</option>
+                <option value="progress-desc">進度最高</option>
+                <option value="progress-asc">進度最低</option>
+                <option value="recent-added">最近新增</option>
+            </select>
+            <button id="anime-list-clear" type="button">清除搜尋</button>
+        </div>
+        <div id="anime-list-summary" class="anime-list-summary" aria-live="polite"></div>
+        <div id="anime-list-no-results" class="empty anime-list-no-results">找不到符合條件的動漫</div>
+        <div id="list-backlog"></div>
+    </div>
     <div class="section"><div class="section-title">🧠 溫故知新（需要複習區）</div><div id="list-review"></div></div>
     <div class="section"><div class="section-title">⏳ 敲碗等待開播</div><div id="list-waiting"></div></div>
     <div class="section"><div class="section-title">🎉 已追完 / 看完了</div><div id="list-completed"></div></div>
@@ -585,6 +619,7 @@
 
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
+const ANIME_SORT_KEY = "anime_list_sort_v10_6";
 const OLD_KEYS = [
     "anime_list_v8_7", "anime_list_v8_6", "anime_list_v8_5",
     "anime_list_v8_4", "anime_list_v8_3", "anime_list_v8_2",
@@ -592,6 +627,8 @@ const OLD_KEYS = [
 ];
 
 let animeList = [];
+let animeListQuery = "";
+let animeListSort = localStorage.getItem(ANIME_SORT_KEY) || "watching-first";
 let eventList = [];
 let eventArchive = [];
 let eventMeta = {};
@@ -642,6 +679,8 @@ function loadStoredAnime() {
 
     animeList = animeList.map(item => ({
         ...item,
+        lastWatchedAt: item.lastWatchedAt || null,
+        addedAt: item.addedAt || null,
         aliases: normalizeAnimeAliasList([
             item.title,
             ...(Array.isArray(item.aliases) ? item.aliases : [])
@@ -1124,6 +1163,8 @@ async function searchAnime(
             rating: null,
             note: "",
             customPlatform: "",
+            lastWatchedAt: category === "watching" ? new Date().toISOString() : null,
+            addedAt: new Date().toISOString(),
             relations: Array.isArray(media.relations?.edges)
                 ? media.relations.edges
                 : []
@@ -1586,6 +1627,10 @@ function moveCategory(id, category) {
 
     anime.category = category;
 
+    if (category === "watching") {
+        anime.lastWatchedAt = new Date().toISOString();
+    }
+
     if (category === "completed") {
         const total = Number(anime.episodes);
 
@@ -1607,6 +1652,10 @@ function updateProgress(id, delta) {
         0,
         (Number(anime.watched) || 0) + Number(delta)
     );
+
+    if (Number(delta) > 0) {
+        anime.lastWatchedAt = new Date().toISOString();
+    }
 
     const total = Number(anime.episodes);
 
@@ -1695,6 +1744,76 @@ function buildAnimeItem(anime) {
     `;
 }
 
+function normalizeAnimeSearchText(value) {
+    return String(value ?? "")
+        .normalize("NFKC")
+        .toLocaleLowerCase()
+        .replace(/[\p{P}\p{S}\s]+/gu, "");
+}
+
+function animeSearchText(anime) {
+    const aliases = Array.isArray(anime.aliases) ? anime.aliases : [];
+    const tags = Array.isArray(anime.tags)
+        ? anime.tags.map(tag => typeof tag === "string" ? tag : tag?.name)
+        : [];
+    const customTags = Array.isArray(anime.customTags) ? anime.customTags : [];
+    const platforms = [
+        anime.customPlatform,
+        ...(Array.isArray(anime.streamingLinks)
+            ? anime.streamingLinks.flatMap(link => [link?.site, link?.url])
+            : [])
+    ];
+    return normalizeAnimeSearchText([
+        anime.title,
+        ...aliases,
+        ...platforms,
+        ...tags,
+        ...customTags,
+        anime.note
+    ].filter(Boolean).join(" "));
+}
+
+function animeProgress(anime) {
+    const watched = Math.max(0, Number(anime.watched) || 0);
+    const total = Number(anime.episodes);
+    return Number.isFinite(total) && total > 0 ? watched / total : 0;
+}
+
+function animeTime(value) {
+    const timestamp = Date.parse(value || "");
+    return Number.isFinite(timestamp) ? timestamp : 0;
+}
+
+function compareAnimeName(a, b) {
+    return String(a.title || "").localeCompare(String(b.title || ""), "zh-Hant", {
+        sensitivity: "base",
+        numeric: true
+    });
+}
+
+function compareAnime(a, b) {
+    if (animeListSort === "watching-first") {
+        const watchingDifference = Number(b.category === "watching") - Number(a.category === "watching");
+        if (watchingDifference) return watchingDifference;
+        if (a.category === "watching" && b.category === "watching") {
+            const watchedDifference = animeTime(b.lastWatchedAt) - animeTime(a.lastWatchedAt);
+            if (watchedDifference) return watchedDifference;
+        }
+    } else if (animeListSort === "recent-watched") {
+        const difference = animeTime(b.lastWatchedAt) - animeTime(a.lastWatchedAt);
+        if (difference) return difference;
+    } else if (animeListSort === "name") {
+        return compareAnimeName(a, b);
+    } else if (animeListSort === "progress-desc" || animeListSort === "progress-asc") {
+        const difference = animeProgress(b) - animeProgress(a);
+        if (difference) return animeListSort === "progress-desc" ? difference : -difference;
+    } else if (animeListSort === "recent-added") {
+        const difference = animeTime(b.addedAt) - animeTime(a.addedAt);
+        if (difference) return difference;
+    }
+    return compareAnimeName(a, b);
+}
+
 function renderList() {
     const openGroups = new Set();
 
@@ -1704,6 +1823,10 @@ function renderList() {
             openGroups.add(detail.dataset.groupkey)
         );
 
+    const normalizedQuery = normalizeAnimeSearchText(animeListQuery);
+    const visibleAnime = animeList
+        .filter(anime => !normalizedQuery || animeSearchText(anime).includes(normalizedQuery))
+        .sort(compareAnime);
     const categories = {
         watching: [],
         backlog: [],
@@ -1712,11 +1835,15 @@ function renderList() {
         completed: []
     };
 
-    for (const anime of animeList) {
+    for (const anime of visibleAnime) {
         if (anime && categories[anime.category]) {
             categories[anime.category].push(anime);
         }
     }
+    const summary = document.getElementById("anime-list-summary");
+    if (summary) summary.textContent = `顯示 ${visibleAnime.length}／${animeList.length} 部`;
+    const noResults = document.getElementById("anime-list-no-results");
+    if (noResults) noResults.style.display = visibleAnime.length ? "none" : "block";
 
     for (const [category, items] of Object.entries(categories)) {
         const seriesMap = {};
@@ -2369,6 +2496,30 @@ document.getElementById("search-input").addEventListener("keydown", event => {
         event.preventDefault();
         searchAnime();
     }
+});
+
+const animeListSearchInput = document.getElementById("anime-list-search");
+const animeListSortSelect = document.getElementById("anime-list-sort");
+if ([...animeListSortSelect.options].some(option => option.value === animeListSort)) {
+    animeListSortSelect.value = animeListSort;
+} else {
+    animeListSort = "watching-first";
+    animeListSortSelect.value = animeListSort;
+}
+animeListSearchInput.addEventListener("input", event => {
+    animeListQuery = event.target.value;
+    renderList();
+});
+document.getElementById("anime-list-clear").addEventListener("click", () => {
+    animeListQuery = "";
+    animeListSearchInput.value = "";
+    animeListSearchInput.focus();
+    renderList();
+});
+animeListSortSelect.addEventListener("change", event => {
+    animeListSort = event.target.value;
+    localStorage.setItem(ANIME_SORT_KEY, animeListSort);
+    renderList();
 });
 
 document.getElementById("event-keyword").addEventListener("input", event => {
