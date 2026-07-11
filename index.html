@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v9.1.0</title>
+    <title>全自動動漫追番基地 v10.0.0</title>
 
     <style>
         :root {
@@ -360,6 +360,37 @@
             padding: 14px;
         }
 
+
+
+        .event-toolbar, .event-tabs, .location-chips, .event-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 10px;
+        }
+        .event-toolbar button, .event-tabs button, .location-chips button, .event-actions button {
+            width: auto;
+            margin: 0;
+            padding: 7px 10px;
+            font-size: 11px;
+            flex: none;
+        }
+        .event-tabs button.active, .location-chips button.active { background: #7c3aed; }
+        .event-card.matched { box-shadow: 0 0 0 1px #a855f7, 0 0 18px rgba(168,85,247,.2); }
+        .event-card.dismissed { opacity: .45; }
+        .event-match { background:#581c87; color:#f3e8ff; }
+        .event-countdown { font-weight: 700; color:#fef08a; }
+        .event-actions .want { background:#ca8a04; }
+        .event-actions .going { background:#059669; }
+        .event-actions .visited { background:#7c3aed; }
+        .event-actions .edit { background:#0284c7; }
+        .event-actions .hide { background:#475569; }
+        .event-actions button.selected { outline:2px solid #fff; }
+        .settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+        .settings-grid > * { margin-bottom:0; }
+        .tiny-note { color:#94a3b8; font-size:11px; line-height:1.6; margin:8px 0; }
+        .archive-title { margin:16px 0 8px; font-weight:bold; color:#c4b5fd; }
+
         @media (max-width: 600px) {
             .event-controls { grid-template-columns: 1fr; }
         }
@@ -368,7 +399,7 @@
 
 <body>
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v9.1.0</h1>
+    <h1>🎬 全自動動漫追番基地 v10.0.0</h1>
 
     <div class="section">
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
@@ -406,22 +437,38 @@
 
     <div class="section">
         <div class="section-title">
-            <span>🇹🇼 台灣動漫活動雷達</span>
+            <span>🇹🇼 台灣動漫活動雷達 v10</span>
             <button onclick="loadEvents(true)" style="width:auto;margin:0;padding:6px 9px;font-size:11px;background:#7c3aed;">重新載入</button>
         </div>
 
         <div id="event-status" class="event-status">正在讀取活動資料……</div>
 
-        <div class="event-controls">
-            <input id="event-keyword" type="search" placeholder="搜尋活動或作品">
-            <select id="event-location">
-                <option value="">全部地區</option>
-            </select>
-            <select id="event-type">
-                <option value="">全部類型</option>
-            </select>
+        <div class="event-toolbar">
+            <button onclick="requestEventNotifications()">🔔 開啟瀏覽器提醒</button>
+            <button onclick="configureEventRegion()">📍 設定我的地區</button>
+            <button onclick="exportEventData()">📤 匯出活動資料</button>
+            <input type="file" id="event-import-file" accept=".json,application/json" style="display:none" onchange="importEventData(event)">
+            <button onclick="document.getElementById('event-import-file').click()">📥 匯入活動資料</button>
         </div>
 
+        <div class="event-tabs" id="event-tabs">
+            <button data-tab="all" class="active" onclick="setEventTab('all')">全部</button>
+            <button data-tab="want" onclick="setEventTab('want')">⭐ 想去</button>
+            <button data-tab="going" onclick="setEventTab('going')">✅ 要去</button>
+            <button data-tab="visited" onclick="setEventTab('visited')">🎫 去過</button>
+            <button data-tab="matched" onclick="setEventTab('matched')">💜 追番相關</button>
+            <button data-tab="archive" onclick="setEventTab('archive')">📦 歷史活動</button>
+        </div>
+
+        <div class="location-chips" id="location-chips"></div>
+
+        <div class="event-controls">
+            <input id="event-keyword" type="search" placeholder="搜尋活動或作品">
+            <select id="event-location"><option value="">全部地區</option></select>
+            <select id="event-type"><option value="">全部類型</option></select>
+        </div>
+
+        <div class="tiny-note">收藏、修正、隱藏與去過狀態會保存在這台裝置。Discord、Telegram、Email 通知可透過 GitHub Secrets 啟用。</div>
         <div id="event-count" class="anime-meta"></div>
         <div id="event-list"></div>
     </div>
@@ -448,7 +495,16 @@ const OLD_KEYS = [
 
 let animeList = [];
 let eventList = [];
+let eventArchive = [];
 let eventMeta = {};
+let eventTab = "all";
+const EVENT_PREFS_KEY = "anime_event_prefs_v10";
+const EVENT_OVERRIDES_KEY = "anime_event_overrides_v10";
+const EVENT_SETTINGS_KEY = "anime_event_settings_v10";
+const EVENT_SEEN_KEY = "anime_event_seen_v10";
+let eventPrefs = JSON.parse(localStorage.getItem(EVENT_PREFS_KEY) || "{}");
+let eventOverrides = JSON.parse(localStorage.getItem(EVENT_OVERRIDES_KEY) || "{}");
+let eventSettings = JSON.parse(localStorage.getItem(EVENT_SETTINGS_KEY) || "{}");
 let toastTimer = null;
 
 const searchBtn = document.getElementById("search-btn");
@@ -1216,289 +1272,249 @@ function importData(event) {
 
 function formatEventDate(value) {
     if (!value) return "日期不明";
-
     const date = new Date(value.length === 10 ? `${value}T00:00:00Z` : value);
     if (Number.isNaN(date.getTime())) return "日期不明";
-
-    return new Intl.DateTimeFormat("zh-TW", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        timeZone: "Asia/Taipei"
-    }).format(date);
+    return new Intl.DateTimeFormat("zh-TW", { year:"numeric", month:"2-digit", day:"2-digit", timeZone:"Asia/Taipei" }).format(date);
 }
 
 function todayDateKey() {
-    const parts = new Intl.DateTimeFormat("en-CA", {
-        timeZone: "Asia/Taipei",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit"
-    }).formatToParts(new Date());
-
-    const values = Object.fromEntries(
-        parts
-            .filter(part => part.type !== "literal")
-            .map(part => [part.type, part.value])
-    );
-
-    return `${values.year}-${values.month}-${values.day}`;
+    return new Intl.DateTimeFormat("en-CA", { timeZone:"Asia/Taipei", year:"numeric", month:"2-digit", day:"2-digit" }).format(new Date());
 }
 
-function isVisibleEvent(event) {
+function dateDiffDays(a, b) {
+    const da = new Date(`${a}T00:00:00Z`), db = new Date(`${b}T00:00:00Z`);
+    return Math.round((da - db) / 86400000);
+}
+
+function saveEventLocalData() {
+    localStorage.setItem(EVENT_PREFS_KEY, JSON.stringify(eventPrefs));
+    localStorage.setItem(EVENT_OVERRIDES_KEY, JSON.stringify(eventOverrides));
+    localStorage.setItem(EVENT_SETTINGS_KEY, JSON.stringify(eventSettings));
+}
+
+function applyEventOverride(event) {
+    const override = eventOverrides[event.id] || {};
+    return { ...event, ...override, locations: override.locations || event.locations };
+}
+
+function eventPreference(id) {
+    return eventPrefs[id] || { state:"", dismissed:false };
+}
+
+function updateEventPreference(id, patch) {
+    eventPrefs[id] = { ...eventPreference(id), ...patch };
+    saveEventLocalData();
+    renderEvents();
+}
+
+function setEventTab(tab) {
+    eventTab = tab;
+    document.querySelectorAll("#event-tabs button").forEach(button => button.classList.toggle("active", button.dataset.tab === tab));
+    renderEvents();
+}
+
+function configureEventRegion() {
+    const value = prompt("輸入你最常看的地區，例如：桃園、台北、台中。留空代表全部。", eventSettings.region || "");
+    if (value === null) return;
+    eventSettings.region = value.trim();
+    saveEventLocalData();
+    fillLocationChips();
+    renderEvents();
+    showToast(value.trim() ? `📍 已設定優先地區：${escapeHtml(value.trim())}` : "📍 已取消預設地區");
+}
+
+function requestEventNotifications() {
+    if (!("Notification" in window)) return showToast("此瀏覽器不支援通知。", 4000);
+    Notification.requestPermission().then(permission => {
+        showToast(permission === "granted" ? "🔔 瀏覽器通知已開啟！" : "⚠️ 通知權限未開啟。", 4000);
+    });
+}
+
+function notifyNewEvents(events) {
+    if (!("Notification" in window) || Notification.permission !== "granted") return;
+    const oldIds = new Set(JSON.parse(localStorage.getItem(EVENT_SEEN_KEY) || "[]"));
+    const fresh = events.filter(event => !oldIds.has(event.id));
+    if (oldIds.size > 0 && fresh.length > 0) {
+        const first = fresh[0];
+        new Notification(`發現 ${fresh.length} 個新動漫活動`, { body:first.title, icon:"" });
+    }
+    localStorage.setItem(EVENT_SEEN_KEY, JSON.stringify(events.map(event => event.id).slice(0, 500)));
+}
+
+function normalizeMatchText(value) {
+    return String(value || "").toLowerCase().replace(/[第季期劇場版電影版ovaonaseason\s・·!！?？:：()（）\[\]【】《》]/g, "");
+}
+
+function matchingAnime(event) {
+    const text = normalizeMatchText(`${event.title} ${event.summary}`);
+    return animeList.filter(anime => {
+        const title = normalizeMatchText(getCoreTitle(anime.title));
+        return title.length >= 3 && text.includes(title);
+    }).slice(0, 3);
+}
+
+function isExpiredEvent(event) {
     const today = todayDateKey();
-
-    if (event.eventStatus === "expired") return false;
-    if (event.eventEndDate && event.eventEndDate < today) return false;
-
-    return true;
+    return event.eventStatus === "expired" || Boolean(event.eventEndDate && event.eventEndDate < today);
 }
 
 function eventStatusInfo(event) {
-    if (event.eventStatus === "ongoing") {
-        return { label: "🟢 進行中", className: "ongoing" };
-    }
+    if (isExpiredEvent(event)) return { label:"⚫ 已結束", className:"unknown" };
+    if (event.eventStatus === "ongoing") return { label:"🟢 進行中", className:"ongoing" };
+    if (event.eventStatus === "ongoing-unconfirmed") return { label:"🟢 可能進行中", className:"ongoing" };
+    if (event.eventStatus === "upcoming") return { label:"🔵 即將開始", className:"upcoming" };
+    return { label:"🟡 日期待確認", className:"unknown" };
+}
 
-    if (event.eventStatus === "ongoing-unconfirmed") {
-        return { label: "🟢 可能進行中", className: "ongoing" };
+function eventCountdown(event) {
+    const today = todayDateKey();
+    if (isExpiredEvent(event)) return "已結束";
+    if (event.eventStartDate && event.eventStartDate > today) {
+        const days = dateDiffDays(event.eventStartDate, today);
+        return days === 0 ? "今天開始" : `${days} 天後開始`;
     }
-
-    if (event.eventStatus === "upcoming") {
-        return { label: "🔵 即將開始", className: "upcoming" };
+    if (event.eventEndDate && event.eventEndDate >= today) {
+        const days = dateDiffDays(event.eventEndDate, today);
+        return days === 0 ? "今天最後一天" : `剩 ${days} 天`;
     }
-
-    return { label: "🟡 日期待確認", className: "unknown" };
+    return "日期待確認";
 }
 
 function formatEventPeriod(event) {
-    if (event.eventStartDate && event.eventEndDate) {
-        return `${formatEventDate(event.eventStartDate)} ～ ${formatEventDate(event.eventEndDate)}`;
-    }
-
-    if (event.eventStartDate) {
-        return `${formatEventDate(event.eventStartDate)} 起（結束日期待確認）`;
-    }
-
+    if (event.eventStartDate && event.eventEndDate) return `${formatEventDate(event.eventStartDate)} ～ ${formatEventDate(event.eventEndDate)}`;
+    if (event.eventStartDate) return `${formatEventDate(event.eventStartDate)} 起（結束日期待確認）`;
     return "活動期間待確認，請查看原文";
 }
 
 function eventSortValue(event) {
-    const statusRank = {
-        ongoing: 0,
-        "ongoing-unconfirmed": 1,
-        upcoming: 2,
-        "date-unknown": 3
-    };
+    const statusRank = { ongoing:0, "ongoing-unconfirmed":1, upcoming:2, "date-unknown":3, expired:9 };
+    return { rank:statusRank[event.eventStatus] ?? 8, date:event.eventStartDate || event.publishedAt || "9999-12-31" };
+}
 
-    const rank = statusRank[event.eventStatus] ?? 9;
-    const date = event.eventStartDate || event.publishedAt || "9999-12-31";
-    return { rank, date };
+function fillLocationChips() {
+    const box = document.getElementById("location-chips");
+    const locations = ["全部","台北","新北","桃園","新竹","台中","台南","高雄"];
+    const active = document.getElementById("event-location")?.value || eventSettings.region || "";
+    box.innerHTML = locations.map(location => {
+        const value = location === "全部" ? "" : location;
+        return `<button class="${active === value ? "active" : ""}" onclick="quickLocation('${value}')">${location}</button>`;
+    }).join("");
+}
+
+function quickLocation(location) {
+    document.getElementById("event-location").value = location;
+    fillLocationChips();
+    renderEvents();
 }
 
 function fillEventFilters() {
     const locationSelect = document.getElementById("event-location");
     const typeSelect = document.getElementById("event-type");
-
-    const locations = [
-        ...new Set(
-            eventList.flatMap(event =>
-                Array.isArray(event.locations)
-                    ? event.locations
-                    : []
-            )
-        )
-    ].sort();
-
-    const types = [
-        ...new Set(
-            eventList.map(event => event.type).filter(Boolean)
-        )
-    ].sort();
-
-    const oldLocation = locationSelect.value;
+    const all = [...eventList, ...eventArchive].map(applyEventOverride);
+    const locations = [...new Set(all.flatMap(event => Array.isArray(event.locations) ? event.locations : []))].sort();
+    const types = [...new Set(all.map(event => event.type).filter(Boolean))].sort();
+    const oldLocation = locationSelect.value || eventSettings.region || "";
     const oldType = typeSelect.value;
-
-    locationSelect.innerHTML =
-        '<option value="">全部地區</option>' +
-        locations.map(location =>
-            `<option value="${escapeHtml(location)}">${escapeHtml(location)}</option>`
-        ).join("");
-
-    typeSelect.innerHTML =
-        '<option value="">全部類型</option>' +
-        types.map(type =>
-            `<option value="${escapeHtml(type)}">${escapeHtml(type)}</option>`
-        ).join("");
-
-    locationSelect.value = oldLocation;
+    locationSelect.innerHTML = '<option value="">全部地區</option>' + locations.map(x => `<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+    typeSelect.innerHTML = '<option value="">全部類型</option>' + types.map(x => `<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+    if ([...locationSelect.options].some(o => o.value === oldLocation)) locationSelect.value = oldLocation;
     typeSelect.value = oldType;
+    fillLocationChips();
 }
 
 function updateEventStatus() {
     const status = document.getElementById("event-status");
-    const updateTime = eventMeta.updatedAt
-        ? formatEventDate(eventMeta.updatedAt)
-        : "尚未更新";
-
+    const updateTime = eventMeta.updatedAt ? formatEventDate(eventMeta.updatedAt) : "尚未更新";
     if (eventMeta.fetchStatus === "error") {
-        status.innerHTML =
-            `❌ 本次自動更新失敗，但上一版有效資料仍保留。<br>` +
-            `${escapeHtml(eventMeta.lastError || "")}`;
+        status.innerHTML = `❌ 本次自動更新失敗，但上一版有效資料仍保留。<br>${escapeHtml(eventMeta.lastError || "")}`;
         return;
     }
+    const statusText = eventMeta.fetchStatus === "partial"
+        ? "⚠️ 部分來源暫時限速；已保留舊資料並顯示成功取得的活動"
+        : "✅ 多來源活動更新正常";
+    status.innerHTML = `${statusText}<br>最後更新：${escapeHtml(updateTime)}｜目前：${eventList.length} 則｜歷史：${eventArchive.length} 則<br>新活動：${Number(eventMeta.newEventCount || 0)}｜快取沿用：${Number(eventMeta.cachedEventCount || 0)}｜429：${Number(eventMeta.rateLimitedCount || 0)}`;
+}
 
-    if (eventMeta.fetchStatus === "not-run") {
-        status.innerHTML =
-            "⚠️ 已清除舊的錯誤活動資料。請到 GitHub Actions 執行一次「更新巴哈姆特動漫活動」。";
-        return;
-    }
+function editEvent(id) {
+    const original = [...eventList, ...eventArchive].find(event => event.id === id);
+    if (!original) return;
+    const current = applyEventOverride(original);
+    const title = prompt("活動名稱", current.title); if (title === null) return;
+    const start = prompt("開始日期 YYYY-MM-DD（可留空）", current.eventStartDate || ""); if (start === null) return;
+    const end = prompt("結束日期 YYYY-MM-DD（可留空）", current.eventEndDate || ""); if (end === null) return;
+    const location = prompt("地區，多個請用逗號分隔", (current.locations || []).join(",")); if (location === null) return;
+    eventOverrides[id] = { ...eventOverrides[id], title:title.trim() || current.title, eventStartDate:start.trim() || null, eventEndDate:end.trim() || null, locations:location.split(/[,，]/).map(x => x.trim()).filter(Boolean) };
+    saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("✏️ 活動資料已在本機修正");
+}
 
-    const statusText =
-        eventMeta.fetchStatus === "partial"
-            ? "⚠️ 部分文章讀取失敗，已顯示成功確認的活動"
-            : "✅ 已排除過期、回顧與舊年份活動";
+function markEventEnded(id) {
+    eventOverrides[id] = { ...eventOverrides[id], eventStatus:"expired", eventEndDate:todayDateKey() };
+    saveEventLocalData(); renderEvents();
+}
 
-    status.innerHTML =
-        `${statusText}<br>` +
-        `最後更新：${escapeHtml(updateTime)}｜` +
-        `目前顯示：${Number(eventMeta.storedEventCount || eventList.length)} 則<br>` +
-        `本次排除過期：${Number(eventMeta.expiredRemovedCount || 0)} 則｜` +
-        `排除落幕／回顧：${Number(eventMeta.recapRemovedCount || 0)} 則`;
+function exportEventData() {
+    const payload = { version:10, prefs:eventPrefs, overrides:eventOverrides, settings:eventSettings };
+    const blob = new Blob([JSON.stringify(payload,null,2)], {type:"application/json"});
+    const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `anime_event_data_${todayDateKey()}.json`; link.click(); URL.revokeObjectURL(link.href);
+}
+
+function importEventData(inputEvent) {
+    const file = inputEvent.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => { try { const data=JSON.parse(e.target.result); eventPrefs=data.prefs||{}; eventOverrides=data.overrides||{}; eventSettings=data.settings||{}; saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("📥 活動收藏與修正資料已還原"); } catch { showToast("❌ 活動資料格式錯誤"); } inputEvent.target.value=""; };
+    reader.readAsText(file);
 }
 
 function renderEvents() {
     const keyword = document.getElementById("event-keyword").value.trim().toLowerCase();
     const location = document.getElementById("event-location").value;
     const type = document.getElementById("event-type").value;
+    const source = eventTab === "archive" ? eventArchive : eventList;
+    const filtered = source.map(applyEventOverride).filter(event => {
+        const pref = eventPreference(event.id);
+        const matches = matchingAnime(event);
+        if (eventTab === "want" && pref.state !== "want") return false;
+        if (eventTab === "going" && pref.state !== "going") return false;
+        if (eventTab === "visited" && pref.state !== "visited") return false;
+        if (eventTab === "matched" && matches.length === 0) return false;
+        if (eventTab !== "archive" && (pref.dismissed || isExpiredEvent(event))) return false;
+        const text = `${event.title || ""} ${event.summary || ""}`.toLowerCase();
+        return (!keyword || text.includes(keyword)) && (!type || event.type === type) && (!location || (event.locations || []).includes(location));
+    }).sort((a,b) => { const A=eventSortValue(a), B=eventSortValue(b); return A.rank-B.rank || A.date.localeCompare(B.date); });
 
-    const filtered = eventList
-        .filter(isVisibleEvent)
-        .filter(event => {
-            const text = `${event.title || ""} ${event.summary || ""}`.toLowerCase();
-
-            return (
-                (!keyword || text.includes(keyword)) &&
-                (!type || event.type === type) &&
-                (
-                    !location ||
-                    (
-                        Array.isArray(event.locations) &&
-                        event.locations.includes(location)
-                    )
-                )
-            );
-        })
-        .sort((a, b) => {
-            const valueA = eventSortValue(a);
-            const valueB = eventSortValue(b);
-
-            if (valueA.rank !== valueB.rank) {
-                return valueA.rank - valueB.rank;
-            }
-
-            return valueA.date.localeCompare(valueB.date);
-        });
-
-    document.getElementById("event-count").textContent =
-        `顯示 ${filtered.length} / ${eventList.length} 則近期活動消息`;
-
+    document.getElementById("event-count").textContent = `顯示 ${filtered.length} 則｜收藏 ${Object.values(eventPrefs).filter(x=>x.state==='want').length}｜要去 ${Object.values(eventPrefs).filter(x=>x.state==='going').length}`;
     const container = document.getElementById("event-list");
-
-    if (filtered.length === 0) {
-        container.innerHTML = `
-            <div class="empty">
-                目前沒有符合條件的近期活動。<br>
-                若剛更新檔案，請先到 GitHub Actions 執行一次更新。
-            </div>
-        `;
-        return;
-    }
-
+    if (!filtered.length) { container.innerHTML='<div class="empty">目前沒有符合條件的活動。</div>'; return; }
     container.innerHTML = filtered.map(event => {
-        const locations = Array.isArray(event.locations)
-            ? event.locations
-            : [];
-        const state = eventStatusInfo(event);
-        const cardClass = event.eventStatus === "upcoming"
-            ? "upcoming"
-            : event.confidence === "high"
-                ? "high"
-                : "candidate";
-
-        return `
-            <article class="event-card ${cardClass}">
-                <div class="event-title">${escapeHtml(event.title)}</div>
-
-                <div class="event-badges">
-                    <span class="event-badge">${escapeHtml(event.type || "活動")}</span>
-                    <span class="event-state ${state.className}">${state.label}</span>
-                    ${locations.map(item =>
-                        `<span class="event-badge location">📍 ${escapeHtml(item)}</span>`
-                    ).join("")}
-                </div>
-
-                <div class="event-date">
-                    📅 活動期間：${escapeHtml(formatEventPeriod(event))}
-                </div>
-
-                <div class="event-meta">
-                    📰 消息發布：${escapeHtml(formatEventDate(event.publishedAt))}<br>
-                    資料來源：${escapeHtml(event.source || "巴哈姆特 GNN")}
-                    ${event.discoverySource ? `｜${escapeHtml(event.discoverySource)}` : ""}
-                </div>
-
-                ${event.summary
-                    ? `<div class="event-summary">${escapeHtml(event.summary)}</div>`
-                    : ""
-                }
-
-                <div class="event-warning">
-                    ⚠️ ${escapeHtml(event.verification || "活動詳情請以原文與主辦方公告為準。")}
-                </div>
-
-                <a class="event-link" href="${escapeHtml(event.url)}" target="_blank" rel="noopener noreferrer">
-                    前往巴哈姆特查看原文
-                </a>
-            </article>
-        `;
+        const pref=eventPreference(event.id), matches=matchingAnime(event), state=eventStatusInfo(event);
+        const cardClass = `${event.eventStatus === "upcoming" ? "upcoming" : event.confidence === "high" ? "high" : "candidate"} ${matches.length ? "matched" : ""}`;
+        return `<article class="event-card ${cardClass}">
+            <div class="event-title">${escapeHtml(event.title)}</div>
+            <div class="event-badges"><span class="event-badge">${escapeHtml(event.type || "活動")}</span><span class="event-state ${state.className}">${state.label}</span><span class="event-badge event-countdown">⏳ ${escapeHtml(eventCountdown(event))}</span>${(event.locations||[]).map(x=>`<span class="event-badge location">📍 ${escapeHtml(x)}</span>`).join("")}${matches.length?`<span class="event-badge event-match">💜 ${escapeHtml(matches.map(x=>x.title).join("、"))}</span>`:""}</div>
+            <div class="event-date">📅 活動期間：${escapeHtml(formatEventPeriod(event))}</div>
+            <div class="event-meta">📰 ${escapeHtml(formatEventDate(event.publishedAt))}<br>來源：${escapeHtml(event.source || "公開來源")}${event.discoverySource?`｜${escapeHtml(event.discoverySource)}`:""}</div>
+            ${event.summary?`<div class="event-summary">${escapeHtml(event.summary)}</div>`:""}
+            <div class="event-actions">
+                <button class="want ${pref.state==='want'?'selected':''}" onclick="updateEventPreference('${event.id}',{state:'want'})">⭐ 想去</button>
+                <button class="going ${pref.state==='going'?'selected':''}" onclick="updateEventPreference('${event.id}',{state:'going'})">✅ 要去</button>
+                <button class="visited ${pref.state==='visited'?'selected':''}" onclick="updateEventPreference('${event.id}',{state:'visited'})">🎫 去過</button>
+                <button class="edit" onclick="editEvent('${event.id}')">✏️ 修正</button>
+                <button class="hide" onclick="markEventEnded('${event.id}')">📦 已結束</button>
+                <button class="hide" onclick="updateEventPreference('${event.id}',{dismissed:true})">🙈 隱藏</button>
+            </div>
+            <a class="event-link" href="${escapeHtml(event.url)}" target="_blank" rel="noopener noreferrer">查看原始公告</a>
+        </article>`;
     }).join("");
 }
 
 async function loadEvents(showMessage = false) {
-    const status = document.getElementById("event-status");
-    status.textContent = "正在讀取活動資料……";
-
+    const status=document.getElementById("event-status"); status.textContent="正在讀取活動資料……";
     try {
-        const response = await fetch(
-            `events.json?t=${Date.now()}`,
-            { cache: "no-store" }
-        );
-
-        if (!response.ok) {
-            throw new Error(`events.json HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-        eventMeta = data?.meta || {};
-        eventList = Array.isArray(data?.events)
-            ? data.events.filter(isVisibleEvent)
-            : [];
-
-        fillEventFilters();
-        updateEventStatus();
-        renderEvents();
-
-        if (showMessage) {
-            showToast(`🇹🇼 已重新載入 ${eventList.length} 則近期活動！`);
-        }
-    } catch (error) {
-        status.innerHTML =
-            `❌ 無法讀取 events.json：${escapeHtml(error.message)}<br>` +
-            "請確認 events.json 和 index.html 位於同一層。";
-
-        document.getElementById("event-list").innerHTML =
-            '<div class="empty">活動資料暫時無法顯示。</div>';
-    }
+        const response=await fetch(`events.json?t=${Date.now()}`,{cache:"no-store"}); if(!response.ok) throw new Error(`events.json HTTP ${response.status}`);
+        const data=await response.json(); eventMeta=data?.meta||{}; eventList=Array.isArray(data?.events)?data.events:[]; eventArchive=Array.isArray(data?.archive)?data.archive:[];
+        fillEventFilters(); updateEventStatus(); renderEvents(); notifyNewEvents(eventList);
+        if(showMessage) showToast(`🇹🇼 已重新載入 ${eventList.length} 則活動！`);
+    } catch(error) { status.innerHTML=`❌ 無法讀取 events.json：${escapeHtml(error.message)}`; document.getElementById("event-list").innerHTML='<div class="empty">活動資料暫時無法顯示。</div>'; }
 }
 
 document.getElementById("search-input").addEventListener("keydown", event => {
@@ -1509,7 +1525,7 @@ document.getElementById("search-input").addEventListener("keydown", event => {
 });
 
 document.getElementById("event-keyword").addEventListener("input", renderEvents);
-document.getElementById("event-location").addEventListener("change", renderEvents);
+document.getElementById("event-location").addEventListener("change", () => { fillLocationChips(); renderEvents(); });
 document.getElementById("event-type").addEventListener("change", renderEvents);
 
 loadStoredAnime();
