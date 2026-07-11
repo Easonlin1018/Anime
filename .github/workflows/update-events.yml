@@ -1,4 +1,4 @@
-name: 更新多來源動漫活動
+name: 更新多來源動漫活動 v10.1
 
 on:
   workflow_dispatch:
@@ -51,6 +51,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add events.json
-          git commit -m "更新多來源動漫活動與收藏功能"
+          git commit -m "更新活動場館、入場方式與費用"
           git push
-
