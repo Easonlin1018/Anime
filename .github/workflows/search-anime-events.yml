@@ -1,4 +1,4 @@
-name: 即時搜尋指定動漫活動 v10.5
+name: 即時搜尋指定動漫活動 v10.5.1
 
 on:
   repository_dispatch:
@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: anime-event-live-search
+  group: anime-events-data-write
   cancel-in-progress: false
 
 jobs:
@@ -17,15 +17,23 @@ jobs:
     timeout-minutes: 12
 
     steps:
-      - name: 下載儲存庫
-        uses: actions/checkout@v4
+      - name: 下載最新 main
+        uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
       - name: 設定 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
+
+      - name: 確認使用最新版本
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: 即時搜尋作品活動
         env:
@@ -41,27 +49,45 @@ jobs:
 
       - name: 儲存搜尋結果與活動快取
         shell: bash
+        env:
+          QUERY: ${{ github.event.client_payload.query }}
+          REQUEST_ID: ${{ github.event.client_payload.requestId }}
+          MAX_RSS_QUERIES: "18"
+          MAX_ARTICLE_FETCHES: "28"
+          ARTICLE_DELAY_MS: "650"
+          UNDATED_MAX_AGE_DAYS: "180"
+          SINGLE_DATE_GRACE_DAYS: "21"
+          SEARCH_HISTORY_DAYS: "420"
         run: |
-          set -e
+          set -euo pipefail
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add events.json search-results
-
-          if git diff --cached --quiet; then
-            echo "沒有需要提交的變更"
-            exit 0
-          fi
-
-          git commit -m "即時搜尋動漫活動：${{ github.event.client_payload.query }}"
 
           for attempt in 1 2 3; do
-            if git push; then
+            git add events.json search-results
+
+            if git diff --cached --quiet; then
+              echo "沒有需要提交的變更"
               exit 0
             fi
-            echo "推送衝突，第 ${attempt} 次重新同步"
-            git pull --rebase origin main
+
+            git commit -m "即時搜尋動漫活動：${QUERY}"
+
+            if git push origin HEAD:main; then
+              echo "搜尋結果已成功寫入 main"
+              exit 0
+            fi
+
+            echo "main 已被其他流程更新，準備以最新資料重新搜尋（第 ${attempt} 次）"
+
+            if [ "$attempt" -ge 3 ]; then
+              echo "三次推送皆失敗"
+              exit 1
+            fi
+
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/search-anime-events.mjs
             sleep $((attempt * 3))
           done
-
-          echo "三次推送皆失敗"
-          exit 1
