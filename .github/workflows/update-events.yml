@@ -1,4 +1,4 @@
-name: 更新巴哈姆特動漫活動
+name: 更新多來源動漫活動
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: update-bahamut-events
+  group: update-anime-events
   cancel-in-progress: false
 
 jobs:
@@ -29,7 +29,14 @@ jobs:
       - name: 執行日期解析自我測試
         run: SELF_TEST=1 node scripts/update-events.mjs
 
-      - name: 讀取並篩選巴哈姆特近期活動
+      - name: 讀取多來源活動資訊
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
         run: node scripts/update-events.mjs
 
       - name: 儲存更新結果
@@ -44,5 +51,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add events.json
-          git commit -m "更新近期動漫活動並移除過期資料"
+          git commit -m "更新多來源動漫活動與收藏功能"
           git push
+
