@@ -1,30 +1,30 @@
 {
   "meta": {
-    "schemaVersion": 5,
+    "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-11T01:41:17.900Z",
-    "lastSuccessfulUpdateAt": "2026-07-11T01:41:17.900Z",
+    "updatedAt": "2026-07-11T03:03:57.184Z",
+    "lastSuccessfulUpdateAt": "2026-07-11T03:03:57.184Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
-    "fetchedExternalItemCount": 200,
-    "uniqueNewsCount": 429,
-    "articleCandidateCount": 239,
-    "articleFetchSuccessCount": 30,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 637,
+    "articleCandidateCount": 232,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 13,
-    "newEventCount": 13,
-    "cachedEventCount": 0,
+    "matchedEventCount": 16,
+    "newEventCount": 1,
+    "cachedEventCount": 2,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 11,
-    "expiredRemovedCount": 15,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 74,
+    "undatedOldRemovedCount": 67,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 129,
+    "nonActivityRemovedCount": 131,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -50,11 +50,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
+      "searchCorpus": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -77,13 +78,15 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "孤獨搖滾！動畫展"
+        "孤獨搖滾！動畫展",
+        "團結Band"
       ],
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-5f9b448cd3829337",
@@ -160,12 +163,15 @@
       "venue": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
+      "workTitles": [
+        "動漫最高祭"
+      ],
+      "searchCorpus": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣 上報Up Media",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -188,13 +194,15 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "天官賜福"
+        "天官賜福",
+        "天地流光原畫紀念快閃店活動"
       ],
+      "searchCorpus": "人氣動畫《天官賜福》「天地流光原畫紀念快閃店活動」華山開跑！沉浸式場景首度曝光，台灣獨家周邊、古風特調甜點同步亮相 oneone宇宙",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -219,11 +227,12 @@
       "workTitles": [
         "天官賜福"
       ],
+      "searchCorpus": "《天官賜福》原畫展華山登場！免費預約送明信片 限定周邊曝光 NOWnews今日新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-6aeda05927149db1",
@@ -246,11 +255,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
+      "searchCorpus": "松菸伊藤潤二展！伊藤潤二原畫展超過300幅，必買富江周邊旋渦周邊一次看。|生活 WalkerLand 窩客島",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-21f6459e53df73bd",
@@ -274,11 +284,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
+      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計DailyView",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -301,11 +312,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
+      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 SouNova 少女星",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -327,12 +339,15 @@
       "venue": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
+      "workTitles": [
+        "玩轉動漫遊"
+      ],
+      "searchCorpus": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳 三立新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
+      "discoveredAt": "2026-07-11T03:03:57.184Z",
+      "lastSeenAt": "2026-07-11T03:03:57.184Z"
     }
   ],
   "archive": []
