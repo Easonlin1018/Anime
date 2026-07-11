@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全自動動漫追番基地 v10.1.0</title>
+    <title>全自動動漫追番基地 v10.3.0</title>
 
     <style>
         :root {
@@ -455,7 +455,7 @@
 
 <body>
 <div class="container">
-    <h1>🎬 全自動動漫追番基地 v10.1.0</h1>
+    <h1>🎬 全自動動漫追番基地 v10.3.0</h1>
 
     <div class="section" id="add-section">
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
@@ -503,7 +503,7 @@
 
     <div class="section" id="events-section">
         <div class="section-title">
-            <span>🇹🇼 台灣動漫活動雷達 v10.1</span>
+            <span>🇹🇼 台灣動漫活動雷達 v10.3</span>
             <button onclick="loadEvents(true)" style="width:auto;margin:0;padding:6px 9px;font-size:11px;background:#7c3aed;">重新載入</button>
         </div>
 
@@ -531,7 +531,7 @@
         <div class="work-event-search">
             <input id="work-event-input" list="anime-title-options" type="search" placeholder="輸入作品名稱，直接找該作品的活動">
             <datalist id="anime-title-options"></datalist>
-            <button onclick="searchEventsByWork()">🎪 查作品活動</button>
+            <button id="work-event-btn" onclick="searchEventsByWork()">🎪 智慧查作品活動</button>
         </div>
 
         <div class="event-controls">
@@ -579,8 +579,10 @@ let eventList = [];
 let eventArchive = [];
 let eventMeta = {};
 let eventTab = "all";
+let activeWorkSearch = { query: "", terms: [] };
 let animeSyncing = false;
 const ANIME_SYNC_KEY = "anime_metadata_sync_v10_1";
+const WORK_ALIAS_CACHE_KEY = "anime_work_alias_cache_v10_3";
 const EVENT_PREFS_KEY = "anime_event_prefs_v10";
 const EVENT_OVERRIDES_KEY = "anime_event_overrides_v10";
 const EVENT_SETTINGS_KEY = "anime_event_settings_v10";
@@ -588,6 +590,12 @@ const EVENT_SEEN_KEY = "anime_event_seen_v10";
 let eventPrefs = JSON.parse(localStorage.getItem(EVENT_PREFS_KEY) || "{}");
 let eventOverrides = JSON.parse(localStorage.getItem(EVENT_OVERRIDES_KEY) || "{}");
 let eventSettings = JSON.parse(localStorage.getItem(EVENT_SETTINGS_KEY) || "{}");
+let workAliasCache = {};
+try {
+    workAliasCache = JSON.parse(localStorage.getItem(WORK_ALIAS_CACHE_KEY) || "{}") || {};
+} catch {
+    workAliasCache = {};
+}
 let toastTimer = null;
 
 const searchBtn = document.getElementById("search-btn");
@@ -612,6 +620,14 @@ function loadStoredAnime() {
             } catch {}
         }
     }
+
+    animeList = animeList.map(item => ({
+        ...item,
+        aliases: normalizeAnimeAliasList([
+            item.title,
+            ...(Array.isArray(item.aliases) ? item.aliases : [])
+        ])
+    }));
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
 }
@@ -855,6 +871,7 @@ async function searchWikipedia(input) {
 const MEDIA_FIELDS = `
     id format
     title { native english romaji }
+    synonyms
     status episodes
     startDate { year month day }
     endDate { year month day }
@@ -953,6 +970,11 @@ function applyMediaMetadata(anime, media) {
     anime.nextEpisode = media.nextAiringEpisode?.episode || null;
     anime.nextAiringAt = media.nextAiringEpisode?.airingAt || null;
     anime.streamingLinks = normalizeStreamingLinks(media.externalLinks);
+    anime.aliases = normalizeAnimeAliasList([
+        anime.title,
+        ...(Array.isArray(anime.aliases) ? anime.aliases : []),
+        ...buildWorkAliasesFromMedia(media, anime.title)
+    ]);
     anime.lastMetadataSync = new Date().toISOString();
     anime.relations = Array.isArray(media.relations?.edges) ? media.relations.edges : anime.relations || [];
     if (anime.category === "waiting" && media.status === "RELEASING") anime.category = "watching";
@@ -1065,6 +1087,12 @@ async function searchAnime(
         const newAnime = {
             id: Number(media.id),
             title: finalTitle,
+            aliases: buildWorkAliasesFromMedia(media, finalTitle, [
+                wikiZhTitle,
+                wikiJaTitle,
+                googleZh,
+                input
+            ]),
             status: media.status || "UNKNOWN",
             episodes: media.episodes || "??",
             watched: 0,
@@ -1253,15 +1281,48 @@ function editAnimeReview(id) {
     saveAndRender();
 }
 
-function searchEventsByWork(title = null) {
+async function searchEventsByWork(title = null) {
     const input = document.getElementById("work-event-input");
+    const button = document.getElementById("work-event-btn");
     const keyword = String(title ?? input?.value ?? "").trim();
-    if (!keyword) return showToast("請先輸入作品名稱。");
+
+    if (!keyword) {
+        showToast("請先輸入作品名稱。");
+        return;
+    }
+
     if (input) input.value = keyword;
-    document.getElementById("event-keyword").value = getCoreTitle(keyword);
-    setEventTab("all");
-    scrollToSection("events-section");
-    renderEvents();
+    if (button) {
+        button.disabled = true;
+        button.textContent = "🔎 正在解析作品別名…";
+    }
+
+    showToast("🔎 正在查詢中文、日文、英文名稱與同義名稱……", 5000);
+
+    try {
+        const terms = await resolveWorkAliases(keyword);
+        activeWorkSearch = { query: keyword, terms };
+        document.getElementById("event-keyword").value = keyword;
+        setEventTab("all");
+        scrollToSection("events-section");
+        renderEvents();
+
+        const matchedCount = eventList.filter(
+            event => eventMatchesWorkTerms(event, terms)
+        ).length;
+
+        showToast(
+            matchedCount > 0
+                ? `🎪 找到 ${matchedCount} 個可能相關活動。`
+                : "目前資料中沒有比對到這部作品；可能是來源尚未抓到，或主辦方尚未公布作品名單。",
+            5500
+        );
+    } finally {
+        if (button) {
+            button.disabled = false;
+            button.textContent = "🎪 智慧查作品活動";
+        }
+    }
 }
 
 function scrollToSection(id) {
@@ -1595,14 +1656,228 @@ function notifyNewEvents(events) {
 }
 
 function normalizeMatchText(value) {
-    return String(value || "").toLowerCase().replace(/[第季期劇場版電影版ovaonaseason\s・·!！?？:：()（）\[\]【】《》]/g, "");
+    return String(value || "")
+        .normalize("NFKC")
+        .toLowerCase()
+        .replace(/&(?:amp|quot|apos|lt|gt);/g, " ")
+        .replace(/(?:電視)?動畫(?:版)?|動畫作品|劇場版|電影版|特別篇|外傳/gi, " ")
+        .replace(/第\s*[一二三四五六七八九十百0-9]+\s*[季期部篇章]/g, " ")
+        .replace(/\b(?:anime|animation|tv|season|part|movie|ova|ona|special)\b/gi, " ")
+        .replace(/[^\p{L}\p{N}]+/gu, "");
+}
+
+function normalizeAnimeAliasList(values) {
+    const unique = new Map();
+    for (const raw of Array.isArray(values) ? values.flat(Infinity) : [values]) {
+        const value = String(raw || "")
+            .normalize("NFKC")
+            .replace(/\s+/g, " ")
+            .trim();
+        if (value.length < 2 || value.length > 140) continue;
+        const key = value.toLowerCase();
+        if (!unique.has(key)) unique.set(key, value);
+    }
+    return [...unique.values()].slice(0, 80);
+}
+
+function buildWorkAliasesFromMedia(media, displayTitle = "", extraAliases = []) {
+    return normalizeAnimeAliasList([
+        displayTitle,
+        media?.title?.native,
+        media?.title?.english,
+        media?.title?.romaji,
+        ...(Array.isArray(media?.synonyms) ? media.synonyms : []),
+        ...(Array.isArray(extraAliases) ? extraAliases : [extraAliases])
+    ]);
+}
+
+function deriveAliasVariants(value) {
+    const original = String(value || "")
+        .normalize("NFKC")
+        .replace(/\((?:動畫|anime|電視動畫)\)|（(?:動畫|anime|電視動畫)）/gi, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const variants = new Set();
+    const add = candidate => {
+        const normalized = normalizeMatchText(candidate);
+        if (normalized.length >= 2) variants.add(normalized);
+    };
+
+    add(original);
+    add(getCoreTitle(original));
+
+    for (const part of original.split(/\s*(?:[:：／/|｜\-–—])\s*/)) {
+        if (part.length >= 2) add(part);
+    }
+
+    const cjkRuns = original.match(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]{4,}/gu) || [];
+    for (const run of cjkRuns) {
+        const normalizedRun = normalizeMatchText(run);
+        if (normalizedRun.length < 4) continue;
+
+        // 以 4～10 字片段支援各作品的自然簡稱，不綁死任何特定動漫。
+        const maxWindow = Math.min(10, normalizedRun.length);
+        for (let size = 4; size <= maxWindow; size++) {
+            variants.add(normalizedRun.slice(0, size));
+            variants.add(normalizedRun.slice(-size));
+        }
+
+        // 長標題加入少量中段片段，支援簡稱位於標題中間的作品。
+        if (normalizedRun.length <= 36) {
+            for (let start = 1; start < normalizedRun.length - 3; start += 2) {
+                const piece = normalizedRun.slice(
+                    start,
+                    start + Math.min(8, normalizedRun.length - start)
+                );
+                if (piece.length >= 4) variants.add(piece);
+            }
+        }
+    }
+
+    const latinWords = original.match(/[A-Za-z0-9][A-Za-z0-9'’._-]{2,}/g) || [];
+    latinWords.forEach(add);
+
+    return [...variants].slice(0, 160);
+}
+
+function localWorkAliasesForQuery(value) {
+    const queryNormalized = normalizeMatchText(value);
+    const aliases = new Set([String(value || "").trim()]);
+
+    for (const anime of animeList) {
+        const animeAliases = normalizeAnimeAliasList([
+            anime.title,
+            ...(Array.isArray(anime.aliases) ? anime.aliases : [])
+        ]);
+        const matched = animeAliases.some(alias => {
+            const normalized = normalizeMatchText(alias);
+            return normalized && queryNormalized &&
+                (normalized.includes(queryNormalized) || queryNormalized.includes(normalized));
+        });
+        if (matched) animeAliases.forEach(alias => aliases.add(alias));
+    }
+
+    const cached = workAliasCache[queryNormalized];
+    if (cached && Array.isArray(cached.terms)) {
+        cached.terms.forEach(term => aliases.add(term));
+    }
+
+    return normalizeAnimeAliasList([...aliases]);
+}
+
+async function resolveWorkAliases(value) {
+    const query = String(value || "").trim();
+    const queryNormalized = normalizeMatchText(query);
+    if (!queryNormalized) return [];
+
+    const aliases = new Set(localWorkAliasesForQuery(query));
+    const cached = workAliasCache[queryNormalized];
+    const cacheAge = cached?.updatedAt
+        ? Date.now() - new Date(cached.updatedAt).getTime()
+        : Infinity;
+
+    if (!cached || cacheAge > 30 * 86400000) {
+        try {
+            let lookup = query;
+            let wikiZhTitle = "";
+            let wikiJaTitle = "";
+
+            try {
+                const wiki = await searchWikipedia(query);
+                wikiZhTitle = wiki?.wikiZhTitle || "";
+                wikiJaTitle = wiki?.wikiJaTitle || "";
+                lookup = wikiJaTitle || query;
+            } catch {}
+
+            let media = await requestAniList(SEARCH_QUERY, { search: lookup });
+            if (!media && lookup !== query) {
+                media = await requestAniList(SEARCH_QUERY, { search: query });
+            }
+
+            if (media) {
+                buildWorkAliasesFromMedia(media, "", [
+                    query,
+                    wikiZhTitle,
+                    wikiJaTitle
+                ]).forEach(alias => aliases.add(alias));
+            } else {
+                [query, wikiZhTitle, wikiJaTitle]
+                    .filter(Boolean)
+                    .forEach(alias => aliases.add(alias));
+            }
+        } catch (error) {
+            console.warn("作品別名解析失敗，改用本機比對：", error);
+        }
+
+        workAliasCache[queryNormalized] = {
+            terms: normalizeAnimeAliasList([...aliases]),
+            updatedAt: new Date().toISOString()
+        };
+        localStorage.setItem(
+            WORK_ALIAS_CACHE_KEY,
+            JSON.stringify(workAliasCache)
+        );
+    }
+
+    const expanded = new Set();
+    normalizeAnimeAliasList([...aliases]).forEach(alias => {
+        expanded.add(alias);
+        deriveAliasVariants(alias).forEach(variant => expanded.add(variant));
+    });
+
+    return [...expanded].filter(Boolean).slice(0, 500);
+}
+
+function expandWorkSearchTerms(value) {
+    const aliases = localWorkAliasesForQuery(value);
+    const expanded = new Set();
+
+    aliases.forEach(alias => {
+        expanded.add(alias);
+        deriveAliasVariants(alias).forEach(variant => expanded.add(variant));
+    });
+
+    return [...expanded].filter(Boolean).slice(0, 500);
+}
+
+function eventSearchText(event) {
+    return [
+        event?.title,
+        event?.summary,
+        event?.venue,
+        ...(Array.isArray(event?.workTitles) ? event.workTitles : []),
+        event?.searchCorpus
+    ].filter(Boolean).join(" ");
+}
+
+function eventMatchesWorkTerms(event, terms) {
+    const rawText = eventSearchText(event)
+        .normalize("NFKC")
+        .toLowerCase();
+    const normalizedText = normalizeMatchText(rawText);
+
+    return (Array.isArray(terms) ? terms : []).some(term => {
+        const rawTerm = String(term || "")
+            .normalize("NFKC")
+            .toLowerCase()
+            .trim();
+        const normalizedTerm = normalizeMatchText(term);
+
+        if (rawTerm.length >= 2 && rawText.includes(rawTerm)) return true;
+        return normalizedTerm.length >= 3 &&
+            normalizedText.includes(normalizedTerm);
+    });
 }
 
 function matchingAnime(event) {
-    const text = normalizeMatchText(`${event.title} ${event.summary} ${(event.workTitles || []).join(" ")}`);
     return animeList.filter(anime => {
-        const title = normalizeMatchText(getCoreTitle(anime.title));
-        return title.length >= 3 && text.includes(title);
+        const aliases = normalizeAnimeAliasList([
+            anime.title,
+            ...(Array.isArray(anime.aliases) ? anime.aliases : [])
+        ]);
+        const expanded = aliases.flatMap(deriveAliasVariants);
+        return eventMatchesWorkTerms(event, expanded);
     }).slice(0, 3);
 }
 
@@ -1769,6 +2044,11 @@ function importEventData(inputEvent) {
 function renderEvents() {
     const keyword = document.getElementById("event-keyword").value.trim().toLowerCase();
     const normalizedKeyword = normalizeMatchText(keyword);
+    const workSearchTerms =
+        activeWorkSearch.query &&
+        normalizeMatchText(activeWorkSearch.query) === normalizedKeyword
+            ? activeWorkSearch.terms
+            : expandWorkSearchTerms(keyword);
     const location = document.getElementById("event-location").value;
     const type = document.getElementById("event-type").value;
     const admission = document.getElementById("event-admission")?.value || "";
@@ -1781,9 +2061,13 @@ function renderEvents() {
         if (eventTab === "visited" && pref.state !== "visited") return false;
         if (eventTab === "matched" && matches.length === 0) return false;
         if (eventTab !== "archive" && (pref.dismissed || isExpiredEvent(event))) return false;
-        const text = `${event.title || ""} ${event.summary || ""} ${event.venue || ""} ${(event.workTitles || []).join(" ")}`.toLowerCase();
+        const text = eventSearchText(event).toLowerCase();
         const normalizedText = normalizeMatchText(text);
-        return (!keyword || text.includes(keyword) || (normalizedKeyword.length >= 2 && normalizedText.includes(normalizedKeyword))) && (!type || event.type === type) && (!admission || (event.admissionType || "待確認") === admission) && (!location || (event.locations || []).includes(location));
+        const matchesWorkAlias = eventMatchesWorkTerms(
+            event,
+            workSearchTerms
+        );
+        return (!keyword || text.includes(keyword) || (normalizedKeyword.length >= 2 && normalizedText.includes(normalizedKeyword)) || matchesWorkAlias) && (!type || event.type === type) && (!admission || (event.admissionType || "待確認") === admission) && (!location || (event.locations || []).includes(location));
     }).sort((a,b) => { const A=eventSortValue(a), B=eventSortValue(b); return A.rank-B.rank || A.date.localeCompare(B.date); });
 
     document.getElementById("event-count").textContent = `顯示 ${filtered.length} 則｜收藏 ${Object.values(eventPrefs).filter(x=>x.state==='want').length}｜要去 ${Object.values(eventPrefs).filter(x=>x.state==='going').length}`;
@@ -1832,7 +2116,16 @@ document.getElementById("search-input").addEventListener("keydown", event => {
     }
 });
 
-document.getElementById("event-keyword").addEventListener("input", renderEvents);
+document.getElementById("event-keyword").addEventListener("input", event => {
+    if (
+        activeWorkSearch.query &&
+        normalizeMatchText(event.target.value) !==
+            normalizeMatchText(activeWorkSearch.query)
+    ) {
+        activeWorkSearch = { query: "", terms: [] };
+    }
+    renderEvents();
+});
 document.getElementById("event-location").addEventListener("change", () => { fillLocationChips(); renderEvents(); });
 document.getElementById("event-type").addEventListener("change", renderEvents);
 document.getElementById("event-admission").addEventListener("change", renderEvents);

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 7;
 
 const RSS_URL =
     process.env.BAHAMUT_RSS_URL ||
@@ -21,8 +21,13 @@ const RECENT_UNDATED_DAYS =
 const ARTICLE_DELAY_MS = Number(process.env.ARTICLE_DELAY_MS || 1400);
 const ARCHIVE_DAYS = Number(process.env.ARCHIVE_DAYS || 365);
 const EXTERNAL_FEEDS = [
-    { name: "Google News－台灣動漫活動", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("台灣 動漫 活動 OR 快閃店 OR 動畫展") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant" },
-    { name: "Google News－官方主辦單位", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("木棉花 OR 曼迪 OR 三創 OR 華山 OR 松菸 動漫") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant" }
+    { name: "Google News－台灣動漫活動", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("台灣 動漫 活動 OR 快閃店 OR 動畫展") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant", fetchArticle: false },
+    { name: "Google News－官方主辦單位", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("木棉花 OR 曼迪 OR 三創 OR 華山 OR 松菸 動漫") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant", fetchArticle: false },
+
+    // 大型展會專用來源：避免漫博、動漫節與展內作品名單漏抓。
+    { name: "Google News－漫畫博覽會", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("\"漫畫博覽會\" OR \"漫博\" 台北 世貿") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant", fetchArticle: true },
+    { name: "Google News－台中國際動漫節", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("\"台中國際動漫節\" OR \"台中動漫節\" 臺中國際展覽館") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant", fetchArticle: true },
+    { name: "Google News－展會作品名單", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("(漫博 OR 動漫節) (作品 OR 攤位 OR 商品 OR 活動 OR 舞台 OR 簽名)") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant", fetchArticle: true }
 ];
 
 const TAG_PAGES = [
@@ -431,9 +436,61 @@ function extractAdmission(text) {
     return { admissionType, feeText: feeMatch.replace(/\s+/g, " ").trim() };
 }
 
+function normalizeWorkCandidate(value) {
+    const cleaned = decodeEntities(stripHtml(String(value || "")))
+        .replace(/^[\s•●◆◇■□▪▫・\-–—,，、:：;；|｜]+/, "")
+        .replace(/[\s•●◆◇■□▪▫・\-–—,，、:：;；|｜]+$/, "")
+        .replace(/^(?:參展作品|作品陣容|作品列表|主題作品|動畫作品|漫畫作品|作品|IP)\s*[:：]?\s*/i, "")
+        .replace(/\s*(?:快閃店|限定店|簽名會|舞台活動|周邊商品|週邊商品|商品|攤位)\s*$/i, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    if (cleaned.length < 2 || cleaned.length > 120) return "";
+    if (/^(?:活動|展覽|動漫|動畫|漫畫|小說|電影|舞台|商品|周邊|攤位|會場|台北|臺北|台中|臺中|高雄|台南|臺南|桃園)$/i.test(cleaned)) return "";
+    if (/^(?:https?:\/\/|www\.)/i.test(cleaned)) return "";
+    if (/^\d{1,4}(?:[\/.\-年月日～~至]\d{1,4})+$/.test(cleaned)) return "";
+    return cleaned;
+}
+
 function extractWorkTitles(text) {
-    const titles = [...String(text || "").matchAll(/《([^》]{1,80})》/g)].map(match => match[1].trim()).filter(Boolean);
-    return [...new Set(titles)].slice(0, 8);
+    const source = decodeEntities(stripHtml(String(text || "")));
+    const found = new Set();
+
+    const quotedPatterns = [
+        /《([^》]{1,120})》/g,
+        /「([^」]{2,120})」/g,
+        /『([^』]{2,120})』/g,
+        /【([^】]{2,120})】/g,
+        /“([^”]{2,120})”/g,
+        /"([^"\n]{2,120})"/g
+    ];
+
+    for (const pattern of quotedPatterns) {
+        for (const match of source.matchAll(pattern)) {
+            const value = normalizeWorkCandidate(match[1]);
+            if (value) found.add(value);
+        }
+    }
+
+    // 支援「參展作品：A、B、C」及展會內的長作品清單，不限定任何特定動漫。
+    const listPatterns = [
+        /(?:參展作品|作品陣容|作品列表|主題作品|動畫作品|漫畫作品|收錄作品|登場作品|合作作品|IP\s*陣容)\s*[:：]\s*([^\n。]{2,1000})/gi,
+        /(?:包含|集結|網羅|帶來|推出)\s+([^\n。]{2,700})\s+(?:等)?(?:作品|IP|動畫|漫畫)/gi
+    ];
+
+    for (const pattern of listPatterns) {
+        for (const match of source.matchAll(pattern)) {
+            const parts = String(match[1] || "").split(
+                /\s*(?:、|，|,|\/|／|\||｜|•|●|◆|◇|■|□|▪|▫|；|;|\n)\s*/
+            );
+            for (const part of parts) {
+                const value = normalizeWorkCandidate(part);
+                if (value) found.add(value);
+            }
+        }
+    }
+
+    return [...found].slice(0, 100);
 }
 
 function parseJsonLd(html) {
@@ -973,7 +1030,7 @@ function evaluateArticle(item, today, counters) {
     );
     const venue = extractVenue(`${title} ${summary} ${body.slice(0, 2600)}`);
     const admission = extractAdmission(`${title} ${summary} ${body.slice(0, 2600)}`);
-    const workTitles = extractWorkTitles(`${title} ${summary}`);
+    const workTitles = extractWorkTitles(`${title} ${summary} ${body}`);
 
     if (!status.keep) {
         counters[`${status.reason}Removed`] =
@@ -1002,6 +1059,7 @@ function evaluateArticle(item, today, counters) {
         admissionType: admission.admissionType,
         feeText: admission.feeText,
         workTitles,
+        searchCorpus: truncate(`${title} ${summary} ${body}`.replace(/\s+/g, " ").trim(), 12000),
         dateConfidence: dateInfo.dateConfidence,
         dateSource: dateInfo.dateSource,
         verification:
@@ -1120,13 +1178,27 @@ function makeExternalId(url, title) {
     return `ext-${crypto.createHash("sha256").update(`${url}|${title}`).digest("hex").slice(0,16)}`;
 }
 
-function parseGenericRss(xml, sourceName) {
+function parseGenericRss(xml, sourceName, fetchArticle = false) {
     const blocks = String(xml).match(/<item\b[\s\S]*?<\/item>/gi) || [];
     return blocks.map(block => {
         const title = stripHtml(getTag(block,"title")).replace(/\s+-\s+[^-]+$/, "").trim();
         const url = stripHtml(getTag(block,"link")) || stripHtml(getTag(block,"guid"));
-        const summary = cleanSummary(getTag(block,"description"), title);
-        return { id:makeExternalId(url,title), title, url, summary, publishedAt:safeDate(stripHtml(getTag(block,"pubDate")))?.toISOString() || null, discoverySource:sourceName, sourceTag:"外部來源", source:sourceName, isRss:true, skipFetch:true, articleFetched:false };
+        const rawDescription = getTag(block,"description");
+        const summary = truncate(cleanSummary(rawDescription, title), 1200);
+        return {
+            id: makeExternalId(url,title),
+            title,
+            url,
+            summary,
+            publishedAt: safeDate(stripHtml(getTag(block,"pubDate")))?.toISOString() || null,
+            discoverySource: sourceName,
+            sourceTag: "外部來源",
+            source: sourceName,
+            isRss: true,
+            skipFetch: !fetchArticle,
+            articleFetched: false,
+            externalArticle: fetchArticle
+        };
     }).filter(item => item.url && item.title);
 }
 
@@ -1270,7 +1342,7 @@ async function collectSources(sourceErrors, counters) {
         }
     }
     for (const feed of EXTERNAL_FEEDS) {
-        try { externalItems.push(...parseGenericRss(await fetchTextWithRetries(feed.url,3),feed.name)); }
+        try { externalItems.push(...parseGenericRss(await fetchTextWithRetries(feed.url,3), feed.name, Boolean(feed.fetchArticle))); }
         catch (error) { sourceErrors.push({source:feed.name,error:String(error.message||error)}); }
     }
     return { rssItems, tagItems, externalItems };
