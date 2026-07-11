@@ -3,13 +3,13 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-11T05:16:56.692Z",
-    "lastSuccessfulUpdateAt": "2026-07-11T05:16:56.692Z",
+    "updatedAt": "2026-07-11T07:25:30.432Z",
+    "lastSuccessfulUpdateAt": "2026-07-11T07:25:30.432Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 642,
+    "uniqueNewsCount": 641,
     "articleCandidateCount": 234,
     "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
@@ -17,21 +17,16 @@
     "newEventCount": 1,
     "cachedEventCount": 2,
     "rateLimitedCount": 0,
-    "archiveCount": 10,
+    "archiveCount": 1,
     "storedEventCount": 11,
-    "expiredRemovedCount": 16,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 69,
+    "undatedOldRemovedCount": 67,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 129,
+    "nonActivityRemovedCount": 132,
     "sourceErrors": [],
-    "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。",
-    "liveSearchUpdatedAt": "2026-07-11T06:22:12.824Z",
-    "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-    "liveSearchResultCount": 1,
-    "liveSearchAddedCount": 1,
-    "liveSearchStaleRemovedCount": 0
+    "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
     {
@@ -59,8 +54,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -90,8 +85,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-5f9b448cd3829337",
@@ -175,8 +170,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -206,8 +201,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -236,8 +231,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-6aeda05927149db1",
@@ -264,8 +259,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-21f6459e53df73bd",
@@ -293,8 +288,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -321,8 +316,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -351,42 +346,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T05:16:56.692Z",
-      "lastSeenAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-045a24a24bb7eba5c3",
-      "title": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！",
-      "summary": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ &nbsp;&nbsp; PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTWZ5a2VnNmowZnR3aVVNdjZITFFFeEtQaUIwcEZwdmVfV1NwNDFXVnRwMkd0OTZBTDZtWE1xQk1SQXJ1cWE2SW9EOUVHY3BscklkZ0NSVExzLVhQYmlXTFF4R21HUVM5aEhRSG5zLXJ2NWJ1V3gxbGJMZ2JqTW5VREF3TlFiVmFGZVNV?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "low",
-      "confidenceScore": 59,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2026-04-19T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ 禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ &nbsp;&nbsp; PChome Online 新聞 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a60ccbe1257c423f8404841a2d552b21",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-07-11T06:22:11.322Z",
-      "lastSeenAt": "2026-07-11T06:22:11.322Z"
+      "discoveredAt": "2026-07-11T07:25:30.432Z",
+      "lastSeenAt": "2026-07-11T07:25:30.432Z"
     }
   ],
   "archive": [
@@ -419,326 +380,11 @@
       "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
       "searchCorpus": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ 禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ &nbsp;&nbsp; PChome Online 新聞 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
       "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:47.273Z",
-      "lastSeenAt": "2026-07-11T04:30:47.273Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-d9ea79816d9f439828",
-      "title": "《不時輕聲地以俄語遮羞的鄰座艾莉同學》首度台灣快閃店登場 青春浪漫邂逅夏日限定快閃",
-      "summary": "《不時輕聲地以俄語遮羞的鄰座艾莉同學》首度台灣快閃店登場 青春浪漫邂逅夏日限定快閃 &nbsp;&nbsp; 蕃新聞",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9BMHJZSFZRWm5HUGl4S2xmb0VfMkpsUEV2TVJ1cDRUVm13U2xiZ0ZUaXdqcXhlOFpEUjhTYWZSbE5wV3R0VFBVM2ZiQUVEbkxMQ0E?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "快閃店",
-      "locations": [],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "low",
-      "confidenceScore": 59,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2025-07-24T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "《不時輕聲地以俄語遮羞的鄰座艾莉同學》首度台灣快閃店登場 青春浪漫邂逅夏日限定快閃 《不時輕聲地以俄語遮羞的鄰座艾莉同學》首度台灣快閃店登場 青春浪漫邂逅夏日限定快閃 &nbsp;&nbsp; 蕃新聞 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:50.094Z",
-      "lastSeenAt": "2026-07-11T04:30:50.094Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-7c8f370c33cc928504",
-      "title": "台灣角川2025 國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學(9)》特裝＆限定版與加購特典公開",
-      "summary": "台灣角川2025 國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學(9)》特裝＆限定版與加購特典公開 &nbsp;&nbsp; 遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1MTV9rNmlsNWpqaGh2VEFvaXJzblRUV2lIeThUeEYxM0lEcWE2VGR4X1VUWHZsNGNwNTd2aHp5bkFtZVBWcE43am9Cb3hUaWNmaFd2dVRKQlptWU1WelE?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "low",
-      "confidenceScore": 59,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2024-11-18T08:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "台灣角川2025 國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學(9)》特裝＆限定版與加購特典公開 台灣角川2025 國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學(9)》特裝＆限定版與加購特典公開 &nbsp;&nbsp; 遊戲基地Gamebase Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:53.736Z",
-      "lastSeenAt": "2026-07-11T04:30:53.736Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-57cd8d665fdcabaf0a",
-      "title": "台灣角川 2024 高雄國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者簽名會後報導",
-      "summary": "台灣角川 2024 高雄國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者簽名會後報導 &nbsp;&nbsp; GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB0a0dtQVl3TnNIV3NpcHhMVV9FbS01VVhoeHhUNXVIaWJ1UW1yUXNNOWdlLUhVcWp6QzBnM0JJQ2xqMDZaN1pvNlJFM2JOdmU4RFJfcHV3U0s?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2024-10-23T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "台灣角川 2024 高雄國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者簽名會後報導 台灣角川 2024 高雄國際動漫節《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者簽名會後報導 &nbsp;&nbsp; GNN 新聞網 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:54.605Z",
-      "lastSeenAt": "2026-07-11T04:30:54.605Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-5356c2378c976d29df",
-      "title": "高雄國際動漫節2024：《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者燦燦SUN 首次來台簽名會分享創作秘辛",
-      "summary": "高雄國際動漫節2024：《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者燦燦SUN 首次來台簽名會分享創作秘辛 &nbsp;&nbsp; QooApp",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1EQUdMUU5IdHBMWkxDeThvTzZ2Um1vd3ExNFZzN1ljWmZUTmpGaGZfWUNKN2pmUkJUOExpalZOX3pVLXZhNll3MnVVd0FtaXdETDRFUmRqaThnWmt1aXJvRHdNb09TMlQ3b2g0UW10V0RsSHpRU1c4?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2024-10-13T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "高雄國際動漫節2024：《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者燦燦SUN 首次來台簽名會分享創作秘辛 高雄國際動漫節2024：《不時輕聲地以俄語遮羞的鄰座艾莉同學》作者燦燦SUN 首次來台簽名會分享創作秘辛 &nbsp;&nbsp; QooApp Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:55.433Z",
-      "lastSeenAt": "2026-07-11T04:30:55.433Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-7c8819031e2a6f7b49",
-      "title": "2024漫博｜台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》《義妹生活》周邊精品首賣",
-      "summary": "2024漫博｜台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》《義妹生活》周邊精品首賣 &nbsp;&nbsp; 4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPNlRPWmVnTm0yQ2JGX0ZSR3ZvT01rLXBRVXU3MUsxNWZsN0xLM0Uya00tQXQzdVQxQW5RcGcyNExIZ2prOFV2NlFURGR6bXF2OFhWZjJWUHhtN2ZUcVhIWlFHeTRMUWlGblBnVFhGN2xtZXA4N2VDMDBoTFFmU192TVZjakc0Vkp4RGlSTFJGUlVGdk1PQ0tlcUQ5Y2c?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "low",
-      "confidenceScore": 59,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2024-07-23T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "2024漫博｜台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》《義妹生活》周邊精品首賣 2024漫博｜台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》《義妹生活》周邊精品首賣 &nbsp;&nbsp; 4Gamers Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:57.096Z",
-      "lastSeenAt": "2026-07-11T04:30:57.096Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-23135f690574409e07",
-      "title": "2024台中國際動漫節首賣新書《86-不存在的戰區-(Alter.1)》、《不時輕聲地以俄語遮羞的鄰座艾莉同學(7)》特裝&限定版情報公開!!",
-      "summary": "2024台中國際動漫節首賣新書《86-不存在的戰區-(Alter.1)》、《不時輕聲地以俄語遮羞的鄰座艾莉同學(7)》特裝&限定版情報公開!! &nbsp;&nbsp; winnews.com.tw",
-      "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5xR0pwWThaaTJGdUhBRUNycVZBTE1zamJXV2VEY3BPUkZrZlFRUk1WRUNUb2NEVXpWeFZsbmQ2NndLRDc0ZUEwR19n?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2024-02-08T08:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "2024台中國際動漫節首賣新書《86-不存在的戰區-(Alter.1)》、《不時輕聲地以俄語遮羞的鄰座艾莉同學(7)》特裝&限定版情報公開!! 2024台中國際動漫節首賣新書《86-不存在的戰區-(Alter.1)》、《不時輕聲地以俄語遮羞的鄰座艾莉同學(7)》特裝&限定版情報公開!! &nbsp;&nbsp; winnews.com.tw Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:57.971Z",
-      "lastSeenAt": "2026-07-11T04:30:57.971Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-0eccb1fad9af169d94",
-      "title": "《86 不存在的戰區》《不時輕聲地以俄語遮羞的鄰座艾莉同學》台中動漫節首賣情報公開",
-      "summary": "《86 不存在的戰區》《不時輕聲地以俄語遮羞的鄰座艾莉同學》台中動漫節首賣情報公開 &nbsp;&nbsp; GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9ZQmZXYlZWeHVjUEVkcGRVN1lWZUR6LUlJcjhOWGs1cldnTy1aT0JRZ3pJcWhnTGppaGp6c1FrRF9WUDRxS2FnN3E0MHh0NEZxZXBrZTJaems?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2024-02-07T08:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "《86 不存在的戰區》《不時輕聲地以俄語遮羞的鄰座艾莉同學》台中動漫節首賣情報公開 《86 不存在的戰區》《不時輕聲地以俄語遮羞的鄰座艾莉同學》台中動漫節首賣情報公開 &nbsp;&nbsp; GNN 新聞網 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:58.943Z",
-      "lastSeenAt": "2026-07-11T04:30:58.943Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-a2aa483324e6d9a935",
-      "title": "台灣角川2024台北國際動漫節首賣新刊《不時輕聲地以俄語遮羞的鄰座艾莉同學》第６集推出限定&特裝雙版本！即日起開放特裝版事前預購！",
-      "summary": "台灣角川2024台北國際動漫節首賣新刊《不時輕聲地以俄語遮羞的鄰座艾莉同學》第６集推出限定&特裝雙版本！即日起開放特裝版事前預購！ &nbsp;&nbsp; winnews.com.tw",
-      "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBubm9xdy10NmxWSkdxMDRrX1NxdmYyQmEzYXZHV3hRYW8wUUtVZm1FeTNXMGpFRkFXdkNsVFRhQXdLNlBJYWktdEln?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [
-        "台北"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2023-11-25T08:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "台灣角川2024台北國際動漫節首賣新刊《不時輕聲地以俄語遮羞的鄰座艾莉同學》第６集推出限定&特裝雙版本！即日起開放特裝版事前預購！ 台灣角川2024台北國際動漫節首賣新刊《不時輕聲地以俄語遮羞的鄰座艾莉同學》第６集推出限定&特裝雙版本！即日起開放特裝版事前預購！ &nbsp;&nbsp; winnews.com.tw Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:30:59.759Z",
-      "lastSeenAt": "2026-07-11T04:30:59.759Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
-    },
-    {
-      "id": "live-3be78b0e1ef124a522",
-      "title": "【漫博 22】台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》(2) 特裝版即日起開放預購",
-      "summary": "【漫博 22】台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》(2) 特裝版即日起開放預購 &nbsp;&nbsp; GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5BNEp2YWg1QnVnRUpsTWpNTWw2eFd3dVI5ejAxbE9BRjJvem84NUkzVDFfbEdYT0pHMTZ4X1NBZW16Q09ab1lRVk9MS1JCZmhuQ21fb1pnY2U?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "low",
-      "confidenceScore": 59,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2022-05-25T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "【漫博 22】台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》(2) 特裝版即日起開放預購 【漫博 22】台灣角川《不時輕聲地以俄語遮羞的鄰座艾莉同學》(2) 特裝版即日起開放預購 &nbsp;&nbsp; GNN 新聞網 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a77011f9936d43fe814bad72b890f994",
-      "discoveredAt": "2026-07-11T04:31:02.676Z",
-      "lastSeenAt": "2026-07-11T04:31:02.676Z",
-      "archivedAt": "2026-07-11T05:16:56.692Z"
+      "liveSearchRequestId": "a60ccbe1257c423f8404841a2d552b21",
+      "recencyReason": "目前或未來活動",
+      "discoveredAt": "2026-07-11T06:22:11.322Z",
+      "lastSeenAt": "2026-07-11T06:22:11.322Z",
+      "archivedAt": "2026-07-11T07:25:30.432Z"
     }
   ]
 }
