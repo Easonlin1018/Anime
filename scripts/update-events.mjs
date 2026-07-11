@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 
-const SCHEMA_VERSION = 3;
+const SCHEMA_VERSION = 4;
 
 const RSS_URL =
     process.env.BAHAMUT_RSS_URL ||
@@ -13,10 +13,17 @@ const OUTPUT_FILE =
     "events.json";
 
 const MAX_ARTICLE_FETCHES =
-    Number(process.env.MAX_ARTICLE_FETCHES || 150);
+    Number(process.env.MAX_ARTICLE_FETCHES || 45);
 
 const RECENT_UNDATED_DAYS =
     Number(process.env.RECENT_UNDATED_DAYS || 45);
+
+const ARTICLE_DELAY_MS = Number(process.env.ARTICLE_DELAY_MS || 1400);
+const ARCHIVE_DAYS = Number(process.env.ARCHIVE_DAYS || 365);
+const EXTERNAL_FEEDS = [
+    { name: "Google News－台灣動漫活動", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("台灣 動漫 活動 OR 快閃店 OR 動畫展") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant" },
+    { name: "Google News－官方主辦單位", url: "https://news.google.com/rss/search?q=" + encodeURIComponent("木棉花 OR 曼迪 OR 三創 OR 華山 OR 松菸 動漫") + "&hl=zh-TW&gl=TW&ceid=TW:zh-Hant" }
+];
 
 const TAG_PAGES = [
     { tag: "快閃店", pages: 2 },
@@ -930,7 +937,7 @@ function evaluateArticle(item, today, counters) {
         title,
         summary: truncate(summary, 320),
         url: item.url,
-        source: "巴哈姆特 GNN",
+        source: item.source || "巴哈姆特 GNN",
         discoverySource: item.discoverySource,
         sourceTag: item.sourceTag || "",
         type,
@@ -1031,46 +1038,43 @@ function sortEvents(events, today) {
     });
 }
 
-async function fetchTextWithRetries(
-    url,
-    attempts = 3,
-    timeout = 22000
-) {
+async function fetchTextWithRetries(url, attempts = 4, timeout = 25000) {
     let lastError = null;
-
     for (let attempt = 1; attempt <= attempts; attempt++) {
         const controller = new AbortController();
-        const timer = setTimeout(
-            () => controller.abort(),
-            timeout
-        );
-
+        const timer = setTimeout(() => controller.abort(), timeout);
         try {
-            const response = await fetch(url, {
-                redirect: "follow",
-                signal: controller.signal,
-                headers: fetchHeaders
-            });
-
-            if (!response.ok) {
-                throw new Error(
-                    `HTTP ${response.status} ${response.statusText}`
-                );
+            const response = await fetch(url, { redirect:"follow", signal:controller.signal, headers:fetchHeaders });
+            if (response.status === 429) {
+                const retryAfter = Number(response.headers.get("retry-after") || 0);
+                const waitMs = Math.max(retryAfter * 1000, 12000 * attempt) + Math.floor(Math.random() * 2500);
+                const error = new Error(`HTTP 429 Too Many Requests; wait ${waitMs}ms`);
+                error.rateLimited = true;
+                if (attempt < attempts) { await delay(waitMs); continue; }
+                throw error;
             }
-
+            if (!response.ok) throw new Error(`HTTP ${response.status} ${response.statusText}`);
             return await response.text();
         } catch (error) {
             lastError = error;
-
-            if (attempt < attempts) {
-                await delay(900 * attempt);
-            }
-        } finally {
-            clearTimeout(timer);
-        }
+            if (attempt < attempts && !error.rateLimited) await delay(1800 * attempt + Math.floor(Math.random() * 900));
+        } finally { clearTimeout(timer); }
     }
-
     throw lastError || new Error("讀取失敗");
+}
+
+function makeExternalId(url, title) {
+    return `ext-${crypto.createHash("sha256").update(`${url}|${title}`).digest("hex").slice(0,16)}`;
+}
+
+function parseGenericRss(xml, sourceName) {
+    const blocks = String(xml).match(/<item\b[\s\S]*?<\/item>/gi) || [];
+    return blocks.map(block => {
+        const title = stripHtml(getTag(block,"title")).replace(/\s+-\s+[^-]+$/, "").trim();
+        const url = stripHtml(getTag(block,"link")) || stripHtml(getTag(block,"guid"));
+        const summary = cleanSummary(getTag(block,"description"), title);
+        return { id:makeExternalId(url,title), title, url, summary, publishedAt:safeDate(stripHtml(getTag(block,"pubDate")))?.toISOString() || null, discoverySource:sourceName, sourceTag:"外部來源", source:sourceName, isRss:true, skipFetch:true, articleFetched:false };
+    }).filter(item => item.url && item.title);
 }
 
 function parseRss(xml) {
@@ -1101,6 +1105,7 @@ function parseRss(xml) {
                     ?.toISOString() || null,
             discoverySource: "RSS",
             sourceTag: "",
+            source: "巴哈姆特 GNN",
             isRss: true,
             articleFetched: false
         };
@@ -1133,6 +1138,7 @@ function parseTagPage(html, sourceTag) {
                 publishedAt: null,
                 discoverySource: `標籤：${sourceTag}`,
                 sourceTag,
+                source: "巴哈姆特 GNN",
                 isRss: false,
                 articleFetched: false
             });
@@ -1198,45 +1204,26 @@ async function mapLimit(items, limit, worker) {
     return results;
 }
 
-async function collectSources(sourceErrors) {
-    const rssItems = [];
-    const tagItems = [];
-
-    try {
-        const xml = await fetchTextWithRetries(RSS_URL);
-        rssItems.push(...parseRss(xml));
-    } catch (error) {
-        sourceErrors.push({
-            source: "GNN RSS",
-            error: String(error.message || error)
-        });
-    }
-
+async function collectSources(sourceErrors, counters) {
+    const rssItems = [], tagItems = [], externalItems = [];
+    try { rssItems.push(...parseRss(await fetchTextWithRetries(RSS_URL))); }
+    catch (error) { if (error.rateLimited) counters.rateLimited++; sourceErrors.push({source:"GNN RSS",error:String(error.message||error)}); }
     for (const config of TAG_PAGES) {
-        for (let page = 1; page <= config.pages; page++) {
-            const url =
-                "https://gnn.gamer.com.tw/search_tag.php" +
-                `?q=${encodeURIComponent(config.tag)}` +
-                (page > 1 ? `&page=${page}` : "");
-
-            try {
-                const html = await fetchTextWithRetries(url, 2);
-                tagItems.push(...parseTagPage(html, config.tag));
-            } catch (error) {
-                sourceErrors.push({
-                    source: `標籤 ${config.tag} 第 ${page} 頁`,
-                    error: String(error.message || error)
-                });
-            }
-
-            await delay(250);
+        for (let page=1; page<=config.pages; page++) {
+            const url="https://gnn.gamer.com.tw/search_tag.php"+`?q=${encodeURIComponent(config.tag)}`+(page>1?`&page=${page}`:"");
+            try { tagItems.push(...parseTagPage(await fetchTextWithRetries(url,2),config.tag)); }
+            catch (error) { if (error.rateLimited) counters.rateLimited++; sourceErrors.push({source:`標籤 ${config.tag} 第 ${page} 頁`,error:String(error.message||error)}); }
+            await delay(900);
         }
     }
-
-    return { rssItems, tagItems };
+    for (const feed of EXTERNAL_FEEDS) {
+        try { externalItems.push(...parseGenericRss(await fetchTextWithRetries(feed.url,3),feed.name)); }
+        catch (error) { sourceErrors.push({source:feed.name,error:String(error.message||error)}); }
+    }
+    return { rssItems, tagItems, externalItems };
 }
 
-function selectArticleCandidates(rawItems) {
+function selectArticleCandidates(rawItems, existingEvents = []) {
     const rss = rawItems
         .filter(item => item.isRss)
         .sort((a, b) => articleNumber(b) - articleNumber(a));
@@ -1247,38 +1234,30 @@ function selectArticleCandidates(rawItems) {
         .filter(item => !rssIds.has(item.id))
         .sort((a, b) => articleNumber(b) - articleNumber(a));
 
-    return [
-        ...rss,
-        ...tagOnly
-    ].slice(0, MAX_ARTICLE_FETCHES);
+    const existingIds = new Set(existingEvents.map(event => event.id));
+    const external = rawItems.filter(item => item.skipFetch);
+    const newItems = [...rss, ...tagOnly].filter(item => !existingIds.has(item.id));
+    const refreshItems = [...rss, ...tagOnly].filter(item => existingIds.has(item.id)).slice(0, 8);
+    return [...external, ...newItems.slice(0, MAX_ARTICLE_FETCHES), ...refreshItems];
 }
 
 async function enrichArticles(items, sourceErrors, counters) {
-    return await mapLimit(items, 4, async item => {
+    const results = [];
+    for (const item of items) {
+        if (item.skipFetch) { results.push(item); continue; }
         try {
-            const html = await fetchTextWithRetries(
-                item.url,
-                2,
-                18000
-            );
-
+            const html = await fetchTextWithRetries(item.url, 3, 22000);
             counters.articleFetchSuccess++;
-            await delay(90);
-            return extractArticle(html, item);
+            results.push(extractArticle(html,item));
         } catch (error) {
             counters.articleFetchFailure++;
-            sourceErrors.push({
-                source: `文章 ${item.id}`,
-                error: String(error.message || error)
-            });
-
-            if (item.isRss && item.summary && item.publishedAt) {
-                return item;
-            }
-
-            return null;
+            if (error.rateLimited) counters.rateLimited++;
+            sourceErrors.push({source:`文章 ${item.id}`,error:String(error.message||error)});
+            if (item.isRss && item.summary && item.publishedAt) results.push(item);
         }
-    });
+        await delay(ARTICLE_DELAY_MS + Math.floor(Math.random()*500));
+    }
+    return results;
 }
 
 async function readExistingData() {
@@ -1298,7 +1277,7 @@ async function readExistingData() {
                     : []
         };
     } catch {
-        return { meta: {}, events: [] };
+        return { meta: {}, events: [], archive: [] };
     }
 }
 
@@ -1330,6 +1309,18 @@ function existingEventStillValid(event, today) {
     return status.keep;
 }
 
+
+async function notifyNewEvents(events) {
+    if (!events.length) return;
+    const lines = events.slice(0,8).map(event => `• ${event.title}${event.eventStartDate ? `（${event.eventStartDate}）` : ""}`).join("\n");
+    const text = `發現 ${events.length} 個新動漫活動\n${lines}`;
+    const tasks = [];
+    if (process.env.DISCORD_WEBHOOK_URL) tasks.push(fetch(process.env.DISCORD_WEBHOOK_URL,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({content:text.slice(0,1900)})}));
+    if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) tasks.push(fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({chat_id:process.env.TELEGRAM_CHAT_ID,text})}));
+    if (process.env.RESEND_API_KEY && process.env.EMAIL_TO) tasks.push(fetch("https://api.resend.com/emails",{method:"POST",headers:{"content-type":"application/json",authorization:`Bearer ${process.env.RESEND_API_KEY}`},body:JSON.stringify({from:process.env.EMAIL_FROM||"Anime Radar <onboarding@resend.dev>",to:[process.env.EMAIL_TO],subject:`發現 ${events.length} 個新動漫活動`,text})}));
+    await Promise.allSettled(tasks);
+}
+
 async function main() {
     const now = new Date();
     const today = taiwanToday(now);
@@ -1348,18 +1339,19 @@ async function main() {
         expiredRemoved: 0,
         undatedOldRemoved: 0,
         missingDateRemoved: 0,
-        tooFarRemoved: 0
+        tooFarRemoved: 0,
+        rateLimited: 0
     };
 
-    const { rssItems, tagItems } = await collectSources(sourceErrors);
-    const rawItems = mergeRawItems([...rssItems, ...tagItems]);
+    const { rssItems, tagItems, externalItems } = await collectSources(sourceErrors, counters);
+    const rawItems = mergeRawItems([...rssItems, ...tagItems, ...externalItems]);
 
     if (rawItems.length === 0) {
         await writeJson({
             meta: {
                 ...existing.meta,
                 schemaVersion: SCHEMA_VERSION,
-                sourceName: "巴哈姆特 GNN RSS＋公開標籤頁",
+                sourceName: "巴哈姆特 GNN＋Google News 多來源",
                 sourceUrl: RSS_URL,
                 updatedAt: now.toISOString(),
                 lastAttemptAt: now.toISOString(),
@@ -1374,39 +1366,30 @@ async function main() {
         return;
     }
 
-    const candidates = selectArticleCandidates(rawItems);
+    const candidates = selectArticleCandidates(rawItems, existing.events);
     const enriched = (
         await enrichArticles(candidates, sourceErrors, counters)
     ).filter(Boolean);
 
     const freshEvents = [];
-
     for (const item of enriched) {
         const event = evaluateArticle(item, today, counters);
-        if (event) {
-            freshEvents.push({
-                ...event,
-                discoveredAt: now.toISOString(),
-                lastSeenAt: now.toISOString()
-            });
-        }
+        if (event) freshEvents.push({ ...event, discoveredAt: now.toISOString(), lastSeenAt: now.toISOString() });
     }
-
-    let carryEvents = [];
-
-    if (existing.meta.schemaVersion === SCHEMA_VERSION) {
-        const freshIds = new Set(freshEvents.map(event => event.id));
-
-        carryEvents = existing.events.filter(event =>
-            !freshIds.has(event.id) &&
-            existingEventStillValid(event, today)
-        );
+    const freshIds = new Set(freshEvents.map(event => event.id));
+    const carryEvents = existing.events.filter(event => !freshIds.has(event.id) && existingEventStillValid(event,today));
+    const newlyExpired = existing.events.filter(event => !freshIds.has(event.id) && !existingEventStillValid(event,today)).map(event => ({...event,eventStatus:"expired",archivedAt:now.toISOString()}));
+    const finalEvents = sortEvents(dedupeEvents([...freshEvents,...carryEvents]),today);
+    const archiveCutoff = addDays(today,-ARCHIVE_DAYS);
+    const archiveMap = new Map();
+    for (const event of [...(existing.archive||[]),...newlyExpired]) {
+        const end = dateFromKey(event.eventEndDate) || safeDate(event.archivedAt) || safeDate(event.publishedAt);
+        if (end && end >= archiveCutoff) archiveMap.set(event.id,event);
     }
-
-    const finalEvents = sortEvents(
-        dedupeEvents([...freshEvents, ...carryEvents]),
-        today
-    );
+    const archive = [...archiveMap.values()].sort((a,b)=>String(b.eventEndDate||b.publishedAt||"").localeCompare(String(a.eventEndDate||a.publishedAt||"")));
+    const previousIds = new Set(existing.events.map(event=>event.id));
+    const newEvents = freshEvents.filter(event=>!previousIds.has(event.id));
+    await notifyNewEvents(newEvents);
 
     const fetchStatus =
         sourceErrors.length > 0 ? "partial" : "success";
@@ -1414,18 +1397,23 @@ async function main() {
     const output = {
         meta: {
             schemaVersion: SCHEMA_VERSION,
-            sourceName: "巴哈姆特 GNN RSS＋公開標籤頁",
+            sourceName: "巴哈姆特 GNN＋Google News 多來源",
             sourceUrl: RSS_URL,
             updatedAt: now.toISOString(),
             lastSuccessfulUpdateAt: now.toISOString(),
             fetchStatus,
             fetchedRssCount: rssItems.length,
             fetchedTagItemCount: tagItems.length,
+            fetchedExternalItemCount: externalItems.length,
             uniqueNewsCount: rawItems.length,
             articleCandidateCount: candidates.length,
             articleFetchSuccessCount: counters.articleFetchSuccess,
             articleFetchFailureCount: counters.articleFetchFailure,
             matchedEventCount: freshEvents.length,
+            newEventCount: newEvents.length,
+            cachedEventCount: carryEvents.length,
+            rateLimitedCount: counters.rateLimited,
+            archiveCount: archive.length,
             storedEventCount: finalEvents.length,
             expiredRemovedCount: counters.expiredRemoved,
             recapRemovedCount: counters.recapRemoved,
@@ -1438,7 +1426,8 @@ async function main() {
             note:
                 "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
         },
-        events: finalEvents
+        events: finalEvents,
+        archive
     };
 
     await writeJson(output);
@@ -1446,6 +1435,7 @@ async function main() {
     console.log(
         `完成：RSS ${rssItems.length} 則，` +
         `標籤頁 ${tagItems.length} 筆，` +
+        `外部來源 ${externalItems.length} 則，` +
         `文章成功 ${counters.articleFetchSuccess} 篇，` +
         `保留 ${finalEvents.length} 則活動，` +
         `排除過期 ${counters.expiredRemoved} 則。`
