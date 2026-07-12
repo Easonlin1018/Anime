@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-11T07:25:30.432Z",
-    "lastSuccessfulUpdateAt": "2026-07-11T07:25:30.432Z",
+    "updatedAt": "2026-07-12T07:51:39.028Z",
+    "lastSuccessfulUpdateAt": "2026-07-12T07:51:39.028Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "fetchedExternalItemCount": 430,
     "uniqueNewsCount": 641,
-    "articleCandidateCount": 234,
+    "articleCandidateCount": 232,
     "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 16,
     "newEventCount": 1,
     "cachedEventCount": 2,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
+    "archiveCount": 0,
     "storedEventCount": 11,
     "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 67,
+    "undatedOldRemovedCount": 68,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 132,
+    "nonActivityRemovedCount": 129,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -54,8 +54,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -85,8 +85,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-5f9b448cd3829337",
@@ -170,8 +170,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -201,8 +201,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -231,8 +231,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-6aeda05927149db1",
@@ -259,8 +259,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-21f6459e53df73bd",
@@ -288,8 +288,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -297,7 +297,7 @@
       "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
@@ -316,8 +316,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -346,45 +346,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T07:25:30.432Z",
-      "lastSeenAt": "2026-07-11T07:25:30.432Z"
+      "discoveredAt": "2026-07-12T07:51:39.028Z",
+      "lastSeenAt": "2026-07-12T07:51:39.028Z"
     }
   ],
-  "archive": [
-    {
-      "id": "live-045a24a24bb7eba5c3",
-      "title": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！",
-      "summary": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ &nbsp;&nbsp; PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTWZ5a2VnNmowZnR3aVVNdjZITFFFeEtQaUIwcEZwdmVfV1NwNDFXVnRwMkd0OTZBTDZtWE1xQk1SQXJ1cWE2SW9EOUVHY3BscklkZ0NSVExzLVhQYmlXTFF4R21HUVM5aEhRSG5zLXJ2NWJ1V3gxbGJMZ2JqTW5VREF3TlFiVmFGZVNV?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "low",
-      "confidenceScore": 59,
-      "matchedAliases": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "workTitles": [
-        "不時輕聲地以俄語遮羞的鄰座艾莉同學"
-      ],
-      "publishedAt": "2026-04-19T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ 禮服艾莉×兔女郎綾乃夢幻登場！台灣角川 2026 漫博首賣《不時輕聲地以俄語遮羞的鄰座艾莉同學 (11)》限定、特裝雙版本情報解禁！ &nbsp;&nbsp; PChome Online 新聞 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "不時輕聲地以俄語遮羞的鄰座艾莉同學",
-      "liveSearchRequestId": "a60ccbe1257c423f8404841a2d552b21",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-07-11T06:22:11.322Z",
-      "lastSeenAt": "2026-07-11T06:22:11.322Z",
-      "archivedAt": "2026-07-11T07:25:30.432Z"
-    }
-  ]
+  "archive": []
 }
