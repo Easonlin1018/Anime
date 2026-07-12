@@ -1696,6 +1696,7 @@ function deleteAnime(id) {
 
 function buildAnimeItem(anime) {
     const animeId = JSON.stringify(String(anime.id));
+    const animeDataId = escapeHtml(String(anime.id));
     let badge = "";
 
     if (anime.title.includes("(OVA")) badge = '<span class="badge" style="background:#0284c7">OVA</span>';
@@ -1708,11 +1709,11 @@ function buildAnimeItem(anime) {
 
     if (["watching", "backlog"].includes(anime.category)) {
         actions =
-            `<button onclick='updateProgress(${animeId},1)'>➕ 看了 1 集</button>` +
+            `<button type="button" data-progress-action="increment" data-anime-id="${animeDataId}">➕ 看了 1 集</button>` +
             `<button class="btn-next" onclick='moveCategory(${animeId},"completed")'>🎉 追完</button>`;
     } else if (anime.category === "review") {
         actions =
-            `<button onclick='updateProgress(${animeId},1)'>➕ 複習 1 集</button>` +
+            `<button type="button" data-progress-action="increment" data-anime-id="${animeDataId}">➕ 複習 1 集</button>` +
             `<button class="btn-next" onclick='moveCategory(${animeId},"completed")'>🎉 複習完</button>`;
     } else if (anime.category === "waiting") {
         actions = '<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中……</div>';
@@ -1742,12 +1743,13 @@ function buildAnimeItem(anime) {
 
     return `
         <div class="anime-item">
-            <div class="anime-title">${badge}<span>${escapeHtml(anime.title)}</span></div>
+            <button type="button" class="anime-title v11-title-button" data-open-detail="${animeDataId}" aria-label="開啟 ${escapeHtml(anime.title)} 詳細資料">${badge}<span>${escapeHtml(anime.title)}</span></button>
             <div class="anime-meta">${meta}</div>
             <div class="anime-extra">📡 目前已播：${released || "?"} 集｜${nextInfo}<br>📝 ${reviewInfo}<div class="platform-links">${platformLinks}${customPlatform}</div></div>
             <div class="btn-group">
                 ${actions}
                 <button class="btn-review" onclick='editAnimeReview(${animeId})'>⭐ 評分筆記</button>
+                <button type="button" class="btn-review" data-open-themes="${animeDataId}">🎵 主題曲</button>
                 <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getCoreTitle(anime.title))}'))">🎪 查活動</button>
                 <button class="btn-edit" onclick='editTitle(${animeId})'>✏️ 改名</button>
                 <button class="btn-del" onclick='deleteAnime(${animeId})'>🗑️ 刪除</button>
@@ -2652,5 +2654,7 @@ maybeAutoSyncAnimeMetadata();
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="v11-ui.js"></script>
+<script src="spotify-config.js"></script>
+<script src="spotify-themes.js"></script>
 </body>
 </html>

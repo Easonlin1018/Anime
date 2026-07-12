@@ -8,6 +8,7 @@
     const SCHEMA_VERSION = 11;
     const STORAGE_KEY = "anime_list_v8_8";
     const HISTORY_KEY = "anime_tracker_watch_history_v1";
+    const WATCH_RESET_UNDO_KEY = "anime_tracker_watch_history_reset_undo_v1";
     const RESTORE_KEY = "anime_tracker_restore_points_v1";
     const SETTINGS_KEY = "anime_tracker_settings_v11";
     const TOMBSTONE_DAYS = 30;
@@ -20,6 +21,49 @@
     const arrayOf = value => Array.isArray(value) ? value.filter(Boolean) : value ? [value] : [];
     const uuid = () => globalThis.crypto?.randomUUID?.() || `anime-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
     const normalizeText = value => String(value || "").normalize("NFKC").toLocaleLowerCase().replace(/[\p{P}\p{S}\s]+/gu, "");
+    const stableHash = value => { let hash = 2166136261; for (const char of String(value)) { hash ^= char.codePointAt(0); hash = Math.imul(hash, 16777619); } return (hash >>> 0).toString(36); };
+
+    function normalizeSongTitle(value) {
+        return normalizeText(String(value || "")
+            .replace(/\b(?:tv|anime)\s*size\b/gi, "")
+            .replace(/\b(?:opening|ending)\s*(?:version|ver\.?)\b/gi, "")
+            .replace(/[（(]\s*(?:tv|anime)\s*size\s*[）)]/gi, ""));
+    }
+    function normalizeArtistName(value) {
+        return normalizeText(String(value || "").replace(/\b(?:feat\.?|featuring|ft\.?)\b[\s\S]*$/i, ""));
+    }
+    function normalizeThemeSong(song, type, index) {
+        const normalizedType = String(song?.type || type || "OP").toUpperCase() === "ED" ? "ED" : "OP";
+        const sequence = Math.max(1, numberOr(song?.sequence, index + 1));
+        const title = String(song?.title || song?.rawText || "").trim();
+        const artist = String(song?.artist || "").trim();
+        return {
+            ...song,
+            id: song?.id || `theme-${stableHash(`${normalizedType}|${sequence}|${title}|${artist}`)}`,
+            type: normalizedType,
+            sequence,
+            title,
+            artist,
+            episodeRange: String(song?.episodeRange || "").trim(),
+            spotifyTrackId: String(song?.spotifyTrackId || ""),
+            spotifyUrl: String(song?.spotifyUrl || ""),
+            spotifyEmbedUrl: String(song?.spotifyEmbedUrl || ""),
+            spotifyMatchStatus: song?.spotifyMatchStatus || "unmatched",
+            spotifyMatchScore: numberOr(song?.spotifyMatchScore),
+            sourceName: String(song?.sourceName || ""),
+            sourceUrl: String(song?.sourceUrl || ""),
+            manuallyCorrected: Boolean(song?.manuallyCorrected),
+            unavailableOnSpotify: Boolean(song?.unavailableOnSpotify),
+            updatedAt: iso(song?.updatedAt || new Date().toISOString())
+        };
+    }
+    function normalizeThemeSongs(value) {
+        const themes = value && typeof value === "object" ? value : {};
+        return {
+            openings: arrayOf(themes.openings).map((song, index) => normalizeThemeSong(song, "OP", index)),
+            endings: arrayOf(themes.endings).map((song, index) => normalizeThemeSong(song, "ED", index))
+        };
+    }
 
     function migrateAnime(item, now = new Date().toISOString()) {
         const currentEpisode = numberOr(item.currentEpisode ?? item.watched, 0);
@@ -54,6 +98,7 @@
             releaseDate: item.releaseDate || null,
             nextSeasonDate: item.nextSeasonDate || null,
             reminderEnabled: Boolean(item.reminderEnabled),
+            themeSongs: normalizeThemeSongs(item.themeSongs),
             addedAt: iso(item.addedAt || createdAt),
             createdAt,
             updatedAt: iso(item.updatedAt || createdAt),
@@ -68,6 +113,88 @@
 
     function createWatchRecord(anime, delta, at = new Date().toISOString()) {
         return { id: uuid(), animeId: anime.id, title: anime.title, delta: numberOr(delta), episode: numberOr(anime.currentEpisode ?? anime.watched), at: iso(at), correction: numberOr(delta) < 0 };
+    }
+
+    function updateAnimeProgress(list, id, delta = 1, at = new Date().toISOString()) {
+        const targetId = String(id), change = Number(delta);
+        const index = arrayOf(list).findIndex(item => String(item?.id) === targetId);
+        if (index < 0) return { list, found: false, changed: false, reason: "not-found", anime: null, historyRecord: null };
+        const old = migrateAnime(list[index], at);
+        const current = Math.max(0, numberOr(old.currentEpisode ?? old.watched));
+        const rawTotal = old.totalEpisodes ?? old.episodes;
+        const parsedTotal = Number(rawTotal);
+        const total = Number.isFinite(parsedTotal) && parsedTotal > 0 ? parsedTotal : null;
+        const requested = Math.max(0, current + (Number.isFinite(change) ? change : 0));
+        const nextEpisode = total === null ? requested : Math.min(requested, total);
+        if (nextEpisode === current) return { list, found: true, changed: false, reason: change > 0 && total !== null && current >= total ? "at-total" : "unchanged", anime: old, historyRecord: null };
+        const updated = {
+            ...old,
+            watched: nextEpisode,
+            currentEpisode: nextEpisode,
+            updatedAt: iso(at),
+            lastWatchedAt: change > 0 ? iso(at) : old.lastWatchedAt
+        };
+        if (total !== null && nextEpisode >= total) updated.category = "completed";
+        const nextList = arrayOf(list).slice(); nextList[index] = updated;
+        return { list: nextList, found: true, changed: true, reason: "updated", anime: updated, historyRecord: createWatchRecord(updated, nextEpisode - current, at), total };
+    }
+
+    function commitAnimeProgress(storage, list, history, id, delta = 1, at = new Date().toISOString()) {
+        const result = updateAnimeProgress(list, id, delta, at);
+        if (!result.changed) return { ...result, history: arrayOf(history) };
+        const nextHistory = [...arrayOf(history), result.historyRecord];
+        storage.setItem(STORAGE_KEY, JSON.stringify(result.list));
+        storage.setItem(HISTORY_KEY, JSON.stringify(nextHistory));
+        return { ...result, history: nextHistory };
+    }
+
+    function parseThemeSongText(text, type = "OP", sequence = 1) {
+        const rawText = String(text || "").trim();
+        const episodeMatch = rawText.match(/\((?:eps?\.?|episodes?)\s*(\d+)(?:\s*[-–—~]\s*(\d+))?\)/i);
+        const episodeRange = episodeMatch ? (episodeMatch[2] ? `${episodeMatch[1]}–${episodeMatch[2]}` : episodeMatch[1]) : "";
+        const withoutEpisodes = rawText.replace(/\((?:eps?\.?|episodes?)\s*\d+(?:\s*[-–—~]\s*\d+)?\)/ig, "").trim();
+        const quoted = withoutEpisodes.match(/^["“「『](.*?)["”」』]\s+by\s+(.+)$/i);
+        const plain = withoutEpisodes.match(/^(.+?)\s+by\s+(.+)$/i);
+        const match = quoted || plain;
+        const song = normalizeThemeSong({ title: match ? match[1].trim() : rawText, artist: match ? match[2].trim() : "", episodeRange, rawText, spotifyMatchStatus: "unmatched" }, type, sequence - 1);
+        song.sequence = sequence;
+        return song;
+    }
+
+    function extractSpotifyTrackId(value) {
+        const clean = String(value || "").trim();
+        const match = clean.match(/^spotify:track:([A-Za-z0-9]{22})$/) || clean.match(/^https:\/\/open\.spotify\.com\/track\/([A-Za-z0-9]{22})(?:[/?#].*)?$/i);
+        return match ? match[1] : "";
+    }
+
+    function calculateSpotifyMatchScore(song, track) {
+        const wantedTitle = normalizeSongTitle(song?.title), foundTitle = normalizeSongTitle(track?.name);
+        const wantedArtist = normalizeArtistName(song?.artist);
+        const foundArtists = arrayOf(track?.artists).map(artist => normalizeArtistName(typeof artist === "string" ? artist : artist?.name));
+        let score = wantedTitle && foundTitle && wantedTitle === foundTitle ? 65 : wantedTitle && foundTitle && (wantedTitle.includes(foundTitle) || foundTitle.includes(wantedTitle)) ? 42 : 0;
+        if (wantedArtist && foundArtists.some(artist => artist === wantedArtist || artist.includes(wantedArtist) || wantedArtist.includes(artist))) score += 30;
+        const variantText = `${track?.name || ""} ${track?.album || ""}`;
+        if (/\b(?:cover|karaoke|instrumental|remix)\b/i.test(variantText)) score -= 50;
+        return Math.max(0, Math.min(100, score));
+    }
+    function selectSpotifyMatch(song, tracks, threshold = 75) {
+        if (song?.manuallyCorrected) return { song, candidates: [], matched: false, preservedManual: true };
+        const candidates = arrayOf(tracks).map(track => ({ ...track, matchScore: calculateSpotifyMatchScore(song, track) })).sort((a, b) => b.matchScore - a.matchScore).slice(0, 5);
+        const best = candidates[0];
+        if (!best || best.matchScore < threshold) return { song: { ...song, spotifyMatchStatus: "candidates" }, candidates, matched: false };
+        const id = extractSpotifyTrackId(best.spotifyUrl) || String(best.id || "");
+        if (!/^[A-Za-z0-9]{22}$/.test(id)) return { song: { ...song, spotifyMatchStatus: "candidates" }, candidates, matched: false };
+        return { song: { ...song, spotifyTrackId: id, spotifyUrl: `https://open.spotify.com/track/${id}`, spotifyEmbedUrl: `https://open.spotify.com/embed/track/${id}`, spotifyMatchStatus: "matched", spotifyMatchScore: best.matchScore, updatedAt: new Date().toISOString() }, candidates, matched: true };
+    }
+    function isSpecialMediaType(anime) { return /^(movie|ova|ona|special|short)$/i.test(String(anime?.mediaType || anime?.format || anime?.type || "")); }
+    function mergeThemeSongs(existing, incoming) {
+        const current = normalizeThemeSongs(existing), next = normalizeThemeSongs(incoming);
+        const mergeGroup = (oldSongs, newSongs) => {
+            const map = new Map(oldSongs.map(song => [song.id, song]));
+            newSongs.forEach(song => { const old = map.get(song.id); if (!old || (!old.manuallyCorrected && Date.parse(song.updatedAt) >= Date.parse(old.updatedAt))) map.set(song.id, { ...old, ...song }); });
+            return [...map.values()];
+        };
+        return { openings: mergeGroup(current.openings, next.openings), endings: mergeGroup(current.endings, next.endings) };
     }
 
     function createBackup(data) {
@@ -137,7 +264,9 @@
         const map = new Map(migrateList(local).map(item => [String(item.id), item]));
         migrateList(incoming).forEach(item => {
             const old = map.get(String(item.id));
-            if (!old || Date.parse(item.updatedAt) >= Date.parse(old.updatedAt)) map.set(String(item.id), { ...old, ...item });
+            if (!old) map.set(String(item.id), item);
+            else if (Date.parse(item.updatedAt) >= Date.parse(old.updatedAt)) map.set(String(item.id), { ...old, ...item, themeSongs: mergeThemeSongs(old.themeSongs, item.themeSongs) });
+            else map.set(String(item.id), { ...old, themeSongs: mergeThemeSongs(old.themeSongs, item.themeSongs) });
         });
         return [...map.values()];
     }
@@ -221,6 +350,24 @@
         return { today: sum(records.filter(r => dayKey(r.at) === today)), week: sum(records.filter(r => new Date(r.at) >= weekStart)), month: sum(records.filter(r => dayKey(r.at).startsWith(month))), total: sum(records), completed: active.filter(x => x.category === "completed").length, watching: active.filter(x => x.category === "watching").length, averageRating: ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : "—", streak, topPlatform: frequency(active.map(x => x.platform)), topTag: frequency(active.flatMap(x => x.tags)), trend7: trend(7), trend30: trend(30) };
     }
 
+    function resetWatchStatistics(storage, at = new Date().toISOString()) {
+        let history = [];
+        try { const parsed = JSON.parse(storage.getItem(HISTORY_KEY) || "[]"); history = Array.isArray(parsed) ? parsed : []; } catch { history = []; }
+        const restorePoint = { createdAt: iso(at), history };
+        storage.setItem(WATCH_RESET_UNDO_KEY, JSON.stringify(restorePoint));
+        storage.setItem(HISTORY_KEY, "[]");
+        return { reset: true, clearedCount: history.length, history: [], restorePoint };
+    }
+
+    function restoreWatchStatistics(storage) {
+        let restorePoint = null;
+        try { restorePoint = JSON.parse(storage.getItem(WATCH_RESET_UNDO_KEY) || "null"); } catch { restorePoint = null; }
+        if (!restorePoint || !Array.isArray(restorePoint.history)) return { restored: false, history: [] };
+        storage.setItem(HISTORY_KEY, JSON.stringify(restorePoint.history));
+        storage.removeItem?.(WATCH_RESET_UNDO_KEY);
+        return { restored: true, history: restorePoint.history, restoredCount: restorePoint.history.length };
+    }
+
     function calendarItems(anime, events) {
         const items = [];
         migrateList(anime).forEach(item => {
@@ -261,7 +408,7 @@
         return { ...local, ...cloud, animeList: mergeById(local.animeList, cloud.animeList), eventOverrides: { ...(local.eventOverrides || {}), ...(cloud.eventOverrides || {}) }, settings: { ...(local.settings || {}), ...(cloud.settings || {}) }, watchHistory: [...arrayOf(local.watchHistory), ...arrayOf(cloud.watchHistory)] };
     }
     function pruneTombstones(list, now = Date.now()) { return migrateList(list).filter(item => !item.deletedAt || now - Date.parse(item.deletedAt) <= TOMBSTONE_DAYS * 86400000); }
-    function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|worker|sync)/i.test(value); }
+    function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, RESTORE_KEY, SETTINGS_KEY, migrateAnime, migrateList, createWatchRecord, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, calendarItems, areDuplicateEvents, mergeDuplicateEvents, mergeCloudPayload, pruneTombstones, shouldCacheRequest, normalizeText };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, migrateAnime, migrateList, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, mergeCloudPayload, pruneTombstones, shouldCacheRequest, normalizeText };
 });
