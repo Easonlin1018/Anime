@@ -1,0 +1,13 @@
+{
+  "name": "全自動動漫追番基地",
+  "short_name": "追番基地",
+  "description": "Local-first 動漫、活動與觀看進度追蹤工具",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "icons": [
+    { "src": "icons/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
