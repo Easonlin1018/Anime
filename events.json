@@ -3,32 +3,63 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-13T11:44:18.398Z",
-    "lastSuccessfulUpdateAt": "2026-07-13T11:44:18.398Z",
+    "updatedAt": "2026-07-14T07:26:12.868Z",
+    "lastSuccessfulUpdateAt": "2026-07-14T07:26:12.868Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 646,
-    "articleCandidateCount": 237,
-    "articleFetchSuccessCount": 33,
+    "uniqueNewsCount": 637,
+    "articleCandidateCount": 233,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 16,
-    "newEventCount": 2,
-    "cachedEventCount": 2,
+    "matchedEventCount": 20,
+    "newEventCount": 5,
+    "cachedEventCount": 3,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 11,
-    "expiredRemovedCount": 13,
+    "archiveCount": 0,
+    "storedEventCount": 15,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 72,
+    "undatedOldRemovedCount": 63,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 130,
+    "nonActivityRemovedCount": 129,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-308121",
+      "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
+      "summary": "自 1926 年《小熊維尼》繪本第一集問世起，維尼與他的夥伴們已經陪伴大家度過一世紀的溫暖時光，為歡慶迪士尼經典角色「小熊維尼」100 週年，2026 年 7 月 10 日至 10 月 11 日，「小熊維尼 友你相繪」100 週年限定快閃店於台北松山文創園區正式登場界。 本次快閃店將跨越百年時空，帶領粉絲循著時光隧",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308121",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-14T03:40:46.000Z",
+      "eventStartDate": "2026-07-10",
+      "eventEndDate": "2026-10-11",
+      "eventStatus": "ongoing",
+      "venue": "松山文創園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "小熊維尼",
+        "小熊維尼 友你相繪"
+      ],
+      "searchCorpus": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場 自 1926 年《小熊維尼》繪本第一集問世起，維尼與他的夥伴們已經陪伴大家度過一世紀的溫暖時光，為歡慶迪士尼經典角色「小熊維尼」100 週年，2026 年 7 月 10 日至 10 月 11 日，「小熊維尼 友你相繪」100 週年限定快閃店於台北松山文創園區正式登場界。 本次快閃店將跨越百年時空，帶領粉絲循著時光隧",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 10 日至 10 月 11 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
     {
       "id": "ext-f3c836c747fab5a7",
       "title": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕",
@@ -54,8 +85,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -89,6 +120,38 @@
       "lastSeenAt": "2026-07-12T07:51:39.028Z"
     },
     {
+      "id": "gnn-308126",
+      "title": "【漫博 26】青文出版 2026 漫博會會場與官網活動資訊公開",
+      "summary": "配合 2026 年第 25 屆漫畫博覽會即將在 7 月 23 日至 7 月 27 日於台北世貿一館舉辦，青文出版社也在今日公開了多項漫博期間的限定活動，包含經典套書與圖冊精品 5 折起，以及全館漫畫、輕小說 85 折起的優惠活動。 除了購書折扣外，青文還推出了「消費三重禮」滿額贈活動。同時，官方網站也將同步展開線上漫博會（官網活動期間為 7/1~8/",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308126",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台北",
+        "新北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-14T04:25:21.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "upcoming",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "消費三重禮",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】青文出版 2026 漫博會會場與官網活動資訊公開 配合 2026 年第 25 屆漫畫博覽會即將在 7 月 23 日至 7 月 27 日於台北世貿一館舉辦，青文出版社也在今日公開了多項漫博期間的限定活動，包含經典套書與圖冊精品 5 折起，以及全館漫畫、輕小說 85 折起的優惠活動。 除了購書折扣外，青文還推出了「消費三重禮」滿額贈活動。同時，官方網站也將同步展開線上漫博會（官網活動期間為 7/1~8/",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 7 月 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
       "id": "ext-5f9b448cd3829337",
       "title": "2026漫博7/23~7/27台北世貿一館舉辦確定 台中動漫節訂清明連假臺中國際展覽館登場",
       "summary": "4Gamers",
@@ -117,6 +180,67 @@
       "lastSeenAt": "2026-07-11T01:41:17.900Z"
     },
     {
+      "id": "gnn-308120",
+      "title": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開",
+      "summary": "日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308120",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T03:31:49.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "麻宮騎亞 40th Arts Exhibition In 台灣 2026"
+      ],
+      "searchCorpus": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開 日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 25 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
+      "id": "ext-562b7f12b291cf8a",
+      "title": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBEVzBpd3NvMXI4Q1JoMGxMOWlKNDFPTzFOb2hxSGV6azJRYnowd19zbUc3OG9ZWDJjWGw5RGhvTHE5bDBFNlUxbjFCM1dTZ3hsbGVfeS04RUI?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-15T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "華山漫畫13+14 集限定版獨家販售《O",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "全知讀者視角",
+        "Omniscient Reader"
+      ],
+      "searchCorpus": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
       "id": "ext-26d921140c8adc8b",
       "title": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣",
       "summary": "上報Up Media",
@@ -143,8 +267,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -174,8 +298,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -204,8 +328,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-6aeda05927149db1",
@@ -232,8 +356,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-21f6459e53df73bd",
@@ -261,8 +385,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -289,8 +413,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -319,8 +443,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -354,34 +478,5 @@
       "lastSeenAt": "2026-07-13T11:44:18.398Z"
     }
   ],
-  "archive": [
-    {
-      "id": "ext-9cfac1afa65e1f63",
-      "title": "2026 新竹國際動漫節「漫人祭」超神卡司全公開！臺日韓大師面對面、必逛亮點總整理",
-      "summary": "映CG / INCG Media",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPbFhmWGx5aFRYVFdWT3o5U0h5ZWVQZjMzN3VGYk8tQzBNZG5pOGhLa2tpWjdRaDdHZHlDYzk3RzlrbERKcXRvbDhhWTJFQlZhNjFDTzM4NFYwN1hHOVN1dUZ2azNUMUs5QVNybDczbjZtMHIyWnAwd28zdFZvMFhNOWt4aHFoc25MQzJHOE83WWU3VXM?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-05-28T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z",
-      "archivedAt": "2026-07-13T11:44:18.398Z"
-    }
-  ]
+  "archive": []
 }
