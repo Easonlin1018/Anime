@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-14T07:26:12.868Z",
-    "lastSuccessfulUpdateAt": "2026-07-14T07:26:12.868Z",
+    "updatedAt": "2026-07-15T07:31:09.855Z",
+    "lastSuccessfulUpdateAt": "2026-07-15T07:31:09.855Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 637,
-    "articleCandidateCount": 233,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 641,
+    "articleCandidateCount": 234,
     "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 5,
-    "cachedEventCount": 3,
+    "matchedEventCount": 24,
+    "newEventCount": 10,
+    "cachedEventCount": 8,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 15,
-    "expiredRemovedCount": 14,
+    "storedEventCount": 21,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 63,
+    "undatedOldRemovedCount": 62,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 129,
+    "nonActivityRemovedCount": 127,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -85,8 +85,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -118,6 +118,113 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-12T07:51:39.028Z",
       "lastSeenAt": "2026-07-12T07:51:39.028Z"
+    },
+    {
+      "id": "gnn-308198",
+      "title": "【漫博 26】宇峻奧汀公開「多重宇奧」展出陣容 《三國群英傳：格鬥版》等遊戲開放現場試玩",
+      "summary": "宇峻奧汀今（15）日宣布，將於 7 月 23 日至 7 月 27 日參展「2026 台灣國際電玩電競產業展 GAMERS CON 」，集結旗下《三國群英傳：格鬥版》和首度參展的《三國群英傳：策定九州》與《幻世錄 重製版》，還有與智寶國際聯合代理的《FINAL FANTASY XIV 繁體中文版》，以「多重宇奧」為核心主題，匯聚四大遊戲宇宙，打造時空交錯的沉浸式展區體",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308198",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-15T07:13:59.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "三國群英傳：格鬥版",
+        "三國群英傳：策定九州",
+        "幻世錄 重製版",
+        "FINAL FANTASY XIV 繁體中文版",
+        "多重宇奧",
+        "2026 台灣國際電玩電競產業展 GAMERS CON",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】宇峻奧汀公開「多重宇奧」展出陣容 《三國群英傳：格鬥版》等遊戲開放現場試玩 宇峻奧汀今（15）日宣布，將於 7 月 23 日至 7 月 27 日參展「2026 台灣國際電玩電競產業展 GAMERS CON 」，集結旗下《三國群英傳：格鬥版》和首度參展的《三國群英傳：策定九州》與《幻世錄 重製版》，還有與智寶國際聯合代理的《FINAL FANTASY XIV 繁體中文版》，以「多重宇奧」為核心主題，匯聚四大遊戲宇宙，打造時空交錯的沉浸式展區體",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 7 月 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+    },
+    {
+      "id": "gnn-308195",
+      "title": "So-net 攜手台灣遊戲產業振興會進軍 Gamers Con 2026 《TP12》《天選吉他》將於專屬展區登場",
+      "summary": "台灣碩網網路娛樂股份有限公司（So-net）今（15）日宣布，將攜手台灣遊戲產業振興會（TGIPA），於 2026 年 7 月 23 日至 27 日參加在台北世界貿易中心一館舉辦的台灣國際電玩電競產業展 （Gamers Con 2026）。本次除了首次於漫博展出 So-net 看板娘互動攤位外，同場帶來《TP12》與音樂節奏遊戲《Heavenly Guitars 天選吉他》和其他多項現場趣味活動，",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308195",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-15T04:45:51.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "TP12",
+        "天選吉他",
+        "Heavenly Guitars 天選吉他"
+      ],
+      "searchCorpus": "So-net 攜手台灣遊戲產業振興會進軍 Gamers Con 2026 《TP12》《天選吉他》將於專屬展區登場 台灣碩網網路娛樂股份有限公司（So-net）今（15）日宣布，將攜手台灣遊戲產業振興會（TGIPA），於 2026 年 7 月 23 日至 27 日參加在台北世界貿易中心一館舉辦的台灣國際電玩電競產業展 （Gamers Con 2026）。本次除了首次於漫博展出 So-net 看板娘互動攤位外，同場帶來《TP12》與音樂節奏遊戲《Heavenly Guitars 天選吉他》和其他多項現場趣味活動，",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 23 日至 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+    },
+    {
+      "id": "gnn-308173",
+      "title": "【漫博 26】台灣角川限定活動與滿額贈公開 推出「本館」與「絢戀館」雙館齊發",
+      "summary": "台灣角川今正式公開「2026 漫畫博覽會」展場特別活動與滿額贈禮資訊。本屆漫博將於 2026 年 7 月 23 日（四）至 7 月 27 日（一）在台北世貿一館登場。台灣角川推出 15 部話題作「首賣特裝版 & 限定版」、超過百款人氣 IP「首賣精品」及 20 款「會場先行商品」。此外，為了滿足多面向作品粉絲需求，今年特別規劃「台灣角川本館」與「",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308173",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-14T09:54:38.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "本館",
+        "絢戀館",
+        "2026 漫畫博覽會",
+        "首賣特裝版 & 限定版",
+        "首賣精品",
+        "會場先行",
+        "台灣角川本館",
+        "漫博 26",
+        "15 部話題作「首賣特裝版 & 限定版」",
+        "超過百款人氣"
+      ],
+      "searchCorpus": "【漫博 26】台灣角川限定活動與滿額贈公開 推出「本館」與「絢戀館」雙館齊發 台灣角川今正式公開「2026 漫畫博覽會」展場特別活動與滿額贈禮資訊。本屆漫博將於 2026 年 7 月 23 日（四）至 7 月 27 日（一）在台北世貿一館登場。台灣角川推出 15 部話題作「首賣特裝版 & 限定版」、超過百款人氣 IP「首賣精品」及 20 款「會場先行商品」。此外，為了滿足多面向作品粉絲需求，今年特別規劃「台灣角川本館」與「",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 7 月 23 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "gnn-308126",
@@ -237,8 +344,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-26d921140c8adc8b",
@@ -298,8 +405,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -328,8 +435,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-6aeda05927149db1",
@@ -385,8 +492,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -394,7 +501,7 @@
       "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
@@ -413,8 +520,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -443,8 +550,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -476,6 +583,102 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-13T11:44:18.398Z",
       "lastSeenAt": "2026-07-13T11:44:18.398Z"
+    },
+    {
+      "id": "ext-83e05308d772dbe8",
+      "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
+      "summary": "4Gamers",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-13T08:46:03.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "全知讀者視角",
+        "非正式授權"
+      ],
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+    },
+    {
+      "id": "gnn-308171",
+      "title": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台",
+      "summary": "作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308171",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T09:44:36.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "水縹そまる",
+        "花咲くれは",
+        "UFO 醬",
+        "流川莉蘿",
+        "夏色Palette",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台 作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+    },
+    {
+      "id": "ext-57e5e727037a7dc6",
+      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T13:18:12.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026漫畫博覽會"
+      ],
+      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ Paradaily",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z"
     }
   ],
   "archive": []
