@@ -3,29 +3,86 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-15T07:31:09.855Z",
-    "lastSuccessfulUpdateAt": "2026-07-15T07:31:09.855Z",
-    "fetchStatus": "success",
-    "fetchedRssCount": 30,
-    "fetchedTagItemCount": 205,
-    "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 641,
-    "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 34,
+    "updatedAt": "2026-07-16T07:48:31.886Z",
+    "lastSuccessfulUpdateAt": "2026-07-16T07:48:31.886Z",
+    "fetchStatus": "partial",
+    "fetchedRssCount": 0,
+    "fetchedTagItemCount": 0,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 413,
+    "articleCandidateCount": 237,
+    "articleFetchSuccessCount": 5,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 24,
-    "newEventCount": 10,
-    "cachedEventCount": 8,
+    "matchedEventCount": 20,
+    "newEventCount": 2,
+    "cachedEventCount": 10,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 21,
-    "expiredRemovedCount": 13,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 62,
+    "undatedOldRemovedCount": 85,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 127,
-    "sourceErrors": [],
+    "nonActivityRemovedCount": 110,
+    "sourceErrors": [
+      {
+        "source": "GNN RSS",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 快閃店 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 快閃店 第 2 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 展覽 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 展覽 第 2 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 餐廳 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 餐廳 第 2 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 主題咖啡廳 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 見面會 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 見面會 第 2 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 簽名會 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 簽名會 第 2 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 漫畫博覽會 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      },
+      {
+        "source": "標籤 動漫節 第 1 頁",
+        "error": "HTTP 403 Forbidden"
+      }
+    ],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
@@ -85,8 +142,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -116,8 +173,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-12T07:51:39.028Z",
-      "lastSeenAt": "2026-07-12T07:51:39.028Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "gnn-308198",
@@ -344,8 +401,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-26d921140c8adc8b",
@@ -405,8 +462,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -435,8 +492,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-6aeda05927149db1",
@@ -492,8 +549,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -501,7 +558,7 @@
       "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
@@ -520,8 +577,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -550,13 +607,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
       "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
-      "summary": "聯合新聞網",
+      "summary": "UDN",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -577,12 +634,12 @@
         "湯姆貓與傑利鼠",
         "飛天小女警"
       ],
-      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 聯合新聞網",
+      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 UDN",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-13T11:44:18.398Z",
-      "lastSeenAt": "2026-07-13T11:44:18.398Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -612,8 +669,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     },
     {
       "id": "gnn-308171",
@@ -677,8 +734,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-16T07:48:31.886Z",
+      "lastSeenAt": "2026-07-16T07:48:31.886Z"
     }
   ],
   "archive": []
