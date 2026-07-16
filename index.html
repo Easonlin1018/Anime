@@ -6,7 +6,7 @@
     <title>全自動動漫追番基地 v11.0</title>
     <meta name="theme-color" content="#0f172a">
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="stylesheet" href="v11-styles.css">
+    <link rel="stylesheet" href="v11-styles.css?v=cross-media-2">
 
     <style>
         :root {
@@ -627,7 +627,7 @@
     <button style="margin-top:15px;margin-bottom:0;width:auto;padding:5px 15px;background:#475569;" onclick="closeToast()">關閉</button>
 </div>
 
-<script src="v11-core.js"></script>
+<script src="v11-core.js?v=cross-media-2"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -644,18 +644,25 @@ let eventList = [];
 let eventArchive = [];
 let eventMeta = {};
 let eventTab = "all";
-let activeWorkSearch = { query: "", terms: [] };
+let activeWorkSearch = { query: "", terms: [], animeId: "", mediaContext: null };
 let animeSyncing = false;
 const ANIME_SYNC_KEY = "anime_metadata_sync_v10_1";
-const WORK_ALIAS_CACHE_KEY = "anime_work_alias_cache_v10_4";
+const WORK_ALIAS_CACHE_KEY = "anime_work_alias_cache_v11_1";
 const LIVE_SEARCH_API_KEY = "anime_live_search_api_v10_4";
-const LIVE_SEARCH_PENDING_KEY = "anime_live_search_pending_v10_4";
+const LIVE_SEARCH_PENDING_KEY = "anime_live_search_pending_v11_1";
 const EVENT_PREFS_KEY = "anime_event_prefs_v10";
 const EVENT_OVERRIDES_KEY = "anime_event_overrides_v10";
+const EVENT_ANIME_OVERRIDES_KEY = "anime_event_anime_overrides_v11";
 const EVENT_SETTINGS_KEY = "anime_event_settings_v10";
 const EVENT_SEEN_KEY = "anime_event_seen_v10";
 let eventPrefs = JSON.parse(localStorage.getItem(EVENT_PREFS_KEY) || "{}");
 let eventOverrides = JSON.parse(localStorage.getItem(EVENT_OVERRIDES_KEY) || "{}");
+let eventAnimeOverrides = {};
+try {
+    eventAnimeOverrides = JSON.parse(localStorage.getItem(EVENT_ANIME_OVERRIDES_KEY) || "{}") || {};
+} catch {
+    eventAnimeOverrides = {};
+}
 let eventSettings = JSON.parse(localStorage.getItem(EVENT_SETTINGS_KEY) || "{}");
 let workAliasCache = {};
 try {
@@ -663,6 +670,7 @@ try {
 } catch {
     workAliasCache = {};
 }
+const EVENT_MATCH_DEBUG = /^(?:localhost|127\.0\.0\.1)$/.test(location.hostname) || new URLSearchParams(location.search).get("eventMatchDebug") === "1";
 let toastTimer = null;
 
 const searchBtn = document.getElementById("search-btn");
@@ -950,9 +958,11 @@ const MEDIA_FIELDS = `
         edges {
             relationType
             node {
-                id format
+                id type format chapters volumes siteUrl
                 title { native english romaji }
+                synonyms
                 status
+                staff(perPage: 5) { edges { role node { name { full native } } } }
             }
         }
     }
@@ -1457,12 +1467,20 @@ async function pollLiveSearchResult(pending, button = null) {
                 ...(activeWorkSearch.terms || []),
                 ...(Array.isArray(result.aliases) ? result.aliases : [])
             ]).flatMap(deriveAliasVariants);
-            activeWorkSearch = { query: pending.query, terms:[...new Set(allTerms)].slice(0, 500) };
+            activeWorkSearch = {
+                query: pending.query,
+                terms:[...new Set(allTerms)].slice(0, 500),
+                animeId:String(pending.animeId || activeWorkSearch.animeId || ""),
+                mediaContext:pending.mediaContext || activeWorkSearch.mediaContext || null
+            };
             const added = mergeLiveSearchEvents(result.events);
             fillEventFilters();
             renderEvents();
 
-            const count = Array.isArray(result.events) ? result.events.length : 0;
+            const activeAnime = currentActiveWorkAnime();
+            const count = activeAnime
+                ? filterEventsForAnime((Array.isArray(result.events) ? result.events : []).map(applyEventOverride), activeAnime).length
+                : (Array.isArray(result.events) ? result.events.length : 0);
             if (count > 0) {
                 setLiveSearchStatus(
                     `✅ 即時搜尋完成：檢查 ${Number(result.sourcesChecked || 0)} 個搜尋來源、` +
@@ -1497,7 +1515,7 @@ async function pollLiveSearchResult(pending, button = null) {
     throw new Error("搜尋超過 7 分鐘仍未完成，請到 GitHub Actions 查看執行狀態。 ");
 }
 
-async function startLiveEventSearch(query, button = null) {
+async function startLiveEventSearch(query, button = null, animeId = "", mediaContext = null) {
     const api = liveSearchApiUrl();
     if (!api) {
         setLiveSearchStatus(
@@ -1521,6 +1539,8 @@ async function startLiveEventSearch(query, button = null) {
     const pending = {
         requestId:data.requestId,
         query,
+        animeId:String(animeId || ""),
+        mediaContext:mediaContext || null,
         resultUrl:data.resultUrl,
         createdAt:new Date().toISOString()
     };
@@ -1546,7 +1566,7 @@ async function resumePendingLiveSearch() {
     });
 }
 
-async function searchEventsByWork(title = null) {
+async function searchEventsByWork(title = null, animeId = null, mediaContext = null) {
     const input = document.getElementById("work-event-input");
     const button = document.getElementById("work-event-btn");
     const keyword = String(title ?? input?.value ?? "").trim();
@@ -1563,11 +1583,23 @@ async function searchEventsByWork(title = null) {
     }
 
     try {
-        const terms = await resolveWorkAliases(keyword);
-        activeWorkSearch = { query: keyword, terms };
+        const selectedAnime = animeId === null
+            ? animeList.find(anime => normalizeMatchText(anime.title) === normalizeMatchText(keyword)) || null
+            : animeList.find(anime => String(anime.id) === String(animeId)) || null;
+        const selectedTarget = mediaContext || selectedAnime;
+        activeWorkSearch = {
+            query:keyword,
+            terms:[...new Set([...expandWorkSearchTerms(keyword), ...normalizeAnimeAliasList(mediaContext?.aliases || []).flatMap(deriveAliasVariants)])],
+            animeId:String(selectedAnime?.id || ""),
+            mediaContext:mediaContext || null
+        };
         document.getElementById("event-keyword").value = keyword;
         setEventTab("all");
         scrollToSection("events-section");
+        renderEvents();
+
+        const terms = await resolveWorkAliases(keyword);
+        activeWorkSearch = { ...activeWorkSearch, terms };
         renderEvents();
 
         const beforeCleanup = eventList.length;
@@ -1578,9 +1610,9 @@ async function searchEventsByWork(title = null) {
             renderEvents();
         }
 
-        const localMatchedCount = eventList.filter(
-            event => eventMatchesWorkTerms(event, terms)
-        ).length;
+        const localMatchedCount = selectedTarget
+            ? filterEventsForAnime(eventList.map(applyEventOverride), selectedTarget).length
+            : eventList.filter(event => eventMatchesWorkTerms(event, terms)).length;
 
         if (localMatchedCount > 0) {
             setLiveSearchStatus(
@@ -1595,7 +1627,7 @@ async function searchEventsByWork(title = null) {
         }
 
         if (button) button.textContent = "⚡ 正在上網搜尋…";
-        await startLiveEventSearch(keyword, button);
+        await startLiveEventSearch(keyword, button, selectedAnime?.id || "", mediaContext);
     } catch (error) {
         setLiveSearchStatus(`❌ ${escapeHtml(error.message)}`, "error");
         showToast(`❌ ${escapeHtml(error.message)}`, 5000);
@@ -1750,7 +1782,7 @@ function buildAnimeItem(anime) {
                 ${actions}
                 <button class="btn-review" onclick='editAnimeReview(${animeId})'>⭐ 評分筆記</button>
                 <button type="button" class="btn-review" data-open-themes="${animeDataId}">🎵 主題曲</button>
-                <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getCoreTitle(anime.title))}'))">🎪 查活動</button>
+                <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getCoreTitle(anime.title))}'),decodeURIComponent('${encodeURIComponent(String(anime.id))}'))">🎪 查活動</button>
                 <button class="btn-edit" onclick='editTitle(${animeId})'>✏️ 改名</button>
                 <button class="btn-del" onclick='deleteAnime(${animeId})'>🗑️ 刪除</button>
             </div>
@@ -1974,8 +2006,75 @@ function dateDiffDays(a, b) {
 function saveEventLocalData() {
     localStorage.setItem(EVENT_PREFS_KEY, JSON.stringify(eventPrefs));
     localStorage.setItem(EVENT_OVERRIDES_KEY, JSON.stringify(eventOverrides));
+    localStorage.setItem(EVENT_ANIME_OVERRIDES_KEY, JSON.stringify(eventAnimeOverrides));
     localStorage.setItem(EVENT_SETTINGS_KEY, JSON.stringify(eventSettings));
 }
+
+window.searchEventsByMedia = function (work, media) {
+    const context = window.CrossMediaTracker?.eventContext?.(work, media) || { ...media, workId:work?.workId };
+    return searchEventsByWork(media?.title || work?.title || "", null, context);
+};
+
+function normalizeAnimeIdList(value) {
+    return [...new Set((Array.isArray(value) ? value : []).map(id => String(id)).filter(Boolean))];
+}
+
+function migrateEventAnimeOverrides() {
+    const migrated = {};
+    const ids = new Set([...Object.keys(eventOverrides || {}), ...Object.keys(eventAnimeOverrides || {})]);
+    ids.forEach(eventId => {
+        const legacyManual = eventOverrides?.[eventId] || {};
+        const current = eventAnimeOverrides?.[eventId] || {};
+        const includeAnimeIds = normalizeAnimeIdList([
+            ...normalizeAnimeIdList(legacyManual.includeAnimeIds),
+            ...normalizeAnimeIdList(current.includeAnimeIds)
+        ]);
+        const excludeAnimeIds = normalizeAnimeIdList([
+            ...normalizeAnimeIdList(legacyManual.excludeAnimeIds),
+            ...normalizeAnimeIdList(current.excludeAnimeIds)
+        ]);
+        const includeMediaIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.includeMediaIds), ...normalizeAnimeIdList(current.includeMediaIds)]);
+        const excludeMediaIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.excludeMediaIds), ...normalizeAnimeIdList(current.excludeMediaIds)]);
+        const includeWorkIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.includeWorkIds), ...normalizeAnimeIdList(current.includeWorkIds)]);
+        const excludeWorkIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.excludeWorkIds), ...normalizeAnimeIdList(current.excludeWorkIds)]);
+        if (includeAnimeIds.length || excludeAnimeIds.length || includeMediaIds.length || excludeMediaIds.length || includeWorkIds.length || excludeWorkIds.length) migrated[eventId] = { includeAnimeIds, excludeAnimeIds, includeMediaIds, excludeMediaIds, includeWorkIds, excludeWorkIds };
+    });
+    eventAnimeOverrides = migrated;
+    localStorage.setItem(EVENT_ANIME_OVERRIDES_KEY, JSON.stringify(eventAnimeOverrides));
+}
+
+function eventAnimeOverride(id) {
+    return eventAnimeOverrides[String(id)] || { includeAnimeIds:[], excludeAnimeIds:[], includeMediaIds:[], excludeMediaIds:[], includeWorkIds:[], excludeWorkIds:[] };
+}
+
+function currentActiveWorkAnime() {
+    if (!activeWorkSearch.query) return null;
+    if (activeWorkSearch.mediaContext) return activeWorkSearch.mediaContext;
+    if (activeWorkSearch.animeId) {
+        const anime = animeList.find(item => String(item.id) === String(activeWorkSearch.animeId));
+        if (anime) return anime;
+    }
+    return {
+        id:`query:${normalizeMatchText(activeWorkSearch.query)}`,
+        title:activeWorkSearch.query,
+        aliases:localWorkAliasesForQuery(activeWorkSearch.query)
+    };
+}
+
+function matchEventToAnime(event, anime) {
+    const result = AnimeTrackerV11.matchEventToAnime(event, anime, eventAnimeOverride(event?.id));
+    if (EVENT_MATCH_DEBUG) console.debug("[event-anime-match]", result);
+    return result;
+}
+
+function filterEventsForAnime(events, anime) {
+    return (Array.isArray(events) ? events : []).filter(event => {
+        const result = matchEventToAnime(event, anime);
+        return result.matched === true && result.confidence === "high" && result.score >= 80;
+    });
+}
+
+migrateEventAnimeOverrides();
 
 function applyEventOverride(event) {
     const override = eventOverrides[event.id] || {};
@@ -2243,12 +2342,8 @@ function eventMatchesWorkTerms(event, terms) {
 
 function matchingAnime(event) {
     return animeList.filter(anime => {
-        const aliases = normalizeAnimeAliasList([
-            anime.title,
-            ...(Array.isArray(anime.aliases) ? anime.aliases : [])
-        ]);
-        const expanded = aliases.flatMap(deriveAliasVariants);
-        return eventMatchesWorkTerms(event, expanded);
+        const result = matchEventToAnime(event, anime);
+        return result.matched === true && result.confidence === "high" && result.score >= 80;
     }).slice(0, 3);
 }
 
@@ -2505,13 +2600,34 @@ function editEvent(id) {
     saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("✏️ 活動資料已在本機修正");
 }
 
+function excludeEventForActiveAnime(id) {
+    const anime = currentActiveWorkAnime();
+    if (!anime || (!activeWorkSearch.animeId && !activeWorkSearch.mediaContext)) return showToast("請先從作品卡片按「查活動」。");
+    const event = [...eventList, ...eventArchive].find(item => String(item.id) === String(id));
+    if (!event) return;
+    if (!confirm(`確定將「${event.title}」標記為與《${anime.title}》無關嗎？`)) return;
+    const current = eventAnimeOverride(id);
+    const isCrossMedia = Boolean(activeWorkSearch.mediaContext);
+    eventAnimeOverrides[String(id)] = {
+        includeAnimeIds:normalizeAnimeIdList(current.includeAnimeIds),
+        excludeAnimeIds:normalizeAnimeIdList(isCrossMedia ? current.excludeAnimeIds : [...current.excludeAnimeIds, anime.id]),
+        includeMediaIds:normalizeAnimeIdList(current.includeMediaIds),
+        excludeMediaIds:normalizeAnimeIdList(isCrossMedia ? [...(current.excludeMediaIds || []), anime.id] : current.excludeMediaIds),
+        includeWorkIds:normalizeAnimeIdList(current.includeWorkIds),
+        excludeWorkIds:normalizeAnimeIdList(isCrossMedia ? [...(current.excludeWorkIds || []), anime.workId] : current.excludeWorkIds)
+    };
+    saveEventLocalData();
+    renderEvents();
+    showToast("🚫 已排除此活動；重新搜尋、整理或同步後仍會保留。");
+}
+
 function markEventEnded(id) {
     eventOverrides[id] = { ...eventOverrides[id], eventStatus:"expired", eventEndDate:todayDateKey() };
     saveEventLocalData(); renderEvents();
 }
 
 function exportEventData() {
-    const payload = { version:"10.1", prefs:eventPrefs, overrides:eventOverrides, settings:eventSettings };
+    const payload = { version:"11.1", prefs:eventPrefs, overrides:eventOverrides, animeOverrides:eventAnimeOverrides, settings:eventSettings };
     const blob = new Blob([JSON.stringify(payload,null,2)], {type:"application/json"});
     const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `anime_event_data_${todayDateKey()}.json`; link.click(); URL.revokeObjectURL(link.href);
 }
@@ -2519,7 +2635,7 @@ function exportEventData() {
 function importEventData(inputEvent) {
     const file = inputEvent.target.files[0]; if (!file) return;
     const reader = new FileReader();
-    reader.onload = e => { try { const data=JSON.parse(e.target.result); eventPrefs=data.prefs||{}; eventOverrides=data.overrides||{}; eventSettings=data.settings||{}; saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("📥 活動收藏與修正資料已還原"); } catch { showToast("❌ 活動資料格式錯誤"); } inputEvent.target.value=""; };
+    reader.onload = e => { try { const data=JSON.parse(e.target.result); eventPrefs=data.prefs||{}; eventOverrides=data.overrides||{}; eventAnimeOverrides=data.animeOverrides||{}; eventSettings=data.settings||{}; migrateEventAnimeOverrides(); saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("📥 活動收藏與修正資料已還原"); } catch { showToast("❌ 活動資料格式錯誤"); } inputEvent.target.value=""; };
     reader.readAsText(file);
 }
 
@@ -2535,8 +2651,13 @@ function renderEvents() {
     const type = document.getElementById("event-type").value;
     const admission = document.getElementById("event-admission")?.value || "";
     const rawSource = eventTab === "archive" ? eventArchive : eventList;
-    const source = window.AnimeTrackerV11 ? AnimeTrackerV11.mergeDuplicateEvents(rawSource) : rawSource;
-    const filtered = source.map(applyEventOverride).filter(event => {
+    const mergedSource = window.AnimeTrackerV11 ? AnimeTrackerV11.mergeDuplicateEvents(rawSource) : rawSource;
+    const overriddenSource = mergedSource.map(applyEventOverride);
+    const activeAnime = activeWorkSearch.query && normalizeMatchText(activeWorkSearch.query) === normalizedKeyword
+        ? currentActiveWorkAnime()
+        : null;
+    const source = activeAnime ? filterEventsForAnime(overriddenSource, activeAnime) : overriddenSource;
+    const filtered = source.filter(event => {
         const pref = eventPreference(event.id);
         const matches = matchingAnime(event);
         if (eventTab === "want" && pref.state !== "want") return false;
@@ -2550,7 +2671,8 @@ function renderEvents() {
             event,
             workSearchTerms
         );
-        return (!keyword || text.includes(keyword) || (normalizedKeyword.length >= 2 && normalizedText.includes(normalizedKeyword)) || matchesWorkAlias) && (!type || event.type === type) && (!admission || (event.admissionType || "待確認") === admission) && (!location || (event.locations || []).includes(location));
+        const matchesKeyword = activeAnime || !keyword || text.includes(keyword) || (normalizedKeyword.length >= 2 && normalizedText.includes(normalizedKeyword)) || matchesWorkAlias;
+        return matchesKeyword && (!type || event.type === type) && (!admission || (event.admissionType || "待確認") === admission) && (!location || (event.locations || []).includes(location));
     }).sort((a,b) => { const A=eventSortValue(a), B=eventSortValue(b); return A.rank-B.rank || A.date.localeCompare(B.date); });
 
     document.getElementById("event-count").textContent = `顯示 ${filtered.length} 則｜收藏 ${Object.values(eventPrefs).filter(x=>x.state==='want').length}｜要去 ${Object.values(eventPrefs).filter(x=>x.state==='going').length}`;
@@ -2581,6 +2703,7 @@ function renderEvents() {
                 <button class="going ${pref.state==='going'?'selected':''}" onclick="updateEventPreference('${event.id}',{state:'going'})">✅ 要去</button>
                 <button class="visited ${pref.state==='visited'?'selected':''}" onclick="updateEventPreference('${event.id}',{state:'visited'})">🎫 去過</button>
                 <button class="edit" onclick="editEvent('${event.id}')">✏️ 修正</button>
+                ${activeWorkSearch.animeId || activeWorkSearch.mediaContext ? `<button class="hide" onclick="excludeEventForActiveAnime(decodeURIComponent('${encodeURIComponent(String(event.id))}'))">🚫 此活動與目前作品無關</button>` : ""}
                 <button class="hide" onclick="markEventEnded('${event.id}')">📦 已結束</button>
                 <button class="hide" onclick="updateEventPreference('${event.id}',{dismissed:true})">🙈 隱藏</button>
             </div>
@@ -2637,7 +2760,7 @@ document.getElementById("event-keyword").addEventListener("input", event => {
         normalizeMatchText(event.target.value) !==
             normalizeMatchText(activeWorkSearch.query)
     ) {
-        activeWorkSearch = { query: "", terms: [] };
+        activeWorkSearch = { query: "", terms: [], animeId: "", mediaContext: null };
     }
     renderEvents();
 });
@@ -2653,8 +2776,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js"></script>
+<script src="v11-ui.js?v=cross-media-2"></script>
 <script src="spotify-config.js"></script>
 <script src="spotify-themes.js"></script>
+<script src="cross-media.js?v=cross-media-2"></script>
 </body>
 </html>
