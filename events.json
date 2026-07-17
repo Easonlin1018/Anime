@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-16T07:48:31.886Z",
-    "lastSuccessfulUpdateAt": "2026-07-16T07:48:31.886Z",
+    "updatedAt": "2026-07-17T07:36:00.059Z",
+    "lastSuccessfulUpdateAt": "2026-07-17T07:36:00.059Z",
     "fetchStatus": "partial",
     "fetchedRssCount": 0,
     "fetchedTagItemCount": 0,
     "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 413,
-    "articleCandidateCount": 237,
-    "articleFetchSuccessCount": 5,
+    "uniqueNewsCount": 408,
+    "articleCandidateCount": 232,
+    "articleFetchSuccessCount": 7,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
+    "matchedEventCount": 19,
     "newEventCount": 2,
-    "cachedEventCount": 10,
+    "cachedEventCount": 11,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 21,
-    "expiredRemovedCount": 15,
+    "expiredRemovedCount": 18,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 85,
+    "undatedOldRemovedCount": 77,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 110,
+    "nonActivityRemovedCount": 109,
     "sourceErrors": [
       {
         "source": "GNN RSS",
@@ -142,8 +142,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -173,8 +173,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "gnn-308198",
@@ -401,8 +401,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-26d921140c8adc8b",
@@ -462,8 +462,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -549,8 +549,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -577,8 +577,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -607,8 +607,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -638,8 +638,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -669,8 +669,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     },
     {
       "id": "gnn-308171",
@@ -734,8 +734,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-16T07:48:31.886Z",
-      "lastSeenAt": "2026-07-16T07:48:31.886Z"
+      "discoveredAt": "2026-07-17T07:36:00.059Z",
+      "lastSeenAt": "2026-07-17T07:36:00.059Z"
     }
   ],
   "archive": []
