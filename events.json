@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-18T07:12:14.311Z",
-    "lastSuccessfulUpdateAt": "2026-07-18T07:12:14.311Z",
+    "updatedAt": "2026-07-19T07:56:42.848Z",
+    "lastSuccessfulUpdateAt": "2026-07-19T07:56:42.848Z",
     "fetchStatus": "partial",
     "fetchedRssCount": 0,
     "fetchedTagItemCount": 0,
     "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 409,
-    "articleCandidateCount": 233,
-    "articleFetchSuccessCount": 6,
+    "uniqueNewsCount": 410,
+    "articleCandidateCount": 234,
+    "articleFetchSuccessCount": 5,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 20,
-    "newEventCount": 3,
+    "newEventCount": 2,
     "cachedEventCount": 11,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 22,
-    "expiredRemovedCount": 18,
+    "expiredRemovedCount": 16,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 77,
+    "undatedOldRemovedCount": 72,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 109,
+    "nonActivityRemovedCount": 120,
     "sourceErrors": [
       {
         "source": "GNN RSS",
@@ -142,8 +142,8 @@
       "dateConfidence": "medium",
       "dateSource": "5 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -173,8 +173,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "gnn-308198",
@@ -401,8 +401,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-26d921140c8adc8b",
@@ -462,8 +462,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -549,8 +549,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -558,7 +558,7 @@
       "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
@@ -577,8 +577,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -607,8 +607,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -623,7 +623,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-10T06:30:13.000Z",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -638,8 +638,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -669,8 +669,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "gnn-308171",
@@ -734,8 +734,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
       "id": "ext-b5b6e003c966cbf4",
@@ -764,8 +764,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-18T07:12:14.311Z",
-      "lastSeenAt": "2026-07-18T07:12:14.311Z"
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z"
     }
   ],
   "archive": []
