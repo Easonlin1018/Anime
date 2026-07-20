@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-19T07:56:42.848Z",
-    "lastSuccessfulUpdateAt": "2026-07-19T07:56:42.848Z",
+    "updatedAt": "2026-07-20T11:22:47.408Z",
+    "lastSuccessfulUpdateAt": "2026-07-20T11:22:47.408Z",
     "fetchStatus": "partial",
     "fetchedRssCount": 0,
     "fetchedTagItemCount": 0,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 410,
-    "articleCandidateCount": 234,
+    "fetchedExternalItemCount": 429,
+    "uniqueNewsCount": 403,
+    "articleCandidateCount": 230,
     "articleFetchSuccessCount": 5,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 2,
-    "cachedEventCount": 11,
+    "matchedEventCount": 17,
+    "newEventCount": 3,
+    "cachedEventCount": 13,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
+    "archiveCount": 1,
     "storedEventCount": 22,
-    "expiredRemovedCount": 16,
+    "expiredRemovedCount": 19,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 72,
+    "undatedOldRemovedCount": 76,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 120,
+    "nonActivityRemovedCount": 111,
     "sourceErrors": [
       {
         "source": "GNN RSS",
@@ -118,34 +118,6 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
-      "id": "ext-f3c836c747fab5a7",
-      "title": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5IYTVjam5XampqcjV3VTBUZEh1QXM2TFkxMjA5akdna05HUkloeFU1VVozTGhiMVR5SFgwWlNHNmJNRUlNRXgtVHhLRzJtNl9jTWxYVUxxeXA?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-04-29T07:00:00.000Z",
-      "eventStartDate": "2026-05-15",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "5 月 15 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
-    },
-    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
       "summary": "4Gamers",
@@ -161,7 +133,7 @@
       "publishedAt": "2026-05-29T07:00:00.000Z",
       "eventStartDate": "2026-07-20",
       "eventEndDate": null,
-      "eventStatus": "upcoming",
+      "eventStatus": "ongoing-unconfirmed",
       "venue": "中友百貨",
       "admissionType": "待確認",
       "feeText": "",
@@ -173,8 +145,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "gnn-308198",
@@ -431,8 +403,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -462,8 +434,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -549,8 +521,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -577,8 +549,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -607,8 +579,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+    },
+    {
+      "id": "ext-0ca4f08ed4351924",
+      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
+      "summary": "遠見雜誌",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -669,8 +669,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     },
     {
       "id": "gnn-308171",
@@ -738,10 +738,10 @@
       "lastSeenAt": "2026-07-19T07:56:42.848Z"
     },
     {
-      "id": "ext-b5b6e003c966cbf4",
-      "title": "《黃泉使者》尤爾與阿薩兄妹檔領軍 木棉花2026台北漫畫博覽會攤位熱鬧登場",
-      "summary": "Zeek玩家誌",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFA4bmdHTW9XSUlUS2lZc0RNaEJiYWllX3V6ZHdWTDVBZ1VwQXdEQmdETnVYREhxZHZPUXlTSDdRU3hBekd2X19fejV5ODBVd0NHd0E?oc=5",
+      "id": "ext-9775fce9a1c716ac",
+      "title": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看",
+      "summary": "oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1aczg4d1o5bEIwLU5KVGNkNEh2a2VlRE5mel9YcW1MNTN0QXg1aVRCUmVVZ2hVRVViRGQxYktTclQ2Zmd2YmhIMVdDWmFYTXhVdnJJ?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
@@ -750,7 +750,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-17T16:47:36.000Z",
+      "publishedAt": "2026-07-20T07:59:51.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -758,15 +758,46 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "黃泉使者"
+        "黃泉使者",
+        "2026台北漫畫博覽會"
       ],
-      "searchCorpus": "《黃泉使者》尤爾與阿薩兄妹檔領軍 木棉花2026台北漫畫博覽會攤位熱鬧登場 Zeek玩家誌",
+      "searchCorpus": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看 oneone宇宙",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-20T11:22:47.408Z",
+      "lastSeenAt": "2026-07-20T11:22:47.408Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-f3c836c747fab5a7",
+      "title": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5IYTVjam5XampqcjV3VTBUZEh1QXM2TFkxMjA5akdna05HUkloeFU1VVozTGhiMVR5SFgwWlNHNmJNRUlNRXgtVHhLRzJtNl9jTWxYVUxxeXA?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-04-29T07:00:00.000Z",
+      "eventStartDate": "2026-05-15",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "5 月 15 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z",
+      "archivedAt": "2026-07-20T11:22:47.408Z"
+    }
+  ]
 }
