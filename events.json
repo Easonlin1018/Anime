@@ -3,86 +3,29 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-20T11:22:47.408Z",
-    "lastSuccessfulUpdateAt": "2026-07-20T11:22:47.408Z",
-    "fetchStatus": "partial",
-    "fetchedRssCount": 0,
-    "fetchedTagItemCount": 0,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 403,
+    "updatedAt": "2026-07-21T09:36:55.915Z",
+    "lastSuccessfulUpdateAt": "2026-07-21T09:36:55.915Z",
+    "fetchStatus": "success",
+    "fetchedRssCount": 30,
+    "fetchedTagItemCount": 205,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 637,
     "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 5,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
-    "newEventCount": 3,
+    "matchedEventCount": 22,
+    "newEventCount": 6,
     "cachedEventCount": 13,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 22,
-    "expiredRemovedCount": 19,
+    "archiveCount": 0,
+    "storedEventCount": 25,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 76,
+    "undatedOldRemovedCount": 64,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 111,
-    "sourceErrors": [
-      {
-        "source": "GNN RSS",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 快閃店 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 快閃店 第 2 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 展覽 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 展覽 第 2 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 餐廳 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 餐廳 第 2 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 主題咖啡廳 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 見面會 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 見面會 第 2 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 簽名會 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 簽名會 第 2 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 漫畫博覽會 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      },
-      {
-        "source": "標籤 動漫節 第 1 頁",
-        "error": "HTTP 403 Forbidden"
-      }
-    ],
+    "nonActivityRemovedCount": 122,
+    "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
@@ -118,6 +61,36 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "ext-3df4fd4cb0c8ce3a",
+      "title": "年輕人暑假不無聊 《孤獨搖滾！》動畫展即日起獨家在中友百貨展出 | 自由電子報",
+      "summary": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE82LXhtMzJiZmxXaDBqUHhUXy1Xd2JBaF9nZkJ3cGU2aGltWWI2amhJbVdBMHNqdWNEZE5HZEpSLWEzekJCcndIWDJOdHo2N2hIM3M5NFpOZzhTaUJuV2Z3MXBxSTNiNThUZ1F4SGFvemhRNS1ibG1R?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-21T05:58:35.000Z",
+      "eventStartDate": "2026-07-21",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！"
+      ],
+      "searchCorpus": "年輕人暑假不無聊 《孤獨搖滾！》動畫展即日起獨家在中友百貨展出 | 自由電子報 LINE TODAY",
+      "dateConfidence": "medium",
+      "dateSource": "即日起",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+    },
+    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
       "summary": "4Gamers",
@@ -145,8 +118,39 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+    },
+    {
+      "id": "gnn-308504",
+      "title": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流",
+      "summary": "美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308504",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-21T08:54:49.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-26",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "聖地牙哥國際漫畫展",
+        "T-COMICS"
+      ],
+      "searchCorpus": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流 美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 26 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "gnn-308198",
@@ -346,6 +350,41 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "gnn-308492",
+      "title": "《未定事件簿》× 萌番 More Fun 六週年期間限定主題餐廳 7/29 起台北、高雄兩地同步揭幕",
+      "summary": "IP 授權品牌「萌番 More Fun」正式宣布，《未定事件簿》期間限定主題餐廳即將自 2026 年 7 月 29 日起至 9 月 13 日止，在台北「SORA LINK」與高雄「魯克思咖啡」同步登場，邀請全台律師共赴這場專屬於妳與他們的限定宴會。 這場宴會，因你而起 本次主題餐廳以架空推理宴會為舞台，圍繞四位角色夏彥、左然、莫弈、陸景和，打造專屬聯名餐",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308492",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：餐廳",
+      "sourceTag": "餐廳",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-21T08:10:28.000Z",
+      "eventStartDate": "2026-07-29",
+      "eventEndDate": "2026-09-13",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "未定事件簿",
+        "萌番 More Fun",
+        "SORA LINK",
+        "魯克思咖啡"
+      ],
+      "searchCorpus": "《未定事件簿》× 萌番 More Fun 六週年期間限定主題餐廳 7/29 起台北、高雄兩地同步揭幕 IP 授權品牌「萌番 More Fun」正式宣布，《未定事件簿》期間限定主題餐廳即將自 2026 年 7 月 29 日起至 9 月 13 日止，在台北「SORA LINK」與高雄「魯克思咖啡」同步登場，邀請全台律師共赴這場專屬於妳與他們的限定宴會。 這場宴會，因你而起 本次主題餐廳以架空推理宴會為舞台，圍繞四位角色夏彥、左然、莫弈、陸景和，打造專屬聯名餐",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 29 日起至 9 月 13 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+    },
+    {
       "id": "ext-562b7f12b291cf8a",
       "title": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》",
       "summary": "GNN 新聞網",
@@ -403,8 +442,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -434,8 +473,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -498,7 +537,7 @@
     {
       "id": "ext-21f6459e53df73bd",
       "title": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題",
-      "summary": "網路溫度計 DailyView",
+      "summary": "網路溫度計DailyView",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tOXFxcjBDMHM3Y3pxM3U1TU5MQ0xGVExXRUNueFI5UDgxVjVxaDVYQVNKeHF0RW5sOHQ3V2oxVXpHNTl2bzRickE2SWxaN3plZWtF?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -517,12 +556,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計 DailyView",
+      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計DailyView",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -549,8 +588,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -579,8 +618,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-0ca4f08ed4351924",
@@ -607,8 +646,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -669,8 +708,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "gnn-308171",
@@ -765,39 +804,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-20T11:22:47.408Z",
-      "lastSeenAt": "2026-07-20T11:22:47.408Z"
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     }
   ],
-  "archive": [
-    {
-      "id": "ext-f3c836c747fab5a7",
-      "title": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5IYTVjam5XampqcjV3VTBUZEh1QXM2TFkxMjA5akdna05HUkloeFU1VVozTGhiMVR5SFgwWlNHNmJNRUlNRXgtVHhLRzJtNl9jTWxYVUxxeXA?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-04-29T07:00:00.000Z",
-      "eventStartDate": "2026-05-15",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "日本時尚動漫聯名品牌 MAYLA 首次登台 期間限定快閃店 5 月 15 日台北開幕 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "5 月 15 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z",
-      "archivedAt": "2026-07-20T11:22:47.408Z"
-    }
-  ]
+  "archive": []
 }
