@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-21T09:36:55.915Z",
-    "lastSuccessfulUpdateAt": "2026-07-21T09:36:55.915Z",
+    "updatedAt": "2026-07-22T09:37:08.897Z",
+    "lastSuccessfulUpdateAt": "2026-07-22T09:37:08.897Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 637,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 33,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 635,
+    "articleCandidateCount": 229,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 6,
-    "cachedEventCount": 13,
+    "matchedEventCount": 19,
+    "newEventCount": 5,
+    "cachedEventCount": 18,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 25,
-    "expiredRemovedCount": 14,
+    "storedEventCount": 28,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 64,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 122,
+    "nonActivityRemovedCount": 125,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -89,6 +89,38 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-21T09:36:55.915Z",
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
+    },
+    {
+      "id": "gnn-308568",
+      "title": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會",
+      "summary": "《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308568",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-22T07:36:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Pokemon GO",
+        "皮卡丘",
+        "伊布"
+      ],
+      "searchCorpus": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會 《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -320,6 +352,38 @@
       "lastSeenAt": "2026-07-11T01:41:17.900Z"
     },
     {
+      "id": "gnn-308555",
+      "title": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊",
+      "summary": "由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308555",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "簽名會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-22T04:54:54.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": "2026-08-23",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "麻宮騎亞 40th Arts Exhibition In 台灣",
+        "麻宮騎亞 40th Arts Exhibition In 台灣 2026",
+        "快傑蒸汽偵探團"
+      ],
+      "searchCorpus": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊 由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 25 日至 8 月 23 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+    },
+    {
       "id": "gnn-308120",
       "title": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開",
       "summary": "日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
@@ -385,6 +449,36 @@
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
+      "id": "gnn-308580",
+      "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
+      "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308580",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-22T08:31:07.000Z",
+      "eventStartDate": "2026-09-20",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "怪物彈珠"
+      ],
+      "searchCorpus": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣 由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 9 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+    },
+    {
       "id": "ext-562b7f12b291cf8a",
       "title": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》",
       "summary": "GNN 新聞網",
@@ -442,8 +536,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -473,8 +567,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -537,7 +631,7 @@
     {
       "id": "ext-21f6459e53df73bd",
       "title": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題",
-      "summary": "網路溫度計DailyView",
+      "summary": "網路溫度計 DailyView",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tOXFxcjBDMHM3Y3pxM3U1TU5MQ0xGVExXRUNueFI5UDgxVjVxaDVYQVNKeHF0RW5sOHQ3V2oxVXpHNTl2bzRickE2SWxaN3plZWtF?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -556,12 +650,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計DailyView",
+      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計 DailyView",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -588,8 +682,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -646,8 +740,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -708,8 +802,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "gnn-308171",
@@ -804,8 +898,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     }
   ],
   "archive": []
