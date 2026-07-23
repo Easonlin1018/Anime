@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-22T09:37:08.897Z",
-    "lastSuccessfulUpdateAt": "2026-07-22T09:37:08.897Z",
+    "updatedAt": "2026-07-23T09:31:17.983Z",
+    "lastSuccessfulUpdateAt": "2026-07-23T09:31:17.983Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 635,
+    "uniqueNewsCount": 630,
     "articleCandidateCount": 229,
-    "articleFetchSuccessCount": 35,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 5,
-    "cachedEventCount": 18,
+    "matchedEventCount": 16,
+    "newEventCount": 2,
+    "cachedEventCount": 20,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 28,
-    "expiredRemovedCount": 15,
+    "archiveCount": 1,
+    "storedEventCount": 27,
+    "expiredRemovedCount": 16,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 64,
+    "undatedOldRemovedCount": 60,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 125,
+    "nonActivityRemovedCount": 128,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -89,38 +89,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-21T09:36:55.915Z",
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
-    },
-    {
-      "id": "gnn-308568",
-      "title": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會",
-      "summary": "《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308568",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-22T07:36:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "Pokemon GO",
-        "皮卡丘",
-        "伊布"
-      ],
-      "searchCorpus": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會 《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -515,7 +483,7 @@
       "summary": "上報Up Media",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ycTdHQTNDVWhtRTNLdDJxUS1IcmhWaUNZZWFNTDZuNEVvV3FzVHZlc1NNVVV4enhxWlV5WHZsRGdCVXBBemZ3bk1tcHkxb1AxajNjaDlrTVY1dW0wcmc?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -536,8 +504,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -567,8 +535,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -654,8 +622,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -682,8 +650,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -740,8 +708,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -802,8 +770,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     },
     {
       "id": "gnn-308171",
@@ -898,9 +866,43 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
+      "discoveredAt": "2026-07-23T09:31:17.983Z",
+      "lastSeenAt": "2026-07-23T09:31:17.983Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-308568",
+      "title": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會",
+      "summary": "《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308568",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-22T07:36:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Pokemon GO",
+        "皮卡丘",
+        "伊布"
+      ],
+      "searchCorpus": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會 《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z",
+      "archivedAt": "2026-07-23T09:31:17.983Z"
+    }
+  ]
 }
