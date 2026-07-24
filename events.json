@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-23T09:31:17.983Z",
-    "lastSuccessfulUpdateAt": "2026-07-23T09:31:17.983Z",
+    "updatedAt": "2026-07-24T09:12:42.910Z",
+    "lastSuccessfulUpdateAt": "2026-07-24T09:12:42.910Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
     "fetchedExternalItemCount": 432,
     "uniqueNewsCount": 630,
-    "articleCandidateCount": 229,
+    "articleCandidateCount": 231,
     "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 16,
-    "newEventCount": 2,
-    "cachedEventCount": 20,
+    "matchedEventCount": 18,
+    "newEventCount": 3,
+    "cachedEventCount": 19,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 27,
-    "expiredRemovedCount": 16,
-    "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 60,
+    "archiveCount": 0,
+    "storedEventCount": 29,
+    "expiredRemovedCount": 15,
+    "recapRemovedCount": 1,
+    "undatedOldRemovedCount": 65,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 128,
+    "foreignRemovedCount": 1,
+    "nonActivityRemovedCount": 124,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -320,6 +320,42 @@
       "lastSeenAt": "2026-07-11T01:41:17.900Z"
     },
     {
+      "id": "gnn-308731",
+      "title": "《Sky 光・遇》結合大稻埕夏日節打造「星夜」新季節《致梵谷》中高主題餐廳開跑",
+      "summary": "社交冒險遊戲《Sky 光・遇》今日宣佈展開實體「夏夜花火節」線下活動。自 7 月 25 日起，《Sky 光・遇》新季節《致梵谷》將加入「大稻埕夏日節」，於台北大稻埕碼頭（五號水門）設置以「星夜」為概念的實體打卡裝置與闖關任務。此外，8 月 1 日起將接續於台中、高雄兩地開啟限定主題餐廳，推出名畫概念餐點與官方手作體驗活動。 大",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308731",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-24T06:42:30.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Sky 光・遇",
+        "致梵谷",
+        "星夜",
+        "夏夜花火節",
+        "大稻埕夏日節"
+      ],
+      "searchCorpus": "《Sky 光・遇》結合大稻埕夏日節打造「星夜」新季節《致梵谷》中高主題餐廳開跑 社交冒險遊戲《Sky 光・遇》今日宣佈展開實體「夏夜花火節」線下活動。自 7 月 25 日起，《Sky 光・遇》新季節《致梵谷》將加入「大稻埕夏日節」，於台北大稻埕碼頭（五號水門）設置以「星夜」為概念的實體打卡裝置與闖關任務。此外，8 月 1 日起將接續於台中、高雄兩地開啟限定主題餐廳，推出名畫概念餐點與官方手作體驗活動。 大",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 25 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+    },
+    {
       "id": "gnn-308555",
       "title": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊",
       "summary": "由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
@@ -483,7 +519,7 @@
       "summary": "上報Up Media",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ycTdHQTNDVWhtRTNLdDJxUS1IcmhWaUNZZWFNTDZuNEVvV3FzVHZlc1NNVVV4enhxWlV5WHZsRGdCVXBBemZ3bk1tcHkxb1AxajNjaDlrTVY1dW0wcmc?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -504,8 +540,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -535,8 +571,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -622,8 +658,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -650,8 +686,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -708,8 +744,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -739,8 +775,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -755,7 +791,7 @@
         "台灣"
       ],
       "confidence": "candidate",
-      "publishedAt": "2026-07-13T08:46:03.000Z",
+      "publishedAt": "2026-07-13T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -770,8 +806,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     },
     {
       "id": "gnn-308171",
@@ -866,43 +902,44 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-23T09:31:17.983Z",
-      "lastSeenAt": "2026-07-23T09:31:17.983Z"
-    }
-  ],
-  "archive": [
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+    },
     {
-      "id": "gnn-308568",
-      "title": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會",
-      "summary": "《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308568",
+      "id": "gnn-308754",
+      "title": "PARCO × GEEKS RULE 將於台北舉辦快閃店 發售《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》服飾",
+      "summary": "日本「PARCO」宣佈將與聚焦動畫等次文化的品牌企劃「GEEKS RULE」展開跨國合作企劃，本次企劃特別打造「GEEKS RULE WORLD TOUR CREATED BY PARCO」亞洲巡迴，預計將登陸台北、香港與首爾，展售活動旨在透過潮流服飾，將日本動畫文化與手作工藝推向世界舞台。 這次將推出與日本具代表性的人氣動畫《鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308754",
       "source": "巴哈姆特 GNN",
       "discoverySource": "RSS",
       "sourceTag": "",
-      "type": "見面會",
+      "type": "快閃店",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-22T07:36:00.000Z",
-      "eventStartDate": "2026-07-20",
+      "publishedAt": "2026-07-24T08:14:46.000Z",
+      "eventStartDate": null,
       "eventEndDate": null,
-      "eventStatus": "expired",
+      "eventStatus": "date-unknown",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "Pokemon GO",
-        "皮卡丘",
-        "伊布"
+        "鏈鋸人 蕾潔篇",
+        "膽大黨",
+        "福音戰士",
+        "PARCO",
+        "GEEKS RULE",
+        "GEEKS RULE WORLD TOUR CREATED BY PARCO"
       ],
-      "searchCorpus": "《Pokemon GO》攜手台北捷運推出一系列 10 周年活動 將舉辦「皮卡丘」與「伊布」見面會 《Pokemon GO》近日宣布，今年夏天，台北捷運邀請所有訓練家們一起前往捷運大安森林公園站，參與《Pokemon GO》10 週年特展，一同慶祝 10 年來的冒險旅程與難忘回憶。除了限定主題展區之外，現場還有「皮卡丘」與「伊布」見面會，以及紀念贈品等內容。 《Pokemon GO》遊戲內明信片蒐集 7 月 20 日起，台北捷運指定站點的寶可補給站，也將有",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z",
-      "archivedAt": "2026-07-23T09:31:17.983Z"
+      "searchCorpus": "PARCO × GEEKS RULE 將於台北舉辦快閃店 發售《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》服飾 日本「PARCO」宣佈將與聚焦動畫等次文化的品牌企劃「GEEKS RULE」展開跨國合作企劃，本次企劃特別打造「GEEKS RULE WORLD TOUR CREATED BY PARCO」亞洲巡迴，預計將登陸台北、香港與首爾，展售活動旨在透過潮流服飾，將日本動畫文化與手作工藝推向世界舞台。 這次將推出與日本具代表性的人氣動畫《鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-24T09:12:42.910Z",
+      "lastSeenAt": "2026-07-24T09:12:42.910Z"
     }
-  ]
+  ],
+  "archive": []
 }
