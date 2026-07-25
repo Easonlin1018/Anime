@@ -3,25 +3,25 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-24T09:12:42.910Z",
-    "lastSuccessfulUpdateAt": "2026-07-24T09:12:42.910Z",
+    "updatedAt": "2026-07-25T07:35:39.764Z",
+    "lastSuccessfulUpdateAt": "2026-07-25T07:35:39.764Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
-    "fetchedExternalItemCount": 432,
+    "fetchedExternalItemCount": 433,
     "uniqueNewsCount": 630,
-    "articleCandidateCount": 231,
-    "articleFetchSuccessCount": 33,
+    "articleCandidateCount": 234,
+    "articleFetchSuccessCount": 32,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 18,
-    "newEventCount": 3,
-    "cachedEventCount": 19,
+    "newEventCount": 4,
+    "cachedEventCount": 22,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 29,
+    "storedEventCount": 32,
     "expiredRemovedCount": 15,
-    "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 65,
+    "recapRemovedCount": 0,
+    "undatedOldRemovedCount": 63,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 1,
     "nonActivityRemovedCount": 124,
@@ -59,6 +59,37 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
+      "id": "gnn-308800",
+      "title": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場",
+      "summary": "長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308800",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "簽名會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T06:18:06.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "我兩個爸爸的故事",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場 長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
+      "dateConfidence": "medium",
+      "dateSource": "7/25",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "ext-3df4fd4cb0c8ce3a",
@@ -540,8 +571,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -571,8 +602,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -638,7 +669,7 @@
       "summary": "網路溫度計 DailyView",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tOXFxcjBDMHM3Y3pxM3U1TU5MQ0xGVExXRUNueFI5UDgxVjVxaDVYQVNKeHF0RW5sOHQ3V2oxVXpHNTl2bzRickE2SWxaN3plZWtF?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -658,13 +689,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "ext-642d6f3817b89821",
       "title": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡",
-      "summary": "SouNova 少女星",
+      "summary": "sounova.com",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
@@ -682,12 +713,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 SouNova 少女星",
+      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 sounova.com",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -744,8 +775,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -806,8 +837,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "gnn-308171",
@@ -887,7 +918,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-20T07:59:51.000Z",
+      "publishedAt": "2026-07-20T08:00:25.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -902,8 +933,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     },
     {
       "id": "gnn-308754",
@@ -939,6 +970,70 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-24T09:12:42.910Z",
       "lastSeenAt": "2026-07-24T09:12:42.910Z"
+    },
+    {
+      "id": "gnn-308798",
+      "title": "【漫博 26】《Myther》作者八田てき首場簽名會登場 作者感受粉絲熱情盼能再度來台",
+      "summary": "隨著 2026 年第 25 屆漫畫博覽會進入第三天，台灣東販於今日的舞台活動中，邀請到《Myther》作者八田てき來台舉行簽名會。 八田てき的《Myther》故事舞台為近未來，日本開發出一款能設計人格的裝置「Myther」，它能彌補使用者人格缺陷的部分，人們開始追求「理想的自己」。但來源不明的「非法 Myther」會讓使用者人格異常，導致犯罪頻傳",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308798",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "簽名會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T05:15:34.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Myther",
+        "理想的自己",
+        "非法 Myther",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《Myther》作者八田てき首場簽名會登場 作者感受粉絲熱情盼能再度來台 隨著 2026 年第 25 屆漫畫博覽會進入第三天，台灣東販於今日的舞台活動中，邀請到《Myther》作者八田てき來台舉行簽名會。 八田てき的《Myther》故事舞台為近未來，日本開發出一款能設計人格的裝置「Myther」，它能彌補使用者人格缺陷的部分，人們開始追求「理想的自己」。但來源不明的「非法 Myther」會讓使用者人格異常，導致犯罪頻傳",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+    },
+    {
+      "id": "gnn-308799",
+      "title": "【漫博 26】《GACHIAKUTA》聲優小西克幸來台特別專訪：希望擁有恩琴的溫柔帥氣魅力",
+      "summary": "羚邦於現正舉辦中的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，在預定將於明日登場的見面會之前，今（25）日主辦單位也搶先邀請巴哈姆特 GNN 等少數媒體特別專訪到了小西克幸先生，與各位分享他參與《GACHIAKUTA》演出的心情。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。《GACHIAKUTA》以生活在罪",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308799",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T06:01:57.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GACHIAKUTA",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《GACHIAKUTA》聲優小西克幸來台特別專訪：希望擁有恩琴的溫柔帥氣魅力 羚邦於現正舉辦中的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，在預定將於明日登場的見面會之前，今（25）日主辦單位也搶先邀請巴哈姆特 GNN 等少數媒體特別專訪到了小西克幸先生，與各位分享他參與《GACHIAKUTA》演出的心情。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。《GACHIAKUTA》以生活在罪",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-25T07:35:39.764Z",
+      "lastSeenAt": "2026-07-25T07:35:39.764Z"
     }
   ],
   "archive": []
