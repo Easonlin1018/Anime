@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-25T07:35:39.764Z",
-    "lastSuccessfulUpdateAt": "2026-07-25T07:35:39.764Z",
+    "updatedAt": "2026-07-26T09:02:06.621Z",
+    "lastSuccessfulUpdateAt": "2026-07-26T09:02:06.621Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 205,
-    "fetchedExternalItemCount": 433,
-    "uniqueNewsCount": 630,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 625,
     "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 32,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 18,
-    "newEventCount": 4,
-    "cachedEventCount": 22,
+    "newEventCount": 3,
+    "cachedEventCount": 21,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 32,
+    "storedEventCount": 34,
     "expiredRemovedCount": 15,
-    "recapRemovedCount": 0,
+    "recapRemovedCount": 1,
     "undatedOldRemovedCount": 63,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 124,
+    "nonActivityRemovedCount": 123,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -61,6 +61,37 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "gnn-308803",
+      "title": "【漫博 26】BL 漫畫《完美異族》系列作者おやすみ毛布簽名會登場",
+      "summary": "在今年的漫畫博覽會中，買動漫特別邀請原創同人誌《完美異族》系列作者おやすみ毛布首度來台舉辦簽名會，活動於今（7/25）下午在 B 舞台舉辦。（※由於活動規範，本次簽名會無法拍攝作者的照片。） 從二創起步的おやすみ毛布，畫風細膩美型，筆下人物皆邪魅狂狷，個個高挑、美麗又強大。她的原創作品《完美異族》系列，構築了",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308803",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "簽名會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T09:09:19.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "完美異族",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】BL 漫畫《完美異族》系列作者おやすみ毛布簽名會登場 在今年的漫畫博覽會中，買動漫特別邀請原創同人誌《完美異族》系列作者おやすみ毛布首度來台舉辦簽名會，活動於今（7/25）下午在 B 舞台舉辦。（※由於活動規範，本次簽名會無法拍攝作者的照片。） 從二創起步的おやすみ毛布，畫風細膩美型，筆下人物皆邪魅狂狷，個個高挑、美麗又強大。她的原創作品《完美異族》系列，構築了",
+      "dateConfidence": "medium",
+      "dateSource": "7/25",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+    },
+    {
       "id": "gnn-308800",
       "title": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場",
       "summary": "長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
@@ -88,8 +119,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/25",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-3df4fd4cb0c8ce3a",
@@ -571,8 +602,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -602,8 +633,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -689,8 +720,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -717,8 +748,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -775,8 +806,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -806,13 +837,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4Gamers",
+      "summary": "4gamers.com.tw",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -833,12 +864,12 @@
         "全知讀者視角",
         "非正式授權"
       ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4gamers.com.tw",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "gnn-308171",
@@ -933,8 +964,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "gnn-308754",
@@ -1001,8 +1032,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "gnn-308799",
@@ -1032,8 +1063,41 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-25T07:35:39.764Z",
-      "lastSeenAt": "2026-07-25T07:35:39.764Z"
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+    },
+    {
+      "id": "gnn-308801",
+      "title": "【漫博 26】《想看她一臉嫌惡地露出褲褲 R》作者與製作團隊簽名見面會 暢談作品紳士堅持",
+      "summary": "由社團「Animal Machine」成員 40 原（SHIMAHARA）原創改編，動畫《想看她一臉嫌惡地露出褲褲 R》代理商提恩傳媒今日邀請到作者 40 原以及動畫導演深瀨沙哉以及 DMM 的動畫製作人高篠秀一來台舉辦見面會活動。 ※ 活動因日方要求，作者 40 原臉部以笑臉符號遮擋，尚請見諒。 《想看她一臉嫌惡地露出褲褲》作品將兩種看似矛盾的情境結合在一",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308801",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T08:46:26.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "想看她一臉嫌惡地露出褲褲 R",
+        "想看她一臉嫌惡地露出褲褲",
+        "Animal Machine",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《想看她一臉嫌惡地露出褲褲 R》作者與製作團隊簽名見面會 暢談作品紳士堅持 由社團「Animal Machine」成員 40 原（SHIMAHARA）原創改編，動畫《想看她一臉嫌惡地露出褲褲 R》代理商提恩傳媒今日邀請到作者 40 原以及動畫導演深瀨沙哉以及 DMM 的動畫製作人高篠秀一來台舉辦見面會活動。 ※ 活動因日方要求，作者 40 原臉部以笑臉符號遮擋，尚請見諒。 《想看她一臉嫌惡地露出褲褲》作品將兩種看似矛盾的情境結合在一",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     }
   ],
   "archive": []
