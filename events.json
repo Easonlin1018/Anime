@@ -3,32 +3,64 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-26T09:02:06.621Z",
-    "lastSuccessfulUpdateAt": "2026-07-26T09:02:06.621Z",
+    "updatedAt": "2026-07-27T12:42:26.657Z",
+    "lastSuccessfulUpdateAt": "2026-07-27T12:42:26.657Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
-    "fetchedTagItemCount": 205,
+    "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 625,
+    "uniqueNewsCount": 631,
     "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 33,
+    "articleFetchSuccessCount": 32,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 18,
-    "newEventCount": 3,
-    "cachedEventCount": 21,
+    "matchedEventCount": 19,
+    "newEventCount": 4,
+    "cachedEventCount": 25,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 34,
+    "archiveCount": 1,
+    "storedEventCount": 35,
     "expiredRemovedCount": 15,
-    "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 63,
+    "recapRemovedCount": 0,
+    "undatedOldRemovedCount": 64,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 123,
+    "foreignRemovedCount": 2,
+    "nonActivityRemovedCount": 121,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-308892",
+      "title": "【漫博 26】《M2 神甲奇兵 M》《G9：特攻聯盟》攤位現場畫面公開 透露未來展望",
+      "summary": "2026 第 25 屆漫畫博覽會暨台灣國際電玩電競產業展 Gamers Con 於 7 月 23 日至 27 日在台北世貿一館登場。昱泉國際此次以《M2 神甲奇兵 M》與《G9：特攻聯盟》兩款作品為主題設展，將東方機甲與近未來競技特色搬進展場中。隨著展會進入最後一日，官方今日公開攤位現場照片與未來展望，並透露將整理現場玩家的回饋，以投入未來規劃中。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308892",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-27T11:12:04.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "ongoing",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "M2 神甲奇兵 M",
+        "G9：特攻聯盟",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《M2 神甲奇兵 M》《G9：特攻聯盟》攤位現場畫面公開 透露未來展望 2026 第 25 屆漫畫博覽會暨台灣國際電玩電競產業展 Gamers Con 於 7 月 23 日至 27 日在台北世貿一館登場。昱泉國際此次以《M2 神甲奇兵 M》與《G9：特攻聯盟》兩款作品為主題設展，將東方機甲與近未來競技特色搬進展場中。隨著展會進入最後一日，官方今日公開攤位現場照片與未來展望，並透露將整理現場玩家的回饋，以投入未來規劃中。",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+    },
     {
       "id": "gnn-308121",
       "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
@@ -180,39 +212,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
-    },
-    {
-      "id": "gnn-308504",
-      "title": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流",
-      "summary": "美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308504",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-21T08:54:49.000Z",
-      "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-26",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "聖地牙哥國際漫畫展",
-        "T-COMICS"
-      ],
-      "searchCorpus": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流 美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
-      "dateConfidence": "high",
-      "dateSource": "7 月 23 日至 26 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "gnn-308198",
@@ -602,8 +603,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -633,8 +634,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -720,13 +721,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "ext-642d6f3817b89821",
       "title": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡",
-      "summary": "sounova.com",
+      "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
@@ -744,12 +745,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 sounova.com",
+      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 SouNova 少女星",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -806,8 +807,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -843,7 +844,7 @@
     {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4gamers.com.tw",
+      "summary": "4Gamers",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -864,12 +865,12 @@
         "全知讀者視角",
         "非正式授權"
       ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4gamers.com.tw",
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "gnn-308171",
@@ -964,8 +965,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     },
     {
       "id": "gnn-308754",
@@ -1098,7 +1099,71 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-26T09:02:06.621Z",
       "lastSeenAt": "2026-07-26T09:02:06.621Z"
+    },
+    {
+      "id": "gnn-308854",
+      "title": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動",
+      "summary": "羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308854",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "見面會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-27T07:20:34.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GACHIAKUTA",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動 羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-308504",
+      "title": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流",
+      "summary": "美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308504",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-21T08:54:49.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-26",
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "聖地牙哥國際漫畫展",
+        "T-COMICS"
+      ],
+      "searchCorpus": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流 美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 26 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z",
+      "archivedAt": "2026-07-27T12:42:26.657Z"
+    }
+  ]
 }
