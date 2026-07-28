@@ -3,64 +3,32 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-27T12:42:26.657Z",
-    "lastSuccessfulUpdateAt": "2026-07-27T12:42:26.657Z",
+    "updatedAt": "2026-07-28T10:12:56.163Z",
+    "lastSuccessfulUpdateAt": "2026-07-28T10:12:56.163Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 631,
-    "articleCandidateCount": 234,
+    "uniqueNewsCount": 636,
+    "articleCandidateCount": 239,
     "articleFetchSuccessCount": 32,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 19,
-    "newEventCount": 4,
-    "cachedEventCount": 25,
+    "newEventCount": 3,
+    "cachedEventCount": 20,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 35,
-    "expiredRemovedCount": 15,
-    "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 64,
+    "archiveCount": 7,
+    "storedEventCount": 30,
+    "expiredRemovedCount": 17,
+    "recapRemovedCount": 2,
+    "undatedOldRemovedCount": 67,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 2,
-    "nonActivityRemovedCount": 121,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 123,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
-    {
-      "id": "gnn-308892",
-      "title": "【漫博 26】《M2 神甲奇兵 M》《G9：特攻聯盟》攤位現場畫面公開 透露未來展望",
-      "summary": "2026 第 25 屆漫畫博覽會暨台灣國際電玩電競產業展 Gamers Con 於 7 月 23 日至 27 日在台北世貿一館登場。昱泉國際此次以《M2 神甲奇兵 M》與《G9：特攻聯盟》兩款作品為主題設展，將東方機甲與近未來競技特色搬進展場中。隨著展會進入最後一日，官方今日公開攤位現場照片與未來展望，並透露將整理現場玩家的回饋，以投入未來規劃中。",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308892",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-27T11:12:04.000Z",
-      "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-27",
-      "eventStatus": "ongoing",
-      "venue": "台北世貿一館",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "M2 神甲奇兵 M",
-        "G9：特攻聯盟",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】《M2 神甲奇兵 M》《G9：特攻聯盟》攤位現場畫面公開 透露未來展望 2026 第 25 屆漫畫博覽會暨台灣國際電玩電競產業展 Gamers Con 於 7 月 23 日至 27 日在台北世貿一館登場。昱泉國際此次以《M2 神甲奇兵 M》與《G9：特攻聯盟》兩款作品為主題設展，將東方機甲與近未來競技特色搬進展場中。隨著展會進入最後一日，官方今日公開攤位現場照片與未來展望，並透露將整理現場玩家的回饋，以投入未來規劃中。",
-      "dateConfidence": "high",
-      "dateSource": "7 月 23 日至 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
-    },
     {
       "id": "gnn-308121",
       "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
@@ -91,68 +59,6 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
-    },
-    {
-      "id": "gnn-308803",
-      "title": "【漫博 26】BL 漫畫《完美異族》系列作者おやすみ毛布簽名會登場",
-      "summary": "在今年的漫畫博覽會中，買動漫特別邀請原創同人誌《完美異族》系列作者おやすみ毛布首度來台舉辦簽名會，活動於今（7/25）下午在 B 舞台舉辦。（※由於活動規範，本次簽名會無法拍攝作者的照片。） 從二創起步的おやすみ毛布，畫風細膩美型，筆下人物皆邪魅狂狷，個個高挑、美麗又強大。她的原創作品《完美異族》系列，構築了",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308803",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：漫畫博覽會",
-      "sourceTag": "漫畫博覽會",
-      "type": "簽名會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-25T09:09:19.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "完美異族",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】BL 漫畫《完美異族》系列作者おやすみ毛布簽名會登場 在今年的漫畫博覽會中，買動漫特別邀請原創同人誌《完美異族》系列作者おやすみ毛布首度來台舉辦簽名會，活動於今（7/25）下午在 B 舞台舉辦。（※由於活動規範，本次簽名會無法拍攝作者的照片。） 從二創起步的おやすみ毛布，畫風細膩美型，筆下人物皆邪魅狂狷，個個高挑、美麗又強大。她的原創作品《完美異族》系列，構築了",
-      "dateConfidence": "medium",
-      "dateSource": "7/25",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
-    },
-    {
-      "id": "gnn-308800",
-      "title": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場",
-      "summary": "長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308800",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：漫畫博覽會",
-      "sourceTag": "漫畫博覽會",
-      "type": "簽名會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-25T06:18:06.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "我兩個爸爸的故事",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場 長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
-      "dateConfidence": "medium",
-      "dateSource": "7/25",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "ext-3df4fd4cb0c8ce3a",
@@ -212,76 +118,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
-    },
-    {
-      "id": "gnn-308198",
-      "title": "【漫博 26】宇峻奧汀公開「多重宇奧」展出陣容 《三國群英傳：格鬥版》等遊戲開放現場試玩",
-      "summary": "宇峻奧汀今（15）日宣布，將於 7 月 23 日至 7 月 27 日參展「2026 台灣國際電玩電競產業展 GAMERS CON 」，集結旗下《三國群英傳：格鬥版》和首度參展的《三國群英傳：策定九州》與《幻世錄 重製版》，還有與智寶國際聯合代理的《FINAL FANTASY XIV 繁體中文版》，以「多重宇奧」為核心主題，匯聚四大遊戲宇宙，打造時空交錯的沉浸式展區體",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308198",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-15T07:13:59.000Z",
-      "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-27",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "三國群英傳：格鬥版",
-        "三國群英傳：策定九州",
-        "幻世錄 重製版",
-        "FINAL FANTASY XIV 繁體中文版",
-        "多重宇奧",
-        "2026 台灣國際電玩電競產業展 GAMERS CON",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】宇峻奧汀公開「多重宇奧」展出陣容 《三國群英傳：格鬥版》等遊戲開放現場試玩 宇峻奧汀今（15）日宣布，將於 7 月 23 日至 7 月 27 日參展「2026 台灣國際電玩電競產業展 GAMERS CON 」，集結旗下《三國群英傳：格鬥版》和首度參展的《三國群英傳：策定九州》與《幻世錄 重製版》，還有與智寶國際聯合代理的《FINAL FANTASY XIV 繁體中文版》，以「多重宇奧」為核心主題，匯聚四大遊戲宇宙，打造時空交錯的沉浸式展區體",
-      "dateConfidence": "high",
-      "dateSource": "7 月 23 日至 7 月 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
-    },
-    {
-      "id": "gnn-308195",
-      "title": "So-net 攜手台灣遊戲產業振興會進軍 Gamers Con 2026 《TP12》《天選吉他》將於專屬展區登場",
-      "summary": "台灣碩網網路娛樂股份有限公司（So-net）今（15）日宣布，將攜手台灣遊戲產業振興會（TGIPA），於 2026 年 7 月 23 日至 27 日參加在台北世界貿易中心一館舉辦的台灣國際電玩電競產業展 （Gamers Con 2026）。本次除了首次於漫博展出 So-net 看板娘互動攤位外，同場帶來《TP12》與音樂節奏遊戲《Heavenly Guitars 天選吉他》和其他多項現場趣味活動，",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308195",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-15T04:45:51.000Z",
-      "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-27",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "TP12",
-        "天選吉他",
-        "Heavenly Guitars 天選吉他"
-      ],
-      "searchCorpus": "So-net 攜手台灣遊戲產業振興會進軍 Gamers Con 2026 《TP12》《天選吉他》將於專屬展區登場 台灣碩網網路娛樂股份有限公司（So-net）今（15）日宣布，將攜手台灣遊戲產業振興會（TGIPA），於 2026 年 7 月 23 日至 27 日參加在台北世界貿易中心一館舉辦的台灣國際電玩電競產業展 （Gamers Con 2026）。本次除了首次於漫博展出 So-net 看板娘互動攤位外，同場帶來《TP12》與音樂節奏遊戲《Heavenly Guitars 天選吉他》和其他多項現場趣味活動，",
-      "dateConfidence": "high",
-      "dateSource": "2026 年 7 月 23 日至 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "gnn-308173",
@@ -321,66 +159,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-15T07:31:09.855Z",
       "lastSeenAt": "2026-07-15T07:31:09.855Z"
-    },
-    {
-      "id": "gnn-308126",
-      "title": "【漫博 26】青文出版 2026 漫博會會場與官網活動資訊公開",
-      "summary": "配合 2026 年第 25 屆漫畫博覽會即將在 7 月 23 日至 7 月 27 日於台北世貿一館舉辦，青文出版社也在今日公開了多項漫博期間的限定活動，包含經典套書與圖冊精品 5 折起，以及全館漫畫、輕小說 85 折起的優惠活動。 除了購書折扣外，青文還推出了「消費三重禮」滿額贈活動。同時，官方網站也將同步展開線上漫博會（官網活動期間為 7/1~8/",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308126",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台北",
-        "新北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-14T04:25:21.000Z",
-      "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-27",
-      "eventStatus": "upcoming",
-      "venue": "台北世貿一館",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "消費三重禮",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】青文出版 2026 漫博會會場與官網活動資訊公開 配合 2026 年第 25 屆漫畫博覽會即將在 7 月 23 日至 7 月 27 日於台北世貿一館舉辦，青文出版社也在今日公開了多項漫博期間的限定活動，包含經典套書與圖冊精品 5 折起，以及全館漫畫、輕小說 85 折起的優惠活動。 除了購書折扣外，青文還推出了「消費三重禮」滿額贈活動。同時，官方網站也將同步展開線上漫博會（官網活動期間為 7/1~8/",
-      "dateConfidence": "high",
-      "dateSource": "7 月 23 日至 7 月 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
-    },
-    {
-      "id": "ext-5f9b448cd3829337",
-      "title": "2026漫博7/23~7/27台北世貿一館舉辦確定 台中動漫節訂清明連假臺中國際展覽館登場",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWFQxeDRnenlUR1hxNHNYOFA2VTdST2tWZkdFVUhyczI0RlFCM1dVcndNVENtdzZBQnZVRjlORVA4Q1oxTzJ5Slp2b0RyaHFJVThIMVlQS0xFTHZUU3VaSTl4czFWcTFZTXBPLUU5NTh3Y0o2OHF5SzJvd3RnUGY5S0JoOFVwWFFMTnVCM3RxWFJ5RnVBdTQzR180RTdBRklWOVVCZHJvMlI5clNkSk5QVE5BS2E2YTdLeHhoUg?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台北",
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-02-09T08:00:00.000Z",
-      "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-27",
-      "eventStatus": "upcoming",
-      "venue": "台北世貿一館",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "dateConfidence": "high",
-      "dateSource": "7/23~7/27",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-11T01:41:17.900Z",
-      "lastSeenAt": "2026-07-11T01:41:17.900Z"
     },
     {
       "id": "gnn-308731",
@@ -516,6 +294,37 @@
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
+      "id": "gnn-308926",
+      "title": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場",
+      "summary": "《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308926",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-28T08:21:41.000Z",
+      "eventStartDate": "2026-08-28",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "我在意的對象並不是男人",
+        "A-BASE"
+      ],
+      "searchCorpus": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場 《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 8 月 28 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
       "id": "gnn-308580",
       "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
       "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
@@ -544,6 +353,40 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-22T09:37:08.897Z",
       "lastSeenAt": "2026-07-22T09:37:08.897Z"
+    },
+    {
+      "id": "gnn-308916",
+      "title": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動",
+      "summary": "日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308916",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-28T04:55:32.000Z",
+      "eventStartDate": "2026-10-03",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "輝夜姬",
+        "輝夜姬想讓人告白",
+        "無職轉生",
+        "小原好美 粉絲見面會 2026 feat. 古賀葵",
+        "四宮輝夜"
+      ],
+      "searchCorpus": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動 日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 10 月 3 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-562b7f12b291cf8a",
@@ -603,8 +446,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -634,8 +477,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -701,7 +544,7 @@
       "summary": "網路溫度計 DailyView",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tOXFxcjBDMHM3Y3pxM3U1TU5MQ0xGVExXRUNueFI5UDgxVjVxaDVYQVNKeHF0RW5sOHQ3V2oxVXpHNTl2bzRickE2SWxaN3plZWtF?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -721,8 +564,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -749,8 +592,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -807,8 +650,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -838,8 +681,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -869,8 +712,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
       "id": "gnn-308171",
@@ -1134,36 +977,233 @@
   ],
   "archive": [
     {
-      "id": "gnn-308504",
-      "title": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流",
-      "summary": "美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308504",
+      "id": "gnn-308892",
+      "title": "【漫博 26】《M2 神甲奇兵 M》《G9：特攻聯盟》攤位現場畫面公開 透露未來展望",
+      "summary": "2026 第 25 屆漫畫博覽會暨台灣國際電玩電競產業展 Gamers Con 於 7 月 23 日至 27 日在台北世貿一館登場。昱泉國際此次以《M2 神甲奇兵 M》與《G9：特攻聯盟》兩款作品為主題設展，將東方機甲與近未來競技特色搬進展場中。隨著展會進入最後一日，官方今日公開攤位現場照片與未來展望，並透露將整理現場玩家的回饋，以投入未來規劃中。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308892",
       "source": "巴哈姆特 GNN",
       "discoverySource": "RSS",
       "sourceTag": "",
-      "type": "展覽",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-27T11:12:04.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "expired",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "M2 神甲奇兵 M",
+        "G9：特攻聯盟",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《M2 神甲奇兵 M》《G9：特攻聯盟》攤位現場畫面公開 透露未來展望 2026 第 25 屆漫畫博覽會暨台灣國際電玩電競產業展 Gamers Con 於 7 月 23 日至 27 日在台北世貿一館登場。昱泉國際此次以《M2 神甲奇兵 M》與《G9：特攻聯盟》兩款作品為主題設展，將東方機甲與近未來競技特色搬進展場中。隨著展會進入最後一日，官方今日公開攤位現場照片與未來展望，並透露將整理現場玩家的回饋，以投入未來規劃中。",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "gnn-308198",
+      "title": "【漫博 26】宇峻奧汀公開「多重宇奧」展出陣容 《三國群英傳：格鬥版》等遊戲開放現場試玩",
+      "summary": "宇峻奧汀今（15）日宣布，將於 7 月 23 日至 7 月 27 日參展「2026 台灣國際電玩電競產業展 GAMERS CON 」，集結旗下《三國群英傳：格鬥版》和首度參展的《三國群英傳：策定九州》與《幻世錄 重製版》，還有與智寶國際聯合代理的《FINAL FANTASY XIV 繁體中文版》，以「多重宇奧」為核心主題，匯聚四大遊戲宇宙，打造時空交錯的沉浸式展區體",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308198",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
       "locations": [
         "台灣"
       ],
       "confidence": "candidate",
-      "publishedAt": "2026-07-21T08:54:49.000Z",
+      "publishedAt": "2026-07-15T07:13:59.000Z",
       "eventStartDate": "2026-07-23",
-      "eventEndDate": "2026-07-26",
+      "eventEndDate": "2026-07-27",
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "聖地牙哥國際漫畫展",
-        "T-COMICS"
+        "三國群英傳：格鬥版",
+        "三國群英傳：策定九州",
+        "幻世錄 重製版",
+        "FINAL FANTASY XIV 繁體中文版",
+        "多重宇奧",
+        "2026 台灣國際電玩電競產業展 GAMERS CON",
+        "漫博 26"
       ],
-      "searchCorpus": "文化部駐洛杉磯臺灣書院邀請台灣漫畫家赴 2026 聖地牙哥國際漫畫展參展交流 美國大型動漫盛會「聖地牙哥國際漫畫展」（San Diego Comic-Con, SDCC 2026）將於當地時間 7 月 23 日至 26 日在加州聖地牙哥會展中心登場，文化部駐洛杉磯臺灣書院持續推動臺灣漫畫國際交流，與社團法人中華動漫出版同業協進會再次合作，以「T-COMICS」為題，邀請漫畫家 PAJI、插畫家馬子狗及動畫導演王登鈺親赴現場，與全球動漫迷交流互動，",
+      "searchCorpus": "【漫博 26】宇峻奧汀公開「多重宇奧」展出陣容 《三國群英傳：格鬥版》等遊戲開放現場試玩 宇峻奧汀今（15）日宣布，將於 7 月 23 日至 7 月 27 日參展「2026 台灣國際電玩電競產業展 GAMERS CON 」，集結旗下《三國群英傳：格鬥版》和首度參展的《三國群英傳：策定九州》與《幻世錄 重製版》，還有與智寶國際聯合代理的《FINAL FANTASY XIV 繁體中文版》，以「多重宇奧」為核心主題，匯聚四大遊戲宇宙，打造時空交錯的沉浸式展區體",
       "dateConfidence": "high",
-      "dateSource": "7 月 23 日至 26 日",
+      "dateSource": "7 月 23 日至 7 月 27 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z",
-      "archivedAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "gnn-308195",
+      "title": "So-net 攜手台灣遊戲產業振興會進軍 Gamers Con 2026 《TP12》《天選吉他》將於專屬展區登場",
+      "summary": "台灣碩網網路娛樂股份有限公司（So-net）今（15）日宣布，將攜手台灣遊戲產業振興會（TGIPA），於 2026 年 7 月 23 日至 27 日參加在台北世界貿易中心一館舉辦的台灣國際電玩電競產業展 （Gamers Con 2026）。本次除了首次於漫博展出 So-net 看板娘互動攤位外，同場帶來《TP12》與音樂節奏遊戲《Heavenly Guitars 天選吉他》和其他多項現場趣味活動，",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308195",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-15T04:45:51.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "TP12",
+        "天選吉他",
+        "Heavenly Guitars 天選吉他"
+      ],
+      "searchCorpus": "So-net 攜手台灣遊戲產業振興會進軍 Gamers Con 2026 《TP12》《天選吉他》將於專屬展區登場 台灣碩網網路娛樂股份有限公司（So-net）今（15）日宣布，將攜手台灣遊戲產業振興會（TGIPA），於 2026 年 7 月 23 日至 27 日參加在台北世界貿易中心一館舉辦的台灣國際電玩電競產業展 （Gamers Con 2026）。本次除了首次於漫博展出 So-net 看板娘互動攤位外，同場帶來《TP12》與音樂節奏遊戲《Heavenly Guitars 天選吉他》和其他多項現場趣味活動，",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 23 日至 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "gnn-308126",
+      "title": "【漫博 26】青文出版 2026 漫博會會場與官網活動資訊公開",
+      "summary": "配合 2026 年第 25 屆漫畫博覽會即將在 7 月 23 日至 7 月 27 日於台北世貿一館舉辦，青文出版社也在今日公開了多項漫博期間的限定活動，包含經典套書與圖冊精品 5 折起，以及全館漫畫、輕小說 85 折起的優惠活動。 除了購書折扣外，青文還推出了「消費三重禮」滿額贈活動。同時，官方網站也將同步展開線上漫博會（官網活動期間為 7/1~8/",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308126",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台北",
+        "新北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-14T04:25:21.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "expired",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "消費三重禮",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】青文出版 2026 漫博會會場與官網活動資訊公開 配合 2026 年第 25 屆漫畫博覽會即將在 7 月 23 日至 7 月 27 日於台北世貿一館舉辦，青文出版社也在今日公開了多項漫博期間的限定活動，包含經典套書與圖冊精品 5 折起，以及全館漫畫、輕小說 85 折起的優惠活動。 除了購書折扣外，青文還推出了「消費三重禮」滿額贈活動。同時，官方網站也將同步展開線上漫博會（官網活動期間為 7/1~8/",
+      "dateConfidence": "high",
+      "dateSource": "7 月 23 日至 7 月 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "ext-5f9b448cd3829337",
+      "title": "2026漫博7/23~7/27台北世貿一館舉辦確定 台中動漫節訂清明連假臺中國際展覽館登場",
+      "summary": "4Gamers",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOWFQxeDRnenlUR1hxNHNYOFA2VTdST2tWZkdFVUhyczI0RlFCM1dVcndNVENtdzZBQnZVRjlORVA4Q1oxTzJ5Slp2b0RyaHFJVThIMVlQS0xFTHZUU3VaSTl4czFWcTFZTXBPLUU5NTh3Y0o2OHF5SzJvd3RnUGY5S0JoOFVwWFFMTnVCM3RxWFJ5RnVBdTQzR180RTdBRklWOVVCZHJvMlI5clNkSk5QVE5BS2E2YTdLeHhoUg?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台北",
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-02-09T08:00:00.000Z",
+      "eventStartDate": "2026-07-23",
+      "eventEndDate": "2026-07-27",
+      "eventStatus": "expired",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "dateConfidence": "high",
+      "dateSource": "7/23~7/27",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-11T01:41:17.900Z",
+      "lastSeenAt": "2026-07-11T01:41:17.900Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "gnn-308803",
+      "title": "【漫博 26】BL 漫畫《完美異族》系列作者おやすみ毛布簽名會登場",
+      "summary": "在今年的漫畫博覽會中，買動漫特別邀請原創同人誌《完美異族》系列作者おやすみ毛布首度來台舉辦簽名會，活動於今（7/25）下午在 B 舞台舉辦。（※由於活動規範，本次簽名會無法拍攝作者的照片。） 從二創起步的おやすみ毛布，畫風細膩美型，筆下人物皆邪魅狂狷，個個高挑、美麗又強大。她的原創作品《完美異族》系列，構築了",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308803",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "簽名會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T09:09:19.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "完美異族",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】BL 漫畫《完美異族》系列作者おやすみ毛布簽名會登場 在今年的漫畫博覽會中，買動漫特別邀請原創同人誌《完美異族》系列作者おやすみ毛布首度來台舉辦簽名會，活動於今（7/25）下午在 B 舞台舉辦。（※由於活動規範，本次簽名會無法拍攝作者的照片。） 從二創起步的おやすみ毛布，畫風細膩美型，筆下人物皆邪魅狂狷，個個高挑、美麗又強大。她的原創作品《完美異族》系列，構築了",
+      "dateConfidence": "medium",
+      "dateSource": "7/25",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "gnn-308800",
+      "title": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場",
+      "summary": "長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308800",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "簽名會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T06:18:06.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "我兩個爸爸的故事",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】BL 漫畫《我兩個爸爸的故事》作者ろじ簽名會登場 長鴻出版社於今日（7/25）的漫畫博覽會中，邀請到日本 BL 漫畫家ろじ帶著溫馨育兒作《我兩個爸爸的故事》首度來台舉辦簽名會活動。（※本次簽名會活動由於官方規範，因此無法拍攝漫畫家照片） 在簽名會上，漫畫家ろじ表示這是她自己第二次來台灣，第一次是大學時期來觀光的。而那時候完全沒有想到會有著這樣的緣分，不只僅僅是",
+      "dateConfidence": "medium",
+      "dateSource": "7/25",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z",
+      "archivedAt": "2026-07-28T10:12:56.163Z"
     }
   ]
 }
