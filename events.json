@@ -3,32 +3,62 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-07-30T03:26:59.703Z",
-    "lastSuccessfulUpdateAt": "2026-07-30T03:26:59.703Z",
+    "updatedAt": "2026-07-31T03:48:27.527Z",
+    "lastSuccessfulUpdateAt": "2026-07-31T03:48:27.527Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 640,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 636,
     "articleCandidateCount": 236,
     "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 20,
     "newEventCount": 4,
-    "cachedEventCount": 22,
+    "cachedEventCount": 24,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 33,
-    "expiredRemovedCount": 14,
-    "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 58,
+    "archiveCount": 1,
+    "storedEventCount": 34,
+    "expiredRemovedCount": 15,
+    "recapRemovedCount": 1,
+    "undatedOldRemovedCount": 65,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 124,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-309119",
+      "title": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨",
+      "summary": "《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309119",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-30T09:23:26.000Z",
+      "eventStartDate": "2026-07-31",
+      "eventEndDate": "2026-09-03",
+      "eventStatus": "ongoing",
+      "venue": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [
+        "新世紀福音戰士"
+      ],
+      "searchCorpus": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨 《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
+      "dateConfidence": "high",
+      "dateSource": "7 月 31 日~9 月 3 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
+    },
     {
       "id": "gnn-308121",
       "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
@@ -118,8 +148,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -150,8 +180,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "gnn-308173",
@@ -455,37 +485,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-562b7f12b291cf8a",
-      "title": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBEVzBpd3NvMXI4Q1JoMGxMOWlKNDFPTzFOb2hxSGV6azJRYnowd19zbUc3OG9ZWDJjWGw5RGhvTHE5bDBFNlUxbjFCM1dTZ3hsbGVfeS04RUI?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-06-15T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "華山漫畫13+14 集限定版獨家販售《O",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "全知讀者視角",
-        "Omniscient Reader"
-      ],
-      "searchCorpus": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-19T07:56:42.848Z",
-      "lastSeenAt": "2026-07-19T07:56:42.848Z"
-    },
-    {
       "id": "ext-26d921140c8adc8b",
       "title": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣",
       "summary": "上報Up Media",
@@ -512,8 +511,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "ext-f1961ecab2d7ab4a",
@@ -543,8 +542,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -630,8 +629,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -716,8 +715,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -778,8 +777,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -808,8 +807,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     },
     {
       "id": "gnn-308171",
@@ -1076,7 +1075,68 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-30T03:26:59.703Z",
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
+    },
+    {
+      "id": "ext-effa105c095847b1",
+      "title": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北",
+      "summary": "Yahoo新聞",
+      "url": "https://news.google.com/rss/articles/CBMiwwNBVV95cUxQdG1raTJnSm1aNWtuMHVBblVHbzFoUnFZamY4ejBtRHJlRHJFQkhLUTZKOVg3Vm9JMk1GT2FDZzZhRjh3dDdMWHZ5ankyZHNIeHpzenN6b3lsZTUzNVFPakFLUDhtX3Vvc1RHNWFub2lDcHhSTUFaNEpfaXBhWkZ0OXVRZTc3Tm0tWkFyQUhST3JwMnVUTXV0cm9fUWVjUHlFR2EyUjZReFhZSEZvTTJlaTFrV3EzczFlTlQyWnZ6ZndnRmhHQXFZT3V3YW1XTzBNUHJTVEhJU1RZVjJueW5sNGp2bmh2Z3F6YVpGRTVSd2w2MHFXeVJwSnhtUVZJenNtcHRWWjE5TUk1NzM0N19uWi1YTV84cnRQMnV0SW1UWG1xZVZKYlhYQUUxbzlrRkRiNlJ2QlozbWFJMW04MmdtS1pGdFJBQlFVRnZabmlyWjZCRnZmV3Q5dkxHQnVzLUdPVE1OX0p0T0lmY0xOOXZMUkU1MFZNLVVKQUFPVHhhS0Jsa3FaZ2IybklhTjdTSDFJQzhTNm0zNUt0QU5YcTRvbl9YNng1U1dqSnVmN3FGZGNMWThHeDg1TGJaYlNNU2IxQlhj?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-30T08:21:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北 Yahoo新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-31T03:48:27.527Z",
+      "lastSeenAt": "2026-07-31T03:48:27.527Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-562b7f12b291cf8a",
+      "title": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBEVzBpd3NvMXI4Q1JoMGxMOWlKNDFPTzFOb2hxSGV6azJRYnowd19zbUc3OG9ZWDJjWGw5RGhvTHE5bDBFNlUxbjFCM1dTZ3hsbGVfeS04RUI?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-15T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "華山漫畫13+14 集限定版獨家販售《O",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "全知讀者視角",
+        "Omniscient Reader"
+      ],
+      "searchCorpus": "《全知讀者視角》Pop-up Store 7 月首度登陸台北華山漫畫13+14 集限定版獨家販售《Omniscient Reader》 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-19T07:56:42.848Z",
+      "lastSeenAt": "2026-07-19T07:56:42.848Z",
+      "archivedAt": "2026-07-31T03:48:27.527Z"
+    }
+  ]
 }
