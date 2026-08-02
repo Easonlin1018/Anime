@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-01T03:48:23.117Z",
-    "lastSuccessfulUpdateAt": "2026-08-01T03:48:23.117Z",
+    "updatedAt": "2026-08-02T03:51:23.811Z",
+    "lastSuccessfulUpdateAt": "2026-08-02T03:51:23.811Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 630,
-    "articleCandidateCount": 235,
-    "articleFetchSuccessCount": 33,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 626,
+    "articleCandidateCount": 230,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 21,
+    "matchedEventCount": 17,
     "newEventCount": 3,
-    "cachedEventCount": 24,
+    "cachedEventCount": 25,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
+    "archiveCount": 1,
     "storedEventCount": 34,
-    "expiredRemovedCount": 12,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 61,
+    "undatedOldRemovedCount": 57,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 129,
+    "nonActivityRemovedCount": 133,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -148,8 +148,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -485,36 +485,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-26d921140c8adc8b",
-      "title": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣",
-      "summary": "上報Up Media",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ycTdHQTNDVWhtRTNLdDJxUS1IcmhWaUNZZWFNTDZuNEVvV3FzVHZlc1NNVVV4enhxWlV5WHZsRGdCVXBBemZ3bk1tcHkxb1AxajNjaDlrTVY1dW0wcmc?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-06-17T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "動漫最高祭"
-      ],
-      "searchCorpus": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣 上報Up Media",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
-    },
-    {
       "id": "ext-f1961ecab2d7ab4a",
       "title": "人氣動畫《天官賜福》「天地流光原畫紀念快閃店活動」華山開跑！沉浸式場景首度曝光，台灣獨家周邊、古風特調甜點同步亮相",
       "summary": "oneone宇宙",
@@ -542,8 +512,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "ext-9167562ed4db32f5",
@@ -629,8 +599,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "ext-642d6f3817b89821",
@@ -657,8 +627,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -693,7 +663,7 @@
     {
       "id": "ext-0ca4f08ed4351924",
       "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "gvm.com.tw",
+      "summary": "遠見雜誌",
       "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -711,12 +681,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 gvm.com.tw",
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -777,8 +747,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1066,8 +1036,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     },
     {
       "id": "gnn-309209",
@@ -1103,9 +1073,69 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
+    },
+    {
+      "id": "ext-2d785a3e1d2ed80f",
+      "title": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛",
+      "summary": "Yahoo新聞",
+      "url": "https://news.google.com/rss/articles/CBMiqgNBVV95cUxPQUU4ZUh5dUUzeHg4c0VWX1pKR0Y0cW5RT2FJSVFhS0lCaVc4X2dUbDNVMXhaNzJXQWZJV2dtRzFaT21Mcm5rbk11dmZ4RWVWWHNkc3BYZHVZLV9MVVYxSENJMWdKa0tRVVplYURCSTVvTmRheGVQZGdaTE94ekZFQlc0OVRPYnhTZktnTmxkNmNmckN2bFN4RFJwZTBTSk5DZTVMWmxfZlRqSkI0VFlkcVFJazNiRk1wN0pxQ05YV042anJGR2tUNzFLWE1LdTFvalNVQ091dWVoa1NsaDZfaEFSUkJQTHdEZUp6VDNuZEx1RVBlMDBLby1Od2ZCUnF3dzRrS2w1SzFCYnphbjR0VGd6OEZ4T044QWdPaF9NbUxYQzNXckpjRHMtT0tmcXgyM3NCb0ZGaGtpWi1lRjU2YjE4d18ySnpxV2ZySXliWTVKQURPajFYbzRNYlNqLTJfZmx2LXQ4Ul9kSmhsQVk4cFpyUHljLUp2aC1OdG1BN3RoS0p0SWJhZkdteWpuVXdpLXlrSHpNNTQxRE4tZjRfMUdqX0lYXzk2SUE?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-31T14:45:50.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛 Yahoo新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-02T03:51:23.811Z",
+      "lastSeenAt": "2026-08-02T03:51:23.811Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-26d921140c8adc8b",
+      "title": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣",
+      "summary": "上報Up Media",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ycTdHQTNDVWhtRTNLdDJxUS1IcmhWaUNZZWFNTDZuNEVvV3FzVHZlc1NNVVV4enhxWlV5WHZsRGdCVXBBemZ3bk1tcHkxb1AxajNjaDlrTVY1dW0wcmc?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "動漫最高祭"
+      ],
+      "searchCorpus": "華山「動漫最高祭」快閃店免費逛！鬼滅之刃、進擊的巨人、芙莉蓮等人氣IP 周邊開賣閃卡機試手氣 上報Up Media",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-01T03:48:23.117Z",
+      "lastSeenAt": "2026-08-01T03:48:23.117Z",
+      "archivedAt": "2026-08-02T03:51:23.811Z"
+    }
+  ]
 }
