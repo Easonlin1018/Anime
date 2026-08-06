@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-05T03:31:09.112Z",
-    "lastSuccessfulUpdateAt": "2026-08-05T03:31:09.112Z",
+    "updatedAt": "2026-08-06T03:35:05.926Z",
+    "lastSuccessfulUpdateAt": "2026-08-06T03:35:05.926Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 620,
-    "articleCandidateCount": 228,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 229,
     "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 14,
-    "newEventCount": 1,
+    "matchedEventCount": 17,
+    "newEventCount": 5,
     "cachedEventCount": 22,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 30,
-    "expiredRemovedCount": 15,
+    "archiveCount": 1,
+    "storedEventCount": 34,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 134,
+    "nonActivityRemovedCount": 131,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -56,8 +56,8 @@
       "dateConfidence": "high",
       "dateSource": "7 月 31 日~9 月 3 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "gnn-308121",
@@ -89,6 +89,96 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
+      "id": "ext-b58f3713fde43779",
+      "title": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場",
+      "summary": "三嘻行動哇 Yipee!",
+      "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxOakFCN0NLd3piajNhclFKVm1RenVzTnR4QjdhZDBNLVlfNk1xbEg5UE5TZHQzYnFtNFJvanoxVzFlNEVNWGo0OG1LY2lKX3FCME5ONXByeWtSNlEyYnJwcmFlWm1OdE10X1BKakdZV2dXMHBQeU5zeE40eWxnM01yZ1ZKcUwyV25TcVYySUlWQWhFT0lCNW5HU1V1UFBhQmNHdnJacmk1b3FISHhZbHlEWEV3MGFWaWN0NUtxWGdvZVBBZ2hVOEFLYld2M3Q0bURZQXVYczdEQTBZVExCd1lzT0xUMWNoekRCNEFvR0VsNElOQUpXYkdMTHFmWjdoT3FwRjFObkZDODhyV3RSTUhWRG1jZVZTOThCVlNpWnNqTXR1VDJrakhwaDRnQ040QzRJSERaQkM0YmlDYWlHSHVUdEhCUF9IN1lJbGc?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T15:57:31.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者"
+      ],
+      "searchCorpus": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場 三嘻行動哇 Yipee!",
+      "dateConfidence": "medium",
+      "dateSource": "8月6日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
+    },
+    {
+      "id": "ext-8160678c11878af3",
+      "title": "木棉花「超動漫研究社」快閃店8月6日起降臨新竹巨城！人氣周邊、多款動漫IP抽卡機一次集結",
+      "summary": "QooApp",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1QdG5kZGpLeGNCeUZ6YnNxSFk5VkloQjRYb19jSTZhckhGRU1IOWYtMnY4RzNTS3pSQy1kRFNKQlNqeWVaaVY2OHlkRUhQQ204Q3NDQzdUcUxfaFJPQ2ZDRXo3dUxSM2M?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T04:24:00.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8月6日起降臨新竹巨城！人氣周邊、多款動漫IP抽卡機一次集結 QooApp",
+      "dateConfidence": "medium",
+      "dateSource": "8月6日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
+    },
+    {
+      "id": "ext-a8b0f32886165b97",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T04:12:44.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "ext-3df4fd4cb0c8ce3a",
@@ -180,8 +270,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-04T03:35:39.203Z",
-      "lastSeenAt": "2026-08-04T03:35:39.203Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "gnn-308731",
@@ -317,6 +407,68 @@
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
+      "id": "gnn-309446",
+      "title": "hololive production「盛夏｜墾丁旅行日記」快閃店 宣布 8 月 11 日起於台中大遠百登場",
+      "summary": "由 hololive production 正式授權，NoonX（樂曜日）策劃推出全新系列快閃店 「hololive production 盛夏｜墾丁旅行日記」，即將於 8 月 11 日在台中大遠百 11 樓展開。延續春日旅行日記系列，本次將旅行舞台移至充滿南國風情的墾丁海岸，邀請粉絲與 白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・貝爾絲及儒烏風亭螺鈿一同展開熱情的",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309446",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-06T03:34:41.000Z",
+      "eventStartDate": "2026-08-11",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "閃店 宣布 8 月 11 日起於台中大遠百登場 由 hololive",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "盛夏｜墾丁旅行日記",
+        "hololive production 盛夏｜墾丁旅行日記"
+      ],
+      "searchCorpus": "hololive production「盛夏｜墾丁旅行日記」快閃店 宣布 8 月 11 日起於台中大遠百登場 由 hololive production 正式授權，NoonX（樂曜日）策劃推出全新系列快閃店 「hololive production 盛夏｜墾丁旅行日記」，即將於 8 月 11 日在台中大遠百 11 樓展開。延續春日旅行日記系列，本次將旅行舞台移至充滿南國風情的墾丁海岸，邀請粉絲與 白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・貝爾絲及儒烏風亭螺鈿一同展開熱情的",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 11 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
+    },
+    {
+      "id": "gnn-309443",
+      "title": "黏土人 20 週年紀念展於高雄開展 活動將持續至 8 月 20 日為止",
+      "summary": "日本模型製造商 Good Smile Company 攜手 GAME 休閒館所舉行的「黏土人 20 週年紀念展」正式前往高雄，活動自即日起將於高雄夢時代 3 樓舉行至 8 月 20 日為止，有興趣的民眾可以活動期間內前往。 現場除了熱門作品系列的黏土人展示，也特別設有編號為「整數號」的黏土人限定。除了黏土人展示外，會場同樣將展開一般商品、限定商品的販售",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309443",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-06T03:05:00.000Z",
+      "eventStartDate": "2026-08-20",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黏土人 20 週年紀念展",
+        "整數號"
+      ],
+      "searchCorpus": "黏土人 20 週年紀念展於高雄開展 活動將持續至 8 月 20 日為止 日本模型製造商 Good Smile Company 攜手 GAME 休閒館所舉行的「黏土人 20 週年紀念展」正式前往高雄，活動自即日起將於高雄夢時代 3 樓舉行至 8 月 20 日為止，有興趣的民眾可以活動期間內前往。 現場除了熱門作品系列的黏土人展示，也特別設有編號為「整數號」的黏土人限定。除了黏土人展示外，會場同樣將展開一般商品、限定商品的販售",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
+    },
+    {
       "id": "gnn-308926",
       "title": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場",
       "summary": "《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
@@ -446,35 +598,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-21f6459e53df73bd",
-      "title": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題",
-      "summary": "網路溫度計 DailyView",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tOXFxcjBDMHM3Y3pxM3U1TU5MQ0xGVExXRUNueFI5UDgxVjVxaDVYQVNKeHF0RW5sOHQ3V2oxVXpHNTl2bzRickE2SWxaN3plZWtF?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-06-21T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "華山快閃店與慈濟特展登場｜熱門話題 網路",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計 DailyView",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
-    },
-    {
       "id": "ext-642d6f3817b89821",
       "title": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡",
       "summary": "SouNova 少女星",
@@ -499,8 +622,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -619,8 +742,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -908,8 +1031,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "gnn-309209",
@@ -945,8 +1068,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "ext-2d785a3e1d2ed80f",
@@ -973,9 +1096,40 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-21f6459e53df73bd",
+      "title": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題",
+      "summary": "網路溫度計 DailyView",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tOXFxcjBDMHM3Y3pxM3U1TU5MQ0xGVExXRUNueFI5UDgxVjVxaDVYQVNKeHF0RW5sOHQ3V2oxVXpHNTl2bzRickE2SWxaN3plZWtF?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "華山快閃店與慈濟特展登場｜熱門話題 網路",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026暑假去哪玩？台中動漫祭免費逛、史努比華山快閃店與慈濟特展登場｜熱門話題 網路溫度計 DailyView",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-05T03:31:09.112Z",
+      "lastSeenAt": "2026-08-05T03:31:09.112Z",
+      "archivedAt": "2026-08-06T03:35:05.926Z"
+    }
+  ]
 }
