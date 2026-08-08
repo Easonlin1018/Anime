@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-07T03:14:15.928Z",
-    "lastSuccessfulUpdateAt": "2026-08-07T03:14:15.928Z",
+    "updatedAt": "2026-08-08T02:20:40.969Z",
+    "lastSuccessfulUpdateAt": "2026-08-08T02:20:40.969Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 618,
-    "articleCandidateCount": 228,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 429,
+    "uniqueNewsCount": 620,
+    "articleCandidateCount": 230,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 15,
-    "newEventCount": 1,
+    "matchedEventCount": 17,
+    "newEventCount": 4,
     "cachedEventCount": 26,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 34,
-    "expiredRemovedCount": 11,
+    "storedEventCount": 36,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 56,
+    "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 139,
+    "nonActivityRemovedCount": 137,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -56,8 +56,8 @@
       "dateConfidence": "high",
       "dateSource": "7 月 31 日~9 月 3 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "gnn-308121",
@@ -91,9 +91,41 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "gnn-309600",
+      "title": "烈空坐舞龍活動首次登台！「超級烈空坐 ex 降臨祭」於 LaLaport 南港開跑",
+      "summary": "寶可夢集換式卡牌遊戲於 8 月 7 日（五）推出全新商品《寶可夢集換式卡牌遊戲 超級進化 擴充包 綠寶石風暴》。為了讓更多玩家體驗超級烈空坐 ex 等各式卡牌的魅力，本次特別於台北市 LaLaport 南港中央廣場舉辦「超級烈空坐 ex 降臨祭」POP-UP 活動，讓來場者可以透過活動現場的多元活動體驗傳說中的霸主「超級烈空坐 ex」的魅力。 ※ 示",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309600",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-07T15:58:57.000Z",
+      "eventStartDate": "2026-08-07",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "台！「超級烈空坐 ex 降臨祭」於 LaLaport 南港開跑 寶可夢集換式卡牌",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "寶可夢集換式卡牌遊戲 超級進化 擴充包 綠寶石風暴",
+        "超級烈空坐 ex 降臨祭",
+        "超級烈空坐 ex"
+      ],
+      "searchCorpus": "烈空坐舞龍活動首次登台！「超級烈空坐 ex 降臨祭」於 LaLaport 南港開跑 寶可夢集換式卡牌遊戲於 8 月 7 日（五）推出全新商品《寶可夢集換式卡牌遊戲 超級進化 擴充包 綠寶石風暴》。為了讓更多玩家體驗超級烈空坐 ex 等各式卡牌的魅力，本次特別於台北市 LaLaport 南港中央廣場舉辦「超級烈空坐 ex 降臨祭」POP-UP 活動，讓來場者可以透過活動現場的多元活動體驗傳說中的霸主「超級烈空坐 ex」的魅力。 ※ 示",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 7 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+    },
+    {
       "id": "ext-b58f3713fde43779",
       "title": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場",
-      "summary": "3c.yipee.cc",
+      "summary": "三嘻行動哇 Yipee!",
       "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxOakFCN0NLd3piajNhclFKVm1RenVzTnR4QjdhZDBNLVlfNk1xbEg5UE5TZHQzYnFtNFJvanoxVzFlNEVNWGo0OG1LY2lKX3FCME5ONXByeWtSNlEyYnJwcmFlWm1OdE10X1BKakdZV2dXMHBQeU5zeE40eWxnM01yZ1ZKcUwyV25TcVYySUlWQWhFT0lCNW5HU1V1UFBhQmNHdnJacmk1b3FISHhZbHlEWEV3MGFWaWN0NUtxWGdvZVBBZ2hVOEFLYld2M3Q0bURZQXVYczdEQTBZVExCd1lzT0xUMWNoekRCNEFvR0VsNElOQUpXYkdMTHFmWjdoT3FwRjFObkZDODhyV3RSTUhWRG1jZVZTOThCVlNpWnNqTXR1VDJrakhwaDRnQ040QzRJSERaQkM0YmlDYWlHSHVUdEhCUF9IN1lJbGc?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -113,12 +145,12 @@
       "workTitles": [
         "黃泉使者"
       ],
-      "searchCorpus": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場 3c.yipee.cc",
+      "searchCorpus": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場 三嘻行動哇 Yipee!",
       "dateConfidence": "medium",
       "dateSource": "8月6日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "ext-a8b0f32886165b97",
@@ -147,8 +179,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -496,8 +528,8 @@
       "dateConfidence": "medium",
       "dateSource": "2026 年 8 月 28 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-05T03:31:09.112Z",
-      "lastSeenAt": "2026-08-05T03:31:09.112Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "gnn-308580",
@@ -622,8 +654,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -742,8 +774,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1019,7 +1051,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T08:21:00.000Z",
+      "publishedAt": "2026-07-30T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1031,8 +1063,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "gnn-309209",
@@ -1068,8 +1100,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     },
     {
       "id": "ext-2d785a3e1d2ed80f",
@@ -1098,6 +1130,38 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-08-06T03:35:05.926Z",
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
+    },
+    {
+      "id": "ext-058a5dbb433da8b8",
+      "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
+      "summary": "風傳媒",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-08-07T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "貓貓蟲咖波",
+        "排球少年",
+        "1神級動漫"
+      ],
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-08T02:20:40.969Z",
+      "lastSeenAt": "2026-08-08T02:20:40.969Z"
     }
   ],
   "archive": []
