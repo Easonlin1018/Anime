@@ -1277,11 +1277,14 @@ async function searchAnime(
             return false;
         }
 
-        const duplicate = animeList.find(
-            anime => Number(anime.id) === Number(media.id)
-        );
+        const duplicate = findExistingAnimeForMedia(media, animeList);
 
         if (duplicate) {
+            const originalCategory = duplicate.category;
+            attachAniListIdToLegacyAnime(duplicate, media);
+            applyMediaMetadata(duplicate, media);
+            duplicate.category = originalCategory;
+            saveAndRender();
             if (!isQuiet) {
                 showToast(`⚠️ 《${escapeHtml(duplicate.title)}》已經在清單裡！`);
             }
@@ -1394,6 +1397,67 @@ async function searchAnime(
     }
 }
 
+function getAniListMediaId(media) {
+    if (!media || typeof media !== "object") return "";
+    const values = [media.anilistId, media.aniListId];
+    if (String(media.source || "").toLowerCase() === "anilist") values.push(media.sourceId);
+    values.push(media.id);
+    for (const value of values) {
+        const number = Number(value);
+        if (Number.isSafeInteger(number) && number > 0) return String(number);
+    }
+    return "";
+}
+
+function getMediaIdentityTitles(media) {
+    const titleObject = media?.title && typeof media.title === "object" ? media.title : {};
+    return [...new Set([
+        typeof media?.title === "string" ? media.title : "",
+        media?.displayTitle,
+        media?.canonicalTitle,
+        media?.anilistTitles?.native,
+        media?.anilistTitles?.english,
+        media?.anilistTitles?.romaji,
+        titleObject.native,
+        titleObject.english,
+        titleObject.romaji,
+        ...(Array.isArray(media?.aliases) ? media.aliases : []),
+        ...(Array.isArray(media?.synonyms) ? media.synonyms : [])
+    ].map(normalizeTitleIdentity).filter(Boolean))];
+}
+
+function isConservativeLegacyMediaMatch(existing, media) {
+    const existingId = getAniListMediaId(existing);
+    const mediaId = getAniListMediaId(media);
+    if (existingId && mediaId) return existingId === mediaId;
+
+    const existingDate = getStructuredMediaStartDate(existing);
+    const mediaDate = getStructuredMediaStartDate(media);
+    const existingFormat = String(existing?.format || "").toUpperCase();
+    const mediaFormat = String(media?.format || "").toUpperCase();
+    if (!existingDate.year || !mediaDate.year || existingDate.year !== mediaDate.year) return false;
+    if (!existingFormat || !mediaFormat || existingFormat !== mediaFormat) return false;
+
+    const existingTitles = new Set(getMediaIdentityTitles(existing));
+    return getMediaIdentityTitles(media).some(title => existingTitles.has(title));
+}
+
+function findExistingAnimeForMedia(media, list = animeList) {
+    const mediaId = getAniListMediaId(media);
+    if (mediaId) {
+        const idMatch = list.find(item => getAniListMediaId(item) === mediaId);
+        if (idMatch) return idMatch;
+    }
+    return list.find(item => isConservativeLegacyMediaMatch(item, media)) || null;
+}
+
+function attachAniListIdToLegacyAnime(anime, media) {
+    const mediaId = getAniListMediaId(media);
+    if (!anime || !mediaId || getAniListMediaId(anime)) return anime;
+    anime.anilistId = Number(mediaId);
+    return anime;
+}
+
 function getDirectSequelNodes(media) {
     const edges = Array.isArray(media?.relations)
         ? media.relations
@@ -1430,6 +1494,34 @@ async function walkAniListSequelGraph(seedMedia, loadMedia, maxDepth = 8) {
     return discovered;
 }
 
+async function reconcileDiscoveredSequelMedia(discovered, list, handlers = {}) {
+    const processedIds = new Set();
+    let added = 0;
+    let refreshed = 0;
+
+    for (const entry of discovered) {
+        const media = entry?.media || entry;
+        if (!media) continue;
+        const mediaId = getAniListMediaId(media);
+        if (mediaId && processedIds.has(mediaId)) continue;
+        if (mediaId) processedIds.add(mediaId);
+
+        const existing = findExistingAnimeForMedia(media, list);
+        if (existing) {
+            attachAniListIdToLegacyAnime(existing, media);
+            if (handlers.refreshMedia) await handlers.refreshMedia(existing, media);
+            refreshed++;
+            continue;
+        }
+
+        if (!handlers.addMedia) continue;
+        const result = await handlers.addMedia(media);
+        if (result) added++;
+    }
+
+    return { added, refreshed };
+}
+
 async function checkAndAddSequel(anime, isQuiet = false) {
     const seedMedia = Array.isArray(anime?.relations) && anime.relations.length
         ? anime
@@ -1445,13 +1537,18 @@ async function checkAndAddSequel(anime, isQuiet = false) {
         }
     );
 
-    let added = 0;
-    for (const { media } of chain) {
-        if (animeList.some(item => String(item.id) === String(media.id))) continue;
-        await delay(350);
-        if (await searchAnime(null, isQuiet, groupTitle, media.id)) added++;
-    }
-    return added;
+    const result = await reconcileDiscoveredSequelMedia(chain, animeList, {
+        refreshMedia(existing, media) {
+            const originalCategory = existing.category;
+            applyMediaMetadata(existing, media);
+            existing.category = originalCategory;
+        },
+        async addMedia(media) {
+            await delay(350);
+            return searchAnime(null, isQuiet, groupTitle, media.id);
+        }
+    });
+    return result.added;
 }
 
 async function manualScanSequels() {

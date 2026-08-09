@@ -10,11 +10,11 @@ const end = html.indexOf("async function searchWikipedia", start);
 assert.ok(start >= 0 && end > start, "找不到標題產生函式");
 const code = html.slice(start, end);
 const api = Function(`${code}; return { getCoreTitle, getSeriesGroupTitle, getSmartTitleDetails, generateSmartTitle, isLegacyGeneratedTitle, refreshGeneratedAnimeTitle, compareSeriesMediaByStartDate };`)();
-const sequelStart = html.indexOf("function getDirectSequelNodes");
+const sequelStart = html.indexOf("function getAniListMediaId");
 const sequelEnd = html.indexOf("async function manualScanSequels", sequelStart);
 assert.ok(sequelStart >= 0 && sequelEnd > sequelStart, "找不到續作 traversal 函式");
 const sequelCode = html.slice(sequelStart, sequelEnd);
-const sequelApi = Function(`${sequelCode}; return { getDirectSequelNodes, walkAniListSequelGraph };`)();
+const sequelApi = Function(`${code}\n${sequelCode}; return { getAniListMediaId, findExistingAnimeForMedia, getDirectSequelNodes, walkAniListSequelGraph, reconcileDiscoveredSequelMedia };`)();
 
 let passed = 0;
 const pending = [];
@@ -187,9 +187,106 @@ test("系列同年作品使用 month/day 排序", () => {
     assert.deepEqual(list.sort(api.compareSeriesMediaByStartDate).map(item => item.id), ["early", "middle", "late"]);
 });
 
+test("diamond relation 的共同節點只發現一次", async () => {
+    const graph = new Map([
+        [1, { id: 1, relations: { edges: [
+            { relationType: "SEQUEL", node: { id: 2, type: "ANIME", format: "TV" } },
+            { relationType: "SEQUEL", node: { id: 3, type: "ANIME", format: "SPECIAL" } }
+        ] } }],
+        [2, { id: 2, relations: { edges: [{ relationType: "SEQUEL", node: { id: 4, type: "ANIME", format: "MOVIE" } }] } }],
+        [3, { id: 3, relations: { edges: [{ relationType: "SEQUEL", node: { id: "4", type: "ANIME", format: "MOVIE" } }] } }],
+        [4, { id: 4, relations: { edges: [] } }]
+    ]);
+    const result = await sequelApi.walkAniListSequelGraph(graph.get(1), async id => graph.get(Number(id)), 8);
+    assert.deepEqual(result.map(item => Number(item.media.id)), [2, 3, 4]);
+    assert.equal(result.filter(item => Number(item.media.id) === 4).length, 1);
+});
+
+test("circular relation 由 visited set 正常終止", async () => {
+    const graph = new Map([
+        [1, { id: 1, relations: { edges: [{ relationType: "SEQUEL", node: { id: 2, type: "ANIME" } }] } }],
+        [2, { id: 2, relations: { edges: [{ relationType: "SEQUEL", node: { id: 3, type: "ANIME" } }] } }],
+        [3, { id: 3, relations: { edges: [{ relationType: "SEQUEL", node: { id: 1, type: "ANIME" } }] } }]
+    ]);
+    const result = await sequelApi.walkAniListSequelGraph(graph.get(1), async id => graph.get(Number(id)), 8);
+    assert.deepEqual(result.map(item => item.media.id), [2, 3]);
+});
+
+test("已存在的 AniList ID 只 refresh、不重複新增", async () => {
+    const list = [{ id: 200, title: "既有作品", category: "completed", year: 2024, format: "OVA" }];
+    let addCalls = 0;
+    let refreshCalls = 0;
+    const result = await sequelApi.reconcileDiscoveredSequelMedia(
+        [{ media: { id: "200", title: { native: "Existing" }, startDate: { year: 2024 }, format: "OVA" } }],
+        list,
+        {
+            addMedia() { addCalls++; return true; },
+            refreshMedia(existing) { refreshCalls++; assert.equal(existing.category, "completed"); }
+        }
+    );
+    assert.deepEqual(result, { added: 0, refreshed: 1 });
+    assert.equal(addCalls, 0);
+    assert.equal(refreshCalls, 1);
+    assert.equal(list.length, 1);
+});
+
+test("同一 AniList ID 已在其他 category 時不複製", async () => {
+    const list = [{ id: 300, title: "跨分類作品", category: "backlog", year: 2023, format: "SPECIAL" }];
+    const result = await sequelApi.reconcileDiscoveredSequelMedia(
+        [{ media: { id: 300, title: { native: "跨分類作品" }, startDate: { year: 2023 }, format: "SPECIAL" } }],
+        list,
+        { addMedia() { throw new Error("不得新增重複作品"); } }
+    );
+    assert.equal(result.added, 0);
+    assert.equal(list[0].category, "backlog");
+    assert.equal(list.length, 1);
+});
+
+test("連續執行兩次 sequel reconcile，第二次新增 0 筆", async () => {
+    const list = [];
+    const discovered = [
+        { media: { id: 401, title: { native: "作品 B" }, startDate: { year: 2024 }, format: "TV" } },
+        { media: { id: 402, title: { native: "作品 C" }, startDate: { year: 2025 }, format: "ONA" } }
+    ];
+    const handlers = {
+        addMedia(media) {
+            list.push({ id: media.id, title: media.title.native, year: media.startDate.year, format: media.format, category: "waiting" });
+            return true;
+        }
+    };
+    const first = await sequelApi.reconcileDiscoveredSequelMedia(discovered, list, handlers);
+    const second = await sequelApi.reconcileDiscoveredSequelMedia(discovered, list, handlers);
+    assert.equal(first.added, 2);
+    assert.equal(second.added, 0);
+    assert.equal(list.length, 2);
+});
+
+test("舊資料無 AniList ID 時只用 title＋year＋format 保守去重", async () => {
+    const legacy = { id: "legacy-uuid", title: "舊作品", aliases: ["Legacy Native"], year: 2022, format: "MOVIE", category: "completed" };
+    const list = [legacy];
+    const media = { id: 999, title: { native: "Legacy Native" }, startDate: { year: 2022 }, format: "MOVIE" };
+    const result = await sequelApi.reconcileDiscoveredSequelMedia(
+        [{ media }],
+        list,
+        { addMedia() { throw new Error("保守 fallback 已匹配，不應新增"); } }
+    );
+    assert.deepEqual(result, { added: 0, refreshed: 1 });
+    assert.equal(legacy.id, "legacy-uuid");
+    assert.equal(legacy.anilistId, 999);
+    assert.equal(legacy.category, "completed");
+
+    const differentKnownId = { id: 1000, title: "Legacy Native", aliases: ["Legacy Native"], year: 2022, format: "MOVIE" };
+    assert.equal(sequelApi.findExistingAnimeForMedia(media, [differentKnownId]), null, "不同 AniList ID 不可因同名合併");
+});
+
 test("renderList 只在系列群組內套用結構化日期排序", () => {
     assert.match(html, /for \(const \[core, series\] of Object\.entries\(seriesMap\)\) \{\s*series\.sort\(compareSeriesMediaByStartDate\)/u);
     assert.doesNotMatch(html, /compareSeriesMediaByStartDate\([^)]*title/u);
+});
+
+test("searchAnime 與 checkAndAddSequel 共用統一去重流程", () => {
+    assert.match(html, /const duplicate = findExistingAnimeForMedia\(media, animeList\)/u);
+    assert.match(html, /reconcileDiscoveredSequelMedia\(chain, animeList/u);
 });
 
 Promise.all(pending).then(() => {
