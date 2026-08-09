@@ -842,66 +842,166 @@ async function batchSearchAnime() {
     );
 }
 
-function getCoreTitle(title) {
+function stripDisplayYear(title) {
     return String(title || "")
-        .replace(/\s*第[一二三四五六七八九十百0-9]+[季期]\s*$/g, "")
-        .replace(/\s*Season\s*[0-9]+\s*$/gi, "")
-        .replace(/\s*\((OVA|特別篇|劇場版|ONA外傳|續篇).*?\)\s*$/gi, "")
+        .replace(/\s*[（(]\s*(?:19|20)\d{2}\s*年?\s*[）)]\s*$/u, "")
         .trim();
 }
 
-function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
-    const combinedText = [
-        media.title?.native || "",
-        media.title?.english || "",
-        media.title?.romaji || ""
-    ].join(" ");
+function normalizeTitleIdentity(title) {
+    return stripDisplayYear(title)
+        .normalize("NFKC")
+        .toLowerCase()
+        .replace(/[\s\u3000《》「」『』【】()（）:：・·,，.。!?！？/\\_-]+/gu, "")
+        .trim();
+}
 
-    const lower = combinedText.toLowerCase();
+function getCoreTitle(title) {
+    return stripDisplayYear(title)
+        .replace(/^\s*(?:電影版|剧场版|劇場版|映画)\s*/iu, "")
+        .replace(/\s*第[一二三四五六七八九十百0-9]+[季期]\s*$/gu, "")
+        .replace(/\s*(?:Season\s*[0-9]+|[0-9]+(?:st|nd|rd|th)\s+Season)\s*$/giu, "")
+        .replace(/\s*[（(](?:OVA|特別篇|劇場版|電影版|ONA外傳|續篇)(?:\s*[・·\-－—]\s*\d{4}\s*年?)?[）)]\s*$/giu, "")
+        .replace(/[∬∽＊*]+\s*$/gu, "")
+        .trim();
+}
 
-    let coreTitle =
-        wikiZhTitle ||
-        googleZhTitle ||
-        media.title?.native ||
-        media.title?.romaji ||
-        media.title?.english ||
-        "未命名作品";
-
-    if (parentChineseTitle) {
-        coreTitle = getCoreTitle(parentChineseTitle);
+function getSeriesGroupTitle(mediaOrTitle, parentChineseTitle = null) {
+    if (parentChineseTitle) return getCoreTitle(parentChineseTitle);
+    if (mediaOrTitle && typeof mediaOrTitle === "object") {
+        const stored = String(mediaOrTitle.groupTitle || mediaOrTitle.seriesGroupTitle || "").trim();
+        if (stored) return getCoreTitle(stored);
+        return getCoreTitle(mediaOrTitle.title || mediaOrTitle.displayTitle || "");
     }
+    return getCoreTitle(mediaOrTitle);
+}
 
-    const seasons = [
-        [5, ["season 5", "5th season", "第5期", "第五季"]],
-        [4, ["season 4", "4th season", "第4期", "第四季"]],
-        [3, ["season 3", "3rd season", "第3期", "第三季"]],
-        [2, ["season 2", "2nd season", "第2期", "第二季"]]
+function cleanMediaTitle(value) {
+    const title = stripDisplayYear(value).replace(/\s+/g, " ").trim();
+    if (!title || /^(?:undefined|null|untitled|未命名作品)$/iu.test(title)) return "";
+    return title;
+}
+
+function detectMediaSeasonNumber(media) {
+    const text = [
+        media?.title?.native,
+        media?.title?.english,
+        media?.title?.romaji,
+        ...(Array.isArray(media?.synonyms) ? media.synonyms : [])
+    ].filter(Boolean).join(" ");
+    const patterns = [
+        /\bseason\s*(\d+)\b/iu,
+        /\b(\d+)(?:st|nd|rd|th)\s+season\b/iu,
+        /第\s*([一二三四五六七八九十百0-9]+)\s*[季期]/u
     ];
+    for (const pattern of patterns) {
+        const match = text.match(pattern);
+        if (!match) continue;
+        const chineseNumbers = { 一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10 };
+        const number = Number(match[1]) || chineseNumbers[match[1]];
+        if (Number.isInteger(number) && number >= 2) return number;
+    }
+    return null;
+}
 
-    for (const [number, words] of seasons) {
-        if (
-            words.some(word =>
-                lower.includes(word.toLowerCase()) ||
-                combinedText.includes(word)
-            )
-        ) {
-            return `${coreTitle} 第${["", "一", "二", "三", "四", "五"][number]}季`;
-        }
+function chineseSeasonNumber(number) {
+    return ({ 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九", 10: "十" })[number] || String(number);
+}
+
+function hasDistinctiveMediaTitle(title) {
+    return /[∬∽＊*]|(?:movie|special|ova|ona)|(?:電影版|劇場版|映画|特別篇)|(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season)|第\s*[一二三四五六七八九十百0-9]+\s*[季期]|[:：～~]/iu.test(String(title || ""));
+}
+
+function getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
+    const candidates = [
+        [media?.title?.traditionalChinese || media?.title?.zhHant || media?.title?.chinese, "anilist"],
+        [wikiZhTitle, "wiki"],
+        [googleZhTitle, "google"],
+        [media?.title?.native, "anilist"],
+        [media?.title?.english, "anilist"],
+        [media?.title?.romaji, "anilist"]
+    ].map(([title, source]) => ({ title: cleanMediaTitle(title), source })).filter(item => item.title);
+
+    if (!candidates.length) return { title: "", source: "generated", distinctFromParent: false };
+
+    const parentIdentity = normalizeTitleIdentity(getCoreTitle(parentChineseTitle));
+    const ownCandidate = parentIdentity
+        ? candidates.find(item => normalizeTitleIdentity(item.title) !== parentIdentity && hasDistinctiveMediaTitle(item.title))
+            || candidates.find(item => normalizeTitleIdentity(item.title) !== parentIdentity)
+        : candidates[0];
+    const selected = ownCandidate || candidates[0];
+    return {
+        ...selected,
+        distinctFromParent: Boolean(parentIdentity && normalizeTitleIdentity(selected.title) !== parentIdentity)
+    };
+}
+
+function appendPremiereYear(title, year) {
+    const cleanTitle = cleanMediaTitle(title);
+    const numericYear = Number(year);
+    if (!cleanTitle || !Number.isInteger(numericYear) || numericYear < 1900) return cleanTitle;
+    if (new RegExp(`[（(]\\s*${numericYear}\\s*年?\\s*[）)]$`, "u").test(cleanTitle)) return cleanTitle;
+    return `${cleanTitle}（${numericYear}）`;
+}
+
+function buildFallbackMediaTitle(parentTitle, format, year, relationType = "SEQUEL") {
+    const coreTitle = getCoreTitle(parentTitle) || "未命名作品";
+    const labels = { OVA: "OVA", SPECIAL: "特別篇", MOVIE: "劇場版", ONA: "ONA外傳" };
+    const label = labels[String(format || "").toUpperCase()] || (relationType === "SEQUEL" ? "續篇" : "續篇");
+    const numericYear = Number(year);
+    return `${coreTitle}（${label}${Number.isInteger(numericYear) && numericYear >= 1900 ? `・${numericYear}` : ""}）`;
+}
+
+function getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
+    const year = Number(media?.startDate?.year) || null;
+    const parentCore = getCoreTitle(parentChineseTitle);
+    const canonical = getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle);
+    const seasonNumber = detectMediaSeasonNumber(media);
+    const relationType = media?.relationType || "SEQUEL";
+
+    if (parentCore && seasonNumber) {
+        const title = `${parentCore} 第${chineseSeasonNumber(seasonNumber)}季`;
+        return { displayTitle: appendPremiereYear(title, year), canonicalTitle: title, groupTitle: parentCore, titleSource: canonical.source, seasonNumber, usedFallback: false };
     }
 
-    if (parentChineseTitle) {
-        const yearSuffix = media.startDate?.year
-            ? ` - ${media.startDate.year}年`
-            : "";
-
-        if (media.format === "OVA") return `${coreTitle} (OVA${yearSuffix})`;
-        if (media.format === "SPECIAL") return `${coreTitle} (特別篇${yearSuffix})`;
-        if (media.format === "MOVIE") return `${coreTitle} (劇場版${yearSuffix})`;
-        if (media.format === "ONA") return `${coreTitle} (ONA外傳${yearSuffix})`;
-        return `${coreTitle} (續篇${yearSuffix})`;
+    if (canonical.title && (!parentCore || canonical.distinctFromParent)) {
+        return { displayTitle: appendPremiereYear(canonical.title, year), canonicalTitle: canonical.title, groupTitle: parentCore || getCoreTitle(canonical.title), titleSource: canonical.source, seasonNumber: null, usedFallback: false };
     }
 
-    return coreTitle;
+    if (parentCore) {
+        const fallback = buildFallbackMediaTitle(parentCore, media?.format, year, relationType);
+        return { displayTitle: fallback, canonicalTitle: fallback, groupTitle: parentCore, titleSource: "generated", seasonNumber: null, usedFallback: true };
+    }
+
+    const standaloneTitle = canonical.title || "未命名作品";
+    return { displayTitle: appendPremiereYear(standaloneTitle, year), canonicalTitle: standaloneTitle, groupTitle: getCoreTitle(standaloneTitle), titleSource: canonical.source, seasonNumber: null, usedFallback: !canonical.title };
+}
+
+function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
+    return getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTitle).displayTitle;
+}
+
+function isLegacyGeneratedTitle(title) {
+    return /[（(](?:OVA|特別篇|劇場版|電影版|ONA外傳|續篇|第二季)(?:\s*[・·\-－—]\s*\d{4}\s*年?)?[）)]\s*$/iu.test(String(title || ""));
+}
+
+function refreshGeneratedAnimeTitle(anime, media) {
+    if (!anime || anime.titleManuallyEdited === true || anime.titleSource === "manual") return false;
+    const managedSource = ["anilist", "wiki", "google", "generated", "legacy"].includes(anime.titleSource);
+    if (!managedSource && !isLegacyGeneratedTitle(anime.title)) return false;
+
+    const previousTitle = anime.title;
+    const parentTitle = anime.groupTitle || getCoreTitle(previousTitle);
+    const details = getSmartTitleDetails(media, parentTitle, null, null);
+    if (!details.displayTitle || details.usedFallback) return false;
+
+    anime.title = details.displayTitle;
+    anime.displayTitle = details.displayTitle;
+    anime.canonicalTitle = details.canonicalTitle;
+    anime.groupTitle = details.groupTitle;
+    anime.titleSource = details.titleSource;
+    anime.titleManuallyEdited = false;
+    return anime.title !== previousTitle;
 }
 
 async function searchWikipedia(input) {
@@ -1043,17 +1143,27 @@ function releasedEpisodeCount(media, existing = {}) {
 }
 
 function applyMediaMetadata(anime, media) {
+    const previousTitle = anime.title;
     anime.status = media.status || anime.status || "UNKNOWN";
+    anime.format = media.format || anime.format || "";
     if (Number(media.episodes) > 0) anime.episodes = Number(media.episodes);
     anime.releasedEpisodes = releasedEpisodeCount(media, anime);
     anime.nextEpisode = media.nextAiringEpisode?.episode || null;
     anime.nextAiringAt = media.nextAiringEpisode?.airingAt || null;
     anime.streamingLinks = normalizeStreamingLinks(media.externalLinks);
     anime.aliases = normalizeAnimeAliasList([
-        anime.title,
+        previousTitle,
         ...(Array.isArray(anime.aliases) ? anime.aliases : []),
-        ...buildWorkAliasesFromMedia(media, anime.title)
+        ...buildWorkAliasesFromMedia(media, previousTitle)
     ]);
+    refreshGeneratedAnimeTitle(anime, media);
+    anime.groupTitle = anime.groupTitle || getSeriesGroupTitle(anime);
+    anime.anilistTitles = {
+        native: media.title?.native || anime.anilistTitles?.native || "",
+        english: media.title?.english || anime.anilistTitles?.english || "",
+        romaji: media.title?.romaji || anime.anilistTitles?.romaji || ""
+    };
+    anime.year = Number(media.startDate?.year) || anime.year || null;
     anime.lastMetadataSync = new Date().toISOString();
     anime.relations = Array.isArray(media.relations?.edges) ? media.relations.edges : anime.relations || [];
     if (anime.category === "waiting" && media.status === "RELEASING") anime.category = "watching";
@@ -1142,12 +1252,13 @@ async function searchAnime(
             "zh-TW"
         );
 
-        const finalTitle = generateSmartTitle(
+        const titleDetails = getSmartTitleDetails(
             media,
             parentChineseTitle,
             wikiZhTitle,
             googleZh
         );
+        const finalTitle = titleDetails.displayTitle;
 
         const category =
             forcedCategory ||
@@ -1166,6 +1277,16 @@ async function searchAnime(
         const newAnime = {
             id: Number(media.id),
             title: finalTitle,
+            displayTitle: finalTitle,
+            canonicalTitle: titleDetails.canonicalTitle,
+            groupTitle: titleDetails.groupTitle,
+            titleSource: titleDetails.titleSource,
+            titleManuallyEdited: false,
+            anilistTitles: {
+                native: media.title?.native || "",
+                english: media.title?.english || "",
+                romaji: media.title?.romaji || ""
+            },
             aliases: buildWorkAliasesFromMedia(media, finalTitle, [
                 wikiZhTitle,
                 wikiJaTitle,
@@ -1173,6 +1294,8 @@ async function searchAnime(
                 input
             ]),
             status: media.status || "UNKNOWN",
+            format: media.format || "",
+            year: Number(media.startDate?.year) || null,
             episodes: media.episodes || "??",
             watched: 0,
             category,
@@ -1656,6 +1779,9 @@ function editTitle(id) {
 
     if (title?.trim()) {
         anime.title = title.trim();
+        anime.displayTitle = anime.title;
+        anime.titleSource = "manual";
+        anime.titleManuallyEdited = true;
         saveAndRender();
     }
 }
@@ -1731,11 +1857,11 @@ function buildAnimeItem(anime) {
     const animeDataId = escapeHtml(String(anime.id));
     let badge = "";
 
-    if (anime.title.includes("(OVA")) badge = '<span class="badge" style="background:#0284c7">OVA</span>';
-    else if (anime.title.includes("(特別篇")) badge = '<span class="badge" style="background:#f59e0b">特別篇</span>';
-    else if (anime.title.includes("(劇場版")) badge = '<span class="badge" style="background:#e11d48">劇場版</span>';
-    else if (anime.title.includes("(ONA外傳")) badge = '<span class="badge" style="background:#7c3aed">外傳</span>';
-    else if (anime.title.includes("(續篇")) badge = '<span class="badge" style="background:#4b5563">續篇</span>';
+    if (anime.format === "OVA" || /[（(]OVA/u.test(anime.title)) badge = '<span class="badge" style="background:#0284c7">OVA</span>';
+    else if (anime.format === "SPECIAL" || /[（(]特別篇/u.test(anime.title)) badge = '<span class="badge" style="background:#f59e0b">特別篇</span>';
+    else if (anime.format === "MOVIE" || /[（(]劇場版/u.test(anime.title)) badge = '<span class="badge" style="background:#e11d48">劇場版</span>';
+    else if (anime.format === "ONA" || /[（(]ONA外傳/u.test(anime.title)) badge = '<span class="badge" style="background:#7c3aed">外傳</span>';
+    else if (/[（(]續篇/u.test(anime.title)) badge = '<span class="badge" style="background:#4b5563">續篇</span>';
 
     let actions = "";
 
@@ -1782,7 +1908,7 @@ function buildAnimeItem(anime) {
                 ${actions}
                 <button class="btn-review" onclick='editAnimeReview(${animeId})'>⭐ 評分筆記</button>
                 <button type="button" class="btn-review" data-open-themes="${animeDataId}">🎵 主題曲</button>
-                <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getCoreTitle(anime.title))}'),decodeURIComponent('${encodeURIComponent(String(anime.id))}'))">🎪 查活動</button>
+                <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getSeriesGroupTitle(anime))}'),decodeURIComponent('${encodeURIComponent(String(anime.id))}'))">🎪 查活動</button>
                 <button class="btn-edit" onclick='editTitle(${animeId})'>✏️ 改名</button>
                 <button class="btn-del" onclick='deleteAnime(${animeId})'>🗑️ 刪除</button>
             </div>
@@ -1895,7 +2021,7 @@ function renderList() {
         const seriesMap = {};
 
         for (const anime of items) {
-            const core = getCoreTitle(anime.title) || anime.title;
+            const core = getSeriesGroupTitle(anime) || anime.title;
             (seriesMap[core] ||= []).push(anime);
         }
 
