@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-08T02:20:40.969Z",
-    "lastSuccessfulUpdateAt": "2026-08-08T02:20:40.969Z",
+    "updatedAt": "2026-08-09T02:27:30.573Z",
+    "lastSuccessfulUpdateAt": "2026-08-09T02:27:30.573Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 620,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 625,
     "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 37,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 17,
-    "newEventCount": 4,
-    "cachedEventCount": 26,
+    "newEventCount": 2,
+    "cachedEventCount": 28,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 36,
+    "storedEventCount": 37,
     "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 55,
+    "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 137,
+    "nonActivityRemovedCount": 140,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -119,8 +119,8 @@
       "dateConfidence": "medium",
       "dateSource": "8 月 7 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "ext-b58f3713fde43779",
@@ -149,13 +149,13 @@
       "dateConfidence": "medium",
       "dateSource": "8月6日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "巴哈姆特",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -175,12 +175,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 巴哈姆特",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -654,8 +654,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -686,6 +686,34 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-21T09:36:55.915Z",
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
+    },
+    {
+      "id": "ext-0ca4f08ed4351924",
+      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
+      "summary": "遠見雜誌",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -719,34 +747,6 @@
       "lastSeenAt": "2026-08-07T03:14:15.928Z"
     },
     {
-      "id": "ext-0ca4f08ed4351924",
-      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "遠見雜誌",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-04T03:35:39.203Z",
-      "lastSeenAt": "2026-08-04T03:35:39.203Z"
-    },
-    {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
       "summary": "4Gamers",
@@ -774,8 +774,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1063,8 +1063,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     },
     {
       "id": "gnn-309209",
@@ -1160,8 +1160,38 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+    },
+    {
+      "id": "ext-aa09a40ecdd54fb1",
+      "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
+      "summary": "nownews.com",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9EX05yX0pCOUxQYzMyR09jQjdRV3FwQkVNblRkMm9wNnJXNDQ3VDFNN2tTQzQ0U09kUEowRTlhRVBuU1I4aWxxSjg5TXA4Mkp5d0HSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-08T21:41:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 nownews.com",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-09T02:27:30.573Z",
+      "lastSeenAt": "2026-08-09T02:27:30.573Z"
     }
   ],
   "archive": []
