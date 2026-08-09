@@ -876,6 +876,31 @@ function getSeriesGroupTitle(mediaOrTitle, parentChineseTitle = null) {
     return getCoreTitle(mediaOrTitle);
 }
 
+function getStructuredMediaStartDate(media) {
+    const source = media?.startDate && typeof media.startDate === "object"
+        ? media.startDate
+        : {};
+    const yearValue = Number(source.year ?? media?.year);
+    const monthValue = Number(source.month);
+    const dayValue = Number(source.day);
+    return {
+        year: Number.isInteger(yearValue) && yearValue > 0 ? yearValue : null,
+        month: Number.isInteger(monthValue) && monthValue >= 1 && monthValue <= 12 ? monthValue : null,
+        day: Number.isInteger(dayValue) && dayValue >= 1 && dayValue <= 31 ? dayValue : null
+    };
+}
+
+function compareSeriesMediaByStartDate(a, b) {
+    const dateA = getStructuredMediaStartDate(a);
+    const dateB = getStructuredMediaStartDate(b);
+    if (dateA.year == null && dateB.year == null) return 0;
+    if (dateA.year == null) return 1;
+    if (dateB.year == null) return -1;
+    return dateA.year - dateB.year
+        || (dateA.month || 0) - (dateB.month || 0)
+        || (dateA.day || 0) - (dateB.day || 0);
+}
+
 function cleanMediaTitle(value) {
     const title = stripDisplayYear(value).replace(/\s+/g, " ").trim();
     if (!title || /^(?:undefined|null|untitled|未命名作品)$/iu.test(title)) return "";
@@ -912,10 +937,27 @@ function hasDistinctiveMediaTitle(title) {
     return /[∬∽＊*]|(?:movie|special|ova|ona)|(?:電影版|劇場版|映画|特別篇)|(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season)|第\s*[一二三四五六七八九十百0-9]+\s*[季期]|[:：～~]/iu.test(String(title || ""));
 }
 
+function deriveLocalizedMediaTitle(media, parentChineseTitle) {
+    const parentCore = getCoreTitle(parentChineseTitle);
+    const nativeTitle = cleanMediaTitle(media?.title?.native);
+    if (!parentCore || !nativeTitle) return "";
+
+    const suffix = nativeTitle.match(/([∬∽＊*]+)$/u)?.[1];
+    if (suffix) return `${parentCore}${suffix}`;
+
+    if (/^(?:映画|劇場版)\s+/u.test(nativeTitle) && !/[:：～~]/u.test(nativeTitle)) {
+        return `電影版 ${parentCore}`;
+    }
+
+    return "";
+}
+
 function getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
+    const localizedFromParent = deriveLocalizedMediaTitle(media, parentChineseTitle);
     const candidates = [
         [media?.title?.traditionalChinese || media?.title?.zhHant || media?.title?.chinese, "anilist"],
         [wikiZhTitle, "wiki"],
+        [localizedFromParent, "anilist"],
         [googleZhTitle, "google"],
         [media?.title?.native, "anilist"],
         [media?.title?.english, "anilist"],
@@ -1144,6 +1186,7 @@ function releasedEpisodeCount(media, existing = {}) {
 
 function applyMediaMetadata(anime, media) {
     const previousTitle = anime.title;
+    const mediaStartDate = getStructuredMediaStartDate(media);
     anime.status = media.status || anime.status || "UNKNOWN";
     anime.format = media.format || anime.format || "";
     if (Number(media.episodes) > 0) anime.episodes = Number(media.episodes);
@@ -1163,7 +1206,8 @@ function applyMediaMetadata(anime, media) {
         english: media.title?.english || anime.anilistTitles?.english || "",
         romaji: media.title?.romaji || anime.anilistTitles?.romaji || ""
     };
-    anime.year = Number(media.startDate?.year) || anime.year || null;
+    if (mediaStartDate.year) anime.startDate = mediaStartDate;
+    anime.year = mediaStartDate.year || anime.year || null;
     anime.lastMetadataSync = new Date().toISOString();
     anime.relations = Array.isArray(media.relations?.edges) ? media.relations.edges : anime.relations || [];
     if (anime.category === "waiting" && media.status === "RELEASING") anime.category = "watching";
@@ -1296,6 +1340,7 @@ async function searchAnime(
             status: media.status || "UNKNOWN",
             format: media.format || "",
             year: Number(media.startDate?.year) || null,
+            startDate: getStructuredMediaStartDate(media),
             episodes: media.episodes || "??",
             watched: 0,
             category,
@@ -1349,26 +1394,64 @@ async function searchAnime(
     }
 }
 
-async function checkAndAddSequel(anime, isQuiet = false) {
-    const sequel = anime?.relations?.find(
-        edge => edge?.relationType === "SEQUEL"
-    )?.node;
+function getDirectSequelNodes(media) {
+    const edges = Array.isArray(media?.relations)
+        ? media.relations
+        : Array.isArray(media?.relations?.edges)
+            ? media.relations.edges
+            : [];
+    return edges
+        .filter(edge => edge?.relationType === "SEQUEL" && edge?.node?.id)
+        .filter(edge => !edge.node.type || edge.node.type === "ANIME")
+        .map(edge => edge.node);
+}
 
-    if (
-        !sequel ||
-        animeList.some(item => Number(item.id) === Number(sequel.id))
-    ) {
-        return false;
+async function walkAniListSequelGraph(seedMedia, loadMedia, maxDepth = 8) {
+    const seen = new Set([String(seedMedia?.id || "")]);
+    const queue = [{ media: seedMedia, depth: 0 }];
+    const discovered = [];
+
+    while (queue.length) {
+        const current = queue.shift();
+        if (!current?.media || current.depth >= maxDepth) continue;
+
+        for (const sequelNode of getDirectSequelNodes(current.media)) {
+            const id = String(sequelNode.id);
+            if (seen.has(id)) continue;
+            seen.add(id);
+
+            const fullMedia = await loadMedia(sequelNode.id) || sequelNode;
+            const entry = { media: fullMedia, depth: current.depth + 1, parentId: current.media.id };
+            discovered.push(entry);
+            queue.push(entry);
+        }
     }
 
-    await delay(500);
+    return discovered;
+}
 
-    return await searchAnime(
-        null,
-        isQuiet,
-        anime.title,
-        sequel.id
+async function checkAndAddSequel(anime, isQuiet = false) {
+    const seedMedia = Array.isArray(anime?.relations) && anime.relations.length
+        ? anime
+        : await requestAniList(ID_QUERY, { id: Number(anime.id) });
+    if (!seedMedia) return 0;
+
+    const groupTitle = getSeriesGroupTitle(anime) || anime.title;
+    const chain = await walkAniListSequelGraph(
+        seedMedia,
+        async id => {
+            await delay(350);
+            return requestAniList(ID_QUERY, { id: Number(id) });
+        }
     );
+
+    let added = 0;
+    for (const { media } of chain) {
+        if (animeList.some(item => String(item.id) === String(media.id))) continue;
+        await delay(350);
+        if (await searchAnime(null, isQuiet, groupTitle, media.id)) added++;
+    }
+    return added;
 }
 
 async function manualScanSequels() {
@@ -1383,9 +1466,7 @@ async function manualScanSequels() {
 
             anime.relations = media?.relations?.edges || [];
 
-            if (await checkAndAddSequel(anime, true)) {
-                found++;
-            }
+            found += await checkAndAddSequel(anime, true);
 
             await delay(600);
         } catch (error) {
@@ -2028,6 +2109,7 @@ function renderList() {
         let html = "";
 
         for (const [core, series] of Object.entries(seriesMap)) {
+            series.sort(compareSeriesMediaByStartDate);
             if (series.length === 1) {
                 html += buildAnimeItem(series[0]);
                 continue;
