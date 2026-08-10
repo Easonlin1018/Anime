@@ -21,6 +21,16 @@
         save(V.RESTORE_KEY, points.slice(0, 5));
         renderRestorePoints();
     }
+    function auxiliaryUndoSnapshot() { return { eventOverrides:{ ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, watchHistory:[...watchHistory] }; }
+    function restoreAuxiliaryUndo(undo) {
+        if (!undo?.auxiliary) return;
+        eventOverrides = undo.auxiliary.eventOverrides || {};
+        eventAnimeOverrides = undo.auxiliary.eventAnimeOverrides || {};
+        watchHistory = undo.auxiliary.watchHistory || [];
+        save(EVENT_OVERRIDES_KEY, eventOverrides);
+        save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
+        save(V.HISTORY_KEY, watchHistory);
+    }
 
     animeList = V.migrateList(animeList);
     persistAnime();
@@ -50,8 +60,11 @@
     deleteAnime = function (id) {
         const item = animeList.find(x => String(x.id) === String(id)); if (!item) return;
         if (!confirm(`確定刪除「${item.title}」？可使用「復原上一步」恢復。`)) return;
-        save(UNDO_KEY, { type: "delete", at: new Date().toISOString(), before: animeList });
-        item.deletedAt = new Date().toISOString(); item.category = "_deleted"; touch(item); saveAndRender(); showToast("🗑️ 已刪除，可在批次工具列復原上一步");
+        save(UNDO_KEY, { type: "delete", at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
+        const result = V.markAnimeDeletedById(animeList, id);
+        animeList = result.list;
+        cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt);
+        saveAndRender(); showToast("🗑️ 已刪除，可在批次工具列復原上一步");
     };
 
     const originalBuildAnimeItem = buildAnimeItem;
@@ -168,9 +181,15 @@
         const action = document.getElementById("v11-batch-action").value, valueText = document.getElementById("v11-batch-value").value.trim();
         if (action === "delete") { const names = animeList.filter(x => state.selected.has(String(x.id))).map(x => x.title); if (!confirm(`將刪除 ${names.length} 部：\n${names.slice(0,10).join("、")}\n確定繼續？`)) return; }
         const value = action === "reminder" ? /^(1|true|啟用|是)$/i.test(valueText) : valueText;
-        save(UNDO_KEY, { type: "batch", at: new Date().toISOString(), before: animeList }); animeList = V.applyBatch(animeList, [...state.selected], action, value); persistAnime(); state.selected.clear(); renderList(); refreshV11(); showToast("批次操作完成，可復原上一步");
+        save(UNDO_KEY, { type: "batch", at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
+        if (action === "delete") {
+            const deleted = animeList.filter(item => state.selected.has(String(item.id)));
+            for (const item of deleted) animeList = V.markAnimeDeletedById(animeList, item.id).list;
+            deleted.forEach(item => cleanupAnimeAuxiliaryReferences(animeList.find(current => String(current.id) === String(item.id))));
+        } else animeList = V.applyBatch(animeList, [...state.selected], action, value);
+        persistAnime(); state.selected.clear(); renderList(); refreshV11(); showToast("批次操作完成，可復原上一步");
     }
-    function undoLast() { const undo = parse(UNDO_KEY, null); if (!undo?.before) return showToast("目前沒有可復原操作"); animeList = V.migrateList(undo.before); localStorage.removeItem(UNDO_KEY); persistAnime(); renderList(); refreshV11(); showToast("已復原上一步"); }
+    function undoLast() { const undo = parse(UNDO_KEY, null); if (!undo?.before) return showToast("目前沒有可復原操作"); animeList = V.migrateList(undo.before); restoreAuxiliaryUndo(undo); localStorage.removeItem(UNDO_KEY); persistAnime(); window.CrossMediaTracker?.syncAnimeReferences?.(); renderList(); renderEvents(); refreshV11(); showToast("已復原上一步"); }
 
     function openAnimeDetail(id, expandThemes = false) {
         const item = animeList.find(x => String(x.id) === String(id)); if (!item) return;
@@ -188,7 +207,7 @@
     function closeV11Modals(){ window.SpotifyThemes?.close(); document.querySelectorAll(".v11-modal").forEach(x=>x.hidden=true); }
     function safeUrl(value){ try{const url=new URL(value,location.href);return ["http:","https:","data:"].includes(url.protocol)?url.href:""}catch{return ""} }
 
-    function renderReminders() { const now=new Date(), week=new Date(now); week.setDate(week.getDate()+7); const list=animeList.filter(x=>x.reminderEnabled&&x.nextEpisodeAt).sort((a,b)=>Date.parse(a.nextEpisodeAt)-Date.parse(b.nextEpisodeAt)); const box=document.getElementById("v11-reminders");box.innerHTML=list.map(item=>{const date=new Date(item.nextEpisodeAt), diff=date-now, due=diff<=0; const days=Math.floor(Math.abs(diff)/86400000), hours=Math.floor(Math.abs(diff)%86400000/3600000), label=due?"已播出・待看":diff<86400000?"今天更新":diff<172800000?"明天更新":date<=week?"本週更新":"稍後";return `<div class="v11-card"><span class="v11-badge ${due?"danger":"good"}">${label}</span><strong>${escapeHtml(item.title)}</strong><div>下一集：${escapeHtml(date.toLocaleString("zh-TW"))}</div><div>${due?"已過":"剩餘"}：${days} 天 ${hours} 小時</div></div>`}).join("")||'<div class="empty">目前沒有啟用動畫提醒的作品。</div>';window.CrossMediaTracker?.appendMangaReminders?.(box); }
+    function renderReminders() { const now=new Date(), week=new Date(now); week.setDate(week.getDate()+7); const list=animeList.filter(x=>!x.deletedAt&&x.reminderEnabled&&x.nextEpisodeAt).sort((a,b)=>Date.parse(a.nextEpisodeAt)-Date.parse(b.nextEpisodeAt)); const box=document.getElementById("v11-reminders");box.innerHTML=list.map(item=>{const date=new Date(item.nextEpisodeAt), diff=date-now, due=diff<=0; const days=Math.floor(Math.abs(diff)/86400000), hours=Math.floor(Math.abs(diff)%86400000/3600000), label=due?"已播出・待看":diff<86400000?"今天更新":diff<172800000?"明天更新":date<=week?"本週更新":"稍後";return `<div class="v11-card"><span class="v11-badge ${due?"danger":"good"}">${label}</span><strong>${escapeHtml(item.title)}</strong><div>下一集：${escapeHtml(date.toLocaleString("zh-TW"))}</div><div>${due?"已過":"剩餘"}：${days} 天 ${hours} 小時</div></div>`}).join("")||'<div class="empty">目前沒有啟用動畫提醒的作品。</div>';window.CrossMediaTracker?.appendMangaReminders?.(box); }
     function renderCalendar(){const box=document.getElementById("v11-calendar");if(!box)return;const date=new Date(state.calendarDate),year=date.getFullYear(),month=date.getMonth();document.getElementById("v11-calendar-title").textContent=`${year} 年 ${month+1} 月`;const items=V.calendarItems(animeList,[...eventList,...eventArchive]).filter(x=>state.calendarTypes.has(x.type));const first=new Date(year,month,1),start=new Date(first);start.setDate(start.getDate()-((start.getDay()+6)%7));const days=state.calendarView==="week"?7:42;if(state.calendarView==="week"){start.setTime(date.getTime());start.setDate(start.getDate()-((start.getDay()+6)%7))}box.innerHTML=Array.from({length:days},(_,i)=>{const day=new Date(start);day.setDate(day.getDate()+i);const key=day.toISOString().slice(0,10),dayItems=items.filter(x=>x.date===key);return `<div class="v11-day ${day.getMonth()!==month?"other":""} ${key===new Date().toISOString().slice(0,10)?"today":""}" data-calendar-day="${key}" tabindex="0"><strong>${day.getDate()}</strong>${dayItems.slice(0,4).map(x=>`<button class="v11-calendar-item" data-calendar-day="${key}">${iconType(x.type)} ${escapeHtml(x.title)}</button>`).join("")}</div>`}).join(""); }
     function iconType(type){return ({episode:"📺",movie:"🎬",season:"🌱","event-start":"🎪","event-end":"🏁"})[type]||"•"}
     function renderDayItems(key){const items=V.calendarItems(animeList,[...eventList,...eventArchive]).filter(x=>x.date===key&&state.calendarTypes.has(x.type));document.getElementById("v11-day-items").innerHTML=`<h3>${escapeHtml(key)}</h3>`+items.map(x=>`<button class="v11-card" ${x.animeId?`onclick="document.querySelector('[data-anime-id=&quot;${escapeHtml(x.animeId)}&quot;]')?.click()"`:""}>${iconType(x.type)} ${escapeHtml(x.label)}｜${escapeHtml(x.title)}</button>`).join("");}

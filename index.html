@@ -627,7 +627,7 @@
     <button style="margin-top:15px;margin-bottom:0;width:auto;padding:5px 15px;background:#475569;" onclick="closeToast()">關閉</button>
 </div>
 
-<script src="v11-core.js?v=cross-media-2"></script>
+<script src="v11-core.js?v=identity-integrity-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -705,6 +705,12 @@ function loadStoredAnime() {
             ...(Array.isArray(item.aliases) ? item.aliases : [])
         ])
     }));
+
+    const activeAnimeIds = animeList.filter(item => !item.deletedAt).map(item => item.id);
+    eventAnimeOverrides = AnimeTrackerV11.pruneAnimeIdOverrides(eventAnimeOverrides, activeAnimeIds);
+    eventOverrides = AnimeTrackerV11.pruneAnimeIdOverrides(eventOverrides, activeAnimeIds);
+    localStorage.setItem(EVENT_ANIME_OVERRIDES_KEY, JSON.stringify(eventAnimeOverrides));
+    localStorage.setItem(EVENT_OVERRIDES_KEY, JSON.stringify(eventOverrides));
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
 }
@@ -1647,7 +1653,7 @@ function renderAiringCalendar() {
     const container = document.getElementById("airing-calendar");
     const status = document.getElementById("calendar-status");
     if (!container || !status) return;
-    const scheduled = animeList.filter(anime => anime.nextAiringAt).sort((a,b) => a.nextAiringAt - b.nextAiringAt);
+    const scheduled = animeList.filter(anime => !anime.deletedAt && anime.nextAiringAt).sort((a,b) => a.nextAiringAt - b.nextAiringAt);
     const weekdays = ["週一","週二","週三","週四","週五","週六","週日"];
     const groups = Object.fromEntries(weekdays.map(day => [day, []]));
     for (const anime of scheduled) {
@@ -2013,37 +2019,18 @@ function editTitle(id) {
     const title = prompt("請輸入新名字：", anime.title);
 
     if (title?.trim()) {
-        anime.title = title.trim();
-        anime.displayTitle = anime.title;
-        anime.titleSource = "manual";
-        anime.titleManuallyEdited = true;
+        const result = AnimeTrackerV11.updateAnimeTitleById(animeList, id, title);
+        animeList = result.list;
         saveAndRender();
     }
 }
 
 function moveCategory(id, category) {
-    const anime = animeList.find(item => String(item.id) === String(id));
-    if (!anime) return;
+    const result = AnimeTrackerV11.moveAnimeCategoryById(animeList, id, category);
+    if (!result.found) return;
+    animeList = result.list;
 
-    if (anime.category === "completed" && ["watching", "review"].includes(category)) {
-        anime.watched = 0;
-    }
-
-    anime.category = category;
-
-    if (category === "watching") {
-        anime.lastWatchedAt = new Date().toISOString();
-    }
-
-    if (category === "completed") {
-        const total = Number(anime.episodes);
-
-        if (Number.isFinite(total) && total > 0) {
-            anime.watched = total;
-        }
-
-        checkAndAddSequel(anime, false);
-    }
+    if (category === "completed") checkAndAddSequel(result.anime, false);
 
     saveAndRender();
 }
@@ -2074,15 +2061,27 @@ function updateProgress(id, delta) {
     }
 }
 
+function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOString()) {
+    const cleaned = AnimeTrackerV11.cleanupAnimeAuxiliaryState({ eventOverrides, eventAnimeOverrides, watchHistory }, anime.id);
+    eventOverrides = cleaned.eventOverrides;
+    eventAnimeOverrides = cleaned.eventAnimeOverrides;
+    watchHistory = cleaned.watchHistory;
+    saveEventLocalData();
+    localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(watchHistory));
+    if (String(activeWorkSearch.animeId) === String(anime.id)) activeWorkSearch = { query:"", terms:[], animeId:"", mediaContext:null };
+    window.SpotifyThemes?.cleanupAnime?.(anime);
+    window.CrossMediaTracker?.markAnimeDeleted?.(anime.id, deletedAt);
+}
+
 function deleteAnime(id) {
     const anime = animeList.find(item => String(item.id) === String(id));
     if (!anime) return;
 
     if (!confirm(`確定刪除《${anime.title}》嗎？`)) return;
 
-    animeList = animeList.filter(
-        item => String(item.id) !== String(id)
-    );
+    const result = AnimeTrackerV11.markAnimeDeletedById(animeList, id);
+    animeList = result.list;
+    cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt);
 
     saveAndRender();
 }
@@ -2703,7 +2702,7 @@ function eventMatchesWorkTerms(event, terms) {
 }
 
 function matchingAnime(event) {
-    return animeList.filter(anime => {
+    return animeList.filter(anime => !anime.deletedAt).filter(anime => {
         const result = matchEventToAnime(event, anime);
         return result.matched === true && result.confidence === "high" && result.score >= 80;
     }).slice(0, 3);
@@ -3138,9 +3137,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=cross-media-2"></script>
+<script src="v11-ui.js?v=identity-integrity-1"></script>
 <script src="spotify-config.js"></script>
-<script src="spotify-themes.js"></script>
-<script src="cross-media.js?v=cross-media-2"></script>
+<script src="spotify-themes.js?v=identity-integrity-1"></script>
+<script src="cross-media.js?v=identity-integrity-1"></script>
 </body>
 </html>

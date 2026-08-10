@@ -147,6 +147,35 @@
     function markUnavailable(song) { rememberUndo(currentAnime); Object.assign(song, { spotifyTrackId:"", spotifyUrl:"", spotifyEmbedUrl:"", spotifyMatchStatus:"unavailable", spotifyMatchScore:0, manuallyCorrected:true, unavailableOnSpotify:true, updatedAt:new Date().toISOString() }); persist(currentAnime); }
     function deleteSong(song) { if (!confirm(`確定刪除 ${song.type} ${song.sequence}「${song.title}」？`)) return; rememberUndo(currentAnime); currentAnime.themeSongs.openings = currentAnime.themeSongs.openings.filter(item => item.id !== song.id); currentAnime.themeSongs.endings = currentAnime.themeSongs.endings.filter(item => item.id !== song.id); persist(currentAnime); }
 
+    function cleanupAnime(anime) {
+        const animeId = String(anime?.id || "");
+        if (!animeId) return false;
+        delete cache[`source:${animeId}`];
+        const songs = V.normalizeThemeSongs(anime?.themeSongs);
+        [...songs.openings, ...songs.endings].forEach(song => candidatesBySong.delete(song.id));
+        try {
+            const undo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null");
+            if (String(undo?.animeId || "") === animeId) localStorage.removeItem(UNDO_KEY);
+        } catch { localStorage.removeItem(UNDO_KEY); }
+        if (String(currentAnime?.id || "") === animeId) close();
+        saveCache();
+        return true;
+    }
+
+    function pruneDeletedAnimeCaches() {
+        if (typeof animeList === "undefined") return;
+        const activeIds = new Set(animeList.filter(anime => !anime.deletedAt).map(anime => String(anime.id)));
+        let changed = false;
+        Object.keys(cache).filter(key => key.startsWith("source:")).forEach(key => {
+            if (!activeIds.has(key.slice(7))) { delete cache[key]; changed = true; }
+        });
+        if (changed) saveCache();
+        try {
+            const undo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null");
+            if (undo?.animeId != null && !activeIds.has(String(undo.animeId))) localStorage.removeItem(UNDO_KEY);
+        } catch { localStorage.removeItem(UNDO_KEY); }
+    }
+
     function openEditor(song) {
         const editing = song || V.normalizeThemeSong({ type: "OP", sequence: songGroup(currentAnime, "OP").length + 1, manuallyCorrected: true }, "OP", songGroup(currentAnime, "OP").length);
         const dialog = element("dialog", "theme-editor"); const form = element("form", "v11-modal-panel"); form.method = "dialog";
@@ -160,5 +189,6 @@
     }
     function close() { abortPending(); currentContainer?.querySelectorAll("iframe").forEach(frame => frame.remove()); currentAnime = null; currentContainer = null; candidatesBySong.clear(); }
     function expand(container = currentContainer) { const details=container?.querySelector("details.theme-details"); if(!details)return false; details.open=true; return true; }
-    window.SpotifyThemes = { renderForAnime, expand, close, findAnimeThemeSource, fetchAnimeThemeSongs };
+    window.SpotifyThemes = { renderForAnime, expand, close, cleanupAnime, findAnimeThemeSource, fetchAnimeThemeSongs };
+    pruneDeletedAnimeCaches();
 })();
