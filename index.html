@@ -6,7 +6,7 @@
     <title>全自動動漫追番基地 v11.0</title>
     <meta name="theme-color" content="#0f172a">
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="stylesheet" href="v11-styles.css?v=cross-media-2">
+    <link rel="stylesheet" href="v11-styles.css?v=duplicate-reconciliation-1">
 
     <style>
         :root {
@@ -627,7 +627,7 @@
     <button style="margin-top:15px;margin-bottom:0;width:auto;padding:5px 15px;background:#475569;" onclick="closeToast()">關閉</button>
 </div>
 
-<script src="v11-core.js?v=identity-integrity-1"></script>
+<script src="v11-core.js?v=duplicate-reconciliation-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -677,6 +677,14 @@ const searchBtn = document.getElementById("search-btn");
 const batchBtn = document.getElementById("batch-btn");
 
 function loadStoredAnime() {
+    const readLocalJson = (key, fallback) => {
+        try {
+            const value = JSON.parse(localStorage.getItem(key) || "");
+            return value ?? fallback;
+        } catch {
+            return fallback;
+        }
+    };
     try {
         const current = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
         if (Array.isArray(current)) animeList = current;
@@ -705,6 +713,45 @@ function loadStoredAnime() {
             ...(Array.isArray(item.aliases) ? item.aliases : [])
         ])
     }));
+
+    const duplicateState = {
+        eventOverrides,
+        eventAnimeOverrides,
+        watchHistory:readLocalJson(AnimeTrackerV11.HISTORY_KEY, []),
+        works:readLocalJson(AnimeTrackerV11.WORKS_KEY, []),
+        mangaReadHistory:readLocalJson(AnimeTrackerV11.MANGA_HISTORY_KEY, []),
+        themeCache:readLocalJson("anime_theme_lookup_cache_v1", {}),
+        themeUndo:readLocalJson("anime_theme_last_undo_v1", null)
+    };
+    const reconciliation = AnimeTrackerV11.reconcileExistingAnimeDuplicates(animeList, duplicateState);
+    window.__ANIME_DUPLICATE_RECONCILIATION__ = {
+        changed:reconciliation.changed,
+        mergedCount:reconciliation.mergedCount,
+        groups:reconciliation.groups
+    };
+    if (reconciliation.changed) {
+        try {
+            if (!localStorage.getItem("anime_tracker_duplicate_migration_backup_v1")) {
+                localStorage.setItem("anime_tracker_duplicate_migration_backup_v1", JSON.stringify({
+                    createdAt:new Date().toISOString(),
+                    animeList,
+                    ...duplicateState
+                }));
+            }
+        } catch (error) {
+            console.warn("無法建立重複資料遷移備份：", error);
+        }
+        animeList = reconciliation.list;
+        eventOverrides = reconciliation.state.eventOverrides;
+        eventAnimeOverrides = reconciliation.state.eventAnimeOverrides;
+        localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(reconciliation.state.watchHistory));
+        localStorage.setItem(AnimeTrackerV11.WORKS_KEY, JSON.stringify(reconciliation.state.works));
+        localStorage.setItem(AnimeTrackerV11.MANGA_HISTORY_KEY, JSON.stringify(reconciliation.state.mangaReadHistory));
+        localStorage.setItem("anime_theme_lookup_cache_v1", JSON.stringify(reconciliation.state.themeCache));
+        if (reconciliation.state.themeUndo) localStorage.setItem("anime_theme_last_undo_v1", JSON.stringify(reconciliation.state.themeUndo));
+        else localStorage.removeItem("anime_theme_last_undo_v1");
+        if (EVENT_MATCH_DEBUG) console.info("Anime duplicate reconciliation", reconciliation.groups);
+    }
 
     const activeAnimeIds = animeList.filter(item => !item.deletedAt).map(item => item.id);
     eventAnimeOverrides = AnimeTrackerV11.pruneAnimeIdOverrides(eventAnimeOverrides, activeAnimeIds);
@@ -943,41 +990,94 @@ function hasDistinctiveMediaTitle(title) {
     return /[∬∽＊*]|(?:movie|special|ova|ona)|(?:電影版|劇場版|映画|特別篇)|(?:season\s*\d+|\d+(?:st|nd|rd|th)\s+season)|第\s*[一二三四五六七八九十百0-9]+\s*[季期]|[:：～~]/iu.test(String(title || ""));
 }
 
+function hasChineseTitleContext(title) {
+    const value = cleanMediaTitle(title);
+    return /\p{Script=Han}/u.test(value) && !/[\p{Script=Hiragana}\p{Script=Katakana}]/u.test(value);
+}
+
+function trustedChineseAlias(media) {
+    return (Array.isArray(media?.synonyms) ? media.synonyms : [])
+        .map(cleanMediaTitle)
+        .find(hasChineseTitleContext) || "";
+}
+
 function deriveLocalizedMediaTitle(media, parentChineseTitle) {
     const parentCore = getCoreTitle(parentChineseTitle);
-    const nativeTitle = cleanMediaTitle(media?.title?.native);
-    if (!parentCore || !nativeTitle) return "";
+    if (!parentCore || !hasChineseTitleContext(parentCore)) return "";
+    const titles = [
+        media?.title?.native,
+        media?.title?.english,
+        media?.title?.romaji,
+        ...(Array.isArray(media?.synonyms) ? media.synonyms : [])
+    ].map(cleanMediaTitle).filter(Boolean);
+    const titleText = titles.join(" ");
+    if (!titleText) return "";
 
-    const suffix = nativeTitle.match(/([∬∽＊*]+)$/u)?.[1];
+    const suffix = titles.map(title => title.match(/([∬∽＊*]+)$/u)?.[1]).find(Boolean);
     if (suffix) return `${parentCore}${suffix}`;
 
-    if (/^(?:映画|劇場版)\s+/u.test(nativeTitle) && !/[:：～~]/u.test(nativeTitle)) {
+    const bracketSuffix = titles
+        .map(title => title.match(/[【〖]([^【】〖〗]{1,24})[】〗]\s*$/u)?.[1])
+        .find(value => value && hasChineseTitleContext(value));
+    if (bracketSuffix) return `${parentCore}【${bracketSuffix}】`;
+
+    if (/\bshunkashuutou\b/iu.test(titleText) || /春夏秋冬/u.test(titleText)) {
+        return `${parentCore}【春夏秋冬】`;
+    }
+
+    const partNumber = titleText.match(/\bpart\s*(\d+)\b/iu)?.[1];
+    if (partNumber && Number(partNumber) >= 2) return `${parentCore} Part ${Number(partNumber)}`;
+
+    if (/(?:shinsaku|new|新作)\s*ova\b/iu.test(titleText)) {
+        return `${parentCore}（新作 OVA）`;
+    }
+
+    if (/^(?:映画|劇場版)\s+/u.test(titles[0] || "") && !/[:：～~]/u.test(titles[0] || "")) {
         return `電影版 ${parentCore}`;
     }
+
+    const format = String(media?.format || "").toUpperCase();
+    if (format === "MOVIE" || /\bmovie\b|劇場版|映画/iu.test(titleText)) return `${parentCore}（劇場版）`;
+    if (format === "OVA" || /\bova\b/iu.test(titleText)) return `${parentCore}（OVA）`;
+    if (format === "ONA" || /\bona\b/iu.test(titleText)) return `${parentCore}（ONA）`;
+    if (format === "SPECIAL" || /\bspecials?\b|特別篇/iu.test(titleText)) return `${parentCore}（特別篇）`;
 
     return "";
 }
 
 function getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
     const localizedFromParent = deriveLocalizedMediaTitle(media, parentChineseTitle);
-    const candidates = [
-        [media?.title?.traditionalChinese || media?.title?.zhHant || media?.title?.chinese, "anilist"],
-        [wikiZhTitle, "wiki"],
-        [localizedFromParent, "anilist"],
-        [googleZhTitle, "google"],
-        [media?.title?.native, "anilist"],
-        [media?.title?.english, "anilist"],
-        [media?.title?.romaji, "anilist"]
-    ].map(([title, source]) => ({ title: cleanMediaTitle(title), source })).filter(item => item.title);
-
-    if (!candidates.length) return { title: "", source: "generated", distinctFromParent: false };
-
     const parentIdentity = normalizeTitleIdentity(getCoreTitle(parentChineseTitle));
-    const ownCandidate = parentIdentity
-        ? candidates.find(item => normalizeTitleIdentity(item.title) !== parentIdentity && hasDistinctiveMediaTitle(item.title))
-            || candidates.find(item => normalizeTitleIdentity(item.title) !== parentIdentity)
-        : candidates[0];
-    const selected = ownCandidate || candidates[0];
+    const officialChinese = cleanMediaTitle(media?.title?.traditionalChinese || media?.title?.zhHant || media?.title?.chinese);
+    const wikiChinese = hasChineseTitleContext(wikiZhTitle) ? cleanMediaTitle(wikiZhTitle) : "";
+    const aliasChinese = trustedChineseAlias(media);
+    const googleChinese = hasChineseTitleContext(googleZhTitle) ? cleanMediaTitle(googleZhTitle) : "";
+    let selected = null;
+
+    if (officialChinese) {
+        const officialOnlyRepeatsParent = parentIdentity && normalizeTitleIdentity(officialChinese) === parentIdentity;
+        selected = officialOnlyRepeatsParent && localizedFromParent
+            ? { title:localizedFromParent, source:"generated", language:"zh-Hant" }
+            : { title:officialChinese, source:"anilist", language:"zh-Hant" };
+    }
+    else if (parentIdentity) {
+        const distinctWiki = wikiChinese && normalizeTitleIdentity(wikiChinese) !== parentIdentity && hasDistinctiveMediaTitle(wikiChinese);
+        if (distinctWiki) selected = { title:wikiChinese, source:"wiki", language:"zh-Hant" };
+        else if (localizedFromParent) selected = { title:localizedFromParent, source:"generated", language:"zh-Hant" };
+        else if (wikiChinese) selected = { title:wikiChinese, source:"wiki", language:"zh-Hant" };
+        else if (aliasChinese) selected = { title:aliasChinese, source:"alias", language:"zh-Hant" };
+    } else {
+        if (wikiChinese) selected = { title:wikiChinese, source:"wiki", language:"zh-Hant" };
+        else if (aliasChinese) selected = { title:aliasChinese, source:"alias", language:"zh-Hant" };
+        else if (googleChinese) selected = { title:googleChinese, source:"google", language:"zh-Hant" };
+        else {
+            const fallback = [media?.title?.native, media?.title?.english, media?.title?.romaji]
+                .map(title => cleanMediaTitle(title)).find(Boolean) || "";
+            if (fallback) selected = { title:fallback, source:"anilist", language:"fallback" };
+        }
+    }
+
+    if (!selected) return { title: "", source: "generated", language:"generated", distinctFromParent: false };
     return {
         ...selected,
         distinctFromParent: Boolean(parentIdentity && normalizeTitleIdentity(selected.title) !== parentIdentity)
@@ -1005,7 +1105,7 @@ function getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTi
     const parentCore = getCoreTitle(parentChineseTitle);
     const canonical = getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle);
     const seasonNumber = detectMediaSeasonNumber(media);
-    const relationType = media?.relationType || "SEQUEL";
+    const relationType = String(media?.relationType || "").toUpperCase();
 
     if (parentCore && seasonNumber) {
         const title = `${parentCore} 第${chineseSeasonNumber(seasonNumber)}季`;
@@ -1014,6 +1114,10 @@ function getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTi
 
     if (canonical.title && (!parentCore || canonical.distinctFromParent)) {
         return { displayTitle: appendPremiereYear(canonical.title, year), canonicalTitle: canonical.title, groupTitle: parentCore || getCoreTitle(canonical.title), titleSource: canonical.source, seasonNumber: null, usedFallback: false };
+    }
+
+    if (parentCore && !relationType) {
+        return { displayTitle: appendPremiereYear(parentCore, year), canonicalTitle: parentCore, groupTitle: parentCore, titleSource: canonical.source, seasonNumber: null, usedFallback: false };
     }
 
     if (parentCore) {
@@ -1034,12 +1138,18 @@ function isLegacyGeneratedTitle(title) {
 }
 
 function refreshGeneratedAnimeTitle(anime, media) {
-    if (!anime || anime.titleManuallyEdited === true || anime.titleSource === "manual") return false;
+    if (!anime || anime.titleManuallyEdited === true || anime.titleSource === "manual" || anime.manualTitle === true) return false;
     const managedSource = ["anilist", "wiki", "google", "generated", "legacy"].includes(anime.titleSource);
-    if (!managedSource && !isLegacyGeneratedTitle(anime.title)) return false;
+    const chineseContext = [
+        anime.groupTitle,
+        ...(Array.isArray(anime.aliases) ? anime.aliases : []),
+        trustedChineseAlias(media)
+    ].map(cleanMediaTitle).find(hasChineseTitleContext) || "";
+    const canUpgradeForeignTitle = Boolean(chineseContext && !hasChineseTitleContext(anime.title));
+    if (!managedSource && !isLegacyGeneratedTitle(anime.title) && !canUpgradeForeignTitle) return false;
 
     const previousTitle = anime.title;
-    const parentTitle = anime.groupTitle || getCoreTitle(previousTitle);
+    const parentTitle = chineseContext || anime.groupTitle || getCoreTitle(previousTitle);
     const details = getSmartTitleDetails(media, parentTitle, null, null);
     if (!details.displayTitle || details.usedFallback) return false;
 
@@ -1272,7 +1382,8 @@ async function searchAnime(
     isQuiet = false,
     parentChineseTitle = null,
     targetId = null,
-    forcedCategory = null
+    forcedCategory = null,
+    forcedRelationType = null
 ) {
     const inputElement = document.getElementById("search-input");
     const input = keyword || inputElement.value.trim();
@@ -1329,6 +1440,8 @@ async function searchAnime(
             }
             return false;
         }
+
+        if (forcedRelationType) media = { ...media, relationType:forcedRelationType };
 
         const duplicate = findExistingAnimeForMedia(media, animeList);
 
@@ -1604,7 +1717,7 @@ async function checkAndAddSequel(anime, isQuiet = false) {
         },
         async addMedia(media) {
             await delay(350);
-            return searchAnime(null, isQuiet, groupTitle, media.id);
+            return searchAnime(null, isQuiet, groupTitle, media.id, null, "SEQUEL");
         }
     });
     return result.added;
@@ -1614,7 +1727,7 @@ async function manualScanSequels() {
     showToast("🛰️ 正在掃描已追完作品的續作……", 5000);
     let found = 0;
 
-    for (const anime of animeList.filter(item => item.category === "completed")) {
+    for (const anime of animeList.filter(item => !item.deletedAt && item.category === "completed")) {
         try {
             const animeMediaId = getAniListMediaId(anime);
             if (!animeMediaId) continue;
@@ -1670,6 +1783,7 @@ function renderAiringCalendar() {
 async function syncAnimeMetadata(showMessage = false) {
     if (animeSyncing) return;
     const ids = animeList
+        .filter(anime => !anime.deletedAt)
         .map(anime => Number(getAniListMediaId(anime)))
         .filter(Number.isFinite);
     if (ids.length === 0) {
@@ -2061,16 +2175,25 @@ function updateProgress(id, delta) {
     }
 }
 
-function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOString()) {
-    const cleaned = AnimeTrackerV11.cleanupAnimeAuxiliaryState({ eventOverrides, eventAnimeOverrides, watchHistory }, anime.id);
+function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOString(), currentWatchHistory = null) {
+    let storedWatchHistory = [];
+    if (Array.isArray(currentWatchHistory)) {
+        storedWatchHistory = currentWatchHistory;
+    } else {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(AnimeTrackerV11.HISTORY_KEY) || "[]");
+            storedWatchHistory = Array.isArray(parsed) ? parsed : [];
+        } catch {}
+    }
+    const cleaned = AnimeTrackerV11.cleanupAnimeAuxiliaryState({ eventOverrides, eventAnimeOverrides, watchHistory:storedWatchHistory }, anime.id);
     eventOverrides = cleaned.eventOverrides;
     eventAnimeOverrides = cleaned.eventAnimeOverrides;
-    watchHistory = cleaned.watchHistory;
     saveEventLocalData();
-    localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(watchHistory));
+    localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(cleaned.watchHistory));
     if (String(activeWorkSearch.animeId) === String(anime.id)) activeWorkSearch = { query:"", terms:[], animeId:"", mediaContext:null };
     window.SpotifyThemes?.cleanupAnime?.(anime);
     window.CrossMediaTracker?.markAnimeDeleted?.(anime.id, deletedAt);
+    return cleaned;
 }
 
 function deleteAnime(id) {
@@ -2084,6 +2207,10 @@ function deleteAnime(id) {
     cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt);
 
     saveAndRender();
+}
+
+function getAnimeTitlePresentation(anime) {
+    return AnimeTrackerV11.getAnimeTitlePresentation(anime);
 }
 
 function buildAnimeItem(anime) {
@@ -2132,10 +2259,12 @@ function buildAnimeItem(anime) {
     const nextInfo = anime.nextAiringAt ? `下集：第 ${escapeHtml(anime.nextEpisode || "?")} 集・${escapeHtml(formatAiringDateTime(anime.nextAiringAt))}` : "下集時間待更新";
     const reviewInfo = anime.rating !== null && anime.rating !== undefined ? `⭐ ${escapeHtml(anime.rating)}/10${anime.note ? `｜${escapeHtml(anime.note)}` : ""}` : (anime.note ? escapeHtml(anime.note) : "尚未評分");
     const customPlatform = anime.customPlatform ? `<span class="platform-link">${escapeHtml(anime.customPlatform)}</span>` : "";
+    const titlePresentation = getAnimeTitlePresentation(anime);
+    const yearBadge = titlePresentation.year ? `<span class="anime-year-badge" aria-label="首播年份 ${titlePresentation.year}">${titlePresentation.year}</span>` : "";
 
     return `
         <div class="anime-item">
-            <button type="button" class="anime-title v11-title-button" data-open-detail="${animeDataId}" aria-label="開啟 ${escapeHtml(anime.title)} 詳細資料">${badge}<span>${escapeHtml(anime.title)}</span></button>
+            <button type="button" class="anime-title v11-title-button" data-open-detail="${animeDataId}" aria-label="開啟 ${escapeHtml(anime.title)} 詳細資料"><span class="anime-title-content">${badge}<span class="anime-display-title">${escapeHtml(titlePresentation.title)}</span>${yearBadge}</span></button>
             <div class="anime-meta">${meta}</div>
             <div class="anime-extra">📡 目前已播：${released || "?"} 集｜${nextInfo}<br>📝 ${reviewInfo}<div class="platform-links">${platformLinks}${customPlatform}</div></div>
             <div class="btn-group">
@@ -2231,8 +2360,10 @@ function renderList() {
 
     const normalizedQuery = normalizeAnimeSearchText(animeListQuery);
     const visibleAnime = animeList
+        .filter(anime => !anime.deletedAt)
         .filter(anime => !normalizedQuery || animeSearchText(anime).includes(normalizedQuery))
         .sort(compareAnime);
+    const activeAnime = animeList.filter(anime => !anime.deletedAt);
     const categories = {
         watching: [],
         backlog: [],
@@ -2247,7 +2378,7 @@ function renderList() {
         }
     }
     const summary = document.getElementById("anime-list-summary");
-    if (summary) summary.textContent = `顯示 ${visibleAnime.length}／${animeList.length} 部`;
+    if (summary) summary.textContent = `顯示 ${visibleAnime.length}／${activeAnime.length} 部`;
     const noResults = document.getElementById("anime-list-no-results");
     if (noResults) noResults.style.display = visibleAnime.length ? "none" : "block";
 
@@ -2294,7 +2425,7 @@ function renderList() {
             `<div class="empty">${emptyMessages[category]}</div>`;
     }
     const dataList = document.getElementById("anime-title-options");
-    if (dataList) dataList.innerHTML = animeList.map(anime => `<option value="${escapeHtml(anime.title)}"></option>`).join("");
+    if (dataList) dataList.innerHTML = activeAnime.map(anime => `<option value="${escapeHtml(anime.title)}"></option>`).join("");
     renderAiringCalendar();
 }
 
@@ -3137,9 +3268,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=identity-integrity-1"></script>
+<script src="v11-ui.js?v=duplicate-reconciliation-1"></script>
 <script src="spotify-config.js"></script>
-<script src="spotify-themes.js?v=identity-integrity-1"></script>
+<script src="spotify-themes.js?v=duplicate-reconciliation-1"></script>
 <script src="cross-media.js?v=identity-integrity-1"></script>
 </body>
 </html>

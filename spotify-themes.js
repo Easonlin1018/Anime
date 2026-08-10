@@ -189,6 +189,13 @@
     }
     function close() { abortPending(); currentContainer?.querySelectorAll("iframe").forEach(frame => frame.remove()); currentAnime = null; currentContainer = null; candidatesBySong.clear(); }
     function expand(container = currentContainer) { const details=container?.querySelector("details.theme-details"); if(!details)return false; details.open=true; return true; }
-    window.SpotifyThemes = { renderForAnime, expand, close, cleanupAnime, findAnimeThemeSource, fetchAnimeThemeSongs };
+    function restoreCacheSnapshot(snapshot, undo) {
+        Object.keys(cache).forEach(key => delete cache[key]);
+        Object.assign(cache, snapshot && typeof snapshot === "object" ? snapshot : {});
+        saveCache();
+        if (undo) localStorage.setItem(UNDO_KEY, JSON.stringify(undo));
+        else localStorage.removeItem(UNDO_KEY);
+    }
+    window.SpotifyThemes = { renderForAnime, expand, close, cleanupAnime, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs };
     pruneDeletedAnimeCaches();
 })();

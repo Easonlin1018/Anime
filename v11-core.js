@@ -113,6 +113,264 @@
         return arrayOf(list).map(item => migrateAnime(item || {}, now));
     }
 
+    function getAnimeTitlePresentation(anime) {
+        const structuredYear = Number(anime?.startDate?.year ?? anime?.year);
+        const year = Number.isInteger(structuredYear) && structuredYear > 0 ? structuredYear : null;
+        const rawTitle = String(anime?.title || "");
+        const trailingYear = rawTitle.match(/\s*[（(]\s*((?:19|20)\d{2})\s*年?\s*[）)]\s*$/u);
+        const manual = anime?.titleManuallyEdited === true || anime?.titleSource === "manual" || anime?.manualTitle === true;
+        const matchingYear = Boolean(year && trailingYear && Number(trailingYear[1]) === year);
+        return {
+            title:matchingYear ? rawTitle.slice(0, trailingYear.index).trim() : rawTitle,
+            year:year && (!manual || !trailingYear || matchingYear) ? year : null
+        };
+    }
+
+    function getAnimeAniListIdentity(item) {
+        if (!item || typeof item !== "object") return "";
+        const values = [item.anilistId, item.aniListId];
+        if (String(item.source || item.dataSource || "").toLowerCase() === "anilist") values.push(item.sourceId);
+        if (item.anilistTitles && typeof item.anilistTitles === "object") {
+            values.push(item.sourceId, item.mediaId, item.id);
+        }
+        for (const value of values) {
+            const numeric = Number(value);
+            if (Number.isSafeInteger(numeric) && numeric > 0) return String(numeric);
+        }
+        return "";
+    }
+
+    function legacyAnimeIdentityKey(item) {
+        if (!item || getAnimeAniListIdentity(item)) return "";
+        const startDate = item.startDate && typeof item.startDate === "object" ? item.startDate : {};
+        const year = Number(startDate.year ?? item.year);
+        const format = String(item.format || item.mediaType || item.type || "").trim().toUpperCase();
+        const title = String(item.canonicalTitle || item.displayTitle || item.title || "")
+            .normalize("NFKC")
+            .toLocaleLowerCase()
+            .replace(/\s*[（(]\s*(?:19|20)\d{2}\s*年?\s*[）)]\s*$/u, "")
+            .replace(/[\s\p{P}]+/gu, "")
+            .trim();
+        return title && Number.isInteger(year) && year > 0 && format ? `legacy:${title}|${year}|${format}` : "";
+    }
+
+    function uniqueMergedArray(values) {
+        const seen = new Set();
+        return values.flatMap(arrayOf).filter(value => {
+            let key;
+            try { key = typeof value === "object" ? JSON.stringify(value) : `${typeof value}:${String(value)}`; }
+            catch { key = String(value); }
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+    }
+
+    function mergeTextValues(records, field) {
+        return [...new Set(records.map(record => String(record?.[field] || "").trim()).filter(Boolean))].join("\n\n");
+    }
+
+    function animeReferenceCount(state, animeId) {
+        const target = String(animeId), matches = value => String(value) === target;
+        let count = 0;
+        for (const store of [state?.eventOverrides, state?.eventAnimeOverrides]) {
+            Object.values(store && typeof store === "object" ? store : {}).forEach(value => {
+                if (!value || typeof value !== "object") return;
+                ANIME_REFERENCE_FIELDS.forEach(field => { count += arrayOf(value[field]).filter(matches).length; });
+            });
+        }
+        count += arrayOf(state?.watchHistory).filter(record => matches(record?.animeId)).length;
+        count += arrayOf(state?.works).flatMap(work => arrayOf(work?.mediaEntries)).filter(entry => entry?.mediaType === "anime" && matches(entry?.id)).length;
+        if (matches(state?.themeUndo?.animeId)) count++;
+        if (state?.themeCache && Object.prototype.hasOwnProperty.call(state.themeCache, `source:${target}`)) count++;
+        return count;
+    }
+
+    function chooseCanonicalDuplicate(records, state) {
+        return records.slice().sort((a, b) =>
+            animeReferenceCount(state, b.item.id) - animeReferenceCount(state, a.item.id)
+            || Number(!b.item.deletedAt) - Number(!a.item.deletedAt)
+            || Number(Boolean(b.item.titleManuallyEdited || b.item.titleSource === "manual" || b.item.manualTitle === true))
+                - Number(Boolean(a.item.titleManuallyEdited || a.item.titleSource === "manual" || a.item.manualTitle === true))
+            || Date.parse(a.item.createdAt || a.item.addedAt || 0) - Date.parse(b.item.createdAt || b.item.addedAt || 0)
+            || a.index - b.index
+        )[0];
+    }
+
+    function mergeDuplicateAnimeRecords(records, canonicalRecord) {
+        const ordered = records.map(record => record.item);
+        const canonical = canonicalRecord.item;
+        const merged = { ...canonical };
+        for (const item of ordered) {
+            Object.entries(item).forEach(([key, value]) => {
+                if ((merged[key] === undefined || merged[key] === null || merged[key] === "") && value !== undefined && value !== null && value !== "") merged[key] = value;
+            });
+        }
+
+        const manual = ordered
+            .filter(item => item.titleManuallyEdited === true || item.titleSource === "manual" || item.manualTitle === true)
+            .sort((a, b) => Date.parse(b.updatedAt || 0) - Date.parse(a.updatedAt || 0))[0];
+        if (manual) {
+            merged.title = manual.title;
+            merged.displayTitle = manual.displayTitle || manual.title;
+            merged.titleSource = "manual";
+            merged.titleManuallyEdited = true;
+            if (manual.manualTitle === true) merged.manualTitle = true;
+        }
+
+        merged.aliases = uniqueMergedArray(ordered.flatMap(item => [item.title, item.displayTitle, item.canonicalTitle, ...arrayOf(item.aliases)])).filter(Boolean);
+        for (const field of ["tags", "customTags", "relations", "streamingLinks"]) merged[field] = uniqueMergedArray(ordered.map(item => item[field]));
+        merged.themeSongs = ordered.reduce((songs, item) => mergeThemeSongs(songs, item.themeSongs), { openings:[], endings:[] });
+
+        const progress = Math.max(...ordered.map(item => numberOr(item.currentEpisode ?? item.watched)));
+        merged.currentEpisode = progress;
+        merged.watched = progress;
+        for (const field of ["review", "note", "notes", "memo"]) {
+            const value = mergeTextValues(ordered, field);
+            if (value) merged[field] = value;
+        }
+        const platforms = [...new Set(ordered.map(item => String(item.customPlatform || "").trim()).filter(Boolean))];
+        if (platforms.length) merged.customPlatform = platforms.join("、");
+        if (merged.rating == null) merged.rating = ordered.find(item => item.rating != null)?.rating ?? null;
+
+        const active = ordered.filter(item => !item.deletedAt);
+        if (active.length) {
+            const preferredActive = active.find(item => String(item.id) === String(canonical.id)) || active.sort((a, b) => Date.parse(b.updatedAt || 0) - Date.parse(a.updatedAt || 0))[0];
+            merged.deletedAt = null;
+            merged.category = preferredActive.category === "_deleted" ? "backlog" : preferredActive.category;
+        } else {
+            const latestDeletion = ordered.sort((a, b) => Date.parse(b.deletedAt || 0) - Date.parse(a.deletedAt || 0))[0];
+            merged.deletedAt = latestDeletion.deletedAt;
+            merged.category = "_deleted";
+        }
+
+        const createdTimes = ordered.map(item => Date.parse(item.createdAt || item.addedAt || "")).filter(Number.isFinite);
+        const addedTimes = ordered.map(item => Date.parse(item.addedAt || item.createdAt || "")).filter(Number.isFinite);
+        const updatedTimes = ordered.map(item => Date.parse(item.updatedAt || "")).filter(Number.isFinite);
+        if (createdTimes.length) merged.createdAt = new Date(Math.min(...createdTimes)).toISOString();
+        if (addedTimes.length) merged.addedAt = new Date(Math.min(...addedTimes)).toISOString();
+        if (updatedTimes.length) merged.updatedAt = new Date(Math.max(...updatedTimes)).toISOString();
+        merged.id = canonical.id;
+        return migrateAnime(merged, merged.updatedAt);
+    }
+
+    function remapReferenceArray(value, idMap) {
+        return [...new Set(arrayOf(value).map(id => idMap.get(String(id)) ?? id))];
+    }
+
+    function remapOverrideReferences(overrides, idMap, workIdMap = new Map()) {
+        const result = {};
+        Object.entries(overrides && typeof overrides === "object" ? overrides : {}).forEach(([key, value]) => {
+            if (!value || typeof value !== "object" || Array.isArray(value)) { result[key] = value; return; }
+            const next = { ...value };
+            ANIME_REFERENCE_FIELDS.forEach(field => { if (Array.isArray(next[field])) next[field] = remapReferenceArray(next[field], idMap); });
+            ["includeWorkIds", "excludeWorkIds"].forEach(field => { if (Array.isArray(next[field])) next[field] = remapReferenceArray(next[field], workIdMap); });
+            result[key] = next;
+        });
+        return result;
+    }
+
+    function remapWorksForDuplicateAnime(works, idMap) {
+        const next = arrayOf(works).map(work => ({ ...work, mediaEntries:arrayOf(work?.mediaEntries).map(entry => ({ ...entry })) }));
+        const ownerById = new Map(), workIdMap = new Map();
+        next.forEach(work => {
+            const uniqueEntries = new Map();
+            work.mediaEntries.forEach(entry => {
+                const originalId = String(entry.id);
+                const mappedId = entry.mediaType === "anime" ? idMap.get(originalId) : null;
+                const updated = mappedId ? { ...entry, id:mappedId } : entry;
+                const key = `${updated.mediaType || "anime"}:${String(updated.id)}`;
+                const old = uniqueEntries.get(key);
+                uniqueEntries.set(key, old ? { ...updated, ...old, aliases:uniqueMergedArray([old.aliases, updated.aliases]) } : updated);
+            });
+            work.mediaEntries = [...uniqueEntries.values()];
+        });
+        next.forEach(work => {
+            work.mediaEntries = work.mediaEntries.filter(entry => {
+                if (entry.mediaType !== "anime") return true;
+                const id = String(entry.id), owner = ownerById.get(id);
+                if (!owner) { ownerById.set(id, work); return true; }
+                workIdMap.set(String(work.workId), String(owner.workId));
+                owner.aliases = uniqueMergedArray([owner.aliases, work.aliases, entry.aliases, entry.title]).filter(Boolean);
+                return false;
+            });
+        });
+        return { works:next.filter(work => work.mediaEntries.length > 0), workIdMap };
+    }
+
+    function remapAnimeAuxiliaryState(state, idMap) {
+        const worksResult = remapWorksForDuplicateAnime(state?.works, idMap);
+        const workIdMap = worksResult.workIdMap;
+        const themeCache = { ...(state?.themeCache || {}) };
+        idMap.forEach((canonicalId, duplicateId) => {
+            if (String(canonicalId) === String(duplicateId)) return;
+            const oldKey = `source:${duplicateId}`, canonicalKey = `source:${canonicalId}`;
+            if (Object.prototype.hasOwnProperty.call(themeCache, oldKey) && !Object.prototype.hasOwnProperty.call(themeCache, canonicalKey)) themeCache[canonicalKey] = themeCache[oldKey];
+            delete themeCache[oldKey];
+        });
+        return {
+            ...(state || {}),
+            eventOverrides:remapOverrideReferences(state?.eventOverrides, idMap, workIdMap),
+            eventAnimeOverrides:remapOverrideReferences(state?.eventAnimeOverrides, idMap, workIdMap),
+            watchHistory:arrayOf(state?.watchHistory).map(record => ({ ...record, animeId:idMap.get(String(record?.animeId)) ?? record?.animeId })),
+            works:worksResult.works,
+            mangaReadHistory:arrayOf(state?.mangaReadHistory).map(record => ({ ...record, workId:workIdMap.get(String(record?.workId)) ?? record?.workId })),
+            themeCache,
+            themeUndo:state?.themeUndo?.animeId != null ? { ...state.themeUndo, animeId:idMap.get(String(state.themeUndo.animeId)) ?? state.themeUndo.animeId } : state?.themeUndo ?? null
+        };
+    }
+
+    function describeAnimeIdentity(item) {
+        return {
+            localId:item?.id ?? null,
+            anilistId:getAnimeAniListIdentity(item) || null,
+            sourceId:item?.sourceId ?? null,
+            title:item?.title || "",
+            aliases:arrayOf(item?.aliases),
+            year:item?.startDate?.year ?? item?.year ?? null,
+            startDate:item?.startDate ?? null,
+            format:item?.format || item?.mediaType || null,
+            relations:arrayOf(item?.relations),
+            createdAt:item?.createdAt || item?.addedAt || null,
+            deletedAt:item?.deletedAt || null
+        };
+    }
+
+    function reconcileExistingAnimeDuplicates(list, state = {}) {
+        const records = migrateList(list).map((item, index) => ({ item, index }));
+        const groups = new Map();
+        const localIdCounts = records.reduce((counts, record) => {
+            if (getAnimeAniListIdentity(record.item)) return counts;
+            const id = String(record.item.id ?? "");
+            if (id) counts.set(id, (counts.get(id) || 0) + 1);
+            return counts;
+        }, new Map());
+        records.forEach(record => {
+            const externalId = getAnimeAniListIdentity(record.item);
+            const localId = String(record.item.id ?? "");
+            const key = externalId ? `anilist:${externalId}` : localId && localIdCounts.get(localId) > 1 ? `local:${localId}` : legacyAnimeIdentityKey(record.item);
+            if (key) (groups.get(key) || (groups.set(key, []), groups.get(key))).push(record);
+        });
+
+        const duplicateGroups = [...groups.entries()].filter(([, group]) => group.length > 1);
+        if (!duplicateGroups.length) return { list:records.map(record => record.item), state:{ ...(state || {}) }, changed:false, mergedCount:0, idMap:{}, groups:[] };
+
+        const removedIndexes = new Set(), replacements = new Map(), idMap = new Map(), reports = [];
+        duplicateGroups.forEach(([identityKey, group]) => {
+            const canonical = chooseCanonicalDuplicate(group, state);
+            const merged = mergeDuplicateAnimeRecords(group, canonical);
+            replacements.set(canonical.index, merged);
+            group.forEach(record => {
+                idMap.set(String(record.item.id), canonical.item.id);
+                if (record.index !== canonical.index) removedIndexes.add(record.index);
+            });
+            reports.push({ identityKey, canonicalId:canonical.item.id, removedIds:group.filter(record => record.index !== canonical.index).map(record => record.item.id), records:group.map(record => describeAnimeIdentity(record.item)) });
+        });
+        const reconciledList = records.filter(record => !removedIndexes.has(record.index)).map(record => replacements.get(record.index) || record.item);
+        const reconciledState = remapAnimeAuxiliaryState(state, idMap);
+        return { list:reconciledList, state:reconciledState, changed:true, mergedCount:removedIndexes.size, idMap:Object.fromEntries(idMap), groups:reports };
+    }
+
     function updateAnimeTitleById(list, id, title, now = new Date().toISOString()) {
         const targetId = String(id), nextTitle = String(title || "").trim();
         const next = arrayOf(list).slice();
@@ -155,6 +413,18 @@
         const updated = { ...current, category:"_deleted", deletedAt:iso(now), updatedAt:iso(now) };
         next[index] = updated;
         return { list:next, found:true, changed:true, anime:updated };
+    }
+
+    function restoreAnimeById(list, id, snapshot, now = new Date().toISOString()) {
+        const targetId = String(id), next = arrayOf(list).slice();
+        const index = next.findIndex(item => String(item?.id) === targetId);
+        const original = arrayOf(snapshot).find(item => String(item?.id) === targetId)
+            || (snapshot && !Array.isArray(snapshot) && String(snapshot.id) === targetId ? snapshot : null);
+        if (!original) return { list, found:false, changed:false, anime:null };
+        const restored = migrateAnime({ ...original, id:original.id, deletedAt:null, category:original.category === "_deleted" ? "backlog" : original.category, updatedAt:iso(now) }, now);
+        if (index >= 0) next[index] = restored;
+        else next.push(restored);
+        return { list:next, found:true, changed:true, anime:restored };
     }
 
     const ANIME_REFERENCE_FIELDS = Object.freeze([
@@ -641,7 +911,7 @@
         const normalized = normalizeImportedBackup(backup);
         const incoming = migrateList(normalized[STORAGE_KEY]);
         const incomingWorks = migrateWorks(incoming, normalized.works);
-        return {
+        const result = {
             animeList: mode === "replace" ? incoming : mergeById(current.animeList, incoming),
             works:mode === "replace" ? incomingWorks : mergeWorks(migrateWorks(current.animeList, current.works || []), incomingWorks),
             mangaReadHistory:mode === "replace" ? normalized[MANGA_HISTORY_KEY] : [...arrayOf(current.mangaReadHistory), ...normalized[MANGA_HISTORY_KEY]],
@@ -655,6 +925,8 @@
             importedWorkCount:incomingWorks.length,
             backupFormat: normalized.backupFormat
         };
+        const reconciled = reconcileExistingAnimeDuplicates(result.animeList, result);
+        return { ...result, ...reconciled.state, animeList:reconciled.list, duplicateMergeCount:reconciled.mergedCount };
     }
 
     function searchFilterSort(list, query = "", filters = {}, sort = "watching-first", hasEvent = () => false) {
@@ -872,13 +1144,17 @@
     }
 
     function mergeCloudPayload(local, cloud, choice = "merge") {
-        if (choice === "local") return local;
-        if (choice === "cloud") return cloud;
+        const reconcilePayload = payload => {
+            const reconciled = reconcileExistingAnimeDuplicates(payload?.animeList, payload || {});
+            return { ...(payload || {}), ...reconciled.state, animeList:reconciled.list, duplicateMergeCount:reconciled.mergedCount };
+        };
+        if (choice === "local") return reconcilePayload(local);
+        if (choice === "cloud") return reconcilePayload(cloud);
         const historyMap = new Map([...arrayOf(local.mangaReadHistory), ...arrayOf(cloud.mangaReadHistory)].map(record => [String(record.id || `${record.workId}|${record.mediaId}|${record.timestamp}|${record.deltaChapters}|${record.deltaVolumes}`), record]));
-        return { ...local, ...cloud, animeList: mergeById(local.animeList, cloud.animeList), works:mergeWorks(migrateWorks(local.animeList, local.works || []), migrateWorks(cloud.animeList, cloud.works || [])), mangaReadHistory:[...historyMap.values()], eventOverrides: { ...(local.eventOverrides || {}), ...(cloud.eventOverrides || {}) }, eventAnimeOverrides:{ ...(local.eventAnimeOverrides || {}), ...(cloud.eventAnimeOverrides || {}) }, settings: { ...(local.settings || {}), ...(cloud.settings || {}) }, watchHistory: [...arrayOf(local.watchHistory), ...arrayOf(cloud.watchHistory)] };
+        return reconcilePayload({ ...local, ...cloud, animeList: mergeById(local.animeList, cloud.animeList), works:mergeWorks(migrateWorks(local.animeList, local.works || []), migrateWorks(cloud.animeList, cloud.works || [])), mangaReadHistory:[...historyMap.values()], eventOverrides: { ...(local.eventOverrides || {}), ...(cloud.eventOverrides || {}) }, eventAnimeOverrides:{ ...(local.eventAnimeOverrides || {}), ...(cloud.eventAnimeOverrides || {}) }, settings: { ...(local.settings || {}), ...(cloud.settings || {}) }, watchHistory: [...arrayOf(local.watchHistory), ...arrayOf(cloud.watchHistory)] });
     }
     function pruneTombstones(list, now = Date.now()) { return migrateList(list).filter(item => !item.deletedAt || now - Date.parse(item.deletedAt) <= TOMBSTONE_DAYS * 86400000); }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, shouldCacheRequest, normalizeText };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, legacyAnimeIdentityKey, describeAnimeIdentity, reconcileExistingAnimeDuplicates, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, shouldCacheRequest, normalizeText };
 });

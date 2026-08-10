@@ -167,6 +167,108 @@ test("實際 AniList 五等分 metadata 產生完整正式名稱與共同 groupT
     assert.deepEqual(new Set(actual.map(item => item.groupTitle)), new Set(["五等分的花嫁"]));
 });
 
+test("語言回歸 A. 中文 parent 不被 romaji sequel 覆蓋", () => {
+    const details = api.getSmartTitleDetails(media({
+        title: { romaji:"Sousou no Frieren: New Journey" },
+        startDate: { year:2025 }
+    }), "葬送的芙莉蓮（2023）");
+    assert.doesNotMatch(details.displayTitle, /Sousou no Frieren/i);
+    assert.match(details.displayTitle, /^葬送的芙莉蓮/u);
+});
+
+test("語言回歸 B. 中文 parent 不被 English sequel 覆蓋", () => {
+    const details = api.getSmartTitleDetails(media({
+        title: { english:"The Quintessential Quintuplets New Animation" },
+        startDate: { year:2026 }
+    }), "五等分的花嫁（2019）");
+    assert.doesNotMatch(details.displayTitle, /Quintessential/i);
+    assert.match(details.displayTitle, /^五等分的花嫁/u);
+});
+
+test("語言回歸 C. 五等分 Shinsaku OVA 使用中文母作品", () => {
+    const details = api.getSmartTitleDetails(media({
+        title: { romaji:"Go-toubun no Hanayome (Shinsaku OVA)" },
+        format:"OVA",
+        startDate: { year:2026 }
+    }), "五等分的花嫁（2019）");
+    assert.equal(details.displayTitle, "五等分的花嫁（新作 OVA）（2026）");
+    assert.equal(details.groupTitle, "五等分的花嫁");
+});
+
+test("語言回歸 D. 五等分 Shunkashuutou 使用已確認中文短標記", () => {
+    const details = api.getSmartTitleDetails(media({
+        title: { romaji:"Go-toubun no Hanayome: Shunkashuutou" }
+    }), "五等分的花嫁（2019）");
+    assert.equal(details.displayTitle, "五等分的花嫁【春夏秋冬】");
+    assert.equal(details.groupTitle, "五等分的花嫁");
+});
+
+test("語言回歸 E. 葬送的芙莉蓮 Part 2 保留中文系列名稱", () => {
+    const details = api.getSmartTitleDetails(media({
+        title: { romaji:"Sousou no Frieren: Beyond Journey's End Part 2" },
+        startDate: { year:2025 }
+    }), "葬送的芙莉蓮（2023）");
+    assert.equal(details.displayTitle, "葬送的芙莉蓮 Part 2（2025）");
+    assert.equal(details.groupTitle, "葬送的芙莉蓮");
+});
+
+test("芙莉蓮本傳 metadata 無續作證據時保留中文名稱", () => {
+    const details = api.getSmartTitleDetails({
+        title:{romaji:"Sousou no Frieren: Beyond Journey's End"},
+        format:"TV",
+        startDate:{year:2023}
+    }, "葬送的芙莉蓮");
+    assert.equal(details.displayTitle, "葬送的芙莉蓮（2023）");
+    assert.equal(details.groupTitle, "葬送的芙莉蓮");
+});
+
+test("語言回歸 F. 完全沒有中文 context 才允許 romaji fallback", () => {
+    const details = api.getSmartTitleDetails(media({
+        title: { romaji:"Original Romaji Sequel" },
+        startDate: { year:2027 }
+    }), null);
+    assert.equal(details.displayTitle, "Original Romaji Sequel（2027）");
+});
+
+test("語言回歸 G. 人工英文名稱不被 metadata refresh 改中文", () => {
+    const anime = { title:"My Manual English Title", displayTitle:"My Manual English Title", manualTitle:true, titleSource:"anilist", groupTitle:"五等分的花嫁" };
+    const changed = api.refreshGeneratedAnimeTitle(anime, media({
+        title: { romaji:"Go-toubun no Hanayome (Shinsaku OVA)" },
+        format:"OVA"
+    }));
+    assert.equal(changed, false);
+    assert.equal(anime.title, "My Manual English Title");
+});
+
+test("語言回歸 H. 中文 displayTitle 不改變 groupTitle", () => {
+    const entries = [
+        media({ title:{romaji:"Go-toubun no Hanayome (Shinsaku OVA)"}, format:"OVA" }),
+        media({ title:{romaji:"Go-toubun no Hanayome: Shunkashuutou"}, format:"SPECIAL" })
+    ].map(item => api.getSmartTitleDetails(item, "五等分的花嫁（2019）"));
+    assert.deepEqual(new Set(entries.map(item => item.groupTitle)), new Set(["五等分的花嫁"]));
+    assert.ok(entries.every(item => !/Go-toubun/i.test(item.displayTitle)));
+});
+
+test("未區分續作的中文欄位不會蓋掉官方特殊符號", () => {
+    const details = api.getSmartTitleDetails(media({
+        title:{traditionalChinese:"五等分的花嫁",native:"五等分の花嫁＊"},
+        format:"SPECIAL",
+        startDate:{year:2024}
+    }), "五等分的花嫁（2019）");
+    assert.equal(details.displayTitle, "五等分的花嫁＊（2024）");
+});
+
+test("舊 romaji 非人工名稱可在中文 context 下自動升級", () => {
+    const anime = { title:"Sousou no Frieren: Beyond Journey's End Part 2（2025）", displayTitle:"Sousou no Frieren: Beyond Journey's End Part 2（2025）", titleSource:"anilist", groupTitle:"葬送的芙莉蓮", aliases:["葬送的芙莉蓮"] };
+    const changed = api.refreshGeneratedAnimeTitle(anime, media({
+        title:{romaji:"Sousou no Frieren: Beyond Journey's End Part 2"},
+        startDate:{year:2025}
+    }));
+    assert.equal(changed, true);
+    assert.equal(anime.title, "葬送的芙莉蓮 Part 2（2025）");
+    assert.equal(anime.groupTitle, "葬送的芙莉蓮");
+});
+
 test("實際 AniList SEQUEL 鏈跨 TV、SPECIAL、MOVIE 不會中斷", async () => {
     const graph = new Map([
         [103572, { id: 103572, title: "五等分的花嫁（2019）", startDate: { year: 2019, month: 1, day: 11 }, format: "TV", relations: [{ relationType: "SEQUEL", node: { id: 109261, type: "ANIME", format: "TV" } }] }],
@@ -296,6 +398,12 @@ test("renderList 只在系列群組內套用結構化日期排序", () => {
 test("searchAnime 與 checkAndAddSequel 共用統一去重流程", () => {
     assert.match(html, /const duplicate = findExistingAnimeForMedia\(media, animeList\)/u);
     assert.match(html, /reconcileDiscoveredSequelMedia\(chain, animeList/u);
+});
+
+test("續作探索明確傳遞 SEQUEL，不把一般 metadata refresh 當續作", () => {
+    assert.match(html, /forcedRelationType\s*=\s*null/);
+    assert.match(html, /media\s*=\s*\{\s*\.\.\.media,\s*relationType:forcedRelationType\s*\}/);
+    assert.match(html, /searchAnime\(null,\s*isQuiet,\s*groupTitle,\s*media\.id,\s*null,\s*"SEQUEL"\)/);
 });
 
 function userManagedAnime(overrides = {}) {
@@ -470,7 +578,7 @@ test("metadata whitelist excludes all user-managed fields", () => {
 });
 
 test("metadata sync resolves AniList ID without replacing the local ID", () => {
-    assert.match(html, /animeList\s*\.map\(anime => Number\(getAniListMediaId\(anime\)\)\)/u);
+    assert.match(html, /animeList\s*\.filter\(anime => !anime\.deletedAt\)\s*\.map\(anime => Number\(getAniListMediaId\(anime\)\)\)/u);
     assert.match(html, /animeList\.find\(item => getAniListMediaId\(item\) === String\(media\.id\)\)/u);
     assert.match(html, /requestAniList\(ID_QUERY, \{ id: Number\(animeMediaId\) \}\)/u);
 });

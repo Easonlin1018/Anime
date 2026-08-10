@@ -21,7 +21,18 @@
         save(V.RESTORE_KEY, points.slice(0, 5));
         renderRestorePoints();
     }
-    function auxiliaryUndoSnapshot() { return { eventOverrides:{ ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, watchHistory:[...watchHistory] }; }
+    function auxiliaryUndoSnapshot() {
+        const media = window.CrossMediaTracker?.snapshot?.() || { works:parse(V.WORKS_KEY, []), mangaReadHistory:parse(V.MANGA_HISTORY_KEY, []) };
+        return {
+            eventOverrides:{ ...eventOverrides },
+            eventAnimeOverrides:{ ...eventAnimeOverrides },
+            watchHistory:[...watchHistory],
+            works:media.works,
+            mangaReadHistory:media.mangaReadHistory,
+            themeCache:parse("anime_theme_lookup_cache_v1", {}),
+            themeUndo:parse("anime_theme_last_undo_v1", null)
+        };
+    }
     function restoreAuxiliaryUndo(undo) {
         if (!undo?.auxiliary) return;
         eventOverrides = undo.auxiliary.eventOverrides || {};
@@ -30,6 +41,11 @@
         save(EVENT_OVERRIDES_KEY, eventOverrides);
         save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
         save(V.HISTORY_KEY, watchHistory);
+        if (Array.isArray(undo.auxiliary.works)) save(V.WORKS_KEY, undo.auxiliary.works);
+        if (Array.isArray(undo.auxiliary.mangaReadHistory)) save(V.MANGA_HISTORY_KEY, undo.auxiliary.mangaReadHistory);
+        save("anime_theme_lookup_cache_v1", undo.auxiliary.themeCache || {});
+        if (undo.auxiliary.themeUndo) save("anime_theme_last_undo_v1", undo.auxiliary.themeUndo);
+        else localStorage.removeItem("anime_theme_last_undo_v1");
     }
 
     animeList = V.migrateList(animeList);
@@ -60,10 +76,11 @@
     deleteAnime = function (id) {
         const item = animeList.find(x => String(x.id) === String(id)); if (!item) return;
         if (!confirm(`確定刪除「${item.title}」？可使用「復原上一步」恢復。`)) return;
-        save(UNDO_KEY, { type: "delete", at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
+        save(UNDO_KEY, { type: "delete", targetId:item.id, at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
         const result = V.markAnimeDeletedById(animeList, id);
         animeList = result.list;
-        cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt);
+        const cleaned = cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt, watchHistory);
+        watchHistory = cleaned.watchHistory;
         saveAndRender(); showToast("🗑️ 已刪除，可在批次工具列復原上一步");
     };
 
@@ -189,7 +206,21 @@
         } else animeList = V.applyBatch(animeList, [...state.selected], action, value);
         persistAnime(); state.selected.clear(); renderList(); refreshV11(); showToast("批次操作完成，可復原上一步");
     }
-    function undoLast() { const undo = parse(UNDO_KEY, null); if (!undo?.before) return showToast("目前沒有可復原操作"); animeList = V.migrateList(undo.before); restoreAuxiliaryUndo(undo); localStorage.removeItem(UNDO_KEY); persistAnime(); window.CrossMediaTracker?.syncAnimeReferences?.(); renderList(); renderEvents(); refreshV11(); showToast("已復原上一步"); }
+    function undoLast() {
+        const undo = parse(UNDO_KEY, null);
+        if (!undo?.before) return showToast("目前沒有可復原操作");
+        animeList = V.migrateList(undo.before);
+        if (undo.type === "delete" && undo.targetId != null) {
+            animeList = V.restoreAnimeById(animeList, undo.targetId, undo.before).list;
+        }
+        restoreAuxiliaryUndo(undo);
+        localStorage.removeItem(UNDO_KEY);
+        persistAnime();
+        if (Array.isArray(undo.auxiliary?.works)) window.CrossMediaTracker?.replaceData?.(undo.auxiliary.works, undo.auxiliary.mangaReadHistory || []);
+        else window.CrossMediaTracker?.syncAnimeReferences?.();
+        window.SpotifyThemes?.restoreCacheSnapshot?.(undo.auxiliary?.themeCache || {}, undo.auxiliary?.themeUndo || null);
+        renderList(); renderEvents(); refreshV11(); showToast("已復原上一步");
+    }
 
     function openAnimeDetail(id, expandThemes = false) {
         const item = animeList.find(x => String(x.id) === String(id)); if (!item) return;

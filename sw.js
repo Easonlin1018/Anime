@@ -1,5 +1,5 @@
-const CACHE_VERSION = "anime-tracker-v11-identity-integrity-1";
-const SHELL = ["./", "./index.html", "./v11-core.js?v=identity-integrity-1", "./v11-ui.js?v=identity-integrity-1", "./v11-styles.css?v=cross-media-2", "./cross-media.js?v=identity-integrity-1", "./spotify-config.js", "./spotify-themes.js?v=identity-integrity-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
+const CACHE_VERSION = "anime-tracker-v11-duplicate-reconciliation-1";
+const SHELL = ["./", "./index.html", "./v11-core.js?v=duplicate-reconciliation-1", "./v11-ui.js?v=duplicate-reconciliation-1", "./v11-styles.css?v=duplicate-reconciliation-1", "./cross-media.js?v=identity-integrity-1", "./spotify-config.js", "./spotify-themes.js?v=duplicate-reconciliation-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_VERSION).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 function excluded(url) {
