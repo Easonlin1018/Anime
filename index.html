@@ -1184,33 +1184,80 @@ function releasedEpisodeCount(media, existing = {}) {
     return Number(existing.releasedEpisodes) || 0;
 }
 
-function applyMediaMetadata(anime, media) {
-    const previousTitle = anime.title;
-    const mediaStartDate = getStructuredMediaStartDate(media);
-    anime.status = media.status || anime.status || "UNKNOWN";
-    anime.format = media.format || anime.format || "";
-    if (Number(media.episodes) > 0) anime.episodes = Number(media.episodes);
-    anime.releasedEpisodes = releasedEpisodeCount(media, anime);
-    anime.nextEpisode = media.nextAiringEpisode?.episode || null;
-    anime.nextAiringAt = media.nextAiringEpisode?.airingAt || null;
-    anime.streamingLinks = normalizeStreamingLinks(media.externalLinks);
-    anime.aliases = normalizeAnimeAliasList([
-        previousTitle,
-        ...(Array.isArray(anime.aliases) ? anime.aliases : []),
-        ...buildWorkAliasesFromMedia(media, previousTitle)
-    ]);
-    refreshGeneratedAnimeTitle(anime, media);
-    anime.groupTitle = anime.groupTitle || getSeriesGroupTitle(anime);
-    anime.anilistTitles = {
-        native: media.title?.native || anime.anilistTitles?.native || "",
-        english: media.title?.english || anime.anilistTitles?.english || "",
-        romaji: media.title?.romaji || anime.anilistTitles?.romaji || ""
+const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
+    "status",
+    "format",
+    "episodes",
+    "releasedEpisodes",
+    "nextEpisode",
+    "nextAiringAt",
+    "streamingLinks",
+    "aliases",
+    "anilistTitles",
+    "startDate",
+    "year",
+    "relations",
+    "lastMetadataSync"
+]);
+
+function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString(), previousTitle = anime.title) {
+    const patch = {
+        status: media?.status || anime.status || "UNKNOWN",
+        format: media?.format || anime.format || "",
+        releasedEpisodes: releasedEpisodeCount(media, anime),
+        aliases: normalizeAnimeAliasList([
+            ...(Array.isArray(anime.aliases) ? anime.aliases : []),
+            previousTitle,
+            anime.title,
+            ...buildWorkAliasesFromMedia(media, anime.title)
+        ]),
+        anilistTitles: {
+            native: media?.title?.native || anime.anilistTitles?.native || "",
+            english: media?.title?.english || anime.anilistTitles?.english || "",
+            romaji: media?.title?.romaji || anime.anilistTitles?.romaji || ""
+        },
+        lastMetadataSync: syncedAt
     };
-    if (mediaStartDate.year) anime.startDate = mediaStartDate;
-    anime.year = mediaStartDate.year || anime.year || null;
-    anime.lastMetadataSync = new Date().toISOString();
-    anime.relations = Array.isArray(media.relations?.edges) ? media.relations.edges : anime.relations || [];
-    if (anime.category === "waiting" && media.status === "RELEASING") anime.category = "watching";
+
+    if (Number(media?.episodes) > 0) patch.episodes = Number(media.episodes);
+
+    if (media?.nextAiringEpisode !== undefined) {
+        patch.nextEpisode = media?.nextAiringEpisode?.episode || null;
+        patch.nextAiringAt = media?.nextAiringEpisode?.airingAt || null;
+    }
+
+    if (Array.isArray(media?.externalLinks)) {
+        patch.streamingLinks = normalizeStreamingLinks(media.externalLinks);
+    }
+
+    const mediaStartDate = getStructuredMediaStartDate(media);
+    if (mediaStartDate.year) {
+        patch.startDate = mediaStartDate;
+        patch.year = mediaStartDate.year;
+    }
+
+    if (Array.isArray(media?.relations?.edges)) {
+        patch.relations = media.relations.edges;
+    }
+
+    return patch;
+}
+
+function applyMetadataManagedPatch(anime, patch) {
+    for (const field of MEDIA_METADATA_MANAGED_FIELDS) {
+        if (Object.prototype.hasOwnProperty.call(patch, field) && patch[field] !== undefined) {
+            anime[field] = patch[field];
+        }
+    }
+    return anime;
+}
+
+function applyMediaMetadata(anime, media, syncedAt = new Date().toISOString()) {
+    if (!anime || typeof anime !== "object" || !media || typeof media !== "object") return anime;
+    const previousTitle = anime.title;
+    refreshGeneratedAnimeTitle(anime, media);
+    applyMetadataManagedPatch(anime, buildMediaMetadataPatch(anime, media, syncedAt, previousTitle));
+    anime.groupTitle = anime.groupTitle || getSeriesGroupTitle(anime);
     return anime;
 }
 
@@ -1453,7 +1500,10 @@ function findExistingAnimeForMedia(media, list = animeList) {
 
 function attachAniListIdToLegacyAnime(anime, media) {
     const mediaId = getAniListMediaId(media);
-    if (!anime || !mediaId || getAniListMediaId(anime)) return anime;
+    const explicitId = anime?.anilistId
+        || anime?.aniListId
+        || (String(anime?.source || "").toLowerCase() === "anilist" ? anime?.sourceId : null);
+    if (!anime || !mediaId || explicitId) return anime;
     anime.anilistId = Number(mediaId);
     return anime;
 }
@@ -1523,9 +1573,12 @@ async function reconcileDiscoveredSequelMedia(discovered, list, handlers = {}) {
 }
 
 async function checkAndAddSequel(anime, isQuiet = false) {
+    const animeMediaId = getAniListMediaId(anime);
     const seedMedia = Array.isArray(anime?.relations) && anime.relations.length
         ? anime
-        : await requestAniList(ID_QUERY, { id: Number(anime.id) });
+        : animeMediaId
+            ? await requestAniList(ID_QUERY, { id: Number(animeMediaId) })
+            : null;
     if (!seedMedia) return 0;
 
     const groupTitle = getSeriesGroupTitle(anime) || anime.title;
@@ -1557,8 +1610,10 @@ async function manualScanSequels() {
 
     for (const anime of animeList.filter(item => item.category === "completed")) {
         try {
+            const animeMediaId = getAniListMediaId(anime);
+            if (!animeMediaId) continue;
             const media = await requestAniList(ID_QUERY, {
-                id: Number(anime.id)
+                id: Number(animeMediaId)
             });
 
             anime.relations = media?.relations?.edges || [];
@@ -1608,7 +1663,9 @@ function renderAiringCalendar() {
 
 async function syncAnimeMetadata(showMessage = false) {
     if (animeSyncing) return;
-    const ids = animeList.map(anime => Number(anime.id)).filter(Number.isFinite);
+    const ids = animeList
+        .map(anime => Number(getAniListMediaId(anime)))
+        .filter(Number.isFinite);
     if (ids.length === 0) {
         renderAiringCalendar();
         if (showMessage) showToast("目前沒有動漫可以同步。");
@@ -1622,7 +1679,7 @@ async function syncAnimeMetadata(showMessage = false) {
         for (let i = 0; i < ids.length; i += 50) {
             const mediaList = await requestAniListMediaPage(ids.slice(i, i + 50));
             for (const media of mediaList) {
-                const anime = animeList.find(item => Number(item.id) === Number(media.id));
+                const anime = animeList.find(item => getAniListMediaId(item) === String(media.id));
                 if (anime) { applyMediaMetadata(anime, media); synced++; }
             }
             if (i + 50 < ids.length) await delay(800);

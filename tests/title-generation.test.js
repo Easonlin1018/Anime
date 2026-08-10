@@ -14,7 +14,16 @@ const sequelStart = html.indexOf("function getAniListMediaId");
 const sequelEnd = html.indexOf("async function manualScanSequels", sequelStart);
 assert.ok(sequelStart >= 0 && sequelEnd > sequelStart, "找不到續作 traversal 函式");
 const sequelCode = html.slice(sequelStart, sequelEnd);
-const sequelApi = Function(`${code}\n${sequelCode}; return { getAniListMediaId, findExistingAnimeForMedia, getDirectSequelNodes, walkAniListSequelGraph, reconcileDiscoveredSequelMedia };`)();
+const sequelApi = Function(`${code}\n${sequelCode}; return { getAniListMediaId, findExistingAnimeForMedia, attachAniListIdToLegacyAnime, getDirectSequelNodes, walkAniListSequelGraph, reconcileDiscoveredSequelMedia };`)();
+const aliasStart = html.indexOf("function normalizeAnimeAliasList");
+const aliasEnd = html.indexOf("function deriveAliasVariants", aliasStart);
+const metadataStart = html.indexOf("function normalizeStreamingLinks");
+const metadataEnd = html.indexOf("async function searchAnime", metadataStart);
+assert.ok(aliasStart >= 0 && aliasEnd > aliasStart, "找不到 alias metadata helpers");
+assert.ok(metadataStart >= 0 && metadataEnd > metadataStart, "找不到 metadata refresh helpers");
+const aliasCode = html.slice(aliasStart, aliasEnd);
+const metadataCode = html.slice(metadataStart, metadataEnd);
+const metadataApi = Function(`${code}\n${aliasCode}\n${metadataCode}; return { MEDIA_METADATA_MANAGED_FIELDS, buildMediaMetadataPatch, applyMetadataManagedPatch, applyMediaMetadata };`)();
 
 let passed = 0;
 const pending = [];
@@ -287,6 +296,183 @@ test("renderList 只在系列群組內套用結構化日期排序", () => {
 test("searchAnime 與 checkAndAddSequel 共用統一去重流程", () => {
     assert.match(html, /const duplicate = findExistingAnimeForMedia\(media, animeList\)/u);
     assert.match(html, /reconcileDiscoveredSequelMedia\(chain, animeList/u);
+});
+
+function userManagedAnime(overrides = {}) {
+    return {
+        id: "local-anime-uuid",
+        title: "使用者名稱",
+        displayTitle: "使用者名稱",
+        titleSource: "manual",
+        titleManuallyEdited: true,
+        manualTitle: "使用者名稱",
+        category: "watching",
+        watched: 8,
+        currentEpisode: 8,
+        progress: 8,
+        rating: 9,
+        score: 9,
+        review: "使用者心得",
+        note: "使用者筆記",
+        notes: "相容筆記",
+        memo: "私人備忘",
+        customPlatform: "自訂平台",
+        customPlatformUrl: "https://example.com/watch",
+        eventState: { want: ["event-1"], hidden: ["event-2"] },
+        eventOverrides: { "event-1": { venue: "人工場館" } },
+        themeSongs: [{ type: "OP", title: "使用者主題曲" }],
+        createdAt: "2024-01-01T00:00:00.000Z",
+        addedAt: "2024-01-02T00:00:00.000Z",
+        updatedAt: "2024-02-01T00:00:00.000Z",
+        lastWatchedAt: "2024-01-31T00:00:00.000Z",
+        streamingLinks: [{ site: "手動連結", url: "https://example.com/manual" }],
+        customFutureField: "keep-me",
+        ...overrides
+    };
+}
+
+function refreshedMedia(overrides = {}) {
+    return {
+        id: 103572,
+        title: {
+            native: "五等分の花嫁",
+            english: "The Quintessential Quintuplets",
+            romaji: "Go-toubun no Hanayome"
+        },
+        synonyms: ["五等分的新娘"],
+        status: "FINISHED",
+        format: "TV",
+        episodes: 12,
+        startDate: { year: 2019, month: 1, day: 11 },
+        nextAiringEpisode: null,
+        externalLinks: [{ site: "Netflix", type: "STREAMING", url: "https://example.com/netflix" }],
+        relations: { edges: [{ relationType: "SEQUEL", node: { id: 109261 } }] },
+        ...overrides
+    };
+}
+
+function userFieldSnapshot(anime) {
+    const fields = [
+        "id", "category", "watched", "currentEpisode", "progress", "rating", "score",
+        "review", "note", "notes", "memo", "title", "displayTitle", "titleSource",
+        "titleManuallyEdited", "manualTitle", "customPlatform", "customPlatformUrl", "eventState",
+        "eventOverrides", "themeSongs", "createdAt", "addedAt", "updatedAt", "lastWatchedAt",
+        "customFutureField"
+    ];
+    return Object.fromEntries(fields.map(field => [field, anime[field]]));
+}
+
+test("metadata refresh preserves watching progress and category", () => {
+    const anime = userManagedAnime();
+    const before = userFieldSnapshot(anime);
+    metadataApi.applyMediaMetadata(anime, refreshedMedia(), "2026-08-09T00:00:00.000Z");
+    assert.deepEqual(userFieldSnapshot(anime), before);
+    assert.equal(anime.episodes, 12);
+    assert.equal(anime.status, "FINISHED");
+});
+
+test("metadata refresh preserves every user category", () => {
+    for (const category of ["watching", "backlog", "completed", "waiting"]) {
+        const anime = userManagedAnime({ category });
+        metadataApi.applyMediaMetadata(anime, refreshedMedia({ status: "RELEASING" }), "2026-08-09T00:00:00.000Z");
+        assert.equal(anime.category, category);
+    }
+});
+
+test("metadata refresh preserves completed rating and all note fields", () => {
+    const anime = userManagedAnime({ category: "completed", watched: 12, currentEpisode: 12 });
+    metadataApi.applyMediaMetadata(anime, refreshedMedia(), "2026-08-09T00:00:00.000Z");
+    assert.deepEqual(
+        [anime.category, anime.watched, anime.currentEpisode, anime.rating, anime.score, anime.review, anime.note, anime.notes, anime.memo],
+        ["completed", 12, 12, 9, 9, "使用者心得", "使用者筆記", "相容筆記", "私人備忘"]
+    );
+});
+
+test("manual title is never replaced by AniList metadata", () => {
+    const anime = userManagedAnime({ title: "我的五等分名稱", displayTitle: "我的五等分名稱" });
+    metadataApi.applyMediaMetadata(anime, refreshedMedia(), "2026-08-09T00:00:00.000Z");
+    assert.equal(anime.title, "我的五等分名稱");
+    assert.equal(anime.displayTitle, "我的五等分名稱");
+    assert.equal(anime.titleSource, "manual");
+});
+
+test("custom platform and manual streaming data survive partial metadata", () => {
+    const anime = userManagedAnime();
+    metadataApi.applyMediaMetadata(
+        anime,
+        refreshedMedia({ externalLinks: undefined, nextAiringEpisode: undefined }),
+        "2026-08-09T00:00:00.000Z"
+    );
+    assert.equal(anime.customPlatform, "自訂平台");
+    assert.equal(anime.customPlatformUrl, "https://example.com/watch");
+    assert.deepEqual(anime.streamingLinks, [{ site: "手動連結", url: "https://example.com/manual" }]);
+});
+
+test("adding AniList ID preserves local ID and every user field", () => {
+    const anime = userManagedAnime();
+    const before = userFieldSnapshot(anime);
+    sequelApi.attachAniListIdToLegacyAnime(anime, refreshedMedia());
+    metadataApi.applyMediaMetadata(anime, refreshedMedia(), "2026-08-09T00:00:00.000Z");
+    assert.equal(anime.id, "local-anime-uuid");
+    assert.equal(anime.anilistId, 103572);
+    assert.deepEqual(userFieldSnapshot(anime), before);
+});
+
+test("null or undefined metadata never clears existing user data", () => {
+    const anime = userManagedAnime({ status: "RELEASING", format: "TV", episodes: 24 });
+    const before = userFieldSnapshot(anime);
+    metadataApi.applyMediaMetadata(anime, {
+        id: 103572,
+        title: null,
+        status: null,
+        format: undefined,
+        episodes: null,
+        startDate: null,
+        externalLinks: undefined,
+        nextAiringEpisode: undefined,
+        relations: undefined
+    }, "2026-08-09T00:00:00.000Z");
+    assert.deepEqual(userFieldSnapshot(anime), before);
+    assert.deepEqual(anime.streamingLinks, [{ site: "手動連結", url: "https://example.com/manual" }]);
+    assert.equal(anime.episodes, 24);
+});
+
+test("unknown future fields survive metadata refresh", () => {
+    const anime = userManagedAnime({ customFutureObject: { nested: [1, 2, 3] } });
+    metadataApi.applyMediaMetadata(anime, refreshedMedia(), "2026-08-09T00:00:00.000Z");
+    assert.equal(anime.customFutureField, "keep-me");
+    assert.deepEqual(anime.customFutureObject, { nested: [1, 2, 3] });
+});
+
+test("localStorage and Supabase style serialization preserves user-managed fields", () => {
+    const anime = JSON.parse(JSON.stringify(userManagedAnime()));
+    const before = userFieldSnapshot(anime);
+    metadataApi.applyMediaMetadata(anime, refreshedMedia(), "2026-08-09T00:00:00.000Z");
+    const serialized = JSON.parse(JSON.stringify([anime]))[0];
+    assert.deepEqual(userFieldSnapshot(serialized), before);
+    assert.equal(serialized.customFutureField, "keep-me");
+});
+
+test("repeated metadata refresh is idempotent", () => {
+    const anime = userManagedAnime({ titleSource: "legacy", titleManuallyEdited: false, title: "五等分的新娘（續篇・2019）" });
+    const media = refreshedMedia();
+    metadataApi.applyMediaMetadata(anime, media, "2026-08-09T00:00:00.000Z");
+    const once = JSON.parse(JSON.stringify(anime));
+    metadataApi.applyMediaMetadata(anime, media, "2026-08-09T00:00:00.000Z");
+    assert.deepEqual(anime, once);
+});
+
+test("metadata whitelist excludes all user-managed fields", () => {
+    const managed = new Set(metadataApi.MEDIA_METADATA_MANAGED_FIELDS);
+    for (const field of ["id", "category", "watched", "currentEpisode", "rating", "score", "review", "note", "notes", "memo", "manualTitle", "customPlatform", "themeSongs", "createdAt", "addedAt", "updatedAt", "lastWatchedAt", "customFutureField"]) {
+        assert.equal(managed.has(field), false, `${field} must remain user-managed`);
+    }
+});
+
+test("metadata sync resolves AniList ID without replacing the local ID", () => {
+    assert.match(html, /animeList\s*\.map\(anime => Number\(getAniListMediaId\(anime\)\)\)/u);
+    assert.match(html, /animeList\.find\(item => getAniListMediaId\(item\) === String\(media\.id\)\)/u);
+    assert.match(html, /requestAniList\(ID_QUERY, \{ id: Number\(animeMediaId\) \}\)/u);
 });
 
 Promise.all(pending).then(() => {
