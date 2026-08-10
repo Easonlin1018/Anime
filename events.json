@@ -3,35 +3,30 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-09T02:27:30.573Z",
-    "lastSuccessfulUpdateAt": "2026-08-09T02:27:30.573Z",
+    "updatedAt": "2026-08-10T02:33:43.485Z",
+    "lastSuccessfulUpdateAt": "2026-08-10T02:33:43.485Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 625,
-    "articleCandidateCount": 230,
+    "uniqueNewsCount": 628,
+    "articleCandidateCount": 232,
     "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
-    "newEventCount": 2,
-    "cachedEventCount": 28,
+    "matchedEventCount": 21,
+    "newEventCount": 3,
+    "cachedEventCount": 29,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 37,
+    "storedEventCount": 40,
     "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 53,
+    "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 140,
+    "nonActivityRemovedCount": 135,
     "sourceErrors": [],
-    "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。",
-    "liveSearchUpdatedAt": "2026-08-09T11:35:54.810Z",
-    "liveSearchQuery": "無職轉生~到了異世界就拿出真本事~",
-    "liveSearchResultCount": 0,
-    "liveSearchAddedCount": 0,
-    "liveSearchStaleRemovedCount": 0
+    "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
     {
@@ -124,38 +119,44 @@
       "dateConfidence": "medium",
       "dateSource": "8 月 7 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
-      "id": "ext-b58f3713fde43779",
-      "title": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場",
-      "summary": "三嘻行動哇 Yipee!",
-      "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxOakFCN0NLd3piajNhclFKVm1RenVzTnR4QjdhZDBNLVlfNk1xbEg5UE5TZHQzYnFtNFJvanoxVzFlNEVNWGo0OG1LY2lKX3FCME5ONXByeWtSNlEyYnJwcmFlWm1OdE10X1BKakdZV2dXMHBQeU5zeE40eWxnM01yZ1ZKcUwyV25TcVYySUlWQWhFT0lCNW5HU1V1UFBhQmNHdnJacmk1b3FISHhZbHlEWEV3MGFWaWN0NUtxWGdvZVBBZ2hVOEFLYld2M3Q0bURZQXVYczdEQTBZVExCd1lzT0xUMWNoekRCNEFvR0VsNElOQUpXYkdMTHFmWjdoT3FwRjFObkZDODhyV3RSTUhWRG1jZVZTOThCVlNpWnNqTXR1VDJrakhwaDRnQ040QzRJSERaQkM0YmlDYWlHSHVUdEhCUF9IN1lJbGc?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
+      "id": "live-31e59631e80b33e553",
+      "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
+      "summary": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
+      "source": "Google News",
+      "discoverySource": "即時搜尋：Google News",
+      "sourceTag": "即時搜尋",
       "type": "快閃店",
       "locations": [
         "新竹"
       ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T15:57:31.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
       "venue": "",
       "admissionType": "待確認",
-      "feeText": "",
+      "confidence": "medium",
+      "confidenceScore": 77,
+      "matchedAliases": [
+        "黃泉使者"
+      ],
       "workTitles": [
         "黃泉使者"
       ],
-      "searchCorpus": "《黃泉使者》主題造景登陸新竹！木棉花動漫快閃店8月6日巨城登場 三嘻行動哇 Yipee!",
+      "publishedAt": "2026-08-06T11:21:40.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
       "dateConfidence": "medium",
-      "dateSource": "8月6日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "dateSource": "店8/6",
+      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
+      "liveSearchQuery": "黃泉使者",
+      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
+      "recencyReason": "目前或未來活動",
+      "discoveredAt": "2026-08-09T11:35:05.909Z",
+      "lastSeenAt": "2026-08-09T11:35:36.903Z"
     },
     {
       "id": "ext-a8b0f32886165b97",
@@ -184,8 +185,38 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+    },
+    {
+      "id": "ext-fa90244a4a8f2065",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞",
+      "summary": "PChome Online新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWV9LNXdMVmNndkpiMnhNNVNMc29ERTFrM0g4dzk3aVNfTFhYTVlzWGdLaGRtNGl6eXpnUjMxa2V4WXpuT01SS1FNNmVPclNtVmlEejRBMmRSNUxSWjJhSlp6eFFBU0l1WW9FMHJuQXZVek9nbXpQd1BBckNwSGphZWhObi0?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T04:12:44.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online新聞",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -275,8 +306,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-04T03:35:39.203Z",
-      "lastSeenAt": "2026-08-04T03:35:39.203Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -659,8 +690,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -717,8 +748,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -748,8 +779,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-07T03:14:15.928Z",
-      "lastSeenAt": "2026-08-07T03:14:15.928Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -779,8 +810,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -846,6 +877,42 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-15T07:31:09.855Z",
       "lastSeenAt": "2026-07-15T07:31:09.855Z"
+    },
+    {
+      "id": "live-c905c3e7ab49dcf71a",
+      "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
+      "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFA1TjlSaThETk9EWE1CVHlyNG9FUVhSQU15SkRhX05MX3JUWC1XX05ESTE3U2FhV0hEa2pmS2ZNMjZfanV4UjVEQmpRa3NWZw?oc=5",
+      "source": "Google News",
+      "discoverySource": "即時搜尋：Google News",
+      "sourceTag": "即時搜尋",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "venue": "",
+      "admissionType": "待確認",
+      "confidence": "medium",
+      "confidenceScore": 67,
+      "matchedAliases": [
+        "黃泉使者"
+      ],
+      "workTitles": [
+        "黃泉使者"
+      ],
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
+      "searchCorpus": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
+      "liveSearchQuery": "黃泉使者",
+      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
+      "recencyReason": "目前或未來活動",
+      "discoveredAt": "2026-08-09T11:35:08.579Z",
+      "lastSeenAt": "2026-08-09T11:35:39.619Z"
     },
     {
       "id": "ext-9775fce9a1c716ac",
@@ -1068,8 +1135,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "gnn-309209",
@@ -1165,74 +1232,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
-    },
-    {
-      "id": "ext-aa09a40ecdd54fb1",
-      "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
-      "summary": "nownews.com",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9EX05yX0pCOUxQYzMyR09jQjdRV3FwQkVNblRkMm9wNnJXNDQ3VDFNN2tTQzQ0U09kUEowRTlhRVBuU1I4aWxxSjg5TXA4Mkp5d0HSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-08T21:41:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 nownews.com",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-09T02:27:30.573Z",
-      "lastSeenAt": "2026-08-09T02:27:30.573Z"
-    },
-    {
-      "id": "live-31e59631e80b33e553",
-      "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 77,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-08-06T11:21:40.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "dateConfidence": "medium",
-      "dateSource": "店8/6",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:05.909Z",
-      "lastSeenAt": "2026-08-09T11:35:36.903Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1271,40 +1272,39 @@
       "lastSeenAt": "2026-08-09T11:35:36.067Z"
     },
     {
-      "id": "live-c905c3e7ab49dcf71a",
-      "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
-      "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFA1TjlSaThETk9EWE1CVHlyNG9FUVhSQU15SkRhX05MX3JUWC1XX05ESTE3U2FhV0hEa2pmS2ZNMjZfanV4UjVEQmpRa3NWZw?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
+      "id": "gnn-309608",
+      "title": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱",
+      "summary": "過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309608",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
       "locations": [
         "台北"
       ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "confidence": "high",
+      "publishedAt": "2026-08-10T02:33:01.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "BLEACH 死神",
+        "機動戰士鋼彈 00",
+        "青之驅魔師",
+        "亞爾斯蘭戰記",
+        "我的英雄學院",
+        "OVER THE WORLD"
+      ],
+      "searchCorpus": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱 過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
       "dateConfidence": "unknown",
       "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:08.579Z",
-      "lastSeenAt": "2026-08-09T11:35:39.619Z"
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z"
     }
   ],
   "archive": []
