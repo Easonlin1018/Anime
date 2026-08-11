@@ -3,25 +3,25 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-10T02:33:43.485Z",
-    "lastSuccessfulUpdateAt": "2026-08-10T02:33:43.485Z",
+    "updatedAt": "2026-08-11T02:26:32.819Z",
+    "lastSuccessfulUpdateAt": "2026-08-11T02:26:32.819Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 628,
-    "articleCandidateCount": 232,
-    "articleFetchSuccessCount": 33,
+    "uniqueNewsCount": 625,
+    "articleCandidateCount": 231,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 21,
-    "newEventCount": 3,
-    "cachedEventCount": 29,
+    "matchedEventCount": 22,
+    "newEventCount": 5,
+    "cachedEventCount": 31,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 40,
-    "expiredRemovedCount": 13,
+    "storedEventCount": 42,
+    "expiredRemovedCount": 11,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 55,
+    "undatedOldRemovedCount": 54,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
     "nonActivityRemovedCount": 135,
@@ -29,6 +29,39 @@
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-309659",
+      "title": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發",
+      "summary": "由墨香銅臭同名小說改編的動畫《天官賜福》，即日起至 9 月 9 日，在台北信義區 DREAM PLAZA B2 連通道推出期間限定主題快閃店。本次集結覓星社「四靈韻章」系列、包包的谷「歲和紙影」系列以及「與君共千秋」限定系列，三大系列首次在台灣亮相。 本次快閃店運用「歲和紙影」系列兩幅大型主視覺，打造Ｌ形沉浸式打卡區，透過環繞式",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309659",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-10T08:58:04.000Z",
+      "eventStartDate": "2026-08-10",
+      "eventEndDate": "2026-09-09",
+      "eventStatus": "ongoing",
+      "venue": "DREAM PLAZA",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "天官賜福",
+        "四靈韻章",
+        "歲和紙影",
+        "與君共千秋"
+      ],
+      "searchCorpus": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發 由墨香銅臭同名小說改編的動畫《天官賜福》，即日起至 9 月 9 日，在台北信義區 DREAM PLAZA B2 連通道推出期間限定主題快閃店。本次集結覓星社「四靈韻章」系列、包包的谷「歲和紙影」系列以及「與君共千秋」限定系列，三大系列首次在台灣亮相。 本次快閃店運用「歲和紙影」系列兩幅大型主視覺，打造Ｌ形沉浸式打卡區，透過環繞式",
+      "dateConfidence": "high",
+      "dateSource": "即日起至 9 月 9 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+    },
     {
       "id": "gnn-309119",
       "title": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨",
@@ -185,8 +218,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -215,8 +248,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -306,8 +339,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -632,6 +665,36 @@
       "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
+      "id": "gnn-309636",
+      "title": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購",
+      "summary": "2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309636",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-10T07:04:54.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "FLASHLIGHT"
+      ],
+      "searchCorpus": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購 2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 9 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+    },
+    {
       "id": "gnn-309049",
       "title": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場",
       "summary": "聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
@@ -690,8 +753,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-3a237f3b9fc19304",
@@ -748,8 +811,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -779,8 +842,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -810,8 +873,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1135,8 +1198,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "gnn-309209",
@@ -1232,8 +1295,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
