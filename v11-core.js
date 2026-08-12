@@ -131,7 +131,7 @@
         const values = [item.anilistId, item.aniListId];
         if (String(item.source || item.dataSource || "").toLowerCase() === "anilist") values.push(item.sourceId);
         if (item.anilistTitles && typeof item.anilistTitles === "object") {
-            values.push(item.sourceId, item.mediaId, item.id);
+            values.push(item.sourceId);
         }
         for (const value of values) {
             const numeric = Number(value);
@@ -151,7 +151,38 @@
             .replace(/\s*[（(]\s*(?:19|20)\d{2}\s*年?\s*[）)]\s*$/u, "")
             .replace(/[\s\p{P}]+/gu, "")
             .trim();
-        return title && Number.isInteger(year) && year > 0 && format ? `legacy:${title}|${year}|${format}` : "";
+        const group = normalizeText(item.groupTitle || item.seriesTitle || item.title || "");
+        return title && group && Number.isInteger(year) && year > 0 && format ? `legacy:${title}|${year}|${format}|${group}` : "";
+    }
+
+    function animeIdentityTitles(item) {
+        const titles = item?.anilistTitles && typeof item.anilistTitles === "object" ? item.anilistTitles : {};
+        return new Set([
+            item?.title,
+            item?.displayTitle,
+            item?.canonicalTitle,
+            titles.native,
+            titles.english,
+            titles.romaji,
+            ...arrayOf(item?.aliases)
+        ].map(value => normalizeText(String(value || "").replace(/\s*[（(]\s*(?:19|20)\d{2}\s*年?\s*[）)]\s*$/u, ""))).filter(Boolean));
+    }
+
+    function isConservativeLegacyShadowMatch(legacy, known) {
+        if (!legacy || !known || getAnimeAniListIdentity(legacy) || !getAnimeAniListIdentity(known)) return false;
+        const legacyYear = Number(legacy?.startDate?.year ?? legacy?.year);
+        const knownYear = Number(known?.startDate?.year ?? known?.year);
+        const legacyFormat = String(legacy?.format || legacy?.mediaType || legacy?.type || "").trim().toUpperCase();
+        const knownFormat = String(known?.format || known?.mediaType || known?.type || "").trim().toUpperCase();
+        if (!Number.isInteger(legacyYear) || legacyYear <= 0 || legacyYear !== knownYear) return false;
+        if (!legacyFormat || legacyFormat !== knownFormat) return false;
+
+        const legacyGroup = normalizeText(legacy.groupTitle || legacy.seriesTitle || legacy.title || "");
+        const knownGroup = normalizeText(known.groupTitle || known.seriesTitle || known.title || "");
+        if (!legacyGroup || legacyGroup !== knownGroup) return false;
+
+        const legacyTitles = animeIdentityTitles(legacy);
+        return [...animeIdentityTitles(known)].some(title => legacyTitles.has(title));
     }
 
     function uniqueMergedArray(values) {
@@ -188,7 +219,8 @@
 
     function chooseCanonicalDuplicate(records, state) {
         return records.slice().sort((a, b) =>
-            animeReferenceCount(state, b.item.id) - animeReferenceCount(state, a.item.id)
+            Number(Boolean(a.legacyIdentityBound)) - Number(Boolean(b.legacyIdentityBound))
+            || animeReferenceCount(state, b.item.id) - animeReferenceCount(state, a.item.id)
             || Number(!b.item.deletedAt) - Number(!a.item.deletedAt)
             || Number(Boolean(b.item.titleManuallyEdited || b.item.titleSource === "manual" || b.item.manualTitle === true))
                 - Number(Boolean(a.item.titleManuallyEdited || a.item.titleSource === "manual" || a.item.manualTitle === true))
@@ -336,25 +368,123 @@
         };
     }
 
+    function auxiliaryIdentityMatches(value, anime) {
+        if (!value || typeof value !== "object" || !anime) return false;
+        const targetAniListId = getAnimeAniListIdentity(anime);
+        const valueAniListId = getAnimeAniListIdentity(value);
+        if (targetAniListId && valueAniListId) return targetAniListId === valueAniListId;
+        const targetMalId = String(anime.malId ?? anime.idMal ?? anime.externalIds?.malId ?? "");
+        const valueMalId = String(value.malId ?? value.idMal ?? value.externalIds?.malId ?? "");
+        if (targetMalId && valueMalId) return targetMalId === valueMalId;
+        return false;
+    }
+
+    function remapCollisionAuxiliaryState(state, reassignments) {
+        if (!reassignments.length) return { ...(state || {}) };
+        const remapContextId = (value, context) => {
+            const oldId = String(value ?? "");
+            if (!oldId) return value;
+            const match = reassignments.find(item => item.oldId === oldId && auxiliaryIdentityMatches(context, item.record));
+            return match ? match.newId : value;
+        };
+        const works = arrayOf(state?.works).map(work => {
+            const entries = arrayOf(work?.mediaEntries).map(entry => entry?.mediaType === "anime"
+                ? { ...entry, id:remapContextId(entry.id, entry) }
+                : { ...entry });
+            const unique = new Map();
+            entries.forEach(entry => {
+                const key = `${entry.mediaType || "anime"}:${String(entry.id)}`;
+                const previous = unique.get(key);
+                unique.set(key, previous ? { ...entry, ...previous, aliases:uniqueMergedArray([previous.aliases, entry.aliases]) } : entry);
+            });
+            return { ...work, mediaEntries:[...unique.values()] };
+        });
+        const watchHistory = arrayOf(state?.watchHistory).map(record => ({
+            ...record,
+            animeId:remapContextId(record?.animeId, record)
+        }));
+        const themeUndo = state?.themeUndo?.animeId != null
+            ? { ...state.themeUndo, animeId:remapContextId(state.themeUndo.animeId, state.themeUndo) }
+            : state?.themeUndo ?? null;
+        return { ...(state || {}), works, watchHistory, themeUndo };
+    }
+
+    function ensureUniqueLocalAnimeIds(list, state = {}, options = {}) {
+        const records = migrateList(list).map((item, index) => ({ item, index }));
+        const byLocalId = new Map();
+        records.forEach(record => {
+            const id = String(record.item.id ?? "");
+            if (id) (byLocalId.get(id) || (byLocalId.set(id, []), byLocalId.get(id))).push(record);
+        });
+        const usedIds = new Set(records.map(record => String(record.item.id)));
+        const makeId = typeof options.idFactory === "function" ? options.idFactory : uuid;
+        const reassignments = [], collisions = [];
+        for (const [oldId, group] of byLocalId) {
+            if (group.length < 2) continue;
+            const ordered = group.slice().sort((a, b) =>
+                Number(Boolean(a.item.deletedAt)) - Number(Boolean(b.item.deletedAt))
+                || animeReferenceCount(state, b.item.id) - animeReferenceCount(state, a.item.id)
+                || a.index - b.index
+            );
+            const owner = ordered[0];
+            const report = { localId:oldId, owner:describeAnimeIdentity(owner.item), reassigned:[] };
+            for (const record of ordered.slice(1)) {
+                let newId;
+                do { newId = String(makeId(record.item, record.index, oldId)); } while (!newId || usedIds.has(newId));
+                usedIds.add(newId);
+                const updated = {
+                    ...record.item,
+                    id:newId,
+                    localIdReassignedFrom:oldId,
+                    localIdReassignedAt:iso(options.now || new Date().toISOString())
+                };
+                records[record.index].item = updated;
+                const reassignment = { oldId, newId, record:updated, original:record.item };
+                reassignments.push(reassignment);
+                report.reassigned.push({ oldId, newId, record:describeAnimeIdentity(updated) });
+            }
+            collisions.push(report);
+        }
+        const nextState = remapCollisionAuxiliaryState(state, reassignments);
+        return {
+            list:records.map(record => record.item),
+            state:nextState,
+            changed:reassignments.length > 0,
+            reassignedCount:reassignments.length,
+            reassignments:reassignments.map(item => ({ oldId:item.oldId, newId:item.newId, record:describeAnimeIdentity(item.record) })),
+            collisions
+        };
+    }
+
     function reconcileExistingAnimeDuplicates(list, state = {}) {
         const records = migrateList(list).map((item, index) => ({ item, index }));
+        const legacyBindings = [];
+        for (const record of records) {
+            if (getAnimeAniListIdentity(record.item)) continue;
+            const matches = records.filter(known => getAnimeAniListIdentity(known.item)
+                && isConservativeLegacyShadowMatch(record.item, known.item));
+            const identities = [...new Set(matches.map(match => getAnimeAniListIdentity(match.item)).filter(Boolean))];
+            if (identities.length !== 1) continue;
+            const externalId = identities[0];
+            record.item = {
+                ...record.item,
+                anilistId:Number.isSafeInteger(Number(externalId)) ? Number(externalId) : externalId
+            };
+            record.legacyIdentityBound = true;
+            legacyBindings.push({
+                localId:record.item.id,
+                anilistId:externalId,
+                matchedKnownIds:matches.map(match => match.item.id)
+            });
+        }
         const groups = new Map();
-        const localIdCounts = records.reduce((counts, record) => {
-            if (getAnimeAniListIdentity(record.item)) return counts;
-            const id = String(record.item.id ?? "");
-            if (id) counts.set(id, (counts.get(id) || 0) + 1);
-            return counts;
-        }, new Map());
         records.forEach(record => {
             const externalId = getAnimeAniListIdentity(record.item);
-            const localId = String(record.item.id ?? "");
-            const key = externalId ? `anilist:${externalId}` : localId && localIdCounts.get(localId) > 1 ? `local:${localId}` : legacyAnimeIdentityKey(record.item);
+            const key = externalId ? `anilist:${externalId}` : legacyAnimeIdentityKey(record.item);
             if (key) (groups.get(key) || (groups.set(key, []), groups.get(key))).push(record);
         });
 
         const duplicateGroups = [...groups.entries()].filter(([, group]) => group.length > 1);
-        if (!duplicateGroups.length) return { list:records.map(record => record.item), state:{ ...(state || {}) }, changed:false, mergedCount:0, idMap:{}, groups:[] };
-
         const removedIndexes = new Set(), replacements = new Map(), idMap = new Map(), reports = [];
         duplicateGroups.forEach(([identityKey, group]) => {
             const canonical = chooseCanonicalDuplicate(group, state);
@@ -367,14 +497,38 @@
             reports.push({ identityKey, canonicalId:canonical.item.id, removedIds:group.filter(record => record.index !== canonical.index).map(record => record.item.id), records:group.map(record => describeAnimeIdentity(record.item)) });
         });
         const reconciledList = records.filter(record => !removedIndexes.has(record.index)).map(record => replacements.get(record.index) || record.item);
-        const reconciledState = remapAnimeAuxiliaryState(state, idMap);
-        return { list:reconciledList, state:reconciledState, changed:true, mergedCount:removedIndexes.size, idMap:Object.fromEntries(idMap), groups:reports };
+        const reconciledState = idMap.size ? remapAnimeAuxiliaryState(state, idMap) : { ...(state || {}) };
+        const uniqueness = ensureUniqueLocalAnimeIds(reconciledList, reconciledState);
+        return {
+            list:uniqueness.list,
+            state:uniqueness.state,
+            changed:legacyBindings.length > 0 || removedIndexes.size > 0 || uniqueness.changed,
+            mergedCount:removedIndexes.size,
+            legacyBoundCount:legacyBindings.length,
+            reassignedCount:uniqueness.reassignedCount,
+            idMap:Object.fromEntries(idMap),
+            groups:reports,
+            collisions:uniqueness.collisions,
+            reassignments:uniqueness.reassignments,
+            legacyBindings
+        };
+    }
+
+    function findAnimeRecordIndex(list, id, identity = null, options = {}) {
+        const targetId = String(id), items = arrayOf(list);
+        const candidates = items.map((item, index) => ({ item, index })).filter(record => String(record.item?.id) === targetId);
+        if (!candidates.length) return -1;
+        const identityValue = identity && typeof identity === "object" ? getAnimeAniListIdentity(identity) : String(identity ?? "");
+        const matching = identityValue ? candidates.filter(record => getAnimeAniListIdentity(record.item) === identityValue) : candidates;
+        const pool = matching.length ? matching : candidates;
+        if (options.preferDeleted) return (pool.find(record => Boolean(record.item?.deletedAt)) || pool[0]).index;
+        return (pool.find(record => !record.item?.deletedAt) || pool[0]).index;
     }
 
     function updateAnimeTitleById(list, id, title, now = new Date().toISOString()) {
         const targetId = String(id), nextTitle = String(title || "").trim();
         const next = arrayOf(list).slice();
-        const index = next.findIndex(item => String(item?.id) === targetId);
+        const index = findAnimeRecordIndex(next, targetId);
         if (index < 0 || !nextTitle) return { list, found:index >= 0, changed:false, anime:index >= 0 ? next[index] : null };
         const current = next[index];
         if (current.title === nextTitle && current.titleManuallyEdited === true) return { list:next, found:true, changed:false, anime:current };
@@ -394,31 +548,44 @@
     function moveAnimeCategoryById(list, id, category, now = new Date().toISOString()) {
         const targetId = String(id), nextCategory = String(category || "").trim();
         const next = arrayOf(list).slice();
-        const index = next.findIndex(item => String(item?.id) === targetId);
+        const index = findAnimeRecordIndex(next, targetId);
         if (index < 0 || !nextCategory) return { list, found:index >= 0, changed:false, anime:index >= 0 ? next[index] : null };
         const current = next[index];
         if (current.category === nextCategory) return { list:next, found:true, changed:false, anime:current };
-        const updated = { ...current, category:nextCategory, updatedAt:iso(now) };
+        const updated = {
+            ...current,
+            category:nextCategory,
+            categorySource:"manual",
+            categoryManuallyEdited:true,
+            updatedAt:iso(now)
+        };
         if (nextCategory === "watching") updated.lastWatchedAt = iso(now);
         next[index] = updated;
         return { list:next, found:true, changed:true, anime:updated };
     }
 
-    function markAnimeDeletedById(list, id, now = new Date().toISOString()) {
+    function markAnimeDeletedById(list, id, now = new Date().toISOString(), identity = null) {
         const targetId = String(id), next = arrayOf(list).slice();
-        const index = next.findIndex(item => String(item?.id) === targetId);
+        const index = findAnimeRecordIndex(next, targetId, identity);
         if (index < 0) return { list, found:false, changed:false, anime:null };
         const current = next[index];
-        if (current.deletedAt) return { list:next, found:true, changed:false, anime:current };
-        const updated = { ...current, category:"_deleted", deletedAt:iso(now), updatedAt:iso(now) };
+        if (current.deletedAt) return { list:next, found:true, changed:false, anime:current, recordIndex:index };
+        const deletedFromCategory = current.category && current.category !== "_deleted"
+            ? current.category
+            : current.deletedFromCategory || "backlog";
+        const updated = { ...current, deletedFromCategory, category:"_deleted", deletedAt:iso(now), updatedAt:iso(now) };
         next[index] = updated;
-        return { list:next, found:true, changed:true, anime:updated };
+        return { list:next, found:true, changed:true, anime:updated, recordIndex:index };
     }
 
-    function restoreAnimeById(list, id, snapshot, now = new Date().toISOString()) {
+    function restoreAnimeById(list, id, snapshot, now = new Date().toISOString(), identity = null) {
         const targetId = String(id), next = arrayOf(list).slice();
-        const index = next.findIndex(item => String(item?.id) === targetId);
-        const original = arrayOf(snapshot).find(item => String(item?.id) === targetId)
+        const index = findAnimeRecordIndex(next, targetId, identity, { preferDeleted:true });
+        const identityValue = identity && typeof identity === "object" ? getAnimeAniListIdentity(identity) : String(identity ?? "");
+        const snapshotMatches = arrayOf(snapshot).filter(item => String(item?.id) === targetId);
+        const original = (identityValue ? snapshotMatches.find(item => getAnimeAniListIdentity(item) === identityValue) : null)
+            || snapshotMatches.find(item => !item.deletedAt)
+            || snapshotMatches[0]
             || (snapshot && !Array.isArray(snapshot) && String(snapshot.id) === targetId ? snapshot : null);
         if (!original) return { list, found:false, changed:false, anime:null };
         const restored = migrateAnime({ ...original, id:original.id, deletedAt:null, category:original.category === "_deleted" ? "backlog" : original.category, updatedAt:iso(now) }, now);
@@ -477,7 +644,7 @@
 
     function updateAnimeProgress(list, id, delta = 1, at = new Date().toISOString()) {
         const targetId = String(id), change = Number(delta);
-        const index = arrayOf(list).findIndex(item => String(item?.id) === targetId);
+        const index = findAnimeRecordIndex(list, targetId);
         if (index < 0) return { list, found: false, changed: false, reason: "not-found", anime: null, historyRecord: null };
         const old = migrateAnime(list[index], at);
         const current = Math.max(0, numberOr(old.currentEpisode ?? old.watched));
@@ -965,12 +1132,21 @@
         return migrateList(list).map(item => {
             if (!selected.has(String(item.id))) return item;
             const next = { ...item, updatedAt: iso(now) };
-            if (action === "status") next.category = next.status = value;
+            if (action === "status") {
+                next.category = next.status = value;
+                next.categorySource = "manual";
+                next.categoryManuallyEdited = true;
+            }
             if (action === "platform") next.platform = next.customPlatform = value;
             if (action === "add-tag") next.tags = [...new Set([...next.tags, value].filter(Boolean))];
             if (action === "remove-tag") next.tags = next.tags.filter(tag => tag !== value);
             if (action === "reminder") next.reminderEnabled = Boolean(value);
-            if (action === "complete") { next.category = "completed"; next.currentEpisode = next.watched = numberOr(next.totalEpisodes, next.currentEpisode); }
+            if (action === "complete") {
+                next.category = "completed";
+                next.categorySource = "manual";
+                next.categoryManuallyEdited = true;
+                next.currentEpisode = next.watched = numberOr(next.totalEpisodes, next.currentEpisode);
+            }
             if (action === "delete") next.deletedAt = iso(now);
             return next;
         });
@@ -1154,7 +1330,19 @@
         return reconcilePayload({ ...local, ...cloud, animeList: mergeById(local.animeList, cloud.animeList), works:mergeWorks(migrateWorks(local.animeList, local.works || []), migrateWorks(cloud.animeList, cloud.works || [])), mangaReadHistory:[...historyMap.values()], eventOverrides: { ...(local.eventOverrides || {}), ...(cloud.eventOverrides || {}) }, eventAnimeOverrides:{ ...(local.eventAnimeOverrides || {}), ...(cloud.eventAnimeOverrides || {}) }, settings: { ...(local.settings || {}), ...(cloud.settings || {}) }, watchHistory: [...arrayOf(local.watchHistory), ...arrayOf(cloud.watchHistory)] });
     }
     function pruneTombstones(list, now = Date.now()) { return migrateList(list).filter(item => !item.deletedAt || now - Date.parse(item.deletedAt) <= TOMBSTONE_DAYS * 86400000); }
+    function purgeExpiredTombstones(list, state = {}, now = Date.now()) {
+        const migrated = migrateList(list);
+        const expired = migrated.filter(item => item.deletedAt && now - Date.parse(item.deletedAt) > TOMBSTONE_DAYS * 86400000);
+        let nextState = { ...(state || {}) };
+        expired.forEach(item => { nextState = cleanupAnimeAuxiliaryState(nextState, item.id); });
+        return {
+            list:migrated.filter(item => !expired.includes(item)),
+            state:nextState,
+            purgedIds:expired.map(item => item.id),
+            changed:expired.length > 0
+        };
+    }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, legacyAnimeIdentityKey, describeAnimeIdentity, reconcileExistingAnimeDuplicates, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, shouldCacheRequest, normalizeText };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText };
 });

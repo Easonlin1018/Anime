@@ -3,18 +3,19 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const V = require("../v11-core.js");
 
 const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
 const start = html.indexOf("function stripDisplayYear");
 const end = html.indexOf("async function searchWikipedia", start);
 assert.ok(start >= 0 && end > start, "找不到標題產生函式");
 const code = html.slice(start, end);
-const api = Function(`${code}; return { getCoreTitle, getSeriesGroupTitle, getSmartTitleDetails, generateSmartTitle, isLegacyGeneratedTitle, refreshGeneratedAnimeTitle, compareSeriesMediaByStartDate };`)();
+const api = Function(`${code}; return { getCoreTitle, getSeriesGroupTitle, getSmartTitleDetails, generateSmartTitle, detectMediaSeasonNumber, isLegacyGeneratedTitle, refreshGeneratedAnimeTitle, compareSeriesMediaByStartDate };`)();
 const sequelStart = html.indexOf("function getAniListMediaId");
 const sequelEnd = html.indexOf("async function manualScanSequels", sequelStart);
 assert.ok(sequelStart >= 0 && sequelEnd > sequelStart, "找不到續作 traversal 函式");
 const sequelCode = html.slice(sequelStart, sequelEnd);
-const sequelApi = Function(`${code}\n${sequelCode}; return { getAniListMediaId, findExistingAnimeForMedia, attachAniListIdToLegacyAnime, getDirectSequelNodes, walkAniListSequelGraph, reconcileDiscoveredSequelMedia };`)();
+const sequelApi = Function(`${code}\n${sequelCode}; return { getAniListMediaId, getExistingAnimeMediaState, addOrRestoreSingleMedia, findExistingAnimeForMedia, attachAniListIdToLegacyAnime, getDirectSequelNodes, walkAniListSequelGraph, reconcileDiscoveredSequelMedia };`)();
 const aliasStart = html.indexOf("function normalizeAnimeAliasList");
 const aliasEnd = html.indexOf("function deriveAliasVariants", aliasStart);
 const metadataStart = html.indexOf("function normalizeStreamingLinks");
@@ -324,7 +325,7 @@ test("circular relation 由 visited set 正常終止", async () => {
 });
 
 test("已存在的 AniList ID 只 refresh、不重複新增", async () => {
-    const list = [{ id: 200, title: "既有作品", category: "completed", year: 2024, format: "OVA" }];
+    const list = [{ id:"local-200", anilistId:200, title: "既有作品", category: "completed", year: 2024, format: "OVA" }];
     let addCalls = 0;
     let refreshCalls = 0;
     const result = await sequelApi.reconcileDiscoveredSequelMedia(
@@ -342,7 +343,7 @@ test("已存在的 AniList ID 只 refresh、不重複新增", async () => {
 });
 
 test("同一 AniList ID 已在其他 category 時不複製", async () => {
-    const list = [{ id: 300, title: "跨分類作品", category: "backlog", year: 2023, format: "SPECIAL" }];
+    const list = [{ id:"local-300", anilistId:300, title: "跨分類作品", category: "backlog", year: 2023, format: "SPECIAL" }];
     const result = await sequelApi.reconcileDiscoveredSequelMedia(
         [{ media: { id: 300, title: { native: "跨分類作品" }, startDate: { year: 2023 }, format: "SPECIAL" } }],
         list,
@@ -386,7 +387,7 @@ test("舊資料無 AniList ID 時只用 title＋year＋format 保守去重", asy
     assert.equal(legacy.anilistId, 999);
     assert.equal(legacy.category, "completed");
 
-    const differentKnownId = { id: 1000, title: "Legacy Native", aliases: ["Legacy Native"], year: 2022, format: "MOVIE" };
+    const differentKnownId = { id:"different-local", anilistId:1000, title: "Legacy Native", aliases: ["Legacy Native"], year: 2022, format: "MOVIE" };
     assert.equal(sequelApi.findExistingAnimeForMedia(media, [differentKnownId]), null, "不同 AniList ID 不可因同名合併");
 });
 
@@ -396,7 +397,8 @@ test("renderList 只在系列群組內套用結構化日期排序", () => {
 });
 
 test("searchAnime 與 checkAndAddSequel 共用統一去重流程", () => {
-    assert.match(html, /const duplicate = findExistingAnimeForMedia\(media, animeList\)/u);
+    assert.match(html, /addOrRestoreSingleMedia\(media, animeList/u);
+    assert.match(html, /getExistingAnimeMediaState\(media, list\)/u);
     assert.match(html, /reconcileDiscoveredSequelMedia\(chain, animeList/u);
 });
 
@@ -581,6 +583,146 @@ test("metadata sync resolves AniList ID without replacing the local ID", () => {
     assert.match(html, /animeList\s*\.filter\(anime => !anime\.deletedAt\)\s*\.map\(anime => Number\(getAniListMediaId\(anime\)\)\)/u);
     assert.match(html, /animeList\.find\(item => getAniListMediaId\(item\) === String\(media\.id\)\)/u);
     assert.match(html, /requestAniList\(ID_QUERY, \{ id: Number\(animeMediaId\) \}\)/u);
+});
+
+test("numeric local IDs never override explicit AniList identity", () => {
+    const quintuplets = {
+        id: 182255,
+        anilistId: 109261,
+        sourceId: "109261",
+        source: "anilist",
+        title: "五等分的新娘∬（2021）",
+        canonicalTitle: "五等分の花嫁∬",
+        groupTitle: "五等分的新娘",
+        format: "TV",
+        year: 2021,
+        startDate: { year: 2021, month: 1, day: 8 },
+        category: "completed",
+        watched: 12,
+        currentEpisode: 12,
+        rating: 9
+    };
+    const frieren = {
+        id: "60874ec5-271a-44ea-9d9d-9f15cc4f1979",
+        anilistId: 182255,
+        sourceId: "182255",
+        source: "anilist",
+        title: "葬送的芙莉蓮 第二季（2026）",
+        canonicalTitle: "葬送のフリーレン 第2期",
+        groupTitle: "葬送的芙莉蓮",
+        format: "TV",
+        year: 2026,
+        startDate: { year: 2026, month: 1, day: 16 },
+        category: "backlog",
+        watched: 0,
+        currentEpisode: 0,
+        rating: null
+    };
+
+    metadataApi.applyMediaMetadata(quintuplets, refreshedMedia({
+        id: 109261,
+        title: { native: "五等分の花嫁∬", romaji: "Go-toubun no Hanayome ∬", english: "The Quintessential Quintuplets 2" },
+        startDate: { year: 2021, month: 1, day: 8 }
+    }), "2026-08-12T00:00:00.000Z");
+    metadataApi.applyMediaMetadata(frieren, refreshedMedia({
+        id: 182255,
+        title: { native: "葬送のフリーレン 第2期", romaji: "Sousou no Frieren 2nd Season", english: "Frieren: Beyond Journey's End Season 2" },
+        episodes: 10,
+        startDate: { year: 2026, month: 1, day: 16 }
+    }), "2026-08-12T00:00:00.000Z");
+
+    const serialized = JSON.parse(JSON.stringify([quintuplets, frieren]));
+    const reconciled = V.reconcileExistingAnimeDuplicates(serialized).list;
+    assert.equal(reconciled.length, 2);
+    const byLocalId = new Map(reconciled.map(item => [String(item.id), item]));
+    assert.equal(V.getAnimeAniListIdentity(byLocalId.get("182255")), "109261");
+    assert.equal(V.getAnimeAniListIdentity(byLocalId.get("60874ec5-271a-44ea-9d9d-9f15cc4f1979")), "182255");
+    assert.equal(byLocalId.get("182255").watched, 12);
+    assert.equal(byLocalId.get("60874ec5-271a-44ea-9d9d-9f15cc4f1979").episodes, 10);
+    assert.equal(V.getAnimeAniListIdentity({ id: 153554, title: "legacy record without external identity" }), "");
+});
+
+test("芙莉蓮迷你動畫保留可辨識副標題，不退化成泛用 ONA", () => {
+    const value = api.generateSmartTitle(media({
+        id: 170068,
+        title: {
+            native: "葬送のフリーレン ～●●の魔法～",
+            romaji: "Sousou no Frieren: ●● no Mahou",
+            english: null
+        },
+        synonyms: ["Sousou no Frieren Mini Anime"],
+        format: "ONA",
+        startDate: { year: 2023, month: 10, day: 11 }
+    }), "葬送的芙莉蓮");
+    assert.equal(value, "葬送的芙莉蓮【●●の魔法】（2023）");
+    assert.doesNotMatch(value, /（ONA）/u);
+});
+
+test("芙莉蓮迷你動畫 Part 2 保留原副標題，不退化成泛用 Part 2", () => {
+    const value = api.generateSmartTitle(media({
+        id: 189513,
+        title: {
+            native: "葬送のフリーレン ～●●の魔法～ 2クール",
+            romaji: "Sousou no Frieren: ●● no Mahou Part 2",
+            english: null
+        },
+        synonyms: ["Frieren: Beyond Journey's End Mini Anime"],
+        format: "ONA",
+        startDate: { year: 2025, month: 4, day: 2 }
+    }), "葬送的芙莉蓮");
+    assert.equal(value, "葬送的芙莉蓮【●●の魔法 2クール】（2025）");
+    assert.notEqual(value, "葬送的芙莉蓮 Part 2（2025）");
+});
+
+test("ONA synonym 的 2nd Season Mini Anime 不可成為媒體季數", () => {
+    const value = media({
+        id: 206425,
+        title: {
+            native: "葬送のフリーレン ～●●の魔法～ 3クール",
+            romaji: "Sousou no Frieren: ●● no Mahou Part 3",
+            english: null
+        },
+        synonyms: ["Sousou no Frieren 2nd Season Mini Anime", "Frieren: Beyond Journey's End Season 2 Mini Anime"],
+        format: "ONA",
+        startDate: { year: 2026, month: 1, day: 19 }
+    });
+    assert.equal(api.detectMediaSeasonNumber(value), null);
+    assert.equal(api.generateSmartTitle(value, "葬送的芙莉蓮"), "葬送的芙莉蓮【●●の魔法 3クール】（2026）");
+});
+
+test("芙莉蓮 TV 第二季與 ONA 第三批維持不同 identity 與標題", () => {
+    const tv = media({
+        id: 182255,
+        title: { native: "葬送のフリーレン 第2期", romaji: "Sousou no Frieren 2nd Season", english: "Frieren: Beyond Journey's End Season 2" },
+        format: "TV",
+        episodes: 10,
+        startDate: { year: 2026, month: 1, day: 16 }
+    });
+    const ona = media({
+        id: 206425,
+        title: { native: "葬送のフリーレン ～●●の魔法～ 3クール", romaji: "Sousou no Frieren: ●● no Mahou Part 3" },
+        synonyms: ["Sousou no Frieren 2nd Season Mini Anime"],
+        format: "ONA",
+        startDate: { year: 2026, month: 1, day: 19 }
+    });
+    assert.equal(api.generateSmartTitle(tv, "葬送的芙莉蓮"), "葬送的芙莉蓮 第二季（2026）");
+    assert.equal(api.generateSmartTitle(ona, "葬送的芙莉蓮"), "葬送的芙莉蓮【●●の魔法 3クール】（2026）");
+    const reconciled = V.reconcileExistingAnimeDuplicates([
+        { id: "tv-local", anilistId: 182255, title: api.generateSmartTitle(tv, "葬送的芙莉蓮"), format: "TV", year: 2026 },
+        { id: "ona-local", anilistId: 206425, title: api.generateSmartTitle(ona, "葬送的芙莉蓮"), format: "ONA", year: 2026 }
+    ]).list;
+    assert.equal(reconciled.length, 2);
+});
+
+test("芙莉蓮 TV 第三季仍維持第三季名稱", () => {
+    const value = media({
+        id: 209939,
+        title: { native: "葬送のフリーレン 第3期", romaji: "Sousou no Frieren 3rd Season" },
+        format: "TV",
+        status: "NOT_YET_RELEASED",
+        startDate: { year: 2027, month: 10 }
+    });
+    assert.equal(api.generateSmartTitle(value, "葬送的芙莉蓮"), "葬送的芙莉蓮 第三季（2027）");
 });
 
 Promise.all(pending).then(() => {

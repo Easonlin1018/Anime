@@ -192,6 +192,13 @@
         .anime-list-toolbar select,
         .anime-list-toolbar button { margin: 0; min-width: 0; }
         .anime-list-toolbar button { width: auto; white-space: nowrap; background: #475569; }
+        .single-anime-search-result { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 10px; margin-top: 12px; min-width: 0; }
+        .single-anime-search-result[hidden] { display: none; }
+        .single-anime-search-summary { grid-column: 1 / -1; color: #94a3b8; font-size: 12px; }
+        .single-anime-search-result .anime-search-candidate { display: grid; align-content: start; gap: 8px; padding: 12px; border: 1px solid rgba(96,165,250,.35); border-radius: 10px; background: rgba(15,23,42,.55); min-width: 0; }
+        .single-anime-search-result .anime-search-candidate-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; }
+        .single-anime-search-result .anime-search-candidate-title { overflow-wrap: anywhere; }
+        .single-anime-search-result .anime-search-candidate button { justify-self: start; max-width: 100%; }
         .anime-list-summary { color: #94a3b8; font-size: 12px; margin: 0 0 12px; }
         .anime-list-no-results { display: none; }
 
@@ -503,6 +510,7 @@
         <div class="section-title">➕ 一鍵自動化新增（單部搜尋）</div>
         <input type="text" id="search-input" placeholder="輸入單部動漫名稱">
         <button id="search-btn" onclick="searchAnime()">🔍 智慧網格搜尋</button>
+        <div id="single-anime-search-result" class="single-anime-search-result" hidden></div>
     </div>
 
     <div class="section">
@@ -627,7 +635,7 @@
     <button style="margin-top:15px;margin-bottom:0;width:auto;padding:5px 15px;background:#475569;" onclick="closeToast()">關閉</button>
 </div>
 
-<script src="v11-core.js?v=duplicate-reconciliation-1"></script>
+<script src="v11-core.js?v=season-identity-fix-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -675,6 +683,7 @@ let toastTimer = null;
 
 const searchBtn = document.getElementById("search-btn");
 const batchBtn = document.getElementById("batch-btn");
+let pendingSingleAnimeSearch = [];
 
 function loadStoredAnime() {
     const readLocalJson = (key, fallback) => {
@@ -727,12 +736,18 @@ function loadStoredAnime() {
     window.__ANIME_DUPLICATE_RECONCILIATION__ = {
         changed:reconciliation.changed,
         mergedCount:reconciliation.mergedCount,
-        groups:reconciliation.groups
+        legacyBoundCount:reconciliation.legacyBoundCount,
+        reassignedCount:reconciliation.reassignedCount,
+        groups:reconciliation.groups,
+        collisions:reconciliation.collisions
     };
     if (reconciliation.changed) {
         try {
-            if (!localStorage.getItem("anime_tracker_duplicate_migration_backup_v1")) {
-                localStorage.setItem("anime_tracker_duplicate_migration_backup_v1", JSON.stringify({
+            const backupKey = reconciliation.reassignedCount > 0
+                ? "anime_tracker_duplicate_migration_backup_v2"
+                : "anime_tracker_duplicate_migration_backup_v1";
+            if (!localStorage.getItem(backupKey)) {
+                localStorage.setItem(backupKey, JSON.stringify({
                     createdAt:new Date().toISOString(),
                     animeList,
                     ...duplicateState
@@ -750,7 +765,28 @@ function loadStoredAnime() {
         localStorage.setItem("anime_theme_lookup_cache_v1", JSON.stringify(reconciliation.state.themeCache));
         if (reconciliation.state.themeUndo) localStorage.setItem("anime_theme_last_undo_v1", JSON.stringify(reconciliation.state.themeUndo));
         else localStorage.removeItem("anime_theme_last_undo_v1");
-        if (EVENT_MATCH_DEBUG) console.info("Anime duplicate reconciliation", reconciliation.groups);
+        if (EVENT_MATCH_DEBUG) console.info("Anime duplicate reconciliation", {
+            merged:reconciliation.groups,
+            localIdCollisions:reconciliation.collisions
+        });
+    }
+
+    const existingMediaMigration = migrateExistingAnimeRecords(animeList);
+    window.__ANIME_EXISTING_MEDIA_MIGRATION__ = existingMediaMigration.report;
+    if (existingMediaMigration.changed) {
+        try {
+            const backupKey = "anime_tracker_existing_media_migration_backup_v1";
+            if (!localStorage.getItem(backupKey)) {
+                localStorage.setItem(backupKey, JSON.stringify({
+                    createdAt:new Date().toISOString(),
+                    animeList
+                }));
+            }
+        } catch (error) {
+            console.warn("無法建立既有作品資料遷移備份：", error);
+        }
+        animeList = existingMediaMigration.list;
+        if (EVENT_MATCH_DEBUG) console.info("Existing anime metadata migration", existingMediaMigration.report);
     }
 
     const activeAnimeIds = animeList.filter(item => !item.deletedAt).map(item => item.id);
@@ -961,11 +997,12 @@ function cleanMediaTitle(value) {
 }
 
 function detectMediaSeasonNumber(media) {
+    const format = String(media?.format || "").toUpperCase();
+    if (["ONA", "OVA", "SPECIAL", "MOVIE"].includes(format)) return null;
     const text = [
         media?.title?.native,
         media?.title?.english,
-        media?.title?.romaji,
-        ...(Array.isArray(media?.synonyms) ? media.synonyms : [])
+        media?.title?.romaji
     ].filter(Boolean).join(" ");
     const patterns = [
         /\bseason\s*(\d+)\b/iu,
@@ -1001,6 +1038,48 @@ function trustedChineseAlias(media) {
         .find(hasChineseTitleContext) || "";
 }
 
+function getRelationChineseParentTitle(media) {
+    const edges = Array.isArray(media?.relations)
+        ? media.relations
+        : Array.isArray(media?.relations?.edges)
+            ? media.relations.edges
+            : [];
+    const relationPriority = ["PARENT", "PREQUEL", "ADAPTATION"];
+    for (const relationType of relationPriority) {
+        for (const edge of edges.filter(item => String(item?.relationType || "").toUpperCase() === relationType)) {
+            const node = edge?.node || {};
+            const candidates = [
+                node?.title?.traditionalChinese,
+                node?.title?.zhHant,
+                node?.title?.chinese,
+                ...(Array.isArray(node?.synonyms) ? node.synonyms : [])
+            ].map(cleanMediaTitle).filter(Boolean);
+            const chinese = candidates.find(hasChineseTitleContext);
+            if (chinese) return chinese;
+        }
+    }
+    return "";
+}
+
+function getDistinctiveMediaSubtitle(media) {
+    const titles = [
+        media?.title?.native,
+        media?.title?.english,
+        media?.title?.romaji,
+        ...(Array.isArray(media?.synonyms) ? media.synonyms : [])
+    ].map(cleanMediaTitle).filter(Boolean);
+
+    for (const title of titles) {
+        const waveSubtitle = title.match(/[～~]\s*([^～~]{2,48}?)\s*[～~](?:\s*((?:第\s*)?\d+\s*クール|Part\s*\d+))?\s*$/iu);
+        if (waveSubtitle) {
+            return [waveSubtitle[1].trim(), waveSubtitle[2]?.replace(/\s+/g, " ").trim()]
+                .filter(Boolean)
+                .join(" ");
+        }
+    }
+    return "";
+}
+
 function deriveLocalizedMediaTitle(media, parentChineseTitle) {
     const parentCore = getCoreTitle(parentChineseTitle);
     if (!parentCore || !hasChineseTitleContext(parentCore)) return "";
@@ -1024,6 +1103,9 @@ function deriveLocalizedMediaTitle(media, parentChineseTitle) {
     if (/\bshunkashuutou\b/iu.test(titleText) || /春夏秋冬/u.test(titleText)) {
         return `${parentCore}【春夏秋冬】`;
     }
+
+    const distinctiveSubtitle = getDistinctiveMediaSubtitle(media);
+    if (distinctiveSubtitle) return `${parentCore}【${distinctiveSubtitle}】`;
 
     const partNumber = titleText.match(/\bpart\s*(\d+)\b/iu)?.[1];
     if (partNumber && Number(partNumber) >= 2) return `${parentCore} Part ${Number(partNumber)}`;
@@ -1106,6 +1188,11 @@ function getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTi
     const canonical = getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle);
     const seasonNumber = detectMediaSeasonNumber(media);
     const relationType = String(media?.relationType || "").toUpperCase();
+    const preservesOfficialIdentityMark = /[∬∽＊*]/u.test(canonical.title || "");
+
+    if (canonical.title && canonical.distinctFromParent && preservesOfficialIdentityMark) {
+        return { displayTitle: appendPremiereYear(canonical.title, year), canonicalTitle: canonical.title, groupTitle: parentCore || getCoreTitle(canonical.title), titleSource: canonical.source, seasonNumber, usedFallback: false };
+    }
 
     if (parentCore && seasonNumber) {
         const title = `${parentCore} 第${chineseSeasonNumber(seasonNumber)}季`;
@@ -1139,14 +1226,18 @@ function isLegacyGeneratedTitle(title) {
 
 function refreshGeneratedAnimeTitle(anime, media) {
     if (!anime || anime.titleManuallyEdited === true || anime.titleSource === "manual" || anime.manualTitle === true) return false;
-    const managedSource = ["anilist", "wiki", "google", "generated", "legacy"].includes(anime.titleSource);
+    const managedSource = ["anilist", "wiki", "google", "alias", "generated", "legacy"].includes(anime.titleSource);
+    const mediaFormat = String(media?.format || anime?.format || "").toUpperCase();
+    const unsafeNonTvSeasonTitle = ["ONA", "OVA", "SPECIAL", "MOVIE"].includes(mediaFormat)
+        && /(?:\bseason\s*\d+\b|\b\d+(?:st|nd|rd|th)\s+season\b|第\s*[一二三四五六七八九十百0-9]+\s*季)/iu.test(stripDisplayYear(anime.title));
     const chineseContext = [
+        getRelationChineseParentTitle(media),
         anime.groupTitle,
         ...(Array.isArray(anime.aliases) ? anime.aliases : []),
         trustedChineseAlias(media)
     ].map(cleanMediaTitle).find(hasChineseTitleContext) || "";
     const canUpgradeForeignTitle = Boolean(chineseContext && !hasChineseTitleContext(anime.title));
-    if (!managedSource && !isLegacyGeneratedTitle(anime.title) && !canUpgradeForeignTitle) return false;
+    if (!managedSource && !isLegacyGeneratedTitle(anime.title) && !canUpgradeForeignTitle && !unsafeNonTvSeasonTitle) return false;
 
     const previousTitle = anime.title;
     const parentTitle = chineseContext || anime.groupTitle || getCoreTitle(previousTitle);
@@ -1227,6 +1318,16 @@ const MEDIA_FIELDS = `
 `;
 
 const SEARCH_QUERY = `
+query ($search: String, $page: Int, $perPage: Int) {
+    Page(page: $page, perPage: $perPage) {
+        pageInfo { currentPage hasNextPage total }
+        media(search: $search, type: ANIME, sort: SEARCH_MATCH) {
+            ${MEDIA_FIELDS}
+        }
+    }
+}`;
+
+const SINGLE_MEDIA_SEARCH_QUERY = `
 query ($search: String) {
     Media(search: $search, type: ANIME) {
         ${MEDIA_FIELDS}
@@ -1264,7 +1365,43 @@ async function requestAniList(query, variables) {
     );
 
     const data = await response.json();
+    if (data?.errors?.length) throw new Error(data.errors[0].message || "AniList 搜尋失敗");
     return data?.data?.Media || null;
+}
+
+function normalizeAniListSearchResults(mediaList, limit = 10) {
+    const results = [];
+    const seenIds = new Set();
+    for (const media of Array.isArray(mediaList) ? mediaList : []) {
+        const mediaId = getAniListMediaId(media);
+        if (!mediaId || seenIds.has(mediaId)) continue;
+        seenIds.add(mediaId);
+        results.push(media);
+        if (results.length >= Math.max(1, Math.min(10, Number(limit) || 10))) break;
+    }
+    return results;
+}
+
+async function requestAniListSearchPage(search, perPage = 10) {
+    const safePerPage = Math.max(1, Math.min(10, Number(perPage) || 10));
+    const response = await fetchWithTimeout(
+        "https://graphql.anilist.co",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                query: SEARCH_QUERY,
+                variables: { search, page: 1, perPage: safePerPage }
+            })
+        },
+        15000
+    );
+    const data = await response.json();
+    if (data?.errors?.length) throw new Error(data.errors[0].message || "AniList 搜尋失敗");
+    return normalizeAniListSearchResults(data?.data?.Page?.media, safePerPage);
 }
 
 async function requestAniListMediaPage(ids) {
@@ -1304,6 +1441,7 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "status",
     "format",
     "episodes",
+    "totalEpisodes",
     "releasedEpisodes",
     "nextEpisode",
     "nextAiringAt",
@@ -1335,7 +1473,10 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
         lastMetadataSync: syncedAt
     };
 
-    if (Number(media?.episodes) > 0) patch.episodes = Number(media.episodes);
+    if (Number(media?.episodes) > 0) {
+        patch.episodes = Number(media.episodes);
+        patch.totalEpisodes = Number(media.episodes);
+    }
 
     if (media?.nextAiringEpisode !== undefined) {
         patch.nextEpisode = media?.nextAiringEpisode?.episode || null;
@@ -1373,8 +1514,336 @@ function applyMediaMetadata(anime, media, syncedAt = new Date().toISOString()) {
     const previousTitle = anime.title;
     refreshGeneratedAnimeTitle(anime, media);
     applyMetadataManagedPatch(anime, buildMediaMetadataPatch(anime, media, syncedAt, previousTitle));
+    applyAutomaticCategoryFromMedia(anime, media, syncedAt);
     anime.groupTitle = anime.groupTitle || getSeriesGroupTitle(anime);
     return anime;
+}
+
+function isMediaClearlyNotYetReleased(media, now = new Date()) {
+    const status = String(media?.status || "").toUpperCase();
+    if (status === "NOT_YET_RELEASED") return true;
+    if (["FINISHED", "RELEASING", "CANCELLED"].includes(status)) return false;
+
+    const startDate = getStructuredMediaStartDate(media);
+    if (!startDate.year) return false;
+    const start = new Date(Date.UTC(startDate.year, (startDate.month || 1) - 1, startDate.day || 1));
+    const reference = now instanceof Date ? now : new Date(now);
+    return !Number.isNaN(start.getTime()) && !Number.isNaN(reference.getTime()) && start.getTime() > reference.getTime();
+}
+
+function resolveAutomaticMediaCategory(media, now = new Date()) {
+    if (isMediaClearlyNotYetReleased(media, now)) return "waiting";
+    return String(media?.status || "").toUpperCase() === "FINISHED" ? "backlog" : "watching";
+}
+
+function hasManualAnimeCategory(anime) {
+    return anime?.categoryManuallyEdited === true || anime?.categorySource === "manual";
+}
+
+function applyAutomaticCategoryFromMedia(anime, media, now = new Date()) {
+    if (!anime || hasManualAnimeCategory(anime) || !isMediaClearlyNotYetReleased(media, now)) return false;
+    if (anime.category === "waiting" && anime.categorySource === "automatic" && anime.categoryManuallyEdited === false) return false;
+    anime.category = "waiting";
+    anime.categorySource = "automatic";
+    anime.categoryManuallyEdited = false;
+    return true;
+}
+
+function buildStoredAnimeMediaSnapshot(anime) {
+    const titles = anime?.anilistTitles && typeof anime.anilistTitles === "object"
+        ? anime.anilistTitles
+        : {};
+    return {
+        id:getAniListMediaId(anime) || null,
+        title:{
+            native:titles.native || "",
+            english:titles.english || "",
+            romaji:titles.romaji || ""
+        },
+        synonyms:Array.isArray(anime?.aliases) ? anime.aliases : [],
+        format:anime?.format || "",
+        status:anime?.status || "UNKNOWN",
+        startDate:getStructuredMediaStartDate(anime),
+        episodes:anime?.episodes,
+        relations:{ edges:Array.isArray(anime?.relations) ? anime.relations : [] }
+    };
+}
+
+function migrateExistingAnimeRecords(list, now = new Date()) {
+    let titleChanged = 0;
+    let categoryChanged = 0;
+    let metadataChanged = 0;
+    const changes = [];
+    const migrated = (Array.isArray(list) ? list : []).map(original => {
+        if (!original || typeof original !== "object") return original;
+        const next = { ...original };
+        const media = buildStoredAnimeMediaSnapshot(next);
+        const beforeTitle = next.title;
+        const beforeCategory = next.category;
+        const beforeManaged = JSON.stringify({
+            displayTitle:next.displayTitle,
+            canonicalTitle:next.canonicalTitle,
+            groupTitle:next.groupTitle,
+            titleSource:next.titleSource,
+            categorySource:next.categorySource,
+            categoryManuallyEdited:next.categoryManuallyEdited,
+            episodes:next.episodes,
+            totalEpisodes:next.totalEpisodes
+        });
+
+        if (next.titleManuallyEdited !== true && next.titleSource !== "manual" && next.manualTitle !== true) {
+            refreshGeneratedAnimeTitle(next, media);
+        }
+        applyAutomaticCategoryFromMedia(next, media, now);
+        const releasedEpisodes = Number(next.releasedEpisodes);
+        const totalEpisodes = Number(next.totalEpisodes);
+        const episodeCount = Number(next.episodes);
+        const knownEpisodes = Number.isFinite(totalEpisodes) && totalEpisodes > 0 ? totalEpisodes : episodeCount;
+        if (String(next.status || "").toUpperCase() === "FINISHED"
+            && (!Number.isFinite(knownEpisodes) || knownEpisodes <= 0)
+            && Number.isSafeInteger(releasedEpisodes) && releasedEpisodes > 0) {
+            next.episodes = releasedEpisodes;
+            next.totalEpisodes = releasedEpisodes;
+        }
+
+        const changedTitle = next.title !== beforeTitle;
+        const changedCategory = next.category !== beforeCategory;
+        const changedMetadata = JSON.stringify({
+            displayTitle:next.displayTitle,
+            canonicalTitle:next.canonicalTitle,
+            groupTitle:next.groupTitle,
+            titleSource:next.titleSource,
+            categorySource:next.categorySource,
+            categoryManuallyEdited:next.categoryManuallyEdited,
+            episodes:next.episodes,
+            totalEpisodes:next.totalEpisodes
+        }) !== beforeManaged;
+        if (changedTitle) titleChanged++;
+        if (changedCategory) categoryChanged++;
+        if (changedMetadata) metadataChanged++;
+        if (changedTitle || changedCategory || changedMetadata) {
+            changes.push({
+                id:next.id,
+                anilistId:getAniListMediaId(next),
+                title:changedTitle ? { from:beforeTitle, to:next.title } : null,
+                category:changedCategory ? { from:beforeCategory, to:next.category } : null
+            });
+            return next;
+        }
+        return original;
+    });
+    return {
+        list:migrated,
+        changed:titleChanged > 0 || categoryChanged > 0 || metadataChanged > 0,
+        report:{ titleChanged, categoryChanged, metadataChanged, totalChanged:changes.length, changes }
+    };
+}
+
+function buildAnimeRecordFromMedia(media, context = {}) {
+    const titleDetails = context.titleDetails || getSmartTitleDetails(
+        media,
+        context.parentChineseTitle || null,
+        context.wikiZhTitle || null,
+        context.googleZh || null
+    );
+    const finalTitle = titleDetails.displayTitle;
+    const category = context.forcedCategory || resolveAutomaticMediaCategory(media);
+    const airDate = media.startDate?.year
+        ? `${media.startDate.year}年${media.startDate.month || "?"}月`
+        : "未定";
+    return {
+        id:Number(media.id),
+        title:finalTitle,
+        displayTitle:finalTitle,
+        canonicalTitle:titleDetails.canonicalTitle,
+        groupTitle:titleDetails.groupTitle,
+        titleSource:titleDetails.titleSource,
+        titleManuallyEdited:false,
+        anilistTitles:{
+            native:media.title?.native || "",
+            english:media.title?.english || "",
+            romaji:media.title?.romaji || ""
+        },
+        aliases:buildWorkAliasesFromMedia(media, finalTitle, [
+            context.wikiZhTitle,
+            context.wikiJaTitle,
+            context.googleZh,
+            context.input
+        ]),
+        status:media.status || "UNKNOWN",
+        format:media.format || "",
+        year:Number(media.startDate?.year) || null,
+        startDate:getStructuredMediaStartDate(media),
+        episodes:media.episodes || "??",
+        watched:0,
+        category,
+        categorySource:context.forcedCategory ? "manual" : "automatic",
+        categoryManuallyEdited:Boolean(context.forcedCategory),
+        airDate,
+        releasedEpisodes:releasedEpisodeCount(media),
+        nextEpisode:media.nextAiringEpisode?.episode || null,
+        nextAiringAt:media.nextAiringEpisode?.airingAt || null,
+        streamingLinks:normalizeStreamingLinks(media.externalLinks),
+        rating:null,
+        note:"",
+        customPlatform:"",
+        lastWatchedAt:category === "watching" ? new Date().toISOString() : null,
+        addedAt:new Date().toISOString(),
+        relations:Array.isArray(media.relations?.edges) ? media.relations.edges : []
+    };
+}
+
+function directRelationMediaIds(media) {
+    return new Set((Array.isArray(media?.relations?.edges) ? media.relations.edges : [])
+        .map(edge => getAniListMediaId(edge?.node))
+        .filter(Boolean));
+}
+
+function isDirectSearchSeriesMember(media, primaryMedia) {
+    const mediaId = getAniListMediaId(media);
+    const primaryId = getAniListMediaId(primaryMedia);
+    if (!mediaId || !primaryId) return false;
+    if (mediaId === primaryId) return true;
+    return directRelationMediaIds(primaryMedia).has(mediaId)
+        || directRelationMediaIds(media).has(primaryId);
+}
+
+async function buildSingleAnimeSearchEntries(mediaList, baseContext = {}) {
+    const results = normalizeAniListSearchResults(mediaList, 10);
+    if (!results.length) return [];
+    const primaryMedia = results[0];
+    let primaryGoogleZh = "";
+    try {
+        primaryGoogleZh = await translateText(
+            primaryMedia.title?.native || primaryMedia.title?.romaji || primaryMedia.title?.english || "",
+            "zh-TW"
+        );
+    } catch {}
+    const searchParentTitle = baseContext.parentChineseTitle
+        || baseContext.wikiZhTitle
+        || (hasChineseTitleContext(primaryGoogleZh) ? primaryGoogleZh : "");
+
+    return results.map(media => {
+        const existing = getExistingAnimeMediaState(media, animeList).anime;
+        const existingParent = existing?.groupTitle
+            || (existing?.title ? getCoreTitle(existing.title) : "");
+        const sameSeries = isDirectSearchSeriesMember(media, primaryMedia);
+        const localizedParent = existingParent || (sameSeries ? searchParentTitle : baseContext.parentChineseTitle);
+        const titleDetails = getSmartTitleDetails(
+            media,
+            localizedParent || null,
+            sameSeries ? baseContext.wikiZhTitle : null,
+            sameSeries ? primaryGoogleZh : null
+        );
+        return {
+            media,
+            context: {
+                ...baseContext,
+                parentChineseTitle: localizedParent || null,
+                googleZh: sameSeries ? primaryGoogleZh : null,
+                titleDetails
+            }
+        };
+    });
+}
+
+function getSingleAnimeSearchCardView(pending, list = animeList, options = {}) {
+    const state = getExistingAnimeMediaState(pending.media, list);
+    const candidate = (options.buildAnimeRecord || buildAnimeRecordFromMedia)(pending.media, pending.context);
+    const savedTitle = state.anime?.title || state.anime?.displayTitle || "";
+    const title = stripDisplayYear(savedTitle || candidate.title);
+    const year = Number(pending.media?.startDate?.year)
+        || Number(state.anime?.startDate?.year)
+        || Number(state.anime?.year)
+        || Number(candidate.year)
+        || null;
+    return {
+        mediaId: getAniListMediaId(pending.media),
+        title,
+        year,
+        format: candidate.format || state.anime?.format || "動畫",
+        episodes: candidate.episodes || state.anime?.episodes || "??",
+        libraryState: state.state,
+        disabled: state.state === "active" && state.reason !== "legacy-title-year-format",
+        buttonLabel: state.state === "active"
+            ? (state.reason === "legacy-title-year-format" ? "更新資料" : "已加入")
+            : "新增"
+    };
+}
+
+function renderSingleAnimeSearchCandidate(pending = pendingSingleAnimeSearch) {
+    const container = document.getElementById("single-anime-search-result");
+    if (!container) return;
+    const entries = Array.isArray(pending) ? pending : (pending?.media ? [pending] : []);
+    container.replaceChildren();
+    if (!entries.length) {
+        container.hidden = true;
+        return;
+    }
+
+    const summary = document.createElement("div");
+    summary.className = "single-anime-search-summary";
+    summary.textContent = `找到 ${entries.length} 筆 AniList 動畫結果，請選擇要加入的單一作品。`;
+    container.append(summary);
+
+    for (const entry of entries) {
+        const view = getSingleAnimeSearchCardView(entry, animeList);
+        const article = document.createElement("article");
+        article.className = "anime-search-candidate";
+        article.dataset.anilistId = view.mediaId;
+
+        const titleRow = document.createElement("div");
+        titleRow.className = "anime-search-candidate-title-row";
+        const title = document.createElement("strong");
+        title.className = "anime-search-candidate-title";
+        title.textContent = view.title;
+        titleRow.append(title);
+        if (view.year) {
+            const year = document.createElement("span");
+            year.className = "anime-year-badge";
+            year.setAttribute("aria-label", `首播年份 ${view.year}`);
+            year.textContent = String(view.year);
+            titleRow.append(year);
+        }
+
+        const metadata = document.createElement("div");
+        metadata.textContent = `${view.format}｜${view.episodes} 集`;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.addSingleAnimeSearchResult = view.mediaId;
+        button.textContent = view.buttonLabel;
+        button.disabled = view.disabled;
+        article.append(titleRow, metadata, button);
+        container.append(article);
+    }
+    container.hidden = false;
+}
+
+function findPendingSingleAnimeSearchEntry(mediaId, entries = pendingSingleAnimeSearch) {
+    const targetId = String(mediaId || "");
+    return (Array.isArray(entries) ? entries : []).find(entry => getAniListMediaId(entry?.media) === targetId) || null;
+}
+
+function addPendingAnimeSearchResult(mediaId) {
+    const pending = findPendingSingleAnimeSearchEntry(mediaId);
+    if (!pending?.media) return false;
+    const result = addOrRestoreSingleMedia(pending.media, animeList, {
+        createAnime:media => buildAnimeRecordFromMedia(media, pending.context),
+        onRestore:anime => window.CrossMediaTracker?.restoreAnime?.(anime.id),
+        onCreate:() => window.CrossMediaTracker?.syncAnimeReferences?.()
+    });
+    if (!result.changed) {
+        renderSingleAnimeSearchCandidate(pendingSingleAnimeSearch);
+        showToast(`⚠️ 《${escapeHtml(result.anime?.title || "這部作品")}》已經在清單裡！`);
+        return false;
+    }
+    saveAndRender();
+    window.CrossMediaTracker?.syncAnimeReferences?.();
+    renderSingleAnimeSearchCandidate(pendingSingleAnimeSearch);
+    showToast(result.action === "reconciled"
+        ? `✅ 已補齊：<b style="color:#60a5fa">《${escapeHtml(result.anime.title)}》</b> 的 AniList 資料`
+        : `🛰️ 成功加入：<b style="color:#60a5fa">《${escapeHtml(result.anime.title)}》</b>`);
+    return true;
 }
 
 async function searchAnime(
@@ -1406,19 +1875,44 @@ async function searchAnime(
             wikiJaTitle = wiki.wikiJaTitle;
         }
 
-        let media;
+        if (isManual) {
+            let mediaList = await requestAniListSearchPage(wikiJaTitle || input, 10);
+            if (!mediaList.length && wikiJaTitle) {
+                mediaList = await requestAniListSearchPage(input, 10);
+            }
+            if (!mediaList.length) {
+                const translated = await translateText(input, "ja");
+                if (translated) mediaList = await requestAniListSearchPage(translated, 10);
+            }
+            if (!mediaList.length) {
+                pendingSingleAnimeSearch = [];
+                renderSingleAnimeSearchCandidate([]);
+                showToast(`❌ 找不到《${escapeHtml(input)}》`);
+                return false;
+            }
+            pendingSingleAnimeSearch = await buildSingleAnimeSearchEntries(mediaList, {
+                parentChineseTitle,
+                wikiZhTitle,
+                wikiJaTitle,
+                input,
+                forcedCategory
+            });
+            renderSingleAnimeSearchCandidate(pendingSingleAnimeSearch);
+            return true;
+        }
 
+        let media;
         if (targetId) {
             media = await requestAniList(ID_QUERY, {
                 id: Number(targetId)
             });
         } else {
-            media = await requestAniList(SEARCH_QUERY, {
+            media = await requestAniList(SINGLE_MEDIA_SEARCH_QUERY, {
                 search: wikiJaTitle || input
             });
 
             if (!media && wikiJaTitle) {
-                media = await requestAniList(SEARCH_QUERY, {
+                media = await requestAniList(SINGLE_MEDIA_SEARCH_QUERY, {
                     search: input
                 });
             }
@@ -1427,7 +1921,7 @@ async function searchAnime(
                 const translated = await translateText(input, "ja");
 
                 if (translated) {
-                    media = await requestAniList(SEARCH_QUERY, {
+                    media = await requestAniList(SINGLE_MEDIA_SEARCH_QUERY, {
                         search: translated
                     });
                 }
@@ -1443,20 +1937,6 @@ async function searchAnime(
 
         if (forcedRelationType) media = { ...media, relationType:forcedRelationType };
 
-        const duplicate = findExistingAnimeForMedia(media, animeList);
-
-        if (duplicate) {
-            const originalCategory = duplicate.category;
-            attachAniListIdToLegacyAnime(duplicate, media);
-            applyMediaMetadata(duplicate, media);
-            duplicate.category = originalCategory;
-            saveAndRender();
-            if (!isQuiet) {
-                showToast(`⚠️ 《${escapeHtml(duplicate.title)}》已經在清單裡！`);
-            }
-            return false;
-        }
-
         const googleZh = await translateText(
             media.title?.native ||
             media.title?.romaji ||
@@ -1471,80 +1951,17 @@ async function searchAnime(
             wikiZhTitle,
             googleZh
         );
-        const finalTitle = titleDetails.displayTitle;
+        const context = { parentChineseTitle, wikiZhTitle, wikiJaTitle, googleZh, input, forcedCategory, titleDetails };
 
-        const category =
-            forcedCategory ||
-            (
-                media.status === "NOT_YET_RELEASED"
-                    ? "waiting"
-                    : media.status === "FINISHED"
-                        ? "backlog"
-                        : "watching"
-            );
-
-        const airDate = media.startDate?.year
-            ? `${media.startDate.year}年${media.startDate.month || "?"}月`
-            : "未定";
-
-        const newAnime = {
-            id: Number(media.id),
-            title: finalTitle,
-            displayTitle: finalTitle,
-            canonicalTitle: titleDetails.canonicalTitle,
-            groupTitle: titleDetails.groupTitle,
-            titleSource: titleDetails.titleSource,
-            titleManuallyEdited: false,
-            anilistTitles: {
-                native: media.title?.native || "",
-                english: media.title?.english || "",
-                romaji: media.title?.romaji || ""
-            },
-            aliases: buildWorkAliasesFromMedia(media, finalTitle, [
-                wikiZhTitle,
-                wikiJaTitle,
-                googleZh,
-                input
-            ]),
-            status: media.status || "UNKNOWN",
-            format: media.format || "",
-            year: Number(media.startDate?.year) || null,
-            startDate: getStructuredMediaStartDate(media),
-            episodes: media.episodes || "??",
-            watched: 0,
-            category,
-            airDate,
-            releasedEpisodes: releasedEpisodeCount(media),
-            nextEpisode: media.nextAiringEpisode?.episode || null,
-            nextAiringAt: media.nextAiringEpisode?.airingAt || null,
-            streamingLinks: normalizeStreamingLinks(media.externalLinks),
-            rating: null,
-            note: "",
-            customPlatform: "",
-            lastWatchedAt: category === "watching" ? new Date().toISOString() : null,
-            addedAt: new Date().toISOString(),
-            relations: Array.isArray(media.relations?.edges)
-                ? media.relations.edges
-                : []
-        };
-
-        animeList.push(newAnime);
+        const result = addOrRestoreSingleMedia(media, animeList, {
+            allowRestore:forcedRelationType !== "SEQUEL",
+            createAnime:item => buildAnimeRecordFromMedia(item, context),
+            onRestore:anime => window.CrossMediaTracker?.restoreAnime?.(anime.id),
+            onCreate:() => window.CrossMediaTracker?.syncAnimeReferences?.()
+        });
+        if (!result.changed) return false;
         saveAndRender();
-
-        if (!keyword && !isQuiet && !targetId) {
-            inputElement.value = "";
-        }
-
-        if (!isQuiet) {
-            showToast(
-                `🛰️ 成功加入：<b style="color:#60a5fa">《${escapeHtml(finalTitle)}》</b>`
-            );
-        }
-
-        if (!forcedCategory && category !== "waiting") {
-            checkAndAddSequel(newAnime, true);
-        }
-
+        window.CrossMediaTracker?.syncAnimeReferences?.();
         return true;
     } catch (error) {
         console.error("搜尋錯誤：", error);
@@ -1567,7 +1984,11 @@ function getAniListMediaId(media) {
     if (!media || typeof media !== "object") return "";
     const values = [media.anilistId, media.aniListId];
     if (String(media.source || "").toLowerCase() === "anilist") values.push(media.sourceId);
-    values.push(media.id);
+    const isRawAniListMedia = media.title && typeof media.title === "object"
+        && !Object.prototype.hasOwnProperty.call(media, "category")
+        && !Object.prototype.hasOwnProperty.call(media, "watched")
+        && !Object.prototype.hasOwnProperty.call(media, "currentEpisode");
+    if (isRawAniListMedia) values.push(media.id);
     for (const value of values) {
         const number = Number(value);
         if (Number.isSafeInteger(number) && number > 0) return String(number);
@@ -1608,13 +2029,85 @@ function isConservativeLegacyMediaMatch(existing, media) {
     return getMediaIdentityTitles(media).some(title => existingTitles.has(title));
 }
 
-function findExistingAnimeForMedia(media, list = animeList) {
+function getExistingAnimeMediaState(media, list = animeList) {
     const mediaId = getAniListMediaId(media);
-    if (mediaId) {
-        const idMatch = list.find(item => getAniListMediaId(item) === mediaId);
-        if (idMatch) return idMatch;
+    const exactMatches = mediaId ? list.filter(item => getAniListMediaId(item) === mediaId) : [];
+    const activeExact = exactMatches.find(item => !item.deletedAt);
+    if (activeExact) return { state:"active", anime:activeExact, reason:"anilist-id" };
+    const deletedExact = exactMatches.find(item => item.deletedAt);
+    if (deletedExact) return { state:"tombstone", anime:deletedExact, reason:"anilist-id" };
+
+    const legacyMatches = list.filter(item => !getAniListMediaId(item) && isConservativeLegacyMediaMatch(item, media));
+    const activeLegacy = legacyMatches.find(item => !item.deletedAt);
+    if (activeLegacy) return { state:"active", anime:activeLegacy, reason:"legacy-title-year-format" };
+    const deletedLegacy = legacyMatches.find(item => item.deletedAt);
+    if (deletedLegacy) return { state:"tombstone", anime:deletedLegacy, reason:"legacy-title-year-format" };
+    return { state:"not-added", anime:null, reason:"not-found" };
+}
+
+function restoredAnimeCategory(anime, media = null, now = new Date()) {
+    const allowed = new Set(["watching", "backlog", "completed", "waiting", "review", "paused"]);
+    if (!hasManualAnimeCategory(anime) && media && isMediaClearlyNotYetReleased(media, now)) return "waiting";
+    if (allowed.has(String(anime?.deletedFromCategory || ""))) return anime.deletedFromCategory;
+    if (allowed.has(String(anime?.category || ""))) return anime.category;
+    return "backlog";
+}
+
+function addOrRestoreSingleMedia(media, list = animeList, options = {}) {
+    const now = options.now || new Date().toISOString();
+    const allowRestore = options.allowRestore !== false;
+    const applyMetadata = options.applyMetadata || applyMediaMetadata;
+    const createAnime = options.createAnime;
+
+    const restoreRecord = state => {
+        if (!allowRestore) return { list, anime:state.anime, action:"tombstone-skipped", changed:false };
+        const index = list.indexOf(state.anime);
+        if (index < 0) return { list, anime:null, action:"not-added", changed:false };
+        const localId = state.anime.id;
+        const category = restoredAnimeCategory(state.anime, media, now);
+        const restored = { ...state.anime, deletedAt:null, category, updatedAt:now };
+        attachAniListIdToLegacyAnime(restored, media);
+        applyMetadata(restored, media, now);
+        restored.id = localId;
+        restored.deletedAt = null;
+        restored.category = category;
+        if (!hasManualAnimeCategory(state.anime)) {
+            restored.categorySource = "automatic";
+            restored.categoryManuallyEdited = false;
+        }
+        restored.updatedAt = now;
+        list[index] = restored;
+        options.onRestore?.(restored, state.anime);
+        return { list, anime:restored, action:"restored", changed:true };
+    };
+
+    const initial = getExistingAnimeMediaState(media, list);
+    if (initial.state === "active") {
+        if (initial.reason === "legacy-title-year-format") {
+            const localId = initial.anime.id;
+            attachAniListIdToLegacyAnime(initial.anime, media);
+            applyMetadata(initial.anime, media, now);
+            initial.anime.id = localId;
+            initial.anime.updatedAt = now;
+            return { list, anime:initial.anime, action:"reconciled", changed:true };
+        }
+        return { list, anime:initial.anime, action:"active", changed:false };
     }
-    return list.find(item => isConservativeLegacyMediaMatch(item, media)) || null;
+    if (initial.state === "tombstone") return restoreRecord(initial);
+    if (typeof createAnime !== "function") return { list, anime:null, action:"not-added", changed:false };
+
+    const created = createAnime(media);
+    if (!created) return { list, anime:null, action:"not-added", changed:false };
+    const raceCheck = getExistingAnimeMediaState(media, list);
+    if (raceCheck.state === "active") return { list, anime:raceCheck.anime, action:"active", changed:false };
+    if (raceCheck.state === "tombstone") return restoreRecord(raceCheck);
+    list.push(created);
+    options.onCreate?.(created);
+    return { list, anime:created, action:"created", changed:true };
+}
+
+function findExistingAnimeForMedia(media, list = animeList) {
+    return getExistingAnimeMediaState(media, list).anime;
 }
 
 function attachAniListIdToLegacyAnime(anime, media) {
@@ -1675,13 +2168,14 @@ async function reconcileDiscoveredSequelMedia(discovered, list, handlers = {}) {
         if (mediaId && processedIds.has(mediaId)) continue;
         if (mediaId) processedIds.add(mediaId);
 
-        const existing = findExistingAnimeForMedia(media, list);
-        if (existing) {
-            attachAniListIdToLegacyAnime(existing, media);
-            if (handlers.refreshMedia) await handlers.refreshMedia(existing, media);
+        const existingState = getExistingAnimeMediaState(media, list);
+        if (existingState.state === "active") {
+            attachAniListIdToLegacyAnime(existingState.anime, media);
+            if (handlers.refreshMedia) await handlers.refreshMedia(existingState.anime, media);
             refreshed++;
             continue;
         }
+        if (existingState.state === "tombstone") continue;
 
         if (!handlers.addMedia) continue;
         const result = await handlers.addMedia(media);
@@ -2197,12 +2691,14 @@ function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOStri
 }
 
 function deleteAnime(id) {
-    const anime = animeList.find(item => String(item.id) === String(id));
+    const anime = animeList.find(item => String(item.id) === String(id) && !item.deletedAt)
+        || animeList.find(item => String(item.id) === String(id));
     if (!anime) return;
 
     if (!confirm(`確定刪除《${anime.title}》嗎？`)) return;
 
-    const result = AnimeTrackerV11.markAnimeDeletedById(animeList, id);
+    const result = AnimeTrackerV11.markAnimeDeletedById(animeList, id, new Date().toISOString(), anime);
+    if (!result.changed || !result.anime) return;
     animeList = result.list;
     cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt);
 
@@ -2752,9 +3248,9 @@ async function resolveWorkAliases(value) {
                 lookup = wikiJaTitle || query;
             } catch {}
 
-            let media = await requestAniList(SEARCH_QUERY, { search: lookup });
+            let media = await requestAniList(SINGLE_MEDIA_SEARCH_QUERY, { search: lookup });
             if (!media && lookup !== query) {
-                media = await requestAniList(SEARCH_QUERY, { search: query });
+                media = await requestAniList(SINGLE_MEDIA_SEARCH_QUERY, { search: query });
             }
 
             if (media) {
@@ -3222,6 +3718,13 @@ document.getElementById("search-input").addEventListener("keydown", event => {
     }
 });
 
+document.getElementById("single-anime-search-result").addEventListener("click", event => {
+    const button = event.target.closest("[data-add-single-anime-search-result]");
+    if (!button || button.disabled) return;
+    button.disabled = true;
+    addPendingAnimeSearchResult(button.dataset.addSingleAnimeSearchResult);
+});
+
 const animeListSearchInput = document.getElementById("anime-list-search");
 const animeListSortSelect = document.getElementById("anime-list-sort");
 if ([...animeListSortSelect.options].some(option => option.value === animeListSort)) {
@@ -3268,9 +3771,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=duplicate-reconciliation-1"></script>
+<script src="v11-ui.js?v=season-identity-fix-1"></script>
 <script src="spotify-config.js"></script>
 <script src="spotify-themes.js?v=duplicate-reconciliation-1"></script>
-<script src="cross-media.js?v=identity-integrity-1"></script>
+<script src="cross-media.js?v=anime-search-multi-1"></script>
 </body>
 </html>

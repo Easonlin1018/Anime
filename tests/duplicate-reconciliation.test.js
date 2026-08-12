@@ -156,4 +156,224 @@ test("13. 人工名稱含不同年份時不改字串也不再加衝突 badge", (
     assert.deepEqual(V.getAnimeTitlePresentation({title:"我的剪輯版（2020）",startDate:{year:2019},titleSource:"manual",titleManuallyEdited:true}), {title:"我的剪輯版（2020）",year:null});
 });
 
+test("14. 相同 local ID 與相同 AniList ID 會合併成一筆", () => {
+    const result = V.reconcileExistingAnimeDuplicates([
+        base({id:"collision",anilistId:209939,title:"葬送的芙莉蓮 第三季"}),
+        base({id:"collision",anilistId:209939,title:"葬送的芙莉蓮 第三季"})
+    ]);
+    assert.equal(result.list.length, 1);
+    assert.equal(result.mergedCount, 1);
+    assert.equal(result.reassignedCount, 0);
+});
+
+test("15. 相同 local ID 但不同 AniList ID 保留兩筆並重新編號", () => {
+    const result = V.reconcileExistingAnimeDuplicates([
+        base({id:"collision",anilistId:209939,title:"葬送的芙莉蓮 第三季"}),
+        base({id:"collision",anilistId:170068,title:"葬送的小劇場"})
+    ]);
+    assert.equal(result.list.length, 2);
+    assert.equal(new Set(result.list.map(item => String(item.id))).size, 2);
+    assert.equal(result.mergedCount, 0);
+    assert.equal(result.reassignedCount, 1);
+});
+
+test("16. tombstone 排在 active 前面時仍能刪除 active record", () => {
+    const list = [
+        base({id:"collision",anilistId:1,deletedAt:"2026-01-01T00:00:00.000Z",category:"_deleted"}),
+        base({id:"collision",anilistId:2,deletedAt:null,category:"waiting"})
+    ];
+    const result = V.markAnimeDeletedById(list, "collision", "2026-02-01T00:00:00.000Z");
+    assert.equal(result.changed, true);
+    assert.equal(result.anime.anilistId, 2);
+    assert.ok(result.list[1].deletedAt);
+});
+
+test("17. 兩張相同卡片可連續刪到 active count 0", () => {
+    let list = V.reconcileExistingAnimeDuplicates([
+        base({id:"collision",anilistId:209939,title:"葬送的芙莉蓮 第三季"}),
+        base({id:"collision",anilistId:200001,title:"葬送的芙莉蓮 第三季"})
+    ]).list;
+    assert.equal(V.searchFilterSort(list).length, 2);
+    list = V.markAnimeDeletedById(list, list[0].id, "2026-02-01T00:00:00.000Z", "209939").list;
+    assert.equal(V.searchFilterSort(list).length, 1);
+    const remaining = list.find(item => !item.deletedAt);
+    list = V.markAnimeDeletedById(list, remaining.id, "2026-02-02T00:00:00.000Z", V.getAnimeAniListIdentity(remaining)).list;
+    assert.equal(V.searchFilterSort(list).length, 0);
+});
+
+test("18. delete 後 serialize / reload 不會復活", () => {
+    let list = V.reconcileExistingAnimeDuplicates([
+        base({id:"collision",anilistId:209939}),
+        base({id:"collision",anilistId:200001})
+    ]).list;
+    for (const item of [...list]) {
+        list = V.markAnimeDeletedById(list, item.id, "2026-02-01T00:00:00.000Z", V.getAnimeAniListIdentity(item)).list;
+    }
+    const reloaded = V.migrateList(JSON.parse(JSON.stringify(list)));
+    assert.equal(V.searchFilterSort(reloaded).length, 0);
+});
+
+test("19. restore 依 AniList identity 只恢復正確 record", () => {
+    const before = [
+        base({id:"collision",anilistId:1,title:"A"}),
+        base({id:"collision",anilistId:2,title:"B"})
+    ];
+    const deleted = V.markAnimeDeletedById(before, "collision", "2026-02-01T00:00:00.000Z", "2").list;
+    const restored = V.restoreAnimeById(deleted, "collision", before, "2026-02-02T00:00:00.000Z", "2").list;
+    assert.equal(restored.find(item => item.anilistId === 2).deletedAt, null);
+    assert.equal(restored.find(item => item.anilistId === 1).title, "A");
+});
+
+test("20. local ID migration 可重複執行且第二次不再換 ID", () => {
+    const first = V.reconcileExistingAnimeDuplicates([
+        base({id:"collision",anilistId:1}),
+        base({id:"collision",anilistId:2})
+    ]);
+    const ids = first.list.map(item => item.id);
+    const second = V.reconcileExistingAnimeDuplicates(first.list, first.state);
+    assert.equal(second.changed, false);
+    assert.equal(second.reassignedCount, 0);
+    assert.deepEqual(second.list.map(item => item.id), ids);
+});
+
+test("21. 可辨識 AniList identity 的 auxiliary reference 會跟隨新 local ID", () => {
+    const state = {
+        works:[{workId:"work-1",mediaEntries:[{id:"collision",mediaType:"anime",anilistId:2,title:"B"}]}],
+        watchHistory:[{id:"history-1",animeId:"collision",anilistId:2,delta:1}],
+        themeUndo:{animeId:"collision",anilistId:2}
+    };
+    const result = V.ensureUniqueLocalAnimeIds([
+        base({id:"collision",anilistId:1,title:"A"}),
+        base({id:"collision",anilistId:2,title:"B"})
+    ], state, {idFactory:() => "new-local-id", now:"2026-02-01T00:00:00.000Z"});
+    assert.equal(result.state.works[0].mediaEntries[0].id, "new-local-id");
+    assert.equal(result.state.watchHistory[0].animeId, "new-local-id");
+    assert.equal(result.state.themeUndo.animeId, "new-local-id");
+});
+
+test("22. 相同 title 與不同 AniList ID 不會因 local ID collision 合併", () => {
+    const result = V.reconcileExistingAnimeDuplicates([
+        base({id:"collision",anilistId:209939,title:"葬送的芙莉蓮 第三季",canonicalTitle:"葬送のフリーレン 第3期"}),
+        base({id:"collision",anilistId:170068,title:"葬送的芙莉蓮 第三季",canonicalTitle:"葬送のフリーレン ミニアニメ"})
+    ]);
+    assert.equal(result.list.length, 2);
+    assert.deepEqual(new Set(result.list.map(item => item.anilistId)), new Set([209939,170068]));
+    assert.equal(new Set(result.list.map(item => item.id)).size, 2);
+});
+
+test("23. 不同 AniList Media 的同 display title 保留為兩筆且正式 metadata 各自保留", () => {
+    const result = V.reconcileExistingAnimeDuplicates([
+        base({id:"a",anilistId:209939,title:"葬送的芙莉蓮 第三季",displayTitle:"葬送的芙莉蓮 第三季",canonicalTitle:"葬送のフリーレン 第3期"}),
+        base({id:"b",anilistId:170068,title:"葬送的芙莉蓮 第三季",displayTitle:"葬送的芙莉蓮 第三季",canonicalTitle:"葬送のフリーレン ミニアニメ"})
+    ]);
+    assert.equal(result.list.length, 2);
+    assert.notEqual(result.list[0].canonicalTitle, result.list[1].canonicalTitle);
+});
+
+function frierenSecond(overrides = {}) {
+    return base({
+        id:"frieren-known",
+        anilistId:182255,
+        sourceId:"182255",
+        title:"葬送的芙莉蓮 第二季（2026）",
+        displayTitle:"葬送的芙莉蓮 第二季（2026）",
+        canonicalTitle:"葬送的芙莉蓮 第二季",
+        groupTitle:"葬送的芙莉蓮",
+        aliases:["葬送的芙莉蓮 第二季", "葬送のフリーレン 第2期", "Sousou no Frieren 2nd Season"],
+        anilistTitles:{native:"葬送のフリーレン 第2期",english:"Frieren: Beyond Journey’s End Season 2",romaji:"Sousou no Frieren 2nd Season"},
+        year:2026,
+        startDate:{year:2026,month:1,day:16},
+        format:"TV",
+        status:"FINISHED",
+        episodes:10,
+        totalEpisodes:10,
+        releasedEpisodes:10,
+        ...overrides
+    });
+}
+
+test("24. 有 AniList ID 與保守吻合的 legacy no-ID shadow 會補綁後合併", () => {
+    const legacy = frierenSecond({
+        id:"legacy-shadow",
+        anilistId:undefined,
+        sourceId:undefined,
+        episodes:"??",
+        totalEpisodes:"??"
+    });
+    const result = V.reconcileExistingAnimeDuplicates([frierenSecond(), legacy]);
+    assert.equal(result.list.length, 1);
+    assert.equal(result.mergedCount, 1);
+    assert.equal(result.legacyBoundCount, 1);
+    assert.equal(result.list[0].id, "frieren-known");
+    assert.equal(result.list[0].anilistId, 182255);
+    assert.equal(result.list[0].episodes, 10);
+    assert.equal(result.list[0].totalEpisodes, 10);
+});
+
+test("25. legacy shadow 上的使用者資料與 auxiliary reference 合併後完整保留", () => {
+    const legacy = frierenSecond({
+        id:"legacy-shadow",
+        anilistId:undefined,
+        sourceId:undefined,
+        watched:7,
+        currentEpisode:7,
+        rating:9,
+        review:"legacy review",
+        note:"legacy note",
+        customPlatform:"自訂平台",
+        customFutureField:"keep-me",
+        themeSongs:{openings:[{id:"op-legacy",title:"Legacy OP"}],endings:[]}
+    });
+    const state = { watchHistory:[{id:"h1",animeId:"legacy-shadow",delta:1}] };
+    const result = V.reconcileExistingAnimeDuplicates([frierenSecond(), legacy], state);
+    const merged = result.list[0];
+    assert.equal(merged.currentEpisode, 7);
+    assert.equal(merged.rating, 9);
+    assert.equal(merged.review, "legacy review");
+    assert.equal(merged.note, "legacy note");
+    assert.equal(merged.customPlatform, "自訂平台");
+    assert.equal(merged.customFutureField, "keep-me");
+    assert.equal(merged.themeSongs.openings[0].id, "op-legacy");
+    assert.equal(result.state.watchHistory[0].animeId, "frieren-known");
+});
+
+test("26. 相同 title/year/format 但不同已知 AniList ID 絕不合併", () => {
+    const result = V.reconcileExistingAnimeDuplicates([
+        frierenSecond({id:"known-a",anilistId:182255}),
+        frierenSecond({id:"known-b",anilistId:109261})
+    ]);
+    assert.equal(result.list.length, 2);
+    assert.equal(result.mergedCount, 0);
+    assert.equal(result.legacyBoundCount, 0);
+});
+
+test("27. legacy shadow reconciliation 第二次執行為 0 changes", () => {
+    const first = V.reconcileExistingAnimeDuplicates([
+        frierenSecond(),
+        frierenSecond({id:"legacy-shadow",anilistId:undefined,sourceId:undefined,episodes:"??",totalEpisodes:"??"})
+    ]);
+    const second = V.reconcileExistingAnimeDuplicates(JSON.parse(JSON.stringify(first.list)), first.state);
+    assert.equal(second.changed, false);
+    assert.equal(second.mergedCount, 0);
+    assert.equal(second.legacyBoundCount, 0);
+    assert.deepEqual(second.list, first.list);
+});
+
+test("28. serialize / deserialize 後不會重新產生 shadow duplicate", () => {
+    const first = V.reconcileExistingAnimeDuplicates([
+        frierenSecond(),
+        frierenSecond({id:"legacy-shadow",anilistId:undefined,sourceId:undefined})
+    ]);
+    const reloaded = V.reconcileExistingAnimeDuplicates(JSON.parse(JSON.stringify(first.list)), first.state);
+    assert.equal(reloaded.list.length, 1);
+    assert.equal(reloaded.list.filter(item => V.getAnimeAniListIdentity(item) === "182255").length, 1);
+});
+
+test("29. legacy fallback 缺少相同 group context 時不得合併", () => {
+    const legacy = frierenSecond({id:"legacy-shadow",anilistId:undefined,sourceId:undefined,groupTitle:"其他系列"});
+    const result = V.reconcileExistingAnimeDuplicates([frierenSecond(), legacy]);
+    assert.equal(result.list.length, 2);
+    assert.equal(result.legacyBoundCount, 0);
+});
+
 if (!process.exitCode) console.log(`\nAll duplicate reconciliation tests passed: ${passed}/${passed}`);

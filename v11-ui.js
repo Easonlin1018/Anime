@@ -74,10 +74,14 @@
         if (!wasCompleted && updated.category === "completed") void checkAndAddSequel(updated, false);
     };
     deleteAnime = function (id) {
-        const item = animeList.find(x => String(x.id) === String(id)); if (!item) return;
+        const item = animeList.find(x => String(x.id) === String(id) && !x.deletedAt)
+            || animeList.find(x => String(x.id) === String(id));
+        if (!item || item.deletedAt) return;
         if (!confirm(`確定刪除「${item.title}」？可使用「復原上一步」恢復。`)) return;
-        save(UNDO_KEY, { type: "delete", targetId:item.id, at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
-        const result = V.markAnimeDeletedById(animeList, id);
+        const targetIdentity = V.getAnimeAniListIdentity(item);
+        save(UNDO_KEY, { type: "delete", targetId:item.id, targetIdentity, at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
+        const result = V.markAnimeDeletedById(animeList, id, new Date().toISOString(), targetIdentity);
+        if (!result.changed || !result.anime) return showToast("找不到可刪除的有效作品，請重新整理後再試");
         animeList = result.list;
         const cleaned = cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt, watchHistory);
         watchHistory = cleaned.watchHistory;
@@ -201,8 +205,12 @@
         save(UNDO_KEY, { type: "batch", at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
         if (action === "delete") {
             const deleted = animeList.filter(item => state.selected.has(String(item.id)));
-            for (const item of deleted) animeList = V.markAnimeDeletedById(animeList, item.id).list;
-            deleted.forEach(item => cleanupAnimeAuxiliaryReferences(animeList.find(current => String(current.id) === String(item.id))));
+            const results = deleted.map(item => {
+                const result = V.markAnimeDeletedById(animeList, item.id, new Date().toISOString(), V.getAnimeAniListIdentity(item));
+                animeList = result.list;
+                return result;
+            });
+            results.filter(result => result.changed && result.anime).forEach(result => cleanupAnimeAuxiliaryReferences(result.anime));
         } else animeList = V.applyBatch(animeList, [...state.selected], action, value);
         persistAnime(); state.selected.clear(); renderList(); refreshV11(); showToast("批次操作完成，可復原上一步");
     }
@@ -211,7 +219,7 @@
         if (!undo?.before) return showToast("目前沒有可復原操作");
         animeList = V.migrateList(undo.before);
         if (undo.type === "delete" && undo.targetId != null) {
-            animeList = V.restoreAnimeById(animeList, undo.targetId, undo.before).list;
+            animeList = V.restoreAnimeById(animeList, undo.targetId, undo.before, new Date().toISOString(), undo.targetIdentity).list;
         }
         restoreAuxiliaryUndo(undo);
         localStorage.removeItem(UNDO_KEY);
@@ -234,7 +242,7 @@
         if (expandThemes) window.SpotifyThemes?.expand(document.getElementById("v11-theme-section"));
         window.CrossMediaTracker?.enhanceAnimeDetail?.(item, document.getElementById("v11-detail-body"));
     }
-    function saveDetail(event) { event.preventDefault(); const form = event.currentTarget, item = animeList.find(x => String(x.id) === form.dataset.id); if (!item) return; const data = new FormData(form), previousTitle = item.title; ["title","category","platform","synopsis","season","broadcastDay","broadcastTime","notes"].forEach(key => item[key]=String(data.get(key)||"").trim()); if(item.title&&item.title!==previousTitle){item.displayTitle=item.title;item.titleSource="manual";item.titleManuallyEdited=true;} item.aliases=String(data.get("aliases")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.tags=String(data.get("tags")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.currentEpisode=item.watched=Number(data.get("currentEpisode"))||0; item.totalEpisodes=item.episodes=Number(data.get("totalEpisodes"))||null; item.year=Number(data.get("year"))||null; item.rating=data.get("rating")===""?null:Number(data.get("rating")); item.nextEpisodeAt=data.get("nextEpisodeAt")?new Date(data.get("nextEpisodeAt")).toISOString():null; item.nextSeasonDate=data.get("nextSeasonDate")||null; item.reminderEnabled=data.get("reminderEnabled")==="on"; item.note=item.notes; item.customPlatform=item.platform; touch(item); persistAnime(); renderList(); refreshV11(); closeV11Modals(); showToast("詳細資料已儲存"); }
+    function saveDetail(event) { event.preventDefault(); const form = event.currentTarget, item = animeList.find(x => String(x.id) === form.dataset.id); if (!item) return; const data = new FormData(form), previousTitle = item.title, previousCategory = item.category; ["title","category","platform","synopsis","season","broadcastDay","broadcastTime","notes"].forEach(key => item[key]=String(data.get(key)||"").trim()); if(item.title&&item.title!==previousTitle){item.displayTitle=item.title;item.titleSource="manual";item.titleManuallyEdited=true;} if(item.category&&item.category!==previousCategory){item.categorySource="manual";item.categoryManuallyEdited=true;} item.aliases=String(data.get("aliases")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.tags=String(data.get("tags")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.currentEpisode=item.watched=Number(data.get("currentEpisode"))||0; item.totalEpisodes=item.episodes=Number(data.get("totalEpisodes"))||null; item.year=Number(data.get("year"))||null; item.rating=data.get("rating")===""?null:Number(data.get("rating")); item.nextEpisodeAt=data.get("nextEpisodeAt")?new Date(data.get("nextEpisodeAt")).toISOString():null; item.nextSeasonDate=data.get("nextSeasonDate")||null; item.reminderEnabled=data.get("reminderEnabled")==="on"; item.note=item.notes; item.customPlatform=item.platform; touch(item); persistAnime(); renderList(); refreshV11(); closeV11Modals(); showToast("詳細資料已儲存"); }
     function closeV11Modals(){ window.SpotifyThemes?.close(); document.querySelectorAll(".v11-modal").forEach(x=>x.hidden=true); }
     function safeUrl(value){ try{const url=new URL(value,location.href);return ["http:","https:","data:"].includes(url.protocol)?url.href:""}catch{return ""} }
 
@@ -247,7 +255,30 @@
     function restoreLastWatchStatisticsReset(){const result=V.restoreWatchStatistics(localStorage);if(!result.restored)return showToast("目前沒有可復原的統計重設");watchHistory=result.history;renderStats();showToast(`已恢復 ${result.restoredCount} 筆觀看紀錄`);}
 
     let pendingImport = null;
-    function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.onchange=()=>localStorage.setItem("anime_tracker_auto_sync_v11",autoSync.checked?"1":"0");window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").then(reg=>reg.addEventListener("updatefound",()=>showToast("發現新版本，重新整理後套用"))).catch(()=>{});}
+    function registerAppServiceWorker(){
+        if (!("serviceWorker" in navigator)) return;
+        const reloadVersion = "season-identity-fix-1";
+        navigator.serviceWorker.addEventListener("message", event => {
+            if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
+            document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
+            document.documentElement.dataset.swCacheNames = JSON.stringify(event.data.cacheNames || []);
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+            const key = "anime_tracker_sw_reload_version";
+            if (sessionStorage.getItem(key) === reloadVersion) return;
+            sessionStorage.setItem(key, reloadVersion);
+            location.reload();
+        });
+        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`).then(async reg => {
+            reg.addEventListener("updatefound",()=>showToast("發現新版本，安裝完成後會自動套用"));
+            await reg.update();
+            const worker = navigator.serviceWorker.controller || reg.active || reg.waiting || reg.installing;
+            document.documentElement.dataset.swScriptUrl = String(worker?.scriptURL || "");
+            worker?.postMessage({ type:"GET_CACHE_STATUS" });
+        }).catch(error => console.warn("Service Worker 註冊失敗：", error));
+    }
+
+    function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.onchange=()=>localStorage.setItem("anime_tracker_auto_sync_v11",autoSync.checked?"1":"0");window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();registerAppServiceWorker();}
     function exportBackup(){const backup=V.createBackup(snapshot()),blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"}),link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`anime_tracker_v11_${new Date().toISOString().slice(0,10)}.json`;link.click();URL.revokeObjectURL(link.href);}
     function readImport(event){const file=event.target.files[0];event.target.value="";if(!file)return;if(file.size>10*1024*1024)return showToast("匯入檔案不可超過 10 MB");const reader=new FileReader();reader.onload=()=>{try{const validation=V.validateBackup(reader.result);if(!validation.valid)throw Error(validation.error);pendingImport=validation.normalized;const p=validation.preview;document.getElementById("v11-import-preview").textContent=`備份格式：${p.format}｜版本：${p.schemaVersion}｜匯出：${p.exportedAt||"未知"}｜動畫：${p.animeCount} 部｜作品主體：${p.workCount}｜漫畫：${p.mangaCount}｜活動修正：${p.overrideCount}｜觀看紀錄：${p.historyCount}｜漫畫閱讀紀錄：${p.mangaHistoryCount}${p.requiresEmptyConfirmation?"｜⚠️ 備份內沒有任何作品，套用前會再次確認":""}`;document.getElementById("v11-import-modal").hidden=false}catch(error){pendingImport=null;showToast(`匯入失敗：${escapeHtml(error.message)}`)}};reader.onerror=()=>{pendingImport=null;showToast("匯入失敗：無法讀取檔案")};reader.readAsText(file);}
     function applyImport(mode){if(!pendingImport)return;const totalWorks=pendingImport.works.length||pendingImport[V.STORAGE_KEY].length;if(totalWorks===0&&!confirm("此備份包含 0 部作品。確定仍要繼續匯入？"))return;if(mode==="replace"&&!confirm("完全覆蓋會取代目前資料。系統會先建立還原點，確定繼續？"))return;let result;try{result=V.importBackup(snapshot(),pendingImport,mode)}catch(error){showToast(`匯入失敗：${escapeHtml(error.message)}`);return}createRestorePoint("匯入前自動還原點");animeList=result.animeList;eventOverrides=result.eventOverrides;eventAnimeOverrides=result.eventAnimeOverrides;watchHistory=result.watchHistory;state.lastImportRestore=parse(V.RESTORE_KEY,[])[0]?.id;save(V.HISTORY_KEY,watchHistory);save(EVENT_OVERRIDES_KEY,eventOverrides);save(EVENT_ANIME_OVERRIDES_KEY,eventAnimeOverrides);persistAnime();window.CrossMediaTracker?.replaceData?.(result.works,result.mangaReadHistory);renderList();renderEvents();closeV11Modals();showToast(`匯入完成：已處理 ${result.importedAnimeCount} 部動畫、${result.importedWorkCount} 個作品主體`);}

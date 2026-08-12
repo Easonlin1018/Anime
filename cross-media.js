@@ -126,9 +126,10 @@
     function snapshot(){syncAnime();return{works,mangaReadHistory:mangaHistory};}
     function replaceData(nextWorks,nextHistory){works=V.migrateWorks(typeof animeList==="undefined"?[]:animeList,nextWorks||[]);mangaHistory=Array.isArray(nextHistory)?nextHistory:[];persist();renderMangaPage();}
     function markAnimeDeleted(animeId, deletedAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry)return false;entry.deletedAt=deletedAt;entry.updatedAt=deletedAt;work.updatedAt=deletedAt;persist();renderMangaPage();return true;}
+    function restoreAnime(animeId, restoredAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry){syncAnime();return false;}entry.deletedAt=null;entry.updatedAt=restoredAt;work.updatedAt=restoredAt;persist();renderMangaPage();return true;}
     function syncAnimeReferences(){syncAnime();renderMangaPage();return works;}
     function eventContext(work,media){return{...media,workId:work.workId,aliases:[...new Set([...work.aliases,...media.aliases])],publisher:media.publisher};}
 
-    window.CrossMediaTracker={snapshot,replaceData,renderMangaPage,renderSearchResults,enhanceAnimeDetail,openWorkDetail,findWorkByMediaId,markAnimeDeleted,syncAnimeReferences,mediaBadgesForAnime(anime){const work=findWorkByMediaId(anime.id);return work?mediaBadges(work):'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';},appendMangaReminders,appendMangaStatistics,eventContext};
+    window.CrossMediaTracker={snapshot,replaceData,renderMangaPage,renderSearchResults,enhanceAnimeDetail,openWorkDetail,findWorkByMediaId,markAnimeDeleted,restoreAnime,syncAnimeReferences,mediaBadgesForAnime(anime){const work=findWorkByMediaId(anime.id);return work?mediaBadges(work):'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';},appendMangaReminders,appendMangaStatistics,eventContext};
     persist();addShell();renderMangaPage();if(typeof renderList==="function")renderList();
 })();
