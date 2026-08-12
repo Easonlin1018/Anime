@@ -580,7 +580,8 @@ test("metadata whitelist excludes all user-managed fields", () => {
 });
 
 test("metadata sync resolves AniList ID without replacing the local ID", () => {
-    assert.match(html, /animeList\s*\.filter\(anime => !anime\.deletedAt\)\s*\.map\(anime => Number\(getAniListMediaId\(anime\)\)\)/u);
+    assert.match(html, /AnimeTrackerV11\.collectActiveAnimeAniListIds\(animeList\)/u);
+    assert.equal(typeof V.collectActiveAnimeAniListIds, "function");
     assert.match(html, /animeList\.find\(item => getAniListMediaId\(item\) === String\(media\.id\)\)/u);
     assert.match(html, /requestAniList\(ID_QUERY, \{ id: Number\(animeMediaId\) \}\)/u);
 });

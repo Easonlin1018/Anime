@@ -635,7 +635,7 @@
     <button style="margin-top:15px;margin-bottom:0;width:auto;padding:5px 15px;background:#475569;" onclick="closeToast()">關閉</button>
 </div>
 
-<script src="v11-core.js?v=season-identity-fix-1"></script>
+<script src="v11-core.js?v=legacy-identity-recovery-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -732,6 +732,24 @@ function loadStoredAnime() {
         themeCache:readLocalJson("anime_theme_lookup_cache_v1", {}),
         themeUndo:readLocalJson("anime_theme_last_undo_v1", null)
     };
+    const legacyIdentityRecovery = AnimeTrackerV11.recoverLegacyAnimeIdentities(animeList, duplicateState);
+    window.__ANIME_LEGACY_IDENTITY_RECOVERY__ = legacyIdentityRecovery.report;
+    if (legacyIdentityRecovery.changed) {
+        try {
+            const backupKey = "anime_tracker_legacy_identity_recovery_backup_v1";
+            if (!localStorage.getItem(backupKey)) {
+                localStorage.setItem(backupKey, JSON.stringify({
+                    createdAt:new Date().toISOString(),
+                    animeList,
+                    ...duplicateState
+                }));
+            }
+        } catch (error) {
+            console.warn("無法建立 legacy identity recovery 備份", error);
+        }
+        animeList = legacyIdentityRecovery.list;
+        if (EVENT_MATCH_DEBUG) console.info("Legacy AniList identity recovery", legacyIdentityRecovery.report);
+    }
     const reconciliation = AnimeTrackerV11.reconcileExistingAnimeDuplicates(animeList, duplicateState);
     window.__ANIME_DUPLICATE_RECONCILIATION__ = {
         changed:reconciliation.changed,
@@ -1541,7 +1559,7 @@ function hasManualAnimeCategory(anime) {
 }
 
 function applyAutomaticCategoryFromMedia(anime, media, now = new Date()) {
-    if (!anime || hasManualAnimeCategory(anime) || !isMediaClearlyNotYetReleased(media, now)) return false;
+    if (!anime || anime.deletedAt || hasManualAnimeCategory(anime) || !isMediaClearlyNotYetReleased(media, now)) return false;
     if (anime.category === "waiting" && anime.categorySource === "automatic" && anime.categoryManuallyEdited === false) return false;
     anime.category = "waiting";
     anime.categorySource = "automatic";
@@ -2276,10 +2294,7 @@ function renderAiringCalendar() {
 
 async function syncAnimeMetadata(showMessage = false) {
     if (animeSyncing) return;
-    const ids = animeList
-        .filter(anime => !anime.deletedAt)
-        .map(anime => Number(getAniListMediaId(anime)))
-        .filter(Number.isFinite);
+    const ids = AnimeTrackerV11.collectActiveAnimeAniListIds(animeList);
     if (ids.length === 0) {
         renderAiringCalendar();
         if (showMessage) showToast("目前沒有動漫可以同步。");

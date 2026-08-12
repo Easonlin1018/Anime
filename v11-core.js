@@ -140,6 +140,135 @@
         return "";
     }
 
+    function validPositiveIntegerIdentity(value) {
+        const numeric = Number(value);
+        return Number.isSafeInteger(numeric) && numeric > 0 ? String(numeric) : "";
+    }
+
+    function recoverLegacyAnimeIdentities(list, state = {}, now = new Date().toISOString()) {
+        const records = arrayOf(list).map((item, index) => ({ item, index }));
+        const localIdCounts = new Map();
+        records.forEach(({ item }) => {
+            const localId = String(item?.id ?? "");
+            if (localId) localIdCounts.set(localId, (localIdCounts.get(localId) || 0) + 1);
+        });
+
+        const nestedEntries = arrayOf(state?.works).flatMap(work => arrayOf(work?.mediaEntries));
+        const availableEntries = nestedEntries.length ? nestedEntries : arrayOf(state?.mediaEntries);
+        const animeEntries = availableEntries.filter(entry => String(entry?.mediaType || "").toLowerCase() === "anime");
+        const sourceIdCounts = new Map();
+        animeEntries.forEach(entry => {
+            const sourceId = validPositiveIntegerIdentity(entry?.sourceId);
+            if (sourceId) sourceIdCounts.set(sourceId, (sourceIdCounts.get(sourceId) || 0) + 1);
+        });
+
+        const explicitOwners = new Map();
+        records.forEach(record => {
+            const identity = getAnimeAniListIdentity(record.item);
+            if (!identity) return;
+            if (!explicitOwners.has(identity)) explicitOwners.set(identity, []);
+            explicitOwners.get(identity).push(record);
+        });
+
+        const recovered = [];
+        const skipped = [];
+        const skip = (record, reason, details = {}) => skipped.push({
+            localId:String(record.item?.id ?? ""),
+            reason,
+            ...details
+        });
+
+        const next = records.map(record => {
+            const item = record.item;
+            if (!item || typeof item !== "object") return item;
+            const explicitIdentity = getAnimeAniListIdentity(item);
+            if (explicitIdentity) return item;
+
+            const localId = String(item.id ?? "");
+            if (!localId || localIdCounts.get(localId) !== 1) {
+                skip(record, "ambiguous-local-id", { matches:localIdCounts.get(localId) || 0 });
+                return item;
+            }
+
+            const matchingEntries = animeEntries.filter(entry => String(entry?.id ?? "") === localId);
+            if (matchingEntries.length !== 1) {
+                skip(record, "ambiguous-media-entry", { matches:matchingEntries.length });
+                return item;
+            }
+
+            const entry = matchingEntries[0];
+            const sourceId = validPositiveIntegerIdentity(entry.sourceId);
+            if (!sourceId) {
+                skip(record, "invalid-source-id");
+                return item;
+            }
+            if (sourceIdCounts.get(sourceId) !== 1) {
+                skip(record, "ambiguous-source-id", { sourceId, matches:sourceIdCounts.get(sourceId) || 0 });
+                return item;
+            }
+
+            const animeTitles = animeIdentityTitles(item);
+            const entryTitles = animeIdentityTitles(entry);
+            const titleOverlap = [...animeTitles].filter(title => entryTitles.has(title));
+            if (!titleOverlap.length) {
+                skip(record, "title-alias-mismatch", { sourceId });
+                return item;
+            }
+
+            const conflictingOwners = arrayOf(explicitOwners.get(sourceId)).filter(owner => owner.index !== record.index);
+            if (conflictingOwners.length) {
+                skip(record, "conflicting-explicit-identity", {
+                    sourceId,
+                    conflictingLocalIds:conflictingOwners.map(owner => owner.item?.id)
+                });
+                return item;
+            }
+
+            const updated = {
+                ...item,
+                anilistId:Number(sourceId),
+                identitySource:"legacy-work-sourceId",
+                identityRecoveredAt:iso(now)
+            };
+            recovered.push({
+                localId:item.id,
+                anilistId:sourceId,
+                deleted:Boolean(item.deletedAt),
+                titleOverlap
+            });
+            return updated;
+        });
+
+        const reasonCounts = skipped.reduce((counts, item) => {
+            counts[item.reason] = (counts[item.reason] || 0) + 1;
+            return counts;
+        }, {});
+        return {
+            list:next,
+            changed:recovered.length > 0,
+            recoveredCount:recovered.length,
+            recovered,
+            skipped,
+            report:{
+                total:records.length,
+                explicitBefore:records.filter(record => Boolean(getAnimeAniListIdentity(record.item))).length,
+                recoveredCount:recovered.length,
+                skippedCount:skipped.length,
+                reasonCounts,
+                recovered
+            }
+        };
+    }
+
+    function collectActiveAnimeAniListIds(list) {
+        return [...new Set(arrayOf(list)
+            .filter(item => item && !item.deletedAt)
+            .map(getAnimeAniListIdentity)
+            .filter(Boolean)
+            .map(Number)
+            .filter(value => Number.isSafeInteger(value) && value > 0))];
+    }
+
     function legacyAnimeIdentityKey(item) {
         if (!item || getAnimeAniListIdentity(item)) return "";
         const startDate = item.startDate && typeof item.startDate === "object" ? item.startDate : {};
@@ -1076,11 +1205,14 @@
 
     function importBackup(current, backup, mode = "merge") {
         const normalized = normalizeImportedBackup(backup);
-        const incoming = migrateList(normalized[STORAGE_KEY]);
+        const incomingRecovery = recoverLegacyAnimeIdentities(normalized[STORAGE_KEY], normalized, normalized.exportedAt || new Date().toISOString());
+        const currentRecovery = recoverLegacyAnimeIdentities(current.animeList, current, new Date().toISOString());
+        const incoming = migrateList(incomingRecovery.list);
+        const currentAnime = migrateList(currentRecovery.list);
         const incomingWorks = migrateWorks(incoming, normalized.works);
         const result = {
-            animeList: mode === "replace" ? incoming : mergeById(current.animeList, incoming),
-            works:mode === "replace" ? incomingWorks : mergeWorks(migrateWorks(current.animeList, current.works || []), incomingWorks),
+            animeList: mode === "replace" ? incoming : mergeById(currentAnime, incoming),
+            works:mode === "replace" ? incomingWorks : mergeWorks(migrateWorks(currentAnime, current.works || []), incomingWorks),
             mangaReadHistory:mode === "replace" ? normalized[MANGA_HISTORY_KEY] : [...arrayOf(current.mangaReadHistory), ...normalized[MANGA_HISTORY_KEY]],
             eventOverrides: mode === "replace" ? normalized.eventOverrides : { ...(current.eventOverrides || {}), ...normalized.eventOverrides },
             eventAnimeOverrides:mode === "replace" ? normalized.eventAnimeOverrides : { ...(current.eventAnimeOverrides || {}), ...normalized.eventAnimeOverrides },
@@ -1090,7 +1222,9 @@
             preferences: { ...(mode === "replace" ? {} : current.preferences), ...normalized.preferences },
             importedAnimeCount: incoming.length,
             importedWorkCount:incomingWorks.length,
-            backupFormat: normalized.backupFormat
+            backupFormat: normalized.backupFormat,
+            legacyIdentityRecoveryCount:incomingRecovery.recoveredCount + (mode === "replace" ? 0 : currentRecovery.recoveredCount),
+            legacyIdentityRecovery:{ incoming:incomingRecovery.report, current:currentRecovery.report }
         };
         const reconciled = reconcileExistingAnimeDuplicates(result.animeList, result);
         return { ...result, ...reconciled.state, animeList:reconciled.list, duplicateMergeCount:reconciled.mergedCount };
@@ -1321,13 +1455,19 @@
 
     function mergeCloudPayload(local, cloud, choice = "merge") {
         const reconcilePayload = payload => {
-            const reconciled = reconcileExistingAnimeDuplicates(payload?.animeList, payload || {});
-            return { ...(payload || {}), ...reconciled.state, animeList:reconciled.list, duplicateMergeCount:reconciled.mergedCount };
+            const recovery = recoverLegacyAnimeIdentities(payload?.animeList, payload || {}, new Date().toISOString());
+            const recoveredPayload = { ...(payload || {}), animeList:recovery.list };
+            const reconciled = reconcileExistingAnimeDuplicates(recovery.list, recoveredPayload);
+            return { ...recoveredPayload, ...reconciled.state, animeList:reconciled.list, duplicateMergeCount:reconciled.mergedCount, legacyIdentityRecoveryCount:Number(payload?.legacyIdentityRecoveryCount || 0) + recovery.recoveredCount, legacyIdentityRecovery:recovery.report };
         };
         if (choice === "local") return reconcilePayload(local);
         if (choice === "cloud") return reconcilePayload(cloud);
-        const historyMap = new Map([...arrayOf(local.mangaReadHistory), ...arrayOf(cloud.mangaReadHistory)].map(record => [String(record.id || `${record.workId}|${record.mediaId}|${record.timestamp}|${record.deltaChapters}|${record.deltaVolumes}`), record]));
-        return reconcilePayload({ ...local, ...cloud, animeList: mergeById(local.animeList, cloud.animeList), works:mergeWorks(migrateWorks(local.animeList, local.works || []), migrateWorks(cloud.animeList, cloud.works || [])), mangaReadHistory:[...historyMap.values()], eventOverrides: { ...(local.eventOverrides || {}), ...(cloud.eventOverrides || {}) }, eventAnimeOverrides:{ ...(local.eventAnimeOverrides || {}), ...(cloud.eventAnimeOverrides || {}) }, settings: { ...(local.settings || {}), ...(cloud.settings || {}) }, watchHistory: [...arrayOf(local.watchHistory), ...arrayOf(cloud.watchHistory)] });
+        const recoveredLocal = recoverLegacyAnimeIdentities(local?.animeList, local || {}, new Date().toISOString());
+        const recoveredCloud = recoverLegacyAnimeIdentities(cloud?.animeList, cloud || {}, new Date().toISOString());
+        const localPayload = { ...(local || {}), animeList:recoveredLocal.list };
+        const cloudPayload = { ...(cloud || {}), animeList:recoveredCloud.list };
+        const historyMap = new Map([...arrayOf(localPayload.mangaReadHistory), ...arrayOf(cloudPayload.mangaReadHistory)].map(record => [String(record.id || `${record.workId}|${record.mediaId}|${record.timestamp}|${record.deltaChapters}|${record.deltaVolumes}`), record]));
+        return reconcilePayload({ ...localPayload, ...cloudPayload, animeList: mergeById(localPayload.animeList, cloudPayload.animeList), works:mergeWorks(migrateWorks(localPayload.animeList, localPayload.works || []), migrateWorks(cloudPayload.animeList, cloudPayload.works || [])), mangaReadHistory:[...historyMap.values()], eventOverrides: { ...(localPayload.eventOverrides || {}), ...(cloudPayload.eventOverrides || {}) }, eventAnimeOverrides:{ ...(localPayload.eventAnimeOverrides || {}), ...(cloudPayload.eventAnimeOverrides || {}) }, settings: { ...(localPayload.settings || {}), ...(cloudPayload.settings || {}) }, watchHistory: [...arrayOf(localPayload.watchHistory), ...arrayOf(cloudPayload.watchHistory)], legacyIdentityRecoveryCount:recoveredLocal.recoveredCount + recoveredCloud.recoveredCount });
     }
     function pruneTombstones(list, now = Date.now()) { return migrateList(list).filter(item => !item.deletedAt || now - Date.parse(item.deletedAt) <= TOMBSTONE_DAYS * 86400000); }
     function purgeExpiredTombstones(list, state = {}, now = Date.now()) {
@@ -1344,5 +1484,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText };
 });
