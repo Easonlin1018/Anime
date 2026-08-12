@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-11T02:26:32.819Z",
-    "lastSuccessfulUpdateAt": "2026-08-11T02:26:32.819Z",
+    "updatedAt": "2026-08-12T02:43:03.808Z",
+    "lastSuccessfulUpdateAt": "2026-08-12T02:43:03.808Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 625,
-    "articleCandidateCount": 231,
-    "articleFetchSuccessCount": 34,
+    "uniqueNewsCount": 622,
+    "articleCandidateCount": 229,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 5,
-    "cachedEventCount": 31,
+    "matchedEventCount": 15,
+    "newEventCount": 3,
+    "cachedEventCount": 34,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
+    "archiveCount": 1,
     "storedEventCount": 42,
-    "expiredRemovedCount": 11,
+    "expiredRemovedCount": 12,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 54,
+    "undatedOldRemovedCount": 60,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 133,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -35,7 +35,7 @@
       "summary": "由墨香銅臭同名小說改編的動畫《天官賜福》，即日起至 9 月 9 日，在台北信義區 DREAM PLAZA B2 連通道推出期間限定主題快閃店。本次集結覓星社「四靈韻章」系列、包包的谷「歲和紙影」系列以及「與君共千秋」限定系列，三大系列首次在台灣亮相。 本次快閃店運用「歲和紙影」系列兩幅大型主視覺，打造Ｌ形沉浸式打卡區，透過環繞式",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=309659",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -59,8 +59,8 @@
       "dateConfidence": "high",
       "dateSource": "即日起至 9 月 9 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     },
     {
       "id": "gnn-309119",
@@ -194,7 +194,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "巴哈姆特",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -214,12 +214,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 巴哈姆特",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -248,8 +248,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -729,34 +729,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-642d6f3817b89821",
-      "title": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-06-27T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 SouNova 少女星",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
-    },
-    {
       "id": "ext-3a237f3b9fc19304",
       "title": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳",
       "summary": "三立新聞網SETN.com",
@@ -787,6 +759,37 @@
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
+      "id": "ext-10025e3f3fa962b7",
+      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
+      "summary": "travel.udn.com",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "湯姆貓與傑利鼠",
+        "飛天小女警"
+      ],
+      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 travel.udn.com",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+    },
+    {
       "id": "ext-0ca4f08ed4351924",
       "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
       "summary": "遠見雜誌",
@@ -808,37 +811,6 @@
       "feeText": "",
       "workTitles": [],
       "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
-    },
-    {
-      "id": "ext-10025e3f3fa962b7",
-      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
-      "summary": "UDN",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "湯姆貓與傑利鼠",
-        "飛天小女警"
-      ],
-      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 UDN",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
@@ -873,8 +845,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1235,8 +1207,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     },
     {
       "id": "ext-2d785a3e1d2ed80f",
@@ -1295,8 +1267,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1368,7 +1340,67 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-08-10T02:33:43.485Z",
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
+    },
+    {
+      "id": "ext-0f83f086603a7bb2",
+      "title": "比奇堡居民盲盒開賣！台北華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟筆小新等人氣IP 一次登場",
+      "summary": "上報Up Media",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0wdkNOYWRSUGs2Mno1bGRrUy1lMFpBTDFrX0tOQWdjT2FMV2czZkktSzJzQzRXQWtmSHlhS0o0c1k0d3VSTFFvcGtNS09jTi1wc0loSzk1QjNfMEx6d0dn?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-11T08:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "夏日萌盒祭"
+      ],
+      "searchCorpus": "比奇堡居民盲盒開賣！台北華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟筆小新等人氣IP 一次登場 上報Up Media",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-12T02:43:03.808Z",
+      "lastSeenAt": "2026-08-12T02:43:03.808Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-642d6f3817b89821",
+      "title": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-06-27T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 SouNova 少女星",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z",
+      "archivedAt": "2026-08-12T02:43:03.808Z"
+    }
+  ]
 }
