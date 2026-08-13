@@ -3,6 +3,7 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const V = require("../v11-core.js");
 
 const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
 const titleStart = html.indexOf("function stripDisplayYear");
@@ -122,7 +123,7 @@ function legacyStorageRecords() {
 test("startup 使用真實 existing-record migration 路徑", () => {
     const loadSource = html.slice(html.indexOf("function loadStoredAnime"), html.indexOf("function saveAndRender"));
     assert.match(loadSource, /migrateExistingAnimeRecords\(animeList\)/u);
-    assert.match(loadSource, /anime_tracker_existing_media_migration_backup_v1/u);
+    assert.match(loadSource, /anime_tracker_title_series_migration_backup_v1/u);
 });
 
 test("舊 storage 三筆資料一次升級標題與 waiting category", () => {
@@ -149,7 +150,7 @@ test("第二次 startup migration 為 0 changes 且資料完全相同", () => {
     const serialized = JSON.parse(JSON.stringify(first.list));
     const second = api.migrateExistingAnimeRecords(serialized, new Date("2026-08-11T00:00:00.000Z"));
     assert.equal(second.changed, false);
-    assert.deepEqual(second.report, { titleChanged:0, categoryChanged:0, metadataChanged:0, totalChanged:0, changes:[] });
+    assert.deepEqual(second.report, { titleChanged:0, categoryChanged:0, metadataChanged:0, seriesChanged:0, seriesIdentityChanged:0, totalChanged:0, changes:[] });
     assert.deepEqual(second.list, serialized);
 });
 

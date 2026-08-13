@@ -1,5 +1,5 @@
-const CACHE_VERSION = "anime-tracker-v11-legacy-identity-recovery-1";
-const SHELL = ["./", "./index.html", "./v11-core.js?v=legacy-identity-recovery-1", "./v11-ui.js?v=season-identity-fix-1", "./v11-styles.css?v=duplicate-reconciliation-1", "./cross-media.js?v=anime-search-multi-1", "./spotify-config.js", "./spotify-themes.js?v=duplicate-reconciliation-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
+const CACHE_VERSION = "anime-tracker-v11-series-title-identity-1";
+const SHELL = ["./", "./index.html", "./vendor/opencc-js-1.4.1-full.js?v=1.4.1", "./v11-core.js?v=series-title-identity-1", "./v11-ui.js?v=series-title-identity-1", "./v11-styles.css?v=duplicate-reconciliation-1", "./cross-media.js?v=anime-search-multi-1", "./spotify-config.js", "./spotify-themes.js?v=duplicate-reconciliation-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_VERSION).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener("message", event => {

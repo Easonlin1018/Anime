@@ -635,7 +635,8 @@
     <button style="margin-top:15px;margin-bottom:0;width:auto;padding:5px 15px;background:#475569;" onclick="closeToast()">關閉</button>
 </div>
 
-<script src="v11-core.js?v=legacy-identity-recovery-1"></script>
+<script src="vendor/opencc-js-1.4.1-full.js?v=1.4.1"></script>
+<script src="v11-core.js?v=series-title-identity-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -793,7 +794,7 @@ function loadStoredAnime() {
     window.__ANIME_EXISTING_MEDIA_MIGRATION__ = existingMediaMigration.report;
     if (existingMediaMigration.changed) {
         try {
-            const backupKey = "anime_tracker_existing_media_migration_backup_v1";
+            const backupKey = "anime_tracker_title_series_migration_backup_v1";
             if (!localStorage.getItem(backupKey)) {
                 localStorage.setItem(backupKey, JSON.stringify({
                     createdAt:new Date().toISOString(),
@@ -817,6 +818,7 @@ function loadStoredAnime() {
 }
 
 function saveAndRender() {
+    animeList = migrateExistingAnimeRecords(animeList).list;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
     renderList();
 }
@@ -955,6 +957,27 @@ function stripDisplayYear(title) {
         .trim();
 }
 
+function toTraditionalAnimeTitle(value) {
+    return AnimeTrackerV11.toTraditionalChinese(String(value ?? ""));
+}
+
+function normalizeTitleAliasesForMigration(values) {
+    const aliases = [];
+    const seen = new Set();
+    for (const raw of Array.isArray(values) ? values.flat(Infinity) : [values]) {
+        const value = String(raw || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+        if (!value) continue;
+        const variants = [value, hasChineseTitleContext(value) ? toTraditionalAnimeTitle(value) : ""];
+        for (const variant of variants.filter(Boolean)) {
+            const key = variant.toLocaleLowerCase();
+            if (seen.has(key)) continue;
+            seen.add(key);
+            aliases.push(variant);
+        }
+    }
+    return aliases.slice(0, 80);
+}
+
 function normalizeTitleIdentity(title) {
     return stripDisplayYear(title)
         .normalize("NFKC")
@@ -974,13 +997,13 @@ function getCoreTitle(title) {
 }
 
 function getSeriesGroupTitle(mediaOrTitle, parentChineseTitle = null) {
-    if (parentChineseTitle) return getCoreTitle(parentChineseTitle);
+    if (parentChineseTitle) return getCoreTitle(toTraditionalAnimeTitle(parentChineseTitle));
     if (mediaOrTitle && typeof mediaOrTitle === "object") {
         const stored = String(mediaOrTitle.groupTitle || mediaOrTitle.seriesGroupTitle || "").trim();
-        if (stored) return getCoreTitle(stored);
-        return getCoreTitle(mediaOrTitle.title || mediaOrTitle.displayTitle || "");
+        if (stored) return getCoreTitle(toTraditionalAnimeTitle(stored));
+        return getCoreTitle(toTraditionalAnimeTitle(mediaOrTitle.title || mediaOrTitle.displayTitle || ""));
     }
-    return getCoreTitle(mediaOrTitle);
+    return getCoreTitle(toTraditionalAnimeTitle(mediaOrTitle));
 }
 
 function getStructuredMediaStartDate(media) {
@@ -1009,7 +1032,11 @@ function compareSeriesMediaByStartDate(a, b) {
 }
 
 function cleanMediaTitle(value) {
-    const title = stripDisplayYear(value).replace(/\s+/g, " ").trim();
+    const title = stripDisplayYear(value)
+        .replace(/∫\s*∫(?=\s*$)/u, "∬")
+        .replace(/\*(?=\s*$)/u, "＊")
+        .replace(/\s+/g, " ")
+        .trim();
     if (!title || /^(?:undefined|null|untitled|未命名作品)$/iu.test(title)) return "";
     return title;
 }
@@ -1017,10 +1044,13 @@ function cleanMediaTitle(value) {
 function detectMediaSeasonNumber(media) {
     const format = String(media?.format || "").toUpperCase();
     if (["ONA", "OVA", "SPECIAL", "MOVIE"].includes(format)) return null;
+    const safeSynonyms = (Array.isArray(media?.synonyms) ? media.synonyms : [])
+        .filter(value => !/(?:mini\s*anime|short|ona|ova|special|movie|spin[ -]?off|迷你動畫|短篇|特別篇|劇場版)/iu.test(String(value || "")));
     const text = [
         media?.title?.native,
         media?.title?.english,
-        media?.title?.romaji
+        media?.title?.romaji,
+        ...safeSynonyms
     ].filter(Boolean).join(" ");
     const patterns = [
         /\bseason\s*(\d+)\b/iu,
@@ -1051,9 +1081,31 @@ function hasChineseTitleContext(title) {
 }
 
 function trustedChineseAlias(media) {
-    return (Array.isArray(media?.synonyms) ? media.synonyms : [])
+    const direct = (Array.isArray(media?.synonyms) ? media.synonyms : [])
         .map(cleanMediaTitle)
-        .find(hasChineseTitleContext) || "";
+        .filter(hasChineseTitleContext)
+        .map(toTraditionalAnimeTitle)
+        .filter(title => !isLegacyGeneratedTitle(title));
+    const distinctive = direct.find(title => hasDistinctiveMediaTitle(title)
+        || /(?:第\s*[一二三四五六七八九十百0-9]+\s*[季期]|\s[2-9]\s*$)/u.test(title));
+    if (distinctive) return distinctive;
+
+    const mediaNames = new Set([
+        media?.title?.native,
+        media?.title?.english,
+        media?.title?.romaji,
+        ...(Array.isArray(media?.synonyms) ? media.synonyms : [])
+    ].map(normalizeTitleIdentity).filter(Boolean));
+    for (const edge of Array.isArray(media?.relations) ? media.relations : Array.isArray(media?.relations?.edges) ? media.relations.edges : []) {
+        const node = edge?.node || {};
+        const nodeNames = [node?.title?.native, node?.title?.english, node?.title?.romaji]
+            .map(normalizeTitleIdentity).filter(Boolean);
+        if (!nodeNames.some(name => mediaNames.has(name))) continue;
+        const relatedChinese = (Array.isArray(node?.synonyms) ? node.synonyms : [])
+            .map(cleanMediaTitle).filter(hasChineseTitleContext).map(toTraditionalAnimeTitle)[0];
+        if (relatedChinese) return relatedChinese;
+    }
+    return direct[0] || "";
 }
 
 function getRelationChineseParentTitle(media) {
@@ -1073,7 +1125,7 @@ function getRelationChineseParentTitle(media) {
                 ...(Array.isArray(node?.synonyms) ? node.synonyms : [])
             ].map(cleanMediaTitle).filter(Boolean);
             const chinese = candidates.find(hasChineseTitleContext);
-            if (chinese) return chinese;
+            if (chinese) return toTraditionalAnimeTitle(chinese);
         }
     }
     return "";
@@ -1099,7 +1151,7 @@ function getDistinctiveMediaSubtitle(media) {
 }
 
 function deriveLocalizedMediaTitle(media, parentChineseTitle) {
-    const parentCore = getCoreTitle(parentChineseTitle);
+    const parentCore = getCoreTitle(toTraditionalAnimeTitle(parentChineseTitle));
     if (!parentCore || !hasChineseTitleContext(parentCore)) return "";
     const titles = [
         media?.title?.native,
@@ -1111,19 +1163,19 @@ function deriveLocalizedMediaTitle(media, parentChineseTitle) {
     if (!titleText) return "";
 
     const suffix = titles.map(title => title.match(/([∬∽＊*]+)$/u)?.[1]).find(Boolean);
-    if (suffix) return `${parentCore}${suffix}`;
+    if (suffix) return toTraditionalAnimeTitle(`${parentCore}${suffix}`);
 
     const bracketSuffix = titles
         .map(title => title.match(/[【〖]([^【】〖〗]{1,24})[】〗]\s*$/u)?.[1])
         .find(value => value && hasChineseTitleContext(value));
-    if (bracketSuffix) return `${parentCore}【${bracketSuffix}】`;
+    if (bracketSuffix) return toTraditionalAnimeTitle(`${parentCore}【${bracketSuffix}】`);
 
     if (/\bshunkashuutou\b/iu.test(titleText) || /春夏秋冬/u.test(titleText)) {
         return `${parentCore}【春夏秋冬】`;
     }
 
     const distinctiveSubtitle = getDistinctiveMediaSubtitle(media);
-    if (distinctiveSubtitle) return `${parentCore}【${distinctiveSubtitle}】`;
+    if (distinctiveSubtitle) return toTraditionalAnimeTitle(`${parentCore}【${distinctiveSubtitle}】`);
 
     const partNumber = titleText.match(/\bpart\s*(\d+)\b/iu)?.[1];
     if (partNumber && Number(partNumber) >= 2) return `${parentCore} Part ${Number(partNumber)}`;
@@ -1148,10 +1200,10 @@ function deriveLocalizedMediaTitle(media, parentChineseTitle) {
 function getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
     const localizedFromParent = deriveLocalizedMediaTitle(media, parentChineseTitle);
     const parentIdentity = normalizeTitleIdentity(getCoreTitle(parentChineseTitle));
-    const officialChinese = cleanMediaTitle(media?.title?.traditionalChinese || media?.title?.zhHant || media?.title?.chinese);
-    const wikiChinese = hasChineseTitleContext(wikiZhTitle) ? cleanMediaTitle(wikiZhTitle) : "";
+    const officialChinese = toTraditionalAnimeTitle(cleanMediaTitle(media?.title?.traditionalChinese || media?.title?.zhHant || media?.title?.chinese));
+    const wikiChinese = hasChineseTitleContext(wikiZhTitle) ? toTraditionalAnimeTitle(cleanMediaTitle(wikiZhTitle)) : "";
     const aliasChinese = trustedChineseAlias(media);
-    const googleChinese = hasChineseTitleContext(googleZhTitle) ? cleanMediaTitle(googleZhTitle) : "";
+    const googleChinese = hasChineseTitleContext(googleZhTitle) ? toTraditionalAnimeTitle(cleanMediaTitle(googleZhTitle)) : "";
     let selected = null;
 
     if (officialChinese) {
@@ -1202,7 +1254,7 @@ function buildFallbackMediaTitle(parentTitle, format, year, relationType = "SEQU
 
 function getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTitle) {
     const year = Number(media?.startDate?.year) || null;
-    const parentCore = getCoreTitle(parentChineseTitle);
+    const parentCore = getCoreTitle(toTraditionalAnimeTitle(parentChineseTitle));
     const canonical = getCanonicalMediaTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitle);
     const seasonNumber = detectMediaSeasonNumber(media);
     const relationType = String(media?.relationType || "").toUpperCase();
@@ -1238,6 +1290,15 @@ function generateSmartTitle(media, parentChineseTitle, wikiZhTitle, googleZhTitl
     return getSmartTitleDetails(media, parentChineseTitle, wikiZhTitle, googleZhTitle).displayTitle;
 }
 
+function resolveTraditionalChineseDisplayTitle(media, context = {}) {
+    return getSmartTitleDetails(
+        media,
+        context.parentChineseTitle || null,
+        context.wikiZhTitle || null,
+        context.googleZhTitle || context.googleZh || null
+    ).displayTitle;
+}
+
 function isLegacyGeneratedTitle(title) {
     return /[（(](?:OVA|特別篇|劇場版|電影版|ONA外傳|續篇|第二季)(?:\s*[・·\-－—]\s*\d{4}\s*年?)?[）)]\s*$/iu.test(String(title || ""));
 }
@@ -1254,8 +1315,12 @@ function refreshGeneratedAnimeTitle(anime, media) {
         ...(Array.isArray(anime.aliases) ? anime.aliases : []),
         trustedChineseAlias(media)
     ].map(cleanMediaTitle).find(hasChineseTitleContext) || "";
+    const traditionalCurrentTitle = hasChineseTitleContext(anime.title)
+        ? toTraditionalAnimeTitle(anime.title)
+        : anime.title;
+    const canNormalizeChineseTitle = traditionalCurrentTitle !== anime.title;
     const canUpgradeForeignTitle = Boolean(chineseContext && !hasChineseTitleContext(anime.title));
-    if (!managedSource && !isLegacyGeneratedTitle(anime.title) && !canUpgradeForeignTitle && !unsafeNonTvSeasonTitle) return false;
+    if (!managedSource && !isLegacyGeneratedTitle(anime.title) && !canUpgradeForeignTitle && !unsafeNonTvSeasonTitle && !canNormalizeChineseTitle) return false;
 
     const previousTitle = anime.title;
     const parentTitle = chineseContext || anime.groupTitle || getCoreTitle(previousTitle);
@@ -1587,10 +1652,11 @@ function buildStoredAnimeMediaSnapshot(anime) {
     };
 }
 
-function migrateExistingAnimeRecords(list, now = new Date()) {
+function migrateExistingAnimeRecordsPass(list, now = new Date()) {
     let titleChanged = 0;
     let categoryChanged = 0;
     let metadataChanged = 0;
+    let seriesChanged = 0;
     const changes = [];
     const migrated = (Array.isArray(list) ? list : []).map(original => {
         if (!original || typeof original !== "object") return original;
@@ -1610,7 +1676,19 @@ function migrateExistingAnimeRecords(list, now = new Date()) {
         });
 
         if (next.titleManuallyEdited !== true && next.titleSource !== "manual" && next.manualTitle !== true) {
+            if (hasChineseTitleContext(next.title)) {
+                next.title = toTraditionalAnimeTitle(next.title);
+                next.displayTitle = toTraditionalAnimeTitle(next.displayTitle || next.title);
+                next.canonicalTitle = toTraditionalAnimeTitle(next.canonicalTitle || stripDisplayYear(next.title));
+            }
+            next.aliases = normalizeTitleAliasesForMigration([next.title, ...(Array.isArray(next.aliases) ? next.aliases : [])]);
             refreshGeneratedAnimeTitle(next, media);
+            if (hasChineseTitleContext(next.title)) {
+                next.title = toTraditionalAnimeTitle(next.title);
+                next.displayTitle = toTraditionalAnimeTitle(next.displayTitle || next.title);
+                next.canonicalTitle = toTraditionalAnimeTitle(next.canonicalTitle || stripDisplayYear(next.title));
+            }
+            next.aliases = normalizeTitleAliasesForMigration([next.title, ...(Array.isArray(next.aliases) ? next.aliases : [])]);
         }
         applyAutomaticCategoryFromMedia(next, media, now);
         const releasedEpisodes = Number(next.releasedEpisodes);
@@ -1650,11 +1728,70 @@ function migrateExistingAnimeRecords(list, now = new Date()) {
         }
         return original;
     });
+    const seriesIdentityMigration = AnimeTrackerV11.assignAnimeSeriesIdentity(migrated);
+    const withSeriesIdentity = seriesIdentityMigration.list.map(item => item && typeof item === "object" ? { ...item } : item);
+    const seriesGroups = new Map();
+    withSeriesIdentity.forEach(item => {
+        if (!item || typeof item !== "object") return;
+        const key = AnimeTrackerV11.getAnimeSeriesKey(item);
+        if (!seriesGroups.has(key)) seriesGroups.set(key, []);
+        seriesGroups.get(key).push(item);
+    });
+    for (const members of seriesGroups.values()) {
+        const ordered = members.slice().sort(compareSeriesMediaByStartDate);
+        const candidates = ordered.flatMap(item => [
+            item.title,
+            item.groupTitle,
+            item.seriesGroupTitle,
+            ...(Array.isArray(item.aliases) ? item.aliases : [])
+        ]).map(cleanMediaTitle).filter(Boolean);
+        const chineseCandidate = candidates.find(hasChineseTitleContext);
+        const header = getCoreTitle(toTraditionalAnimeTitle(chineseCandidate || candidates[0] || ""));
+        members.forEach(item => {
+            const nextHeader = header || getCoreTitle(toTraditionalAnimeTitle(item.title));
+            if (item.groupTitle !== nextHeader) {
+                item.groupTitle = nextHeader;
+                seriesChanged++;
+            }
+        });
+    }
     return {
-        list:migrated,
-        changed:titleChanged > 0 || categoryChanged > 0 || metadataChanged > 0,
-        report:{ titleChanged, categoryChanged, metadataChanged, totalChanged:changes.length, changes }
+        list:withSeriesIdentity,
+        changed:titleChanged > 0 || categoryChanged > 0 || metadataChanged > 0 || seriesChanged > 0
+            || seriesIdentityMigration.changed,
+        report:{ titleChanged, categoryChanged, metadataChanged, seriesChanged, seriesIdentityChanged:seriesIdentityMigration.changedCount, totalChanged:changes.length, changes }
     };
+}
+
+function migrateExistingAnimeRecords(list, now = new Date()) {
+    let current = Array.isArray(list) ? list : [];
+    let changed = false;
+    const aggregate = {
+        titleChanged:0,
+        categoryChanged:0,
+        metadataChanged:0,
+        seriesChanged:0,
+        seriesIdentityChanged:0,
+        totalChanged:0,
+        changes:[]
+    };
+    const changedIds = new Set();
+    for (let passIndex = 0; passIndex < 4; passIndex++) {
+        const beforePass = JSON.stringify(current);
+        const pass = migrateExistingAnimeRecordsPass(current, now);
+        current = pass.list;
+        if (!pass.changed || JSON.stringify(current) === beforePass) break;
+        changed = true;
+        for (const field of ["titleChanged", "categoryChanged", "metadataChanged", "seriesChanged", "seriesIdentityChanged"]) {
+            aggregate[field] += Number(pass.report[field] || 0);
+        }
+        for (const change of pass.report.changes || []) {
+            aggregate.changes.push(change);
+            changedIds.add(String(change.id));
+        }
+    }
+    aggregate.totalChanged = changedIds.size;
+    return { list:current, changed, report:aggregate };
 }
 
 function buildAnimeRecordFromMedia(media, context = {}) {
@@ -1726,6 +1863,31 @@ function isDirectSearchSeriesMember(media, primaryMedia) {
         || directRelationMediaIds(media).has(primaryId);
 }
 
+function getExistingChineseSeriesContext(media, list = animeList) {
+    const active = (Array.isArray(list) ? list : []).filter(item => item && !item.deletedAt);
+    const relationIds = directRelationMediaIds(media);
+    const exactRelation = active.find(item => relationIds.has(getAniListMediaId(item)));
+    const contextTitle = item => {
+        const value = item?.groupTitle || item?.seriesGroupTitle || (item?.title ? getCoreTitle(item.title) : "");
+        return hasChineseTitleContext(value) ? toTraditionalAnimeTitle(value) : "";
+    };
+    const exactTitle = contextTitle(exactRelation);
+    if (exactTitle) return exactTitle;
+
+    const mediaTitles = getMediaIdentityTitles(media);
+    for (const item of active) {
+        const chinese = contextTitle(item);
+        if (!chinese) continue;
+        const existingTitles = getMediaIdentityTitles(item);
+        const reliablePrefix = mediaTitles.some(mediaTitle => existingTitles.some(existingTitle =>
+            Math.min(mediaTitle.length, existingTitle.length) >= 6
+            && (mediaTitle.startsWith(existingTitle) || existingTitle.startsWith(mediaTitle))
+        ));
+        if (reliablePrefix) return chinese;
+    }
+    return "";
+}
+
 async function buildSingleAnimeSearchEntries(mediaList, baseContext = {}) {
     const results = normalizeAniListSearchResults(mediaList, 10);
     if (!results.length) return [];
@@ -1738,6 +1900,8 @@ async function buildSingleAnimeSearchEntries(mediaList, baseContext = {}) {
         );
     } catch {}
     const searchParentTitle = baseContext.parentChineseTitle
+        || getExistingChineseSeriesContext(primaryMedia, animeList)
+        || getRelationChineseParentTitle(primaryMedia)
         || baseContext.wikiZhTitle
         || (hasChineseTitleContext(primaryGoogleZh) ? primaryGoogleZh : "");
 
@@ -1769,7 +1933,10 @@ function getSingleAnimeSearchCardView(pending, list = animeList, options = {}) {
     const state = getExistingAnimeMediaState(pending.media, list);
     const candidate = (options.buildAnimeRecord || buildAnimeRecordFromMedia)(pending.media, pending.context);
     const savedTitle = state.anime?.title || state.anime?.displayTitle || "";
-    const title = stripDisplayYear(savedTitle || candidate.title);
+    const visibleTitle = AnimeTrackerV11.hasManualAnimeTitle(state.anime)
+        ? savedTitle
+        : toTraditionalAnimeTitle(savedTitle || candidate.title);
+    const title = stripDisplayYear(visibleTitle);
     const year = Number(pending.media?.startDate?.year)
         || Number(state.anime?.startDate?.year)
         || Number(state.anime?.year)
@@ -2791,7 +2958,7 @@ function buildAnimeItem(anime) {
 }
 
 function normalizeAnimeSearchText(value) {
-    return String(value ?? "")
+    return toTraditionalAnimeTitle(String(value ?? ""))
         .normalize("NFKC")
         .toLocaleLowerCase()
         .replace(/[\p{P}\p{S}\s]+/gu, "");
@@ -2894,23 +3061,31 @@ function renderList() {
     if (noResults) noResults.style.display = visibleAnime.length ? "none" : "block";
 
     for (const [category, items] of Object.entries(categories)) {
-        const seriesMap = {};
+        const seriesMap = new Map();
 
         for (const anime of items) {
-            const core = getSeriesGroupTitle(anime) || anime.title;
-            (seriesMap[core] ||= []).push(anime);
+            const seriesKey = AnimeTrackerV11.getAnimeSeriesKey(anime);
+            if (!seriesMap.has(seriesKey)) {
+                seriesMap.set(seriesKey, {
+                    title:getSeriesGroupTitle(anime) || toTraditionalAnimeTitle(anime.title),
+                    items:[]
+                });
+            }
+            seriesMap.get(seriesKey).items.push(anime);
         }
 
         let html = "";
 
-        for (const [core, series] of Object.entries(seriesMap)) {
+        for (const [seriesKey, group] of seriesMap.entries()) {
+            const core = group.title;
+            const series = group.items;
             series.sort(compareSeriesMediaByStartDate);
             if (series.length === 1) {
                 html += buildAnimeItem(series[0]);
                 continue;
             }
 
-            const key = `${category}_${core}`;
+            const key = `${category}_${seriesKey}`;
             html += `
                 <details class="series-group" data-groupkey="${escapeHtml(key)}" ${openGroups.has(key) ? "open" : ""}>
                     <summary class="series-summary">
@@ -3149,6 +3324,11 @@ function normalizeAnimeAliasList(values) {
         if (value.length < 2 || value.length > 140) continue;
         const key = value.toLowerCase();
         if (!unique.has(key)) unique.set(key, value);
+        if (hasChineseTitleContext(value)) {
+            const traditional = toTraditionalAnimeTitle(value);
+            const traditionalKey = traditional.toLowerCase();
+            if (!unique.has(traditionalKey)) unique.set(traditionalKey, traditional);
+        }
     }
     return [...unique.values()].slice(0, 80);
 }
@@ -3786,7 +3966,7 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=season-identity-fix-1"></script>
+<script src="v11-ui.js?v=series-title-identity-1"></script>
 <script src="spotify-config.js"></script>
 <script src="spotify-themes.js?v=duplicate-reconciliation-1"></script>
 <script src="cross-media.js?v=anime-search-multi-1"></script>

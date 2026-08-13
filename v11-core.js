@@ -24,6 +24,182 @@
     const uuid = () => globalThis.crypto?.randomUUID?.() || `anime-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
     const normalizeText = value => String(value || "").normalize("NFKC").toLocaleLowerCase().replace(/[\p{P}\p{S}\s]+/gu, "");
     const stableHash = value => { let hash = 2166136261; for (const char of String(value)) { hash ^= char.codePointAt(0); hash = Math.imul(hash, 16777619); } return (hash >>> 0).toString(36); };
+    let traditionalChineseConverter = null;
+
+    function getOpenCC() {
+        if (globalThis.OpenCC?.Converter) return globalThis.OpenCC;
+        if (typeof require === "function") {
+            try { return require("./vendor/opencc-js-1.4.1-full.js"); }
+            catch { return null; }
+        }
+        return null;
+    }
+
+    function toTraditionalChinese(value) {
+        const text = String(value ?? "");
+        if (!text) return text;
+        if (!traditionalChineseConverter) {
+            const opencc = getOpenCC();
+            traditionalChineseConverter = opencc?.Converter
+                ? opencc.Converter({ from:"cn", to:"tw" })
+                : input => String(input ?? "");
+        }
+        try { return traditionalChineseConverter(text); }
+        catch { return text; }
+    }
+
+    function hasManualAnimeTitle(item) {
+        return item?.titleManuallyEdited === true || item?.titleSource === "manual" || item?.manualTitle === true;
+    }
+
+    function hasChineseTitleContext(value) {
+        const text = String(value || "");
+        return /\p{Script=Han}/u.test(text) && !/[\p{Script=Hiragana}\p{Script=Katakana}]/u.test(text);
+    }
+
+    function localizedStoredTitle(value, manual = false) {
+        const text = String(value || "");
+        return !manual && hasChineseTitleContext(text) ? toTraditionalChinese(text) : text;
+    }
+
+    function localizedAliasList(values) {
+        const aliases = [];
+        const seen = new Set();
+        arrayOf(values).flat(Infinity).forEach(value => {
+            const text = String(value || "").trim();
+            if (!text) return;
+            [text, hasChineseTitleContext(text) ? toTraditionalChinese(text) : ""].filter(Boolean).forEach(alias => {
+                const key = alias.normalize("NFKC").toLocaleLowerCase();
+                if (seen.has(key)) return;
+                seen.add(key);
+                aliases.push(alias);
+            });
+        });
+        return aliases;
+    }
+
+    function animeRelationEdges(item) {
+        if (Array.isArray(item?.relations)) return item.relations;
+        if (Array.isArray(item?.relations?.edges)) return item.relations.edges;
+        return [];
+    }
+
+    function animeRelationNode(edge) {
+        return edge?.node || edge?.media || edge?.entry || {};
+    }
+
+    function explicitRelationNodeId(edge) {
+        const node = animeRelationNode(edge);
+        const values = [node?.anilistId, node?.aniListId, node?.id];
+        if (String(node?.source || node?.dataSource || "").toLowerCase() === "anilist") values.push(node?.sourceId);
+        for (const value of values) {
+            const numeric = Number(value);
+            if (Number.isSafeInteger(numeric) && numeric > 0) return String(numeric);
+        }
+        return "";
+    }
+
+    function isSafeAnimeSeriesRelation(edge) {
+        const relationType = String(edge?.relationType || edge?.relation_type || edge?.relation || "").toUpperCase();
+        if (!["PREQUEL", "SEQUEL", "PARENT"].includes(relationType)) return false;
+        const format = String(animeRelationNode(edge)?.format || "").toUpperCase();
+        return !format || ["TV", "TV_SHORT", "MOVIE", "OVA", "ONA", "SPECIAL"].includes(format);
+    }
+
+    function legacySeriesTitleIdentity(item) {
+        const source = toTraditionalChinese(item?.groupTitle || item?.seriesGroupTitle || item?.title || "")
+            .normalize("NFKC")
+            .replace(/\s*[（(]\s*(?:19|20)\d{2}\s*年?\s*[）)]\s*$/u, "")
+            .replace(/^\s*(?:電影版|劇場版|映画)\s*/iu, "")
+            .replace(/\s*(?:第\s*[一二三四五六七八九十百0-9]+\s*[季期]|Season\s*\d+|\d+(?:st|nd|rd|th)\s+Season|Part\s*\d+)\s*$/iu, "")
+            .replace(/[∬∽＊*]+\s*$/u, "")
+            .trim();
+        return normalizeText(source);
+    }
+
+    function buildAnimeSeriesIdentity(list) {
+        const records = arrayOf(list);
+        const graph = new Map();
+        const ensureNode = id => {
+            if (id && !graph.has(id)) graph.set(id, new Set());
+            return graph.get(id);
+        };
+        records.forEach(item => {
+            const mediaId = getAnimeAniListIdentity(item);
+            if (!mediaId) return;
+            ensureNode(mediaId);
+            animeRelationEdges(item).forEach(edge => {
+                if (!isSafeAnimeSeriesRelation(edge)) return;
+                const relatedId = explicitRelationNodeId(edge);
+                if (!relatedId || relatedId === mediaId) return;
+                ensureNode(mediaId).add(relatedId);
+                ensureNode(relatedId).add(mediaId);
+            });
+        });
+
+        const rootById = new Map();
+        const visited = new Set();
+        const numericOrder = (a, b) => Number(a) - Number(b) || String(a).localeCompare(String(b));
+        [...graph.keys()].sort(numericOrder).forEach(startId => {
+            if (visited.has(startId)) return;
+            const component = [];
+            const queue = [startId];
+            visited.add(startId);
+            while (queue.length) {
+                const current = queue.shift();
+                component.push(current);
+                for (const next of graph.get(current) || []) {
+                    if (visited.has(next)) continue;
+                    visited.add(next);
+                    queue.push(next);
+                }
+            }
+            const rootId = component.slice().sort(numericOrder)[0];
+            component.forEach(id => rootById.set(id, { rootId, size:component.length }));
+        });
+
+        const entries = records.map((item, index) => {
+            const mediaId = getAnimeAniListIdentity(item);
+            if (mediaId) {
+                const component = rootById.get(mediaId) || { rootId:mediaId, size:1 };
+                return {
+                    index,
+                    mediaId,
+                    seriesRootId:component.rootId,
+                    seriesKey:component.size > 1 ? `anilist-series:${component.rootId}` : `anilist-media:${mediaId}`,
+                    source:component.size > 1 ? "anilist-relations" : "anilist-media"
+                };
+            }
+            const fallback = legacySeriesTitleIdentity(item) || `local-${stableHash(String(item?.id || index))}`;
+            return { index, mediaId:"", seriesRootId:null, seriesKey:`legacy-series:${stableHash(fallback)}`, source:"legacy-title" };
+        });
+        return { entries, graph, rootById };
+    }
+
+    function assignAnimeSeriesIdentity(list) {
+        const source = arrayOf(list);
+        const identity = buildAnimeSeriesIdentity(source);
+        let changedCount = 0;
+        const migrated = source.map((item, index) => {
+            const entry = identity.entries[index];
+            if (!item || !entry) return item;
+            const changed = item.seriesKey !== entry.seriesKey
+                || String(item.seriesRootId ?? "") !== String(entry.seriesRootId ?? "")
+                || item.seriesKeySource !== entry.source;
+            if (!changed) return item;
+            changedCount++;
+            return { ...item, seriesKey:entry.seriesKey, seriesRootId:entry.seriesRootId, seriesKeySource:entry.source };
+        });
+        return { list:migrated, changed:changedCount > 0, changedCount, entries:identity.entries };
+    }
+
+    function getAnimeSeriesKey(item) {
+        if (item?.seriesKey) return String(item.seriesKey);
+        const mediaId = getAnimeAniListIdentity(item);
+        if (mediaId) return `anilist-media:${mediaId}`;
+        const fallback = legacySeriesTitleIdentity(item) || `local-${stableHash(String(item?.id || "unknown"))}`;
+        return `legacy-series:${stableHash(fallback)}`;
+    }
 
     function normalizeSongTitle(value) {
         return normalizeText(String(value || "")
@@ -73,11 +249,16 @@
         const totalEpisodes = Number.isFinite(Number(totalRaw)) ? Number(totalRaw) : totalRaw || null;
         const platform = item.platform || item.customPlatform || arrayOf(item.streamingLinks).map(link => link?.site).filter(Boolean).join("、");
         const createdAt = iso(item.createdAt || item.addedAt || now);
+        const manualTitle = hasManualAnimeTitle(item);
+        const localizedTitle = localizedStoredTitle(item.title || "未命名作品", manualTitle);
         return {
             ...item,
             id: item.id || uuid(),
-            title: String(item.title || "未命名作品"),
-            aliases: [...new Set([item.title, ...arrayOf(item.aliases)].filter(Boolean))],
+            title: localizedTitle,
+            displayTitle:localizedStoredTitle(item.displayTitle || localizedTitle, manualTitle),
+            canonicalTitle:localizedStoredTitle(item.canonicalTitle || localizedTitle, manualTitle),
+            groupTitle:localizedStoredTitle(item.groupTitle || item.seriesGroupTitle || localizedTitle, false),
+            aliases: localizedAliasList([item.title, localizedTitle, ...arrayOf(item.aliases)]),
             status: item.status || item.category || "backlog",
             category: item.category || item.status || "backlog",
             platform,
@@ -110,7 +291,7 @@
     }
 
     function migrateList(list, now) {
-        return arrayOf(list).map(item => migrateAnime(item || {}, now));
+        return assignAnimeSeriesIdentity(arrayOf(list).map(item => migrateAnime(item || {}, now))).list;
     }
 
     function getAnimeTitlePresentation(anime) {
@@ -877,12 +1058,14 @@
     function normalizeMediaEntry(entry, forcedType, now = new Date().toISOString()) {
         const mediaType = String(forcedType || entry?.mediaType || "anime").toLowerCase();
         const createdAt = iso(entry?.createdAt || entry?.addedAt || now);
+        const manualTitle = hasManualAnimeTitle(entry);
+        const commonTitle = localizedStoredTitle(entry?.title || "未命名作品", manualTitle);
         const common = {
             ...entry,
             id:entry?.id || uuid(),
             mediaType:["anime", "manga", "novel"].includes(mediaType) ? mediaType : "anime",
-            title:String(entry?.title || "未命名作品"),
-            aliases:[...new Set([entry?.title, ...arrayOf(entry?.aliases)].filter(Boolean))],
+            title:commonTitle,
+            aliases:localizedAliasList([entry?.title, commonTitle, ...arrayOf(entry?.aliases)]),
             status:String(entry?.status || "unknown").toLowerCase(),
             sourceId:String(entry?.sourceId ?? ""),
             sourceUrl:validHttpUrl(entry?.sourceUrl),
@@ -929,11 +1112,13 @@
     function normalizeWork(work, now = new Date().toISOString()) {
         const entries = arrayOf(work?.mediaEntries).map(entry => normalizeMediaEntry(entry, entry?.mediaType, now));
         const createdAt = iso(work?.createdAt || entries[0]?.createdAt || now);
+        const manualTitle = work?.titleManuallyEdited === true || work?.titleSource === "manual" || work?.manualTitle === true;
+        const title = localizedStoredTitle(work?.title || entries[0]?.title || "未命名作品", manualTitle);
         return {
             ...work,
             workId:work?.workId || uuid(),
-            title:String(work?.title || entries[0]?.title || "未命名作品"),
-            aliases:[...new Set([work?.title, ...arrayOf(work?.aliases), ...entries.flatMap(entry => [entry.title, ...entry.aliases])].filter(Boolean))],
+            title,
+            aliases:localizedAliasList([work?.title, title, ...arrayOf(work?.aliases), ...entries.flatMap(entry => [entry.title, ...entry.aliases])]),
             mediaEntries:entries,
             createdAt,
             updatedAt:iso(work?.updatedAt || createdAt)
@@ -1484,5 +1669,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });

@@ -12,7 +12,13 @@
     let autoSyncTimer = null;
 
     function touch(item) { item.updatedAt = new Date().toISOString(); return item; }
-    function persistAnime() { animeList = V.migrateList(animeList); localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList)); localStorage.setItem("anime_tracker_schema_version", "11"); }
+    function persistAnime() {
+        animeList = V.migrateList(animeList);
+        const presentationMigration = window.migrateExistingAnimeRecords?.(animeList);
+        if (Array.isArray(presentationMigration?.list)) animeList = presentationMigration.list;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
+        localStorage.setItem("anime_tracker_schema_version", "11");
+    }
     function currentSettings() { return { eventSettings, filters: state.filters, animeListSort, notificationPermissionAsked: localStorage.getItem("anime_notification_prompted_v11") === "1" }; }
     function snapshot() { const media=window.CrossMediaTracker?.snapshot?.()||{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])}; return { animeList: V.migrateList(animeList), works:media.works, mangaReadHistory:media.mangaReadHistory, eventOverrides: { ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, settings: currentSettings(), watchHistory: [...watchHistory], reminders: {}, preferences: parse(PREFS_KEY, {}) }; }
     function createRestorePoint(reason) {
@@ -257,7 +263,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "season-identity-fix-1";
+        const reloadVersion = "series-title-identity-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");

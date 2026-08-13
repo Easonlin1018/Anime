@@ -29,7 +29,7 @@ ${html.slice(cardStart,cardEnd)}
 ${html.slice(findStart,findEnd)}
 ${html.slice(categoryStart,categoryEnd)}
 ${html.slice(mediaStart,mediaEnd)}
-return { normalizeAniListSearchResults, getSingleAnimeSearchCardView, findPendingSingleAnimeSearchEntry, getExistingAnimeMediaState, addOrRestoreSingleMedia };`)();
+return { normalizeAniListSearchResults, getSingleAnimeSearchCardView, findPendingSingleAnimeSearchEntry, getExistingAnimeMediaState, addOrRestoreSingleMedia, getExistingChineseSeriesContext };`)();
 
 let passed = 0;
 function test(name, fn) {
@@ -151,6 +151,27 @@ test("AniList UI 搜尋使用 Page + SEARCH_MATCH，單筆流程使用獨立 que
     assert.match(html,/const SINGLE_MEDIA_SEARCH_QUERY/u);
     assert.match(html,/data-add-single-anime-search-result/u);
     assert.doesNotMatch(html.slice(html.indexOf("function addPendingAnimeSearchResult"),html.indexOf("async function searchAnime")),/checkAndAddSequel|walkAniListSequelGraph/u);
+});
+
+test("關聯候選優先沿用既有繁中系列 context，不採低可信機翻母標題", () => {
+    const candidate = {
+        id:206425,
+        title:{
+            native:"葬送のフリーレン ～●●の魔法～ 3クール",
+            romaji:"Sousou no Frieren: ●● no Mahou Part 3"
+        },
+        format:"ONA",
+        relations:{edges:[]}
+    };
+    const existing = [{
+        id:"local-frieren",
+        anilistId:154587,
+        title:"葬送的芙莉蓮",
+        groupTitle:"葬送的芙莉蓮",
+        aliases:["Sousou no Frieren", "Frieren: Beyond Journey's End"],
+        category:"completed"
+    }];
+    assert.equal(api.getExistingChineseSeriesContext(candidate, existing), "葬送的芙莉蓮");
 });
 
 if (!process.exitCode) console.log(`\nAnime multi-result search tests passed: ${passed}/${passed}`);
