@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-13T02:46:19.616Z",
-    "lastSuccessfulUpdateAt": "2026-08-13T02:46:19.616Z",
+    "updatedAt": "2026-08-14T02:45:01.378Z",
+    "lastSuccessfulUpdateAt": "2026-08-14T02:45:01.378Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 622,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 39,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 234,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 15,
-    "newEventCount": 3,
+    "matchedEventCount": 17,
+    "newEventCount": 4,
     "cachedEventCount": 34,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 42,
-    "expiredRemovedCount": 13,
+    "storedEventCount": 43,
+    "expiredRemovedCount": 12,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 60,
+    "undatedOldRemovedCount": 63,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 134,
+    "foreignRemovedCount": 1,
+    "nonActivityRemovedCount": 130,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -59,8 +59,8 @@
       "dateConfidence": "high",
       "dateSource": "即日起至 9 月 9 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "gnn-309119",
@@ -89,8 +89,8 @@
       "dateConfidence": "high",
       "dateSource": "7 月 31 日~9 月 3 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "gnn-308121",
@@ -204,7 +204,7 @@
         "新竹"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-05T04:12:44.000Z",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
       "eventStartDate": "2026-08-06",
       "eventEndDate": null,
       "eventStatus": "ongoing-unconfirmed",
@@ -218,8 +218,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -248,8 +248,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -371,8 +371,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-06T03:35:05.926Z",
-      "lastSeenAt": "2026-08-06T03:35:05.926Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "gnn-308731",
@@ -759,6 +759,37 @@
       "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
+      "id": "ext-3c6478c274b20cfd",
+      "title": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場",
+      "summary": "上報Up Media",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE94cF9FcnhCRWNaeFotMHlvRUFLM2tIaERZLUtHTHo4dzhMR0NfbjBGdzUwS1pYUXYxcTdERUtta1lYQ0NGbDVPV0U2dTlCNVNmS1hpVmRyd3BuWkJEM3BN?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-09T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創登場 上報Up Media",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "華納兄弟卡通萌友會",
+        "小小兵＆大怪獸"
+      ],
+      "searchCorpus": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場 上報Up Media",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+    },
+    {
       "id": "ext-10025e3f3fa962b7",
       "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
       "summary": "UDN",
@@ -786,8 +817,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "ext-0ca4f08ed4351924",
@@ -1207,8 +1238,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "ext-2d785a3e1d2ed80f",
@@ -1267,8 +1298,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
