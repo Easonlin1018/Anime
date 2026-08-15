@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-14T02:45:01.378Z",
-    "lastSuccessfulUpdateAt": "2026-08-14T02:45:01.378Z",
+    "updatedAt": "2026-08-15T01:48:44.120Z",
+    "lastSuccessfulUpdateAt": "2026-08-15T01:48:44.120Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 623,
-    "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 35,
+    "uniqueNewsCount": 625,
+    "articleCandidateCount": 233,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
+    "matchedEventCount": 18,
     "newEventCount": 4,
-    "cachedEventCount": 34,
+    "cachedEventCount": 35,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 43,
-    "expiredRemovedCount": 12,
+    "storedEventCount": 44,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 63,
+    "undatedOldRemovedCount": 59,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 130,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 131,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -59,8 +59,8 @@
       "dateConfidence": "high",
       "dateSource": "即日起至 9 月 9 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "gnn-309119",
@@ -218,8 +218,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -248,8 +248,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -314,7 +314,7 @@
     {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4Gamers",
+      "summary": "4gamers.com.tw",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -335,12 +335,12 @@
         "孤獨搖滾！動畫展",
         "團結Band"
       ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4gamers.com.tw",
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -790,6 +790,34 @@
       "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
+      "id": "ext-0ca4f08ed4351924",
+      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
+      "summary": "遠見雜誌",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
+    },
+    {
       "id": "ext-10025e3f3fa962b7",
       "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
       "summary": "UDN",
@@ -817,36 +845,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
-    },
-    {
-      "id": "ext-0ca4f08ed4351924",
-      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "遠見雜誌",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -1010,6 +1010,37 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-07-27T12:42:26.657Z",
       "lastSeenAt": "2026-07-27T12:42:26.657Z"
+    },
+    {
+      "id": "ext-e8f64087db1135bc",
+      "title": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE44S3paenZOeHdQMnhFUXhhaGotLWdPUWs2dlVYN1RJbEF1MUZCMWs4YTdhbHFnMUc3NGVjZWNSSkptczJraGFVdDVKeDVYYmlQYnRJN2F4SFFoYUdpRF9KZzlhekdkSkdsenEyWmE2RnJpczBtSmx2Wk96d1lSUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創 SouNova 少女星",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師"
+      ],
+      "searchCorpus": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創 SouNova 少女星",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "gnn-308798",
@@ -1238,8 +1269,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "ext-2d785a3e1d2ed80f",
@@ -1272,7 +1303,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "風傳媒",
+      "summary": "storm.mg",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1294,12 +1325,12 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
