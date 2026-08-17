@@ -3,25 +3,25 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-16T01:56:14.896Z",
-    "lastSuccessfulUpdateAt": "2026-08-16T01:56:14.896Z",
+    "updatedAt": "2026-08-17T01:53:59.785Z",
+    "lastSuccessfulUpdateAt": "2026-08-17T01:53:59.785Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 622,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 621,
     "articleCandidateCount": 232,
-    "articleFetchSuccessCount": 36,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
-    "newEventCount": 4,
-    "cachedEventCount": 36,
+    "matchedEventCount": 19,
+    "newEventCount": 2,
+    "cachedEventCount": 35,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 45,
-    "expiredRemovedCount": 14,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 59,
+    "undatedOldRemovedCount": 58,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
     "nonActivityRemovedCount": 130,
@@ -218,8 +218,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -248,8 +248,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -339,8 +339,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -814,8 +814,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -845,8 +845,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-15T01:48:44.120Z",
-      "lastSeenAt": "2026-08-15T01:48:44.120Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -876,8 +876,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -906,8 +906,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "gnn-308171",
@@ -1303,7 +1303,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "storm.mg",
+      "summary": "風傳媒",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1325,12 +1325,12 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1406,7 +1406,7 @@
     {
       "id": "ext-0f83f086603a7bb2",
       "title": "比奇堡居民盲盒開賣！台北華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟筆小新等人氣IP 一次登場",
-      "summary": "上報Up Media",
+      "summary": "upmedia.mg",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0wdkNOYWRSUGs2Mno1bGRrUy1lMFpBTDFrX0tOQWdjT2FMV2czZkktSzJzQzRXQWtmSHlhS0o0c1k0d3VSTFFvcGtNS09jTi1wc0loSzk1QjNfMEx6d0dn?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -1426,12 +1426,12 @@
       "workTitles": [
         "夏日萌盒祭"
       ],
-      "searchCorpus": "比奇堡居民盲盒開賣！台北華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟筆小新等人氣IP 一次登場 上報Up Media",
+      "searchCorpus": "比奇堡居民盲盒開賣！台北華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟筆小新等人氣IP 一次登場 upmedia.mg",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     },
     {
       "id": "gnn-309957",
@@ -1464,8 +1464,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
     }
   ],
   "archive": []
