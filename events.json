@@ -3,22 +3,22 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-19T01:51:54.872Z",
-    "lastSuccessfulUpdateAt": "2026-08-19T01:51:54.872Z",
+    "updatedAt": "2026-08-20T01:50:33.177Z",
+    "lastSuccessfulUpdateAt": "2026-08-20T01:50:33.177Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 628,
-    "articleCandidateCount": 236,
+    "uniqueNewsCount": 627,
+    "articleCandidateCount": 235,
     "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 21,
+    "matchedEventCount": 19,
     "newEventCount": 3,
-    "cachedEventCount": 36,
+    "cachedEventCount": 39,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 47,
+    "storedEventCount": 48,
     "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 60,
@@ -29,6 +29,37 @@
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-310116",
+      "title": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場",
+      "summary": "由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310116",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-08-19T08:58:23.000Z",
+      "eventStartDate": "2026-08-19",
+      "eventEndDate": "2026-08-30",
+      "eventStatus": "ongoing",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "開動吧！Unzip the Fantasy 臺灣原創動畫展映",
+        "開動吧！"
+      ],
+      "searchCorpus": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場 由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
+      "dateConfidence": "high",
+      "dateSource": "即日起至 8/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+    },
     {
       "id": "gnn-309659",
       "title": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發",
@@ -218,13 +249,13 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞",
-      "summary": "PChome Online新聞",
+      "summary": "PChome Online 新聞",
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWV9LNXdMVmNndkpiMnhNNVNMc29ERTFrM0g4dzk3aVNfTFhYTVlzWGdLaGRtNGl6eXpnUjMxa2V4WXpuT01SS1FNNmVPclNtVmlEejRBMmRSNUxSWjJhSlp6eFFBU0l1WW9FMHJuQXZVek9nbXpQd1BBckNwSGphZWhObi0?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -244,12 +275,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online新聞",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online 新聞",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -826,7 +857,7 @@
     {
       "id": "ext-0ca4f08ed4351924",
       "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "gvm.com.tw",
+      "summary": "遠見雜誌",
       "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -844,12 +875,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 gvm.com.tw",
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -885,7 +916,7 @@
     {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4gamers.com.tw",
+      "summary": "4Gamers",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -906,12 +937,12 @@
         "全知讀者視角",
         "非正式授權"
       ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4gamers.com.tw",
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -940,8 +971,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "gnn-308171",
@@ -1101,8 +1132,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "gnn-308798",
@@ -1391,8 +1422,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1478,7 +1509,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-11T08:00:00.000Z",
+      "publishedAt": "2026-08-11T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1492,8 +1523,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
     },
     {
       "id": "gnn-309957",
