@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-20T01:50:33.177Z",
-    "lastSuccessfulUpdateAt": "2026-08-20T01:50:33.177Z",
+    "updatedAt": "2026-08-21T01:56:25.568Z",
+    "lastSuccessfulUpdateAt": "2026-08-21T01:56:25.568Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 627,
-    "articleCandidateCount": 235,
-    "articleFetchSuccessCount": 33,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 630,
+    "articleCandidateCount": 238,
+    "articleFetchSuccessCount": 32,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 3,
-    "cachedEventCount": 39,
+    "matchedEventCount": 22,
+    "newEventCount": 6,
+    "cachedEventCount": 40,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 48,
-    "expiredRemovedCount": 14,
+    "storedEventCount": 49,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 60,
+    "undatedOldRemovedCount": 61,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 133,
+    "nonActivityRemovedCount": 135,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -155,6 +155,37 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "ext-1e3eb4e0df99540b",
+      "title": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE55NzVNaDZwVkZpWTIybEd0X050a1dIUndEd3o3SmlBa1V3b0kxMlhHYzlrVHYwZmtkNi1ZR2ZYakowZ25SaU15eWZfSUFPUm5LODBXUzg5OWZGcTBxZVkzSVA3TjNreE95RVJNb1dfNUNMb2NJNFYzRGRudHg4UQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-20T07:40:41.000Z",
+      "eventStartDate": "2026-08-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "三創！ Paradaily",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "緋染天空 Heaven Burns Red",
+        "開箱"
+      ],
+      "searchCorpus": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！ Paradaily",
+      "dateConfidence": "medium",
+      "dateSource": "8月20日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+    },
+    {
       "id": "gnn-309600",
       "title": "烈空坐舞龍活動首次登台！「超級烈空坐 ex 降臨祭」於 LaLaport 南港開跑",
       "summary": "寶可夢集換式卡牌遊戲於 8 月 7 日（五）推出全新商品《寶可夢集換式卡牌遊戲 超級進化 擴充包 綠寶石風暴》。為了讓更多玩家體驗超級烈空坐 ex 等各式卡牌的魅力，本次特別於台北市 LaLaport 南港中央廣場舉辦「超級烈空坐 ex 降臨祭」POP-UP 活動，讓來場者可以透過活動現場的多元活動體驗傳說中的霸主「超級烈空坐 ex」的魅力。 ※ 示",
@@ -249,8 +280,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -279,8 +310,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -879,8 +910,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -941,8 +972,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -971,8 +1002,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "gnn-308171",
@@ -1132,8 +1163,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "gnn-308798",
@@ -1301,10 +1332,10 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-effa105c095847b1",
+      "id": "ext-050b57857b74ae96",
       "title": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北",
-      "summary": "Yahoo新聞",
-      "url": "https://news.google.com/rss/articles/CBMiwwNBVV95cUxQdG1raTJnSm1aNWtuMHVBblVHbzFoUnFZamY4ejBtRHJlRHJFQkhLUTZKOVg3Vm9JMk1GT2FDZzZhRjh3dDdMWHZ5ankyZHNIeHpzenN6b3lsZTUzNVFPakFLUDhtX3Vvc1RHNWFub2lDcHhSTUFaNEpfaXBhWkZ0OXVRZTc3Tm0tWkFyQUhST3JwMnVUTXV0cm9fUWVjUHlFR2EyUjZReFhZSEZvTTJlaTFrV3EzczFlTlQyWnZ6ZndnRmhHQXFZT3V3YW1XTzBNUHJTVEhJU1RZVjJueW5sNGp2bmh2Z3F6YVpGRTVSd2w2MHFXeVJwSnhtUVZJenNtcHRWWjE5TUk1NzM0N19uWi1YTV84cnRQMnV0SW1UWG1xZVZKYlhYQUUxbzlrRkRiNlJ2QlozbWFJMW04MmdtS1pGdFJBQlFVRnZabmlyWjZCRnZmV3Q5dkxHQnVzLUdPVE1OX0p0T0lmY0xOOXZMUkU1MFZNLVVKQUFPVHhhS0Jsa3FaZ2IybklhTjdTSDFJQzhTNm0zNUt0QU5YcTRvbl9YNng1U1dqSnVmN3FGZGNMWThHeDg1TGJaYlNNU2IxQlhj?oc=5",
+      "summary": "鏡報",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpOVpKLXR4ZHBpOVI0N1ZpX0pTRktGSXBDcVdpXzUzWWJWemJ3UDlGeVJDaXFiZHNwbjJDb1NGNmJlakpDZ1RHUUtSTEM0RnI4dkE?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
@@ -1313,7 +1344,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T07:00:00.000Z",
+      "publishedAt": "2026-07-30T08:24:26.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1321,12 +1352,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北 Yahoo新聞",
+      "searchCorpus": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北 鏡報",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "gnn-309209",
@@ -1422,8 +1453,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1523,8 +1554,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "gnn-309957",
