@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-21T01:56:25.568Z",
-    "lastSuccessfulUpdateAt": "2026-08-21T01:56:25.568Z",
+    "updatedAt": "2026-08-22T01:49:16.839Z",
+    "lastSuccessfulUpdateAt": "2026-08-22T01:49:16.839Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 630,
-    "articleCandidateCount": 238,
-    "articleFetchSuccessCount": 32,
+    "fetchedExternalItemCount": 433,
+    "uniqueNewsCount": 626,
+    "articleCandidateCount": 234,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 6,
+    "matchedEventCount": 20,
+    "newEventCount": 3,
     "cachedEventCount": 40,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 49,
-    "expiredRemovedCount": 10,
+    "storedEventCount": 50,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 61,
+    "undatedOldRemovedCount": 56,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 134,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "gnn-309600",
@@ -280,8 +280,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -401,8 +401,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -886,6 +886,37 @@
       "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
+      "id": "ext-10025e3f3fa962b7",
+      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
+      "summary": "UDN",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "湯姆貓與傑利鼠",
+        "飛天小女警"
+      ],
+      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 UDN",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+    },
+    {
       "id": "ext-0ca4f08ed4351924",
       "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
       "summary": "遠見雜誌",
@@ -914,40 +945,9 @@
       "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
-      "id": "ext-10025e3f3fa962b7",
-      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
-      "summary": "travel.udn.com",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "湯姆貓與傑利鼠",
-        "飛天小女警"
-      ],
-      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 travel.udn.com",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-19T01:51:54.872Z",
-      "lastSeenAt": "2026-08-19T01:51:54.872Z"
-    },
-    {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4Gamers",
+      "summary": "4gamers.com.tw",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -968,12 +968,12 @@
         "全知讀者視角",
         "非正式授權"
       ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4gamers.com.tw",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1002,8 +1002,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "gnn-308171",
@@ -1356,8 +1356,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "gnn-309209",
@@ -1453,8 +1453,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1554,8 +1554,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     },
     {
       "id": "gnn-309957",
@@ -1590,6 +1590,38 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-08-17T01:53:59.785Z",
       "lastSeenAt": "2026-08-17T01:53:59.785Z"
+    },
+    {
+      "id": "gnn-310252",
+      "title": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開",
+      "summary": "偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310252",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-21T09:31:43.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "偶像夢幻祭 2",
+        "偶像夢幻祭",
+        "聚光舞台主題"
+      ],
+      "searchCorpus": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開 偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-22T01:49:16.839Z",
+      "lastSeenAt": "2026-08-22T01:49:16.839Z"
     }
   ],
   "archive": []
