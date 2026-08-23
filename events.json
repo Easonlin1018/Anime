@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-22T01:49:16.839Z",
-    "lastSuccessfulUpdateAt": "2026-08-22T01:49:16.839Z",
+    "updatedAt": "2026-08-23T01:58:38.350Z",
+    "lastSuccessfulUpdateAt": "2026-08-23T01:58:38.350Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 433,
-    "uniqueNewsCount": 626,
+    "uniqueNewsCount": 628,
     "articleCandidateCount": 234,
     "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 20,
-    "newEventCount": 3,
-    "cachedEventCount": 40,
+    "newEventCount": 2,
+    "cachedEventCount": 38,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 50,
+    "archiveCount": 1,
+    "storedEventCount": 49,
     "expiredRemovedCount": 14,
-    "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 56,
+    "recapRemovedCount": 1,
+    "undatedOldRemovedCount": 54,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 134,
+    "nonActivityRemovedCount": 135,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "gnn-309600",
@@ -280,8 +280,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -376,7 +376,7 @@
     {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4gamers.com.tw",
+      "summary": "4Gamers",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -397,12 +397,12 @@
         "孤獨搖滾！動畫展",
         "團結Band"
       ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4gamers.com.tw",
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -825,36 +825,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-3a237f3b9fc19304",
-      "title": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳",
-      "summary": "三立新聞網SETN.com",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZOTBYZ1V4V3RrcGwwVE5SYnJfem51TnlOay1iME9SaXZsTnpIZFd4NFJOUmZSVHlWMUNJRWlFeThpYVBtR19VQtIBTEFVX3lxTE82ZzJhY2VoMEIzYWxHU0R4SmdCY1VQb0xRNGJDR0VxN0Z2ZVo3Xzl1UHNaMHVIVVB6Wk1jZzNaeGVIMUZZNjBxZHJDWnY?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "主題餐廳／咖啡廳",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-08T16:55:03.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "玩轉動漫遊"
-      ],
-      "searchCorpus": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳 三立新聞網SETN.com",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
-    },
-    {
       "id": "ext-3c6478c274b20cfd",
       "title": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場",
       "summary": "上報Up Media",
@@ -886,6 +856,34 @@
       "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
+      "id": "ext-0ca4f08ed4351924",
+      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
+      "summary": "遠見雜誌",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+    },
+    {
       "id": "ext-10025e3f3fa962b7",
       "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
       "summary": "UDN",
@@ -913,41 +911,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
-    },
-    {
-      "id": "ext-0ca4f08ed4351924",
-      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "遠見雜誌",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4gamers.com.tw",
+      "summary": "4Gamers",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -968,12 +938,12 @@
         "全知讀者視角",
         "非正式授權"
       ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4gamers.com.tw",
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1002,8 +972,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "gnn-308171",
@@ -1356,8 +1326,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "gnn-309209",
@@ -1453,8 +1423,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1554,8 +1524,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     },
     {
       "id": "gnn-309957",
@@ -1620,9 +1590,41 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-22T01:49:16.839Z",
-      "lastSeenAt": "2026-08-22T01:49:16.839Z"
+      "discoveredAt": "2026-08-23T01:58:38.350Z",
+      "lastSeenAt": "2026-08-23T01:58:38.350Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-3a237f3b9fc19304",
+      "title": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳",
+      "summary": "三立新聞網SETN.com",
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZOTBYZ1V4V3RrcGwwVE5SYnJfem51TnlOay1iME9SaXZsTnpIZFd4NFJOUmZSVHlWMUNJRWlFeThpYVBtR19VQtIBTEFVX3lxTE82ZzJhY2VoMEIzYWxHU0R4SmdCY1VQb0xRNGJDR0VxN0Z2ZVo3Xzl1UHNaMHVIVVB6Wk1jZzNaeGVIMUZZNjBxZHJDWnY?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-08T16:55:03.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "玩轉動漫遊"
+      ],
+      "searchCorpus": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳 三立新聞網SETN.com",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-21T09:36:55.915Z",
+      "lastSeenAt": "2026-07-21T09:36:55.915Z",
+      "archivedAt": "2026-08-23T01:58:38.350Z"
+    }
+  ]
 }
