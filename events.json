@@ -3,25 +3,25 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-23T01:58:38.350Z",
-    "lastSuccessfulUpdateAt": "2026-08-23T01:58:38.350Z",
+    "updatedAt": "2026-08-24T01:56:44.434Z",
+    "lastSuccessfulUpdateAt": "2026-08-24T01:56:44.434Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 433,
-    "uniqueNewsCount": 628,
-    "articleCandidateCount": 234,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 232,
     "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 2,
-    "cachedEventCount": 38,
+    "matchedEventCount": 22,
+    "newEventCount": 3,
+    "cachedEventCount": 35,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 49,
-    "expiredRemovedCount": 14,
-    "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 54,
+    "archiveCount": 2,
+    "storedEventCount": 47,
+    "expiredRemovedCount": 13,
+    "recapRemovedCount": 0,
+    "undatedOldRemovedCount": 50,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
     "nonActivityRemovedCount": 135,
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-309600",
@@ -280,8 +280,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -401,8 +401,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -471,38 +471,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-24T09:12:42.910Z",
       "lastSeenAt": "2026-07-24T09:12:42.910Z"
-    },
-    {
-      "id": "gnn-308555",
-      "title": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊",
-      "summary": "由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308555",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：展覽",
-      "sourceTag": "展覽",
-      "type": "簽名會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-22T04:54:54.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": "2026-08-23",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "麻宮騎亞 40th Arts Exhibition In 台灣",
-        "麻宮騎亞 40th Arts Exhibition In 台灣 2026",
-        "快傑蒸汽偵探團"
-      ],
-      "searchCorpus": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊 由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
-      "dateConfidence": "high",
-      "dateSource": "2026 年 7 月 25 日至 8 月 23 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "gnn-308120",
@@ -825,37 +793,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-3c6478c274b20cfd",
-      "title": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場",
-      "summary": "上報Up Media",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE94cF9FcnhCRWNaeFotMHlvRUFLM2tIaERZLUtHTHo4dzhMR0NfbjBGdzUwS1pYUXYxcTdERUtta1lYQ0NGbDVPV0U2dTlCNVNmS1hpVmRyd3BuWkJEM3BN?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-09T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創登場 上報Up Media",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "華納兄弟卡通萌友會",
-        "小小兵＆大怪獸"
-      ],
-      "searchCorpus": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場 上報Up Media",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
-    },
-    {
       "id": "ext-0ca4f08ed4351924",
       "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
       "summary": "遠見雜誌",
@@ -880,8 +817,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "ext-10025e3f3fa962b7",
@@ -911,8 +848,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "ext-83e05308d772dbe8",
@@ -942,8 +879,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -972,8 +909,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-308171",
@@ -1121,7 +1058,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-22T08:42:52.000Z",
+      "publishedAt": "2026-07-22T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1133,8 +1070,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-308798",
@@ -1326,8 +1263,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-309209",
@@ -1423,8 +1360,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1524,8 +1461,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-309957",
@@ -1590,41 +1527,75 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-23T01:58:38.350Z",
-      "lastSeenAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     }
   ],
   "archive": [
     {
-      "id": "ext-3a237f3b9fc19304",
-      "title": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳",
-      "summary": "三立新聞網SETN.com",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZOTBYZ1V4V3RrcGwwVE5SYnJfem51TnlOay1iME9SaXZsTnpIZFd4NFJOUmZSVHlWMUNJRWlFeThpYVBtR19VQtIBTEFVX3lxTE82ZzJhY2VoMEIzYWxHU0R4SmdCY1VQb0xRNGJDR0VxN0Z2ZVo3Xzl1UHNaMHVIVVB6Wk1jZzNaeGVIMUZZNjBxZHJDWnY?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "主題餐廳／咖啡廳",
+      "id": "gnn-308555",
+      "title": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊",
+      "summary": "由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308555",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "簽名會",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-08T16:55:03.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
+      "publishedAt": "2026-07-22T04:54:54.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": "2026-08-23",
       "eventStatus": "expired",
-      "venue": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主",
+      "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "玩轉動漫遊"
+        "麻宮騎亞 40th Arts Exhibition In 台灣",
+        "麻宮騎亞 40th Arts Exhibition In 台灣 2026",
+        "快傑蒸汽偵探團"
       ],
-      "searchCorpus": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳 三立新聞網SETN.com",
+      "searchCorpus": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊 由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 7 月 25 日至 8 月 23 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z",
+      "archivedAt": "2026-08-24T01:56:44.434Z"
+    },
+    {
+      "id": "ext-3c6478c274b20cfd",
+      "title": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場",
+      "summary": "上報Up Media",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE94cF9FcnhCRWNaeFotMHlvRUFLM2tIaERZLUtHTHo4dzhMR0NfbjBGdzUwS1pYUXYxcTdERUtta1lYQ0NGbDVPV0U2dTlCNVNmS1hpVmRyd3BuWkJEM3BN?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-09T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "三創登場 上報Up Media",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "華納兄弟卡通萌友會",
+        "小小兵＆大怪獸"
+      ],
+      "searchCorpus": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場 上報Up Media",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z",
-      "archivedAt": "2026-08-23T01:58:38.350Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z",
+      "archivedAt": "2026-08-24T01:56:44.434Z"
     }
   ]
 }
