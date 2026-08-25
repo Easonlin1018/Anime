@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-24T01:56:44.434Z",
-    "lastSuccessfulUpdateAt": "2026-08-24T01:56:44.434Z",
+    "updatedAt": "2026-08-25T01:51:26.169Z",
+    "lastSuccessfulUpdateAt": "2026-08-25T01:51:26.169Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 623,
-    "articleCandidateCount": 232,
-    "articleFetchSuccessCount": 33,
+    "uniqueNewsCount": 624,
+    "articleCandidateCount": 233,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 3,
-    "cachedEventCount": 35,
+    "matchedEventCount": 16,
+    "newEventCount": 5,
+    "cachedEventCount": 39,
     "rateLimitedCount": 0,
     "archiveCount": 2,
     "storedEventCount": 47,
-    "expiredRemovedCount": 13,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 50,
+    "undatedOldRemovedCount": 54,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 139,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -280,8 +280,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -665,6 +665,37 @@
       "lastSeenAt": "2026-08-13T02:46:19.616Z"
     },
     {
+      "id": "gnn-310339",
+      "title": "台灣大攜手 Riot Games 打造《特戰英豪》新地圖「頂峰亭閣」主題特展",
+      "summary": "台灣大哥大宣布，攜手 Riot Games 在台北東區商圈為《特戰英豪》打造新地圖「頂峰亭閣」主題特展，玩家至 8 月 30 日以前可以體驗遊戲地圖所延伸的場景，以及互動遊戲等。 現場規劃 4 大主題區域，玩家可隨著路線，步入並感受巡禮過程。完成參展任務，玩家不僅可獲得「頂峰亭閣」特展限定周邊；達成",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310339",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-24T09:49:40.000Z",
+      "eventStartDate": "2026-08-30",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "特戰英豪",
+        "頂峰亭閣"
+      ],
+      "searchCorpus": "台灣大攜手 Riot Games 打造《特戰英豪》新地圖「頂峰亭閣」主題特展 台灣大哥大宣布，攜手 Riot Games 在台北東區商圈為《特戰英豪》打造新地圖「頂峰亭閣」主題特展，玩家至 8 月 30 日以前可以體驗遊戲地圖所延伸的場景，以及互動遊戲等。 現場規劃 4 大主題區域，玩家可隨著路線，步入並感受巡禮過程。完成參展任務，玩家不僅可獲得「頂峰亭閣」特展限定周邊；達成",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 30 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+    },
+    {
       "id": "gnn-308580",
       "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
       "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
@@ -793,65 +824,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-0ca4f08ed4351924",
-      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "遠見雜誌",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
-    },
-    {
-      "id": "ext-10025e3f3fa962b7",
-      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
-      "summary": "UDN",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "湯姆貓與傑利鼠",
-        "飛天小女警"
-      ],
-      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 UDN",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
-    },
-    {
       "id": "ext-83e05308d772dbe8",
       "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
       "summary": "4Gamers",
@@ -879,8 +851,38 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+    },
+    {
+      "id": "ext-ff9e9373add67262",
+      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ - news.para-daily.com",
+      "summary": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ news.para-daily.com",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026漫畫博覽會"
+      ],
+      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ - news.para-daily.com 台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ news.para-daily.com",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -1263,8 +1265,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
       "id": "gnn-309209",
@@ -1360,8 +1362,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1461,8 +1463,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
       "id": "gnn-309957",
@@ -1504,7 +1506,7 @@
       "summary": "偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=310252",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -1527,49 +1529,45 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-308555",
-      "title": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊",
-      "summary": "由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308555",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：展覽",
-      "sourceTag": "展覽",
-      "type": "簽名會",
+      "id": "ext-0ca4f08ed4351924",
+      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
+      "summary": "遠見雜誌",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
       "locations": [
-        "台北"
+        "全台"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-22T04:54:54.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": "2026-08-23",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [
-        "麻宮騎亞 40th Arts Exhibition In 台灣",
-        "麻宮騎亞 40th Arts Exhibition In 台灣 2026",
-        "快傑蒸汽偵探團"
-      ],
-      "searchCorpus": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊 由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
-      "dateConfidence": "high",
-      "dateSource": "2026 年 7 月 25 日至 8 月 23 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z",
-      "archivedAt": "2026-08-24T01:56:44.434Z"
+      "workTitles": [],
+      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z",
+      "archivedAt": "2026-08-25T01:51:26.169Z"
     },
     {
-      "id": "ext-3c6478c274b20cfd",
-      "title": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場",
-      "summary": "上報Up Media",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE94cF9FcnhCRWNaeFotMHlvRUFLM2tIaERZLUtHTHo4dzhMR0NfbjBGdzUwS1pYUXYxcTdERUtta1lYQ0NGbDVPV0U2dTlCNVNmS1hpVmRyd3BuWkJEM3BN?oc=5",
+      "id": "ext-10025e3f3fa962b7",
+      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
+      "summary": "UDN",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
@@ -1578,24 +1576,24 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-09T07:00:00.000Z",
+      "publishedAt": "2026-07-10T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "三創登場 上報Up Media",
+      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "華納兄弟卡通萌友會",
-        "小小兵＆大怪獸"
+        "湯姆貓與傑利鼠",
+        "飛天小女警"
       ],
-      "searchCorpus": "野獸國引爆夏日 IP 熱潮！「華納兄弟卡通萌友會」、「小小兵＆大怪獸」雙主題快閃店三創登場 上報Up Media",
+      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 UDN",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z",
-      "archivedAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z",
+      "archivedAt": "2026-08-25T01:51:26.169Z"
     }
   ]
 }
