@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-25T01:51:26.169Z",
-    "lastSuccessfulUpdateAt": "2026-08-25T01:51:26.169Z",
+    "updatedAt": "2026-08-26T01:57:24.633Z",
+    "lastSuccessfulUpdateAt": "2026-08-26T01:57:24.633Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 624,
-    "articleCandidateCount": 233,
-    "articleFetchSuccessCount": 36,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 232,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 16,
-    "newEventCount": 5,
-    "cachedEventCount": 39,
+    "newEventCount": 2,
+    "cachedEventCount": 40,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
+    "archiveCount": 0,
     "storedEventCount": 47,
-    "expiredRemovedCount": 15,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 54,
+    "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 139,
+    "nonActivityRemovedCount": 141,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "gnn-309600",
@@ -218,40 +218,35 @@
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
-      "id": "live-31e59631e80b33e553",
+      "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙",
+      "summary": "oneone宇宙",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
         "新竹"
       ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 77,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-08-06T11:21:40.000Z",
+      "confidence": "high",
+      "publishedAt": "2026-08-06T11:22:37.000Z",
       "eventStartDate": "2026-08-06",
       "eventEndDate": null,
       "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者",
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
       "dateConfidence": "medium",
-      "dateSource": "店8/6",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:05.909Z",
-      "lastSeenAt": "2026-08-09T11:35:36.903Z"
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "ext-a8b0f32886165b97",
@@ -280,8 +275,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -851,8 +846,38 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+    },
+    {
+      "id": "ext-57e5e727037a7dc6",
+      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026漫畫博覽會"
+      ],
+      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ Paradaily",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "ext-ff9e9373add67262",
@@ -883,36 +908,6 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-08-25T01:51:26.169Z",
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
-    },
-    {
-      "id": "ext-57e5e727037a7dc6",
-      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026漫畫博覽會"
-      ],
-      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ Paradaily",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-308171",
@@ -1265,8 +1260,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "gnn-309209",
@@ -1362,8 +1357,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1463,8 +1458,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+      "discoveredAt": "2026-08-26T01:57:24.633Z",
+      "lastSeenAt": "2026-08-26T01:57:24.633Z"
     },
     {
       "id": "gnn-309957",
@@ -1533,67 +1528,5 @@
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
     }
   ],
-  "archive": [
-    {
-      "id": "ext-0ca4f08ed4351924",
-      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "遠見雜誌",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z",
-      "archivedAt": "2026-08-25T01:51:26.169Z"
-    },
-    {
-      "id": "ext-10025e3f3fa962b7",
-      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
-      "summary": "UDN",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "湯姆貓與傑利鼠",
-        "飛天小女警"
-      ],
-      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 UDN",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z",
-      "archivedAt": "2026-08-25T01:51:26.169Z"
-    }
-  ]
+  "archive": []
 }
