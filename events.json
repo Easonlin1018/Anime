@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-26T01:57:24.633Z",
-    "lastSuccessfulUpdateAt": "2026-08-26T01:57:24.633Z",
+    "updatedAt": "2026-08-27T09:46:22.004Z",
+    "lastSuccessfulUpdateAt": "2026-08-27T09:46:22.004Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 623,
-    "articleCandidateCount": 232,
+    "uniqueNewsCount": 621,
+    "articleCandidateCount": 231,
     "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 16,
-    "newEventCount": 2,
-    "cachedEventCount": 40,
+    "matchedEventCount": 20,
+    "newEventCount": 3,
+    "cachedEventCount": 38,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 47,
+    "storedEventCount": 49,
     "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 53,
+    "undatedOldRemovedCount": 52,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 141,
+    "nonActivityRemovedCount": 137,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "gnn-309600",
@@ -245,8 +245,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "ext-a8b0f32886165b97",
@@ -275,8 +275,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -396,8 +396,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -691,6 +691,75 @@
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
+      "id": "gnn-310560",
+      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
+      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T09:35:02.000Z",
+      "eventStartDate": "2026-09-01",
+      "eventEndDate": "2026-09-30",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "IDOLiSH7 - 偶像星願",
+        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
+        "こまどり モフモフパレード"
+      ],
+      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "dateConfidence": "high",
+      "dateSource": "9/1~9/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+    },
+    {
+      "id": "gnn-310540",
+      "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
+      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310540",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T08:19:38.000Z",
+      "eventStartDate": "2026-09-04",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "魔法少女小圓",
+        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "角色背景打卡區",
+        "主視覺區"
+      ],
+      "searchCorpus": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 4 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+    },
+    {
       "id": "gnn-308580",
       "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
       "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
@@ -846,8 +915,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "ext-57e5e727037a7dc6",
@@ -876,8 +945,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "ext-ff9e9373add67262",
@@ -1260,8 +1329,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "gnn-309209",
@@ -1357,8 +1426,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "live-a12d2df9a41c01c979",
@@ -1458,8 +1527,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-26T01:57:24.633Z",
-      "lastSeenAt": "2026-08-26T01:57:24.633Z"
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "gnn-309957",
