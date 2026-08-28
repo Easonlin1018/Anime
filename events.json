@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-27T09:46:22.004Z",
-    "lastSuccessfulUpdateAt": "2026-08-27T09:46:22.004Z",
+    "updatedAt": "2026-08-28T11:21:49.812Z",
+    "lastSuccessfulUpdateAt": "2026-08-28T11:21:49.812Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 621,
-    "articleCandidateCount": 231,
+    "uniqueNewsCount": 625,
+    "articleCandidateCount": 234,
     "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 20,
-    "newEventCount": 3,
-    "cachedEventCount": 38,
+    "newEventCount": 4,
+    "cachedEventCount": 39,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
+    "archiveCount": 1,
     "storedEventCount": 49,
-    "expiredRemovedCount": 13,
+    "expiredRemovedCount": 11,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 52,
+    "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 137,
+    "nonActivityRemovedCount": 142,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "gnn-309600",
@@ -218,6 +218,36 @@
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
+      "id": "ext-a8b0f32886165b97",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+    },
+    {
       "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
       "summary": "oneone宇宙",
@@ -245,38 +275,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
-    },
-    {
-      "id": "ext-a8b0f32886165b97",
-      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T07:00:00.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "8/6",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -396,8 +396,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -888,37 +888,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-83e05308d772dbe8",
-      "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-13T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "全知讀者視角",
-        "非正式授權"
-      ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
-    },
-    {
       "id": "ext-57e5e727037a7dc6",
       "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
       "summary": "Paradaily",
@@ -945,8 +914,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "ext-ff9e9373add67262",
@@ -1077,8 +1046,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "ext-e8f64087db1135bc",
@@ -1329,8 +1298,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "gnn-309209",
@@ -1426,44 +1395,38 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
-      "id": "live-a12d2df9a41c01c979",
+      "id": "ext-baa2ea110cbe8cf8",
       "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
-      "summary": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 &nbsp;&nbsp; nownews.com",
+      "summary": "NOWnews今日新聞",
       "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9iY0tsbjFpX251TjNRNm1RSFhfejFOel9Sc0gwWlByYlQ4Z1drVVJjSWpQTkdnSzNINmZDLUVGRlVOTlJmR0k3SUEyS1PSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
         "新竹"
       ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-08-08T21:41:00.000Z",
+      "confidence": "high",
+      "publishedAt": "2026-08-09T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 NOWnews今日新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 &nbsp;&nbsp; nownews.com Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:05.055Z",
-      "lastSeenAt": "2026-08-09T11:35:36.067Z"
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "gnn-309608",
@@ -1527,8 +1490,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     },
     {
       "id": "gnn-309957",
@@ -1595,7 +1558,71 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-08-25T01:51:26.169Z",
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
+    },
+    {
+      "id": "ext-4f7e330b7c6a4053",
+      "title": "POP UP STORE「曼迪秋日祭」快閃微風信義 集結《名偵探柯南》等多部作品周邊、抽卡機",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE96RW5WWkFiTUNVNFI2Rm9JOHpObTgwaWc5anBaR1p0QlZUVy1SSXQwOTd4U1JoRHdtSzVFUFU2WXMwWU5YYnhPY3RCN3VaVjc2dTNCS2tpSWM?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-28T07:11:27.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "曼迪秋日祭"
+      ],
+      "searchCorpus": "POP UP STORE「曼迪秋日祭」快閃微風信義 集結《名偵探柯南》等多部作品周邊、抽卡機 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-83e05308d772dbe8",
+      "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
+      "summary": "4Gamers",
+      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-13T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "全知讀者視角",
+        "非正式授權"
+      ],
+      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z",
+      "archivedAt": "2026-08-28T11:21:49.812Z"
+    }
+  ]
 }
