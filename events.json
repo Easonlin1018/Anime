@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-28T11:21:49.812Z",
-    "lastSuccessfulUpdateAt": "2026-08-28T11:21:49.812Z",
+    "updatedAt": "2026-08-29T07:03:16.765Z",
+    "lastSuccessfulUpdateAt": "2026-08-29T07:03:16.765Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 625,
-    "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 35,
+    "fetchedExternalItemCount": 427,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 235,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 4,
-    "cachedEventCount": 39,
+    "matchedEventCount": 18,
+    "newEventCount": 2,
+    "cachedEventCount": 37,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 49,
-    "expiredRemovedCount": 11,
+    "archiveCount": 3,
+    "storedEventCount": 46,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 53,
+    "undatedOldRemovedCount": 56,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 142,
+    "nonActivityRemovedCount": 140,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -182,8 +182,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "gnn-309600",
@@ -244,8 +244,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -275,8 +275,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -396,8 +396,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -888,101 +888,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-57e5e727037a7dc6",
-      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026漫畫博覽會"
-      ],
-      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ Paradaily",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
-    },
-    {
-      "id": "ext-ff9e9373add67262",
-      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ - news.para-daily.com",
-      "summary": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ news.para-daily.com",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026漫畫博覽會"
-      ],
-      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ - news.para-daily.com 台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ news.para-daily.com",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
-    },
-    {
-      "id": "gnn-308171",
-      "title": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台",
-      "summary": "作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308171",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T09:44:36.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "水縹そまる",
-        "花咲くれは",
-        "UFO 醬",
-        "流川莉蘿",
-        "夏色Palette",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台 作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
-    },
-    {
       "id": "live-c905c3e7ab49dcf71a",
       "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
       "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
@@ -1046,8 +951,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "ext-e8f64087db1135bc",
@@ -1298,8 +1203,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "gnn-309209",
@@ -1395,8 +1300,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1425,8 +1330,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "gnn-309608",
@@ -1490,8 +1395,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-28T11:21:49.812Z",
-      "lastSeenAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "gnn-309957",
@@ -1593,19 +1498,19 @@
   ],
   "archive": [
     {
-      "id": "ext-83e05308d772dbe8",
-      "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
+      "id": "gnn-308171",
+      "title": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台",
+      "summary": "作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308171",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
       "locations": [
         "台灣"
       ],
       "confidence": "candidate",
-      "publishedAt": "2026-07-13T07:00:00.000Z",
+      "publishedAt": "2026-07-14T09:44:36.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
@@ -1613,16 +1518,82 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "全知讀者視角",
-        "非正式授權"
+        "水縹そまる",
+        "花咲くれは",
+        "UFO 醬",
+        "流川莉蘿",
+        "夏色Palette",
+        "漫博 26"
       ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
+      "searchCorpus": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台 作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z",
-      "archivedAt": "2026-08-28T11:21:49.812Z"
+      "discoveredAt": "2026-07-15T07:31:09.855Z",
+      "lastSeenAt": "2026-07-15T07:31:09.855Z",
+      "archivedAt": "2026-08-29T07:03:16.765Z"
+    },
+    {
+      "id": "ext-57e5e727037a7dc6",
+      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026漫畫博覽會"
+      ],
+      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ Paradaily",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-28T11:21:49.812Z",
+      "lastSeenAt": "2026-08-28T11:21:49.812Z",
+      "archivedAt": "2026-08-29T07:03:16.765Z"
+    },
+    {
+      "id": "ext-ff9e9373add67262",
+      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ - news.para-daily.com",
+      "summary": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ news.para-daily.com",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026漫畫博覽會"
+      ],
+      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ - news.para-daily.com 台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ news.para-daily.com",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z",
+      "archivedAt": "2026-08-29T07:03:16.765Z"
     }
   ]
 }
