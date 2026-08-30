@@ -85,12 +85,64 @@ test("9. 同名但沒有 relation graph 的不同 AniList Media 不會分組", (
     assert.notEqual(result.list[0].seriesKey, result.list[1].seriesKey);
 });
 
-test("10. SIDE_STORY 不會自動擴大成整個 universe", () => {
+test("10. SIDE_STORY 直接項目加入同一系列 component", () => {
     const result = V.assignAnimeSeriesIdentity([
         { id:"a", anilistId:500, title:"本傳", relations:[relation("SIDE_STORY", 501)] },
         { id:"b", anilistId:501, title:"外傳" }
     ]);
-    assert.notEqual(result.list[0].seriesKey, result.list[1].seriesKey);
+    assert.equal(result.list[0].seriesKey, result.list[1].seriesKey);
+    assert.equal(result.list.length, 2);
+});
+
+test("10a. ALTERNATIVE 後的深度 SIDE_STORY 共享 seriesKey 且保持三筆 Media", () => {
+    const records = [
+        { id:"a", anilistId:14753, title:"A", relations:[relation("ALTERNATIVE", 124080, "OVA")] },
+        { id:"b", anilistId:124080, title:"B", relations:[relation("SIDE_STORY", 163132)] },
+        { id:"c", anilistId:163132, title:"C" }
+    ];
+    const result = V.assignAnimeSeriesIdentity(records);
+    const shuffled = V.assignAnimeSeriesIdentity([records[2], records[0], records[1]]);
+    const second = V.assignAnimeSeriesIdentity(JSON.parse(JSON.stringify(result.list)));
+    assert.equal(new Set(result.list.map(item => item.seriesKey)).size, 1);
+    assert.equal(result.list[0].seriesKey, "anilist-series:14753");
+    assert.deepEqual(result.list.map(item => String(item.anilistId)).sort(), ["124080", "14753", "163132"].sort());
+    assert.deepEqual(
+        new Map(shuffled.list.map(item => [String(item.anilistId), item.seriesKey])),
+        new Map(result.list.map(item => [String(item.anilistId), item.seriesKey]))
+    );
+    assert.equal(second.changedCount, 0);
+});
+
+test("10b. SIDE_STORY target 是 collect-only，不沿 target 關聯擴散", () => {
+    const result = V.assignAnimeSeriesIdentity([
+        { id:"a", anilistId:1000, title:"A", relations:[relation("ALTERNATIVE", 1001)] },
+        { id:"b", anilistId:1001, title:"B", relations:[relation("SIDE_STORY", 1002)] },
+        { id:"c", anilistId:1002, title:"C", relations:[relation("SEQUEL", 1003)] },
+        { id:"d", anilistId:1003, title:"D" }
+    ]);
+    assert.equal(result.list[0].seriesKey, result.list[1].seriesKey);
+    assert.equal(result.list[1].seriesKey, result.list[2].seriesKey);
+    assert.notEqual(result.list[2].seriesKey, result.list[3].seriesKey);
+});
+
+test("10c. SPIN_OFF／CHARACTER／ADAPTATION 不建立 series identity edge", () => {
+    for (const relationType of ["SPIN_OFF", "CHARACTER", "ADAPTATION"]) {
+        const result = V.assignAnimeSeriesIdentity([
+            { id:`a-${relationType}`, anilistId:1100, title:"A", relations:[relation(relationType, 1101)] },
+            { id:`b-${relationType}`, anilistId:1101, title:"B" }
+        ]);
+        assert.notEqual(result.list[0].seriesKey, result.list[1].seriesKey);
+    }
+});
+
+test("10d. traverse relation cycle 由 visited Set 正常結束", () => {
+    const result = V.assignAnimeSeriesIdentity([
+        { id:"cycle-a", anilistId:1200, title:"A", relations:[relation("ALTERNATIVE", 1201)] },
+        { id:"cycle-b", anilistId:1201, title:"B", relations:[relation("SEQUEL", 1202)] },
+        { id:"cycle-c", anilistId:1202, title:"C", relations:[relation("PREQUEL", 1200)] }
+    ]);
+    assert.equal(result.list.length, 3);
+    assert.equal(new Set(result.list.map(item => item.seriesKey)).size, 1);
 });
 
 test("11. 無 external ID 的 legacy 簡繁變體可保守共用 fallback key", () => {
@@ -183,13 +235,13 @@ test("19. tombstone 狀態在 series migration 後保持", () => {
     assert.equal(migrated.deletedAt, deletedAt);
 });
 
-test("20. Service Worker 離線快取固定版 OpenCC 與新版 core", () => {
+test("20. Service Worker 離線快取固定版 OpenCC 與 series graph cache", () => {
     const sw = fs.readFileSync(path.resolve(__dirname, "..", "sw.js"), "utf8");
     const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
-    assert.match(sw, /anime-tracker-v11-series-title-identity-1/u);
+    assert.match(sw, /anime-tracker-v11-series-graph-depth-1/u);
     assert.match(sw, /vendor\/opencc-js-1\.4\.1-full\.js\?v=1\.4\.1/u);
-    assert.match(sw, /v11-core\.js\?v=series-title-identity-1/u);
-    assert.match(ui, /reloadVersion = "series-title-identity-1"/u);
+    assert.match(sw, /v11-core\.js\?v=series-graph-depth-1/u);
+    assert.match(ui, /reloadVersion = "title-idempotence-1"/u);
 });
 
 test("21. TV 可從安全 synonym 辨識季數", () => {
@@ -258,5 +310,5 @@ test("25. relation graph 輸入順序不同仍產生相同 deterministic root", 
 
 process.on("beforeExit", () => {
     if (process.exitCode) return;
-    console.log(`\nSeries/title identity tests passed: ${passed}/25`);
+    console.log(`\nSeries/title identity tests passed: ${passed}/29`);
 });

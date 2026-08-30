@@ -263,7 +263,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "series-title-identity-1";
+        const reloadVersion = "title-idempotence-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");

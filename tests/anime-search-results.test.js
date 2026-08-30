@@ -22,18 +22,45 @@ const mediaStart = html.indexOf("function getAniListMediaId");
 const mediaEnd = html.indexOf("async function manualScanSequels", mediaStart);
 for (const position of [titleStart,titleEnd,normalizeStart,normalizeEnd,directStart,directEnd,cardStart,cardEnd,findStart,findEnd,categoryStart,categoryEnd,mediaStart,mediaEnd]) assert.ok(position >= 0);
 
-const api = Function(`${html.slice(titleStart,titleEnd)}
+const api = Function("AnimeTrackerV11", `${html.slice(titleStart,titleEnd)}
 ${html.slice(normalizeStart,normalizeEnd)}
-${html.slice(directStart,directEnd)}
+${html.slice(directStart,cardStart)}
 ${html.slice(cardStart,cardEnd)}
 ${html.slice(findStart,findEnd)}
 ${html.slice(categoryStart,categoryEnd)}
 ${html.slice(mediaStart,mediaEnd)}
-return { normalizeAniListSearchResults, getSingleAnimeSearchCardView, findPendingSingleAnimeSearchEntry, getExistingAnimeMediaState, addOrRestoreSingleMedia, getExistingChineseSeriesContext };`)();
+let animeList = [];
+const MAX_DISCOVERED_MEDIA = 30;
+async function translateText() { return null; }
+return {
+    normalizeAniListSearchResults,
+    buildSingleAnimeSearchEntries,
+    getSingleAnimeSearchCardView,
+    findPendingSingleAnimeSearchEntry,
+    getExistingAnimeMediaState,
+    addOrRestoreSingleMedia,
+    getExistingChineseSeriesContext,
+    setAnimeList(value) { animeList = Array.isArray(value) ? value : []; }
+};`)(V);
 
 let passed = 0;
+const pendingTests = [];
 function test(name, fn) {
-    try { fn(); passed++; console.log(`✓ ${name}`); }
+    try {
+        const result = fn();
+        if (result && typeof result.then === "function") {
+            pendingTests.push(result.then(() => {
+                passed++;
+                console.log(`✓ ${name}`);
+            }).catch(error => {
+                process.exitCode = 1;
+                console.error(`✗ ${name}\n  ${error.stack}`);
+            }));
+            return;
+        }
+        passed++;
+        console.log(`✓ ${name}`);
+    }
     catch (error) { process.exitCode = 1; console.error(`✗ ${name}\n  ${error.stack}`); }
 }
 
@@ -174,4 +201,100 @@ test("關聯候選優先沿用既有繁中系列 context，不採低可信機翻
     assert.equal(api.getExistingChineseSeriesContext(candidate, existing), "葬送的芙莉蓮");
 });
 
-if (!process.exitCode) console.log(`\nAnime multi-result search tests passed: ${passed}/${passed}`);
+test("搜尋 UI 將直接結果與相關動畫分區顯示", () => {
+    const renderStart = html.indexOf("function renderSingleAnimeSearchCandidate");
+    const renderEnd = html.indexOf("function findPendingSingleAnimeSearchEntry", renderStart);
+    const source = html.slice(renderStart, renderEnd);
+    assert.match(source, /appendGroup\("直接搜尋結果", directEntries, "direct"\)/u);
+    assert.match(source, /appendGroup\("相關動畫", relatedEntries, "relation"\)/u);
+    assert.match(source, /data\.discoverySource|dataset\.discoverySource/u);
+});
+
+test("相關動畫文案只依 relationType 通用產生", () => {
+    const labelStart = html.indexOf("function searchDiscoveryRelationLabel");
+    const labelEnd = html.indexOf("function renderSingleAnimeSearchCandidate", labelStart);
+    const source = html.slice(labelStart, labelEnd);
+    assert.match(source, /PREQUEL:"前傳"/u);
+    assert.match(source, /SEQUEL:"續作"/u);
+    assert.match(source, /ALTERNATIVE:"其他版本"/u);
+    assert.match(source, /SIDE_STORY:"外傳"/u);
+    assert.doesNotMatch(source, /堀與宮村|ホリミヤ|Horimiya/u);
+});
+
+const localizedDiscoveryFixture = () => {
+    const direct = {
+        id:14753,
+        title:{native:"ホリミヤ",english:"HoriMiya",romaji:"Horimiya"},
+        synonyms:[],format:"OVA",startDate:{year:2012},
+        relations:{edges:[{relationType:"ALTERNATIVE",node:{id:124080}}]}
+    };
+    const related = {
+        id:124080,
+        title:{native:"ホリミヤ",english:"Horimiya",romaji:"Horimiya"},
+        synonyms:[],format:"TV",startDate:{year:2021},
+        relations:{edges:[{relationType:"SEQUEL",node:{id:163132}}]}
+    };
+    const relatedWithSuffix = {
+        id:163132,
+        title:{native:"ホリミヤ -piece-",english:"Horimiya: The Missing Pieces",romaji:"Horimiya: piece"},
+        synonyms:[],format:"TV",startDate:{year:2023},relations:{edges:[]}
+    };
+    return [
+        {media:direct,discoverySource:"direct",relationDepth:0},
+        {media:related,discoverySource:"relation",relationType:"ALTERNATIVE",relationDepth:1,discoveredFromAniListId:"14753"},
+        {media:relatedWithSuffix,discoverySource:"relation",relationType:"SEQUEL",relationDepth:2,discoveredFromAniListId:"124080"}
+    ];
+};
+
+test("Related result 沿 discovery parent 共用繁中 title pipeline", async () => {
+    api.setAnimeList([]);
+    const entries = await api.buildSingleAnimeSearchEntries(localizedDiscoveryFixture(), {wikiZhTitle:"堀與宮村"});
+    assert.equal(entries.find(entry => entry.media.id === 163132).context.titleDetails.displayTitle, "堀與宮村 -piece-（2023）");
+});
+
+test("無可信翻譯的 distinctive suffix 保留原文、主系列維持繁中", async () => {
+    api.setAnimeList([]);
+    const entries = await api.buildSingleAnimeSearchEntries(localizedDiscoveryFixture(), {wikiZhTitle:"堀與宮村"});
+    const title = entries.find(entry => entry.media.id === 163132).context.titleDetails.displayTitle;
+    assert.match(title, /^堀與宮村/u);
+    assert.match(title, /-piece-/u);
+    assert.doesNotMatch(title, /^ホリミヤ/u);
+});
+
+test("Related media 有可信繁中 alias 時優先使用 alias", async () => {
+    api.setAnimeList([]);
+    const fixture = localizedDiscoveryFixture();
+    fixture[2].media.synonyms = ["堀與宮村：遺失的篇章"];
+    const entries = await api.buildSingleAnimeSearchEntries(fixture, {wikiZhTitle:"堀與宮村"});
+    assert.equal(entries.find(entry => entry.media.id === 163132).context.titleDetails.displayTitle, "堀與宮村：遺失的篇章（2023）");
+});
+
+test("manual title 仍優先於 Related localized title", async () => {
+    const manual = {
+        id:"local-manual",anilistId:163132,title:"My Manual Title",displayTitle:"My Manual Title",
+        groupTitle:"堀與宮村",titleManuallyEdited:true,titleSource:"manual",category:"backlog"
+    };
+    api.setAnimeList([manual]);
+    const entries = await api.buildSingleAnimeSearchEntries(localizedDiscoveryFixture(), {wikiZhTitle:"堀與宮村"});
+    const entry = entries.find(item => item.media.id === 163132);
+    assert.equal(api.getSingleAnimeSearchCardView(entry,[manual],{buildAnimeRecord:build}).title,"My Manual Title");
+});
+
+test("不同 AniList ID 的 Direct / Related entries 不合併", async () => {
+    api.setAnimeList([]);
+    const entries = await api.buildSingleAnimeSearchEntries(localizedDiscoveryFixture(), {wikiZhTitle:"堀與宮村"});
+    assert.deepEqual(entries.map(entry => entry.media.id),[14753,124080,163132]);
+});
+
+test("relation discovery metadata 不寫回 raw media 或 series identity", async () => {
+    api.setAnimeList([]);
+    const fixture = localizedDiscoveryFixture();
+    const before = JSON.stringify(fixture.map(item => item.media));
+    const entries = await api.buildSingleAnimeSearchEntries(fixture, {wikiZhTitle:"堀與宮村"});
+    assert.equal(JSON.stringify(fixture.map(item => item.media)),before);
+    assert.ok(entries.every(entry => !Object.hasOwn(entry.media,"seriesKey") && !Object.hasOwn(entry.media,"discoverySource")));
+});
+
+Promise.all(pendingTests).then(() => {
+    if (!process.exitCode) console.log(`\nAnime multi-result search tests passed: ${passed}/${passed}`);
+});

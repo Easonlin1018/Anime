@@ -240,4 +240,34 @@ test("已完結且 releasedEpisodes 已知時修復未知總集數", () => {
     assert.deepEqual(second.list, first.list);
 });
 
+test("managed generated title migration 修復重複 format decoration 且可重複執行", () => {
+    const record = {
+        id:"legacy-ona-corruption",
+        anilistId:900001,
+        title:"範例作品（ONA）（ONA）（ONA）（2024）",
+        displayTitle:"範例作品（ONA）（ONA）（ONA）（2024）",
+        canonicalTitle:"範例作品（ONA）（ONA）（ONA）",
+        groupTitle:"範例作品（ONA）（ONA）",
+        titleSource:"generated",
+        titleManuallyEdited:false,
+        anilistTitles:{native:"範例作品",english:"Example Work",romaji:"Example Work"},
+        aliases:["範例作品", "範例作品（ONA）（ONA）"],
+        relations:[],
+        format:"ONA",
+        status:"FINISHED",
+        startDate:{year:2024,month:1,day:1},
+        year:2024,
+        category:"backlog"
+    };
+    const first = api.migrateExistingAnimeRecords([record], new Date("2026-08-30T00:00:00.000Z"));
+    assert.equal(first.list[0].title,"範例作品（ONA）（2024）");
+    assert.equal(first.list[0].displayTitle,"範例作品（ONA）（2024）");
+    assert.equal(first.list[0].canonicalTitle,"範例作品（ONA）");
+    assert.equal(first.list[0].groupTitle,"範例作品");
+    assert.ok(first.list[0].aliases.every(alias => !/（ONA）.*（ONA）/u.test(alias)));
+    const second = api.migrateExistingAnimeRecords(JSON.parse(JSON.stringify(first.list)), new Date("2026-08-30T00:00:00.000Z"));
+    assert.equal(second.changed,false);
+    assert.deepEqual(second.list,first.list);
+});
+
 if (!process.exitCode) console.log(`\nExisting media migration integration tests passed: ${passed}/${passed}`);

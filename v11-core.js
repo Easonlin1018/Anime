@@ -99,9 +99,18 @@
         return "";
     }
 
-    function isSafeAnimeSeriesRelation(edge) {
+    const ANIME_SERIES_TRAVERSAL_RELATIONS = new Set(["PREQUEL", "SEQUEL", "PARENT", "ALTERNATIVE"]);
+    const ANIME_SERIES_COLLECT_ONLY_RELATIONS = new Set(["SIDE_STORY"]);
+
+    function animeSeriesRelationMode(edge) {
         const relationType = String(edge?.relationType || edge?.relation_type || edge?.relation || "").toUpperCase();
-        if (!["PREQUEL", "SEQUEL", "PARENT"].includes(relationType)) return false;
+        if (ANIME_SERIES_TRAVERSAL_RELATIONS.has(relationType)) return "traverse";
+        if (ANIME_SERIES_COLLECT_ONLY_RELATIONS.has(relationType)) return "collect-only";
+        return "exclude";
+    }
+
+    function isSafeAnimeSeriesRelation(edge) {
+        if (animeSeriesRelationMode(edge) === "exclude") return false;
         const format = String(animeRelationNode(edge)?.format || "").toUpperCase();
         return !format || ["TV", "TV_SHORT", "MOVIE", "OVA", "ONA", "SPECIAL"].includes(format);
     }
@@ -120,8 +129,15 @@
     function buildAnimeSeriesIdentity(list) {
         const records = arrayOf(list);
         const graph = new Map();
+        const traversalGraph = new Map();
+        const collectOnlyGraph = new Map();
+        const collectOnlyTargets = new Set();
         const ensureNode = id => {
-            if (id && !graph.has(id)) graph.set(id, new Set());
+            if (id && !graph.has(id)) {
+                graph.set(id, new Set());
+                traversalGraph.set(id, new Set());
+                collectOnlyGraph.set(id, new Set());
+            }
             return graph.get(id);
         };
         records.forEach(item => {
@@ -134,13 +150,24 @@
                 if (!relatedId || relatedId === mediaId) return;
                 ensureNode(mediaId).add(relatedId);
                 ensureNode(relatedId).add(mediaId);
+                if (animeSeriesRelationMode(edge) === "collect-only") {
+                    collectOnlyGraph.get(mediaId).add(relatedId);
+                    collectOnlyTargets.add(relatedId);
+                    return;
+                }
+                traversalGraph.get(mediaId).add(relatedId);
+                traversalGraph.get(relatedId).add(mediaId);
             });
         });
 
         const rootById = new Map();
         const visited = new Set();
         const numericOrder = (a, b) => Number(a) - Number(b) || String(a).localeCompare(String(b));
-        [...graph.keys()].sort(numericOrder).forEach(startId => {
+        const startOrder = [...graph.keys()].sort((a, b) =>
+            Number(collectOnlyTargets.has(a)) - Number(collectOnlyTargets.has(b))
+            || numericOrder(a, b)
+        );
+        startOrder.forEach(startId => {
             if (visited.has(startId)) return;
             const component = [];
             const queue = [startId];
@@ -148,10 +175,15 @@
             while (queue.length) {
                 const current = queue.shift();
                 component.push(current);
-                for (const next of graph.get(current) || []) {
+                for (const next of traversalGraph.get(current) || []) {
                     if (visited.has(next)) continue;
                     visited.add(next);
                     queue.push(next);
+                }
+                for (const next of collectOnlyGraph.get(current) || []) {
+                    if (visited.has(next)) continue;
+                    visited.add(next);
+                    component.push(next);
                 }
             }
             const rootId = component.slice().sort(numericOrder)[0];
@@ -173,7 +205,7 @@
             const fallback = legacySeriesTitleIdentity(item) || `local-${stableHash(String(item?.id || index))}`;
             return { index, mediaId:"", seriesRootId:null, seriesKey:`legacy-series:${stableHash(fallback)}`, source:"legacy-title" };
         });
-        return { entries, graph, rootById };
+        return { entries, graph, traversalGraph, collectOnlyGraph, rootById };
     }
 
     function assignAnimeSeriesIdentity(list) {

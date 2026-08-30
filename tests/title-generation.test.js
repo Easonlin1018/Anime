@@ -727,6 +727,145 @@ test("芙莉蓮 TV 第三季仍維持第三季名稱", () => {
     assert.equal(api.generateSmartTitle(value, "葬送的芙莉蓮"), "葬送的芙莉蓮 第三季（2027）");
 });
 
+function generatedFormatAnime(format, overrides = {}) {
+    return {
+        id:`local-${format.toLowerCase()}`,
+        anilistId:900001,
+        title:"範例作品",
+        displayTitle:"範例作品",
+        canonicalTitle:"範例作品",
+        groupTitle:"範例作品",
+        titleSource:"generated",
+        titleManuallyEdited:false,
+        aliases:["範例作品"],
+        format,
+        category:"backlog",
+        ...overrides
+    };
+}
+
+function generatedFormatMedia(format, overrides = {}) {
+    return {
+        id:900001,
+        title:{native:"範例作品",english:"Example Work",romaji:"Example Work"},
+        synonyms:[],
+        format,
+        status:"FINISHED",
+        episodes:1,
+        startDate:{year:2024,month:1,day:1},
+        relations:{edges:[]},
+        ...overrides
+    };
+}
+
+function managedTitleSnapshot(anime) {
+    return {
+        title:anime.title,
+        displayTitle:anime.displayTitle,
+        canonicalTitle:anime.canonicalTitle,
+        groupTitle:anime.groupTitle,
+        aliases:JSON.parse(JSON.stringify(anime.aliases || [])),
+        relations:JSON.parse(JSON.stringify(anime.relations || []))
+    };
+}
+
+test("generated ONA title refresh 1／10 次皆為單一 decoration", () => {
+    const anime = generatedFormatAnime("ONA");
+    const mediaValue = generatedFormatMedia("ONA");
+    metadataApi.applyMediaMetadata(anime,mediaValue,"2026-08-30T00:00:00.000Z");
+    const once = managedTitleSnapshot(anime);
+    assert.equal(api.getCoreTitle(anime.title),"範例作品");
+    assert.equal(anime.groupTitle,"範例作品");
+    assert.equal(anime.title,"範例作品（ONA）（2024）");
+    for(let index=1;index<10;index++) metadataApi.applyMediaMetadata(anime,mediaValue,"2026-08-30T00:00:00.000Z");
+    assert.deepEqual(managedTitleSnapshot(anime),once);
+});
+
+test("OVA／SPECIAL／MOVIE generated decoration 皆可重複 refresh", () => {
+    const expected = {OVA:"範例作品（OVA）（2024）",SPECIAL:"範例作品（特別篇）（2024）",MOVIE:"範例作品（劇場版）（2024）"};
+    for(const format of Object.keys(expected)) {
+        const anime = generatedFormatAnime(format);
+        const mediaValue = generatedFormatMedia(format);
+        metadataApi.applyMediaMetadata(anime,mediaValue,"2026-08-30T00:00:00.000Z");
+        const once = managedTitleSnapshot(anime);
+        for(let index=1;index<10;index++) metadataApi.applyMediaMetadata(anime,mediaValue,"2026-08-30T00:00:00.000Z");
+        assert.equal(anime.title,expected[format]);
+        assert.equal(anime.groupTitle,"範例作品");
+        assert.deepEqual(managedTitleSnapshot(anime),once);
+    }
+});
+
+test("人工重複 ONA 名稱完全不被 metadata refresh 修改", () => {
+    const anime = generatedFormatAnime("ONA",{
+        title:"我的作品（ONA）（ONA）",
+        displayTitle:"我的作品（ONA）（ONA）",
+        canonicalTitle:"我的作品（ONA）（ONA）",
+        groupTitle:"我的作品（ONA）（ONA）",
+        titleSource:"manual",
+        titleManuallyEdited:true
+    });
+    const before = managedTitleSnapshot(anime);
+    metadataApi.applyMediaMetadata(anime,generatedFormatMedia("ONA"),"2026-08-30T00:00:00.000Z");
+    assert.deepEqual({
+        title:anime.title,displayTitle:anime.displayTitle,canonicalTitle:anime.canonicalTitle,groupTitle:anime.groupTitle
+    },{
+        title:before.title,displayTitle:before.displayTitle,canonicalTitle:before.canonicalTitle,groupTitle:before.groupTitle
+    });
+});
+
+test("distinctive dash 與 bracket subtitles 不被 format cleanup 移除", () => {
+    const dash = generatedFormatAnime("TV",{title:"範例作品 -piece-",displayTitle:"範例作品 -piece-",canonicalTitle:"範例作品 -piece-",groupTitle:"範例作品 -piece-"});
+    const bracket = generatedFormatAnime("TV",{title:"範例作品【特殊副標題】",displayTitle:"範例作品【特殊副標題】",canonicalTitle:"範例作品【特殊副標題】",groupTitle:"範例作品【特殊副標題】"});
+    metadataApi.applyMediaMetadata(dash,generatedFormatMedia("TV",{title:{native:"範例作品 -piece-",romaji:"Example Work -piece-"}}),"2026-08-30T00:00:00.000Z");
+    metadataApi.applyMediaMetadata(bracket,generatedFormatMedia("TV",{title:{native:"範例作品【特殊副標題】"}}),"2026-08-30T00:00:00.000Z");
+    const dashOnce = managedTitleSnapshot(dash);
+    const bracketOnce = managedTitleSnapshot(bracket);
+    for(let index=1;index<10;index++) {
+        metadataApi.applyMediaMetadata(dash,generatedFormatMedia("TV",{title:{native:"範例作品 -piece-",romaji:"Example Work -piece-"}}),"2026-08-30T00:00:00.000Z");
+        metadataApi.applyMediaMetadata(bracket,generatedFormatMedia("TV",{title:{native:"範例作品【特殊副標題】"}}),"2026-08-30T00:00:00.000Z");
+    }
+    assert.match(dash.title,/-piece-/u);
+    assert.match(bracket.title,/【特殊副標題】/u);
+    assert.deepEqual(managedTitleSnapshot(dash),dashOnce);
+    assert.deepEqual(managedTitleSnapshot(bracket),bracketOnce);
+});
+
+test("TV 與 Season 2 metadata refresh 10 次保持穩定", () => {
+    const fixtures = [
+        {anime:generatedFormatAnime("TV"),media:generatedFormatMedia("TV"),expected:"範例作品（2024）"},
+        {
+            anime:generatedFormatAnime("TV"),
+            media:generatedFormatMedia("TV",{title:{native:"範例作品 第2期",english:"Example Work 2nd Season",romaji:"Example Work Season 2"}}),
+            expected:"範例作品 第二季（2024）"
+        }
+    ];
+    for(const fixture of fixtures) {
+        metadataApi.applyMediaMetadata(fixture.anime,fixture.media,"2026-08-30T00:00:00.000Z");
+        const once=managedTitleSnapshot(fixture.anime);
+        for(let index=1;index<10;index++) metadataApi.applyMediaMetadata(fixture.anime,fixture.media,"2026-08-30T00:00:00.000Z");
+        assert.equal(fixture.anime.title,fixture.expected);
+        assert.equal(fixture.anime.groupTitle,"範例作品");
+        assert.deepEqual(managedTitleSnapshot(fixture.anime),once);
+    }
+});
+
+test("metadata refresh 100 次 title／group／aliases／relations 完全穩定", () => {
+    const anime = generatedFormatAnime("ONA",{
+        title:"範例作品（ONA）（ONA）（ONA）（2024）",
+        displayTitle:"範例作品（ONA）（ONA）（ONA）（2024）",
+        canonicalTitle:"範例作品（ONA）（ONA）（ONA）",
+        groupTitle:"範例作品（ONA）（ONA）",
+        aliases:["範例作品", "範例作品（ONA）（ONA）"]
+    });
+    const mediaValue = generatedFormatMedia("ONA",{relations:{edges:[{relationType:"PARENT",node:{id:900000}}]}});
+    metadataApi.applyMediaMetadata(anime,mediaValue,"2026-08-30T00:00:00.000Z");
+    const once = managedTitleSnapshot(anime);
+    assert.equal(anime.title,"範例作品（ONA）（2024）");
+    assert.equal(anime.groupTitle,"範例作品");
+    for(let index=1;index<100;index++) metadataApi.applyMediaMetadata(anime,mediaValue,"2026-08-30T00:00:00.000Z");
+    assert.deepEqual(managedTitleSnapshot(anime),once);
+});
+
 Promise.all(pending).then(() => {
     if (!process.exitCode) console.log(`\nTitle generation tests passed: ${passed}/${passed}`);
 });
