@@ -3,32 +3,63 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-12T02:43:03.808Z",
-    "lastSuccessfulUpdateAt": "2026-08-12T02:43:03.808Z",
+    "updatedAt": "2026-08-30T05:22:40.676Z",
+    "lastSuccessfulUpdateAt": "2026-08-30T05:22:40.676Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 430,
+    "fetchedExternalItemCount": 427,
     "uniqueNewsCount": 622,
-    "articleCandidateCount": 229,
-    "articleFetchSuccessCount": 36,
+    "articleCandidateCount": 235,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 15,
+    "matchedEventCount": 20,
     "newEventCount": 3,
-    "cachedEventCount": 34,
+    "cachedEventCount": 37,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 42,
+    "archiveCount": 0,
+    "storedEventCount": 46,
     "expiredRemovedCount": 12,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 60,
+    "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 133,
+    "nonActivityRemovedCount": 140,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-310116",
+      "title": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場",
+      "summary": "由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310116",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-08-19T08:58:23.000Z",
+      "eventStartDate": "2026-08-19",
+      "eventEndDate": "2026-08-30",
+      "eventStatus": "ongoing",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "開動吧！Unzip the Fantasy 臺灣原創動畫展映",
+        "開動吧！"
+      ],
+      "searchCorpus": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場 由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
+      "dateConfidence": "high",
+      "dateSource": "即日起至 8/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z"
+    },
     {
       "id": "gnn-309659",
       "title": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發",
@@ -59,8 +90,8 @@
       "dateConfidence": "high",
       "dateSource": "即日起至 9 月 9 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-16T01:56:14.896Z",
+      "lastSeenAt": "2026-08-16T01:56:14.896Z"
     },
     {
       "id": "gnn-309119",
@@ -89,8 +120,8 @@
       "dateConfidence": "high",
       "dateSource": "7 月 31 日~9 月 3 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-16T01:56:14.896Z",
+      "lastSeenAt": "2026-08-16T01:56:14.896Z"
     },
     {
       "id": "gnn-308121",
@@ -122,6 +153,37 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
+      "id": "ext-1e3eb4e0df99540b",
+      "title": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE55NzVNaDZwVkZpWTIybEd0X050a1dIUndEd3o3SmlBa1V3b0kxMlhHYzlrVHYwZmtkNi1ZR2ZYakowZ25SaU15eWZfSUFPUm5LODBXUzg5OWZGcTBxZVkzSVA3TjNreE95RVJNb1dfNUNMb2NJNFYzRGRudHg4UQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-20T07:00:00.000Z",
+      "eventStartDate": "2026-08-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "三創！ Paradaily",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "緋染天空 Heaven Burns Red",
+        "開箱"
+      ],
+      "searchCorpus": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！ Paradaily",
+      "dateConfidence": "medium",
+      "dateSource": "8月20日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
     },
     {
       "id": "gnn-309600",
@@ -156,45 +218,9 @@
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
-      "id": "live-31e59631e80b33e553",
-      "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 77,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-08-06T11:21:40.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "dateConfidence": "medium",
-      "dateSource": "店8/6",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 &nbsp;&nbsp; oneone宇宙 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:05.909Z",
-      "lastSeenAt": "2026-08-09T11:35:36.903Z"
-    },
-    {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "巴哈姆特",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -204,7 +230,7 @@
         "新竹"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-05T04:12:44.000Z",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
       "eventStartDate": "2026-08-06",
       "eventEndDate": null,
       "eventStatus": "ongoing-unconfirmed",
@@ -214,17 +240,48 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 巴哈姆特",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+    },
+    {
+      "id": "ext-ec98737ee34d30a6",
+      "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
+      "summary": "oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-06T11:22:37.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者",
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞",
-      "summary": "PChome Online新聞",
+      "summary": "PChome Online 新聞",
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWV9LNXdMVmNndkpiMnhNNVNMc29ERTFrM0g4dzk3aVNfTFhYTVlzWGdLaGRtNGl6eXpnUjMxa2V4WXpuT01SS1FNNmVPclNtVmlEejRBMmRSNUxSWjJhSlp6eFFBU0l1WW9FMHJuQXZVek9nbXpQd1BBckNwSGphZWhObi0?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -244,12 +301,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online新聞",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online 新聞",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z"
     },
     {
       "id": "ext-8160678c11878af3",
@@ -339,8 +396,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-29T07:03:16.765Z",
+      "lastSeenAt": "2026-08-29T07:03:16.765Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -371,8 +428,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-06T03:35:05.926Z",
-      "lastSeenAt": "2026-08-06T03:35:05.926Z"
+      "discoveredAt": "2026-08-14T02:45:01.378Z",
+      "lastSeenAt": "2026-08-14T02:45:01.378Z"
     },
     {
       "id": "gnn-308731",
@@ -409,38 +466,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-24T09:12:42.910Z",
       "lastSeenAt": "2026-07-24T09:12:42.910Z"
-    },
-    {
-      "id": "gnn-308555",
-      "title": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊",
-      "summary": "由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308555",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：展覽",
-      "sourceTag": "展覽",
-      "type": "簽名會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-22T04:54:54.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": "2026-08-23",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "麻宮騎亞 40th Arts Exhibition In 台灣",
-        "麻宮騎亞 40th Arts Exhibition In 台灣 2026",
-        "快傑蒸汽偵探團"
-      ],
-      "searchCorpus": "《麻宮騎亞 40th Arts Exhibition In 台灣》7/25 開幕 新公開集章卡、簽名會與限定周邊資訊 由陋室五月小風景主辦、《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽即將於 2026 年 7 月 25 日至 8 月 23 日在台北正式展出。 《麻宮騎亞 40th Arts Exhibition In 台灣 2026》展覽門口 官方表示，本次展覽最受矚目的收藏商品之一，為首度公開《快傑蒸汽偵探團》展覽限定預購雕塑。雕塑以麻宮騎亞筆下極具代表性的角色為設計核心，完整呈現其",
-      "dateConfidence": "high",
-      "dateSource": "2026 年 7 月 25 日至 8 月 23 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
     },
     {
       "id": "gnn-308120",
@@ -570,6 +595,40 @@
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
+      "id": "gnn-309993",
+      "title": "《偶像夢幻祭》迎來十週年里程碑「聚光舞台主題快閃店」8 月 21 日起於北中南登場",
+      "summary": "為慶祝人氣偶像 IP《偶像夢幻祭》迎來十週年里程碑，主辦方 Smarprise 將自 8 月 21 日起，分別於台中、台北、高雄三地巡迴舉辦「聚光舞台主題快閃店」活動，集結全 58 位偶像推出快閃周邊商品，涵蓋 10 大商品類別，並同步推出購買特典、集點企畫、遊戲內限定稱號及 SNS 投稿特典等內容，為玩家帶來期間限定的線上遊戲結合實體活動參",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309993",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-17T09:03:12.000Z",
+      "eventStartDate": "2026-08-21",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "偶像夢幻祭",
+        "聚光舞台主題"
+      ],
+      "searchCorpus": "《偶像夢幻祭》迎來十週年里程碑「聚光舞台主題快閃店」8 月 21 日起於北中南登場 為慶祝人氣偶像 IP《偶像夢幻祭》迎來十週年里程碑，主辦方 Smarprise 將自 8 月 21 日起，分別於台中、台北、高雄三地巡迴舉辦「聚光舞台主題快閃店」活動，集結全 58 位偶像推出快閃周邊商品，涵蓋 10 大商品類別，並同步推出購買特典、集點企畫、遊戲內限定稱號及 SNS 投稿特典等內容，為玩家帶來期間限定的線上遊戲結合實體活動參",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 21 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-18T01:49:50.020Z",
+      "lastSeenAt": "2026-08-18T01:49:50.020Z"
+    },
+    {
       "id": "gnn-308926",
       "title": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場",
       "summary": "《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
@@ -597,8 +656,108 @@
       "dateConfidence": "medium",
       "dateSource": "2026 年 8 月 28 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-08T02:20:40.969Z",
-      "lastSeenAt": "2026-08-08T02:20:40.969Z"
+      "discoveredAt": "2026-08-13T02:46:19.616Z",
+      "lastSeenAt": "2026-08-13T02:46:19.616Z"
+    },
+    {
+      "id": "gnn-310339",
+      "title": "台灣大攜手 Riot Games 打造《特戰英豪》新地圖「頂峰亭閣」主題特展",
+      "summary": "台灣大哥大宣布，攜手 Riot Games 在台北東區商圈為《特戰英豪》打造新地圖「頂峰亭閣」主題特展，玩家至 8 月 30 日以前可以體驗遊戲地圖所延伸的場景，以及互動遊戲等。 現場規劃 4 大主題區域，玩家可隨著路線，步入並感受巡禮過程。完成參展任務，玩家不僅可獲得「頂峰亭閣」特展限定周邊；達成",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310339",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-24T09:49:40.000Z",
+      "eventStartDate": "2026-08-30",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "特戰英豪",
+        "頂峰亭閣"
+      ],
+      "searchCorpus": "台灣大攜手 Riot Games 打造《特戰英豪》新地圖「頂峰亭閣」主題特展 台灣大哥大宣布，攜手 Riot Games 在台北東區商圈為《特戰英豪》打造新地圖「頂峰亭閣」主題特展，玩家至 8 月 30 日以前可以體驗遊戲地圖所延伸的場景，以及互動遊戲等。 現場規劃 4 大主題區域，玩家可隨著路線，步入並感受巡禮過程。完成參展任務，玩家不僅可獲得「頂峰亭閣」特展限定周邊；達成",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 30 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+    },
+    {
+      "id": "gnn-310560",
+      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
+      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T09:35:02.000Z",
+      "eventStartDate": "2026-09-01",
+      "eventEndDate": "2026-09-30",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "IDOLiSH7 - 偶像星願",
+        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
+        "こまどり モフモフパレード"
+      ],
+      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "dateConfidence": "high",
+      "dateSource": "9/1~9/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+    },
+    {
+      "id": "gnn-310540",
+      "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
+      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310540",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T08:19:38.000Z",
+      "eventStartDate": "2026-09-04",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "魔法少女小圓",
+        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "角色背景打卡區",
+        "主視覺區"
+      ],
+      "searchCorpus": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 4 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-27T09:46:22.004Z",
+      "lastSeenAt": "2026-08-27T09:46:22.004Z"
     },
     {
       "id": "gnn-308580",
@@ -729,191 +888,6 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-3a237f3b9fc19304",
-      "title": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳",
-      "summary": "三立新聞網SETN.com",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5ZOTBYZ1V4V3RrcGwwVE5SYnJfem51TnlOay1iME9SaXZsTnpIZFd4NFJOUmZSVHlWMUNJRWlFeThpYVBtR19VQtIBTEFVX3lxTE82ZzJhY2VoMEIzYWxHU0R4SmdCY1VQb0xRNGJDR0VxN0Z2ZVo3Xzl1UHNaMHVIVVB6Wk1jZzNaeGVIMUZZNjBxZHJDWnY?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "主題餐廳／咖啡廳",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-08T16:55:03.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "玩轉動漫遊"
-      ],
-      "searchCorpus": "三創生活揪「玩轉動漫遊」 必吃幽遊白書主題餐廳 三立新聞網SETN.com",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
-    },
-    {
-      "id": "ext-10025e3f3fa962b7",
-      "title": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券",
-      "summary": "travel.udn.com",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE12VHhDNm5iZEUtRmlxOFlDVTJQXzY3bENaVmJ0ZmhjWldYaGJ1Ui1TOWV4dnJTQVBLdmtIbjJjMnJQWWN4VlBUM3Z3V2RoN0VmZWdxLWhuZFR1c3VI?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創快閃店登場！還有《湯姆貓與傑利鼠》《",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "湯姆貓與傑利鼠",
-        "飛天小女警"
-      ],
-      "searchCorpus": "小小兵三創快閃店登場！還有《湯姆貓與傑利鼠》《飛天小女警》一次逛再抽免費電影券 travel.udn.com",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
-    },
-    {
-      "id": "ext-0ca4f08ed4351924",
-      "title": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看",
-      "summary": "遠見雜誌",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5IWEJmaWZOd2FmWDFXMnhWaWVqcDh5TXRxVGpaa2x5Uko4dTd3eGo0TGxNYjNibDBlRkRxWmtoSks3MFVqX2ZoMWNaX19hUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-10T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "吉伊卡哇、迷宮飯、我獨自升級展！北中南暑假動漫展時間地點一次看 遠見雜誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
-    },
-    {
-      "id": "ext-83e05308d772dbe8",
-      "title": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQd3FGVUw4LUJxV25YV3kzMlZaSldHV0FkSGZjWWJub1RHLTRtVnZTNmU1VmRMcEhkaDA1OXBnZjlsdzA2YW8xeU1MRmJXT1dRa2RyUnV5UzFRVExjWWlSVW8xbXZsN2lvaVdicXl0UGs2OVFLengxMW8xYndZTFJ2UWF3UDQ3a19PbEpZbGNpM3lQX0w5ODVHbjc4alk0NElhYkRvM1VKY2c4eks1OXdxWVg4YU9XVjJSNWFJcFdZQkxjXzNMcUNCTXRtLW5OSzVfRHpoSS1QN2FBSm9EalVXRlFR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-13T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "全知讀者視角",
-        "非正式授權"
-      ],
-      "searchCorpus": "台灣角川澄清《全知讀者視角 快閃店》中國bilibili會員購商品為「非正式授權」 4Gamers",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
-    },
-    {
-      "id": "ext-57e5e727037a7dc6",
-      "title": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE16Y19kb0xUUmVrQTBoVXBWRlZFTU9EV3RBTG9hRVlKeE5jcVcxZ3lBcGNObEFRbGRYX2M1SF8zMFl3cXJkdXVhOEtDVUhwdmk2djBSYmdfRV9hUzVVbzhaelJmdVZCdGsw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026漫畫博覽會"
-      ],
-      "searchCorpus": "台灣角川「2026漫畫博覽會」限定活動＆最強滿額贈 正式公開！ Paradaily",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-01T03:48:23.117Z",
-      "lastSeenAt": "2026-08-01T03:48:23.117Z"
-    },
-    {
-      "id": "gnn-308171",
-      "title": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台",
-      "summary": "作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308171",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T09:44:36.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "水縹そまる",
-        "花咲くれは",
-        "UFO 醬",
-        "流川莉蘿",
-        "夏色Palette",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】水縹そまる×花咲くれは×UFO 醬×流川莉蘿 登上日本館舞台 作為台灣 VTuber 圈的雙語 VTuber，「水縹そまる」與「花咲くれは」去年曾參展漫畫博覽會，今年也將再次登場，於 2026 年漫畫博覽會日本館攤位販售限定周邊商品。此外，本次還邀請兩位新夥伴「UFO 醬」及「流川莉蘿」共同參與，四人將以「夏色Palette」名義登上日本館舞台。 除了周邊商品販售外，攤位現場還設有拍照打卡區，更安排了一",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-15T07:31:09.855Z",
-      "lastSeenAt": "2026-07-15T07:31:09.855Z"
-    },
-    {
       "id": "live-c905c3e7ab49dcf71a",
       "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
       "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
@@ -977,8 +951,67 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+    },
+    {
+      "id": "ext-e8f64087db1135bc",
+      "title": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE44S3paenZOeHdQMnhFUXhhaGotLWdPUWs2dlVYN1RJbEF1MUZCMWs4YTdhbHFnMUc3NGVjZWNSSkptczJraGFVdDVKeDVYYmlQYnRJN2F4SFFoYUdpRF9KZzlhekdkSkdsenEyWmE2RnJpczBtSmx2Wk96d1lSUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創 SouNova 少女星",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師"
+      ],
+      "searchCorpus": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創 SouNova 少女星",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z"
+    },
+    {
+      "id": "ext-dec58b57e7230bb4",
+      "title": "小小兵化身攝影師太可愛！三創雙主題快閃店，四大IP超可愛，滿額抽電影票",
+      "summary": "udn 女子漾",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Ub2N6RHgwdHVWdmdEekh3dko2bHpQQUY0cnk2T00zWUl3THBFbVF5MHBkVTdmLWhlRGVqd0JYdWx3enNQTkJ1dl8yRThicnBaX2l2N0ZIN25zVnBB0gFiQVVfeXFMT2pYczlIemtDdENPdzZGUmM0d3hfNEVUWUhNVzlvLUlqblU0dDFZdHpYLUxoTmJGZ3RTczBuLVhIbVpWOGdqVndlQ0Jua25hZlM4VlJTeElCMU1QSWFSbVhjenc?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-22T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創雙主題快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "小小兵化身攝影師太可愛！三創雙主題快閃店，四大IP超可愛，滿額抽電影票 udn 女子漾",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-24T01:56:44.434Z",
+      "lastSeenAt": "2026-08-24T01:56:44.434Z"
     },
     {
       "id": "gnn-308798",
@@ -1146,10 +1179,10 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
-      "id": "ext-effa105c095847b1",
+      "id": "ext-050b57857b74ae96",
       "title": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北",
-      "summary": "Yahoo新聞",
-      "url": "https://news.google.com/rss/articles/CBMiwwNBVV95cUxQdG1raTJnSm1aNWtuMHVBblVHbzFoUnFZamY4ejBtRHJlRHJFQkhLUTZKOVg3Vm9JMk1GT2FDZzZhRjh3dDdMWHZ5ankyZHNIeHpzenN6b3lsZTUzNVFPakFLUDhtX3Vvc1RHNWFub2lDcHhSTUFaNEpfaXBhWkZ0OXVRZTc3Tm0tWkFyQUhST3JwMnVUTXV0cm9fUWVjUHlFR2EyUjZReFhZSEZvTTJlaTFrV3EzczFlTlQyWnZ6ZndnRmhHQXFZT3V3YW1XTzBNUHJTVEhJU1RZVjJueW5sNGp2bmh2Z3F6YVpGRTVSd2w2MHFXeVJwSnhtUVZJenNtcHRWWjE5TUk1NzM0N19uWi1YTV84cnRQMnV0SW1UWG1xZVZKYlhYQUUxbzlrRkRiNlJ2QlozbWFJMW04MmdtS1pGdFJBQlFVRnZabmlyWjZCRnZmV3Q5dkxHQnVzLUdPVE1OX0p0T0lmY0xOOXZMUkU1MFZNLVVKQUFPVHhhS0Jsa3FaZ2IybklhTjdTSDFJQzhTNm0zNUt0QU5YcTRvbl9YNng1U1dqSnVmN3FGZGNMWThHeDg1TGJaYlNNU2IxQlhj?oc=5",
+      "summary": "鏡報",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpOVpKLXR4ZHBpOVI0N1ZpX0pTRktGSXBDcVdpXzUzWWJWemJ3UDlGeVJDaXFiZHNwbjJDb1NGNmJlakpDZ1RHUUtSTEM0RnI4dkE?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
@@ -1158,7 +1191,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T07:00:00.000Z",
+      "publishedAt": "2026-07-30T08:24:26.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1166,12 +1199,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北 Yahoo新聞",
+      "searchCorpus": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北 鏡報",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
     },
     {
       "id": "gnn-309209",
@@ -1207,8 +1240,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-16T01:56:14.896Z",
+      "lastSeenAt": "2026-08-16T01:56:14.896Z"
     },
     {
       "id": "ext-2d785a3e1d2ed80f",
@@ -1241,7 +1274,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "風傳媒",
+      "summary": "Storm.mg",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1263,48 +1296,42 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 Storm.mg",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
     },
     {
-      "id": "live-a12d2df9a41c01c979",
+      "id": "ext-baa2ea110cbe8cf8",
       "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
-      "summary": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 &nbsp;&nbsp; nownews.com",
+      "summary": "NOWnews今日新聞",
       "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9iY0tsbjFpX251TjNRNm1RSFhfejFOel9Sc0gwWlByYlQ4Z1drVVJjSWpQTkdnSzNINmZDLUVGRlVOTlJmR0k3SUEyS1PSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
         "新竹"
       ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-08-08T21:41:00.000Z",
+      "confidence": "high",
+      "publishedAt": "2026-08-09T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 NOWnews今日新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 &nbsp;&nbsp; nownews.com Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:05.055Z",
-      "lastSeenAt": "2026-08-09T11:35:36.067Z"
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
     },
     {
       "id": "gnn-309608",
@@ -1354,7 +1381,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-11T08:00:00.000Z",
+      "publishedAt": "2026-08-11T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1368,39 +1395,106 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-12T02:43:03.808Z",
-      "lastSeenAt": "2026-08-12T02:43:03.808Z"
-    }
-  ],
-  "archive": [
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+    },
     {
-      "id": "ext-642d6f3817b89821",
-      "title": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9kcG13NzZYX09JRjM4UmI3dVhPWjNFY0NGclNpUEN4U1FMU01XbFBYQklVaE5OY3plVkFabEw3aW1nbGg3aXQzUWpjZkllRlYtWHRjZHd3bjBvajVOYktPT2pyb3FxUnhqZlZsbF9NZk1kTm9SZkhuNXU4NA?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
+      "id": "gnn-309957",
+      "title": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件",
+      "summary": "為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309957",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
       "locations": [
-        "全台"
+        "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-06-27T07:00:00.000Z",
+      "publishedAt": "2026-08-15T09:24:47.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
-      "eventStatus": "expired",
+      "eventStatus": "date-unknown",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026 暑假全台動漫展覽懶人包！ 超過 15 場的精彩活動強勢集結，打造絕對不無聊的夏日狂歡 SouNova 少女星",
+      "workTitles": [
+        "Pokemon GO",
+        "超夢",
+        "陽光大廳",
+        "皮卡丘",
+        "伊布"
+      ],
+      "searchCorpus": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件 為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z",
-      "archivedAt": "2026-08-12T02:43:03.808Z"
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z"
+    },
+    {
+      "id": "gnn-310252",
+      "title": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開",
+      "summary": "偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310252",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-21T09:31:43.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "偶像夢幻祭 2",
+        "偶像夢幻祭",
+        "聚光舞台主題"
+      ],
+      "searchCorpus": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開 偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-25T01:51:26.169Z",
+      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+    },
+    {
+      "id": "ext-4f7e330b7c6a4053",
+      "title": "POP UP STORE「曼迪秋日祭」快閃微風信義 集結《名偵探柯南》等多部作品周邊、抽卡機",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE96RW5WWkFiTUNVNFI2Rm9JOHpObTgwaWc5anBaR1p0QlZUVy1SSXQwOTd4U1JoRHdtSzVFUFU2WXMwWU5YYnhPY3RCN3VaVjc2dTNCS2tpSWM?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-28T07:11:27.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "曼迪秋日祭"
+      ],
+      "searchCorpus": "POP UP STORE「曼迪秋日祭」快閃微風信義 集結《名偵探柯南》等多部作品周邊、抽卡機 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-30T05:22:40.676Z",
+      "lastSeenAt": "2026-08-30T05:22:40.676Z"
     }
-  ]
+  ],
+  "archive": []
 }
