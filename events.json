@@ -3,63 +3,32 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-30T05:22:40.676Z",
-    "lastSuccessfulUpdateAt": "2026-08-30T05:22:40.676Z",
+    "updatedAt": "2026-08-31T05:32:32.134Z",
+    "lastSuccessfulUpdateAt": "2026-08-31T05:32:32.134Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 622,
-    "articleCandidateCount": 235,
+    "fetchedExternalItemCount": 428,
+    "uniqueNewsCount": 621,
+    "articleCandidateCount": 236,
     "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 3,
-    "cachedEventCount": 37,
+    "matchedEventCount": 23,
+    "newEventCount": 6,
+    "cachedEventCount": 36,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 46,
-    "expiredRemovedCount": 12,
+    "archiveCount": 1,
+    "storedEventCount": 48,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 55,
+    "undatedOldRemovedCount": 59,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 140,
+    "nonActivityRemovedCount": 133,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
-    {
-      "id": "gnn-310116",
-      "title": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場",
-      "summary": "由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310116",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-08-19T08:58:23.000Z",
-      "eventStartDate": "2026-08-19",
-      "eventEndDate": "2026-08-30",
-      "eventStatus": "ongoing",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "開動吧！Unzip the Fantasy 臺灣原創動畫展映",
-        "開動吧！"
-      ],
-      "searchCorpus": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場 由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
-      "dateConfidence": "high",
-      "dateSource": "即日起至 8/30",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z"
-    },
     {
       "id": "gnn-309659",
       "title": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發",
@@ -182,8 +151,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "gnn-309600",
@@ -244,8 +213,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -275,8 +244,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -888,6 +857,34 @@
       "lastSeenAt": "2026-07-30T03:26:59.703Z"
     },
     {
+      "id": "gnn-310732",
+      "title": "人氣音樂組合 YOASOBI 宣布 1/9、1/10 登上大巨蛋！演唱會詳情正式公開",
+      "summary": "日本現象級雙人組合 YOASOBI 在去年沖繩演唱會上，宣布了將展開出道以來規模最大的亞洲巡迴演出，包含有日本國內大阪、名古屋、札幌、福岡、東京，以及海外台北、首爾、新加坡等城市後，主辦單位今日正式宣布台北場將於 2027 年 1 月 9 日、1 月 10 日一連兩天於台北大巨蛋開唱的消息。 YOASOBI 是由 Ayase 與 ikura 組成的日本人氣音樂團體",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310732",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-31T03:20:52.000Z",
+      "eventStartDate": "2027-01-09",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "人氣音樂組合 YOASOBI 宣布 1/9、1/10 登上大巨蛋！演唱會詳情正式公開 日本現象級雙人組合 YOASOBI 在去年沖繩演唱會上，宣布了將展開出道以來規模最大的亞洲巡迴演出，包含有日本國內大阪、名古屋、札幌、福岡、東京，以及海外台北、首爾、新加坡等城市後，主辦單位今日正式宣布台北場將於 2027 年 1 月 9 日、1 月 10 日一連兩天於台北大巨蛋開唱的消息。 YOASOBI 是由 Ayase 與 ikura 組成的日本人氣音樂團體",
+      "dateConfidence": "medium",
+      "dateSource": "1/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+    },
+    {
       "id": "live-c905c3e7ab49dcf71a",
       "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
       "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
@@ -951,8 +948,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "ext-e8f64087db1135bc",
@@ -1203,8 +1200,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "gnn-309209",
@@ -1300,8 +1297,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1330,8 +1327,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "gnn-309608",
@@ -1395,8 +1392,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "gnn-309957",
@@ -1492,9 +1489,109 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-30T05:22:40.676Z",
-      "lastSeenAt": "2026-08-30T05:22:40.676Z"
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+    },
+    {
+      "id": "gnn-310709",
+      "title": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲",
+      "summary": "日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310709",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-30T13:23:09.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Fatal",
+        "ONIGOTO",
+        "＂IDOL1ST KENTY＂ ASIA TOUR 2026",
+        "3000 年前開始就是偶像",
+        "天生偶像"
+      ],
+      "searchCorpus": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲 日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+    },
+    {
+      "id": "gnn-310753",
+      "title": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎複製原畫展 台中場正式開展",
+      "summary": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310753",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-31T05:03:14.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "台中中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "JOJO 的奇妙冒險",
+        "JOJO 的奇妙冒險 星塵遠征軍",
+        "飆馬野郎 JOJO 的奇妙冒險",
+        "主角立牌區"
+      ],
+      "searchCorpus": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎複製原畫展 台中場正式開展 《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-310116",
+      "title": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場",
+      "summary": "由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310116",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-08-19T08:58:23.000Z",
+      "eventStartDate": "2026-08-19",
+      "eventEndDate": "2026-08-30",
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "開動吧！Unzip the Fantasy 臺灣原創動畫展映",
+        "開動吧！"
+      ],
+      "searchCorpus": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場 由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
+      "dateConfidence": "high",
+      "dateSource": "即日起至 8/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-20T01:50:33.177Z",
+      "lastSeenAt": "2026-08-20T01:50:33.177Z",
+      "archivedAt": "2026-08-31T05:32:32.134Z"
+    }
+  ]
 }
