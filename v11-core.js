@@ -1179,13 +1179,36 @@
             cleanupResult = options.cleanup?.(marked.anime, undo, marked.list) ?? null;
             trace("STEP 8 saveAndRender");
             options.persist?.(marked.list, cleanupResult);
-            return { ok:true, changed:true, stage:"complete", list:marked.list, anime:marked.anime, cleanupResult, undoBytes:serializedUndo.length * 2 };
+            return {
+                ok:true, changed:true, stage:"complete", list:marked.list, anime:marked.anime,
+                cleanupResult, undoBytes:serializedUndo.length * 2,
+                rollbackSucceeded:null, rollbackError:null, recoveryRequired:false
+            };
         } catch (error) {
-            try { options.rollback?.(list, undo, marked, cleanupResult, error); } catch (rollbackError) {
-                error.rollbackError = rollbackError;
+            const failure = error instanceof Error ? error : new Error(String(error));
+            let rollbackSucceeded = false, rollbackError = null;
+            try {
+                if (typeof options.rollback !== "function") throw new Error("Delete rollback handler is unavailable");
+                options.rollback(list, undo, marked, cleanupResult, failure);
+                rollbackSucceeded = true;
+            } catch (caughtRollbackError) {
+                rollbackError = caughtRollbackError instanceof Error
+                    ? caughtRollbackError
+                    : new Error(String(caughtRollbackError));
+                failure.rollbackError = rollbackError;
             }
-            try { options.storage.removeItem?.(options.undoKey); } catch {}
-            return { ok:false, changed:false, stage:error?.deleteStage || "persist", list, anime:item, error, quotaExceeded:isStorageQuotaError(error), undoBytes:serializedUndo.length * 2 };
+            if (rollbackSucceeded) {
+                try { options.storage.removeItem?.(options.undoKey); } catch {}
+            }
+            return {
+                ok:false, changed:false, stage:failure.deleteStage || "persist", list, anime:item,
+                error:failure, quotaExceeded:isStorageQuotaError(failure) || isStorageQuotaError(rollbackError),
+                undoBytes:serializedUndo.length * 2,
+                rollbackSucceeded,
+                rollbackError,
+                recoveryRequired:!rollbackSucceeded,
+                recoveryUndoPreserved:!rollbackSucceeded
+            };
         }
     }
 
@@ -1195,7 +1218,7 @@
             return {
                 list:restored.list,
                 state:restoreAnimeAuxiliaryState(state, undo.auxiliary, undo.targetId),
-                restored:restored.changed,
+                restored:restored.changed || restored.found,
                 legacy:false,
                 anime:restored.anime
             };

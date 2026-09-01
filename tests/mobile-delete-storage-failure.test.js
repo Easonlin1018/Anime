@@ -24,6 +24,7 @@ function quotaError() {
 function quotaStorage(limitBytes = Infinity, failKey = "") {
     const data = new Map();
     const bytes = value => String(value).length * 2;
+    let capacity = limitBytes;
     return {
         data,
         setItem(key, value) {
@@ -32,11 +33,16 @@ function quotaStorage(limitBytes = Infinity, failKey = "") {
             const currentBytes = [...data.entries()].reduce((total, [storedKey, storedValue]) => total + bytes(storedKey) + bytes(storedValue), 0);
             const oldBytes = data.has(key) ? bytes(key) + bytes(data.get(key)) : 0;
             const nextBytes = currentBytes - oldBytes + bytes(key) + bytes(nextValue);
-            if (nextBytes > limitBytes) throw quotaError();
+            if (nextBytes > capacity) throw quotaError();
             data.set(String(key), nextValue);
         },
         getItem:key => data.get(String(key)) ?? null,
-        removeItem:key => data.delete(String(key))
+        removeItem:key => data.delete(String(key)),
+        setLimit(value) { capacity = Number(value); },
+        usedBytes() {
+            return [...data.entries()].reduce((total, [key, value]) => total + bytes(key) + bytes(value), 0);
+        },
+        snapshot() { return Object.fromEntries([...data.entries()].sort(([a], [b]) => a.localeCompare(b))); }
     };
 }
 
@@ -243,6 +249,180 @@ test("15. 舊流程的 UNDO quota fault 完整重現 confirm 後無 toast、UI �
     assert.equal(toasts.length, 0);
     assert.equal(list.find(item => item.anilistId === 2002).deletedAt, null);
     assert.equal(list.filter(item => !item.deletedAt).length, 2);
+});
+
+test("16. rollback restore 失敗時必須保留 compact recovery，不能刪除 UNDO_KEY", () => {
+    const storage = quotaStorage(), state = auxiliaryFor(target.id);
+    const undo = V.createCompactDeleteUndo(target, "2002", state, {}, at);
+    const result = V.runAnimeDeleteTransaction({
+        list:[sibling, target], id:target.id, identity:"2002", now:at, undo, undoKey, storage,
+        cleanup:() => {
+            storage.setItem(V.HISTORY_KEY, "[]");
+            const error = new Error("persist failed");
+            error.deleteStage = "persist";
+            throw error;
+        },
+        persist:() => {},
+        rollback:() => { throw quotaError(); }
+    });
+    assert.equal(result.ok, false);
+    assert.equal(result.rollbackSucceeded, false);
+    assert.equal(result.recoveryRequired, true);
+    assert.equal(result.error.rollbackError.name, "QuotaExceededError");
+    assert.equal(storage.getItem(undoKey), JSON.stringify(undo));
+});
+
+test("17. near-quota partial rollback 會保留真實 persistent recovery，之後可補完 auxiliary restore", () => {
+    const EVENT_KEY = "anime_event_overrides_v10";
+    const EVENT_ANIME_KEY = "anime_event_anime_overrides_v11";
+    const THEME_KEY = "anime_theme_lookup_cache_v1";
+    const list = [sibling, target], state = auxiliaryFor(target.id);
+    state.watchHistory[0].payload = "h".repeat(1200);
+    const undo = V.createCompactDeleteUndo(target, "2002", state, {
+        spotify:{ animeId:target.id, cacheKey:`source:${target.id}`, cachePresent:true },
+        crossMedia:{ workId:"work-1", mediaId:target.id }
+    }, at);
+    const worksBefore = [{ workId:"work-1", mediaEntries:[{ id:target.id, deletedAt:null }] }];
+    const before = {
+        [V.STORAGE_KEY]:JSON.stringify(list),
+        [EVENT_KEY]:JSON.stringify(state.eventOverrides),
+        [EVENT_ANIME_KEY]:JSON.stringify(state.eventAnimeOverrides),
+        [V.HISTORY_KEY]:JSON.stringify(state.watchHistory),
+        [THEME_KEY]:JSON.stringify(state.themeCache),
+        [V.WORKS_KEY]:JSON.stringify(worksBefore)
+    };
+    const storage = quotaStorage();
+    Object.entries(before).forEach(([key, value]) => storage.setItem(key, value));
+    const undoBytes = (undoKey.length + JSON.stringify(undo).length) * 2;
+    storage.setLimit(storage.usedBytes() + undoBytes + 120);
+    const cleaned = V.cleanupAnimeAuxiliaryState(state, target.id);
+    const deletedWorks = [{
+        workId:"work-1",
+        mediaEntries:[{ id:target.id, deletedAt:at, updatedAt:at, syncEnvelope:"w".repeat(600) }]
+    }];
+    const result = V.runAnimeDeleteTransaction({
+        list, id:target.id, identity:"2002", now:at, undo, undoKey, storage,
+        cleanup:() => {
+            storage.setItem(EVENT_KEY, JSON.stringify(cleaned.eventOverrides));
+            storage.setItem(EVENT_ANIME_KEY, JSON.stringify(cleaned.eventAnimeOverrides));
+            storage.setItem(V.HISTORY_KEY, JSON.stringify(cleaned.watchHistory));
+            storage.setItem(THEME_KEY, JSON.stringify(cleaned.themeCache));
+            storage.setItem(V.WORKS_KEY, JSON.stringify(deletedWorks));
+            return cleaned;
+        },
+        persist:nextList => storage.setItem(V.STORAGE_KEY, JSON.stringify(nextList) + "x".repeat(2000)),
+        rollback:() => {
+            const errors = [];
+            [
+                () => storage.setItem(EVENT_KEY, before[EVENT_KEY]),
+                () => storage.setItem(EVENT_ANIME_KEY, before[EVENT_ANIME_KEY]),
+                () => storage.setItem(V.HISTORY_KEY, before[V.HISTORY_KEY]),
+                () => storage.setItem(THEME_KEY, before[THEME_KEY]),
+                () => storage.setItem(V.WORKS_KEY, before[V.WORKS_KEY]),
+                () => storage.setItem(V.STORAGE_KEY, before[V.STORAGE_KEY])
+            ].forEach(action => { try { action(); } catch (error) { errors.push(error); } });
+            if (errors.length) throw errors[0];
+        }
+    });
+    assert.equal(result.ok, false);
+    assert.equal(result.rollbackSucceeded, false);
+    assert.equal(result.recoveryRequired, true);
+    assert.ok(storage.getItem(undoKey), "compact undo must survive partial rollback");
+    assert.equal(storage.getItem(V.STORAGE_KEY), before[V.STORAGE_KEY], "main anime record remains active");
+    assert.notEqual(storage.getItem(V.HISTORY_KEY), before[V.HISTORY_KEY], "history demonstrates partial persistent rollback");
+    assert.equal(storage.getItem(V.WORKS_KEY), before[V.WORKS_KEY], "later rollback steps still run");
+
+    storage.setLimit(Infinity);
+    const recovery = V.restoreDeleteUndoState(
+        JSON.parse(storage.getItem(V.STORAGE_KEY)),
+        {
+            eventOverrides:JSON.parse(storage.getItem(EVENT_KEY)),
+            eventAnimeOverrides:JSON.parse(storage.getItem(EVENT_ANIME_KEY)),
+            watchHistory:JSON.parse(storage.getItem(V.HISTORY_KEY)),
+            themeCache:JSON.parse(storage.getItem(THEME_KEY)),
+            themeUndo:null
+        },
+        JSON.parse(storage.getItem(undoKey)),
+        "2026-09-01T13:00:00.000Z"
+    );
+    assert.equal(recovery.restored, true, "active anime must not block auxiliary recovery");
+    storage.setItem(V.STORAGE_KEY, JSON.stringify(recovery.list));
+    storage.setItem(EVENT_KEY, JSON.stringify(recovery.state.eventOverrides));
+    storage.setItem(EVENT_ANIME_KEY, JSON.stringify(recovery.state.eventAnimeOverrides));
+    storage.setItem(V.HISTORY_KEY, JSON.stringify(recovery.state.watchHistory));
+    storage.setItem(THEME_KEY, JSON.stringify(recovery.state.themeCache));
+    storage.removeItem(undoKey);
+    assert.deepEqual(JSON.parse(storage.getItem(V.HISTORY_KEY)), state.watchHistory);
+    assert.equal(storage.getItem(undoKey), null);
+});
+
+test("18. rollback incomplete 的 UI 必須警告 recoveryRequired，不能宣稱資料未變更", () => {
+    const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
+    const deleteBlock = ui.slice(ui.indexOf("deleteAnime = function"), ui.indexOf("const originalBuildAnimeItem"));
+    assert.match(deleteBlock, /recoveryRequired/u);
+    assert.match(deleteBlock, /復原資料已保留/u);
+    assert.doesNotMatch(deleteBlock, /刪除交易已取消，資料未變更/u);
+});
+
+test("19. rollback success 後 persistent state 完整等於 before 且移除 failed transaction undo", () => {
+    const storage = quotaStorage();
+    const before = {
+        [V.STORAGE_KEY]:JSON.stringify([sibling, target]),
+        [V.HISTORY_KEY]:JSON.stringify(auxiliaryFor(target.id).watchHistory),
+        [V.WORKS_KEY]:JSON.stringify([{ workId:"work-1", mediaEntries:[{ id:target.id, deletedAt:null }] }])
+    };
+    Object.entries(before).forEach(([key, value]) => storage.setItem(key, value));
+    const undo = V.createCompactDeleteUndo(target, "2002", auxiliaryFor(target.id), {}, at);
+    const result = V.runAnimeDeleteTransaction({
+        list:[sibling, target], id:target.id, identity:"2002", now:at, undo, undoKey, storage,
+        cleanup:() => {
+            storage.setItem(V.HISTORY_KEY, "[]");
+            storage.setItem(V.WORKS_KEY, JSON.stringify([{ workId:"work-1", mediaEntries:[{ id:target.id, deletedAt:at }] }]));
+            const error = new Error("persist failed");
+            error.deleteStage = "persist";
+            throw error;
+        },
+        persist:() => {},
+        rollback:() => Object.entries(before).forEach(([key, value]) => storage.setItem(key, value))
+    });
+    assert.equal(result.ok, false);
+    assert.equal(result.rollbackSucceeded, true);
+    assert.equal(result.recoveryRequired, false);
+    assert.equal(storage.getItem(undoKey), null);
+    assert.deepEqual(storage.snapshot(), Object.fromEntries(Object.entries(before).sort(([a], [b]) => a.localeCompare(b))));
+});
+
+[
+    ["history", V.HISTORY_KEY],
+    ["spotify", "anime_theme_lookup_cache_v1"],
+    ["cross-media", V.WORKS_KEY],
+    ["storage", V.STORAGE_KEY]
+].forEach(([rollbackStage, touchedKey], offset) => {
+    test(`${20 + offset}. ${rollbackStage} restore failure 會保留 compact recovery`, () => {
+        const storage = quotaStorage(), undo = V.createCompactDeleteUndo(target, "2002", auxiliaryFor(target.id), {}, at);
+        storage.setItem(touchedKey, JSON.stringify({ before:true }));
+        const result = V.runAnimeDeleteTransaction({
+            list:[sibling, target], id:target.id, identity:"2002", now:at, undo, undoKey, storage,
+            cleanup:() => {
+                storage.setItem(touchedKey, JSON.stringify({ partial:true }));
+                const error = new Error("delete persist failed");
+                error.deleteStage = "persist";
+                throw error;
+            },
+            persist:() => {},
+            rollback:() => {
+                const error = quotaError();
+                error.rollbackStage = rollbackStage;
+                throw error;
+            }
+        });
+        assert.equal(result.ok, false);
+        assert.equal(result.rollbackSucceeded, false);
+        assert.equal(result.recoveryRequired, true);
+        assert.equal(result.rollbackError.rollbackStage, rollbackStage);
+        assert.ok(storage.getItem(undoKey));
+        assert.deepEqual(JSON.parse(storage.getItem(touchedKey)), { partial:true });
+    });
 });
 
 if (!process.exitCode) console.log(`Mobile delete storage failure tests: ${passed}/${passed} passed`);

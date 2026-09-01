@@ -72,6 +72,7 @@
         eventOverrides = restoredState.eventOverrides || {};
         eventAnimeOverrides = restoredState.eventAnimeOverrides || {};
         watchHistory = restoredState.watchHistory || [];
+        if (undo.external?.crossMedia) window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external.crossMedia);
         save(EVENT_OVERRIDES_KEY, eventOverrides);
         save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
         save(V.HISTORY_KEY, watchHistory);
@@ -82,7 +83,6 @@
             if (restoredState.themeUndo) save("anime_theme_last_undo_v1", restoredState.themeUndo);
             else localStorage.removeItem("anime_theme_last_undo_v1");
         }
-        if (undo.external?.crossMedia) window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external.crossMedia);
     }
 
     function rollbackCompactDelete(originalList, undo) {
@@ -92,17 +92,25 @@
         eventAnimeOverrides = restoredState.eventAnimeOverrides || {};
         watchHistory = restoredState.watchHistory || [];
         const attempts = [
-            () => save(EVENT_OVERRIDES_KEY, eventOverrides),
-            () => save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides),
-            () => save(V.HISTORY_KEY, watchHistory),
-            () => window.SpotifyThemes?.restoreAnimeCleanupSnapshot?.(undo.external?.spotify),
-            () => window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external?.crossMedia),
-            () => localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList)),
-            () => { renderList(); renderEvents(); refreshV11(); }
+            { stage:"event-overrides", action:() => save(EVENT_OVERRIDES_KEY, eventOverrides) },
+            { stage:"event-anime-overrides", action:() => save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides) },
+            { stage:"history", action:() => save(V.HISTORY_KEY, watchHistory) },
+            { stage:"spotify", action:() => window.SpotifyThemes?.restoreAnimeCleanupSnapshot?.(undo.external?.spotify) },
+            { stage:"cross-media", action:() => window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external?.crossMedia) },
+            { stage:"storage", action:() => localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList)) },
+            { stage:"render", action:() => { renderList(); renderEvents(); refreshV11(); } }
         ];
         const errors = [];
-        attempts.forEach(action => { try { action(); } catch (error) { errors.push(error); } });
-        if (errors.length) throw errors[0];
+        attempts.forEach(({ stage, action }) => {
+            try { action(); }
+            catch (error) { errors.push({ stage, error }); }
+        });
+        if (errors.length) {
+            const rollbackError = errors[0].error;
+            rollbackError.rollbackStage = errors[0].stage;
+            rollbackError.rollbackErrors = errors;
+            throw rollbackError;
+        }
     }
 
     animeList = V.migrateList(animeList);
@@ -175,9 +183,10 @@
         });
         if (!result.ok) {
             if (result.stage === "undo" && result.quotaExceeded) return showToast("儲存空間不足，無法建立刪除復原點，因此未刪除。");
-            if (result.quotaExceeded) return showToast("儲存空間不足，刪除交易已取消，資料未變更。");
+            if (result.recoveryRequired) return showToast("刪除未完整完成，復原資料已保留。請不要繼續修改資料，先重新整理並復原上一步。");
+            if (result.quotaExceeded) return showToast("儲存空間不足，刪除交易已取消，原資料已恢復。");
             if (result.stage === "lookup" || result.stage === "mark") return showToast("找不到可刪除的有效作品，請重新整理後再試");
-            return showToast("刪除失敗，資料已保留。請重新整理後再試。");
+            return showToast("刪除失敗，原資料已恢復。請重新整理後再試。");
         }
         animeList = result.list;
         traceDeleteStep("STEP 9 success toast");
@@ -317,8 +326,8 @@
             if (!restored.restored) return showToast("找不到可復原的刪除資料");
             try {
                 animeList = restored.list;
-                applyCompactAuxiliaryRestore(restored.state, undo);
                 persistAnime();
+                applyCompactAuxiliaryRestore(restored.state, undo);
                 localStorage.removeItem(UNDO_KEY);
                 renderList(); renderEvents(); refreshV11();
                 return showToast("已復原上一步");
@@ -367,7 +376,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "mobile-delete-storage-1";
+        const reloadVersion = "mobile-delete-storage-2";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
