@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-08-31T05:32:32.134Z",
-    "lastSuccessfulUpdateAt": "2026-08-31T05:32:32.134Z",
+    "updatedAt": "2026-09-01T05:06:04.630Z",
+    "lastSuccessfulUpdateAt": "2026-09-01T05:06:04.630Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
     "fetchedExternalItemCount": 428,
-    "uniqueNewsCount": 621,
-    "articleCandidateCount": 236,
-    "articleFetchSuccessCount": 34,
+    "uniqueNewsCount": 619,
+    "articleCandidateCount": 233,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 23,
-    "newEventCount": 6,
-    "cachedEventCount": 36,
+    "matchedEventCount": 20,
+    "newEventCount": 3,
+    "cachedEventCount": 38,
     "rateLimitedCount": 0,
     "archiveCount": 1,
-    "storedEventCount": 48,
+    "storedEventCount": 47,
     "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 59,
+    "undatedOldRemovedCount": 56,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 133,
+    "nonActivityRemovedCount": 136,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -151,8 +151,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "gnn-309600",
@@ -213,8 +213,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -244,8 +244,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -885,42 +885,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "live-c905c3e7ab49dcf71a",
-      "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
-      "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFA1TjlSaThETk9EWE1CVHlyNG9FUVhSQU15SkRhX05MX3JUWC1XX05ESTE3U2FhV0hEa2pmS2ZNMjZfanV4UjVEQmpRa3NWZw?oc=5",
-      "source": "Google News",
-      "discoverySource": "即時搜尋：Google News",
-      "sourceTag": "即時搜尋",
-      "type": "大型展會",
-      "locations": [
-        "台北"
-      ],
-      "venue": "",
-      "admissionType": "待確認",
-      "confidence": "medium",
-      "confidenceScore": 67,
-      "matchedAliases": [
-        "黃泉使者"
-      ],
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
-      "searchCorpus": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
-      "liveSearchQuery": "黃泉使者",
-      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
-      "recencyReason": "目前或未來活動",
-      "discoveredAt": "2026-08-09T11:35:08.579Z",
-      "lastSeenAt": "2026-08-09T11:35:39.619Z"
-    },
-    {
       "id": "ext-9775fce9a1c716ac",
       "title": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看",
       "summary": "oneone宇宙",
@@ -948,8 +912,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "ext-e8f64087db1135bc",
@@ -1200,8 +1164,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "gnn-309209",
@@ -1271,7 +1235,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "Storm.mg",
+      "summary": "風傳媒",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1293,12 +1257,12 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 Storm.mg",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1327,8 +1291,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "gnn-309608",
@@ -1392,8 +1356,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "gnn-309957",
@@ -1489,8 +1453,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-01T05:06:04.630Z",
+      "lastSeenAt": "2026-09-01T05:06:04.630Z"
     },
     {
       "id": "gnn-310709",
@@ -1562,36 +1526,41 @@
   ],
   "archive": [
     {
-      "id": "gnn-310116",
-      "title": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場",
-      "summary": "由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310116",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
+      "id": "live-c905c3e7ab49dcf71a",
+      "title": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點",
+      "summary": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFA1TjlSaThETk9EWE1CVHlyNG9FUVhSQU15SkRhX05MX3JUWC1XX05ESTE3U2FhV0hEa2pmS2ZNMjZfanV4UjVEQmpRa3NWZw?oc=5",
+      "source": "Google News",
+      "discoverySource": "即時搜尋：Google News",
+      "sourceTag": "即時搜尋",
+      "type": "大型展會",
       "locations": [
-        "台灣"
+        "台北"
       ],
-      "confidence": "candidate",
-      "publishedAt": "2026-08-19T08:58:23.000Z",
-      "eventStartDate": "2026-08-19",
-      "eventEndDate": "2026-08-30",
-      "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "開動吧！Unzip the Fantasy 臺灣原創動畫展映",
-        "開動吧！"
+      "confidence": "medium",
+      "confidenceScore": 67,
+      "matchedAliases": [
+        "黃泉使者"
       ],
-      "searchCorpus": "「開動吧！Unzip the Fantasy 臺灣原創動畫展映」即日起至 8/30 空總國家文化基地登場 由動畫特效協會策劃、C-LAB 支持的「開動吧！Unzip the Fantasy 臺灣原創動畫展映」，即日起至 8/30 在空總國家文化基地登場。 本次展覽以「開動吧！」為口號，號召觀眾盡情享受原汁原味的臺式創意，更以「開」箱「動」畫為核心精神，規畫圖像與體驗引導，帶領每位觀眾打開本土動畫創作團隊的世界；「U",
-      "dateConfidence": "high",
-      "dateSource": "即日起至 8/30",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-20T01:50:33.177Z",
-      "lastSeenAt": "2026-08-20T01:50:33.177Z",
-      "archivedAt": "2026-08-31T05:32:32.134Z"
+      "workTitles": [
+        "黃泉使者"
+      ],
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "即時搜尋在新聞標題或摘要找到作品名稱；請開啟原文確認完整資訊。",
+      "searchCorpus": "2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 2026台北漫畫博覽會木棉花攤位攻略！黃泉使者入口、6大福袋與新品亮點 &nbsp;&nbsp; 輕旅行 Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News. Google News",
+      "liveSearchQuery": "黃泉使者",
+      "liveSearchRequestId": "ae4ef2dc92ac43fdafe6f87730efda54",
+      "recencyReason": "目前或未來活動",
+      "discoveredAt": "2026-08-09T11:35:08.579Z",
+      "lastSeenAt": "2026-08-09T11:35:39.619Z",
+      "archivedAt": "2026-09-01T05:06:04.630Z"
     }
   ]
 }
