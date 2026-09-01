@@ -62,8 +62,12 @@
     const originalMoveCategory = moveCategory;
     moveCategory = function (id, category) { const item = animeList.find(x => String(x.id) === String(id)); if (item) touch(item); originalMoveCategory(id, category); };
     updateProgress = function (id, delta) {
-        const wasCompleted = animeList.find(item => String(item.id) === String(id))?.category === "completed";
-        const result = V.commitAnimeProgress(localStorage, animeList, watchHistory, id, delta);
+        const current = animeList.find(item => String(item.id) === String(id) && !item.deletedAt);
+        const wasCompleted = current?.category === "completed";
+        const isReview = current?.category === "review";
+        const result = isReview
+            ? V.commitAnimeReviewProgress(localStorage, animeList, watchHistory, id, delta)
+            : V.commitAnimeProgress(localStorage, animeList, watchHistory, id, delta);
         if (!result.found) return showToast("找不到要更新的動漫，請重新整理後再試");
         if (!result.changed) return showToast(result.reason === "at-total" ? "已達總集數，觀看進度不再增加" : "觀看進度沒有變更");
         animeList = result.list;
@@ -77,14 +81,14 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
         renderList();
         refreshV11();
-        if (!wasCompleted && updated.category === "completed") void checkAndAddSequel(updated, false);
+        if (!isReview && !wasCompleted && updated.category === "completed") void checkAndAddSequel(updated, false);
     };
-    deleteAnime = function (id) {
-        const item = animeList.find(x => String(x.id) === String(id) && !x.deletedAt)
-            || animeList.find(x => String(x.id) === String(id));
+    deleteAnime = function (id, externalIdentity = null) {
+        const recordIndex = V.findAnimeRecordIndex(animeList, id, externalIdentity);
+        const item = recordIndex >= 0 ? animeList[recordIndex] : null;
         if (!item || item.deletedAt) return;
         if (!confirm(`確定刪除「${item.title}」？可使用「復原上一步」恢復。`)) return;
-        const targetIdentity = V.getAnimeAniListIdentity(item);
+        const targetIdentity = String(externalIdentity || V.getAnimeAniListIdentity(item));
         save(UNDO_KEY, { type: "delete", targetId:item.id, targetIdentity, at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
         const result = V.markAnimeDeletedById(animeList, id, new Date().toISOString(), targetIdentity);
         if (!result.changed || !result.anime) return showToast("找不到可刪除的有效作品，請重新整理後再試");
@@ -263,7 +267,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "title-idempotence-1";
+        const reloadVersion = "media-review-hotfix-2";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");

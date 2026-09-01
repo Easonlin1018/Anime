@@ -468,7 +468,16 @@ function userFieldSnapshot(anime) {
         "review", "note", "notes", "memo", "title", "displayTitle", "titleSource",
         "titleManuallyEdited", "manualTitle", "customPlatform", "customPlatformUrl", "eventState",
         "eventOverrides", "themeSongs", "createdAt", "addedAt", "updatedAt", "lastWatchedAt",
-        "customFutureField"
+        "reviewWatched", "reviewSessionActive", "reviewStartedAt", "reviewCompletedAt", "trackingLifecycleResetAt", "customFutureField"
+    ];
+    return Object.fromEntries(fields.map(field => [field, anime[field]]));
+}
+
+function trackingLifecycleSnapshot(anime) {
+    const fields = [
+        "id", "category", "categorySource", "categoryManuallyEdited", "watched", "currentEpisode", "progress",
+        "reviewWatched", "reviewSessionActive", "reviewStartedAt", "reviewCompletedAt", "lastWatchedAt",
+        "trackingLifecycleResetAt", "rating", "note", "customPlatform"
     ];
     return Object.fromEntries(fields.map(field => [field, anime[field]]));
 }
@@ -562,6 +571,69 @@ test("localStorage and Supabase style serialization preserves user-managed field
     const serialized = JSON.parse(JSON.stringify([anime]))[0];
     assert.deepEqual(userFieldSnapshot(serialized), before);
     assert.equal(serialized.customFutureField, "keep-me");
+});
+
+test("active review session survives direct AniList metadata refresh", () => {
+    const anime = userManagedAnime({
+        title:"通用作品",
+        displayTitle:"通用作品",
+        category:"review",
+        categorySource:"manual",
+        categoryManuallyEdited:true,
+        watched:24,
+        currentEpisode:24,
+        reviewWatched:2,
+        reviewSessionActive:true,
+        reviewStartedAt:"2026-08-31T10:00:00.000Z",
+        reviewCompletedAt:null
+    });
+    const before = trackingLifecycleSnapshot(anime);
+    metadataApi.applyMediaMetadata(anime, refreshedMedia({
+        id:8205,
+        title:{ native:"通用作品" },
+        episodes:24,
+        startDate:{ year:2026, month:1, day:1 }
+    }), "2026-08-31T12:00:00.000Z");
+    assert.deepEqual(trackingLifecycleSnapshot(anime), before);
+    assert.equal(anime.reviewWatched, 2);
+    assert.equal(anime.reviewSessionActive, true);
+    assert.equal(anime.reviewStartedAt, "2026-08-31T10:00:00.000Z");
+    assert.equal(anime.watched, 24);
+    assert.equal(anime.currentEpisode, 24);
+});
+
+test("fresh re-add lifecycle survives direct AniList metadata refresh", () => {
+    const anime = userManagedAnime({
+        title:"通用作品",
+        displayTitle:"通用作品",
+        titleSource:"anilist",
+        titleManuallyEdited:false,
+        category:"backlog",
+        categorySource:"automatic",
+        categoryManuallyEdited:false,
+        watched:0,
+        currentEpisode:0,
+        progress:0,
+        reviewWatched:0,
+        reviewSessionActive:false,
+        reviewStartedAt:null,
+        reviewCompletedAt:null,
+        lastWatchedAt:null,
+        trackingLifecycleResetAt:"2026-08-31T10:00:00.000Z"
+    });
+    const before = trackingLifecycleSnapshot(anime);
+    metadataApi.applyMediaMetadata(anime, refreshedMedia({
+        id:8206,
+        title:{ native:"通用作品" },
+        episodes:24,
+        status:"FINISHED",
+        startDate:{ year:2026, month:1, day:1 }
+    }), "2026-08-31T12:00:00.000Z");
+    assert.deepEqual(trackingLifecycleSnapshot(anime), before);
+    assert.equal(anime.category,"backlog");
+    assert.equal(anime.watched,0);
+    assert.equal(anime.currentEpisode,0);
+    assert.equal(anime.reviewWatched,0);
 });
 
 test("repeated metadata refresh is idempotent", () => {

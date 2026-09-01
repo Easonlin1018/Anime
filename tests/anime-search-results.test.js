@@ -119,7 +119,7 @@ test("4. 點 B 的 identity 只恢復 B", () => {
     const entries=[A,B].map(item=>({media:item,context:{}}));
     const selected=api.findPendingSingleAnimeSearchEntry(String(B.id),entries);
     const result=add(selected.media,list);
-    assert.equal(result.action,"restored");
+    assert.equal(result.action,"re-added");
     assert.equal(result.anime.anilistId,B.id);
     assert.equal(list.find(item=>item.anilistId===A.id).updatedAt,undefined);
 });

@@ -238,10 +238,10 @@ test("19. tombstone 狀態在 series migration 後保持", () => {
 test("20. Service Worker 離線快取固定版 OpenCC 與 series graph cache", () => {
     const sw = fs.readFileSync(path.resolve(__dirname, "..", "sw.js"), "utf8");
     const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
-    assert.match(sw, /anime-tracker-v11-series-graph-depth-1/u);
+    assert.match(sw, /anime-tracker-v11-media-review-hotfix-2/u);
     assert.match(sw, /vendor\/opencc-js-1\.4\.1-full\.js\?v=1\.4\.1/u);
-    assert.match(sw, /v11-core\.js\?v=series-graph-depth-1/u);
-    assert.match(ui, /reloadVersion = "title-idempotence-1"/u);
+    assert.match(sw, /v11-core\.js\?v=media-review-hotfix-2/u);
+    assert.match(ui, /reloadVersion = "media-review-hotfix-2"/u);
 });
 
 test("21. TV 可從安全 synonym 辨識季數", () => {

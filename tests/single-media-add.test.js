@@ -11,7 +11,7 @@ const titleEnd = html.indexOf("async function searchWikipedia", titleStart);
 const mediaStart = html.indexOf("function normalizeStreamingLinks");
 const mediaEnd = html.indexOf("async function manualScanSequels", mediaStart);
 assert.ok(titleStart >= 0 && titleEnd > titleStart && mediaStart >= 0 && mediaEnd > mediaStart);
-const api = Function(`${html.slice(titleStart, titleEnd)}\n${html.slice(mediaStart, mediaEnd)}; return { getAniListMediaId, getExistingAnimeMediaState, addOrRestoreSingleMedia, reconcileDiscoveredSequelMedia, isMediaClearlyNotYetReleased, resolveAutomaticMediaCategory, restoredAnimeCategory };`)();
+const api = Function(`${html.slice(titleStart, titleEnd)}\n${html.slice(mediaStart, mediaEnd)}; return { getAniListMediaId, getExistingAnimeMediaState, addOrRestoreSingleMedia, reconcileDiscoveredSequelMedia, isMediaClearlyNotYetReleased, resolveAutomaticMediaCategory, buildFreshAnimeTrackingLifecycle, resetAnimeTrackingLifecycleForFreshAdd };`)();
 
 let passed = 0;
 const pending = [];
@@ -60,7 +60,7 @@ test("3. 搜尋候選 UI 不顯示恢復、已刪除或 tombstone", () => {
 test("4. 新增 B 復用 tombstone 且不建立第二 object", () => {
     const original=V.markAnimeDeletedById([anime(2,"B")],2,"2026-08-10T00:00:00.000Z","2").list[0];
     const list=[original],result=add(media(2,"B"),list);
-    assert.equal(result.action,"restored");
+    assert.equal(result.action,"re-added");
     assert.equal(list.length,1);
     assert.equal(result.anime.id,original.id);
 });
@@ -90,10 +90,10 @@ test("9. 連續新增 B 兩次仍只有三筆 active", () => {
     assert.equal(add(media(2,"B"),list).changed,true);assert.equal(add(media(2,"B"),list).changed,false);assert.equal(active(list).length,3);
 });
 
-test("10. ACTIVE B + tombstone B reconciliation 後新增 no-op", () => {
+test("10. 較新的 tombstone B 不被舊 ACTIVE B reconciliation 復活", () => {
     const deleted=V.markAnimeDeletedById([anime("old", "B", "backlog", {anilistId:2})],"old","2026-08-10T00:00:00.000Z","2").list[0];
     const reconciled=V.reconcileExistingAnimeDuplicates([anime("active","B","backlog",{anilistId:2}),deleted]).list;
-    const result=add(media(2,"B"),reconciled);assert.equal(result.action,"active");assert.equal(reconciled.length,1);
+    assert.ok(reconciled[0].deletedAt);const result=add(media(2,"B"),reconciled);assert.equal(result.action,"re-added");assert.equal(reconciled.length,1);
 });
 
 test("11. 兩個 tombstone B reconciliation 後只剩 canonical identity", () => {
@@ -108,14 +108,18 @@ test("12. 相同 title、不同 AniList ID 只恢復指定 ID", () => {
     assert.equal(list.find(x=>x.anilistId===2).deletedAt,null);assert.ok(list.find(x=>x.anilistId===3).deletedAt);
 });
 
-test("13. watching 刪除後普通新增仍恢復 watching", () => {
-    const list=V.markAnimeDeletedById([anime(2,"B","watching")],2,"2026-08-10T00:00:00.000Z","2").list;assert.equal(add(media(2,"B"),list).anime.category,"watching");
+test("13. 已播完作品從搜尋普通新增採 fresh backlog，不恢復舊 watching", () => {
+    const list=V.markAnimeDeletedById([anime(2,"B","watching")],2,"2026-08-10T00:00:00.000Z","2").list;const readded=add(media(2,"B"),list).anime;
+    assert.equal(readded.category,"backlog");assert.equal(readded.categorySource,"automatic");assert.equal(readded.categoryManuallyEdited,false);
 });
 
-test("14. completed 使用者資料 delete → add 全部保留", () => {
-    const original=anime(2,"B","completed",{watched:12,rating:9,note:"note",notes:"notes",review:"review",memo:"memo",themeSongs:{openings:[{id:"op",title:"OP"}],endings:[]},customPlatform:"平台",unknown:"keep"});
-    const list=V.markAnimeDeletedById([original],2,"2026-08-10T00:00:00.000Z","2").list;const restored=add(media(2,"B"),list).anime;
-    assert.equal(restored.category,"completed");assert.equal(restored.watched,12);assert.equal(restored.rating,9);assert.equal(restored.note,"note");assert.equal(restored.themeSongs.openings[0].id,"op");assert.equal(restored.customPlatform,"平台");assert.equal(restored.unknown,"keep");
+test("14. completed tombstone 普通新增重設觀看 lifecycle、保留非進度使用者資料", () => {
+    const original=anime(2,"B","completed",{watched:12,currentEpisode:12,progress:12,reviewWatched:4,reviewSessionActive:true,reviewStartedAt:"2026-08-01T00:00:00.000Z",reviewCompletedAt:"2026-08-02T00:00:00.000Z",lastWatchedAt:"2026-08-09T00:00:00.000Z",categorySource:"manual",categoryManuallyEdited:true,rating:9,note:"note",notes:"notes",review:"review",memo:"memo",themeSongs:{openings:[{id:"op",title:"OP"}],endings:[]},customPlatform:"平台",unknown:"keep"});
+    const list=V.markAnimeDeletedById([original],2,"2026-08-10T00:00:00.000Z","2").list;const readded=add(media(2,"B"),list).anime;
+    assert.equal(readded.category,"backlog");assert.equal(readded.categorySource,"automatic");assert.equal(readded.categoryManuallyEdited,false);
+    assert.equal(readded.watched,0);assert.equal(readded.currentEpisode,0);assert.equal(readded.progress,0);assert.equal(readded.lastWatchedAt,null);
+    assert.equal(readded.reviewWatched,0);assert.equal(readded.reviewSessionActive,false);assert.equal(readded.reviewStartedAt,null);assert.equal(readded.reviewCompletedAt,null);
+    assert.equal(readded.rating,9);assert.equal(readded.note,"note");assert.equal(readded.themeSongs.openings[0].id,"op");assert.equal(readded.customPlatform,"平台");assert.equal(readded.unknown,"keep");
 });
 
 test("15. manual title delete → add 不被 metadata refresh 覆蓋", () => {
@@ -129,7 +133,7 @@ test("16. UUID local id delete → add 後完全不變", () => {
 
 test("17. legacy tombstone title + year + format 符合時補綁 AniList ID", () => {
     const legacy={...anime("uuid-legacy","Legacy", "backlog",{year:2024,format:"MOVIE"}),anilistId:undefined};const list=V.markAnimeDeletedById([legacy],"uuid-legacy","2026-08-10T00:00:00.000Z").list;
-    const result=add(media(88,"Legacy",2024,"MOVIE"),list);assert.equal(result.action,"restored");assert.equal(result.anime.anilistId,88);assert.equal(result.anime.id,"uuid-legacy");
+    const result=add(media(88,"Legacy",2024,"MOVIE"),list);assert.equal(result.action,"re-added");assert.equal(result.anime.anilistId,88);assert.equal(result.anime.id,"uuid-legacy");
 });
 
 test("18. legacy 同名但年份不同不得錯誤 restore", () => {
@@ -182,7 +186,7 @@ test("26. tombstone 舊 backlog 在明確未開播 metadata 下恢復為 waiting
     future.startDate = { year:2027, month:10, day:null };
     const tombstone = V.markAnimeDeletedById([anime(209939, "葬送的芙莉蓮 第三季", "backlog", { categorySource:"automatic" })], 209939, "2026-08-10T00:00:00.000Z", "209939").list;
     const result = add(future, tombstone);
-    assert.equal(result.action, "restored");
+    assert.equal(result.action, "re-added");
     assert.equal(result.anime.category, "waiting");
     assert.equal(result.anime.categorySource, "automatic");
 });
@@ -194,11 +198,15 @@ test("27. 已開播作品不會錯誤分類到 waiting", () => {
     assert.equal(api.resolveAutomaticMediaCategory(released, "2026-08-11T00:00:00.000Z"), "backlog");
 });
 
-test("28. 使用者人工分類標記可保留舊分類", () => {
+test("28. 搜尋 fresh re-add 不沿用 tombstone 的人工分類", () => {
     const future = media(209939, "葬送のフリーレン 第3期", 2027, "TV");
     future.status = "NOT_YET_RELEASED";
     const manual = anime(209939, "葬送的芙莉蓮 第三季", "backlog", { categorySource:"manual", categoryManuallyEdited:true, deletedFromCategory:"backlog" });
-    assert.equal(api.restoredAnimeCategory(manual, future, "2026-08-11T00:00:00.000Z"), "backlog");
+    const fresh = api.buildFreshAnimeTrackingLifecycle(future, {}, "2026-08-11T00:00:00.000Z");
+    const readded = api.resetAnimeTrackingLifecycleForFreshAdd(manual, fresh, "2026-08-11T00:00:00.000Z");
+    assert.equal(readded.category, "waiting");
+    assert.equal(readded.categorySource, "automatic");
+    assert.equal(readded.categoryManuallyEdited, false);
 });
 
 test("29. 普通單筆新增流程仍不觸發 sequel traversal", () => {
@@ -270,6 +278,40 @@ test("34. metadata refresh 對高可信 legacy record 補綁 ID 而不新增 sha
     assert.equal(list[0].id, "legacy-local");
     assert.equal(list[0].anilistId, 182255);
     assert.equal(list[0].episodes, 10);
+});
+
+test("35. fresh re-add 經 serialize、migration 與 stale tombstone reconciliation 仍為零進度", () => {
+    const original = anime("local-b", "B", "completed", { anilistId:2, watched:12, currentEpisode:12, reviewWatched:3, categorySource:"manual", categoryManuallyEdited:true });
+    const tombstone = V.markAnimeDeletedById([original], original.id, "2026-08-10T00:00:00.000Z", "2").list[0];
+    const list = [JSON.parse(JSON.stringify(tombstone))];
+    const readded = add(media(2,"B"), list).anime;
+    refresh(readded, media(2,"B"), "2026-08-11T01:00:00.000Z");
+    const reloaded = V.migrateList(JSON.parse(JSON.stringify(list)), "2026-08-11T02:00:00.000Z");
+    const synced = V.reconcileExistingAnimeDuplicates([JSON.parse(JSON.stringify(tombstone)), reloaded[0]]).list;
+    assert.equal(synced.length,1);assert.equal(synced[0].deletedAt,null);assert.equal(synced[0].category,"backlog");
+    assert.equal(synced[0].watched,0);assert.equal(synced[0].currentEpisode,0);assert.equal(synced[0].reviewWatched,0);assert.equal(synced[0].reviewSessionActive,false);
+});
+
+test("36. Undo Delete 與 Search Re-add 語意分離", () => {
+    const original = anime("local-b", "B", "completed", { anilistId:2, watched:12, currentEpisode:12, reviewWatched:2, reviewSessionActive:true, rating:9, note:"保留" });
+    const before = [JSON.parse(JSON.stringify(original))];
+    const deleted = V.markAnimeDeletedById(before, original.id, "2026-08-10T00:00:00.000Z", "2").list;
+    const undone = V.restoreAnimeById(deleted, original.id, [original], "2026-08-10T01:00:00.000Z", "2").anime;
+    assert.equal(undone.category,"completed");assert.equal(undone.watched,12);assert.equal(undone.currentEpisode,12);assert.equal(undone.reviewWatched,2);assert.equal(undone.reviewSessionActive,true);
+    const deletedAgain = V.markAnimeDeletedById([undone], undone.id, "2026-08-10T02:00:00.000Z", "2").list;
+    const readded = add(media(2,"B"), deletedAgain).anime;
+    assert.equal(readded.category,"backlog");assert.equal(readded.watched,0);assert.equal(readded.currentEpisode,0);assert.equal(readded.reviewWatched,0);assert.equal(readded.reviewSessionActive,false);
+    assert.equal(readded.id,original.id);assert.equal(readded.anilistId,2);assert.equal(readded.rating,9);assert.equal(readded.note,"保留");
+});
+
+test("37. fresh re-add 只復活使用者明確新增的 exact AniList identity", () => {
+    const first = anime("local-a", "A", "completed", { anilistId:1, watched:12 });
+    const second = anime("local-b", "B", "completed", { anilistId:2, watched:12 });
+    const list = V.markAnimeDeletedById([first,second], second.id, "2026-08-10T00:00:00.000Z", "2").list;
+    const result = add(media(2,"B"),list);
+    assert.equal(result.anime.id,"local-b");assert.equal(result.anime.anilistId,2);
+    assert.equal(list.filter(item=>!item.deletedAt&&item.anilistId===1).length,1);assert.equal(list.filter(item=>!item.deletedAt&&item.anilistId===2).length,1);
+    assert.equal(list.length,2);assert.equal(list[0].watched,12);assert.equal(list[0].category,"completed");
 });
 
 Promise.all(pending).then(() => {

@@ -640,7 +640,7 @@
 </div>
 
 <script src="vendor/opencc-js-1.4.1-full.js?v=1.4.1"></script>
-<script src="v11-core.js?v=series-graph-depth-1"></script>
+<script src="v11-core.js?v=media-review-hotfix-2"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -2063,6 +2063,49 @@ function resolveAutomaticMediaCategory(media, now = new Date()) {
     return String(media?.status || "").toUpperCase() === "FINISHED" ? "backlog" : "watching";
 }
 
+function buildFreshAnimeTrackingLifecycle(media, context = {}, now = new Date().toISOString()) {
+    const category = context.forcedCategory || resolveAutomaticMediaCategory(media, now);
+    return {
+        category,
+        categorySource:context.forcedCategory ? "manual" : "automatic",
+        categoryManuallyEdited:Boolean(context.forcedCategory),
+        watched:0,
+        currentEpisode:0,
+        progress:0,
+        reviewWatched:0,
+        reviewSessionActive:false,
+        reviewStartedAt:null,
+        reviewCompletedAt:null,
+        lastWatchedAt:category === "watching" ? new Date(now).toISOString() : null
+    };
+}
+
+function resetAnimeTrackingLifecycleForFreshAdd(anime, freshAnime, now = new Date().toISOString()) {
+    const category = String(freshAnime?.category || "backlog");
+    const manualCategory = freshAnime?.categorySource === "manual" && freshAnime?.categoryManuallyEdited === true;
+    const lifecycle = {
+        category,
+        categorySource:manualCategory ? "manual" : "automatic",
+        categoryManuallyEdited:manualCategory,
+        watched:0,
+        currentEpisode:0,
+        progress:0,
+        reviewWatched:0,
+        reviewSessionActive:false,
+        reviewStartedAt:null,
+        reviewCompletedAt:null,
+        lastWatchedAt:freshAnime?.lastWatchedAt || null
+    };
+    return {
+        ...anime,
+        ...lifecycle,
+        deletedAt:null,
+        deletedFromCategory:null,
+        trackingLifecycleResetAt:new Date(now).toISOString(),
+        updatedAt:new Date(now).toISOString()
+    };
+}
+
 function hasManualAnimeCategory(anime) {
     return anime?.categoryManuallyEdited === true || anime?.categorySource === "manual";
 }
@@ -2246,7 +2289,8 @@ function buildAnimeRecordFromMedia(media, context = {}) {
         context.googleZh || null
     );
     const finalTitle = titleDetails.displayTitle;
-    const category = context.forcedCategory || resolveAutomaticMediaCategory(media);
+    const now = new Date().toISOString();
+    const lifecycle = buildFreshAnimeTrackingLifecycle(media, context, now);
     const airDate = media.startDate?.year
         ? `${media.startDate.year}年${media.startDate.month || "?"}月`
         : "未定";
@@ -2274,10 +2318,7 @@ function buildAnimeRecordFromMedia(media, context = {}) {
         year:Number(media.startDate?.year) || null,
         startDate:getStructuredMediaStartDate(media),
         episodes:media.episodes || "??",
-        watched:0,
-        category,
-        categorySource:context.forcedCategory ? "manual" : "automatic",
-        categoryManuallyEdited:Boolean(context.forcedCategory),
+        ...lifecycle,
         airDate,
         releasedEpisodes:releasedEpisodeCount(media),
         nextEpisode:media.nextAiringEpisode?.episode || null,
@@ -2286,8 +2327,7 @@ function buildAnimeRecordFromMedia(media, context = {}) {
         rating:null,
         note:"",
         customPlatform:"",
-        lastWatchedAt:category === "watching" ? new Date().toISOString() : null,
-        addedAt:new Date().toISOString(),
+        addedAt:now,
         relations:Array.isArray(media.relations?.edges) ? media.relations.edges : []
     };
 }
@@ -2750,40 +2790,30 @@ function getExistingAnimeMediaState(media, list = animeList) {
     return { state:"not-added", anime:null, reason:"not-found" };
 }
 
-function restoredAnimeCategory(anime, media = null, now = new Date()) {
-    const allowed = new Set(["watching", "backlog", "completed", "waiting", "review", "paused"]);
-    if (!hasManualAnimeCategory(anime) && media && isMediaClearlyNotYetReleased(media, now)) return "waiting";
-    if (allowed.has(String(anime?.deletedFromCategory || ""))) return anime.deletedFromCategory;
-    if (allowed.has(String(anime?.category || ""))) return anime.category;
-    return "backlog";
-}
-
 function addOrRestoreSingleMedia(media, list = animeList, options = {}) {
     const now = options.now || new Date().toISOString();
     const allowRestore = options.allowRestore !== false;
     const applyMetadata = options.applyMetadata || applyMediaMetadata;
     const createAnime = options.createAnime;
 
-    const restoreRecord = state => {
+    const freshReaddRecord = state => {
         if (!allowRestore) return { list, anime:state.anime, action:"tombstone-skipped", changed:false };
         const index = list.indexOf(state.anime);
         if (index < 0) return { list, anime:null, action:"not-added", changed:false };
         const localId = state.anime.id;
-        const category = restoredAnimeCategory(state.anime, media, now);
-        const restored = { ...state.anime, deletedAt:null, category, updatedAt:now };
-        attachAniListIdToLegacyAnime(restored, media);
-        applyMetadata(restored, media, now);
-        restored.id = localId;
-        restored.deletedAt = null;
-        restored.category = category;
-        if (!hasManualAnimeCategory(state.anime)) {
-            restored.categorySource = "automatic";
-            restored.categoryManuallyEdited = false;
-        }
-        restored.updatedAt = now;
-        list[index] = restored;
-        options.onRestore?.(restored, state.anime);
-        return { list, anime:restored, action:"restored", changed:true };
+        const freshAnime = typeof createAnime === "function"
+            ? createAnime(media)
+            : { ...buildFreshAnimeTrackingLifecycle(media, {}, now) };
+        let readded = resetAnimeTrackingLifecycleForFreshAdd(state.anime, freshAnime, now);
+        attachAniListIdToLegacyAnime(readded, media);
+        applyMetadata(readded, media, now);
+        readded.id = localId;
+        readded.deletedAt = null;
+        readded.updatedAt = now;
+        list[index] = readded;
+        options.onRestore?.(readded, state.anime);
+        options.onFreshReadd?.(readded, state.anime);
+        return { list, anime:readded, action:"re-added", changed:true };
     };
 
     const initial = getExistingAnimeMediaState(media, list);
@@ -2798,14 +2828,14 @@ function addOrRestoreSingleMedia(media, list = animeList, options = {}) {
         }
         return { list, anime:initial.anime, action:"active", changed:false };
     }
-    if (initial.state === "tombstone") return restoreRecord(initial);
+    if (initial.state === "tombstone") return freshReaddRecord(initial);
     if (typeof createAnime !== "function") return { list, anime:null, action:"not-added", changed:false };
 
     const created = createAnime(media);
     if (!created) return { list, anime:null, action:"not-added", changed:false };
     const raceCheck = getExistingAnimeMediaState(media, list);
     if (raceCheck.state === "active") return { list, anime:raceCheck.anime, action:"active", changed:false };
-    if (raceCheck.state === "tombstone") return restoreRecord(raceCheck);
+    if (raceCheck.state === "tombstone") return freshReaddRecord(raceCheck);
     list.push(created);
     options.onCreate?.(created);
     return { list, anime:created, action:"created", changed:true };
@@ -3336,11 +3366,15 @@ function editTitle(id) {
 }
 
 function moveCategory(id, category) {
+    const previous = animeList.find(item => String(item.id) === String(id) && !item.deletedAt);
+    const previousCategory = previous?.category;
     const result = AnimeTrackerV11.moveAnimeCategoryById(animeList, id, category);
     if (!result.found) return;
     animeList = result.list;
 
-    if (category === "completed") checkAndAddSequel(result.anime, false);
+    if (AnimeTrackerV11.shouldDiscoverSequelAfterCategoryMove(previousCategory, category)) {
+        checkAndAddSequel(result.anime, false);
+    }
 
     saveAndRender();
 }
@@ -3392,14 +3426,14 @@ function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOStri
     return cleaned;
 }
 
-function deleteAnime(id) {
-    const anime = animeList.find(item => String(item.id) === String(id) && !item.deletedAt)
-        || animeList.find(item => String(item.id) === String(id));
+function deleteAnime(id, externalIdentity = null) {
+    const recordIndex = AnimeTrackerV11.findAnimeRecordIndex(animeList, id, externalIdentity);
+    const anime = recordIndex >= 0 ? animeList[recordIndex] : null;
     if (!anime) return;
 
     if (!confirm(`確定刪除《${anime.title}》嗎？`)) return;
 
-    const result = AnimeTrackerV11.markAnimeDeletedById(animeList, id, new Date().toISOString(), anime);
+    const result = AnimeTrackerV11.markAnimeDeletedById(animeList, id, new Date().toISOString(), externalIdentity || anime);
     if (!result.changed || !result.anime) return;
     animeList = result.list;
     cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt);
@@ -3413,6 +3447,7 @@ function getAnimeTitlePresentation(anime) {
 
 function buildAnimeItem(anime) {
     const animeId = JSON.stringify(String(anime.id));
+    const animeExternalIdentity = JSON.stringify(String(getAniListMediaId(anime) || ""));
     const animeDataId = escapeHtml(String(anime.id));
     let badge = "";
 
@@ -3445,7 +3480,7 @@ function buildAnimeItem(anime) {
     if (["watching", "backlog"].includes(anime.category)) {
         meta = `進度：${anime.watched} / ${escapeHtml(anime.episodes)} 集`;
     } else if (anime.category === "review") {
-        meta = `🧠 已複習 ${anime.watched} / ${escapeHtml(anime.episodes)} 集`;
+        meta = `🧠 已複習 ${Number(anime.reviewWatched) || 0} / ${escapeHtml(anime.episodes)} 集｜首次觀看 ${Number(anime.watched) || 0} 集`;
     } else if (anime.category === "waiting") {
         meta = `預計開播：<span style="color:#f59e0b;font-weight:bold">${escapeHtml(anime.airDate)}</span>`;
     } else {
@@ -3471,7 +3506,7 @@ function buildAnimeItem(anime) {
                 <button type="button" class="btn-review" data-open-themes="${animeDataId}">🎵 主題曲</button>
                 <button class="btn-next" onclick="searchEventsByWork(decodeURIComponent('${encodeURIComponent(getSeriesGroupTitle(anime))}'),decodeURIComponent('${encodeURIComponent(String(anime.id))}'))">🎪 查活動</button>
                 <button class="btn-edit" onclick='editTitle(${animeId})'>✏️ 改名</button>
-                <button class="btn-del" onclick='deleteAnime(${animeId})'>🗑️ 刪除</button>
+                <button class="btn-del" onclick='deleteAnime(${animeId},${animeExternalIdentity})'>🗑️ 刪除</button>
             </div>
         </div>
     `;
@@ -4487,7 +4522,7 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=title-idempotence-1"></script>
+<script src="v11-ui.js?v=media-review-hotfix-2"></script>
 <script src="spotify-config.js"></script>
 <script src="spotify-themes.js?v=duplicate-reconciliation-1"></script>
 <script src="cross-media.js?v=anime-search-multi-1"></script>

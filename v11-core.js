@@ -277,6 +277,7 @@
 
     function migrateAnime(item, now = new Date().toISOString()) {
         const currentEpisode = numberOr(item.currentEpisode ?? item.watched, 0);
+        const reviewWatched = Math.max(0, numberOr(item.reviewWatched, 0));
         const totalRaw = item.totalEpisodes ?? item.episodes;
         const totalEpisodes = Number.isFinite(Number(totalRaw)) ? Number(totalRaw) : totalRaw || null;
         const platform = item.platform || item.customPlatform || arrayOf(item.streamingLinks).map(link => link?.site).filter(Boolean).join("、");
@@ -298,6 +299,10 @@
             tags: arrayOf(item.tags || item.customTags),
             currentEpisode,
             watched: currentEpisode,
+            reviewWatched,
+            reviewSessionActive:item.reviewSessionActive === true || (item.reviewSessionActive == null && item.category === "review"),
+            reviewStartedAt:item.reviewStartedAt ? iso(item.reviewStartedAt) : null,
+            reviewCompletedAt:item.reviewCompletedAt ? iso(item.reviewCompletedAt) : null,
             totalEpisodes,
             episodes: totalEpisodes ?? item.episodes ?? "??",
             rating: item.rating ?? null,
@@ -596,9 +601,26 @@
         for (const field of ["tags", "customTags", "relations", "streamingLinks"]) merged[field] = uniqueMergedArray(ordered.map(item => item[field]));
         merged.themeSongs = ordered.reduce((songs, item) => mergeThemeSongs(songs, item.themeSongs), { openings:[], endings:[] });
 
-        const progress = Math.max(...ordered.map(item => numberOr(item.currentEpisode ?? item.watched)));
+        const resetTimes = ordered
+            .map(item => Date.parse(item.trackingLifecycleResetAt || ""))
+            .filter(Number.isFinite);
+        const latestResetTime = resetTimes.length ? Math.max(...resetTimes) : null;
+        const lifecycleRecords = latestResetTime === null
+            ? ordered
+            : ordered.filter(item => Date.parse(item.trackingLifecycleResetAt || "") === latestResetTime);
+        const progress = Math.max(...lifecycleRecords.map(item => numberOr(item.currentEpisode ?? item.watched)));
         merged.currentEpisode = progress;
         merged.watched = progress;
+        merged.reviewWatched = Math.max(...lifecycleRecords.map(item => Math.max(0, numberOr(item.reviewWatched))));
+        if (latestResetTime !== null) {
+            const lifecycleOwner = lifecycleRecords.slice().sort((a, b) => Date.parse(b.updatedAt || 0) - Date.parse(a.updatedAt || 0))[0];
+            merged.trackingLifecycleResetAt = new Date(latestResetTime).toISOString();
+            merged.progress = numberOr(lifecycleOwner?.progress ?? lifecycleOwner?.currentEpisode ?? lifecycleOwner?.watched);
+            merged.lastWatchedAt = lifecycleOwner?.lastWatchedAt || null;
+            merged.reviewSessionActive = lifecycleOwner?.reviewSessionActive === true;
+            merged.reviewStartedAt = lifecycleOwner?.reviewStartedAt || null;
+            merged.reviewCompletedAt = lifecycleOwner?.reviewCompletedAt || null;
+        }
         for (const field of ["review", "note", "notes", "memo"]) {
             const value = mergeTextValues(ordered, field);
             if (value) merged[field] = value;
@@ -608,14 +630,26 @@
         if (merged.rating == null) merged.rating = ordered.find(item => item.rating != null)?.rating ?? null;
 
         const active = ordered.filter(item => !item.deletedAt);
-        if (active.length) {
-            const preferredActive = active.find(item => String(item.id) === String(canonical.id)) || active.sort((a, b) => Date.parse(b.updatedAt || 0) - Date.parse(a.updatedAt || 0))[0];
+        const tombstones = ordered.filter(item => item.deletedAt);
+        const preferredActive = active.slice().sort((a, b) => Date.parse(b.updatedAt || 0) - Date.parse(a.updatedAt || 0))[0];
+        const preferredManualCategory = active
+            .filter(item => item.categorySource === "manual" || item.categoryManuallyEdited === true)
+            .sort((a, b) => Date.parse(b.updatedAt || 0) - Date.parse(a.updatedAt || 0))[0];
+        const latestDeletion = tombstones.slice().sort((a, b) => Date.parse(b.deletedAt || b.updatedAt || 0) - Date.parse(a.deletedAt || a.updatedAt || 0))[0];
+        const deletionIsNewest = latestDeletion && (!preferredActive
+            || Date.parse(latestDeletion.deletedAt || latestDeletion.updatedAt || 0) >= Date.parse(preferredActive.updatedAt || 0));
+        if (active.length && !deletionIsNewest) {
+            const categoryOwner = preferredManualCategory || preferredActive;
             merged.deletedAt = null;
-            merged.category = preferredActive.category === "_deleted" ? "backlog" : preferredActive.category;
+            merged.category = categoryOwner.category === "_deleted" ? "backlog" : categoryOwner.category;
+            if (preferredManualCategory) merged.categorySource = "manual";
+            else if (categoryOwner.categorySource !== undefined) merged.categorySource = categoryOwner.categorySource;
+            else delete merged.categorySource;
+            merged.categoryManuallyEdited = preferredManualCategory ? true : categoryOwner.categoryManuallyEdited === true;
         } else {
-            const latestDeletion = ordered.sort((a, b) => Date.parse(b.deletedAt || 0) - Date.parse(a.deletedAt || 0))[0];
-            merged.deletedAt = latestDeletion.deletedAt;
+            merged.deletedAt = latestDeletion?.deletedAt || latestDeletion?.updatedAt || null;
             merged.category = "_deleted";
+            if (latestDeletion?.deletedFromCategory) merged.deletedFromCategory = latestDeletion.deletedFromCategory;
         }
 
         const createdTimes = ordered.map(item => Date.parse(item.createdAt || item.addedAt || "")).filter(Number.isFinite);
@@ -858,11 +892,16 @@
 
     function findAnimeRecordIndex(list, id, identity = null, options = {}) {
         const targetId = String(id), items = arrayOf(list);
-        const candidates = items.map((item, index) => ({ item, index })).filter(record => String(record.item?.id) === targetId);
-        if (!candidates.length) return -1;
         const identityValue = identity && typeof identity === "object" ? getAnimeAniListIdentity(identity) : String(identity ?? "");
-        const matching = identityValue ? candidates.filter(record => getAnimeAniListIdentity(record.item) === identityValue) : candidates;
-        const pool = matching.length ? matching : candidates;
+        const records = items.map((item, index) => ({ item, index }));
+        const localMatches = records.filter(record => String(record.item?.id) === targetId);
+        let pool = localMatches;
+        if (identityValue) {
+            const exactMatches = localMatches.filter(record => getAnimeAniListIdentity(record.item) === identityValue);
+            const identityMatches = records.filter(record => getAnimeAniListIdentity(record.item) === identityValue);
+            pool = exactMatches.length ? exactMatches : identityMatches;
+        }
+        if (!pool.length) return -1;
         if (options.preferDeleted) return (pool.find(record => Boolean(record.item?.deletedAt)) || pool[0]).index;
         return (pool.find(record => !record.item?.deletedAt) || pool[0]).index;
     }
@@ -893,7 +932,8 @@
         const index = findAnimeRecordIndex(next, targetId);
         if (index < 0 || !nextCategory) return { list, found:index >= 0, changed:false, anime:index >= 0 ? next[index] : null };
         const current = next[index];
-        if (current.category === nextCategory) return { list:next, found:true, changed:false, anime:current };
+        const alreadyManual = current.categorySource === "manual" && current.categoryManuallyEdited === true;
+        if (current.category === nextCategory && alreadyManual) return { list:next, found:true, changed:false, anime:current };
         const updated = {
             ...current,
             category:nextCategory,
@@ -901,9 +941,26 @@
             categoryManuallyEdited:true,
             updatedAt:iso(now)
         };
+        if (nextCategory === "review") {
+            if (current.reviewSessionActive !== true) {
+                updated.reviewWatched = 0;
+                updated.reviewStartedAt = iso(now);
+                updated.reviewCompletedAt = null;
+            }
+            updated.reviewSessionActive = true;
+        } else if (current.category === "review" && current.reviewSessionActive === true) {
+            updated.reviewSessionActive = false;
+            if (nextCategory === "completed") updated.reviewCompletedAt = iso(now);
+        }
         if (nextCategory === "watching") updated.lastWatchedAt = iso(now);
         next[index] = updated;
         return { list:next, found:true, changed:true, anime:updated };
+    }
+
+    function shouldDiscoverSequelAfterCategoryMove(previousCategory, nextCategory) {
+        const previous = String(previousCategory || "").trim();
+        const next = String(nextCategory || "").trim();
+        return next === "completed" && previous !== "completed" && previous !== "review";
     }
 
     function markAnimeDeletedById(list, id, now = new Date().toISOString(), identity = null) {
@@ -924,8 +981,9 @@
         const targetId = String(id), next = arrayOf(list).slice();
         const index = findAnimeRecordIndex(next, targetId, identity, { preferDeleted:true });
         const identityValue = identity && typeof identity === "object" ? getAnimeAniListIdentity(identity) : String(identity ?? "");
-        const snapshotMatches = arrayOf(snapshot).filter(item => String(item?.id) === targetId);
-        const original = (identityValue ? snapshotMatches.find(item => getAnimeAniListIdentity(item) === identityValue) : null)
+        const snapshotRecords = arrayOf(snapshot);
+        const snapshotMatches = snapshotRecords.filter(item => String(item?.id) === targetId);
+        const original = (identityValue ? snapshotRecords.find(item => getAnimeAniListIdentity(item) === identityValue) : null)
             || snapshotMatches.find(item => !item.deletedAt)
             || snapshotMatches[0]
             || (snapshot && !Array.isArray(snapshot) && String(snapshot.id) === targetId ? snapshot : null);
@@ -984,6 +1042,14 @@
         return { id: uuid(), animeId: anime.id, title: anime.title, delta: numberOr(delta), episode: numberOr(anime.currentEpisode ?? anime.watched), at: iso(at), correction: numberOr(delta) < 0 };
     }
 
+    function createReviewWatchRecord(anime, delta, at = new Date().toISOString()) {
+        return {
+            id:uuid(), animeId:anime.id, title:anime.title, delta:numberOr(delta),
+            episode:numberOr(anime.reviewWatched), reviewEpisode:numberOr(anime.reviewWatched),
+            type:"review", review:true, at:iso(at), correction:numberOr(delta) < 0
+        };
+    }
+
     function updateAnimeProgress(list, id, delta = 1, at = new Date().toISOString()) {
         const targetId = String(id), change = Number(delta);
         const index = findAnimeRecordIndex(list, targetId);
@@ -1015,6 +1081,41 @@
         storage.setItem(STORAGE_KEY, JSON.stringify(result.list));
         storage.setItem(HISTORY_KEY, JSON.stringify(nextHistory));
         return { ...result, history: nextHistory };
+    }
+
+    function updateAnimeReviewProgress(list, id, delta = 1, at = new Date().toISOString()) {
+        const targetId = String(id), change = Number(delta);
+        const index = findAnimeRecordIndex(list, targetId);
+        if (index < 0) return { list, found:false, changed:false, reason:"not-found", anime:null, historyRecord:null };
+        const old = migrateAnime(list[index], at);
+        const current = Math.max(0, numberOr(old.reviewWatched));
+        const parsedTotal = Number(old.totalEpisodes ?? old.episodes);
+        const total = Number.isFinite(parsedTotal) && parsedTotal > 0 ? parsedTotal : null;
+        const requested = Math.max(0, current + (Number.isFinite(change) ? change : 0));
+        const nextEpisode = total === null ? requested : Math.min(requested, total);
+        if (nextEpisode === current) {
+            return { list, found:true, changed:false, reason:change > 0 && total !== null && current >= total ? "at-total" : "unchanged", anime:old, historyRecord:null };
+        }
+        const updated = {
+            ...old,
+            reviewWatched:nextEpisode,
+            reviewSessionActive:true,
+            reviewStartedAt:old.reviewStartedAt || iso(at),
+            updatedAt:iso(at),
+            lastWatchedAt:change > 0 ? iso(at) : old.lastWatchedAt
+        };
+        const nextList = arrayOf(list).slice();
+        nextList[index] = updated;
+        return { list:nextList, found:true, changed:true, reason:"updated", anime:updated, historyRecord:createReviewWatchRecord(updated, nextEpisode - current, at), total };
+    }
+
+    function commitAnimeReviewProgress(storage, list, history, id, delta = 1, at = new Date().toISOString()) {
+        const result = updateAnimeReviewProgress(list, id, delta, at);
+        if (!result.changed) return { ...result, history:arrayOf(history) };
+        const nextHistory = [...arrayOf(history), result.historyRecord];
+        storage.setItem(STORAGE_KEY, JSON.stringify(result.list));
+        storage.setItem(HISTORY_KEY, JSON.stringify(nextHistory));
+        return { ...result, history:nextHistory };
     }
 
     function parseThemeSongText(text, type = "OP", sequence = 1) {
@@ -1701,5 +1802,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, updateAnimeProgress, commitAnimeProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });
