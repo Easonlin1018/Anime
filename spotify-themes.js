@@ -147,6 +147,20 @@
     function markUnavailable(song) { rememberUndo(currentAnime); Object.assign(song, { spotifyTrackId:"", spotifyUrl:"", spotifyEmbedUrl:"", spotifyMatchStatus:"unavailable", spotifyMatchScore:0, manuallyCorrected:true, unavailableOnSpotify:true, updatedAt:new Date().toISOString() }); persist(currentAnime); }
     function deleteSong(song) { if (!confirm(`確定刪除 ${song.type} ${song.sequence}「${song.title}」？`)) return; rememberUndo(currentAnime); currentAnime.themeSongs.openings = currentAnime.themeSongs.openings.filter(item => item.id !== song.id); currentAnime.themeSongs.endings = currentAnime.themeSongs.endings.filter(item => item.id !== song.id); persist(currentAnime); }
 
+    function snapshotAnimeCleanup(anime) {
+        const animeId = String(anime?.id || ""), cacheKey = `source:${animeId}`;
+        let themeUndo = null;
+        try { themeUndo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null"); } catch {}
+        return {
+            animeId,
+            cacheKey,
+            cachePresent:Object.prototype.hasOwnProperty.call(cache, cacheKey),
+            cacheValue:Object.prototype.hasOwnProperty.call(cache, cacheKey) ? JSON.parse(JSON.stringify(cache[cacheKey])) : null,
+            themeUndoPresent:String(themeUndo?.animeId || "") === animeId,
+            themeUndo:String(themeUndo?.animeId || "") === animeId ? themeUndo : null
+        };
+    }
+
     function cleanupAnime(anime) {
         const animeId = String(anime?.id || "");
         if (!animeId) return false;
@@ -159,6 +173,15 @@
         } catch { localStorage.removeItem(UNDO_KEY); }
         if (String(currentAnime?.id || "") === animeId) close();
         saveCache();
+        return true;
+    }
+
+    function restoreAnimeCleanupSnapshot(snapshot) {
+        if (!snapshot?.animeId) return false;
+        if (snapshot.cachePresent) cache[snapshot.cacheKey] = snapshot.cacheValue;
+        else delete cache[snapshot.cacheKey];
+        saveCache();
+        if (snapshot.themeUndoPresent) localStorage.setItem(UNDO_KEY, JSON.stringify(snapshot.themeUndo));
         return true;
     }
 
@@ -196,6 +219,6 @@
         if (undo) localStorage.setItem(UNDO_KEY, JSON.stringify(undo));
         else localStorage.removeItem(UNDO_KEY);
     }
-    window.SpotifyThemes = { renderForAnime, expand, close, cleanupAnime, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs };
+    window.SpotifyThemes = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs };
     pruneDeletedAnimeCaches();
 })();

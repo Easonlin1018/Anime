@@ -1038,6 +1038,176 @@
         };
     }
 
+    function cloneJsonValue(value) {
+        if (value === undefined) return undefined;
+        return JSON.parse(JSON.stringify(value));
+    }
+
+    function captureOverrideReferences(overrides, animeId) {
+        const targetId = String(animeId), captured = {};
+        Object.entries(overrides && typeof overrides === "object" ? overrides : {}).forEach(([key, value]) => {
+            if (!value || typeof value !== "object" || Array.isArray(value)) return;
+            const references = {};
+            ANIME_REFERENCE_FIELDS.forEach(field => {
+                const matches = arrayOf(value[field]).filter(id => String(id) === targetId);
+                if (matches.length) references[field] = cloneJsonValue(matches);
+            });
+            if (Object.keys(references).length) captured[key] = references;
+        });
+        return captured;
+    }
+
+    function restoreOverrideReferences(overrides, captured) {
+        const restored = { ...(overrides && typeof overrides === "object" ? overrides : {}) };
+        Object.entries(captured && typeof captured === "object" ? captured : {}).forEach(([key, references]) => {
+            const current = restored[key] && typeof restored[key] === "object" && !Array.isArray(restored[key])
+                ? { ...restored[key] }
+                : {};
+            Object.entries(references || {}).forEach(([field, values]) => {
+                const merged = [], seen = new Set();
+                [...arrayOf(current[field]), ...arrayOf(values)].forEach(value => {
+                    const keyValue = String(value);
+                    if (seen.has(keyValue)) return;
+                    seen.add(keyValue);
+                    merged.push(value);
+                });
+                current[field] = merged;
+            });
+            restored[key] = current;
+        });
+        return restored;
+    }
+
+    function watchHistoryIdentity(record) {
+        if (record?.id != null && String(record.id)) return `id:${record.id}`;
+        return JSON.stringify([
+            record?.animeId, record?.at || record?.timestamp, record?.delta,
+            record?.episode ?? record?.reviewEpisode, record?.type || "watch"
+        ]);
+    }
+
+    function captureAnimeAuxiliaryState(state, animeId) {
+        const targetId = String(animeId), themeCache = state?.themeCache || {};
+        const themeCacheKey = `source:${targetId}`;
+        const matchingThemeUndo = String(state?.themeUndo?.animeId || "") === targetId;
+        return {
+            animeId:targetId,
+            eventOverrides:captureOverrideReferences(state?.eventOverrides, targetId),
+            eventAnimeOverrides:captureOverrideReferences(state?.eventAnimeOverrides, targetId),
+            watchHistory:arrayOf(state?.watchHistory).map((record, index) => ({ record, index })).filter(entry => String(entry.record?.animeId) === targetId).map(cloneJsonValue),
+            themeCache:{
+                key:themeCacheKey,
+                present:Object.prototype.hasOwnProperty.call(themeCache, themeCacheKey),
+                value:Object.prototype.hasOwnProperty.call(themeCache, themeCacheKey) ? cloneJsonValue(themeCache[themeCacheKey]) : null
+            },
+            themeUndo:{
+                touched:matchingThemeUndo,
+                present:matchingThemeUndo,
+                value:matchingThemeUndo ? cloneJsonValue(state.themeUndo) : null
+            }
+        };
+    }
+
+    function restoreAnimeAuxiliaryState(state, snapshot, animeId = snapshot?.animeId) {
+        const targetId = String(animeId || ""), restored = { ...(state || {}) };
+        restored.eventOverrides = restoreOverrideReferences(state?.eventOverrides, snapshot?.eventOverrides);
+        restored.eventAnimeOverrides = restoreOverrideReferences(state?.eventAnimeOverrides, snapshot?.eventAnimeOverrides);
+        const history = arrayOf(state?.watchHistory).slice();
+        const historyKeys = new Set(history.map(watchHistoryIdentity));
+        arrayOf(snapshot?.watchHistory).slice().sort((a, b) => numberOr(a?.index) - numberOr(b?.index)).forEach(entry => {
+            const record = cloneJsonValue(entry?.record);
+            if (!record || String(record.animeId) !== targetId) return;
+            const key = watchHistoryIdentity(record);
+            if (historyKeys.has(key)) return;
+            history.splice(Math.min(Math.max(0, numberOr(entry.index)), history.length), 0, record);
+            historyKeys.add(key);
+        });
+        restored.watchHistory = history;
+        const themeCache = { ...(state?.themeCache || {}) };
+        const cacheKey = String(snapshot?.themeCache?.key || `source:${targetId}`);
+        if (snapshot?.themeCache?.present) themeCache[cacheKey] = cloneJsonValue(snapshot.themeCache.value);
+        else delete themeCache[cacheKey];
+        restored.themeCache = themeCache;
+        if (snapshot?.themeUndo?.touched) restored.themeUndo = snapshot.themeUndo.present ? cloneJsonValue(snapshot.themeUndo.value) : null;
+        return restored;
+    }
+
+    function createCompactDeleteUndo(anime, identity, state = {}, external = {}, now = new Date().toISOString()) {
+        const targetIdentity = String(identity || getAnimeAniListIdentity(anime));
+        return {
+            schemaVersion:2,
+            type:"delete-compact",
+            targetId:anime?.id,
+            targetIdentity,
+            at:iso(now),
+            record:cloneJsonValue(anime),
+            auxiliary:captureAnimeAuxiliaryState(state, anime?.id),
+            external:cloneJsonValue(external || {})
+        };
+    }
+
+    function isStorageQuotaError(error) {
+        return error?.name === "QuotaExceededError" || error?.code === 22 || error?.code === 1014;
+    }
+
+    function runAnimeDeleteTransaction(options = {}) {
+        const trace = step => { try { options.trace?.(step); } catch {} };
+        const list = arrayOf(options.list), id = options.id, identity = options.identity;
+        trace("STEP 1 findAnimeRecordIndex");
+        const recordIndex = findAnimeRecordIndex(list, id, identity);
+        const item = recordIndex >= 0 ? list[recordIndex] : null;
+        if (!item || item.deletedAt) return { ok:false, changed:false, stage:"lookup", list, anime:item || null, error:null };
+        const undo = options.undo;
+        let serializedUndo = "";
+        try {
+            trace("STEP 4 JSON.stringify undo");
+            serializedUndo = JSON.stringify(undo);
+            trace("STEP 5 save UNDO_KEY");
+            options.storage.setItem(options.undoKey, serializedUndo);
+        } catch (error) {
+            return { ok:false, changed:false, stage:"undo", list, anime:item, error, quotaExceeded:isStorageQuotaError(error), undoBytes:serializedUndo.length * 2 };
+        }
+        trace("STEP 6 markAnimeDeletedById");
+        const marked = markAnimeDeletedById(list, id, options.now, identity);
+        if (!marked.changed || !marked.anime) {
+            try { options.storage.removeItem?.(options.undoKey); } catch {}
+            return { ok:false, changed:false, stage:"mark", list, anime:marked.anime, error:null };
+        }
+        let cleanupResult = null;
+        try {
+            trace("STEP 7 cleanupAnimeAuxiliaryReferences");
+            cleanupResult = options.cleanup?.(marked.anime, undo, marked.list) ?? null;
+            trace("STEP 8 saveAndRender");
+            options.persist?.(marked.list, cleanupResult);
+            return { ok:true, changed:true, stage:"complete", list:marked.list, anime:marked.anime, cleanupResult, undoBytes:serializedUndo.length * 2 };
+        } catch (error) {
+            try { options.rollback?.(list, undo, marked, cleanupResult, error); } catch (rollbackError) {
+                error.rollbackError = rollbackError;
+            }
+            try { options.storage.removeItem?.(options.undoKey); } catch {}
+            return { ok:false, changed:false, stage:error?.deleteStage || "persist", list, anime:item, error, quotaExceeded:isStorageQuotaError(error), undoBytes:serializedUndo.length * 2 };
+        }
+    }
+
+    function restoreDeleteUndoState(list, state, undo, now = new Date().toISOString()) {
+        if (undo?.type === "delete-compact" && undo?.record) {
+            const restored = restoreAnimeById(list, undo.targetId, undo.record, now, undo.targetIdentity);
+            return {
+                list:restored.list,
+                state:restoreAnimeAuxiliaryState(state, undo.auxiliary, undo.targetId),
+                restored:restored.changed,
+                legacy:false,
+                anime:restored.anime
+            };
+        }
+        if (Array.isArray(undo?.before)) {
+            let restoredList = migrateList(undo.before);
+            if (undo.type === "delete" && undo.targetId != null) restoredList = restoreAnimeById(restoredList, undo.targetId, undo.before, now, undo.targetIdentity).list;
+            return { list:restoredList, state:{ ...(undo.auxiliary || state || {}) }, restored:true, legacy:true, anime:null };
+        }
+        return { list, state, restored:false, legacy:false, anime:null };
+    }
+
     function createWatchRecord(anime, delta, at = new Date().toISOString()) {
         return { id: uuid(), animeId: anime.id, title: anime.title, delta: numberOr(delta), episode: numberOr(anime.currentEpisode ?? anime.watched), at: iso(at), correction: numberOr(delta) < 0 };
     }
@@ -1802,5 +1972,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });

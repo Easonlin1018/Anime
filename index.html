@@ -640,7 +640,7 @@
 </div>
 
 <script src="vendor/opencc-js-1.4.1-full.js?v=1.4.1"></script>
-<script src="v11-core.js?v=media-review-hotfix-2"></script>
+<script src="v11-core.js?v=mobile-delete-storage-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -3406,6 +3406,10 @@ function updateProgress(id, delta) {
 }
 
 function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOString(), currentWatchHistory = null) {
+    const atDeleteStage = (stage, action) => {
+        try { return action(); }
+        catch (error) { if (!error.deleteStage) error.deleteStage = stage; throw error; }
+    };
     let storedWatchHistory = [];
     if (Array.isArray(currentWatchHistory)) {
         storedWatchHistory = currentWatchHistory;
@@ -3418,11 +3422,11 @@ function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOStri
     const cleaned = AnimeTrackerV11.cleanupAnimeAuxiliaryState({ eventOverrides, eventAnimeOverrides, watchHistory:storedWatchHistory }, anime.id);
     eventOverrides = cleaned.eventOverrides;
     eventAnimeOverrides = cleaned.eventAnimeOverrides;
-    saveEventLocalData();
-    localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(cleaned.watchHistory));
+    atDeleteStage("event-overrides", () => saveEventLocalData());
+    atDeleteStage("history", () => localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(cleaned.watchHistory)));
     if (String(activeWorkSearch.animeId) === String(anime.id)) activeWorkSearch = { query:"", terms:[], animeId:"", mediaContext:null };
-    window.SpotifyThemes?.cleanupAnime?.(anime);
-    window.CrossMediaTracker?.markAnimeDeleted?.(anime.id, deletedAt);
+    atDeleteStage("spotify", () => window.SpotifyThemes?.cleanupAnime?.(anime));
+    atDeleteStage("cross-media", () => window.CrossMediaTracker?.markAnimeDeleted?.(anime.id, deletedAt));
     return cleaned;
 }
 
@@ -4522,9 +4526,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=media-review-hotfix-2"></script>
+<script src="v11-ui.js?v=mobile-delete-storage-1"></script>
 <script src="spotify-config.js"></script>
-<script src="spotify-themes.js?v=duplicate-reconciliation-1"></script>
-<script src="cross-media.js?v=anime-search-multi-1"></script>
+<script src="spotify-themes.js?v=mobile-delete-storage-1"></script>
+<script src="cross-media.js?v=mobile-delete-storage-1"></script>
 </body>
 </html>

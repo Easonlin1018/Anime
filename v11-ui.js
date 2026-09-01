@@ -54,6 +54,57 @@
         else localStorage.removeItem("anime_theme_last_undo_v1");
     }
 
+    function currentDeleteAuxiliaryState() {
+        return {
+            eventOverrides,
+            eventAnimeOverrides,
+            watchHistory,
+            themeCache:parse("anime_theme_lookup_cache_v1", {}),
+            themeUndo:parse("anime_theme_last_undo_v1", null)
+        };
+    }
+
+    function traceDeleteStep(step) {
+        try { window.__ANIME_DELETE_TRACE__?.(step); } catch {}
+    }
+
+    function applyCompactAuxiliaryRestore(restoredState, undo) {
+        eventOverrides = restoredState.eventOverrides || {};
+        eventAnimeOverrides = restoredState.eventAnimeOverrides || {};
+        watchHistory = restoredState.watchHistory || [];
+        save(EVENT_OVERRIDES_KEY, eventOverrides);
+        save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
+        save(V.HISTORY_KEY, watchHistory);
+        if (window.SpotifyThemes?.restoreAnimeCleanupSnapshot && undo.external?.spotify) {
+            window.SpotifyThemes.restoreAnimeCleanupSnapshot(undo.external.spotify);
+        } else {
+            save("anime_theme_lookup_cache_v1", restoredState.themeCache || {});
+            if (restoredState.themeUndo) save("anime_theme_last_undo_v1", restoredState.themeUndo);
+            else localStorage.removeItem("anime_theme_last_undo_v1");
+        }
+        if (undo.external?.crossMedia) window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external.crossMedia);
+    }
+
+    function rollbackCompactDelete(originalList, undo) {
+        animeList = originalList;
+        const restoredState = V.restoreAnimeAuxiliaryState(currentDeleteAuxiliaryState(), undo.auxiliary, undo.targetId);
+        eventOverrides = restoredState.eventOverrides || {};
+        eventAnimeOverrides = restoredState.eventAnimeOverrides || {};
+        watchHistory = restoredState.watchHistory || [];
+        const attempts = [
+            () => save(EVENT_OVERRIDES_KEY, eventOverrides),
+            () => save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides),
+            () => save(V.HISTORY_KEY, watchHistory),
+            () => window.SpotifyThemes?.restoreAnimeCleanupSnapshot?.(undo.external?.spotify),
+            () => window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external?.crossMedia),
+            () => localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList)),
+            () => { renderList(); renderEvents(); refreshV11(); }
+        ];
+        const errors = [];
+        attempts.forEach(action => { try { action(); } catch (error) { errors.push(error); } });
+        if (errors.length) throw errors[0];
+    }
+
     animeList = V.migrateList(animeList);
     persistAnime();
 
@@ -84,18 +135,53 @@
         if (!isReview && !wasCompleted && updated.category === "completed") void checkAndAddSequel(updated, false);
     };
     deleteAnime = function (id, externalIdentity = null) {
+        traceDeleteStep("STEP 1 findAnimeRecordIndex");
         const recordIndex = V.findAnimeRecordIndex(animeList, id, externalIdentity);
         const item = recordIndex >= 0 ? animeList[recordIndex] : null;
         if (!item || item.deletedAt) return;
         if (!confirm(`確定刪除「${item.title}」？可使用「復原上一步」恢復。`)) return;
+        traceDeleteStep("STEP 2 confirm accepted");
         const targetIdentity = String(externalIdentity || V.getAnimeAniListIdentity(item));
-        save(UNDO_KEY, { type: "delete", targetId:item.id, targetIdentity, at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
-        const result = V.markAnimeDeletedById(animeList, id, new Date().toISOString(), targetIdentity);
-        if (!result.changed || !result.anime) return showToast("找不到可刪除的有效作品，請重新整理後再試");
+        const now = new Date().toISOString(), originalList = animeList;
+        let undo;
+        try {
+            const external = {
+                spotify:window.SpotifyThemes?.snapshotAnimeCleanup?.(item) || null,
+                crossMedia:window.CrossMediaTracker?.snapshotAnimeDeletion?.(item.id) || null
+            };
+            undo = V.createCompactDeleteUndo(item, targetIdentity, currentDeleteAuxiliaryState(), external, now);
+            traceDeleteStep("STEP 3 auxiliaryUndoSnapshot built");
+        } catch (error) {
+            showToast("無法建立刪除復原點，因此未刪除。");
+            return;
+        }
+        const result = V.runAnimeDeleteTransaction({
+            list:animeList,
+            id,
+            identity:targetIdentity,
+            now,
+            undo,
+            undoKey:UNDO_KEY,
+            storage:localStorage,
+            trace:step => { if (step !== "STEP 1 findAnimeRecordIndex") traceDeleteStep(step); },
+            cleanup:(deleted, compactUndo, nextList) => {
+                animeList = nextList;
+                const cleaned = cleanupAnimeAuxiliaryReferences(deleted, deleted.deletedAt, watchHistory);
+                watchHistory = cleaned.watchHistory;
+                return cleaned;
+            },
+            persist:() => saveAndRender(),
+            rollback:() => rollbackCompactDelete(originalList, undo)
+        });
+        if (!result.ok) {
+            if (result.stage === "undo" && result.quotaExceeded) return showToast("儲存空間不足，無法建立刪除復原點，因此未刪除。");
+            if (result.quotaExceeded) return showToast("儲存空間不足，刪除交易已取消，資料未變更。");
+            if (result.stage === "lookup" || result.stage === "mark") return showToast("找不到可刪除的有效作品，請重新整理後再試");
+            return showToast("刪除失敗，資料已保留。請重新整理後再試。");
+        }
         animeList = result.list;
-        const cleaned = cleanupAnimeAuxiliaryReferences(result.anime, result.anime.deletedAt, watchHistory);
-        watchHistory = cleaned.watchHistory;
-        saveAndRender(); showToast("🗑️ 已刪除，可在批次工具列復原上一步");
+        traceDeleteStep("STEP 9 success toast");
+        showToast("🗑️ 已刪除，可在批次工具列復原上一步");
     };
 
     const originalBuildAnimeItem = buildAnimeItem;
@@ -226,6 +312,20 @@
     }
     function undoLast() {
         const undo = parse(UNDO_KEY, null);
+        if (undo?.type === "delete-compact" && undo?.record) {
+            const restored = V.restoreDeleteUndoState(animeList, currentDeleteAuxiliaryState(), undo, new Date().toISOString());
+            if (!restored.restored) return showToast("找不到可復原的刪除資料");
+            try {
+                animeList = restored.list;
+                applyCompactAuxiliaryRestore(restored.state, undo);
+                persistAnime();
+                localStorage.removeItem(UNDO_KEY);
+                renderList(); renderEvents(); refreshV11();
+                return showToast("已復原上一步");
+            } catch (error) {
+                return showToast("復原失敗：本機儲存空間不足，復原點仍保留");
+            }
+        }
         if (!undo?.before) return showToast("目前沒有可復原操作");
         animeList = V.migrateList(undo.before);
         if (undo.type === "delete" && undo.targetId != null) {
@@ -267,7 +367,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "media-review-hotfix-2";
+        const reloadVersion = "mobile-delete-storage-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
