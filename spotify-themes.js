@@ -5,6 +5,9 @@
     const CACHE_KEY = "anime_theme_lookup_cache_v1";
     const UNDO_KEY = "anime_theme_last_undo_v1";
     const JIKAN = "https://api.jikan.moe/v4";
+    const JIKAN_RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
+    const JIKAN_RETRY_DELAYS = [800, 1600];
+    const MAX_RETRY_AFTER_MS = 5000;
     let currentAnime = null, currentContainer = null, controller = null, searchTimer = null;
     const candidatesBySong = new Map();
     const automaticLookupAttempts = new Set();
@@ -17,7 +20,69 @@
     function cached(key) { const item = cache[key]; return item && Date.now() - item.queriedAt < item.ttl ? item.value : null; }
     function putCache(key, value, ttl) { cache[key] = { value, queriedAt: Date.now(), ttl }; saveCache(); }
     function abortPending() { clearTimeout(searchTimer); controller?.abort(); controller = null; }
-    async function fetchJson(url) { controller?.abort(); controller = new AbortController(); const response = await fetch(url, { signal: controller.signal, headers: { Accept: "application/json" } }); if (!response.ok) throw new Error(`主題曲資料來源 HTTP ${response.status}`); return response.json(); }
+    function abortError() { const error = new Error("Aborted"); error.name = "AbortError"; return error; }
+    function parseRetryAfterMs(response, now = Date.now()) {
+        const value = String(response?.headers?.get?.("Retry-After") || "").trim();
+        if (!value) return null;
+        const seconds = Number(value);
+        const milliseconds = Number.isFinite(seconds) ? seconds * 1000 : Date.parse(value) - Number(now);
+        return Number.isFinite(milliseconds) ? Math.min(MAX_RETRY_AFTER_MS, Math.max(0, milliseconds)) : null;
+    }
+    function waitForRetry(delay, signal) {
+        return new Promise((resolve, reject) => {
+            if (signal?.aborted) return reject(abortError());
+            const timer = setTimeout(done, Math.max(0, Number(delay) || 0));
+            function done() { signal?.removeEventListener?.("abort", aborted); resolve(); }
+            function aborted() { clearTimeout(timer); signal?.removeEventListener?.("abort", aborted); reject(abortError()); }
+            signal?.addEventListener?.("abort", aborted, { once:true });
+        });
+    }
+    async function requestJikanJson(url, options = {}) {
+        const signal = options.signal;
+        const request = options.fetchImpl || fetch;
+        const delays = Array.isArray(options.delays) ? options.delays : JIKAN_RETRY_DELAYS;
+        const sleep = options.sleep || waitForRetry;
+        const onRetry = options.onRetry;
+        const requestedRetries = Number(options.maxRetries ?? 2);
+        const maxRetries = Number.isFinite(requestedRetries) ? Math.min(2, Math.max(0, Math.floor(requestedRetries))) : 2;
+        for (let attempt = 0; attempt <= maxRetries; attempt++) {
+            if (signal?.aborted) throw abortError();
+            let response;
+            try {
+                response = await request(url, { signal, headers:{ Accept:"application/json" } });
+            } catch (error) {
+                if (error?.name === "AbortError" || signal?.aborted) throw abortError();
+                if (attempt >= maxRetries) throw error;
+                const retry = attempt + 1, delay = Number(delays[attempt] ?? 0);
+                try { onRetry?.({ retry, maxRetries, status:0, delay, error }); } catch {}
+                await sleep(delay, signal);
+                continue;
+            }
+            if (response.ok) return response.json();
+            const error = new Error(`主題曲資料來源 HTTP ${response.status}`);
+            error.status = response.status;
+            if (!JIKAN_RETRYABLE_STATUSES.has(Number(response.status)) || attempt >= maxRetries) throw error;
+            const retry = attempt + 1;
+            const retryAfter = Number(response.status) === 429 ? parseRetryAfterMs(response, options.now?.() ?? Date.now()) : null;
+            const delay = retryAfter ?? Number(delays[attempt] ?? 0);
+            try { onRetry?.({ retry, maxRetries, status:Number(response.status), delay, error }); } catch {}
+            await sleep(delay, signal);
+        }
+        throw new Error("主題曲資料來源重試失敗");
+    }
+    async function fetchJikanJson(url) {
+        controller?.abort();
+        const activeController = new AbortController();
+        controller = activeController;
+        try {
+            return await requestJikanJson(url, {
+                signal:activeController.signal,
+                onRetry:({ retry, maxRetries }) => setStatus(`主題曲資料來源暫時無回應，正在重試（${retry}/${maxRetries}）…`)
+            });
+        } finally {
+            if (controller === activeController) controller = null;
+        }
+    }
     function mediaType(anime) { return String(anime.mediaType || anime.format || anime.type || "TV").toUpperCase(); }
     function candidateScore(anime, candidate) {
         const wanted = [anime.title, ...(anime.aliases || [])].map(V.normalizeText).filter(Boolean);
@@ -34,7 +99,7 @@
         const queries = [...new Set([anime.title, ...(anime.aliases || []), anime.titleJapanese, anime.titleEnglish].filter(Boolean))].slice(0, 4);
         const found = new Map();
         for (const query of queries) {
-            const data = await fetchJson(`${JIKAN}/anime?q=${encodeURIComponent(query)}&limit=5&sfw=true`);
+            const data = await fetchJikanJson(`${JIKAN}/anime?q=${encodeURIComponent(query)}&limit=5&sfw=true`);
             (data.data || []).forEach(item => found.set(item.mal_id, item));
             if (found.size >= 8) break;
         }
@@ -48,7 +113,7 @@
         if (!source.selected) return source;
         const malId = Number(source.selected.mal_id), key = `themes:${malId}`, old = cached(key);
         if (old) return { ...source, songs: old, malId };
-        const data = await fetchJson(`${JIKAN}/anime/${malId}/full`);
+        const data = await fetchJikanJson(`${JIKAN}/anime/${malId}/full`);
         const theme = data.data?.theme || {};
         const songs = {
             openings: (theme.openings || []).map((text, index) => ({ ...V.parseThemeSongText(text, "OP", index + 1), sourceName: "MyAnimeList via Jikan", sourceUrl: `https://myanimelist.net/anime/${malId}`, updatedAt: new Date().toISOString() })),
@@ -280,7 +345,7 @@
         if (undo) localStorage.setItem(UNDO_KEY, JSON.stringify(undo));
         else localStorage.removeItem(UNDO_KEY);
     }
-    const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs, hasThemeSongData, themeSongStatus, claimAutomaticLookup };
+    const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs, hasThemeSongData, themeSongStatus, claimAutomaticLookup, requestJikanJson, parseRetryAfterMs, invalidateThemeLookupCache };
     window.ThemeSongs = api;
     window.SpotifyThemes = api;
     pruneDeletedAnimeCaches();
