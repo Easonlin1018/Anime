@@ -640,7 +640,7 @@
 </div>
 
 <script src="vendor/opencc-js-1.4.1-full.js?v=1.4.1"></script>
-<script src="v11-core.js?v=mobile-delete-storage-2"></script>
+<script src="v11-core.js?v=theme-songs-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -3425,7 +3425,7 @@ function cleanupAnimeAuxiliaryReferences(anime, deletedAt = new Date().toISOStri
     atDeleteStage("event-overrides", () => saveEventLocalData());
     atDeleteStage("history", () => localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(cleaned.watchHistory)));
     if (String(activeWorkSearch.animeId) === String(anime.id)) activeWorkSearch = { query:"", terms:[], animeId:"", mediaContext:null };
-    atDeleteStage("spotify", () => window.SpotifyThemes?.cleanupAnime?.(anime));
+    atDeleteStage("spotify", () => (window.ThemeSongs || window.SpotifyThemes)?.cleanupAnime?.(anime));
     atDeleteStage("cross-media", () => window.CrossMediaTracker?.markAnimeDeleted?.(anime.id, deletedAt));
     return cleaned;
 }
@@ -4526,9 +4526,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=mobile-delete-storage-2"></script>
+<script src="v11-ui.js?v=theme-songs-1"></script>
 <script src="spotify-config.js"></script>
-<script src="spotify-themes.js?v=mobile-delete-storage-1"></script>
+<script src="spotify-themes.js?v=theme-songs-1"></script>
 <script src="cross-media.js?v=mobile-delete-storage-1"></script>
 </body>
 </html>

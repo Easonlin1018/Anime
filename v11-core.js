@@ -269,9 +269,12 @@
     }
     function normalizeThemeSongs(value) {
         const themes = value && typeof value === "object" ? value : {};
+        const normalizeGroup = (songs, type) => arrayOf(songs)
+            .map((song, index) => normalizeThemeSong(song, type, index))
+            .sort((a, b) => a.sequence - b.sequence || a.title.localeCompare(b.title));
         return {
-            openings: arrayOf(themes.openings).map((song, index) => normalizeThemeSong(song, "OP", index)),
-            endings: arrayOf(themes.endings).map((song, index) => normalizeThemeSong(song, "ED", index))
+            openings:normalizeGroup(themes.openings, "OP"),
+            endings:normalizeGroup(themes.endings, "ED")
         };
     }
 

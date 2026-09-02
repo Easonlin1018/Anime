@@ -2,6 +2,7 @@
     "use strict";
     const V = window.AnimeTrackerV11;
     if (!V) return;
+    const themeSongsApi = () => window.ThemeSongs || window.SpotifyThemes;
     const parse = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || "") ?? fallback; } catch { return fallback; } };
     const save = (key, value) => localStorage.setItem(key, JSON.stringify(value));
     const FILTER_KEY = "anime_tracker_filters_v11";
@@ -76,8 +77,8 @@
         save(EVENT_OVERRIDES_KEY, eventOverrides);
         save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
         save(V.HISTORY_KEY, watchHistory);
-        if (window.SpotifyThemes?.restoreAnimeCleanupSnapshot && undo.external?.spotify) {
-            window.SpotifyThemes.restoreAnimeCleanupSnapshot(undo.external.spotify);
+        if (themeSongsApi()?.restoreAnimeCleanupSnapshot && undo.external?.spotify) {
+            themeSongsApi().restoreAnimeCleanupSnapshot(undo.external.spotify);
         } else {
             save("anime_theme_lookup_cache_v1", restoredState.themeCache || {});
             if (restoredState.themeUndo) save("anime_theme_last_undo_v1", restoredState.themeUndo);
@@ -95,7 +96,7 @@
             { stage:"event-overrides", action:() => save(EVENT_OVERRIDES_KEY, eventOverrides) },
             { stage:"event-anime-overrides", action:() => save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides) },
             { stage:"history", action:() => save(V.HISTORY_KEY, watchHistory) },
-            { stage:"spotify", action:() => window.SpotifyThemes?.restoreAnimeCleanupSnapshot?.(undo.external?.spotify) },
+            { stage:"spotify", action:() => themeSongsApi()?.restoreAnimeCleanupSnapshot?.(undo.external?.spotify) },
             { stage:"cross-media", action:() => window.CrossMediaTracker?.restoreAnimeDeletionSnapshot?.(undo.external?.crossMedia) },
             { stage:"storage", action:() => localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList)) },
             { stage:"render", action:() => { renderList(); renderEvents(); refreshV11(); } }
@@ -154,7 +155,7 @@
         let undo;
         try {
             const external = {
-                spotify:window.SpotifyThemes?.snapshotAnimeCleanup?.(item) || null,
+                spotify:themeSongsApi()?.snapshotAnimeCleanup?.(item) || null,
                 crossMedia:window.CrossMediaTracker?.snapshotAnimeDeletion?.(item.id) || null
             };
             undo = V.createCompactDeleteUndo(item, targetIdentity, currentDeleteAuxiliaryState(), external, now);
@@ -345,7 +346,7 @@
         persistAnime();
         if (Array.isArray(undo.auxiliary?.works)) window.CrossMediaTracker?.replaceData?.(undo.auxiliary.works, undo.auxiliary.mangaReadHistory || []);
         else window.CrossMediaTracker?.syncAnimeReferences?.();
-        window.SpotifyThemes?.restoreCacheSnapshot?.(undo.auxiliary?.themeCache || {}, undo.auxiliary?.themeUndo || null);
+        themeSongsApi()?.restoreCacheSnapshot?.(undo.auxiliary?.themeCache || {}, undo.auxiliary?.themeUndo || null);
         renderList(); renderEvents(); refreshV11(); showToast("已復原上一步");
     }
 
@@ -357,12 +358,12 @@
         document.getElementById("v11-detail-body").innerHTML = `<form id="v11-detail-form" data-id="${escapeHtml(item.id)}"><div class="v11-detail-grid"><div><img class="v11-poster" src="${safeUrl(item.poster) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='100%25' height='100%25' fill='%230f172a'/%3E%3Ctext x='50%25' y='50%25' fill='%2394a3b8' text-anchor='middle'%3EAnime%3C/text%3E%3C/svg%3E"}" alt="${escapeHtml(item.title)} 海報"></div><div><label>正式名稱<input name="title" value="${escapeHtml(item.title)}"></label><label>別名<input name="aliases" value="${escapeHtml(item.aliases.join("、"))}"></label><label>劇情簡介<textarea name="synopsis">${escapeHtml(item.synopsis)}</textarea></label></div></div><div class="v11-filter-grid"><label>狀態<input name="category" value="${escapeHtml(item.category)}"></label><label>目前集數<input name="currentEpisode" type="number" value="${item.currentEpisode}"></label><label>總集數<input name="totalEpisodes" type="number" value="${escapeHtml(item.totalEpisodes || "")}"></label><label>平台<input name="platform" value="${escapeHtml(item.platform)}"></label><label>標籤<input name="tags" value="${escapeHtml(item.tags.join("、"))}"></label><label>年份<input name="year" type="number" value="${escapeHtml(item.year || "")}"></label><label>季度<input name="season" value="${escapeHtml(item.season)}"></label><label>評分<input name="rating" type="number" min="0" max="10" step=".1" value="${escapeHtml(item.rating ?? "")}"></label><label>播出星期<input name="broadcastDay" value="${escapeHtml(item.broadcastDay)}"></label><label>播出時間<input name="broadcastTime" type="time" value="${escapeHtml(item.broadcastTime)}"></label><label>下一集時間<input name="nextEpisodeAt" type="datetime-local" value="${item.nextEpisodeAt ? escapeHtml(item.nextEpisodeAt.slice(0,16)) : ""}"></label><label>下一季日期<input name="nextSeasonDate" type="date" value="${escapeHtml(item.nextSeasonDate || "")}"></label><label><input name="reminderEnabled" type="checkbox" ${item.reminderEnabled?"checked":""}> 啟用提醒</label></div><label>筆記<textarea name="notes">${escapeHtml(item.notes)}</textarea></label><div class="v11-toolbar"><button type="button" onclick="updateProgress('${escapeHtml(item.id)}',-1)">減少 1 集</button><button type="button" onclick="updateProgress('${escapeHtml(item.id)}',1)">增加 1 集</button><button type="submit">儲存詳細資料</button></div><div class="tiny-note">建立：${escapeHtml(item.createdAt)}｜最近觀看：${escapeHtml(item.lastWatchedAt || "尚無")}</div><div id="v11-theme-section"></div><h3>相關活動</h3><div>${relatedEvents.map(x=>escapeHtml(x.title)).join("、")||"目前沒有相關活動"}</div><h3>觀看歷史</h3><div>${history.map(x=>`<div>${escapeHtml(x.at)}｜${x.delta>0?"+":""}${x.delta} 集</div>`).join("")||"尚無紀錄"}</div></form>`;
         document.getElementById("v11-detail-form").addEventListener("submit", saveDetail);
         document.getElementById("v11-detail-modal").hidden = false;
-        window.SpotifyThemes?.renderForAnime(item, document.getElementById("v11-theme-section"));
-        if (expandThemes) window.SpotifyThemes?.expand(document.getElementById("v11-theme-section"));
+        themeSongsApi()?.renderForAnime(item, document.getElementById("v11-theme-section"));
+        if (expandThemes) themeSongsApi()?.expand(document.getElementById("v11-theme-section"));
         window.CrossMediaTracker?.enhanceAnimeDetail?.(item, document.getElementById("v11-detail-body"));
     }
     function saveDetail(event) { event.preventDefault(); const form = event.currentTarget, item = animeList.find(x => String(x.id) === form.dataset.id); if (!item) return; const data = new FormData(form), previousTitle = item.title, previousCategory = item.category; ["title","category","platform","synopsis","season","broadcastDay","broadcastTime","notes"].forEach(key => item[key]=String(data.get(key)||"").trim()); if(item.title&&item.title!==previousTitle){item.displayTitle=item.title;item.titleSource="manual";item.titleManuallyEdited=true;} if(item.category&&item.category!==previousCategory){item.categorySource="manual";item.categoryManuallyEdited=true;} item.aliases=String(data.get("aliases")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.tags=String(data.get("tags")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.currentEpisode=item.watched=Number(data.get("currentEpisode"))||0; item.totalEpisodes=item.episodes=Number(data.get("totalEpisodes"))||null; item.year=Number(data.get("year"))||null; item.rating=data.get("rating")===""?null:Number(data.get("rating")); item.nextEpisodeAt=data.get("nextEpisodeAt")?new Date(data.get("nextEpisodeAt")).toISOString():null; item.nextSeasonDate=data.get("nextSeasonDate")||null; item.reminderEnabled=data.get("reminderEnabled")==="on"; item.note=item.notes; item.customPlatform=item.platform; touch(item); persistAnime(); renderList(); refreshV11(); closeV11Modals(); showToast("詳細資料已儲存"); }
-    function closeV11Modals(){ window.SpotifyThemes?.close(); document.querySelectorAll(".v11-modal").forEach(x=>x.hidden=true); }
+    function closeV11Modals(){ themeSongsApi()?.close(); document.querySelectorAll(".v11-modal").forEach(x=>x.hidden=true); }
     function safeUrl(value){ try{const url=new URL(value,location.href);return ["http:","https:","data:"].includes(url.protocol)?url.href:""}catch{return ""} }
 
     function renderReminders() { const now=new Date(), week=new Date(now); week.setDate(week.getDate()+7); const list=animeList.filter(x=>!x.deletedAt&&x.reminderEnabled&&x.nextEpisodeAt).sort((a,b)=>Date.parse(a.nextEpisodeAt)-Date.parse(b.nextEpisodeAt)); const box=document.getElementById("v11-reminders");box.innerHTML=list.map(item=>{const date=new Date(item.nextEpisodeAt), diff=date-now, due=diff<=0; const days=Math.floor(Math.abs(diff)/86400000), hours=Math.floor(Math.abs(diff)%86400000/3600000), label=due?"已播出・待看":diff<86400000?"今天更新":diff<172800000?"明天更新":date<=week?"本週更新":"稍後";return `<div class="v11-card"><span class="v11-badge ${due?"danger":"good"}">${label}</span><strong>${escapeHtml(item.title)}</strong><div>下一集：${escapeHtml(date.toLocaleString("zh-TW"))}</div><div>${due?"已過":"剩餘"}：${days} 天 ${hours} 小時</div></div>`}).join("")||'<div class="empty">目前沒有啟用動畫提醒的作品。</div>';window.CrossMediaTracker?.appendMangaReminders?.(box); }
@@ -376,7 +377,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "mobile-delete-storage-2";
+        const reloadVersion = "theme-songs-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
