@@ -253,6 +253,7 @@
             type: normalizedType,
             sequence,
             title,
+            nativeTitle: String(song?.nativeTitle || "").trim(),
             artist,
             episodeRange: String(song?.episodeRange || "").trim(),
             spotifyTrackId: String(song?.spotifyTrackId || ""),
@@ -1353,12 +1354,50 @@
         return { song: { ...song, spotifyTrackId: id, spotifyUrl: `https://open.spotify.com/track/${id}`, spotifyEmbedUrl: `https://open.spotify.com/embed/track/${id}`, spotifyMatchStatus: "matched", spotifyMatchScore: best.matchScore, updatedAt: new Date().toISOString() }, candidates, matched: true };
     }
     function isSpecialMediaType(anime) { return /^(movie|ova|ona|special|short)$/i.test(String(anime?.mediaType || anime?.format || anime?.type || "")); }
+    function themeSongSourcePriority(song) {
+        if (song?.manuallyCorrected) return 100;
+        const source = String(song?.sourceName || "").toLowerCase();
+        if (source.includes("animethemes")) return 20;
+        if (source.includes("jikan") || source.includes("myanimelist")) return 10;
+        return 0;
+    }
+    function sameThemeSongIdentity(left, right) {
+        if (String(left?.id || "") && String(left?.id) === String(right?.id)) return true;
+        if (String(left?.type || "") !== String(right?.type || "") || Number(left?.sequence) !== Number(right?.sequence)) return false;
+        const leftTitles = [left?.title, left?.nativeTitle].map(normalizeSongTitle).filter(Boolean);
+        const rightTitles = [right?.title, right?.nativeTitle].map(normalizeSongTitle).filter(Boolean);
+        const leftArtist = normalizeArtistName(left?.artist), rightArtist = normalizeArtistName(right?.artist);
+        if (left?.manuallyCorrected || right?.manuallyCorrected) return true;
+        const titleMatches = leftTitles.some(title => rightTitles.includes(title));
+        if (leftTitles.length && rightTitles.length && leftArtist && rightArtist) return titleMatches && leftArtist === rightArtist;
+        if (leftTitles.length && rightTitles.length) return titleMatches;
+        if (leftArtist && rightArtist) return leftArtist === rightArtist;
+        return false;
+    }
+    function mergeThemeSongRecord(existing, incoming) {
+        if (existing?.manuallyCorrected && !incoming?.manuallyCorrected) return existing;
+        const oldPriority = themeSongSourcePriority(existing), nextPriority = themeSongSourcePriority(incoming);
+        const oldUpdated = Date.parse(existing?.updatedAt) || 0, nextUpdated = Date.parse(incoming?.updatedAt) || 0;
+        if (nextPriority < oldPriority || (nextPriority === oldPriority && nextUpdated < oldUpdated)) return existing;
+        const merged = { ...existing, ...incoming, id:existing.id || incoming.id };
+        ["spotifyTrackId", "spotifyUrl", "spotifyEmbedUrl"].forEach(field => {
+            if (!incoming?.[field] && existing?.[field]) merged[field] = existing[field];
+        });
+        if (existing?.spotifyMatchStatus && (!incoming?.spotifyMatchStatus || incoming.spotifyMatchStatus === "unmatched")) merged.spotifyMatchStatus = existing.spotifyMatchStatus;
+        if (existing?.spotifyMatchScore && !incoming?.spotifyMatchScore) merged.spotifyMatchScore = existing.spotifyMatchScore;
+        if (existing?.unavailableOnSpotify && !Object.prototype.hasOwnProperty.call(incoming || {}, "unavailableOnSpotify")) merged.unavailableOnSpotify = true;
+        return merged;
+    }
     function mergeThemeSongs(existing, incoming) {
         const current = normalizeThemeSongs(existing), next = normalizeThemeSongs(incoming);
         const mergeGroup = (oldSongs, newSongs) => {
-            const map = new Map(oldSongs.map(song => [song.id, song]));
-            newSongs.forEach(song => { const old = map.get(song.id); if (!old || (!old.manuallyCorrected && Date.parse(song.updatedAt) >= Date.parse(old.updatedAt))) map.set(song.id, { ...old, ...song }); });
-            return [...map.values()];
+            const merged = oldSongs.slice();
+            newSongs.forEach(song => {
+                const index = merged.findIndex(old => sameThemeSongIdentity(old, song));
+                if (index < 0) merged.push(song);
+                else merged[index] = mergeThemeSongRecord(merged[index], song);
+            });
+            return merged.sort((a, b) => a.sequence - b.sequence || a.title.localeCompare(b.title));
         };
         return { openings: mergeGroup(current.openings, next.openings), endings: mergeGroup(current.endings, next.endings) };
     }
@@ -1996,7 +2035,7 @@
             changed:expired.length > 0
         };
     }
-    function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe)/i.test(value); }
+    function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe|animethemes\.moe|itunes\.apple\.com|music\.apple\.com)/i.test(value); }
 
     return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });

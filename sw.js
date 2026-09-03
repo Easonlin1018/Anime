@@ -1,5 +1,5 @@
-const CACHE_VERSION = "anime-tracker-v11-theme-songs-jikan-retry-1";
-const SHELL = ["./", "./index.html", "./vendor/opencc-js-1.4.1-full.js?v=1.4.1", "./v11-core.js?v=theme-songs-1", "./v11-ui.js?v=theme-songs-jikan-retry-1", "./v11-styles.css?v=duplicate-reconciliation-1", "./cross-media.js?v=mobile-delete-storage-1", "./spotify-config.js", "./spotify-themes.js?v=theme-songs-jikan-retry-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
+const CACHE_VERSION = "anime-tracker-v11-theme-songs-native-title-1";
+const SHELL = ["./", "./index.html", "./vendor/opencc-js-1.4.1-full.js?v=1.4.1", "./v11-core.js?v=theme-songs-native-title-1", "./v11-ui.js?v=theme-songs-native-title-1", "./v11-styles.css?v=duplicate-reconciliation-1", "./cross-media.js?v=mobile-delete-storage-1", "./spotify-config.js", "./spotify-themes.js?v=theme-songs-native-title-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_VERSION).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener("message", event => {
@@ -12,7 +12,7 @@ self.addEventListener("message", event => {
 });
 function excluded(url) {
     if (url.origin === self.location.origin) return /(?:spotify-worker|sync-api)/i.test(url.pathname);
-    return /(?:spotify\.com|scdn\.co|jikan\.moe|supabase|workers\.dev|cloudflare|auth\/v1|rest\/v1)/i.test(url.href);
+    return /(?:spotify\.com|scdn\.co|jikan\.moe|animethemes\.moe|itunes\.apple\.com|music\.apple\.com|supabase|workers\.dev|cloudflare|auth\/v1|rest\/v1)/i.test(url.href);
 }
 self.addEventListener("fetch", event => {
     if (event.request.method !== "GET") return;

@@ -34,13 +34,17 @@ function memoryStorage(seed = {}) {
 function loadThemeSongs(fetchImpl, { online = true, cache = {} } = {}) {
     const localStorage = memoryStorage({ anime_theme_lookup_cache_v1:JSON.stringify(cache) });
     const window = { AnimeTrackerV11:V };
+    const routedFetch = (url, options) => String(url).startsWith("https://itunes.apple.com/")
+        ? Promise.resolve(okJson({ resultCount:0, results:[] }))
+        : fetchImpl(url, options);
     const context = {
         window,
         localStorage,
         navigator:{ onLine:online },
-        fetch:fetchImpl,
+        fetch:routedFetch,
         AbortController,
         URL,
+        URLSearchParams,
         setTimeout,
         clearTimeout,
         console
@@ -78,9 +82,9 @@ function okJson(value) {
             ? okJson({ data:{ theme:{ openings:['"OP A" by A','"OP B" by B','"OP C" by C'], endings:['"ED A" by D','"ED B" by E'] } } })
             : okJson({ data:[] }));
         const result = await api.fetchAnimeThemeSongs({ id:"local-b", malId:502, title:"B" });
-        assert.deepEqual(result.songs.openings.map(song => song.sequence), [1, 2, 3]);
-        assert.deepEqual(result.songs.endings.map(song => song.sequence), [1, 2]);
-        assert.deepEqual(result.songs.openings.map(song => song.title), ["OP A", "OP B", "OP C"]);
+        assert.deepEqual(Array.from(result.songs.openings, song => song.sequence), [1, 2, 3]);
+        assert.deepEqual(Array.from(result.songs.endings, song => song.sequence), [1, 2]);
+        assert.deepEqual(Array.from(result.songs.openings, song => song.title), ["OP A", "OP B", "OP C"]);
     });
 
     await test("3. artist、sourceName 與 sourceUrl 完整保存", async () => {

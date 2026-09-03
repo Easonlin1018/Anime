@@ -51,13 +51,17 @@ function loadThemeSongs(fetchImpl, cache = {}) {
     const localStorage = memoryStorage({ [CACHE_KEY]:JSON.stringify(cache) });
     const scheduledDelays = [];
     const window = { AnimeTrackerV11:V };
+    const routedFetch = (url, options) => String(url).startsWith("https://itunes.apple.com/")
+        ? Promise.resolve(response(200, { resultCount:0, results:[] }))
+        : fetchImpl(url, options);
     const context = {
         window,
         localStorage,
         navigator:{ onLine:true },
-        fetch:fetchImpl,
+        fetch:routedFetch,
         AbortController,
         URL,
+        URLSearchParams,
         setTimeout:(callback, delay) => { scheduledDelays.push(delay); queueMicrotask(callback); return scheduledDelays.length; },
         clearTimeout:() => {},
         console
@@ -173,7 +177,7 @@ function loadThemeSongs(fetchImpl, cache = {}) {
         assert.equal(calls, 1);
         assert.deepEqual(notifications, [1]);
         assert.deepEqual(JSON.parse(localStorage.getItem(CACHE_KEY)), {});
-        assert.match(source, /if \(error\.name !== "AbortError"\) setStatus/u);
+        assert.match(source, /if \(error\.name !== "AbortError" && isThemeLookupCurrent/u);
     });
 
     await test("9. 有效 TTL cache 時 request 0 次", async () => {

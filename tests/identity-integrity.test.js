@@ -159,7 +159,7 @@ test("刪除作品不再出現在 calendar，cross-media 與 Spotify 有 cleanup
     assert.match(crossMedia, /function markAnimeDeleted\(/);
     assert.match(crossMedia, /function activeMediaEntries\(/);
     assert.match(spotify, /function cleanupAnime\(/);
-    assert.match(spotify, /delete cache\[`source:\$\{animeId\}`\]/);
+    assert.match(spotify, /themeCacheKeysForAnime\(anime\)\.forEach\(key => delete cache\[key\]\)/);
 });
 
 if (!process.exitCode) console.log(`\nAll identity integrity tests passed: ${passed}/${passed}`);
