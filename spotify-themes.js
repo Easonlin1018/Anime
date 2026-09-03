@@ -97,6 +97,93 @@
         Object.assign(error, { provider:"AnimeThemes", ...details });
         return error;
     }
+    function safeDiagnosticText(value, maxLength = 120) {
+        return String(value || "").replace(/[\r\n\t]+/g, " ").replace(/\s{2,}/g, " ").trim().slice(0, maxLength);
+    }
+    function themeProviderDiagnostic(outcome, details = {}) {
+        const diagnostic = { outcome:String(outcome || "unknown") };
+        const httpStatus = Number(details.httpStatus ?? details.status);
+        if (Number.isInteger(httpStatus) && httpStatus >= 100 && httpStatus <= 599) diagnostic.httpStatus = httpStatus;
+        const reason = safeDiagnosticText(details.reason, 64);
+        const errorName = safeDiagnosticText(details.errorName || details.name, 48);
+        const message = safeDiagnosticText(details.message, 120);
+        if (reason) diagnostic.reason = reason;
+        if (errorName) diagnostic.errorName = errorName;
+        if (message) diagnostic.message = message;
+        return diagnostic;
+    }
+    function diagnosticFromProviderError(error) {
+        if (Number.isInteger(Number(error?.status))) return themeProviderDiagnostic("http-error", { httpStatus:error.status });
+        if (error?.malformed || error?.name === "SyntaxError") return themeProviderDiagnostic("malformed", { errorName:error?.name, message:error?.message });
+        const cause = error?.cause;
+        if (error?.name === "TypeError" || cause?.name === "TypeError" || error?.transient) {
+            return themeProviderDiagnostic("network-error", {
+                errorName:cause?.name || error?.name || "Error",
+                message:cause?.message || error?.message
+            });
+        }
+        return themeProviderDiagnostic("error", { errorName:error?.name || "Error", message:error?.message });
+    }
+    function animeThemesDiagnosticFromResult(result) {
+        if (result?.selected) return themeProviderDiagnostic("success");
+        if (result?.skipped) return themeProviderDiagnostic("skipped", { reason:result.reason || "skipped" });
+        if (result?.reason === "no-themes") return themeProviderDiagnostic("no-themes");
+        if (result?.notFound) return themeProviderDiagnostic("not-found");
+        return themeProviderDiagnostic("unknown");
+    }
+    function jikanDiagnosticFromResult(result) {
+        if (result?.diagnosticOutcome === "malformed") return themeProviderDiagnostic("malformed");
+        if (result?.selected) {
+            const groups = result?.songs;
+            const songCount = Number(groups?.openings?.length || 0) + Number(groups?.endings?.length || 0);
+            return themeProviderDiagnostic(songCount ? "success" : "no-themes");
+        }
+        if (result?.candidates && !result?.confident) return themeProviderDiagnostic("no-confident-match");
+        return themeProviderDiagnostic("not-found");
+    }
+    function createThemeProviderDiagnostics(anime) {
+        const identity = V.getAnimeAniListIdentity(anime);
+        const anilistId = /^\d+$/.test(String(identity || "")) ? String(identity) : null;
+        return {
+            anilistId,
+            animeThemes:themeProviderDiagnostic("not-run"),
+            jikan:themeProviderDiagnostic("not-run")
+        };
+    }
+    function formatThemeProviderDiagnostic(provider, diagnostic) {
+        const detail = diagnostic || themeProviderDiagnostic("not-run");
+        if (detail.outcome === "success") return `${provider}: success`;
+        if (detail.outcome === "skipped") {
+            return `${provider}: skipped - ${detail.reason === "missing-anilist-id" ? "missing-anilist-id" : (detail.reason || "skipped")}`;
+        }
+        if (detail.outcome === "not-found") return `${provider}: not-found`;
+        if (detail.outcome === "no-themes") return `${provider}: no themes`;
+        if (detail.outcome === "no-confident-match") return `${provider}: no confident match`;
+        if (detail.outcome === "http-error") return `${provider}: HTTP ${detail.httpStatus || "error"}`;
+        if (detail.outcome === "network-error") {
+            const error = [detail.errorName, detail.message].filter(Boolean).join(": ");
+            return `${provider}: network error${error ? ` - ${error}` : ""}`;
+        }
+        if (detail.outcome === "malformed") return `${provider}: malformed${detail.message ? ` - ${detail.message}` : ""}`;
+        if (detail.outcome === "not-run") return `${provider}: not run`;
+        const error = [detail.errorName, detail.message].filter(Boolean).join(": ");
+        return `${provider}: error${error ? ` - ${error}` : ""}`;
+    }
+    function formatThemeProviderDiagnostics(diagnostics) {
+        if (!diagnostics) return "";
+        return [
+            `AniList ID: ${diagnostics.anilistId || "missing"}`,
+            formatThemeProviderDiagnostic("AnimeThemes", diagnostics.animeThemes),
+            formatThemeProviderDiagnostic("Jikan", diagnostics.jikan)
+        ].join("\n");
+    }
+    function themeStatusModel(message, diagnostics = null) {
+        const formatted = formatThemeProviderDiagnostics(diagnostics);
+        return {
+            message:String(message || ""),
+            diagnosticLines:formatted ? formatted.split("\n") : []
+        };
+    }
     function nativeTitleError(message, details = {}) {
         const error = new Error(message);
         Object.assign(error, { provider:"Apple Music JP", ...details });
@@ -272,7 +359,7 @@
         if (!anilistId) return { provider:"AnimeThemes", skipped:true, reason:"missing-anilist-id", selected:false, songs:null };
         const key = `animethemes:${anilistId}`, old = cachedEntry(key);
         if (old.hit) {
-            if (old.value?.kind !== "songs") return { provider:"AnimeThemes", selected:false, notFound:true, cached:true, anilistId, songs:null };
+            if (old.value?.kind !== "songs") return { provider:"AnimeThemes", selected:false, notFound:true, reason:old.value?.kind === "no-themes" ? "no-themes" : "not-found", cached:true, anilistId, songs:null };
             const songs = await enrichThemeSongsWithNativeTitles(old.value.songs, options);
             return { provider:"AnimeThemes", selected:true, cached:true, anilistId, ...old.value, songs };
         }
@@ -285,7 +372,7 @@
         ensureRequestCurrent(options);
         if (!normalized.songs.openings.length && !normalized.songs.endings.length) {
             putCache(key, { kind:"no-themes", animeTitle:normalized.anime?.name || "" }, ANIMETHEMES_NEGATIVE_TTL);
-            return { provider:"AnimeThemes", selected:false, notFound:true, anilistId, animeTitle:normalized.anime?.name || "", themeCount:normalized.themeCount, songs:null };
+            return { provider:"AnimeThemes", selected:false, notFound:true, reason:"no-themes", anilistId, animeTitle:normalized.anime?.name || "", themeCount:normalized.themeCount, songs:null };
         }
         const songs = await enrichThemeSongsWithNativeTitles(normalized.songs, options);
         const value = { kind:"songs", songs, animeTitle:normalized.anime?.name || "", themeCount:normalized.themeCount };
@@ -308,17 +395,21 @@
         const key = `source:${anime.id}`, old = cached(key); if (old) return old;
         const queries = [...new Set([anime.title, ...(anime.aliases || []), anime.titleJapanese, anime.titleEnglish].filter(Boolean))].slice(0, 4);
         const found = new Map();
+        let malformedResponse = false;
         for (const query of queries) {
             const data = await fetchJikanJson(`${JIKAN}/anime?q=${encodeURIComponent(query)}&limit=5&sfw=true`, options);
             ensureRequestCurrent(options);
-            (data.data || []).forEach(item => found.set(item.mal_id, item));
+            const items = data.data || [];
+            if (!Array.isArray(data?.data)) malformedResponse = true;
+            items.forEach(item => found.set(item.mal_id, item));
             if (found.size >= 8) break;
         }
         const candidates = [...found.values()].map(item => ({ ...item, matchScore: candidateScore(anime, item) })).sort((a, b) => b.matchScore - a.matchScore);
         const confident = Boolean(candidates[0] && candidates[0].matchScore >= 70 && (!candidates[1] || candidates[0].matchScore - candidates[1].matchScore >= 10));
         const result = { selected: confident ? candidates[0] : null, candidates: candidates.slice(0, 5), confident };
         ensureRequestCurrent(options);
-        putCache(key, result, ttlFor(anime)); return result;
+        putCache(key, result, ttlFor(anime));
+        return malformedResponse && !candidates.length ? { ...result, diagnosticOutcome:"malformed" } : result;
     }
     async function fetchJikanThemeSongs(anime, chosenMalId, options = {}) {
         const source = chosenMalId ? { selected: { mal_id: Number(chosenMalId) }, confident: true, candidates: [] } : await findAnimeThemeSource(anime, options);
@@ -327,6 +418,7 @@
         if (old) return { ...source, songs:await enrichThemeSongsWithNativeTitles(old, options), malId };
         const data = await fetchJikanJson(`${JIKAN}/anime/${malId}/full`, options);
         ensureRequestCurrent(options);
+        const malformedResponse = !data || typeof data !== "object" || !data.data || typeof data.data !== "object" || !data.data.theme || typeof data.data.theme !== "object";
         const theme = data.data?.theme || {};
         const songs = {
             openings: (theme.openings || []).map((text, index) => ({ ...V.parseThemeSongText(text, "OP", index + 1), sourceName: "MyAnimeList via Jikan", sourceUrl: `https://myanimelist.net/anime/${malId}`, updatedAt: new Date().toISOString() })),
@@ -335,34 +427,48 @@
         ensureRequestCurrent(options);
         const enrichedSongs = await enrichThemeSongsWithNativeTitles(songs, options);
         ensureRequestCurrent(options);
-        putCache(key, enrichedSongs, ttlFor(anime)); return { ...source, songs:enrichedSongs, malId };
+        putCache(key, enrichedSongs, ttlFor(anime)); return { ...source, songs:enrichedSongs, malId, ...(malformedResponse ? { diagnosticOutcome:"malformed" } : {}) };
     }
     async function fetchAnimeThemeSongs(anime, chosenMalId, options = {}) {
         let primary = null, primaryFailure = null;
+        const providerDiagnostics = createThemeProviderDiagnostics(anime);
         if (!chosenMalId) {
             try {
                 primary = await fetchAnimeThemesThemeSongs(anime, options);
-                if (primary.selected) return primary;
+                providerDiagnostics.animeThemes = animeThemesDiagnosticFromResult(primary);
+                if (primary.selected) return { ...primary, providerDiagnostics };
             } catch (error) {
                 if (error?.name === "AbortError") throw error;
                 primaryFailure = error;
+                providerDiagnostics.animeThemes = diagnosticFromProviderError(error);
                 options.onProviderFallback?.({ provider:"AnimeThemes", error });
             }
+        } else {
+            providerDiagnostics.animeThemes = themeProviderDiagnostic("skipped", { reason:"manual-jikan-selection" });
         }
         try {
             const fallback = await fetchJikanThemeSongs(anime, chosenMalId, options);
-            return { ...fallback, provider:"Jikan", primary, primaryFailure };
+            providerDiagnostics.jikan = jikanDiagnosticFromResult(fallback);
+            return { ...fallback, provider:"Jikan", primary, primaryFailure, providerDiagnostics };
         } catch (error) {
             if (error?.name === "AbortError") throw error;
+            providerDiagnostics.jikan = diagnosticFromProviderError(error);
             const combined = new Error("主題曲資料來源目前無法使用，請稍後再試");
             combined.providerFailures = [primaryFailure, error].filter(Boolean);
+            combined.providerDiagnostics = providerDiagnostics;
             throw combined;
         }
     }
     function rememberUndo(anime) { localStorage.setItem(UNDO_KEY, JSON.stringify({ animeId: anime.id, themeSongs: anime.themeSongs, at: new Date().toISOString() })); }
     function persist(anime) { const id=String(anime.id),container=currentContainer,expanded=Boolean(container?.querySelector("details.theme-details")?.open); anime.themeSongs = V.normalizeThemeSongs(anime.themeSongs); anime.updatedAt = new Date().toISOString(); saveAndRender(); const fresh=animeList.find(item=>String(item.id)===id)||anime; renderForAnime(fresh, container, { expanded }); }
     function restoreUndo() { try { const undo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null"); if (!undo || String(undo.animeId) !== String(currentAnime.id)) return setStatus("沒有此作品可復原的主題曲修改"); currentAnime.themeSongs = undo.themeSongs; localStorage.removeItem(UNDO_KEY); persist(currentAnime); setStatus("已復原上一次主題曲修改"); } catch { setStatus("復原資料損壞"); } }
-    function setStatus(message) { const box = currentContainer?.querySelector(".theme-status"); if (box) box.textContent = message; }
+    function setStatus(message, diagnostics = null) {
+        const box = currentContainer?.querySelector(".theme-status");
+        if (!box) return;
+        const model = themeStatusModel(message, diagnostics);
+        box.replaceChildren(element("div", "theme-status-message", model.message));
+        model.diagnosticLines.forEach(line => box.append(element("div", "theme-provider-diagnostic-line", line)));
+    }
     function allSongs(anime) { return [...anime.themeSongs.openings, ...anime.themeSongs.endings]; }
     function songGroup(anime, type) { return type === "OP" ? anime.themeSongs.openings : anime.themeSongs.endings; }
     function findSong(id) { return allSongs(currentAnime).find(song => song.id === id); }
@@ -505,23 +611,24 @@
             if (!result.selected) {
                 if (result.candidates?.length) return showSourceCandidates(result.candidates, anime, container);
                 renderSongContent(container.querySelector(".theme-content"));
-                if (result.primaryFailure) return setStatus("主題曲資料來源目前無法使用，請稍後再試");
-                return setStatus(V.isSpecialMediaType(anime) ? "尚未找到此特別篇專屬的 OP／ED" : "尚未找到此作品的 OP／ED");
+                if (result.primaryFailure) return setStatus("主題曲資料來源目前無法使用，請稍後再試", result.providerDiagnostics);
+                return setStatus(V.isSpecialMediaType(anime) ? "尚未找到此特別篇專屬的 OP／ED" : "尚未找到此作品的 OP／ED", result.providerDiagnostics);
             }
             if (!options.automatic || hasThemeSongData(anime)) rememberUndo(anime);
             if (!applyThemeLookupResult(anime, result, lookup)) return false;
             finishThemeLookup(lookup);
             persist(anime);
-            setStatus(allSongs(anime).length ? `已載入 ${allSongs(anime).length} 首主題曲` : (V.isSpecialMediaType(anime) ? "尚未找到此特別篇專屬的 OP／ED" : "尚未找到此作品的 OP／ED"));
+            const songCount = allSongs(anime).length;
+            setStatus(songCount ? `已載入 ${songCount} 首主題曲` : (V.isSpecialMediaType(anime) ? "尚未找到此特別篇專屬的 OP／ED" : "尚未找到此作品的 OP／ED"), songCount ? null : result.providerDiagnostics);
             return true;
         } catch (error) {
-            if (error.name !== "AbortError" && isThemeLookupCurrent(lookup, anime)) setStatus(error.providerFailures ? error.message : `主題曲搜尋失敗：${error.message}`);
+            if (error.name !== "AbortError" && isThemeLookupCurrent(lookup, anime)) setStatus(error.providerFailures ? error.message : `主題曲搜尋失敗：${error.message}`, error.providerDiagnostics);
             return false;
         } finally { finishThemeLookup(lookup); }
     }
     function showSourceCandidates(candidates, anime = currentAnime, container = currentContainer) {
         const content = container.querySelector(".theme-content"), details = container.querySelector("details"); details.open = true; setStatus("找到多個可能作品，請選擇正確版本"); content.replaceChildren(element("div", "event-status", "請選擇正確的 MyAnimeList 作品："));
-        (candidates || []).forEach(candidate => { const row = element("div", "v11-card", `${candidate.title}｜${candidate.type || "?"}｜${candidate.year || "?"}｜${candidate.episodes || "?"} 集｜${candidate.matchScore} 分`); row.append(button("選擇此作品", async () => { const lookup=beginThemeLookup(anime); try { const result = await fetchAnimeThemeSongs(anime, candidate.mal_id, { signal:lookup.signal, isCurrent:()=>isThemeLookupCurrent(lookup,anime), onRetry:({retry,maxRetries})=>{if(isThemeLookupCurrent(lookup,anime))setStatus(`主題曲資料來源暫時無回應，正在重試（${retry}/${maxRetries}）…`);} }); if(!isThemeLookupCurrent(lookup,anime))return; if (hasThemeSongData(anime)) rememberUndo(anime); if(!applyThemeLookupResult(anime,result,lookup))return; finishThemeLookup(lookup); persist(anime); setStatus(allSongs(anime).length ? `已載入 ${allSongs(anime).length} 首主題曲` : "尚未找到此作品的 OP／ED"); } catch (error) { if (error.name !== "AbortError"&&isThemeLookupCurrent(lookup,anime)) setStatus(`主題曲搜尋失敗：${error.message}`); } finally { finishThemeLookup(lookup); } })); content.append(row); });
+        (candidates || []).forEach(candidate => { const row = element("div", "v11-card", `${candidate.title}｜${candidate.type || "?"}｜${candidate.year || "?"}｜${candidate.episodes || "?"} 集｜${candidate.matchScore} 分`); row.append(button("選擇此作品", async () => { const lookup=beginThemeLookup(anime); try { const result = await fetchAnimeThemeSongs(anime, candidate.mal_id, { signal:lookup.signal, isCurrent:()=>isThemeLookupCurrent(lookup,anime), onRetry:({retry,maxRetries})=>{if(isThemeLookupCurrent(lookup,anime))setStatus(`主題曲資料來源暫時無回應，正在重試（${retry}/${maxRetries}）…`);} }); if(!isThemeLookupCurrent(lookup,anime))return; if (hasThemeSongData(anime)) rememberUndo(anime); if(!applyThemeLookupResult(anime,result,lookup))return; finishThemeLookup(lookup); persist(anime); const songCount=allSongs(anime).length; setStatus(songCount ? `已載入 ${songCount} 首主題曲` : "尚未找到此作品的 OP／ED", songCount ? null : result.providerDiagnostics); } catch (error) { if (error.name !== "AbortError"&&isThemeLookupCurrent(lookup,anime)) setStatus(`主題曲搜尋失敗：${error.message}`, error.providerDiagnostics); } finally { finishThemeLookup(lookup); } })); content.append(row); });
     }
     function searchSpotify(song, showCandidates) {
         clearTimeout(searchTimer);
@@ -630,7 +737,7 @@
         if (undo) localStorage.setItem(UNDO_KEY, JSON.stringify(undo));
         else localStorage.removeItem(UNDO_KEY);
     }
-    const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs, fetchAnimeThemesThemeSongs, fetchJikanThemeSongs, requestAnimeThemesJson, normalizeAnimeThemesSongs, animeThemesUrl, hasThemeSongData, themeSongStatus, claimAutomaticLookup, requestJikanJson, parseRetryAfterMs, invalidateThemeLookupCache, beginThemeLookup, isThemeLookupCurrent, applyThemeLookupResult, requestNativeTitleJson, lookupNativeThemeSongTitle, enrichThemeSongsWithNativeTitles, appleMusicSearchUrl, appleMusicLookupUrl, hasJapaneseTitle, nativeTitleCacheKey };
+    const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs, fetchAnimeThemesThemeSongs, fetchJikanThemeSongs, requestAnimeThemesJson, normalizeAnimeThemesSongs, animeThemesUrl, hasThemeSongData, themeSongStatus, claimAutomaticLookup, requestJikanJson, parseRetryAfterMs, invalidateThemeLookupCache, beginThemeLookup, isThemeLookupCurrent, applyThemeLookupResult, requestNativeTitleJson, lookupNativeThemeSongTitle, enrichThemeSongsWithNativeTitles, appleMusicSearchUrl, appleMusicLookupUrl, hasJapaneseTitle, nativeTitleCacheKey, themeProviderDiagnostic, diagnosticFromProviderError, animeThemesDiagnosticFromResult, jikanDiagnosticFromResult, createThemeProviderDiagnostics, formatThemeProviderDiagnostics, themeStatusModel };
     window.ThemeSongs = api;
     window.SpotifyThemes = api;
     pruneDeletedAnimeCaches();
