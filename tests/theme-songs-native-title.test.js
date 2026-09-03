@@ -261,5 +261,64 @@ function successfulNativeFetch(nativeTitle = "公式の曲名", trackId = 9001) 
         assert.doesNotMatch(source, /if\s*\([^)]*(?:trackId|title)[^)]*===\s*["']/u);
     });
 
+    await test("18. incoming 空 nativeTitle 保留完整已驗證 native metadata", () => {
+        const existing = { openings:[{ type:"OP", sequence:1, title:"Romanized", artist:"Artist", nativeTitle:"公式曲", nativeTitleSource:"Apple Music JP", nativeTitleTrackId:"track-1", nativeTitleSourceUrl:"https://music.apple.com/jp/song/track-1", sourceName:"AnimeThemes", updatedAt:"2026-01-01" }], endings:[] };
+        const incoming = { openings:[{ type:"OP", sequence:1, title:"Romanized", artist:"Artist", nativeTitle:"", sourceName:"AnimeThemes", updatedAt:"2026-02-01" }], endings:[] };
+        const song = V.mergeThemeSongs(existing, incoming).openings[0];
+        assert.equal(song.nativeTitle, "公式曲");
+        assert.equal(song.nativeTitleSource, "Apple Music JP");
+        assert.equal(song.nativeTitleTrackId, "track-1");
+        assert.equal(song.nativeTitleSourceUrl, "https://music.apple.com/jp/song/track-1");
+    });
+
+    await test("19. incoming 缺少 nativeTitle property 仍保留完整 native metadata", () => {
+        const existing = { openings:[{ type:"OP", sequence:1, title:"Romanized", artist:"Artist", nativeTitle:"公式曲", nativeTitleSource:"Apple Music JP", nativeTitleTrackId:"track-2", nativeTitleSourceUrl:"https://music.apple.com/jp/song/track-2", sourceName:"AnimeThemes", updatedAt:"2026-01-01" }], endings:[] };
+        const incoming = { openings:[{ type:"OP", sequence:1, title:"Romanized", artist:"Artist", sourceName:"AnimeThemes", updatedAt:"2026-02-01" }], endings:[] };
+        const song = V.mergeThemeSongs(existing, incoming).openings[0];
+        assert.equal(song.nativeTitle, "公式曲");
+        assert.equal(song.nativeTitleTrackId, "track-2");
+    });
+
+    await test("20. incoming 非空新驗證 nativeTitle 可依優先規則更新", () => {
+        const existing = { openings:[{ type:"OP", sequence:1, title:"Romanized", artist:"Artist", nativeTitle:"舊名稱", nativeTitleSource:"Old", nativeTitleTrackId:"old", sourceName:"MyAnimeList via Jikan", updatedAt:"2026-01-01" }], endings:[] };
+        const incoming = { openings:[{ type:"OP", sequence:1, title:"Romanized", artist:"Artist", nativeTitle:"新驗證名稱", nativeTitleSource:"Apple Music JP", nativeTitleTrackId:"new", sourceName:"AnimeThemes", updatedAt:"2026-02-01" }], endings:[] };
+        const song = V.mergeThemeSongs(existing, incoming).openings[0];
+        assert.equal(song.nativeTitle, "新驗證名稱");
+        assert.equal(song.nativeTitleSource, "Apple Music JP");
+        assert.equal(song.nativeTitleTrackId, "new");
+        assert.equal(song.sourceName, "AnimeThemes");
+    });
+
+    await test("21. manual song、canonical metadata 與 Spotify metadata 保持原規則", () => {
+        const existing = { openings:[{ type:"OP", sequence:1, title:"Manual", artist:"User", nativeTitle:"人工原名", spotifyTrackId:"A".repeat(22), spotifyUrl:`https://open.spotify.com/track/${"A".repeat(22)}`, manuallyCorrected:true, sourceName:"人工提供", updatedAt:"2026-01-01" }], endings:[] };
+        const incoming = { openings:[{ type:"OP", sequence:1, title:"Provider", artist:"Provider", nativeTitle:"來源原名", sourceName:"AnimeThemes", updatedAt:"2026-02-01" }], endings:[] };
+        const song = V.mergeThemeSongs(existing, incoming).openings[0];
+        assert.equal(song.title, "Manual");
+        assert.equal(song.artist, "User");
+        assert.equal(song.nativeTitle, "人工原名");
+        assert.equal(song.spotifyTrackId, "A".repeat(22));
+    });
+
+    await test("22. 第二次 refresh 的 Apple failure 不會清除第一次已驗證 nativeTitle", async () => {
+        const { api } = loadThemeSongs();
+        const anime = { id:"refresh-anime", anilistId:987, themeSongs:{ openings:[], endings:[] } };
+        const providerPayload = { anime:[{ name:"Generic Anime", animethemes:[{ type:"OP", sequence:1, song:{ title:"Romanized", artists:[{ name:"Artist" }] } }] }] };
+        const first = await api.fetchAnimeThemesThemeSongs(anime, {
+            fetchImpl:async () => response(200, providerPayload),
+            nativeTitleFetchImpl:successfulNativeFetch("公式曲", 9871)
+        });
+        anime.themeSongs = first.songs;
+        api.invalidateThemeLookupCache(anime);
+        const second = await api.fetchAnimeThemesThemeSongs(anime, {
+            fetchImpl:async () => response(200, providerPayload),
+            nativeTitleFetchImpl:async () => response(503)
+        });
+        anime.themeSongs = V.mergeThemeSongs(anime.themeSongs, second.songs);
+        assert.equal(second.songs.openings[0].nativeTitle, "");
+        assert.equal(anime.themeSongs.openings[0].nativeTitle, "公式曲");
+        assert.equal(anime.themeSongs.openings[0].title, "Romanized");
+        assert.equal(anime.themeSongs.openings[0].artist, "Artist");
+    });
+
     if (!process.exitCode) console.log(`Theme song native-title tests: ${passed}/${passed} passed`);
 })();

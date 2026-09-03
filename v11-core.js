@@ -1380,6 +1380,11 @@
         const oldUpdated = Date.parse(existing?.updatedAt) || 0, nextUpdated = Date.parse(incoming?.updatedAt) || 0;
         if (nextPriority < oldPriority || (nextPriority === oldPriority && nextUpdated < oldUpdated)) return existing;
         const merged = { ...existing, ...incoming, id:existing.id || incoming.id };
+        if (String(existing?.nativeTitle || "").trim() && !String(incoming?.nativeTitle || "").trim()) {
+            ["nativeTitle", "nativeTitleSource", "nativeTitleTrackId", "nativeTitleSourceUrl"].forEach(field => {
+                merged[field] = existing?.[field];
+            });
+        }
         ["spotifyTrackId", "spotifyUrl", "spotifyEmbedUrl"].forEach(field => {
             if (!incoming?.[field] && existing?.[field]) merged[field] = existing[field];
         });
