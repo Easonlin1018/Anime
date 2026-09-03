@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-02T04:31:31.753Z",
-    "lastSuccessfulUpdateAt": "2026-09-02T04:31:31.753Z",
+    "updatedAt": "2026-09-03T04:23:17.729Z",
+    "lastSuccessfulUpdateAt": "2026-09-03T04:23:17.729Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 621,
-    "articleCandidateCount": 232,
-    "articleFetchSuccessCount": 34,
+    "fetchedExternalItemCount": 416,
+    "uniqueNewsCount": 622,
+    "articleCandidateCount": 237,
+    "articleFetchSuccessCount": 33,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 21,
+    "matchedEventCount": 20,
     "newEventCount": 4,
-    "cachedEventCount": 38,
+    "cachedEventCount": 40,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 48,
     "expiredRemovedCount": 12,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 54,
+    "undatedOldRemovedCount": 56,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 136,
+    "nonActivityRemovedCount": 141,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -151,8 +151,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "gnn-309600",
@@ -187,36 +187,6 @@
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
-      "id": "ext-a8b0f32886165b97",
-      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T07:00:00.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "8/6",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
-    },
-    {
       "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
       "summary": "oneone宇宙",
@@ -241,6 +211,36 @@
         "超動漫研究社"
       ],
       "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+    },
+    {
+      "id": "ext-a8b0f32886165b97",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
@@ -306,36 +306,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-08-06T03:35:05.926Z",
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
-    },
-    {
-      "id": "ext-3df4fd4cb0c8ce3a",
-      "title": "年輕人暑假不無聊 《孤獨搖滾！》動畫展即日起獨家在中友百貨展出 | 自由電子報",
-      "summary": "LINE TODAY",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE82LXhtMzJiZmxXaDBqUHhUXy1Xd2JBaF9nZkJ3cGU2aGltWWI2amhJbVdBMHNqdWNEZE5HZEpSLWEzekJCcndIWDJOdHo2N2hIM3M5NFpOZzhTaUJuV2Z3MXBxSTNiNThUZ1F4SGFvemhRNS1ibG1R?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-21T05:58:35.000Z",
-      "eventStartDate": "2026-07-21",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！"
-      ],
-      "searchCorpus": "年輕人暑假不無聊 《孤獨搖滾！》動畫展即日起獨家在中友百貨展出 | 自由電子報 LINE TODAY",
-      "dateConfidence": "medium",
-      "dateSource": "即日起",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -942,8 +912,38 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+    },
+    {
+      "id": "ext-9b88bdf6774f6854",
+      "title": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機",
+      "summary": "Life 生活網",
+      "url": "https://news.google.com/rss/articles/CBMi6gJBVV95cUxOSnl6Vkd6a09oX2I3c3NmMDg2R0pjV283YWcxNW9hNjBSaEU2Q3h2UjRFWVZQc2VZSHA1UV9lZUFnbUVoOGJBR0lqSTJ5Ul9LNFZVdDZ4NW5pblJmYjVSbWU2ZXBCdUxpRlotcGlRWXd5RUZET2lpZ0tKYUxLcUZPRjRWc2p4THV2dFJ4QlJ3YlJVckh5RUwyZWRZcEVQbGg1YzY2cFV5Vmw2TUcyM01LaTNiTTBDcl9YSHQ4RzdpcERZSHh6WlhXcGE2a1VhVDVOamF6WW1QRDQyRGlqc0xraXN0LUlaYU51TFNKeW9OUEJCclZaSGJTWl8zcmwzQjMwb3RhMnRSeURIQUF6SjJfc0N6eWxHWGVIQWlUMXhua3AyNjZ4ZzdHREtHR2VINkYwUWJoeERrbzBsVGVoNWlPWTExSk9zTXQtNXp0N2lSTkVoNlItWWlrcFBjSUMtcTd0emdwY1duM2Fpdw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！"
+      ],
+      "searchCorpus": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機 Life 生活網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "ext-e8f64087db1135bc",
@@ -1194,8 +1194,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "gnn-309209",
@@ -1291,8 +1291,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1321,8 +1321,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "gnn-309608",
@@ -1386,8 +1386,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "gnn-309957",
@@ -1483,8 +1483,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z"
     },
     {
       "id": "gnn-310709",
