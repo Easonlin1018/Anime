@@ -3,32 +3,64 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-03T04:23:17.729Z",
-    "lastSuccessfulUpdateAt": "2026-09-03T04:23:17.729Z",
+    "updatedAt": "2026-09-04T04:30:47.017Z",
+    "lastSuccessfulUpdateAt": "2026-09-04T04:30:47.017Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 416,
-    "uniqueNewsCount": 622,
-    "articleCandidateCount": 237,
-    "articleFetchSuccessCount": 33,
+    "fetchedExternalItemCount": 397,
+    "uniqueNewsCount": 585,
+    "articleCandidateCount": 211,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 4,
-    "cachedEventCount": 40,
+    "matchedEventCount": 16,
+    "newEventCount": 3,
+    "cachedEventCount": 38,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 48,
-    "expiredRemovedCount": 12,
+    "archiveCount": 2,
+    "storedEventCount": 47,
+    "expiredRemovedCount": 11,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 56,
+    "undatedOldRemovedCount": 46,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 141,
+    "nonActivityRemovedCount": 130,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-310560",
+      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
+      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T09:35:02.000Z",
+      "eventStartDate": "2026-09-01",
+      "eventEndDate": "2026-09-30",
+      "eventStatus": "ongoing",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "IDOLiSH7 - 偶像星願",
+        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
+        "こまどり モフモフパレード"
+      ],
+      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "dateConfidence": "high",
+      "dateSource": "9/1~9/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+    },
     {
       "id": "gnn-309659",
       "title": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發",
@@ -63,36 +95,6 @@
       "lastSeenAt": "2026-08-16T01:56:14.896Z"
     },
     {
-      "id": "gnn-309119",
-      "title": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨",
-      "summary": "《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309119",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-30T09:23:26.000Z",
-      "eventStartDate": "2026-07-31",
-      "eventEndDate": "2026-09-03",
-      "eventStatus": "ongoing",
-      "venue": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售",
-      "admissionType": "免費入場",
-      "feeText": "",
-      "workTitles": [
-        "新世紀福音戰士"
-      ],
-      "searchCorpus": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨 《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
-      "dateConfidence": "high",
-      "dateSource": "7 月 31 日~9 月 3 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
-    },
-    {
       "id": "gnn-308121",
       "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
       "summary": "自 1926 年《小熊維尼》繪本第一集問世起，維尼與他的夥伴們已經陪伴大家度過一世紀的溫暖時光，為歡慶迪士尼經典角色「小熊維尼」100 週年，2026 年 7 月 10 日至 10 月 11 日，「小熊維尼 友你相繪」100 週年限定快閃店於台北松山文創園區正式登場界。 本次快閃店將跨越百年時空，帶領粉絲循著時光隧",
@@ -122,6 +124,43 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
+      "id": "gnn-310540",
+      "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
+      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310540",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T08:19:38.000Z",
+      "eventStartDate": "2026-09-04",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "魔法少女小圓",
+        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "角色背景打卡區",
+        "主視覺區"
+      ],
+      "searchCorpus": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 4 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "ext-1e3eb4e0df99540b",
@@ -214,8 +253,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "ext-a8b0f32886165b97",
@@ -630,73 +669,34 @@
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
-      "id": "gnn-310560",
-      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
-      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
-      "sourceTag": "快閃店",
+      "id": "ext-7420612d92063575",
+      "title": "彭哥列家族集結！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店9 月 12 日台北三創熱血登場",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE44S3paenZOeHdQMnhFUXhhaGotLWdPUWs2dlVYN1RJbEF1MUZCMWs4YTdhbHFnMUc3NGVjZWNSSkptczJraGFVdDVKeDVYYmlQYnRJN2F4SFFoYUdpRF9KZzlhekdkSkdsenEyWmE2RnJpczBtSmx2Wk96d1lSUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-27T09:35:02.000Z",
-      "eventStartDate": "2026-09-01",
-      "eventEndDate": "2026-09-30",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "IDOLiSH7 - 偶像星願",
-        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
-        "こまどり モフモフパレード"
-      ],
-      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
-      "dateConfidence": "high",
-      "dateSource": "9/1~9/30",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
-    },
-    {
-      "id": "gnn-310540",
-      "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
-      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310540",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "台中",
-        "高雄",
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-27T08:19:38.000Z",
-      "eventStartDate": "2026-09-04",
+      "publishedAt": "2026-09-01T07:00:00.000Z",
+      "eventStartDate": "2026-09-12",
       "eventEndDate": null,
       "eventStatus": "upcoming",
-      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店",
+      "venue": "三創熱血登場 SouNova 少女星",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉",
-        "魔法少女小圓",
-        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
-        "角色背景打卡區",
-        "主視覺區"
+        "家庭教師HITMAN REBORN!"
       ],
-      "searchCorpus": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "searchCorpus": "彭哥列家族集結！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店9 月 12 日台北三創熱血登場 SouNova 少女星",
       "dateConfidence": "medium",
-      "dateSource": "9 月 4 日",
+      "dateSource": "9 月 12 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-27T09:46:22.004Z",
-      "lastSeenAt": "2026-08-27T09:46:22.004Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "gnn-308580",
@@ -885,37 +885,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "ext-9775fce9a1c716ac",
-      "title": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看",
-      "summary": "oneone宇宙",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1aczg4d1o5bEIwLU5KVGNkNEh2a2VlRE5mel9YcW1MNTN0QXg1aVRCUmVVZ2hVRVViRGQxYktTclQ2Zmd2YmhIMVdDWmFYTXhVdnJJ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-20T08:00:25.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "黃泉使者",
-        "2026台北漫畫博覽會"
-      ],
-      "searchCorpus": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看 oneone宇宙",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
-    },
-    {
       "id": "ext-9b88bdf6774f6854",
       "title": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機",
       "summary": "Life 生活網",
@@ -942,8 +911,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "ext-e8f64087db1135bc",
@@ -1182,7 +1151,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T08:24:26.000Z",
+      "publishedAt": "2026-07-30T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1194,8 +1163,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "gnn-309209",
@@ -1321,8 +1290,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "gnn-309608",
@@ -1483,8 +1452,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     },
     {
       "id": "gnn-310709",
@@ -1526,7 +1495,7 @@
       "summary": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=310753",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -1550,9 +1519,73 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-309119",
+      "title": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨",
+      "summary": "《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309119",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-30T09:23:26.000Z",
+      "eventStartDate": "2026-07-31",
+      "eventEndDate": "2026-09-03",
+      "eventStatus": "expired",
+      "venue": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [
+        "新世紀福音戰士"
+      ],
+      "searchCorpus": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨 《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
+      "dateConfidence": "high",
+      "dateSource": "7 月 31 日~9 月 3 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-08-16T01:56:14.896Z",
+      "lastSeenAt": "2026-08-16T01:56:14.896Z",
+      "archivedAt": "2026-09-04T04:30:47.017Z"
+    },
+    {
+      "id": "ext-9775fce9a1c716ac",
+      "title": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看",
+      "summary": "oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1aczg4d1o5bEIwLU5KVGNkNEh2a2VlRE5mel9YcW1MNTN0QXg1aVRCUmVVZ2hVRVViRGQxYktTclQ2Zmd2YmhIMVdDWmFYTXhVdnJJ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-20T08:00:25.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者",
+        "2026台北漫畫博覽會"
+      ],
+      "searchCorpus": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看 oneone宇宙",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-03T04:23:17.729Z",
+      "lastSeenAt": "2026-09-03T04:23:17.729Z",
+      "archivedAt": "2026-09-04T04:30:47.017Z"
+    }
+  ]
 }
