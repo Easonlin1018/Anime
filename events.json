@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-04T04:30:47.017Z",
-    "lastSuccessfulUpdateAt": "2026-09-04T04:30:47.017Z",
+    "updatedAt": "2026-09-05T04:26:11.077Z",
+    "lastSuccessfulUpdateAt": "2026-09-05T04:26:11.077Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
-    "fetchedTagItemCount": 206,
-    "fetchedExternalItemCount": 397,
-    "uniqueNewsCount": 585,
-    "articleCandidateCount": 211,
+    "fetchedTagItemCount": 207,
+    "fetchedExternalItemCount": 420,
+    "uniqueNewsCount": 611,
+    "articleCandidateCount": 230,
     "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 16,
-    "newEventCount": 3,
-    "cachedEventCount": 38,
+    "matchedEventCount": 19,
+    "newEventCount": 4,
+    "cachedEventCount": 37,
     "rateLimitedCount": 0,
     "archiveCount": 2,
     "storedEventCount": 47,
-    "expiredRemovedCount": 11,
+    "expiredRemovedCount": 12,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 46,
+    "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 130,
+    "nonActivityRemovedCount": 136,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -190,8 +190,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "gnn-309600",
@@ -226,6 +226,36 @@
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
+      "id": "ext-a8b0f32886165b97",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
+      "summary": "gnn.gamer.com.tw",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
+    },
+    {
       "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
       "summary": "oneone宇宙",
@@ -253,38 +283,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
-    },
-    {
-      "id": "ext-a8b0f32886165b97",
-      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T07:00:00.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "8/6",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -345,6 +345,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-08-06T03:35:05.926Z",
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
+    },
+    {
+      "id": "ext-46b7774f36c46c6f",
+      "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": "2026-07-26",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "全國遠征系列"
+      ],
+      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 26 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -695,8 +725,8 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 12 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "gnn-308580",
@@ -883,67 +913,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-08-31T05:32:32.134Z",
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
-    },
-    {
-      "id": "ext-9b88bdf6774f6854",
-      "title": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機",
-      "summary": "Life 生活網",
-      "url": "https://news.google.com/rss/articles/CBMi6gJBVV95cUxOSnl6Vkd6a09oX2I3c3NmMDg2R0pjV283YWcxNW9hNjBSaEU2Q3h2UjRFWVZQc2VZSHA1UV9lZUFnbUVoOGJBR0lqSTJ5Ul9LNFZVdDZ4NW5pblJmYjVSbWU2ZXBCdUxpRlotcGlRWXd5RUZET2lpZ0tKYUxLcUZPRjRWc2p4THV2dFJ4QlJ3YlJVckh5RUwyZWRZcEVQbGg1YzY2cFV5Vmw2TUcyM01LaTNiTTBDcl9YSHQ4RzdpcERZSHh6WlhXcGE2a1VhVDVOamF6WW1QRDQyRGlqc0xraXN0LUlaYU51TFNKeW9OUEJCclZaSGJTWl8zcmwzQjMwb3RhMnRSeURIQUF6SjJfc0N6eWxHWGVIQWlUMXhua3AyNjZ4ZzdHREtHR2VINkYwUWJoeERrbzBsVGVoNWlPWTExSk9zTXQtNXp0N2lSTkVoNlItWWlrcFBjSUMtcTd0emdwY1duM2Fpdw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-21T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！"
-      ],
-      "searchCorpus": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機 Life 生活網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
-    },
-    {
-      "id": "ext-e8f64087db1135bc",
-      "title": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE44S3paenZOeHdQMnhFUXhhaGotLWdPUWs2dlVYN1RJbEF1MUZCMWs4YTdhbHFnMUc3NGVjZWNSSkptczJraGFVdDVKeDVYYmlQYnRJN2F4SFFoYUdpRF9KZzlhekdkSkdsenEyWmE2RnJpczBtSmx2Wk96d1lSUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-21T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創 SouNova 少女星",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "家庭教師"
-      ],
-      "searchCorpus": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創 SouNova 少女星",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-15T01:48:44.120Z",
-      "lastSeenAt": "2026-08-15T01:48:44.120Z"
     },
     {
       "id": "ext-dec58b57e7230bb4",
@@ -1163,8 +1132,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "gnn-309209",
@@ -1232,6 +1201,37 @@
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
+      "id": "ext-98e7a4bb4260b697",
+      "title": "【開箱】《藍色監獄》雙主題快閃店正式登陸三創！造景與限定周邊搶先看",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9nS1RENXhCS0MxVWlhUjdqbXVPVDNWQ0dod3B5aXpUUjFuNFNiVUhrYWExbm5adXFKZFpqQ0x1LUlCNTV3ZjZCZWpyQ0VDdjJCdXcwX3BiZTgzMUZmX0FUUlNiOGx5OTlheFZsdGpiVQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "三創！造景與限定周邊搶先看 Parada",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "藍色監獄",
+        "開箱"
+      ],
+      "searchCorpus": "【開箱】《藍色監獄》雙主題快閃店正式登陸三創！造景與限定周邊搶先看 Paradaily",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
+    },
+    {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
       "summary": "Storm.mg",
@@ -1260,8 +1260,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1290,8 +1290,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     },
     {
       "id": "gnn-309608",
@@ -1519,73 +1519,73 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-09-05T04:26:11.077Z",
+      "lastSeenAt": "2026-09-05T04:26:11.077Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-309119",
-      "title": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨",
-      "summary": "《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309119",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-30T09:23:26.000Z",
-      "eventStartDate": "2026-07-31",
-      "eventEndDate": "2026-09-03",
-      "eventStatus": "expired",
-      "venue": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售",
-      "admissionType": "免費入場",
-      "feeText": "",
-      "workTitles": [
-        "新世紀福音戰士"
-      ],
-      "searchCorpus": "《新世紀福音戰士》快閃店 7/31 新光三越 A8 開幕 周邊限量販售 全新收藏卡即將到貨 《新世紀福音戰士》POP-UP STORE 即將於 7 月 31 日～9 月 3 日，進駐新光三越台北信義新天地 A8，本次快閃店採免費入場，以作品為主題打造搶眼商售空間，更準備豐富周邊商品，滿額再送專屬贈禮。 本次快閃店集結了多樣熱銷周邊，無論是經典角色立牌、生活潮流周邊，還是精緻的機體模型、劇照商品、限定服飾等等，種類豐富應有盡有。",
-      "dateConfidence": "high",
-      "dateSource": "7 月 31 日~9 月 3 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z",
-      "archivedAt": "2026-09-04T04:30:47.017Z"
-    },
-    {
-      "id": "ext-9775fce9a1c716ac",
-      "title": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看",
-      "summary": "oneone宇宙",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1aczg4d1o5bEIwLU5KVGNkNEh2a2VlRE5mel9YcW1MNTN0QXg1aVRCUmVVZ2hVRVViRGQxYktTclQ2Zmd2YmhIMVdDWmFYTXhVdnJJ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "id": "ext-9b88bdf6774f6854",
+      "title": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機",
+      "summary": "Life 生活網",
+      "url": "https://news.google.com/rss/articles/CBMi6gJBVV95cUxOSnl6Vkd6a09oX2I3c3NmMDg2R0pjV283YWcxNW9hNjBSaEU2Q3h2UjRFWVZQc2VZSHA1UV9lZUFnbUVoOGJBR0lqSTJ5Ul9LNFZVdDZ4NW5pblJmYjVSbWU2ZXBCdUxpRlotcGlRWXd5RUZET2lpZ0tKYUxLcUZPRjRWc2p4THV2dFJ4QlJ3YlJVckh5RUwyZWRZcEVQbGg1YzY2cFV5Vmw2TUcyM01LaTNiTTBDcl9YSHQ4RzdpcERZSHh6WlhXcGE2a1VhVDVOamF6WW1QRDQyRGlqc0xraXN0LUlaYU51TFNKeW9OUEJCclZaSGJTWl8zcmwzQjMwb3RhMnRSeURIQUF6SjJfc0N6eWxHWGVIQWlUMXhua3AyNjZ4ZzdHREtHR2VINkYwUWJoeERrbzBsVGVoNWlPWTExSk9zTXQtNXp0N2lSTkVoNlItWWlrcFBjSUMtcTd0emdwY1duM2Fpdw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
-      "type": "大型展會",
+      "type": "展覽",
       "locations": [
-        "台北"
+        "台中"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-20T08:00:25.000Z",
+      "publishedAt": "2026-07-21T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "",
+      "venue": "中友百貨",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "黃泉使者",
-        "2026台北漫畫博覽會"
+        "孤獨搖滾！"
       ],
-      "searchCorpus": "「2026台北漫畫博覽會」木棉花攤位攻略：強檔動畫《黃泉使者》領軍，首賣新品、六大福袋與六重滿額禮一次看 oneone宇宙",
+      "searchCorpus": "《孤獨搖滾！》動畫展登陸台中 中友百貨暑假動漫狂潮搶商機 Life 生活網",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-03T04:23:17.729Z",
-      "lastSeenAt": "2026-09-03T04:23:17.729Z",
-      "archivedAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-09-04T04:30:47.017Z",
+      "lastSeenAt": "2026-09-04T04:30:47.017Z",
+      "archivedAt": "2026-09-05T04:26:11.077Z"
+    },
+    {
+      "id": "ext-e8f64087db1135bc",
+      "title": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE44S3paenZOeHdQMnhFUXhhaGotLWdPUWs2dlVYN1RJbEF1MUZCMWs4YTdhbHFnMUc3NGVjZWNSSkptczJraGFVdDVKeDVYYmlQYnRJN2F4SFFoYUdpRF9KZzlhekdkSkdsenEyWmE2RnJpczBtSmx2Wk96d1lSUQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "三創 SouNova 少女星",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師"
+      ],
+      "searchCorpus": "死氣之火將在台北再度點燃！《家庭教師》動畫 20 週年快閃店高雄引爆熱潮，木棉花宣布9 月登陸台北三創 SouNova 少女星",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-15T01:48:44.120Z",
+      "lastSeenAt": "2026-08-15T01:48:44.120Z",
+      "archivedAt": "2026-09-05T04:26:11.077Z"
     }
   ]
 }
