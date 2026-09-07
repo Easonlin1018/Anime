@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-06T04:36:45.799Z",
-    "lastSuccessfulUpdateAt": "2026-09-06T04:36:45.799Z",
+    "updatedAt": "2026-09-07T04:38:56.105Z",
+    "lastSuccessfulUpdateAt": "2026-09-07T04:38:56.105Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 621,
-    "articleCandidateCount": 232,
-    "articleFetchSuccessCount": 33,
+    "fetchedExternalItemCount": 429,
+    "uniqueNewsCount": 617,
+    "articleCandidateCount": 230,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 18,
-    "newEventCount": 2,
+    "matchedEventCount": 17,
+    "newEventCount": 3,
     "cachedEventCount": 38,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 46,
+    "archiveCount": 0,
+    "storedEventCount": 47,
     "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 60,
+    "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 138,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -58,8 +58,8 @@
       "dateConfidence": "high",
       "dateSource": "9/1~9/30",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "gnn-309659",
@@ -190,8 +190,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "gnn-309600",
@@ -228,7 +228,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -248,17 +248,17 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "universe.oneone.com.tw",
+      "summary": "oneone宇宙",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -279,12 +279,12 @@
         "黃泉使者",
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 universe.oneone.com.tw",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -375,6 +375,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-09-06T04:36:45.799Z",
       "lastSeenAt": "2026-09-06T04:36:45.799Z"
+    },
+    {
+      "id": "ext-60341764dad0f6d6",
+      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "台中中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！"
+      ],
+      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -725,8 +755,8 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 12 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "gnn-308580",
@@ -1104,8 +1134,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "gnn-309209",
@@ -1232,8 +1262,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1491,39 +1521,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-05T04:26:11.077Z",
-      "lastSeenAt": "2026-09-05T04:26:11.077Z"
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z"
     }
   ],
-  "archive": [
-    {
-      "id": "ext-dec58b57e7230bb4",
-      "title": "小小兵化身攝影師太可愛！三創雙主題快閃店，四大IP超可愛，滿額抽電影票",
-      "summary": "udn 女子漾",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Ub2N6RHgwdHVWdmdEekh3dko2bHpQQUY0cnk2T00zWUl3THBFbVF5MHBkVTdmLWhlRGVqd0JYdWx3enNQTkJ1dl8yRThicnBaX2l2N0ZIN25zVnBB0gFiQVVfeXFMT2pYczlIemtDdENPdzZGUmM0d3hfNEVUWUhNVzlvLUlqblU0dDFZdHpYLUxoTmJGZ3RTczBuLVhIbVpWOGdqVndlQ0Jua25hZlM4VlJTeElCMU1QSWFSbVhjenc?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-22T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "三創雙主題快閃店",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "小小兵化身攝影師太可愛！三創雙主題快閃店，四大IP超可愛，滿額抽電影票 udn 女子漾",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-24T01:56:44.434Z",
-      "lastSeenAt": "2026-08-24T01:56:44.434Z",
-      "archivedAt": "2026-09-06T04:36:45.799Z"
-    }
-  ]
+  "archive": []
 }
