@@ -3,19 +3,19 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-07T04:38:56.105Z",
-    "lastSuccessfulUpdateAt": "2026-09-07T04:38:56.105Z",
+    "updatedAt": "2026-09-08T04:33:38.204Z",
+    "lastSuccessfulUpdateAt": "2026-09-08T04:33:38.204Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
     "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 617,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 37,
+    "uniqueNewsCount": 619,
+    "articleCandidateCount": 231,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
-    "newEventCount": 3,
-    "cachedEventCount": 38,
+    "matchedEventCount": 16,
+    "newEventCount": 1,
+    "cachedEventCount": 39,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 47,
@@ -24,7 +24,7 @@
     "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 138,
+    "nonActivityRemovedCount": 141,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -190,8 +190,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "gnn-309600",
@@ -228,7 +228,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "gnn.gamer.com.tw",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -248,12 +248,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -283,8 +283,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -403,8 +403,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -755,8 +755,8 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 12 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "gnn-308580",
@@ -1122,7 +1122,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T08:24:26.000Z",
+      "publishedAt": "2026-07-30T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1134,8 +1134,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "gnn-309209",
@@ -1262,8 +1262,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1521,8 +1521,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
+      "discoveredAt": "2026-09-08T04:33:38.204Z",
+      "lastSeenAt": "2026-09-08T04:33:38.204Z"
     }
   ],
   "archive": []
