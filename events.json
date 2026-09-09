@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-08T04:33:38.204Z",
-    "lastSuccessfulUpdateAt": "2026-09-08T04:33:38.204Z",
+    "updatedAt": "2026-09-09T04:40:05.018Z",
+    "lastSuccessfulUpdateAt": "2026-09-09T04:40:05.018Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 619,
-    "articleCandidateCount": 231,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 616,
+    "articleCandidateCount": 228,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 16,
-    "newEventCount": 1,
-    "cachedEventCount": 39,
+    "matchedEventCount": 19,
+    "newEventCount": 4,
+    "cachedEventCount": 36,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 47,
-    "expiredRemovedCount": 10,
+    "archiveCount": 3,
+    "storedEventCount": 46,
+    "expiredRemovedCount": 11,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 141,
+    "nonActivityRemovedCount": 134,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -190,8 +190,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "gnn-309600",
@@ -228,7 +228,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "巴哈姆特",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -248,12 +248,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 巴哈姆特",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -283,8 +283,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -373,8 +373,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -403,8 +403,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -755,8 +755,44 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 12 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
+    },
+    {
+      "id": "gnn-311261",
+      "title": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場",
+      "summary": "緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311261",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T04:00:27.000Z",
+      "eventStartDate": "2026-09-16",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "JOJO 的奇妙冒險 星塵遠征軍",
+        "JOJO的奇妙冒險 星塵遠征軍",
+        "人形大立牌區",
+        "DIO VS 星塵遠征軍",
+        "星塵遠征軍櫥窗區"
+      ],
+      "searchCorpus": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場 緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
+      "dateConfidence": "medium",
+      "dateSource": "9/16",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "gnn-308580",
@@ -917,6 +953,38 @@
       "lastSeenAt": "2026-09-02T04:31:31.753Z"
     },
     {
+      "id": "gnn-311263",
+      "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」11/1 高雄夢時代南部首登場",
+      "summary": "「名偵探柯南 TV 動畫播放 30 週年紀念展」將抵達南台灣，於 11/1 起在高雄夢時代登場。高雄展覽將承襲台北展的豐富內容，完整呈現柯南 30 年來的點滴回憶，並深入了解動畫幕後製作的精細過程，帶領南部粉絲一同沉浸於柯南的推理世界。 【名偵探柯南TV動畫播放30週年紀念展】最大的特色，就是以「TV",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311263",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T04:33:40.000Z",
+      "eventStartDate": "2026-11-01",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南 TV 動畫播放 30 週年紀念展",
+        "名偵探柯南TV動畫播放30週年紀念展"
+      ],
+      "searchCorpus": "「名偵探柯南 TV 動畫播放 30 週年紀念展」11/1 高雄夢時代南部首登場 「名偵探柯南 TV 動畫播放 30 週年紀念展」將抵達南台灣，於 11/1 起在高雄夢時代登場。高雄展覽將承襲台北展的豐富內容，完整呈現柯南 30 年來的點滴回憶，並深入了解動畫幕後製作的精細過程，帶領南部粉絲一同沉浸於柯南的推理世界。 【名偵探柯南TV動畫播放30週年紀念展】最大的特色，就是以「TV",
+      "dateConfidence": "medium",
+      "dateSource": "11/1",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
+    },
+    {
       "id": "gnn-310732",
       "title": "人氣音樂組合 YOASOBI 宣布 1/9、1/10 登上大巨蛋！演唱會詳情正式公開",
       "summary": "日本現象級雙人組合 YOASOBI 在去年沖繩演唱會上，宣布了將展開出道以來規模最大的亞洲巡迴演出，包含有日本國內大阪、名古屋、札幌、福岡、東京，以及海外台北、首爾、新加坡等城市後，主辦單位今日正式宣布台北場將於 2027 年 1 月 9 日、1 月 10 日一連兩天於台北大巨蛋開唱的消息。 YOASOBI 是由 Ayase 與 ikura 組成的日本人氣音樂團體",
@@ -943,103 +1011,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-08-31T05:32:32.134Z",
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
-    },
-    {
-      "id": "gnn-308798",
-      "title": "【漫博 26】《Myther》作者八田てき首場簽名會登場 作者感受粉絲熱情盼能再度來台",
-      "summary": "隨著 2026 年第 25 屆漫畫博覽會進入第三天，台灣東販於今日的舞台活動中，邀請到《Myther》作者八田てき來台舉行簽名會。 八田てき的《Myther》故事舞台為近未來，日本開發出一款能設計人格的裝置「Myther」，它能彌補使用者人格缺陷的部分，人們開始追求「理想的自己」。但來源不明的「非法 Myther」會讓使用者人格異常，導致犯罪頻傳",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308798",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "簽名會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-25T05:15:34.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "Myther",
-        "理想的自己",
-        "非法 Myther",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】《Myther》作者八田てき首場簽名會登場 作者感受粉絲熱情盼能再度來台 隨著 2026 年第 25 屆漫畫博覽會進入第三天，台灣東販於今日的舞台活動中，邀請到《Myther》作者八田てき來台舉行簽名會。 八田てき的《Myther》故事舞台為近未來，日本開發出一款能設計人格的裝置「Myther」，它能彌補使用者人格缺陷的部分，人們開始追求「理想的自己」。但來源不明的「非法 Myther」會讓使用者人格異常，導致犯罪頻傳",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
-    },
-    {
-      "id": "gnn-308799",
-      "title": "【漫博 26】《GACHIAKUTA》聲優小西克幸來台特別專訪：希望擁有恩琴的溫柔帥氣魅力",
-      "summary": "羚邦於現正舉辦中的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，在預定將於明日登場的見面會之前，今（25）日主辦單位也搶先邀請巴哈姆特 GNN 等少數媒體特別專訪到了小西克幸先生，與各位分享他參與《GACHIAKUTA》演出的心情。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。《GACHIAKUTA》以生活在罪",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308799",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：漫畫博覽會",
-      "sourceTag": "漫畫博覽會",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-25T06:01:57.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "GACHIAKUTA",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】《GACHIAKUTA》聲優小西克幸來台特別專訪：希望擁有恩琴的溫柔帥氣魅力 羚邦於現正舉辦中的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，在預定將於明日登場的見面會之前，今（25）日主辦單位也搶先邀請巴哈姆特 GNN 等少數媒體特別專訪到了小西克幸先生，與各位分享他參與《GACHIAKUTA》演出的心情。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。《GACHIAKUTA》以生活在罪",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
-    },
-    {
-      "id": "gnn-308801",
-      "title": "【漫博 26】《想看她一臉嫌惡地露出褲褲 R》作者與製作團隊簽名見面會 暢談作品紳士堅持",
-      "summary": "由社團「Animal Machine」成員 40 原（SHIMAHARA）原創改編，動畫《想看她一臉嫌惡地露出褲褲 R》代理商提恩傳媒今日邀請到作者 40 原以及動畫導演深瀨沙哉以及 DMM 的動畫製作人高篠秀一來台舉辦見面會活動。 ※ 活動因日方要求，作者 40 原臉部以笑臉符號遮擋，尚請見諒。 《想看她一臉嫌惡地露出褲褲》作品將兩種看似矛盾的情境結合在一",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308801",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-25T08:46:26.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "想看她一臉嫌惡地露出褲褲 R",
-        "想看她一臉嫌惡地露出褲褲",
-        "Animal Machine",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】《想看她一臉嫌惡地露出褲褲 R》作者與製作團隊簽名見面會 暢談作品紳士堅持 由社團「Animal Machine」成員 40 原（SHIMAHARA）原創改編，動畫《想看她一臉嫌惡地露出褲褲 R》代理商提恩傳媒今日邀請到作者 40 原以及動畫導演深瀨沙哉以及 DMM 的動畫製作人高篠秀一來台舉辦見面會活動。 ※ 活動因日方要求，作者 40 原臉部以笑臉符號遮擋，尚請見諒。 《想看她一臉嫌惡地露出褲褲》作品將兩種看似矛盾的情境結合在一",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-26T09:02:06.621Z",
-      "lastSeenAt": "2026-07-26T09:02:06.621Z"
     },
     {
       "id": "gnn-308854",
@@ -1236,7 +1207,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "Storm.mg",
+      "summary": "風傳媒",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1258,12 +1229,12 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 Storm.mg",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1521,9 +1492,110 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z"
+      "discoveredAt": "2026-09-09T04:40:05.018Z",
+      "lastSeenAt": "2026-09-09T04:40:05.018Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-308801",
+      "title": "【漫博 26】《想看她一臉嫌惡地露出褲褲 R》作者與製作團隊簽名見面會 暢談作品紳士堅持",
+      "summary": "由社團「Animal Machine」成員 40 原（SHIMAHARA）原創改編，動畫《想看她一臉嫌惡地露出褲褲 R》代理商提恩傳媒今日邀請到作者 40 原以及動畫導演深瀨沙哉以及 DMM 的動畫製作人高篠秀一來台舉辦見面會活動。 ※ 活動因日方要求，作者 40 原臉部以笑臉符號遮擋，尚請見諒。 《想看她一臉嫌惡地露出褲褲》作品將兩種看似矛盾的情境結合在一",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308801",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T08:46:26.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "想看她一臉嫌惡地露出褲褲 R",
+        "想看她一臉嫌惡地露出褲褲",
+        "Animal Machine",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《想看她一臉嫌惡地露出褲褲 R》作者與製作團隊簽名見面會 暢談作品紳士堅持 由社團「Animal Machine」成員 40 原（SHIMAHARA）原創改編，動畫《想看她一臉嫌惡地露出褲褲 R》代理商提恩傳媒今日邀請到作者 40 原以及動畫導演深瀨沙哉以及 DMM 的動畫製作人高篠秀一來台舉辦見面會活動。 ※ 活動因日方要求，作者 40 原臉部以笑臉符號遮擋，尚請見諒。 《想看她一臉嫌惡地露出褲褲》作品將兩種看似矛盾的情境結合在一",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z",
+      "archivedAt": "2026-09-09T04:40:05.018Z"
+    },
+    {
+      "id": "gnn-308799",
+      "title": "【漫博 26】《GACHIAKUTA》聲優小西克幸來台特別專訪：希望擁有恩琴的溫柔帥氣魅力",
+      "summary": "羚邦於現正舉辦中的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，在預定將於明日登場的見面會之前，今（25）日主辦單位也搶先邀請巴哈姆特 GNN 等少數媒體特別專訪到了小西克幸先生，與各位分享他參與《GACHIAKUTA》演出的心情。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。《GACHIAKUTA》以生活在罪",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308799",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T06:01:57.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GACHIAKUTA",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《GACHIAKUTA》聲優小西克幸來台特別專訪：希望擁有恩琴的溫柔帥氣魅力 羚邦於現正舉辦中的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，在預定將於明日登場的見面會之前，今（25）日主辦單位也搶先邀請巴哈姆特 GNN 等少數媒體特別專訪到了小西克幸先生，與各位分享他參與《GACHIAKUTA》演出的心情。 作品改編自裏那圭擔任原作、晏童秀吉擔綱塗鴉設計的漫畫。《GACHIAKUTA》以生活在罪",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z",
+      "archivedAt": "2026-09-09T04:40:05.018Z"
+    },
+    {
+      "id": "gnn-308798",
+      "title": "【漫博 26】《Myther》作者八田てき首場簽名會登場 作者感受粉絲熱情盼能再度來台",
+      "summary": "隨著 2026 年第 25 屆漫畫博覽會進入第三天，台灣東販於今日的舞台活動中，邀請到《Myther》作者八田てき來台舉行簽名會。 八田てき的《Myther》故事舞台為近未來，日本開發出一款能設計人格的裝置「Myther」，它能彌補使用者人格缺陷的部分，人們開始追求「理想的自己」。但來源不明的「非法 Myther」會讓使用者人格異常，導致犯罪頻傳",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308798",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "簽名會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-25T05:15:34.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Myther",
+        "理想的自己",
+        "非法 Myther",
+        "漫博 26"
+      ],
+      "searchCorpus": "【漫博 26】《Myther》作者八田てき首場簽名會登場 作者感受粉絲熱情盼能再度來台 隨著 2026 年第 25 屆漫畫博覽會進入第三天，台灣東販於今日的舞台活動中，邀請到《Myther》作者八田てき來台舉行簽名會。 八田てき的《Myther》故事舞台為近未來，日本開發出一款能設計人格的裝置「Myther」，它能彌補使用者人格缺陷的部分，人們開始追求「理想的自己」。但來源不明的「非法 Myther」會讓使用者人格異常，導致犯罪頻傳",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-26T09:02:06.621Z",
+      "lastSeenAt": "2026-07-26T09:02:06.621Z",
+      "archivedAt": "2026-09-09T04:40:05.018Z"
+    }
+  ]
 }
