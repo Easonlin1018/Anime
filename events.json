@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-10T04:40:47.154Z",
-    "lastSuccessfulUpdateAt": "2026-09-10T04:40:47.154Z",
+    "updatedAt": "2026-09-11T04:38:27.100Z",
+    "lastSuccessfulUpdateAt": "2026-09-11T04:38:27.100Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
     "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 617,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 34,
+    "uniqueNewsCount": 622,
+    "articleCandidateCount": 234,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 18,
-    "newEventCount": 3,
+    "matchedEventCount": 20,
+    "newEventCount": 5,
     "cachedEventCount": 37,
     "rateLimitedCount": 0,
     "archiveCount": 1,
-    "storedEventCount": 46,
+    "storedEventCount": 45,
     "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 55,
+    "undatedOldRemovedCount": 58,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 141,
+    "nonActivityRemovedCount": 139,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -219,8 +219,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -250,8 +250,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -340,8 +340,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -370,8 +370,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -722,8 +722,8 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 12 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "gnn-311261",
@@ -758,8 +758,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/16",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "gnn-308580",
@@ -980,37 +980,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "gnn-308854",
-      "title": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動",
-      "summary": "羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308854",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：漫畫博覽會",
-      "sourceTag": "漫畫博覽會",
-      "type": "見面會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-27T07:20:34.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "GACHIAKUTA",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動 羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z"
-    },
-    {
       "id": "gnn-309026",
       "title": "《轉生異世界地下城主，打造溫泉地下城 》小說第一集特裝版開放預購 高雄國際動漫節正式發售",
       "summary": "獲得「下一部人氣輕小說大賞 2025」文庫部門第一名，由《異種族風俗娘評鑑指南》原作天原老師創作的輕小說《轉生異世界地下城主，打造溫泉地下城 （1）》將於 2026 高雄國際動漫節期間正式發售，台灣角川同步推出「首刷特裝版」，除了首集小說外，將附贈特典「8P 圖文短篇小冊子」與「5 入 PET 角色收藏卡」預定十月中起全台同步限",
@@ -1200,8 +1169,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1487,44 +1456,42 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-11T04:38:27.100Z",
+      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-309659",
-      "title": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發",
-      "summary": "由墨香銅臭同名小說改編的動畫《天官賜福》，即日起至 9 月 9 日，在台北信義區 DREAM PLAZA B2 連通道推出期間限定主題快閃店。本次集結覓星社「四靈韻章」系列、包包的谷「歲和紙影」系列以及「與君共千秋」限定系列，三大系列首次在台灣亮相。 本次快閃店運用「歲和紙影」系列兩幅大型主視覺，打造Ｌ形沉浸式打卡區，透過環繞式",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309659",
+      "id": "gnn-308854",
+      "title": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動",
+      "summary": "羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308854",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
+      "discoverySource": "RSS、標籤：漫畫博覽會",
+      "sourceTag": "漫畫博覽會",
+      "type": "見面會",
       "locations": [
-        "台北"
+        "台灣"
       ],
-      "confidence": "high",
-      "publishedAt": "2026-08-10T08:58:04.000Z",
-      "eventStartDate": "2026-08-10",
-      "eventEndDate": "2026-09-09",
+      "confidence": "candidate",
+      "publishedAt": "2026-07-27T07:20:34.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "DREAM PLAZA",
+      "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "天官賜福",
-        "四靈韻章",
-        "歲和紙影",
-        "與君共千秋"
+        "GACHIAKUTA",
+        "漫博 26"
       ],
-      "searchCorpus": "《天官賜福》主題快閃店 8 月 10 日進駐 DREAM PLAZA「四靈韻章」、「歲和紙影」台灣首發 由墨香銅臭同名小說改編的動畫《天官賜福》，即日起至 9 月 9 日，在台北信義區 DREAM PLAZA B2 連通道推出期間限定主題快閃店。本次集結覓星社「四靈韻章」系列、包包的谷「歲和紙影」系列以及「與君共千秋」限定系列，三大系列首次在台灣亮相。 本次快閃店運用「歲和紙影」系列兩幅大型主視覺，打造Ｌ形沉浸式打卡區，透過環繞式",
-      "dateConfidence": "high",
-      "dateSource": "即日起至 9 月 9 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z",
-      "archivedAt": "2026-09-10T04:40:47.154Z"
+      "searchCorpus": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動 羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-07-27T12:42:26.657Z",
+      "lastSeenAt": "2026-07-27T12:42:26.657Z",
+      "archivedAt": "2026-09-11T04:38:27.100Z"
     }
   ]
 }
