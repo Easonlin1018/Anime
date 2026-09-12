@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-11T04:38:27.100Z",
-    "lastSuccessfulUpdateAt": "2026-09-11T04:38:27.100Z",
+    "updatedAt": "2026-09-12T04:32:35.555Z",
+    "lastSuccessfulUpdateAt": "2026-09-12T04:32:35.555Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 622,
-    "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 35,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 621,
+    "articleCandidateCount": 231,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
+    "matchedEventCount": 21,
     "newEventCount": 5,
     "cachedEventCount": 37,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 45,
+    "archiveCount": 0,
+    "storedEventCount": 46,
     "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 58,
+    "undatedOldRemovedCount": 55,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 139,
+    "foreignRemovedCount": 1,
+    "nonActivityRemovedCount": 137,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -93,6 +93,66 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "ext-5f235300259b09ab",
+      "title": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPV210SEVMZjd5enhsUUx2eUxGMDhpbTJYNVlkLTJLTjJ2TFllVjBnU2wzcVJQQWVBY042MnA2N2FyY29aM3ptSkktaHBfU2NfZjZhRDdaRTFaZmpRa29FdzB6bTRsOHBRMzFoSEVPUmZ2bkwzUG03dXktUGQ2RVNjZFVYYWdOc1U4?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T08:38:00.000Z",
+      "eventStartDate": "2026-09-12",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "三創生活園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師HITMAN REBORN!"
+      ],
+      "searchCorpus": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場 Paradaily",
+      "dateConfidence": "medium",
+      "dateSource": "9/12",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
+    },
+    {
+      "id": "ext-dbf7a556cceee1ad",
+      "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T08:47:41.000Z",
+      "eventStartDate": "2026-09-12",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "三創生活園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師 HITMAN REBORN！"
+      ],
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/12",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
+    },
+    {
       "id": "gnn-310540",
       "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
       "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
@@ -157,8 +217,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-10T04:40:47.154Z",
-      "lastSeenAt": "2026-09-10T04:40:47.154Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     },
     {
       "id": "gnn-309600",
@@ -219,8 +279,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -250,8 +310,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -316,7 +376,7 @@
     {
       "id": "ext-46b7774f36c46c6f",
       "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
-      "summary": "SouNova 少女星",
+      "summary": "sounova.com",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -336,17 +396,17 @@
       "workTitles": [
         "全國遠征系列"
       ],
-      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
+      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 sounova.com",
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
       "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
-      "summary": "SouNova 少女星",
+      "summary": "sounova.com",
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -366,12 +426,12 @@
       "workTitles": [
         "孤獨搖滾！"
       ],
-      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
+      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 sounova.com",
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -694,36 +754,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-08-25T01:51:26.169Z",
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
-    },
-    {
-      "id": "ext-7420612d92063575",
-      "title": "彭哥列家族集結！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店9 月 12 日台北三創熱血登場",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE44S3paenZOeHdQMnhFUXhhaGotLWdPUWs2dlVYN1RJbEF1MUZCMWs4YTdhbHFnMUc3NGVjZWNSSkptczJraGFVdDVKeDVYYmlQYnRJN2F4SFFoYUdpRF9KZzlhekdkSkdsenEyWmE2RnJpczBtSmx2Wk96d1lSUQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-01T07:00:00.000Z",
-      "eventStartDate": "2026-09-12",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "三創熱血登場 SouNova 少女星",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "家庭教師HITMAN REBORN!"
-      ],
-      "searchCorpus": "彭哥列家族集結！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店9 月 12 日台北三創熱血登場 SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "9 月 12 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
     },
     {
       "id": "gnn-311261",
@@ -1169,8 +1199,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1456,42 +1486,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-11T04:38:27.100Z",
-      "lastSeenAt": "2026-09-11T04:38:27.100Z"
+      "discoveredAt": "2026-09-12T04:32:35.555Z",
+      "lastSeenAt": "2026-09-12T04:32:35.555Z"
     }
   ],
-  "archive": [
-    {
-      "id": "gnn-308854",
-      "title": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動",
-      "summary": "羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308854",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：漫畫博覽會",
-      "sourceTag": "漫畫博覽會",
-      "type": "見面會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-27T07:20:34.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "GACHIAKUTA",
-        "漫博 26"
-      ],
-      "searchCorpus": "【漫博 26】《GACHIAKUTA》恩琴聲優小西克幸見面會登場 與現場粉絲親切互動 羚邦於今年度的漫畫博覽會邀請到動畫《GACHIAKUTA》中飾演恩琴的聲優小西克幸來台，於 26 日舉辦了見面會活動，他不僅親切地與全場粉絲互動、分享配音幕後心得，也特別在現場進行了配音演出，展現出極大的親和力，活動氛圍相當熱烈。 小西克幸與現場粉絲合影留念 活動一開場，小西先生便貼心地關注後方的觀眾：「後面的大家看得",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-07-27T12:42:26.657Z",
-      "lastSeenAt": "2026-07-27T12:42:26.657Z",
-      "archivedAt": "2026-09-11T04:38:27.100Z"
-    }
-  ]
+  "archive": []
 }
