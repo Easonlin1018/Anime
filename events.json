@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-14T04:54:03.477Z",
-    "lastSuccessfulUpdateAt": "2026-09-14T04:54:03.477Z",
+    "updatedAt": "2026-09-15T04:52:38.943Z",
+    "lastSuccessfulUpdateAt": "2026-09-15T04:52:38.943Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 431,
+    "fetchedExternalItemCount": 429,
     "uniqueNewsCount": 623,
-    "articleCandidateCount": 232,
-    "articleFetchSuccessCount": 36,
+    "articleCandidateCount": 234,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 4,
-    "cachedEventCount": 35,
+    "matchedEventCount": 17,
+    "newEventCount": 3,
+    "cachedEventCount": 34,
     "rateLimitedCount": 0,
     "archiveCount": 2,
-    "storedEventCount": 44,
-    "expiredRemovedCount": 10,
+    "storedEventCount": 42,
+    "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 55,
+    "undatedOldRemovedCount": 57,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 141,
+    "nonActivityRemovedCount": 144,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -119,8 +119,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -279,8 +279,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -376,7 +376,7 @@
     {
       "id": "ext-46b7774f36c46c6f",
       "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
-      "summary": "sounova.com",
+      "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -396,12 +396,12 @@
       "workTitles": [
         "全國遠征系列"
       ],
-      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 sounova.com",
+      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -753,8 +753,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/16",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "gnn-308580",
@@ -975,71 +975,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "gnn-309209",
-      "title": "PARCO × GEEKS RULE 快閃店明起登場 帶來《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》潮流 T 恤",
-      "summary": "日本「PARCO」與聚焦動畫等次文化的品牌企劃「GEEKS RULE」所展開跨國合作企劃「GEEKS RULE WORLD TOUR CREATED BY PARCO」，其亞洲巡迴場將於明（1）日起正式在台北登場，而本次的巡迴活動也帶來了《劇場版 鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音戰士》三部作品共六款的 T 恤商品供粉絲選購。 「GEEKS RULE」是一項深耕次文化與潮流視覺的品",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309209",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-31T10:36:37.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "鏈鋸人 蕾潔篇",
-        "膽大黨",
-        "福音戰士",
-        "劇場版 鏈鋸人 蕾潔篇",
-        "新世紀福音戰士",
-        "PARCO",
-        "GEEKS RULE",
-        "GEEKS RULE WORLD TOUR CREATED BY PARCO"
-      ],
-      "searchCorpus": "PARCO × GEEKS RULE 快閃店明起登場 帶來《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》潮流 T 恤 日本「PARCO」與聚焦動畫等次文化的品牌企劃「GEEKS RULE」所展開跨國合作企劃「GEEKS RULE WORLD TOUR CREATED BY PARCO」，其亞洲巡迴場將於明（1）日起正式在台北登場，而本次的巡迴活動也帶來了《劇場版 鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音戰士》三部作品共六款的 T 恤商品供粉絲選購。 「GEEKS RULE」是一項深耕次文化與潮流視覺的品",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z"
-    },
-    {
-      "id": "ext-2d785a3e1d2ed80f",
-      "title": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛",
-      "summary": "Yahoo新聞",
-      "url": "https://news.google.com/rss/articles/CBMiqgNBVV95cUxPQUU4ZUh5dUUzeHg4c0VWX1pKR0Y0cW5RT2FJSVFhS0lCaVc4X2dUbDNVMXhaNzJXQWZJV2dtRzFaT21Mcm5rbk11dmZ4RWVWWHNkc3BYZHVZLV9MVVYxSENJMWdKa0tRVVplYURCSTVvTmRheGVQZGdaTE94ekZFQlc0OVRPYnhTZktnTmxkNmNmckN2bFN4RFJwZTBTSk5DZTVMWmxfZlRqSkI0VFlkcVFJazNiRk1wN0pxQ05YV042anJGR2tUNzFLWE1LdTFvalNVQ091dWVoa1NsaDZfaEFSUkJQTHdEZUp6VDNuZEx1RVBlMDBLby1Od2ZCUnF3dzRrS2w1SzFCYnphbjR0VGd6OEZ4T044QWdPaF9NbUxYQzNXckpjRHMtT0tmcXgyM3NCb0ZGaGtpWi1lRjU2YjE4d18ySnpxV2ZySXliWTVKQURPajFYbzRNYlNqLTJfZmx2LXQ4Ul9kSmhsQVk4cFpyUHljLUp2aC1OdG1BN3RoS0p0SWJhZkdteWpuVXdpLXlrSHpNNTQxRE4tZjRfMUdqX0lYXzk2SUE?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-31T14:45:50.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛 Yahoo新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-06T03:35:05.926Z",
-      "lastSeenAt": "2026-08-06T03:35:05.926Z"
-    },
-    {
       "id": "ext-98e7a4bb4260b697",
       "title": "【開箱】《藍色監獄》雙主題快閃店正式登陸三創！造景與限定周邊搶先看",
       "summary": "Paradaily",
@@ -1099,8 +1034,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1358,8 +1293,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-09T04:40:05.018Z",
-      "lastSeenAt": "2026-09-09T04:40:05.018Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "ext-ea4771a92a9a3816",
@@ -1386,8 +1321,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1416,61 +1351,25 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-15T04:52:38.943Z",
+      "lastSeenAt": "2026-09-15T04:52:38.943Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-308492",
-      "title": "《未定事件簿》× 萌番 More Fun 六週年期間限定主題餐廳 7/29 起台北、高雄兩地同步揭幕",
-      "summary": "IP 授權品牌「萌番 More Fun」正式宣布，《未定事件簿》期間限定主題餐廳即將自 2026 年 7 月 29 日起至 9 月 13 日止，在台北「SORA LINK」與高雄「魯克思咖啡」同步登場，邀請全台律師共赴這場專屬於妳與他們的限定宴會。 這場宴會，因你而起 本次主題餐廳以架空推理宴會為舞台，圍繞四位角色夏彥、左然、莫弈、陸景和，打造專屬聯名餐",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308492",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：餐廳",
-      "sourceTag": "餐廳",
-      "type": "主題餐廳／咖啡廳",
-      "locations": [
-        "台北",
-        "高雄",
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-21T08:10:28.000Z",
-      "eventStartDate": "2026-07-29",
-      "eventEndDate": "2026-09-13",
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "未定事件簿",
-        "萌番 More Fun",
-        "SORA LINK",
-        "魯克思咖啡"
-      ],
-      "searchCorpus": "《未定事件簿》× 萌番 More Fun 六週年期間限定主題餐廳 7/29 起台北、高雄兩地同步揭幕 IP 授權品牌「萌番 More Fun」正式宣布，《未定事件簿》期間限定主題餐廳即將自 2026 年 7 月 29 日起至 9 月 13 日止，在台北「SORA LINK」與高雄「魯克思咖啡」同步登場，邀請全台律師共赴這場專屬於妳與他們的限定宴會。 這場宴會，因你而起 本次主題餐廳以架空推理宴會為舞台，圍繞四位角色夏彥、左然、莫弈、陸景和，打造專屬聯名餐",
-      "dateConfidence": "high",
-      "dateSource": "2026 年 7 月 29 日起至 9 月 13 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-07-21T09:36:55.915Z",
-      "lastSeenAt": "2026-07-21T09:36:55.915Z",
-      "archivedAt": "2026-09-14T04:54:03.477Z"
-    },
-    {
-      "id": "ext-050b57857b74ae96",
-      "title": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北",
-      "summary": "鏡報",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpOVpKLXR4ZHBpOVI0N1ZpX0pTRktGSXBDcVdpXzUzWWJWemJ3UDlGeVJDaXFiZHNwbjJDb1NGNmJlakpDZ1RHUUtSTEM0RnI4dkE?oc=5",
+      "id": "ext-2d785a3e1d2ed80f",
+      "title": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛",
+      "summary": "Yahoo新聞",
+      "url": "https://news.google.com/rss/articles/CBMiqgNBVV95cUxPQUU4ZUh5dUUzeHg4c0VWX1pKR0Y0cW5RT2FJSVFhS0lCaVc4X2dUbDNVMXhaNzJXQWZJV2dtRzFaT21Mcm5rbk11dmZ4RWVWWHNkc3BYZHVZLV9MVVYxSENJMWdKa0tRVVplYURCSTVvTmRheGVQZGdaTE94ekZFQlc0OVRPYnhTZktnTmxkNmNmckN2bFN4RFJwZTBTSk5DZTVMWmxfZlRqSkI0VFlkcVFJazNiRk1wN0pxQ05YV042anJGR2tUNzFLWE1LdTFvalNVQ091dWVoa1NsaDZfaEFSUkJQTHdEZUp6VDNuZEx1RVBlMDBLby1Od2ZCUnF3dzRrS2w1SzFCYnphbjR0VGd6OEZ4T044QWdPaF9NbUxYQzNXckpjRHMtT0tmcXgyM3NCb0ZGaGtpWi1lRjU2YjE4d18ySnpxV2ZySXliWTVKQURPajFYbzRNYlNqLTJfZmx2LXQ4Ul9kSmhsQVk4cFpyUHljLUp2aC1OdG1BN3RoS0p0SWJhZkdteWpuVXdpLXlrSHpNNTQxRE4tZjRfMUdqX0lYXzk2SUE?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
-      "type": "展覽",
+      "type": "快閃店",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T07:00:00.000Z",
+      "publishedAt": "2026-07-31T14:45:50.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
@@ -1478,13 +1377,51 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "圖多／動漫迷必朝聖！台灣萬代嘉年華打造10大主題展區 5公尺鋼彈降臨台北 鏡報",
+      "searchCorpus": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛 Yahoo新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-08T04:33:38.204Z",
-      "lastSeenAt": "2026-09-08T04:33:38.204Z",
-      "archivedAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z",
+      "archivedAt": "2026-09-15T04:52:38.943Z"
+    },
+    {
+      "id": "gnn-309209",
+      "title": "PARCO × GEEKS RULE 快閃店明起登場 帶來《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》潮流 T 恤",
+      "summary": "日本「PARCO」與聚焦動畫等次文化的品牌企劃「GEEKS RULE」所展開跨國合作企劃「GEEKS RULE WORLD TOUR CREATED BY PARCO」，其亞洲巡迴場將於明（1）日起正式在台北登場，而本次的巡迴活動也帶來了《劇場版 鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音戰士》三部作品共六款的 T 恤商品供粉絲選購。 「GEEKS RULE」是一項深耕次文化與潮流視覺的品",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309209",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-31T10:36:37.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "鏈鋸人 蕾潔篇",
+        "膽大黨",
+        "福音戰士",
+        "劇場版 鏈鋸人 蕾潔篇",
+        "新世紀福音戰士",
+        "PARCO",
+        "GEEKS RULE",
+        "GEEKS RULE WORLD TOUR CREATED BY PARCO"
+      ],
+      "searchCorpus": "PARCO × GEEKS RULE 快閃店明起登場 帶來《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》潮流 T 恤 日本「PARCO」與聚焦動畫等次文化的品牌企劃「GEEKS RULE」所展開跨國合作企劃「GEEKS RULE WORLD TOUR CREATED BY PARCO」，其亞洲巡迴場將於明（1）日起正式在台北登場，而本次的巡迴活動也帶來了《劇場版 鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音戰士》三部作品共六款的 T 恤商品供粉絲選購。 「GEEKS RULE」是一項深耕次文化與潮流視覺的品",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-16T01:56:14.896Z",
+      "lastSeenAt": "2026-08-16T01:56:14.896Z",
+      "archivedAt": "2026-09-15T04:52:38.943Z"
     }
   ]
 }
