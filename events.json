@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-15T04:52:38.943Z",
-    "lastSuccessfulUpdateAt": "2026-09-15T04:52:38.943Z",
+    "updatedAt": "2026-09-16T04:47:27.285Z",
+    "lastSuccessfulUpdateAt": "2026-09-16T04:47:27.285Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 623,
-    "articleCandidateCount": 234,
-    "articleFetchSuccessCount": 37,
+    "fetchedExternalItemCount": 427,
+    "uniqueNewsCount": 625,
+    "articleCandidateCount": 236,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
-    "newEventCount": 3,
+    "matchedEventCount": 26,
+    "newEventCount": 10,
     "cachedEventCount": 34,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
-    "storedEventCount": 42,
-    "expiredRemovedCount": 9,
+    "archiveCount": 0,
+    "storedEventCount": 46,
+    "expiredRemovedCount": 7,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 57,
+    "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 144,
+    "nonActivityRemovedCount": 142,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -119,8 +119,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -279,8 +279,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -400,8 +400,39 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+    },
+    {
+      "id": "ext-5dee1a2d64b8561a",
+      "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
+      "summary": "4Gamers",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-05-29T07:00:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！動畫展",
+        "團結Band"
+      ],
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
+      "dateConfidence": "medium",
+      "dateSource": "7/20",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -434,37 +465,6 @@
       "lastSeenAt": "2026-09-14T04:54:03.477Z"
     },
     {
-      "id": "ext-5dee1a2d64b8561a",
-      "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-05-29T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！動畫展",
-        "團結Band"
-      ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
-      "dateConfidence": "medium",
-      "dateSource": "7/20",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-29T07:03:16.765Z",
-      "lastSeenAt": "2026-08-29T07:03:16.765Z"
-    },
-    {
       "id": "ext-577a1ba967b49720",
       "title": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！",
       "summary": "Paradaily",
@@ -493,8 +493,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-14T02:45:01.378Z",
-      "lastSeenAt": "2026-08-14T02:45:01.378Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "gnn-308731",
@@ -757,6 +757,36 @@
       "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
+      "id": "ext-844ffb885046e925",
+      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
+      "summary": "TVBS新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-10T15:57:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "小當家"
+      ],
+      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+    },
+    {
       "id": "gnn-308580",
       "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
       "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
@@ -785,6 +815,40 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-22T09:37:08.897Z",
       "lastSeenAt": "2026-07-22T09:37:08.897Z"
+    },
+    {
+      "id": "gnn-311758",
+      "title": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島",
+      "summary": "文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311758",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-16T04:15:57.000Z",
+      "eventStartDate": "2026-09-23",
+      "eventEndDate": "2026-09-27",
+      "eventStatus": "upcoming",
+      "venue": "展覽館舉辦「2026 臺灣國際兒童及青少年",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "海巫事務所",
+        "台灣特有種",
+        "臺灣漫畫館",
+        "2026 臺灣國際兒童及青少年嘉年華－兒少書展",
+        "臺漫大發現——重返故事島！"
+      ],
+      "searchCorpus": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島 文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
+      "dateConfidence": "high",
+      "dateSource": "9 月 23 日至 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "gnn-308916",
@@ -1034,8 +1098,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1321,13 +1385,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
       "title": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺",
-      "summary": "NOWnews今日新聞",
+      "summary": "nownews.com",
       "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1JYnZyWHFsMXlWMnBXY0taR01GbU9vM0Z0c1hLOUtaSHQzQnJBRmpsZnFoMEdTcFhKZFA0N01IbUlMeDMtdExmbjRObjnSAVJBVV95cUxNNGN4NVpaUnJXY3k4Q0FGR3hkQUw0ZHVHb3gzS3lEcVJUY0lBU29iclVzYTE4UGVydW1TSVgyb0ZBZ0RzQTdseDBsYjYxSlp6WjlR?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -1341,87 +1405,79 @@
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
-      "venue": "三創快閃店排爆 重演漫博開幕秒殺 NOW",
+      "venue": "三創快閃店排爆 重演漫博開幕秒殺 now",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
         "家庭教師"
       ],
-      "searchCorpus": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺 NOWnews今日新聞",
+      "searchCorpus": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺 nownews.com",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
-    }
-  ],
-  "archive": [
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+    },
     {
-      "id": "ext-2d785a3e1d2ed80f",
-      "title": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛",
-      "summary": "Yahoo新聞",
-      "url": "https://news.google.com/rss/articles/CBMiqgNBVV95cUxPQUU4ZUh5dUUzeHg4c0VWX1pKR0Y0cW5RT2FJSVFhS0lCaVc4X2dUbDNVMXhaNzJXQWZJV2dtRzFaT21Mcm5rbk11dmZ4RWVWWHNkc3BYZHVZLV9MVVYxSENJMWdKa0tRVVplYURCSTVvTmRheGVQZGdaTE94ekZFQlc0OVRPYnhTZktnTmxkNmNmckN2bFN4RFJwZTBTSk5DZTVMWmxfZlRqSkI0VFlkcVFJazNiRk1wN0pxQ05YV042anJGR2tUNzFLWE1LdTFvalNVQ091dWVoa1NsaDZfaEFSUkJQTHdEZUp6VDNuZEx1RVBlMDBLby1Od2ZCUnF3dzRrS2w1SzFCYnphbjR0VGd6OEZ4T044QWdPaF9NbUxYQzNXckpjRHMtT0tmcXgyM3NCb0ZGaGtpWi1lRjU2YjE4d18ySnpxV2ZySXliWTVKQURPajFYbzRNYlNqLTJfZmx2LXQ4Ul9kSmhsQVk4cFpyUHljLUp2aC1OdG1BN3RoS0p0SWJhZkdteWpuVXdpLXlrSHpNNTQxRE4tZjRfMUdqX0lYXzk2SUE?oc=5",
+      "id": "ext-4da361fb0d8dbbec",
+      "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE50Y2FVN04yX01nV2ZYaXNxNTNNcGdyeFpuUnpOMU9FN0RIUVlqaEZrb3dpSmlLWXo5Qk5BTTFvbG1hcncxdG9PWlZibjRzQ2t5Q1lFdER6THk?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
-      "type": "快閃店",
+      "type": "大型展會",
       "locations": [
-        "台北"
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-31T14:45:50.000Z",
+      "publishedAt": "2026-09-15T07:54:49.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "台北近期活動快看！Monchhichi、天線寶寶快閃店，萬代南夢宮、誠品動漫祭開逛 Yahoo新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-06T03:35:05.926Z",
-      "lastSeenAt": "2026-08-06T03:35:05.926Z",
-      "archivedAt": "2026-09-15T04:52:38.943Z"
-    },
-    {
-      "id": "gnn-309209",
-      "title": "PARCO × GEEKS RULE 快閃店明起登場 帶來《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》潮流 T 恤",
-      "summary": "日本「PARCO」與聚焦動畫等次文化的品牌企劃「GEEKS RULE」所展開跨國合作企劃「GEEKS RULE WORLD TOUR CREATED BY PARCO」，其亞洲巡迴場將於明（1）日起正式在台北登場，而本次的巡迴活動也帶來了《劇場版 鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音戰士》三部作品共六款的 T 恤商品供粉絲選購。 「GEEKS RULE」是一項深耕次文化與潮流視覺的品",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309209",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-31T10:36:37.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
+      "eventStatus": "date-unknown",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "鏈鋸人 蕾潔篇",
-        "膽大黨",
-        "福音戰士",
-        "劇場版 鏈鋸人 蕾潔篇",
-        "新世紀福音戰士",
-        "PARCO",
-        "GEEKS RULE",
-        "GEEKS RULE WORLD TOUR CREATED BY PARCO"
+        "2026 高雄國際動漫節"
       ],
-      "searchCorpus": "PARCO × GEEKS RULE 快閃店明起登場 帶來《鏈鋸人 蕾潔篇》《膽大黨》《福音戰士》潮流 T 恤 日本「PARCO」與聚焦動畫等次文化的品牌企劃「GEEKS RULE」所展開跨國合作企劃「GEEKS RULE WORLD TOUR CREATED BY PARCO」，其亞洲巡迴場將於明（1）日起正式在台北登場，而本次的巡迴活動也帶來了《劇場版 鏈鋸人 蕾潔篇》、《膽大黨》、《新世紀福音戰士》三部作品共六款的 T 恤商品供粉絲選購。 「GEEKS RULE」是一項深耕次文化與潮流視覺的品",
+      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 GNN 新聞網",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-16T01:56:14.896Z",
-      "lastSeenAt": "2026-08-16T01:56:14.896Z",
-      "archivedAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+    },
+    {
+      "id": "ext-c6f61eee1ee05db4",
+      "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
+      "summary": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05cGxrQXR6QjRqSmEtaU1pbnI3am5WNXJTcWZheTBOeWJ0WU02aXlsOGdvVVJhdGFibU1NU1QtbktXclZxZXlJWGpUMXM5Skg3YUNfR0Z3?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-09-15T23:31:24.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026十鼓魔法動漫祭LPS-TNTDCC"
+      ],
+      "searchCorpus": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞 LINE TODAY",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     }
-  ]
+  ],
+  "archive": []
 }
