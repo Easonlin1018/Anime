@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-16T04:47:27.285Z",
-    "lastSuccessfulUpdateAt": "2026-09-16T04:47:27.285Z",
+    "updatedAt": "2026-09-17T04:51:02.485Z",
+    "lastSuccessfulUpdateAt": "2026-09-17T04:51:02.485Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
     "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 625,
-    "articleCandidateCount": 236,
-    "articleFetchSuccessCount": 35,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 232,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 26,
-    "newEventCount": 10,
-    "cachedEventCount": 34,
+    "matchedEventCount": 21,
+    "newEventCount": 4,
+    "cachedEventCount": 37,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 46,
-    "expiredRemovedCount": 7,
+    "storedEventCount": 47,
+    "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 53,
+    "undatedOldRemovedCount": 52,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 142,
+    "nonActivityRemovedCount": 143,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -93,6 +93,36 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "ext-844ffb885046e925",
+      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
+      "summary": "TVBS新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-10T15:57:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "小當家"
+      ],
+      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
+    },
+    {
       "id": "ext-dbf7a556cceee1ad",
       "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
       "summary": "GNN 新聞網",
@@ -119,8 +149,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -279,8 +309,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -400,8 +430,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -757,36 +787,6 @@
       "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
-      "id": "ext-844ffb885046e925",
-      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
-      "summary": "TVBS新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-10T15:57:00.000Z",
-      "eventStartDate": "2026-09-17",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "小當家"
-      ],
-      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "9/17",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
-    },
-    {
       "id": "gnn-308580",
       "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
       "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
@@ -849,6 +849,40 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-09-16T04:47:27.285Z",
       "lastSeenAt": "2026-09-16T04:47:27.285Z"
+    },
+    {
+      "id": "gnn-311846",
+      "title": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場",
+      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311846",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T03:50:21.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-28",
+      "eventStatus": "upcoming",
+      "venue": "三創園區登場 守護小鎮的《飛天小女警》花",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "飛天小女警",
+        "熊熊遇見你",
+        "飛天小女警 X 熊熊遇見你",
+        "飛天小女警Ｘ熊熊遇見你",
+        "主視覺區"
+      ],
+      "searchCorpus": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
+      "dateConfidence": "high",
+      "dateSource": "9/24~10/28",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "gnn-308916",
@@ -1098,8 +1132,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1385,8 +1419,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1415,8 +1449,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1445,8 +1479,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     },
     {
       "id": "ext-c6f61eee1ee05db4",
@@ -1461,7 +1495,7 @@
         "台灣"
       ],
       "confidence": "candidate",
-      "publishedAt": "2026-09-15T23:31:24.000Z",
+      "publishedAt": "2026-09-15T23:31:37.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1475,8 +1509,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
+      "discoveredAt": "2026-09-17T04:51:02.485Z",
+      "lastSeenAt": "2026-09-17T04:51:02.485Z"
     }
   ],
   "archive": []
