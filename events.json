@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-18T04:41:47.357Z",
-    "lastSuccessfulUpdateAt": "2026-09-18T04:41:47.357Z",
+    "updatedAt": "2026-09-19T04:35:47.283Z",
+    "lastSuccessfulUpdateAt": "2026-09-19T04:35:47.283Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 626,
-    "articleCandidateCount": 231,
-    "articleFetchSuccessCount": 34,
+    "fetchedExternalItemCount": 429,
+    "uniqueNewsCount": 624,
+    "articleCandidateCount": 232,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
+    "matchedEventCount": 20,
     "newEventCount": 4,
-    "cachedEventCount": 37,
+    "cachedEventCount": 40,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 48,
-    "expiredRemovedCount": 10,
+    "storedEventCount": 49,
+    "expiredRemovedCount": 8,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 49,
+    "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 144,
+    "nonActivityRemovedCount": 143,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -91,6 +91,34 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
+    },
+    {
+      "id": "ext-e92e2013d55ba53d",
+      "title": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場",
+      "summary": "life.tw",
+      "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxOdFYwUV9Mb2JLeEtod2hURS1GWXZmeDI2dnQwS2c1djBJMndLRGlOMFhrbEtfVXVXOG9CNE1ZUFR6eHNZdVpWMWowUEI4bnU4NVFmRnZ1Sm1lM0llWk53cGNEVkk4LU9SUHZscE92MWxwZURtS3BaUHNHWU9OSWIxd3VkeXYyOXEtbnl5UlZHSkN5RGxiQWtFTlJ4MzdGTXRsWFJuMTlLekxCaXF1emprVl9LcUl4SlphVTgwcDhnQWxtX3pQYmN4ak90R3NqTkpneWFGUDJ3dzd1S2tHWkdvX1pxMS1hUlh2S1JuRURvN3VfcUI1MjAybzdlSko3ODcxRmpLTE01RGU3YVFKd0kxdWlJc29xMG9pbWNFSHcteHVZR25t?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T07:00:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場 life.tw",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "ext-844ffb885046e925",
@@ -179,8 +207,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "gnn-310540",
@@ -309,8 +337,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -434,6 +462,36 @@
       "lastSeenAt": "2026-09-18T04:41:47.357Z"
     },
     {
+      "id": "ext-60341764dad0f6d6",
+      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
+      "summary": "sounova.com",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "台中中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！"
+      ],
+      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 sounova.com",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
+    },
+    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
       "summary": "4Gamers",
@@ -463,36 +521,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-09-16T04:47:27.285Z",
       "lastSeenAt": "2026-09-16T04:47:27.285Z"
-    },
-    {
-      "id": "ext-60341764dad0f6d6",
-      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
-      "summary": "sounova.com",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "台中中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！"
-      ],
-      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 sounova.com",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -1106,7 +1134,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "storm.mg",
+      "summary": "風傳媒",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1128,12 +1156,12 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1419,8 +1447,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1449,8 +1477,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1479,8 +1507,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
       "id": "ext-c6f61eee1ee05db4",
@@ -1539,8 +1567,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z"
     }
   ],
   "archive": []
