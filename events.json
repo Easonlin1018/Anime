@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-20T04:52:17.492Z",
-    "lastSuccessfulUpdateAt": "2026-09-20T04:52:17.492Z",
+    "updatedAt": "2026-09-21T04:53:48.420Z",
+    "lastSuccessfulUpdateAt": "2026-09-21T04:53:48.420Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 429,
-    "uniqueNewsCount": 622,
-    "articleCandidateCount": 229,
-    "articleFetchSuccessCount": 35,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 631,
+    "articleCandidateCount": 233,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 3,
-    "cachedEventCount": 39,
+    "matchedEventCount": 19,
+    "newEventCount": 2,
+    "cachedEventCount": 40,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
+    "archiveCount": 0,
     "storedEventCount": 49,
-    "expiredRemovedCount": 8,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 48,
+    "undatedOldRemovedCount": 49,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 144,
+    "nonActivityRemovedCount": 146,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -177,8 +177,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-dbf7a556cceee1ad",
@@ -313,7 +313,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -333,17 +333,17 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "oneone宇宙",
+      "summary": "universe.oneone.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -364,12 +364,12 @@
         "黃泉使者",
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 universe.oneone.com.tw",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-14T04:54:03.477Z",
-      "lastSeenAt": "2026-09-14T04:54:03.477Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -488,8 +488,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1103,7 +1103,7 @@
     {
       "id": "ext-058a5dbb433da8b8",
       "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "風傳媒",
+      "summary": "storm.mg",
       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1125,12 +1125,12 @@
         "排球少年",
         "1神級動漫"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 風傳媒",
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-baa2ea110cbe8cf8",
@@ -1286,8 +1286,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "gnn-310252",
@@ -1422,7 +1422,7 @@
     {
       "id": "ext-ea4771a92a9a3816",
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
-      "summary": "walkerland.com.tw",
+      "summary": "WalkerLand 窩客島",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -1440,12 +1440,12 @@
       "admissionType": "免費入場",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 walkerland.com.tw",
+      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand 窩客島",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1460,7 +1460,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-12T04:39:21.000Z",
+      "publishedAt": "2026-09-12T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1474,8 +1474,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1564,42 +1564,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z"
     }
   ],
-  "archive": [
-    {
-      "id": "ext-98e7a4bb4260b697",
-      "title": "【開箱】《藍色監獄》雙主題快閃店正式登陸三創！造景與限定周邊搶先看",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9nS1RENXhCS0MxVWlhUjdqbXVPVDNWQ0dod3B5aXpUUjFuNFNiVUhrYWExbm5adXFKZFpqQ0x1LUlCNTV3ZjZCZWpyQ0VDdjJCdXcwX3BiZTgzMUZmX0FUUlNiOGx5OTlheFZsdGpiVQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "三創！造景與限定周邊搶先看 Parada",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "藍色監獄",
-        "開箱"
-      ],
-      "searchCorpus": "【開箱】《藍色監獄》雙主題快閃店正式登陸三創！造景與限定周邊搶先看 Paradaily",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-05T04:26:11.077Z",
-      "lastSeenAt": "2026-09-05T04:26:11.077Z",
-      "archivedAt": "2026-09-20T04:52:17.492Z"
-    }
-  ]
+  "archive": []
 }
