@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-21T04:53:48.420Z",
-    "lastSuccessfulUpdateAt": "2026-09-21T04:53:48.420Z",
+    "updatedAt": "2026-09-22T04:53:31.038Z",
+    "lastSuccessfulUpdateAt": "2026-09-22T04:53:31.038Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 631,
-    "articleCandidateCount": 233,
-    "articleFetchSuccessCount": 34,
+    "fetchedExternalItemCount": 433,
+    "uniqueNewsCount": 628,
+    "articleCandidateCount": 230,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 2,
-    "cachedEventCount": 40,
+    "matchedEventCount": 20,
+    "newEventCount": 3,
+    "cachedEventCount": 38,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 49,
+    "archiveCount": 1,
+    "storedEventCount": 48,
     "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 49,
+    "undatedOldRemovedCount": 51,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 146,
+    "nonActivityRemovedCount": 140,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -93,6 +93,36 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "ext-844ffb885046e925",
+      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
+      "summary": "TVBS新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-10T07:00:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "小當家"
+      ],
+      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+    },
+    {
       "id": "ext-e92e2013d55ba53d",
       "title": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場",
       "summary": "life.tw",
@@ -121,36 +151,6 @@
       "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
-      "id": "ext-844ffb885046e925",
-      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
-      "summary": "TVBS新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-10T15:57:00.000Z",
-      "eventStartDate": "2026-09-17",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "小當家"
-      ],
-      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "9/17",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
-    },
-    {
       "id": "ext-5f235300259b09ab",
       "title": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場",
       "summary": "Paradaily",
@@ -177,8 +177,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-dbf7a556cceee1ad",
@@ -313,7 +313,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "gnn.gamer.com.tw",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -333,17 +333,17 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
       "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "universe.oneone.com.tw",
+      "summary": "oneone宇宙",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -364,12 +364,12 @@
         "黃泉使者",
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 universe.oneone.com.tw",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -434,7 +434,7 @@
     {
       "id": "ext-46b7774f36c46c6f",
       "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
-      "summary": "sounova.com",
+      "summary": "SouNova 少女星",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -454,12 +454,12 @@
       "workTitles": [
         "全國遠征系列"
       ],
-      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 sounova.com",
+      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -488,8 +488,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1101,38 +1101,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "ext-058a5dbb433da8b8",
-      "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "storm.mg",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-08-07T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "貓貓蟲咖波",
-        "排球少年",
-        "1神級動漫"
-      ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
-    },
-    {
       "id": "ext-baa2ea110cbe8cf8",
       "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
       "summary": "NOWnews今日新聞",
@@ -1286,8 +1254,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "gnn-310252",
@@ -1444,8 +1412,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1474,8 +1442,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1564,9 +1532,43 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z"
+      "discoveredAt": "2026-09-22T04:53:31.038Z",
+      "lastSeenAt": "2026-09-22T04:53:31.038Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-058a5dbb433da8b8",
+      "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
+      "summary": "storm.mg",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-08-07T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "貓貓蟲咖波",
+        "排球少年",
+        "1神級動漫"
+      ],
+      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-21T04:53:48.420Z",
+      "lastSeenAt": "2026-09-21T04:53:48.420Z",
+      "archivedAt": "2026-09-22T04:53:31.038Z"
+    }
+  ]
 }
