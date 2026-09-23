@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-22T04:53:31.038Z",
-    "lastSuccessfulUpdateAt": "2026-09-22T04:53:31.038Z",
+    "updatedAt": "2026-09-23T04:43:29.841Z",
+    "lastSuccessfulUpdateAt": "2026-09-23T04:43:29.841Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 433,
+    "fetchedExternalItemCount": 431,
     "uniqueNewsCount": 628,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 35,
+    "articleCandidateCount": 233,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 3,
+    "matchedEventCount": 21,
+    "newEventCount": 4,
     "cachedEventCount": 38,
     "rateLimitedCount": 0,
     "archiveCount": 1,
     "storedEventCount": 48,
-    "expiredRemovedCount": 10,
+    "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 51,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 140,
+    "nonActivityRemovedCount": 144,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -119,8 +119,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/17",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-e92e2013d55ba53d",
@@ -177,8 +177,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-dbf7a556cceee1ad",
@@ -337,8 +337,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -458,8 +458,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 26 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -488,8 +488,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -815,36 +815,6 @@
       "lastSeenAt": "2026-09-15T04:52:38.943Z"
     },
     {
-      "id": "gnn-308580",
-      "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
-      "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308580",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-22T08:31:07.000Z",
-      "eventStartDate": "2026-09-20",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "怪物彈珠"
-      ],
-      "searchCorpus": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣 由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
-      "dateConfidence": "medium",
-      "dateSource": "2026 年 9 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z"
-    },
-    {
       "id": "gnn-311758",
       "title": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島",
       "summary": "文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
@@ -1073,6 +1043,37 @@
       "lastSeenAt": "2026-09-09T04:40:05.018Z"
     },
     {
+      "id": "gnn-312209",
+      "title": "《活俠傳》音樂會門票今日開賣隨即秒殺 官方緊急宣布 11/13 加場演出",
+      "summary": "即將於 11 月登場的武俠角色扮演遊戲《活俠傳》音樂會「君所願兮江湖行」今（22）日展開售票，三分鐘內就銷售一空，官方晚間緊急宣布，將於 11 月 13 日加場演出，售票時間將於日後公布。 《活俠傳》由台灣獨立遊戲團隊原始鳥熊 Obb Studio 開發的武俠角色扮演遊戲。主角趙活並非天選之人，而是一名資質平凡、長年未能成為入室弟子的",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312209",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-09-22T11:51:14.000Z",
+      "eventStartDate": "2026-11-13",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "購票入場",
+      "feeText": "",
+      "workTitles": [
+        "活俠傳",
+        "君所願兮江湖行"
+      ],
+      "searchCorpus": "《活俠傳》音樂會門票今日開賣隨即秒殺 官方緊急宣布 11/13 加場演出 即將於 11 月登場的武俠角色扮演遊戲《活俠傳》音樂會「君所願兮江湖行」今（22）日展開售票，三分鐘內就銷售一空，官方晚間緊急宣布，將於 11 月 13 日加場演出，售票時間將於日後公布。 《活俠傳》由台灣獨立遊戲團隊原始鳥熊 Obb Studio 開發的武俠角色扮演遊戲。主角趙活並非天選之人，而是一名資質平凡、長年未能成為入室弟子的",
+      "dateConfidence": "medium",
+      "dateSource": "11/13",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+    },
+    {
       "id": "gnn-310732",
       "title": "人氣音樂組合 YOASOBI 宣布 1/9、1/10 登上大巨蛋！演唱會詳情正式公開",
       "summary": "日本現象級雙人組合 YOASOBI 在去年沖繩演唱會上，宣布了將展開出道以來規模最大的亞洲巡迴演出，包含有日本國內大阪、名古屋、札幌、福岡、東京，以及海外台北、首爾、新加坡等城市後，主辦單位今日正式宣布台北場將於 2027 年 1 月 9 日、1 月 10 日一連兩天於台北大巨蛋開唱的消息。 YOASOBI 是由 Ayase 與 ikura 組成的日本人氣音樂團體",
@@ -1254,8 +1255,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "gnn-310252",
@@ -1412,8 +1413,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1442,8 +1443,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1532,43 +1533,41 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z"
     }
   ],
   "archive": [
     {
-      "id": "ext-058a5dbb433da8b8",
-      "title": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠",
-      "summary": "storm.mg",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE10c0ZpVEtVMzFDQU5jb3ZReU0yNTVVdW9YMDhNNmJiZk0tdjd1WWRzc3VEaGo2cjBhM3NhMDNSb0VXMFJDVldDSDk5UEV6bzFR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
+      "id": "gnn-308580",
+      "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
+      "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308580",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
       "locations": [
-        "台灣"
+        "台北"
       ],
-      "confidence": "candidate",
-      "publishedAt": "2026-08-07T07:00:00.000Z",
-      "eventStartDate": null,
+      "confidence": "high",
+      "publishedAt": "2026-07-22T08:31:07.000Z",
+      "eventStartDate": "2026-09-20",
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "貓貓蟲咖波",
-        "排球少年",
-        "1神級動漫"
+        "怪物彈珠"
       ],
-      "searchCorpus": "《貓貓蟲咖波》《排球少年》輸了！台灣人最愛動漫IP快閃店TOP10：「1神級動漫」 人氣超越史努比奪冠 storm.mg",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-21T04:53:48.420Z",
-      "lastSeenAt": "2026-09-21T04:53:48.420Z",
-      "archivedAt": "2026-09-22T04:53:31.038Z"
+      "searchCorpus": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣 由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 9 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-22T09:37:08.897Z",
+      "lastSeenAt": "2026-07-22T09:37:08.897Z",
+      "archivedAt": "2026-09-23T04:43:29.841Z"
     }
   ]
 }
