@@ -3,32 +3,66 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-23T04:43:29.841Z",
-    "lastSuccessfulUpdateAt": "2026-09-23T04:43:29.841Z",
+    "updatedAt": "2026-09-24T04:48:17.920Z",
+    "lastSuccessfulUpdateAt": "2026-09-24T04:48:17.920Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 628,
-    "articleCandidateCount": 233,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 627,
+    "articleCandidateCount": 230,
     "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 21,
-    "newEventCount": 4,
-    "cachedEventCount": 38,
+    "matchedEventCount": 23,
+    "newEventCount": 5,
+    "cachedEventCount": 37,
     "rateLimitedCount": 0,
     "archiveCount": 1,
     "storedEventCount": 48,
-    "expiredRemovedCount": 9,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 51,
+    "undatedOldRemovedCount": 46,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 144,
+    "nonActivityRemovedCount": 142,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-312252",
+      "title": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景",
+      "summary": "繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312252",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "快閃店",
+      "locations": [
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-23T09:04:12.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-26",
+      "eventStatus": "ongoing",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "台味",
+        "Tom and Jerry 台味",
+        "Tom and Jerry 台味快閃店－台中站",
+        "台中驛"
+      ],
+      "searchCorpus": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景 繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
+      "dateConfidence": "high",
+      "dateSource": "9 月 24 日起至 10 月 26 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+    },
     {
       "id": "gnn-310560",
       "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
@@ -119,8 +153,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/17",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "ext-e92e2013d55ba53d",
@@ -151,6 +185,36 @@
       "lastSeenAt": "2026-09-19T04:35:47.283Z"
     },
     {
+      "id": "ext-dbf7a556cceee1ad",
+      "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T07:00:00.000Z",
+      "eventStartDate": "2026-09-12",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "三創生活園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師 HITMAN REBORN！"
+      ],
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/12",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+    },
+    {
       "id": "ext-5f235300259b09ab",
       "title": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場",
       "summary": "Paradaily",
@@ -177,38 +241,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
-    },
-    {
-      "id": "ext-dbf7a556cceee1ad",
-      "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-11T08:47:41.000Z",
-      "eventStartDate": "2026-09-12",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "三創生活園區",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "家庭教師 HITMAN REBORN！"
-      ],
-      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "9/12",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "gnn-310540",
@@ -275,8 +309,8 @@
       "dateConfidence": "medium",
       "dateSource": "8月20日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-12T04:32:35.555Z",
-      "lastSeenAt": "2026-09-12T04:32:35.555Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "gnn-309600",
@@ -337,8 +371,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -368,8 +402,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-22T04:53:31.038Z",
-      "lastSeenAt": "2026-09-22T04:53:31.038Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -488,8 +522,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1102,36 +1136,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "ext-baa2ea110cbe8cf8",
-      "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9iY0tsbjFpX251TjNRNm1RSFhfejFOel9Sc0gwWlByYlQ4Z1drVVJjSWpQTkdnSzNINmZDLUVGRlVOTlJmR0k3SUEyS1PSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-09T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z"
-    },
-    {
       "id": "gnn-309608",
       "title": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱",
       "summary": "過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
@@ -1255,8 +1259,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "gnn-310252",
@@ -1391,10 +1395,10 @@
     {
       "id": "ext-ea4771a92a9a3816",
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
-      "summary": "WalkerLand 窩客島",
+      "summary": "walkerland.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
       "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -1409,12 +1413,12 @@
       "admissionType": "免費入場",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand 窩客島",
+      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 walkerland.com.tw",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1443,8 +1447,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1539,35 +1543,35 @@
   ],
   "archive": [
     {
-      "id": "gnn-308580",
-      "title": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣",
-      "summary": "由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308580",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
+      "id": "ext-baa2ea110cbe8cf8",
+      "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9iY0tsbjFpX251TjNRNm1RSFhfejFOel9Sc0gwWlByYlQ4Z1drVVJjSWpQTkdnSzNINmZDLUVGRlVOTlJmR0k3SUEyS1PSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
       "locations": [
-        "台北"
+        "新竹"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-22T08:31:07.000Z",
-      "eventStartDate": "2026-09-20",
+      "publishedAt": "2026-08-09T07:00:00.000Z",
+      "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "怪物彈珠"
+        "超動漫研究社"
       ],
-      "searchCorpus": "《怪物彈珠》交響音樂會 ～The Classical～ 9 月首度登台 7/24 中午 12:00 正式開賣 由 黑子娛樂 主辦，《怪物彈珠》交響音樂會 ～The Classical～ 將於 2026 年 9 月 20 日在台北福華文教會館卓越堂登場。本次演出由 遊音交響樂團 擔綱，集結專業演奏家，以完整交響樂編制重新演繹歷年經典配樂。 亮點搶先看 重現熱血樂章： 精選《怪物彈珠》主題曲、強化進化冒險、混戰世界、未開之大地、神獸聖域、爆絕、禁忌之獄等多",
-      "dateConfidence": "medium",
-      "dateSource": "2026 年 9 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-22T09:37:08.897Z",
-      "lastSeenAt": "2026-07-22T09:37:08.897Z",
-      "archivedAt": "2026-09-23T04:43:29.841Z"
+      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-06T04:36:45.799Z",
+      "lastSeenAt": "2026-09-06T04:36:45.799Z",
+      "archivedAt": "2026-09-24T04:48:17.920Z"
     }
   ]
 }
