@@ -3,32 +3,66 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-24T04:48:17.920Z",
-    "lastSuccessfulUpdateAt": "2026-09-24T04:48:17.920Z",
+    "updatedAt": "2026-09-25T04:55:57.913Z",
+    "lastSuccessfulUpdateAt": "2026-09-25T04:55:57.913Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 627,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 34,
+    "fetchedExternalItemCount": 433,
+    "uniqueNewsCount": 626,
+    "articleCandidateCount": 229,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 23,
-    "newEventCount": 5,
+    "matchedEventCount": 22,
+    "newEventCount": 4,
     "cachedEventCount": 37,
     "rateLimitedCount": 0,
     "archiveCount": 1,
-    "storedEventCount": 48,
-    "expiredRemovedCount": 10,
+    "storedEventCount": 49,
+    "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 46,
+    "undatedOldRemovedCount": 44,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 142,
+    "nonActivityRemovedCount": 145,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-312354",
+      "title": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場",
+      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312354",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-24T10:27:42.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-28",
+      "eventStatus": "ongoing",
+      "venue": "三創園區可愛登場 守護小鎮的《飛天小女警",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "飛天小女警",
+        "熊熊遇見你",
+        "飛天小女警Ｘ熊熊遇見你",
+        "Power Playdate",
+        "主視覺區"
+      ],
+      "searchCorpus": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
+      "dateConfidence": "high",
+      "dateSource": "自即日起至 10/28",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
+    },
     {
       "id": "gnn-312252",
       "title": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景",
@@ -127,9 +161,42 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "gnn-312349",
+      "title": "「牡蠣寶寶」快閃店前進台北 9/25 華山登場 60 坪沉浸式養殖中心全面升級",
+      "summary": "迪士尼《愛麗絲夢遊仙境》「牡蠣寶寶主題養殖中心快閃店」將於 9 月 25 日進駐華山 1914 文化創意產業園區，帶著全面升級的體驗與粉絲見面。這次台北站打造 60 坪沉浸式空間，不但有規模更大的主題造景「牡蠣寶寶主題養殖中心」，經典「愛麗絲英式午茶」與牡蠣寶寶主題打卡區也將登場，更首度加碼台北限定主題拍貼機、2 米大型貝",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312349",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-24T09:59:48.000Z",
+      "eventStartDate": "2026-09-25",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "華山 1914 文化創意產業園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "愛麗絲夢遊仙境",
+        "牡蠣寶寶",
+        "牡蠣寶寶主題養殖中心",
+        "愛麗絲英式午茶"
+      ],
+      "searchCorpus": "「牡蠣寶寶」快閃店前進台北 9/25 華山登場 60 坪沉浸式養殖中心全面升級 迪士尼《愛麗絲夢遊仙境》「牡蠣寶寶主題養殖中心快閃店」將於 9 月 25 日進駐華山 1914 文化創意產業園區，帶著全面升級的體驗與粉絲見面。這次台北站打造 60 坪沉浸式空間，不但有規模更大的主題造景「牡蠣寶寶主題養殖中心」，經典「愛麗絲英式午茶」與牡蠣寶寶主題打卡區也將登場，更首度加碼台北限定主題拍貼機、2 米大型貝",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 25 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
+    },
+    {
       "id": "ext-844ffb885046e925",
       "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
-      "summary": "TVBS新聞網",
+      "summary": "news.tvbs.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -149,12 +216,12 @@
       "workTitles": [
         "小當家"
       ],
-      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
+      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 news.tvbs.com.tw",
       "dateConfidence": "medium",
       "dateSource": "9/17",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-e92e2013d55ba53d",
@@ -211,8 +278,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -241,8 +308,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "gnn-310540",
@@ -371,8 +438,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -402,8 +469,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -498,7 +565,7 @@
     {
       "id": "ext-60341764dad0f6d6",
       "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
-      "summary": "SouNova 少女星",
+      "summary": "sounova.com",
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -518,12 +585,12 @@
       "workTitles": [
         "孤獨搖滾！"
       ],
-      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
+      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 sounova.com",
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1136,41 +1203,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "gnn-309608",
-      "title": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱",
-      "summary": "過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309608",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-10T02:33:01.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "BLEACH 死神",
-        "機動戰士鋼彈 00",
-        "青之驅魔師",
-        "亞爾斯蘭戰記",
-        "我的英雄學院",
-        "OVER THE WORLD"
-      ],
-      "searchCorpus": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱 過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-10T02:33:43.485Z",
-      "lastSeenAt": "2026-08-10T02:33:43.485Z"
-    },
-    {
       "id": "ext-0f83f086603a7bb2",
       "title": "比奇堡居民盲盒開賣！台北華山「夏日萌盒祭」快閃店免費逛三麗鷗、蠟筆小新等人氣IP 一次登場",
       "summary": "上報Up Media",
@@ -1259,8 +1291,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "gnn-310252",
@@ -1395,7 +1427,7 @@
     {
       "id": "ext-ea4771a92a9a3816",
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
-      "summary": "walkerland.com.tw",
+      "summary": "WalkerLand 窩客島",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
@@ -1413,12 +1445,12 @@
       "admissionType": "免費入場",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 walkerland.com.tw",
+      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand 窩客島",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1447,8 +1479,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1537,25 +1569,25 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
+      "discoveredAt": "2026-09-25T04:55:57.913Z",
+      "lastSeenAt": "2026-09-25T04:55:57.913Z"
     }
   ],
   "archive": [
     {
-      "id": "ext-baa2ea110cbe8cf8",
-      "title": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9iY0tsbjFpX251TjNRNm1RSFhfejFOel9Sc0gwWlByYlQ4Z1drVVJjSWpQTkdnSzNINmZDLUVGRlVOTlJmR0k3SUEyS1PSAVJBVV95cUxPRF9Ocl9KQjlMUGMzMkdPY0I3UVdxcEJFTW5UZDJvcDZyVzQ0N1QxTTdrU0M0NFNPZFBKMEU5YUVQblNSOGlscUo4OU1wODJKeXdB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
+      "id": "gnn-309608",
+      "title": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱",
+      "summary": "過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309608",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
       "locations": [
-        "新竹"
+        "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-09T07:00:00.000Z",
+      "publishedAt": "2026-08-10T02:33:01.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
@@ -1563,15 +1595,20 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "超動漫研究社"
+        "BLEACH 死神",
+        "機動戰士鋼彈 00",
+        "青之驅魔師",
+        "亞爾斯蘭戰記",
+        "我的英雄學院",
+        "OVER THE WORLD"
       ],
-      "searchCorpus": "「超動漫研究社」進駐新竹巨城！黃泉使者、芙莉蓮快閃店免費逛 NOWnews今日新聞",
+      "searchCorpus": "搖滾樂團 UVERworld 宣布舉行台北專場演唱會 預定 11 月 Zepp New Taipei 開唱 過去曾為多部動畫演唱主題曲的日本搖滾樂團 UVERworld，宣布 11 月將在台舉行專場演唱會的消息。 UVERworld 為日本知名搖滾樂團，過去曾為《BLEACH 死神》、《機動戰士鋼彈 00》、《青之驅魔師》、《亞爾斯蘭戰記》以及《我的英雄學院》等多部動畫、遊戲、真人影集與電影演唱主題曲，團體以「OVER THE WORLD」為名， 憑藉搖滾、電子與嘻哈的",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-06T04:36:45.799Z",
-      "lastSeenAt": "2026-09-06T04:36:45.799Z",
-      "archivedAt": "2026-09-24T04:48:17.920Z"
+      "discoveredAt": "2026-08-10T02:33:43.485Z",
+      "lastSeenAt": "2026-08-10T02:33:43.485Z",
+      "archivedAt": "2026-09-25T04:55:57.913Z"
     }
   ]
 }
