@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-27T05:16:51.872Z",
-    "lastSuccessfulUpdateAt": "2026-09-27T05:16:51.872Z",
+    "updatedAt": "2026-09-28T05:21:41.435Z",
+    "lastSuccessfulUpdateAt": "2026-09-28T05:21:41.435Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 433,
-    "uniqueNewsCount": 630,
-    "articleCandidateCount": 232,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 628,
+    "articleCandidateCount": 234,
     "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 24,
-    "newEventCount": 5,
+    "matchedEventCount": 20,
+    "newEventCount": 3,
     "cachedEventCount": 36,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 49,
-    "expiredRemovedCount": 8,
+    "archiveCount": 3,
+    "storedEventCount": 46,
+    "expiredRemovedCount": 11,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 48,
+    "undatedOldRemovedCount": 49,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 140,
+    "nonActivityRemovedCount": 145,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -194,64 +194,6 @@
       "lastSeenAt": "2026-09-25T04:55:57.913Z"
     },
     {
-      "id": "ext-844ffb885046e925",
-      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
-      "summary": "TVBS新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-10T07:00:00.000Z",
-      "eventStartDate": "2026-09-17",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "小當家"
-      ],
-      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "9/17",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
-    },
-    {
-      "id": "ext-e92e2013d55ba53d",
-      "title": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場",
-      "summary": "life.tw",
-      "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxOdFYwUV9Mb2JLeEtod2hURS1GWXZmeDI2dnQwS2c1djBJMndLRGlOMFhrbEtfVXVXOG9CNE1ZUFR6eHNZdVpWMWowUEI4bnU4NVFmRnZ1Sm1lM0llWk53cGNEVkk4LU9SUHZscE92MWxwZURtS3BaUHNHWU9OSWIxd3VkeXYyOXEtbnl5UlZHSkN5RGxiQWtFTlJ4MzdGTXRsWFJuMTlLekxCaXF1emprVl9LcUl4SlphVTgwcDhnQWxtX3pQYmN4ak90R3NqTkpneWFGUDJ3dzd1S2tHWkdvX1pxMS1hUlh2S1JuRURvN3VfcUI1MjAybzdlSko3ODcxRmpLTE01RGU3YVFKd0kxdWlJc29xMG9pbWNFSHcteHVZR25t?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-09T07:00:00.000Z",
-      "eventStartDate": "2026-09-17",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場 life.tw",
-      "dateConfidence": "medium",
-      "dateSource": "9/17",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-19T04:35:47.283Z",
-      "lastSeenAt": "2026-09-19T04:35:47.283Z"
-    },
-    {
       "id": "ext-dbf7a556cceee1ad",
       "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
       "summary": "GNN 新聞網",
@@ -278,8 +220,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -308,8 +250,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "gnn-310540",
@@ -438,8 +380,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -469,8 +411,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -590,8 +532,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -620,8 +562,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -914,40 +856,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-09-15T04:52:38.943Z",
       "lastSeenAt": "2026-09-15T04:52:38.943Z"
-    },
-    {
-      "id": "gnn-311758",
-      "title": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島",
-      "summary": "文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311758",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-16T04:15:57.000Z",
-      "eventStartDate": "2026-09-23",
-      "eventEndDate": "2026-09-27",
-      "eventStatus": "upcoming",
-      "venue": "展覽館舉辦「2026 臺灣國際兒童及青少年",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "海巫事務所",
-        "台灣特有種",
-        "臺灣漫畫館",
-        "2026 臺灣國際兒童及青少年嘉年華－兒少書展",
-        "臺漫大發現——重返故事島！"
-      ],
-      "searchCorpus": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島 文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
-      "dateConfidence": "high",
-      "dateSource": "9 月 23 日至 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "gnn-311846",
@@ -1419,8 +1327,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1449,8 +1357,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1539,8 +1447,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1567,9 +1475,105 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-09-28T05:21:41.435Z",
+      "lastSeenAt": "2026-09-28T05:21:41.435Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-311758",
+      "title": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島",
+      "summary": "文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311758",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-16T04:15:57.000Z",
+      "eventStartDate": "2026-09-23",
+      "eventEndDate": "2026-09-27",
+      "eventStatus": "expired",
+      "venue": "展覽館舉辦「2026 臺灣國際兒童及青少年",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "海巫事務所",
+        "台灣特有種",
+        "臺灣漫畫館",
+        "2026 臺灣國際兒童及青少年嘉年華－兒少書展",
+        "臺漫大發現——重返故事島！"
+      ],
+      "searchCorpus": "2026 兒少書展「臺灣漫畫館」9/23 登場 文策院攜手臺灣漫畫基地打造故事島 文化內容策進院（TAICCA）將於 9 月 23 日至 27 日在高雄展覽館舉辦「2026 臺灣國際兒童及青少年嘉年華－兒少書展」，打造臺灣漫畫館「臺漫大發現——重返故事島！」主題展區。延續 2025 年首屆臺灣國際兒少書展臺灣漫畫館的策展概念，本次再度邀請漫畫家哎呀呀繪製主視覺，並精選《海巫事務所》、《台灣特有種》、《再見信天翁",
+      "dateConfidence": "high",
+      "dateSource": "9 月 23 日至 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z",
+      "archivedAt": "2026-09-28T05:21:41.435Z"
+    },
+    {
+      "id": "ext-844ffb885046e925",
+      "title": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台",
+      "summary": "TVBS新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1RcVE0V0FmNXltOGRPWUFFMkpTeXQ4eThDQldKcS1fTnVxTG1wWmQ4dFJucXVpYWItRVVwaEhlcEF2a1k4a3FYRjNCdmJsdw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-10T07:00:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "小當家"
+      ],
+      "searchCorpus": "台中動漫展9/17登場！盧秀燕變「小當家」 日歌手來台 TVBS新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-27T05:16:51.872Z",
+      "lastSeenAt": "2026-09-27T05:16:51.872Z",
+      "archivedAt": "2026-09-28T05:21:41.435Z"
+    },
+    {
+      "id": "ext-e92e2013d55ba53d",
+      "title": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場",
+      "summary": "life.tw",
+      "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxOdFYwUV9Mb2JLeEtod2hURS1GWXZmeDI2dnQwS2c1djBJMndLRGlOMFhrbEtfVXVXOG9CNE1ZUFR6eHNZdVpWMWowUEI4bnU4NVFmRnZ1Sm1lM0llWk53cGNEVkk4LU9SUHZscE92MWxwZURtS3BaUHNHWU9OSWIxd3VkeXYyOXEtbnl5UlZHSkN5RGxiQWtFTlJ4MzdGTXRsWFJuMTlLekxCaXF1emprVl9LcUl4SlphVTgwcDhnQWxtX3pQYmN4ak90R3NqTkpneWFGUDJ3dzd1S2tHWkdvX1pxMS1hUlh2S1JuRURvN3VfcUI1MjAybzdlSko3ODcxRmpLTE01RGU3YVFKd0kxdWlJc29xMG9pbWNFSHcteHVZR25t?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T07:00:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "盧秀燕Cosplay小當家 台中國際動漫博覽會9/17~23登場 life.tw",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-19T04:35:47.283Z",
+      "lastSeenAt": "2026-09-19T04:35:47.283Z",
+      "archivedAt": "2026-09-28T05:21:41.435Z"
+    }
+  ]
 }
