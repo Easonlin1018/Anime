@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-29T05:42:19.377Z",
-    "lastSuccessfulUpdateAt": "2026-09-29T05:42:19.377Z",
+    "updatedAt": "2026-09-30T05:30:31.204Z",
+    "lastSuccessfulUpdateAt": "2026-09-30T05:30:31.204Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 432,
-    "uniqueNewsCount": 630,
-    "articleCandidateCount": 233,
-    "articleFetchSuccessCount": 35,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 627,
+    "articleCandidateCount": 229,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 25,
-    "newEventCount": 7,
-    "cachedEventCount": 36,
+    "matchedEventCount": 21,
+    "newEventCount": 2,
+    "cachedEventCount": 37,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 50,
-    "expiredRemovedCount": 11,
+    "archiveCount": 2,
+    "storedEventCount": 48,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 49,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 138,
+    "nonActivityRemovedCount": 141,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -196,7 +196,7 @@
     {
       "id": "ext-dbf7a556cceee1ad",
       "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -216,12 +216,12 @@
       "workTitles": [
         "家庭教師 HITMAN REBORN！"
       ],
-      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -356,7 +356,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -376,12 +376,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -411,8 +411,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -475,39 +475,9 @@
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
-      "id": "ext-46b7774f36c46c6f",
-      "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": "2026-07-26",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "全國遠征系列"
-      ],
-      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 26 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z"
-    },
-    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4Gamers",
+      "summary": "4gamers.com.tw",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -528,12 +498,12 @@
         "孤獨搖滾！動畫展",
         "團結Band"
       ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4gamers.com.tw",
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -562,8 +532,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -1173,40 +1143,6 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "gnn-309957",
-      "title": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件",
-      "summary": "為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309957",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-15T09:24:47.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "Pokemon GO",
-        "超夢",
-        "陽光大廳",
-        "皮卡丘",
-        "伊布"
-      ],
-      "searchCorpus": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件 為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-17T01:53:59.785Z",
-      "lastSeenAt": "2026-08-17T01:53:59.785Z"
-    },
-    {
       "id": "ext-ce94dc3a1f4d4a1a",
       "title": "開拓動漫祭 FF47 暑假三日動漫盛會登場！ 日本人氣嘉賓、創作者齊聚台灣精彩舞台、原創特展一次集結 台日動漫文化熱鬧交流",
       "summary": "Paradaily",
@@ -1389,8 +1325,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1419,8 +1355,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1509,8 +1445,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1537,8 +1473,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1568,13 +1504,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
       "title": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票",
-      "summary": "game.ettoday.net",
+      "summary": "ETtoday遊戲雲",
       "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE14YUZzZHBMMmlfdEVOREFpQkhzaVJWNFhUQUlfWWZScV9nX0ZTQmhIRWNMdXdYNGQxbTd5OXRNUHZWSjBSbjM4V2g2cktEdXdTV1JrMDduONIBTEFVX3lxTE5KMTVvd3FWb1VBUW5GYnJPaERHYXlZMWFwTnozbFpPR3FVY3JlT2M2MERtTldJZ21RMFhhZjV1OXpPYVI3cjNXTkg4Umk?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -1592,13 +1528,80 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票 game.ettoday.net",
+      "searchCorpus": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票 ETtoday遊戲雲",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
+      "discoveredAt": "2026-09-30T05:30:31.204Z",
+      "lastSeenAt": "2026-09-30T05:30:31.204Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-309957",
+      "title": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件",
+      "summary": "為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309957",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-15T09:24:47.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Pokemon GO",
+        "超夢",
+        "陽光大廳",
+        "皮卡丘",
+        "伊布"
+      ],
+      "searchCorpus": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件 為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-17T01:53:59.785Z",
+      "lastSeenAt": "2026-08-17T01:53:59.785Z",
+      "archivedAt": "2026-09-30T05:30:31.204Z"
+    },
+    {
+      "id": "ext-46b7774f36c46c6f",
+      "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": "2026-07-26",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "全國遠征系列"
+      ],
+      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 26 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-23T04:43:29.841Z",
+      "lastSeenAt": "2026-09-23T04:43:29.841Z",
+      "archivedAt": "2026-09-30T05:30:31.204Z"
+    }
+  ]
 }
