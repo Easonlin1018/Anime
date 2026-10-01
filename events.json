@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-09-30T05:30:31.204Z",
-    "lastSuccessfulUpdateAt": "2026-09-30T05:30:31.204Z",
+    "updatedAt": "2026-10-01T05:50:29.064Z",
+    "lastSuccessfulUpdateAt": "2026-10-01T05:50:29.064Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
     "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 627,
+    "uniqueNewsCount": 628,
     "articleCandidateCount": 229,
-    "articleFetchSuccessCount": 34,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 21,
-    "newEventCount": 2,
+    "matchedEventCount": 23,
+    "newEventCount": 5,
     "cachedEventCount": 37,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
-    "storedEventCount": 48,
-    "expiredRemovedCount": 10,
+    "archiveCount": 1,
+    "storedEventCount": 49,
+    "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 49,
+    "undatedOldRemovedCount": 48,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 141,
+    "nonActivityRemovedCount": 140,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -98,38 +98,6 @@
       "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
-      "id": "gnn-310560",
-      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
-      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-27T09:35:02.000Z",
-      "eventStartDate": "2026-09-01",
-      "eventEndDate": "2026-09-30",
-      "eventStatus": "ongoing",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "IDOLiSH7 - 偶像星願",
-        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
-        "こまどり モフモフパレード"
-      ],
-      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
-      "dateConfidence": "high",
-      "dateSource": "9/1~9/30",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z"
-    },
-    {
       "id": "gnn-308121",
       "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
       "summary": "自 1926 年《小熊維尼》繪本第一集問世起，維尼與他的夥伴們已經陪伴大家度過一世紀的溫暖時光，為歡慶迪士尼經典角色「小熊維尼」100 週年，2026 年 7 月 10 日至 10 月 11 日，「小熊維尼 友你相繪」100 週年限定快閃店於台北松山文創園區正式登場界。 本次快閃店將跨越百年時空，帶領粉絲循著時光隧",
@@ -196,7 +164,7 @@
     {
       "id": "ext-dbf7a556cceee1ad",
       "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
-      "summary": "gnn.gamer.com.tw",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -216,12 +184,12 @@
       "workTitles": [
         "家庭教師 HITMAN REBORN！"
       ],
-      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 gnn.gamer.com.tw",
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -356,7 +324,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "gnn.gamer.com.tw",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -376,12 +344,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -411,8 +379,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -477,7 +445,7 @@
     {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4gamers.com.tw",
+      "summary": "4Gamers",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -498,12 +466,12 @@
         "孤獨搖滾！動畫展",
         "團結Band"
       ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4gamers.com.tw",
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -532,8 +500,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -928,6 +896,69 @@
       "lastSeenAt": "2026-07-28T10:12:56.163Z"
     },
     {
+      "id": "ext-0661909152b8aa8b",
+      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
+      "summary": "PChome Online 新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T06:17:41.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+    },
+    {
+      "id": "gnn-312577",
+      "title": "羚邦與 BTUHOBBYBASE 攜手多款動漫作品進軍高雄動漫節",
+      "summary": "配合高雄國際動漫節（KICA）即將於雙十連假（10/9-10/12）連續四天於高雄巨蛋登場，羚邦與 BTUHOBBYBASE 再次集結旗下多部人氣動畫作品，帶來各式週邊商品與限定福袋，其中包含《咒術迴戰》、《排球少年！！》、《我的英雄學院》、《遊戲人生》及《GACHIAKUTA》等多種作品週邊。 福袋部分，《咒術迴戰》福袋一次收錄「獄門疆」絨毛吊飾、",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312577",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-30T09:51:31.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": "2026-10-12",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "咒術迴戰",
+        "排球少年！！",
+        "我的英雄學院",
+        "遊戲人生",
+        "GACHIAKUTA",
+        "獄門疆"
+      ],
+      "searchCorpus": "羚邦與 BTUHOBBYBASE 攜手多款動漫作品進軍高雄動漫節 配合高雄國際動漫節（KICA）即將於雙十連假（10/9-10/12）連續四天於高雄巨蛋登場，羚邦與 BTUHOBBYBASE 再次集結旗下多部人氣動畫作品，帶來各式週邊商品與限定福袋，其中包含《咒術迴戰》、《排球少年！！》、《我的英雄學院》、《遊戲人生》及《GACHIAKUTA》等多種作品週邊。 福袋部分，《咒術迴戰》福袋一次收錄「獄門疆」絨毛吊飾、",
+      "dateConfidence": "high",
+      "dateSource": "10/9-10/12",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+    },
+    {
       "id": "ext-24b07d0d8316ac7a",
       "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
       "summary": "Paradaily",
@@ -1303,7 +1334,7 @@
     {
       "id": "ext-ea4771a92a9a3816",
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
-      "summary": "WalkerLand",
+      "summary": "WalkerLand 窩客島",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
@@ -1321,12 +1352,12 @@
       "admissionType": "免費入場",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand",
+      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand 窩客島",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1355,8 +1386,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1371,7 +1402,7 @@
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-15T07:54:49.000Z",
+      "publishedAt": "2026-09-15T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1385,8 +1416,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-20T04:52:17.492Z",
-      "lastSeenAt": "2026-09-20T04:52:17.492Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-c6f61eee1ee05db4",
@@ -1445,8 +1476,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1504,8 +1535,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-01T05:50:29.064Z",
+      "lastSeenAt": "2026-10-01T05:50:29.064Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -1538,70 +1569,37 @@
   ],
   "archive": [
     {
-      "id": "gnn-309957",
-      "title": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件",
-      "summary": "為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309957",
+      "id": "gnn-310560",
+      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
+      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-15T09:24:47.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
+      "publishedAt": "2026-08-27T09:35:02.000Z",
+      "eventStartDate": "2026-09-01",
+      "eventEndDate": "2026-09-30",
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "Pokemon GO",
-        "超夢",
-        "陽光大廳",
-        "皮卡丘",
-        "伊布"
+        "IDOLiSH7 - 偶像星願",
+        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
+        "こまどり モフモフパレード"
       ],
-      "searchCorpus": "《Pokemon GO》十週年特展於大安森林公園站揭幕 行銷總監回應「超夢」事件 為迎接《Pokemon GO》推出十週年，Scopely Explore 今（15）日攜手臺北捷運公司，於捷運大安森林公園站「陽光大廳」舉辦《Pokemon GO》十週年特展開幕活動。除了臺北捷運公司馮兆興處長、《Pokemon GO》亞太區資深行銷總監許世婉（Elaine Hui）出席之外，「皮卡丘」與「伊布」也現身會場，與玩家一同迎接遊戲問世十年的里程碑。 臺北捷運公司馮",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-17T01:53:59.785Z",
-      "lastSeenAt": "2026-08-17T01:53:59.785Z",
-      "archivedAt": "2026-09-30T05:30:31.204Z"
-    },
-    {
-      "id": "ext-46b7774f36c46c6f",
-      "title": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNMHhRWC0zOVZhNmFLUGt0ZUZhSUcyc0RNQzhrWEE0bGlSSmZpNi1vdGVwYXpVQWY0dHdpeXNNblhEWXF0ODBUbmxTZ2ExUW9kZzZuYUpjSTIwbWt4dktUc3R1bDNoQ0tjV1I3QXBDSFF1UjVvcV9UcTFQa0pDdml2V1NXQQ?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": "2026-07-26",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "全國遠征系列"
-      ],
-      "searchCorpus": "排球少年快閃店「全國遠征系列」海外首站7 月 26 日登陸臺中驛鐵道文化園區，集結熱血高校重溫青春悸動 SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 26 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z",
-      "archivedAt": "2026-09-30T05:30:31.204Z"
+      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
+      "dateConfidence": "high",
+      "dateSource": "9/1~9/30",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-07T04:38:56.105Z",
+      "lastSeenAt": "2026-09-07T04:38:56.105Z",
+      "archivedAt": "2026-10-01T05:50:29.064Z"
     }
   ]
 }
