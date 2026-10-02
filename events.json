@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-01T05:50:29.064Z",
-    "lastSuccessfulUpdateAt": "2026-10-01T05:50:29.064Z",
+    "updatedAt": "2026-10-02T05:35:00.379Z",
+    "lastSuccessfulUpdateAt": "2026-10-02T05:35:00.379Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 628,
-    "articleCandidateCount": 229,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 432,
+    "uniqueNewsCount": 629,
+    "articleCandidateCount": 228,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 23,
-    "newEventCount": 5,
+    "newEventCount": 3,
     "cachedEventCount": 37,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 49,
-    "expiredRemovedCount": 9,
+    "archiveCount": 0,
+    "storedEventCount": 50,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 48,
+    "undatedOldRemovedCount": 51,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 140,
+    "nonActivityRemovedCount": 136,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -164,7 +164,7 @@
     {
       "id": "ext-dbf7a556cceee1ad",
       "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -184,12 +184,12 @@
       "workTitles": [
         "家庭教師 HITMAN REBORN！"
       ],
-      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -324,7 +324,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -344,12 +344,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -379,8 +379,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -470,8 +470,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -500,8 +500,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-577a1ba967b49720",
@@ -898,7 +898,7 @@
     {
       "id": "ext-0661909152b8aa8b",
       "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
+      "summary": "PChome Online新聞",
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -916,12 +916,43 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online新聞",
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
+    },
+    {
+      "id": "gnn-312738",
+      "title": "木棉花公開 2026 高雄國際動漫節現場福袋與優惠活動資訊",
+      "summary": "2026 高雄國際動漫節即將於 10 月 9 日至 10 月 12 日在高雄巨蛋體育館登場，動畫代理商木棉花也在今日公開了展場限定回饋、福袋、滿額好禮、首賣新品與精選商品資訊。 曾在台北漫博登場的《黃泉使者》主題入口，這次將移至南台灣，木棉花特別打造高達四米的巨型迎賓拱門，邀請大家一起感受《黃泉使者》這部作品的魅力。 木棉花今",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312738",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T05:06:14.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": "2026-10-12",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者"
+      ],
+      "searchCorpus": "木棉花公開 2026 高雄國際動漫節現場福袋與優惠活動資訊 2026 高雄國際動漫節即將於 10 月 9 日至 10 月 12 日在高雄巨蛋體育館登場，動畫代理商木棉花也在今日公開了展場限定回饋、福袋、滿額好禮、首賣新品與精選商品資訊。 曾在台北漫博登場的《黃泉使者》主題入口，這次將移至南台灣，木棉花特別打造高達四米的巨型迎賓拱門，邀請大家一起感受《黃泉使者》這部作品的魅力。 木棉花今",
+      "dateConfidence": "high",
+      "dateSource": "10 月 9 日至 10 月 12 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "gnn-312577",
@@ -1356,8 +1387,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1386,13 +1417,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
       "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE50Y2FVN04yX01nV2ZYaXNxNTNNcGdyeFpuUnpOMU9FN0RIUVlqaEZrb3dpSmlLWXo5Qk5BTTFvbG1hcncxdG9PWlZibjRzQ2t5Q1lFdER6THk?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1412,12 +1443,12 @@
       "workTitles": [
         "2026 高雄國際動漫節"
       ],
-      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 GNN 新聞網",
+      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 gnn.gamer.com.tw",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-c6f61eee1ee05db4",
@@ -1476,8 +1507,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1535,8 +1566,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -1563,43 +1594,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-02T05:35:00.379Z",
+      "lastSeenAt": "2026-10-02T05:35:00.379Z"
     }
   ],
-  "archive": [
-    {
-      "id": "gnn-310560",
-      "title": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場",
-      "summary": "偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310560",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-27T09:35:02.000Z",
-      "eventStartDate": "2026-09-01",
-      "eventEndDate": "2026-09-30",
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "IDOLiSH7 - 偶像星願",
-        "IDOLiSH7-偶像星願- MEMORIAL EXHIBITION",
-        "こまどり モフモフパレード"
-      ],
-      "searchCorpus": "《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE 宣布 9/1 起於微風信義登場 偶像作品《IDOLiSH7 - 偶像星願 -》MEMORIAL POP UP STORE，宣布將於 9/1~9/30 在台北微風信義登場的消息，16 名偶像集結於現場，讓經紀人重溫偶像們一路走來的軌跡。在本次活動中，將推出「IDOLiSH7-偶像星願- MEMORIAL EXHIBITION」精選內容展示，集結包含日本展會、演唱會、TV 版等周邊商品販售，最新「こまどり モフモフパレード」（KOMADORI MOFUMOFU PAR",
-      "dateConfidence": "high",
-      "dateSource": "9/1~9/30",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-07T04:38:56.105Z",
-      "lastSeenAt": "2026-09-07T04:38:56.105Z",
-      "archivedAt": "2026-10-01T05:50:29.064Z"
-    }
-  ]
+  "archive": []
 }
