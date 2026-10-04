@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-03T05:16:56.596Z",
-    "lastSuccessfulUpdateAt": "2026-10-03T05:16:56.596Z",
+    "updatedAt": "2026-10-04T05:50:27.784Z",
+    "lastSuccessfulUpdateAt": "2026-10-04T05:50:27.784Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
     "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 623,
-    "articleCandidateCount": 225,
-    "articleFetchSuccessCount": 36,
+    "uniqueNewsCount": 622,
+    "articleCandidateCount": 223,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 4,
-    "cachedEventCount": 39,
+    "matchedEventCount": 20,
+    "newEventCount": 2,
+    "cachedEventCount": 40,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 51,
     "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 50,
+    "undatedOldRemovedCount": 51,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 134,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -188,8 +188,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -348,8 +348,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -379,8 +379,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -470,8 +470,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -898,7 +898,7 @@
     {
       "id": "ext-0661909152b8aa8b",
       "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
+      "summary": "PChome Online新聞",
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -916,12 +916,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online新聞",
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "gnn-312738",
@@ -1229,8 +1229,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-ce94dc3a1f4d4a1a",
@@ -1415,8 +1415,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
@@ -1445,8 +1445,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1535,8 +1535,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1594,8 +1594,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -1622,8 +1622,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-03T05:16:56.596Z",
-      "lastSeenAt": "2026-10-03T05:16:56.596Z"
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z"
     }
   ],
   "archive": []
