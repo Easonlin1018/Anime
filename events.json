@@ -3,29 +3,50 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-04T05:50:27.784Z",
-    "lastSuccessfulUpdateAt": "2026-10-04T05:50:27.784Z",
-    "fetchStatus": "success",
+    "updatedAt": "2026-10-05T05:37:27.563Z",
+    "lastSuccessfulUpdateAt": "2026-10-05T05:37:27.563Z",
+    "fetchStatus": "partial",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 622,
-    "articleCandidateCount": 223,
-    "articleFetchSuccessCount": 37,
+    "fetchedExternalItemCount": 0,
+    "uniqueNewsCount": 237,
+    "articleCandidateCount": 53,
+    "articleFetchSuccessCount": 53,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 2,
-    "cachedEventCount": 40,
+    "matchedEventCount": 21,
+    "newEventCount": 13,
+    "cachedEventCount": 43,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 51,
-    "expiredRemovedCount": 9,
+    "storedEventCount": 63,
+    "expiredRemovedCount": 0,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 51,
+    "undatedOldRemovedCount": 0,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 134,
-    "sourceErrors": [],
+    "nonActivityRemovedCount": 32,
+    "sourceErrors": [
+      {
+        "source": "Google News－台灣動漫活動",
+        "error": "HTTP 503 Service Unavailable"
+      },
+      {
+        "source": "Google News－官方主辦單位",
+        "error": "HTTP 503 Service Unavailable"
+      },
+      {
+        "source": "Google News－漫畫博覽會",
+        "error": "HTTP 503 Service Unavailable"
+      },
+      {
+        "source": "Google News－台中國際動漫節",
+        "error": "HTTP 503 Service Unavailable"
+      },
+      {
+        "source": "Google News－展會作品名單",
+        "error": "HTTP 503 Service Unavailable"
+      }
+    ],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
@@ -35,7 +56,7 @@
       "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=312354",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -60,8 +81,42 @@
       "dateConfidence": "high",
       "dateSource": "自即日起至 10/28",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-311846",
+      "title": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場",
+      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311846",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T03:50:21.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-28",
+      "eventStatus": "ongoing",
+      "venue": "三創園區登場 守護小鎮的《飛天小女警》花",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "飛天小女警",
+        "熊熊遇見你",
+        "飛天小女警 X 熊熊遇見你",
+        "飛天小女警Ｘ熊熊遇見你",
+        "主視覺區"
+      ],
+      "searchCorpus": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
+      "dateConfidence": "high",
+      "dateSource": "9/24~10/28",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "gnn-312252",
@@ -98,6 +153,70 @@
       "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
+      "id": "gnn-311635",
+      "title": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相",
+      "summary": "由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311635",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-14T09:12:03.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": "2026-10-20",
+      "eventStatus": "ongoing",
+      "venue": "超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者",
+        "獵人 HUNTER&times;HUNTER",
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相 由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
+      "dateConfidence": "high",
+      "dateSource": "9 月 17 日起至 10 月 20 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-311507",
+      "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
+      "summary": "延續高雄站，《家庭教師 HITMAN REBORN！》TV 動畫 20 週年快閃店即將接力登上台北三創生活園區。「家庭教師動畫 20 周年快閃店 台北站」將於 2026 年 9 月 12 日至 10 月 12 日在三創生活園區 1F 十二立方期間限定登場，免費入場。 本次快閃店將以作品熱血氛圍與20週年紀念感為核心，規劃熱賣商品、經典場景",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311507",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T08:47:41.000Z",
+      "eventStartDate": "2026-09-12",
+      "eventEndDate": "2026-10-12",
+      "eventStatus": "ongoing",
+      "venue": "三創生活園區",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師 HITMAN REBORN！",
+        "家庭教師動畫 20 周年快閃店 台北站"
+      ],
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 延續高雄站，《家庭教師 HITMAN REBORN！》TV 動畫 20 週年快閃店即將接力登上台北三創生活園區。「家庭教師動畫 20 周年快閃店 台北站」將於 2026 年 9 月 12 日至 10 月 12 日在三創生活園區 1F 十二立方期間限定登場，免費入場。 本次快閃店將以作品熱血氛圍與20週年紀念感為核心，規劃熱賣商品、經典場景",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 9 月 12 日至 10 月 12 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
       "id": "gnn-308121",
       "title": "慶祝百年經典「小熊維尼 友你相繪」快閃店於松山文創園區療癒登場",
       "summary": "自 1926 年《小熊維尼》繪本第一集問世起，維尼與他的夥伴們已經陪伴大家度過一世紀的溫暖時光，為歡慶迪士尼經典角色「小熊維尼」100 週年，2026 年 7 月 10 日至 10 月 11 日，「小熊維尼 友你相繪」100 週年限定快閃店於台北松山文創園區正式登場界。 本次快閃店將跨越百年時空，帶領粉絲循著時光隧",
@@ -129,12 +248,77 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "gnn-312758",
+      "title": "「K-Pop 獵魔女團」一週年快閃店夢時代登場 大型 Derpy 首次登場迎接粉絲到來",
+      "summary": "由重星戰略與鑫夢想共同舉辦的《K-Pop 獵魔女團》（K-Pop Demon Hunters）一週年官方巡迴快閃店，繼台北、台中場後，終於迎來台灣巡迴最終站，今日起（10 月 2 日）至 10 月 26 日進駐高雄夢時代，為全台巡迴之旅寫下最終篇章。 現場集結上百款官方周邊，從 HUNTR/X 造型玩偶、Saja Boys 實用周邊到神獸 Derpy 和",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312758",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:04:12.000Z",
+      "eventStartDate": "2026-10-02",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "K-Pop 獵魔女團"
+      ],
+      "searchCorpus": "「K-Pop 獵魔女團」一週年快閃店夢時代登場 大型 Derpy 首次登場迎接粉絲到來 由重星戰略與鑫夢想共同舉辦的《K-Pop 獵魔女團》（K-Pop Demon Hunters）一週年官方巡迴快閃店，繼台北、台中場後，終於迎來台灣巡迴最終站，今日起（10 月 2 日）至 10 月 26 日進駐高雄夢時代，為全台巡迴之旅寫下最終篇章。 現場集結上百款官方周邊，從 HUNTR/X 造型玩偶、Saja Boys 實用周邊到神獸 Derpy 和",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 2 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-312412",
+      "title": "日本插畫角色「麻吉鴨鴨」POP UP STORE 將 10/2 起於台北西門 A-BASE 登場",
+      "summary": "位於台北西門的「A-BASE」，將於 2026 年 10 月 2 日（五）起舉辦日本插畫家 moca 原創角色「もちもちアヒル（麻吉鴨鴨）」POP UP STORE。活動時間自至 10 月 12 日（一）為止。 日本插畫家 moca 以「麻吉鴨鴨」中的鴨鴨、柯基等角色為主進行創作，作品呈現柔和、溫暖又帶有幽默感的角色世界。moca 的 Instagram 目前約有 95000 名追蹤者。除了在日本",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312412",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T04:44:04.000Z",
+      "eventStartDate": "2026-10-02",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "麻吉鴨鴨",
+        "A-BASE",
+        "もちもちアヒル（麻吉鴨鴨）"
+      ],
+      "searchCorpus": "日本插畫角色「麻吉鴨鴨」POP UP STORE 將 10/2 起於台北西門 A-BASE 登場 位於台北西門的「A-BASE」，將於 2026 年 10 月 2 日（五）起舉辦日本插畫家 moca 原創角色「もちもちアヒル（麻吉鴨鴨）」POP UP STORE。活動時間自至 10 月 12 日（一）為止。 日本插畫家 moca 以「麻吉鴨鴨」中的鴨鴨、柯基等角色為主進行創作，作品呈現柔和、溫暖又帶有幽默感的角色世界。moca 的 Instagram 目前約有 95000 名追蹤者。除了在日本",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 10 月 2 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
       "id": "gnn-312349",
       "title": "「牡蠣寶寶」快閃店前進台北 9/25 華山登場 60 坪沉浸式養殖中心全面升級",
       "summary": "迪士尼《愛麗絲夢遊仙境》「牡蠣寶寶主題養殖中心快閃店」將於 9 月 25 日進駐華山 1914 文化創意產業園區，帶著全面升級的體驗與粉絲見面。這次台北站打造 60 坪沉浸式空間，不但有規模更大的主題造景「牡蠣寶寶主題養殖中心」，經典「愛麗絲英式午茶」與牡蠣寶寶主題打卡區也將登場，更首度加碼台北限定主題拍貼機、2 米大型貝",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=312349",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -158,8 +342,146 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 25 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-25T04:55:57.913Z",
-      "lastSeenAt": "2026-09-25T04:55:57.913Z"
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-312289",
+      "title": "TOHO Special POP-UP STORE 南港開幕 帶來《哥吉拉》《藥師少女》等作周邊",
+      "summary": "匯集 TOHO 旗下眾多動畫作品以及《哥吉拉》的「TOHO Special POP-UP STORE」快閃店，今日（9 月 24 日）起正式於 Mitsui Shopping Park LaLaport 南港 B1F 迷你廣場登場，活動將持續到 2027 年 1 月 4 日為止。 官方表示，本次 POP-UP STORE 集結《哥吉拉》、《小哥吉拉的逆襲》，以及東寶旗下動畫品牌 TOHO animation 多部作品。其中在《哥吉拉》的部分，本次活動",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312289",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-24T05:26:37.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "sui Shopping Park LaLaport 南港 B1F 迷你廣場登場",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "哥吉拉",
+        "藥師少女",
+        "小哥吉拉的逆襲",
+        "TOHO Special POP-UP STORE"
+      ],
+      "searchCorpus": "TOHO Special POP-UP STORE 南港開幕 帶來《哥吉拉》《藥師少女》等作周邊 匯集 TOHO 旗下眾多動畫作品以及《哥吉拉》的「TOHO Special POP-UP STORE」快閃店，今日（9 月 24 日）起正式於 Mitsui Shopping Park LaLaport 南港 B1F 迷你廣場登場，活動將持續到 2027 年 1 月 4 日為止。 官方表示，本次 POP-UP STORE 集結《哥吉拉》、《小哥吉拉的逆襲》，以及東寶旗下動畫品牌 TOHO animation 多部作品。其中在《哥吉拉》的部分，本次活動",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 24 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-312190",
+      "title": "「曼迪動漫派對」新北、新竹 9/23 登場《名偵探柯南》《Fate/strange Fake》注目周邊到貨",
+      "summary": "「曼迪動漫派對」宣布將連開兩場，9/23 起新店裕隆城、10/3 起在新竹巨城帶來熱門動漫周邊。《名偵探柯南》《Fate/Strange Fake》《Silent Witch 沉默魔女的秘密》《孤獨搖滾！》台日版周邊集結，不只有多款注目商品限量到貨，還有更多現場才看得到的驚喜周邊，提供給有興趣的人參考。 1/10 曼迪動漫派對快閃店資訊 活動期間 地點 營業時間 2",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312190",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "新北",
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-22T08:52:32.000Z",
+      "eventStartDate": "2026-09-23",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "Fate/strange Fake",
+        "Fate/Strange Fake",
+        "Silent Witch 沉默魔女的秘密",
+        "孤獨搖滾！",
+        "曼迪動漫派對"
+      ],
+      "searchCorpus": "「曼迪動漫派對」新北、新竹 9/23 登場《名偵探柯南》《Fate/strange Fake》注目周邊到貨 「曼迪動漫派對」宣布將連開兩場，9/23 起新店裕隆城、10/3 起在新竹巨城帶來熱門動漫周邊。《名偵探柯南》《Fate/Strange Fake》《Silent Witch 沉默魔女的秘密》《孤獨搖滾！》台日版周邊集結，不只有多款注目商品限量到貨，還有更多現場才看得到的驚喜周邊，提供給有興趣的人參考。 1/10 曼迪動漫派對快閃店資訊 活動期間 地點 營業時間 2",
+      "dateConfidence": "medium",
+      "dateSource": "9/23",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-311707",
+      "title": "「《孤獨搖滾！》POP-UP STORE」高雄夢時代 9/17 起登場",
+      "summary": "「《孤獨搖滾！》POP-UP STORE」，將於 9/17 起於高雄夢時代購物中心 8F 開幕。本次活動現場精心規劃了多個充滿「小孤獨氣息」的沉浸式拍照打卡點，除了展現團結 Band 青春活力的主視覺拍照牆，動畫中最具代表性的「完熟芒果箱」也將在現場真實重現。現場特別開放粉絲親自走入這個充滿安全感的紙箱內部拍照，讓大家能一秒化身為「吉",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311707",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-15T06:59:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "夢時代購物中心",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！",
+        "《孤獨搖滾！》POP-UP STORE",
+        "小孤獨氣息",
+        "完熟芒果箱"
+      ],
+      "searchCorpus": "「《孤獨搖滾！》POP-UP STORE」高雄夢時代 9/17 起登場 「《孤獨搖滾！》POP-UP STORE」，將於 9/17 起於高雄夢時代購物中心 8F 開幕。本次活動現場精心規劃了多個充滿「小孤獨氣息」的沉浸式拍照打卡點，除了展現團結 Band 青春活力的主視覺拍照牆，動畫中最具代表性的「完熟芒果箱」也將在現場真實重現。現場特別開放粉絲親自走入這個充滿安全感的紙箱內部拍照，讓大家能一秒化身為「吉",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-311261",
+      "title": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場",
+      "summary": "緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311261",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T04:00:27.000Z",
+      "eventStartDate": "2026-09-16",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "JOJO 的奇妙冒險 星塵遠征軍",
+        "JOJO的奇妙冒險 星塵遠征軍",
+        "人形大立牌區",
+        "DIO VS 星塵遠征軍",
+        "星塵遠征軍櫥窗區"
+      ],
+      "searchCorpus": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場 緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
+      "dateConfidence": "medium",
+      "dateSource": "9/16",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-dbf7a556cceee1ad",
@@ -222,6 +544,106 @@
       "lastSeenAt": "2026-09-29T05:42:19.377Z"
     },
     {
+      "id": "gnn-311520",
+      "title": "《哈利波特》快閃店今日起於台中草悟廣場 PARK2 登場",
+      "summary": "配合電影第一部上映 25 週年之際，《哈利波特》快閃店今日起（9 月 11 日）於台中 PARK2 草悟廣場登場，活動將持續至 11 月 1 日為止，現場設置七大打卡點、並且推出近 70 款全新商品，以下資訊提供給有興趣的粉絲參考。 首先在打卡點的部分，入口處「護法主視覺」震撼吸睛，若隱若現的霍格華茲城堡前，有著雄鹿、傑克羅素梗犬及水獺",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311520",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T10:07:03.000Z",
+      "eventStartDate": "2026-09-11",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "哈利波特",
+        "護法主視覺"
+      ],
+      "searchCorpus": "《哈利波特》快閃店今日起於台中草悟廣場 PARK2 登場 配合電影第一部上映 25 週年之際，《哈利波特》快閃店今日起（9 月 11 日）於台中 PARK2 草悟廣場登場，活動將持續至 11 月 1 日為止，現場設置七大打卡點、並且推出近 70 款全新商品，以下資訊提供給有興趣的粉絲參考。 首先在打卡點的部分，入口處「護法主視覺」震撼吸睛，若隱若現的霍格華茲城堡前，有著雄鹿、傑克羅素梗犬及水獺",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 11 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-311096",
+      "title": "SKZOO 攜手《動物方城市 2》期間限定快閃店 9 月 5 日起於 A11 一樓登場",
+      "summary": "Stray Kids 旗下的官方代表角色 SKZOO，將與迪士尼動畫續集《動物方城市 2》（ZOOTOPIA 2）展開跨界聯名。 娛樂品牌「野獸國」正式宣布，將於台北信義區隆重推出「動物方城市 2 | SKZOO 期間限定快閃店」的消息，活動將自 9 月 5 日起持續至 9 月 23 日為止。 由韓國男子團體 Stray Kids 與「Zoo（動物園）」概念交織而成的 SKZOO，八個對應成員特徵",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311096",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-04T09:22:47.000Z",
+      "eventStartDate": "2026-09-05",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "動物方城市 2",
+        "野獸國",
+        "動物方城市 2 | SKZOO 期間限定",
+        "Zoo（動物園）"
+      ],
+      "searchCorpus": "SKZOO 攜手《動物方城市 2》期間限定快閃店 9 月 5 日起於 A11 一樓登場 Stray Kids 旗下的官方代表角色 SKZOO，將與迪士尼動畫續集《動物方城市 2》（ZOOTOPIA 2）展開跨界聯名。 娛樂品牌「野獸國」正式宣布，將於台北信義區隆重推出「動物方城市 2 | SKZOO 期間限定快閃店」的消息，活動將自 9 月 5 日起持續至 9 月 23 日為止。 由韓國男子團體 Stray Kids 與「Zoo（動物園）」概念交織而成的 SKZOO，八個對應成員特徵",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 5 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
+      "id": "gnn-311103",
+      "title": "《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店今日起於北中南威秀影城登場",
+      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》今日（9 月 4 日）在台上映，台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店。店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」，再到「主視覺區」與小圓充滿希望的身影合影，最後還有「",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311103",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-04T09:49:51.000Z",
+      "eventStartDate": "2026-09-04",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "魔法少女小圓",
+        "角色背景打卡區",
+        "主視覺區"
+      ],
+      "searchCorpus": "《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店今日起於北中南威秀影城登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》今日（9 月 4 日）在台上映，台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店。店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」，再到「主視覺區」與小圓充滿希望的身影合影，最後還有「",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 4 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+    },
+    {
       "id": "gnn-310540",
       "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
       "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
@@ -255,8 +677,8 @@
       "dateConfidence": "medium",
       "dateSource": "9 月 4 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z"
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-1e3eb4e0df99540b",
@@ -760,108 +1182,6 @@
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
-      "id": "gnn-311261",
-      "title": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場",
-      "summary": "緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311261",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "台中",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-09T04:00:27.000Z",
-      "eventStartDate": "2026-09-16",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "高雄夢時代",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "JOJO 的奇妙冒險 星塵遠征軍",
-        "JOJO的奇妙冒險 星塵遠征軍",
-        "人形大立牌區",
-        "DIO VS 星塵遠征軍",
-        "星塵遠征軍櫥窗區"
-      ],
-      "searchCorpus": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場 緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
-      "dateConfidence": "medium",
-      "dateSource": "9/16",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
-    },
-    {
-      "id": "gnn-311846",
-      "title": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場",
-      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311846",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-17T03:50:21.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-28",
-      "eventStatus": "upcoming",
-      "venue": "三創園區登場 守護小鎮的《飛天小女警》花",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "飛天小女警",
-        "熊熊遇見你",
-        "飛天小女警 X 熊熊遇見你",
-        "飛天小女警Ｘ熊熊遇見你",
-        "主視覺區"
-      ],
-      "searchCorpus": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
-      "dateConfidence": "high",
-      "dateSource": "9/24~10/28",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-17T04:51:02.485Z",
-      "lastSeenAt": "2026-09-17T04:51:02.485Z"
-    },
-    {
-      "id": "gnn-312412",
-      "title": "日本插畫角色「麻吉鴨鴨」POP UP STORE 將 10/2 起於台北西門 A-BASE 登場",
-      "summary": "位於台北西門的「A-BASE」，將於 2026 年 10 月 2 日（五）起舉辦日本插畫家 moca 原創角色「もちもちアヒル（麻吉鴨鴨）」POP UP STORE。活動時間自至 10 月 12 日（一）為止。 日本插畫家 moca 以「麻吉鴨鴨」中的鴨鴨、柯基等角色為主進行創作，作品呈現柔和、溫暖又帶有幽默感的角色世界。moca 的 Instagram 目前約有 95000 名追蹤者。除了在日本",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312412",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T04:44:04.000Z",
-      "eventStartDate": "2026-10-02",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "麻吉鴨鴨",
-        "A-BASE",
-        "もちもちアヒル（麻吉鴨鴨）"
-      ],
-      "searchCorpus": "日本插畫角色「麻吉鴨鴨」POP UP STORE 將 10/2 起於台北西門 A-BASE 登場 位於台北西門的「A-BASE」，將於 2026 年 10 月 2 日（五）起舉辦日本插畫家 moca 原創角色「もちもちアヒル（麻吉鴨鴨）」POP UP STORE。活動時間自至 10 月 12 日（一）為止。 日本插畫家 moca 以「麻吉鴨鴨」中的鴨鴨、柯基等角色為主進行創作，作品呈現柔和、溫暖又帶有幽默感的角色世界。moca 的 Instagram 目前約有 95000 名追蹤者。除了在日本",
-      "dateConfidence": "medium",
-      "dateSource": "2026 年 10 月 2 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
-    },
-    {
       "id": "gnn-308916",
       "title": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動",
       "summary": "日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
@@ -894,6 +1214,38 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-28T10:12:56.163Z",
       "lastSeenAt": "2026-07-28T10:12:56.163Z"
+    },
+    {
+      "id": "gnn-312554",
+      "title": "《天線寶寶》快閃店 宣布 10 月 7 日起前進新光三越台北信義新天地 A9",
+      "summary": "經典兒童節目《天線寶寶》快閃店，宣布將於 10/7 至 11/8 期間於新光三越台北信義新天地 A9 登場。快閃店打造六大打卡點，並推出近 40 款全新周邊，以下報導提供給有興趣的讀者參考。 還沒走進店內，就能看到「主視覺打卡牆」，天線寶寶與吸塵器諾諾排排站，迪西更穿上夢幻蓬蓬芭蕾舞裙。一旁「繽紛四面角色柱」則是丁丁、拉拉、迪",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312554",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-30T08:00:02.000Z",
+      "eventStartDate": "2026-10-07",
+      "eventEndDate": "2026-11-08",
+      "eventStatus": "upcoming",
+      "venue": "快閃店 宣布 10 月 7 日起前進新光三越台北信義新天地 A9 經典兒",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "天線寶寶",
+        "主視覺打卡牆",
+        "繽紛四面角色柱"
+      ],
+      "searchCorpus": "《天線寶寶》快閃店 宣布 10 月 7 日起前進新光三越台北信義新天地 A9 經典兒童節目《天線寶寶》快閃店，宣布將於 10/7 至 11/8 期間於新光三越台北信義新天地 A9 登場。快閃店打造六大打卡點，並推出近 40 款全新周邊，以下報導提供給有興趣的讀者參考。 還沒走進店內，就能看到「主視覺打卡牆」，天線寶寶與吸塵器諾諾排排站，迪西更穿上夢幻蓬蓬芭蕾舞裙。一旁「繽紛四面角色柱」則是丁丁、拉拉、迪",
+      "dateConfidence": "high",
+      "dateSource": "10/7 至 11/8",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-0661909152b8aa8b",
@@ -1048,6 +1400,39 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-08-11T02:26:32.819Z",
       "lastSeenAt": "2026-08-11T02:26:32.819Z"
+    },
+    {
+      "id": "gnn-312126",
+      "title": "《麵包超人》快閃店三地串連登場 最新電影《潘坦與約定之星》9 月起聯動開跑",
+      "summary": "配合最新電影《麵包超人電影版：潘坦與約定之星》10/16 在台上映，將以接力的方式，從 9 月下旬開始，陸續在新店裕隆城、遠東 SOGO 百貨忠孝館，及 Big City 新竹巨城購物中心登場，除了帶來滿滿的《麵包超人》周邊商品，各項電影聯動活動更是豐富，不只有拍照牆，還有贈著色手冊和電影優惠票等好禮。 【以下內容為廠商提供資料原文",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312126",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "新北",
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-21T09:44:29.000Z",
+      "eventStartDate": "2026-10-16",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "巨城購物中心",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "麵包超人",
+        "潘坦與約定之星",
+        "麵包超人電影版：潘坦與約定之星"
+      ],
+      "searchCorpus": "《麵包超人》快閃店三地串連登場 最新電影《潘坦與約定之星》9 月起聯動開跑 配合最新電影《麵包超人電影版：潘坦與約定之星》10/16 在台上映，將以接力的方式，從 9 月下旬開始，陸續在新店裕隆城、遠東 SOGO 百貨忠孝館，及 Big City 新竹巨城購物中心登場，除了帶來滿滿的《麵包超人》周邊商品，各項電影聯動活動更是豐富，不只有拍照牆，還有贈著色手冊和電影優惠票等好禮。 【以下內容為廠商提供資料原文",
+      "dateConfidence": "medium",
+      "dateSource": "10/16",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "gnn-309049",
@@ -1289,8 +1674,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-25T01:51:26.169Z",
-      "lastSeenAt": "2026-08-25T01:51:26.169Z"
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-4f7e330b7c6a4053",
@@ -1387,8 +1772,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-15T04:52:38.943Z",
-      "lastSeenAt": "2026-09-15T04:52:38.943Z"
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-ea4771a92a9a3816",
@@ -1417,6 +1802,36 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-04T05:50:27.784Z",
       "lastSeenAt": "2026-10-04T05:50:27.784Z"
+    },
+    {
+      "id": "gnn-311282",
+      "title": "XRAGE《NANA》主題快閃店登場 台中限定企劃打造矢澤愛式搖滾日常",
+      "summary": "XRAGE 再度攜手經典漫畫《NANA》，將於台中打造期間限定主題快閃店。以矢澤愛筆下充滿搖滾、時尚與青春氣息的《NANA》世界為靈感，XRAGE 將作品中令人難忘的角色、樂團元素與龐克美學融入潮流服飾，從 BLAST 的搖滾靈魂，到奈奈與娜娜之間交織著友情、愛情與夢想的故事，都將在這次快閃店中化為獨特的視覺體驗。繼第一彈聯名引後，本",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311282",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T08:31:46.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "NANA"
+      ],
+      "searchCorpus": "XRAGE《NANA》主題快閃店登場 台中限定企劃打造矢澤愛式搖滾日常 XRAGE 再度攜手經典漫畫《NANA》，將於台中打造期間限定主題快閃店。以矢澤愛筆下充滿搖滾、時尚與青春氣息的《NANA》世界為靈感，XRAGE 將作品中令人難忘的角色、樂團元素與龐克美學融入潮流服飾，從 BLAST 的搖滾靈魂，到奈奈與娜娜之間交織著友情、愛情與夢想的故事，都將在這次快閃店中化為獨特的視覺體驗。繼第一彈聯名引後，本",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-2470cbd502b0f05a",
