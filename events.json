@@ -3,50 +3,29 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-05T05:37:27.563Z",
-    "lastSuccessfulUpdateAt": "2026-10-05T05:37:27.563Z",
-    "fetchStatus": "partial",
+    "updatedAt": "2026-10-06T06:18:28.410Z",
+    "lastSuccessfulUpdateAt": "2026-10-06T06:18:28.410Z",
+    "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 0,
-    "uniqueNewsCount": 237,
-    "articleCandidateCount": 53,
-    "articleFetchSuccessCount": 53,
+    "fetchedExternalItemCount": 431,
+    "uniqueNewsCount": 623,
+    "articleCandidateCount": 226,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 21,
-    "newEventCount": 13,
-    "cachedEventCount": 43,
+    "newEventCount": 7,
+    "cachedEventCount": 51,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 63,
-    "expiredRemovedCount": 0,
+    "archiveCount": 4,
+    "storedEventCount": 62,
+    "expiredRemovedCount": 9,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 0,
+    "undatedOldRemovedCount": 48,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 32,
-    "sourceErrors": [
-      {
-        "source": "Google News－台灣動漫活動",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－官方主辦單位",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－漫畫博覽會",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－台中國際動漫節",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－展會作品名單",
-        "error": "HTTP 503 Service Unavailable"
-      }
-    ],
+    "nonActivityRemovedCount": 139,
+    "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
@@ -486,7 +465,7 @@
     {
       "id": "ext-dbf7a556cceee1ad",
       "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Y1hBZ2ZMQ1lpd0R4SEF0VjNQZXZJU082ckRLMjYzR0FESmw5ckR3SHZERkhLZmt5SUQ1WHlKSE1SLU02Y3NmdW4zOGtEdnNfMWFVc3lpSGo?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -506,12 +485,12 @@
       "workTitles": [
         "家庭教師 HITMAN REBORN！"
       ],
-      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 GNN 新聞網",
+      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -746,7 +725,7 @@
     {
       "id": "ext-a8b0f32886165b97",
       "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
+      "summary": "gnn.gamer.com.tw",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
@@ -766,12 +745,12 @@
       "workTitles": [
         "超動漫研究社"
       ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 gnn.gamer.com.tw",
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -801,8 +780,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -892,8 +871,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1182,40 +1161,6 @@
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
-      "id": "gnn-308916",
-      "title": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動",
-      "summary": "日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308916",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-28T04:55:32.000Z",
-      "eventStartDate": "2026-10-03",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "輝夜姬",
-        "輝夜姬想讓人告白",
-        "無職轉生",
-        "小原好美 粉絲見面會 2026 feat. 古賀葵",
-        "四宮輝夜"
-      ],
-      "searchCorpus": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動 日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
-      "dateConfidence": "medium",
-      "dateSource": "2026 年 10 月 3 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-28T10:12:56.163Z",
-      "lastSeenAt": "2026-07-28T10:12:56.163Z"
-    },
-    {
       "id": "gnn-312554",
       "title": "《天線寶寶》快閃店 宣布 10 月 7 日起前進新光三越台北信義新天地 A9",
       "summary": "經典兒童節目《天線寶寶》快閃店，宣布將於 10/7 至 11/8 期間於新光三越台北信義新天地 A9 登場。快閃店打造六大打卡點，並推出近 40 款全新周邊，以下報導提供給有興趣的讀者參考。 還沒走進店內，就能看到「主視覺打卡牆」，天線寶寶與吸塵器諾諾排排站，迪西更穿上夢幻蓬蓬芭蕾舞裙。一旁「繽紛四面角色柱」則是丁丁、拉拉、迪",
@@ -1272,8 +1217,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "gnn-312738",
@@ -1590,92 +1535,35 @@
       "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
-      "id": "ext-6570ad81626d4822",
-      "title": "開拓動漫祭FF47台北花博登場！ASCA、月海つくね與雙特展打造三日動漫盛會",
-      "summary": "輕旅行",
-      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9nX2pmZ1ZlVm1qXzdhWXFSRFRoUHZpRlQ3X0lTbU9HSmM4aWs1LUw0amJfVFpnN3pQMDNhS2VHWGt6SlR3THpUbGJZR1BJQQ?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-21T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "開拓動漫祭FF47台北花博登場！ASCA、月海つくね與雙特展打造三日動漫盛會 輕旅行",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
-    },
-    {
-      "id": "ext-ce94dc3a1f4d4a1a",
-      "title": "開拓動漫祭 FF47 暑假三日動漫盛會登場！ 日本人氣嘉賓、創作者齊聚台灣精彩舞台、原創特展一次集結 台日動漫文化熱鬧交流",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE00WjI3ZWhtUlo2X1NrODhrejBiOG50TlRoLXRMVXZDbm51V0hBc2NZM0F4OFNOWFQxRnNWMWp5dHl6VnNwZEdWQ25LMWZUSDN1X2RtT2oyTQ?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-08-21T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "開拓動漫祭 FF47 暑假三日動漫盛會登場！ 日本人氣嘉賓、創作者齊聚台灣精彩舞台、原創特展一次集結 台日動漫文化熱鬧交流 Paradaily",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-27T05:16:51.872Z",
-      "lastSeenAt": "2026-09-27T05:16:51.872Z"
-    },
-    {
-      "id": "gnn-310252",
-      "title": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開",
-      "summary": "偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310252",
+      "id": "gnn-312920",
+      "title": "買動漫公開 2026 高雄國際動漫節販售周邊商品資訊",
+      "summary": "配合 2026 高雄國際動漫節即將於本週展開，買動漫也在稍早公開了即將於會場販售的週邊商品資訊，其中包含 MyGO!!!!!&times;Ave Mujica 聯合公演週邊、《蔚藍檔案》、《魔道祖師》等多款作品，供有興趣的人參考。 1/19",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312920",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
       "locations": [
-        "台中"
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-21T09:31:43.000Z",
-      "eventStartDate": null,
+      "publishedAt": "2026-10-06T03:47:28.000Z",
+      "eventStartDate": "2027-01-19",
       "eventEndDate": null,
-      "eventStatus": "date-unknown",
+      "eventStatus": "upcoming",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "偶像夢幻祭 2",
-        "偶像夢幻祭",
-        "聚光舞台主題"
+        "蔚藍檔案",
+        "魔道祖師"
       ],
-      "searchCorpus": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開 偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+      "searchCorpus": "買動漫公開 2026 高雄國際動漫節販售周邊商品資訊 配合 2026 高雄國際動漫節即將於本週展開，買動漫也在稍早公開了即將於會場販售的週邊商品資訊，其中包含 MyGO!!!!!&times;Ave Mujica 聯合公演週邊、《蔚藍檔案》、《魔道祖師》等多款作品，供有興趣的人參考。 1/19",
+      "dateConfidence": "medium",
+      "dateSource": "1/19",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-4f7e330b7c6a4053",
@@ -1860,8 +1748,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -2009,8 +1897,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -2037,9 +1925,196 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
+    },
+    {
+      "id": "ext-0bc936f6ef584ef3",
+      "title": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假",
+      "summary": "Zeek玩家誌",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4tVGg1b1V6dTJ3WllvY0tpMnNOTHo4Xy03SzNXNVRSeTBwWElfRmltaG9oUE5tYnNnejM4TmM2ajJqOVBVaWxaaVpGNlBmT1cwQ2c?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-04T16:39:43.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假 Zeek玩家誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
+    },
+    {
+      "id": "gnn-312921",
+      "title": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲",
+      "summary": "日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312921",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-06T04:09:23.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "靈異教師神眉",
+        "真天地開闢集團-慈愚挫愚",
+        "行腳巡禮 MISOGI ～番外篇～ in 台灣"
+      ],
+      "searchCorpus": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲 日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-310252",
+      "title": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開",
+      "summary": "偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310252",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-21T09:31:43.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "偶像夢幻祭 2",
+        "偶像夢幻祭",
+        "聚光舞台主題"
+      ],
+      "searchCorpus": "《偶像夢幻祭 2》「聚光舞台主題快閃店」台中首站開幕 10 大類 x 58 位偶像全商品公開 偶像 IP《偶像夢幻祭》迎來十週年里程碑，由 Smarprise 主辦的「聚光舞台主題快閃店」今日於台中正式開幕，一開幕便吸引大批粉絲到場，現場隨即湧現排隊人潮，粉絲絡繹不絕進場，收藏喜愛偶像的快閃周邊。本次快閃店推出 10 大商品類別，涵蓋全 58 位偶像，並搭配滿額購買特典、集點企畫及遊戲內限定稱號等內容，讓粉絲除了購買偶",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-10-06T06:18:28.410Z"
+    },
+    {
+      "id": "ext-6570ad81626d4822",
+      "title": "開拓動漫祭FF47台北花博登場！ASCA、月海つくね與雙特展打造三日動漫盛會",
+      "summary": "輕旅行",
+      "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9nX2pmZ1ZlVm1qXzdhWXFSRFRoUHZpRlQ3X0lTbU9HSmM4aWs1LUw0amJfVFpnN3pQMDNhS2VHWGt6SlR3THpUbGJZR1BJQQ?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "開拓動漫祭FF47台北花博登場！ASCA、月海つくね與雙特展打造三日動漫盛會 輕旅行",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-04T05:50:27.784Z",
+      "lastSeenAt": "2026-10-04T05:50:27.784Z",
+      "archivedAt": "2026-10-06T06:18:28.410Z"
+    },
+    {
+      "id": "ext-ce94dc3a1f4d4a1a",
+      "title": "開拓動漫祭 FF47 暑假三日動漫盛會登場！ 日本人氣嘉賓、創作者齊聚台灣精彩舞台、原創特展一次集結 台日動漫文化熱鬧交流",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE00WjI3ZWhtUlo2X1NrODhrejBiOG50TlRoLXRMVXZDbm51V0hBc2NZM0F4OFNOWFQxRnNWMWp5dHl6VnNwZEdWQ25LMWZUSDN1X2RtT2oyTQ?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-08-21T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "開拓動漫祭 FF47 暑假三日動漫盛會登場！ 日本人氣嘉賓、創作者齊聚台灣精彩舞台、原創特展一次集結 台日動漫文化熱鬧交流 Paradaily",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-09-27T05:16:51.872Z",
+      "lastSeenAt": "2026-09-27T05:16:51.872Z",
+      "archivedAt": "2026-10-06T06:18:28.410Z"
+    },
+    {
+      "id": "gnn-308916",
+      "title": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動",
+      "summary": "日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308916",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-28T04:55:32.000Z",
+      "eventStartDate": "2026-10-03",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "輝夜姬",
+        "輝夜姬想讓人告白",
+        "無職轉生",
+        "小原好美 粉絲見面會 2026 feat. 古賀葵",
+        "四宮輝夜"
+      ],
+      "searchCorpus": "《輝夜姬》千花與輝夜聲優小原好美、古賀葵將於 10 月共同來台舉辦見面會活動 日本聲優小原好美日前宣布，將於 2026 年 10 月 3 日（六）來台舉辦「小原好美 粉絲見面會 2026 feat. 古賀葵」。曾飾演《輝夜姬想讓人告白》藤原千花、《無職轉生》洛琪希等多位知名角色的她，本次特別邀請在《輝夜姬想讓人告白》中飾演女主角「四宮輝夜」的聲優古賀葵作為特別嘉賓同台。活動將於台北 Clapper Studio 登場，並規劃了「聲",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 10 月 3 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-28T10:12:56.163Z",
+      "lastSeenAt": "2026-07-28T10:12:56.163Z",
+      "archivedAt": "2026-10-06T06:18:28.410Z"
+    }
+  ]
 }
