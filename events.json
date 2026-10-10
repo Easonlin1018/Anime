@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-09T06:06:38.229Z",
-    "lastSuccessfulUpdateAt": "2026-10-09T06:06:38.229Z",
+    "updatedAt": "2026-10-10T05:50:33.180Z",
+    "lastSuccessfulUpdateAt": "2026-10-10T05:50:33.180Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 431,
-    "uniqueNewsCount": 624,
-    "articleCandidateCount": 224,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 430,
+    "uniqueNewsCount": 630,
+    "articleCandidateCount": 226,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 18,
-    "newEventCount": 3,
-    "cachedEventCount": 55,
+    "matchedEventCount": 22,
+    "newEventCount": 4,
+    "cachedEventCount": 53,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 64,
-    "expiredRemovedCount": 9,
+    "archiveCount": 0,
+    "storedEventCount": 66,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 133,
+    "nonActivityRemovedCount": 130,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -227,6 +227,36 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
+      "id": "ext-24b07d0d8316ac7a",
+      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "柯南展"
+      ],
+      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+    },
+    {
       "id": "ext-1457b6222baff2a4",
       "title": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！",
       "summary": "SouNova 少女星",
@@ -253,8 +283,64 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 9 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+    },
+    {
+      "id": "ext-0661909152b8aa8b",
+      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
+      "summary": "PChome Online 新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T06:17:41.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+    },
+    {
+      "id": "ext-bd9ab5f8b7a4f06d",
+      "title": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！",
+      "summary": "遊戲基地Gamebase",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBkZDZFdExTM1ZZeEVGcmxBTFhYRDVyaGludjJmcVJtRkFpS1FTUTk3Qm5OenJkOE1fUTU5b2h6OVR2eFRoaUQwVnUtcEtVX1NXRWFMUklEaHF3SUNDeUE?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:44:04.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！ 遊戲基地Gamebase",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "gnn-312758",
@@ -519,8 +605,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -779,8 +865,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "ext-ec98737ee34d30a6",
@@ -810,8 +896,8 @@
       "dateConfidence": "medium",
       "dateSource": "8/6",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "ext-fa90244a4a8f2065",
@@ -874,6 +960,36 @@
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
+      "id": "ext-60341764dad0f6d6",
+      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "台中中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！"
+      ],
+      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 20 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+    },
+    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
       "summary": "4Gamers",
@@ -900,36 +1016,6 @@
       "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
       "dateConfidence": "medium",
       "dateSource": "7/20",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
-    },
-    {
-      "id": "ext-60341764dad0f6d6",
-      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "台中中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！"
-      ],
-      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-09T06:06:38.229Z",
       "lastSeenAt": "2026-10-09T06:06:38.229Z"
@@ -1185,64 +1271,6 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-10-05T05:37:27.563Z",
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
-      "id": "ext-0661909152b8aa8b",
-      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T06:17:41.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-08T06:01:38.377Z",
-      "lastSeenAt": "2026-10-08T06:01:38.377Z"
-    },
-    {
-      "id": "ext-24b07d0d8316ac7a",
-      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T04:17:58.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "柯南展"
-      ],
-      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-07T05:57:11.700Z",
-      "lastSeenAt": "2026-10-07T05:57:11.700Z"
     },
     {
       "id": "gnn-312738",
@@ -1924,8 +1952,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -1952,8 +1980,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-07T05:57:11.700Z",
-      "lastSeenAt": "2026-10-07T05:57:11.700Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1983,8 +2011,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+    },
+    {
+      "id": "ext-bf19739780c7e9db",
+      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
+      "summary": "遊戲基地Gamebase",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T10:18:28.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "ext-0bc936f6ef584ef3",
@@ -2011,8 +2067,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-09T06:06:38.229Z",
-      "lastSeenAt": "2026-10-09T06:06:38.229Z"
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z"
     },
     {
       "id": "gnn-312921",
@@ -2047,43 +2103,5 @@
       "lastSeenAt": "2026-10-06T06:18:28.410Z"
     }
   ],
-  "archive": [
-    {
-      "id": "gnn-308731",
-      "title": "《Sky 光・遇》結合大稻埕夏日節打造「星夜」新季節《致梵谷》中高主題餐廳開跑",
-      "summary": "社交冒險遊戲《Sky 光・遇》今日宣佈展開實體「夏夜花火節」線下活動。自 7 月 25 日起，《Sky 光・遇》新季節《致梵谷》將加入「大稻埕夏日節」，於台北大稻埕碼頭（五號水門）設置以「星夜」為概念的實體打卡裝置與闖關任務。此外，8 月 1 日起將接續於台中、高雄兩地開啟限定主題餐廳，推出名畫概念餐點與官方手作體驗活動。 大",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308731",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "主題餐廳／咖啡廳",
-      "locations": [
-        "台北",
-        "台中",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-24T06:42:30.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "Sky 光・遇",
-        "致梵谷",
-        "星夜",
-        "夏夜花火節",
-        "大稻埕夏日節"
-      ],
-      "searchCorpus": "《Sky 光・遇》結合大稻埕夏日節打造「星夜」新季節《致梵谷》中高主題餐廳開跑 社交冒險遊戲《Sky 光・遇》今日宣佈展開實體「夏夜花火節」線下活動。自 7 月 25 日起，《Sky 光・遇》新季節《致梵谷》將加入「大稻埕夏日節」，於台北大稻埕碼頭（五號水門）設置以「星夜」為概念的實體打卡裝置與闖關任務。此外，8 月 1 日起將接續於台中、高雄兩地開啟限定主題餐廳，推出名畫概念餐點與官方手作體驗活動。 大",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 25 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-24T09:12:42.910Z",
-      "lastSeenAt": "2026-07-24T09:12:42.910Z",
-      "archivedAt": "2026-10-09T06:06:38.229Z"
-    }
-  ]
+  "archive": []
 }
