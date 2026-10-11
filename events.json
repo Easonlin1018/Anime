@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-10T05:50:33.180Z",
-    "lastSuccessfulUpdateAt": "2026-10-10T05:50:33.180Z",
+    "updatedAt": "2026-10-11T05:44:24.040Z",
+    "lastSuccessfulUpdateAt": "2026-10-11T05:44:24.040Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 430,
-    "uniqueNewsCount": 630,
-    "articleCandidateCount": 226,
-    "articleFetchSuccessCount": 34,
+    "fetchedExternalItemCount": 429,
+    "uniqueNewsCount": 628,
+    "articleCandidateCount": 225,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 4,
-    "cachedEventCount": 53,
+    "matchedEventCount": 17,
+    "newEventCount": 3,
+    "cachedEventCount": 54,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 66,
-    "expiredRemovedCount": 10,
+    "archiveCount": 4,
+    "storedEventCount": 63,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 53,
+    "undatedOldRemovedCount": 50,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 130,
+    "nonActivityRemovedCount": 135,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -227,36 +227,6 @@
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
-      "id": "ext-24b07d0d8316ac7a",
-      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "柯南展"
-      ],
-      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
-    },
-    {
       "id": "ext-1457b6222baff2a4",
       "title": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！",
       "summary": "SouNova 少女星",
@@ -283,8 +253,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 9 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-0661909152b8aa8b",
@@ -308,6 +278,36 @@
       "feeText": "",
       "workTitles": [],
       "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
+    },
+    {
+      "id": "ext-24b07d0d8316ac7a",
+      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "柯南展"
+      ],
+      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
@@ -605,8 +605,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -839,127 +839,6 @@
       "lastSeenAt": "2026-08-10T02:33:43.485Z"
     },
     {
-      "id": "ext-a8b0f32886165b97",
-      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T07:00:00.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
-      "dateConfidence": "medium",
-      "dateSource": "8/6",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
-    },
-    {
-      "id": "ext-ec98737ee34d30a6",
-      "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "oneone宇宙",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-06T11:22:37.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "黃泉使者",
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
-      "dateConfidence": "medium",
-      "dateSource": "8/6",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
-    },
-    {
-      "id": "ext-fa90244a4a8f2065",
-      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞",
-      "summary": "PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWV9LNXdMVmNndkpiMnhNNVNMc29ERTFrM0g4dzk3aVNfTFhYTVlzWGdLaGRtNGl6eXpnUjMxa2V4WXpuT01SS1FNNmVPclNtVmlEejRBMmRSNUxSWjJhSlp6eFFBU0l1WW9FMHJuQXZVek9nbXpQd1BBckNwSGphZWhObi0?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T04:12:44.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online 新聞",
-      "dateConfidence": "medium",
-      "dateSource": "8/6",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-21T01:56:25.568Z",
-      "lastSeenAt": "2026-08-21T01:56:25.568Z"
-    },
-    {
-      "id": "ext-8160678c11878af3",
-      "title": "木棉花「超動漫研究社」快閃店8月6日起降臨新竹巨城！人氣周邊、多款動漫IP抽卡機一次集結",
-      "summary": "QooApp",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1QdG5kZGpLeGNCeUZ6YnNxSFk5VkloQjRYb19jSTZhckhGRU1IOWYtMnY4RzNTS3pSQy1kRFNKQlNqeWVaaVY2OHlkRUhQQ204Q3NDQzdUcUxfaFJPQ2ZDRXo3dUxSM2M?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-05T04:24:00.000Z",
-      "eventStartDate": "2026-08-06",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」快閃店8月6日起降臨新竹巨城！人氣周邊、多款動漫IP抽卡機一次集結 QooApp",
-      "dateConfidence": "medium",
-      "dateSource": "8月6日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-06T03:35:05.926Z",
-      "lastSeenAt": "2026-08-06T03:35:05.926Z"
-    },
-    {
       "id": "ext-60341764dad0f6d6",
       "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
       "summary": "SouNova 少女星",
@@ -986,8 +865,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1803,8 +1682,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-07T05:57:11.700Z",
-      "lastSeenAt": "2026-10-07T05:57:11.700Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-4da361fb0d8dbbec",
@@ -1952,8 +1831,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -1980,8 +1859,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1996,7 +1875,7 @@
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-02T07:45:36.000Z",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -2011,8 +1890,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-bf19739780c7e9db",
@@ -2101,7 +1980,167 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-06T06:18:28.410Z",
       "lastSeenAt": "2026-10-06T06:18:28.410Z"
+    },
+    {
+      "id": "gnn-313171",
+      "title": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場",
+      "summary": "為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313171",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-10T15:59:44.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "寶可夢",
+        "PokéXciting! in 台北",
+        "Pok&eacute;Xciting! in 台北",
+        "參加寶可夢最大的派對吧！",
+        "Pok&eacute;Xciting! 夜間特別舞台秀"
+      ],
+      "searchCorpus": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場 為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-ec98737ee34d30a6",
+      "title": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結",
+      "summary": "oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9lNGVvUExaZTB5ZWxPcjdRS1VIcUxrN1RCS0wzLXFLaFdaUW1iaDFkODA5dzZVSnJnVHpYNzViQlgyWS1uR2dOeHRJY1hwUW95MDg0?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-06T11:22:37.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黃泉使者",
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8/6 起降臨新竹巨城！《黃泉使者》造景登陸新竹，人氣周邊、多款動漫IP抽卡機一次集結 oneone宇宙",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z",
+      "archivedAt": "2026-10-11T05:44:24.040Z"
+    },
+    {
+      "id": "ext-a8b0f32886165b97",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1xb3JvczNLSUNpUEpOVWxJSU1CcndlaVhVMERiNldpR1hSZmhGUTJ1Wm5oZG1HWmJPelU4d1BzSTNKU1JpR295T0pXdFpVbkZQSkhhTmhNd1c?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T07:00:00.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-10T05:50:33.180Z",
+      "lastSeenAt": "2026-10-10T05:50:33.180Z",
+      "archivedAt": "2026-10-11T05:44:24.040Z"
+    },
+    {
+      "id": "ext-8160678c11878af3",
+      "title": "木棉花「超動漫研究社」快閃店8月6日起降臨新竹巨城！人氣周邊、多款動漫IP抽卡機一次集結",
+      "summary": "QooApp",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1QdG5kZGpLeGNCeUZ6YnNxSFk5VkloQjRYb19jSTZhckhGRU1IOWYtMnY4RzNTS3pSQy1kRFNKQlNqeWVaaVY2OHlkRUhQQ204Q3NDQzdUcUxfaFJPQ2ZDRXo3dUxSM2M?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T04:24:00.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店8月6日起降臨新竹巨城！人氣周邊、多款動漫IP抽卡機一次集結 QooApp",
+      "dateConfidence": "medium",
+      "dateSource": "8月6日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z",
+      "archivedAt": "2026-10-11T05:44:24.040Z"
+    },
+    {
+      "id": "ext-fa90244a4a8f2065",
+      "title": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞",
+      "summary": "PChome Online 新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOWV9LNXdMVmNndkpiMnhNNVNMc29ERTFrM0g4dzk3aVNfTFhYTVlzWGdLaGRtNGl6eXpnUjMxa2V4WXpuT01SS1FNNmVPclNtVmlEejRBMmRSNUxSWjJhSlp6eFFBU0l1WW9FMHJuQXZVek9nbXpQd1BBckNwSGphZWhObi0?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-05T04:12:44.000Z",
+      "eventStartDate": "2026-08-06",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超動漫研究社"
+      ],
+      "searchCorpus": "木棉花「超動漫研究社」快閃店 8/6 起於新竹巨城登場 - 遊戲新聞 - PChome Online 新聞 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "8/6",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-21T01:56:25.568Z",
+      "lastSeenAt": "2026-08-21T01:56:25.568Z",
+      "archivedAt": "2026-10-11T05:44:24.040Z"
+    }
+  ]
 }
