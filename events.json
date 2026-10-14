@@ -3,50 +3,29 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-13T06:46:02.845Z",
-    "lastSuccessfulUpdateAt": "2026-10-13T06:46:02.845Z",
-    "fetchStatus": "partial",
+    "updatedAt": "2026-10-14T04:51:12.320Z",
+    "lastSuccessfulUpdateAt": "2026-10-14T04:51:12.320Z",
+    "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 0,
-    "uniqueNewsCount": 237,
-    "articleCandidateCount": 53,
-    "articleFetchSuccessCount": 53,
+    "fetchedExternalItemCount": 425,
+    "uniqueNewsCount": 627,
+    "articleCandidateCount": 226,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 16,
-    "newEventCount": 8,
-    "cachedEventCount": 49,
+    "matchedEventCount": 22,
+    "newEventCount": 7,
+    "cachedEventCount": 55,
     "rateLimitedCount": 0,
-    "archiveCount": 4,
-    "storedEventCount": 63,
-    "expiredRemovedCount": 1,
+    "archiveCount": 0,
+    "storedEventCount": 67,
+    "expiredRemovedCount": 13,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 0,
+    "undatedOldRemovedCount": 47,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 36,
-    "sourceErrors": [
-      {
-        "source": "Google News－台灣動漫活動",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－官方主辦單位",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－漫畫博覽會",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－台中國際動漫節",
-        "error": "HTTP 503 Service Unavailable"
-      },
-      {
-        "source": "Google News－展會作品名單",
-        "error": "HTTP 503 Service Unavailable"
-      }
-    ],
+    "nonActivityRemovedCount": 134,
+    "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
@@ -211,8 +190,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-1457b6222baff2a4",
@@ -241,8 +220,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 9 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-0661909152b8aa8b",
@@ -269,8 +248,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-bd9ab5f8b7a4f06d",
@@ -628,8 +607,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -833,6 +812,39 @@
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
+      "id": "ext-07a32f8b20799194",
+      "title": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣",
+      "summary": "快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBaR1RhZnpNdnJLSDJTNjhRYXZKVDRoUjNJQTU5UUcwd1hBMDFUVjVYdzJnaUxWYks4azBvRHE0Tzk1QTBBNk5fUnhwd2IydHFOQVMxblJKOFNMd3dES3JTU1VaNjRnZklfb2ZIanZvMDdhQ1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-28T07:00:00.000Z",
+      "eventStartDate": "2026-09-01",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "沉默魔女的秘密",
+        "Free！",
+        "曼迪秋日祭"
+      ],
+      "searchCorpus": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
+      "dateConfidence": "medium",
+      "dateSource": "9月1日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+    },
+    {
       "id": "ext-1e3eb4e0df99540b",
       "title": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！",
       "summary": "Paradaily",
@@ -890,8 +902,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1336,6 +1348,38 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-13T06:46:02.845Z",
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
+    },
+    {
+      "id": "gnn-313356",
+      "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代",
+      "summary": "《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313356",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "展覽",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-14T04:30:02.000Z",
+      "eventStartDate": "2026-11-01",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "名偵探柯南 TV 動畫播放 30 週年紀念展",
+        "TV 動畫製作"
+      ],
+      "searchCorpus": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代 《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 1 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "gnn-311263",
@@ -1800,8 +1844,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-04T05:50:27.784Z",
-      "lastSeenAt": "2026-10-04T05:50:27.784Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1887,8 +1931,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1918,8 +1962,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+    },
+    {
+      "id": "ext-98c880fa22bfcf62",
+      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "1000元起",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
     },
     {
       "id": "ext-bf19739780c7e9db",
@@ -2010,6 +2082,36 @@
       "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
+      "id": "ext-fbbc400ad3ccb14f",
+      "title": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報",
+      "summary": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE80QlVfTWJnckRMMzFyMC11cWgzZkJtQURBX3U3bmd0bFFLMU1DSjRkMERoQWt4aTBBLWEzV2xoQ1JSLTQ0NGNKbVdmVExFS1hZdmdGeHlR?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-09T07:27:32.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "振奮人心、帶來希望"
+      ],
+      "searchCorpus": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報 LINE TODAY",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-14T04:51:12.320Z",
+      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+    },
+    {
       "id": "gnn-313171",
       "title": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場",
       "summary": "為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
@@ -2044,139 +2146,5 @@
       "lastSeenAt": "2026-10-12T05:54:52.213Z"
     }
   ],
-  "archive": [
-    {
-      "id": "gnn-311507",
-      "title": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕",
-      "summary": "延續高雄站，《家庭教師 HITMAN REBORN！》TV 動畫 20 週年快閃店即將接力登上台北三創生活園區。「家庭教師動畫 20 周年快閃店 台北站」將於 2026 年 9 月 12 日至 10 月 12 日在三創生活園區 1F 十二立方期間限定登場，免費入場。 本次快閃店將以作品熱血氛圍與20週年紀念感為核心，規劃熱賣商品、經典場景",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311507",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-11T08:47:41.000Z",
-      "eventStartDate": "2026-09-12",
-      "eventEndDate": "2026-10-12",
-      "eventStatus": "expired",
-      "venue": "三創生活園區",
-      "admissionType": "免費入場",
-      "feeText": "",
-      "workTitles": [
-        "家庭教師 HITMAN REBORN！",
-        "家庭教師動畫 20 周年快閃店 台北站"
-      ],
-      "searchCorpus": "《家庭教師 HITMAN REBORN！》動畫 20 周年快閃店台北站 9/12 起三創生活園區開幕 延續高雄站，《家庭教師 HITMAN REBORN！》TV 動畫 20 週年快閃店即將接力登上台北三創生活園區。「家庭教師動畫 20 周年快閃店 台北站」將於 2026 年 9 月 12 日至 10 月 12 日在三創生活園區 1F 十二立方期間限定登場，免費入場。 本次快閃店將以作品熱血氛圍與20週年紀念感為核心，規劃熱賣商品、經典場景",
-      "dateConfidence": "high",
-      "dateSource": "2026 年 9 月 12 日至 10 月 12 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z",
-      "archivedAt": "2026-10-13T06:46:02.845Z"
-    },
-    {
-      "id": "gnn-312738",
-      "title": "木棉花公開 2026 高雄國際動漫節現場福袋與優惠活動資訊",
-      "summary": "2026 高雄國際動漫節即將於 10 月 9 日至 10 月 12 日在高雄巨蛋體育館登場，動畫代理商木棉花也在今日公開了展場限定回饋、福袋、滿額好禮、首賣新品與精選商品資訊。 曾在台北漫博登場的《黃泉使者》主題入口，這次將移至南台灣，木棉花特別打造高達四米的巨型迎賓拱門，邀請大家一起感受《黃泉使者》這部作品的魅力。 木棉花今",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312738",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T05:06:14.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": "2026-10-12",
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "黃泉使者"
-      ],
-      "searchCorpus": "木棉花公開 2026 高雄國際動漫節現場福袋與優惠活動資訊 2026 高雄國際動漫節即將於 10 月 9 日至 10 月 12 日在高雄巨蛋體育館登場，動畫代理商木棉花也在今日公開了展場限定回饋、福袋、滿額好禮、首賣新品與精選商品資訊。 曾在台北漫博登場的《黃泉使者》主題入口，這次將移至南台灣，木棉花特別打造高達四米的巨型迎賓拱門，邀請大家一起感受《黃泉使者》這部作品的魅力。 木棉花今",
-      "dateConfidence": "high",
-      "dateSource": "10 月 9 日至 10 月 12 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-02T05:35:00.379Z",
-      "lastSeenAt": "2026-10-02T05:35:00.379Z",
-      "archivedAt": "2026-10-13T06:46:02.845Z"
-    },
-    {
-      "id": "gnn-312577",
-      "title": "羚邦與 BTUHOBBYBASE 攜手多款動漫作品進軍高雄動漫節",
-      "summary": "配合高雄國際動漫節（KICA）即將於雙十連假（10/9-10/12）連續四天於高雄巨蛋登場，羚邦與 BTUHOBBYBASE 再次集結旗下多部人氣動畫作品，帶來各式週邊商品與限定福袋，其中包含《咒術迴戰》、《排球少年！！》、《我的英雄學院》、《遊戲人生》及《GACHIAKUTA》等多種作品週邊。 福袋部分，《咒術迴戰》福袋一次收錄「獄門疆」絨毛吊飾、",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312577",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-30T09:51:31.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": "2026-10-12",
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "咒術迴戰",
-        "排球少年！！",
-        "我的英雄學院",
-        "遊戲人生",
-        "GACHIAKUTA",
-        "獄門疆"
-      ],
-      "searchCorpus": "羚邦與 BTUHOBBYBASE 攜手多款動漫作品進軍高雄動漫節 配合高雄國際動漫節（KICA）即將於雙十連假（10/9-10/12）連續四天於高雄巨蛋登場，羚邦與 BTUHOBBYBASE 再次集結旗下多部人氣動畫作品，帶來各式週邊商品與限定福袋，其中包含《咒術迴戰》、《排球少年！！》、《我的英雄學院》、《遊戲人生》及《GACHIAKUTA》等多種作品週邊。 福袋部分，《咒術迴戰》福袋一次收錄「獄門疆」絨毛吊飾、",
-      "dateConfidence": "high",
-      "dateSource": "10/9-10/12",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-01T05:50:29.064Z",
-      "lastSeenAt": "2026-10-01T05:50:29.064Z",
-      "archivedAt": "2026-10-13T06:46:02.845Z"
-    },
-    {
-      "id": "ext-4f7e330b7c6a4053",
-      "title": "POP UP STORE「曼迪秋日祭」快閃微風信義 集結《名偵探柯南》等多部作品周邊、抽卡機",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE96RW5WWkFiTUNVNFI2Rm9JOHpObTgwaWc5anBaR1p0QlZUVy1SSXQwOTd4U1JoRHdtSzVFUFU2WXMwWU5YYnhPY3RCN3VaVjc2dTNCS2tpSWM?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-28T07:11:27.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "名偵探柯南",
-        "曼迪秋日祭"
-      ],
-      "searchCorpus": "POP UP STORE「曼迪秋日祭」快閃微風信義 集結《名偵探柯南》等多部作品周邊、抽卡機 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-04T04:30:47.017Z",
-      "lastSeenAt": "2026-09-04T04:30:47.017Z",
-      "archivedAt": "2026-10-13T06:46:02.845Z"
-    }
-  ]
+  "archive": []
 }
