@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-14T04:51:12.320Z",
-    "lastSuccessfulUpdateAt": "2026-10-14T04:51:12.320Z",
+    "updatedAt": "2026-10-15T04:36:00.593Z",
+    "lastSuccessfulUpdateAt": "2026-10-15T04:36:00.593Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
-    "fetchedTagItemCount": 207,
-    "fetchedExternalItemCount": 425,
-    "uniqueNewsCount": 627,
+    "fetchedTagItemCount": 208,
+    "fetchedExternalItemCount": 426,
+    "uniqueNewsCount": 625,
     "articleCandidateCount": 226,
-    "articleFetchSuccessCount": 36,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 22,
-    "newEventCount": 7,
+    "newEventCount": 4,
     "cachedEventCount": 55,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 67,
-    "expiredRemovedCount": 13,
+    "archiveCount": 1,
+    "storedEventCount": 68,
+    "expiredRemovedCount": 12,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 47,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 134,
+    "nonActivityRemovedCount": 136,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -190,8 +190,36 @@
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+    },
+    {
+      "id": "ext-0661909152b8aa8b",
+      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
+      "summary": "PChome Online 新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T06:17:41.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-1457b6222baff2a4",
@@ -219,34 +247,6 @@
       "searchCorpus": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！ SouNova 少女星",
       "dateConfidence": "medium",
       "dateSource": "10 月 9 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
-    },
-    {
-      "id": "ext-0661909152b8aa8b",
-      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T06:17:41.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-14T04:51:12.320Z",
       "lastSeenAt": "2026-10-14T04:51:12.320Z"
@@ -607,8 +607,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -841,8 +841,8 @@
       "dateConfidence": "medium",
       "dateSource": "9月1日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-1e3eb4e0df99540b",
@@ -902,8 +902,8 @@
       "dateConfidence": "medium",
       "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1284,6 +1284,37 @@
       "lastSeenAt": "2026-09-02T04:31:31.753Z"
     },
     {
+      "id": "gnn-313419",
+      "title": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場",
+      "summary": "人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313419",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-15T03:49:09.000Z",
+      "eventStartDate": "2026-10-23",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "關於我轉生變成史萊姆這檔事",
+        "動物化版本"
+      ],
+      "searchCorpus": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場 人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
+      "dateConfidence": "medium",
+      "dateSource": "10/23",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+    },
+    {
       "id": "gnn-312929",
       "title": "hololive production「秋色｜倫敦旅行日記」快閃店將於高雄登場",
       "summary": "由 VTuber 團體 hololive production 授權，NoonX（樂曜日）策劃推出全新系列快閃店「hololive production 秋色｜倫敦旅行日記」，將於 2026 年 10 月 23 日（五）至 11 月 30 日（一）於高雄夢時代 1F 時代光廊登場。延續春、夏旅行日記系列，本次旅行舞台來到充滿英倫風情的倫敦，邀請粉絲與白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・",
@@ -1445,6 +1476,37 @@
       "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
+      "id": "gnn-313424",
+      "title": "《given 被贈與的未來》 × 日本彩妝品牌 iCouleur Collaboration 限定快閃店 12/4 在台登場",
+      "summary": "人氣 BL 樂團作品《given 被贈與的未來》與日本彩妝品牌 iCouleur 聯名合作，限定週邊商品快閃店將自 12/4 起於西門町草咖啡限時登場。 日本的 iCouleur 品牌概念為「以我的推，點亮彩繪我的人生」，推出的彩妝商品經常成為話題，其延伸的彩妝意象商品也深受喜愛，此次將 given 的 8 位角色融入質感週邊中，不論是日常實用還是收藏，都能讓",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313424",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-15T04:08:18.000Z",
+      "eventStartDate": "2026-12-04",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "given 被贈與的未來",
+        "以我的推，點亮彩繪我的人生"
+      ],
+      "searchCorpus": "《given 被贈與的未來》 × 日本彩妝品牌 iCouleur Collaboration 限定快閃店 12/4 在台登場 人氣 BL 樂團作品《given 被贈與的未來》與日本彩妝品牌 iCouleur 聯名合作，限定週邊商品快閃店將自 12/4 起於西門町草咖啡限時登場。 日本的 iCouleur 品牌概念為「以我的推，點亮彩繪我的人生」，推出的彩妝商品經常成為話題，其延伸的彩妝意象商品也深受喜愛，此次將 given 的 8 位角色融入質感週邊中，不論是日常實用還是收藏，都能讓",
+      "dateConfidence": "medium",
+      "dateSource": "12/4",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+    },
+    {
       "id": "gnn-313300",
       "title": "angela 睽違三年再度來台演出「All About StarChild?」12/6 於 Zepp New Taipei 舉行",
       "summary": "日本音樂組合 angela 宣布，將於 2026 年 12 月 6 日（日）在 Zepp New Taipei 盛大舉辦專場演唱會「angela Live 2026 All About StarChild?! in Taipei」。這是繼 2023 年「Welcome!」巡迴台北場後，兩人時隔整整三年再度來台開唱。本次巡演特別以品牌「StarChild（スターチャイルド）」為核心企劃，帶領全場樂迷橫跨時空，重溫不同世代的動畫歌曲。 angela 是由主",
@@ -1568,40 +1630,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-07T05:57:11.700Z",
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
-    },
-    {
-      "id": "gnn-310709",
-      "title": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲",
-      "summary": "日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310709",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-30T13:23:09.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "Fatal",
-        "ONIGOTO",
-        "＂IDOL1ST KENTY＂ ASIA TOUR 2026",
-        "3000 年前開始就是偶像",
-        "天生偶像"
-      ],
-      "searchCorpus": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲 日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z"
     },
     {
       "id": "gnn-310753",
@@ -1830,7 +1858,7 @@
         "台中"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-17T11:37:52.000Z",
+      "publishedAt": "2026-09-17T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1844,8 +1872,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1931,8 +1959,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1962,8 +1990,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -1990,8 +2018,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-bf19739780c7e9db",
@@ -2006,7 +2034,7 @@
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-02T10:18:28.000Z",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -2018,8 +2046,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-0bc936f6ef584ef3",
@@ -2108,8 +2136,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "gnn-313171",
@@ -2146,5 +2174,41 @@
       "lastSeenAt": "2026-10-12T05:54:52.213Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-310709",
+      "title": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲",
+      "summary": "日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310709",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-30T13:23:09.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "Fatal",
+        "ONIGOTO",
+        "＂IDOL1ST KENTY＂ ASIA TOUR 2026",
+        "3000 年前開始就是偶像",
+        "天生偶像"
+      ],
+      "searchCorpus": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲 日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-08-31T05:32:32.134Z",
+      "lastSeenAt": "2026-08-31T05:32:32.134Z",
+      "archivedAt": "2026-10-15T04:36:00.593Z"
+    }
+  ]
 }
