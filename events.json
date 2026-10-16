@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-15T04:36:00.593Z",
-    "lastSuccessfulUpdateAt": "2026-10-15T04:36:00.593Z",
+    "updatedAt": "2026-10-16T04:29:56.993Z",
+    "lastSuccessfulUpdateAt": "2026-10-16T04:29:56.993Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
     "fetchedExternalItemCount": 426,
-    "uniqueNewsCount": 625,
-    "articleCandidateCount": 226,
+    "uniqueNewsCount": 624,
+    "articleCandidateCount": 223,
     "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 22,
-    "newEventCount": 4,
-    "cachedEventCount": 55,
+    "matchedEventCount": 15,
+    "newEventCount": 2,
+    "cachedEventCount": 59,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 68,
-    "expiredRemovedCount": 12,
+    "archiveCount": 2,
+    "storedEventCount": 67,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 47,
+    "undatedOldRemovedCount": 50,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 136,
+    "nonActivityRemovedCount": 133,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -164,6 +164,34 @@
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
+      "id": "ext-0661909152b8aa8b",
+      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
+      "summary": "PChome Online 新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T06:17:41.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
+    },
+    {
       "id": "ext-24b07d0d8316ac7a",
       "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
       "summary": "Paradaily",
@@ -187,34 +215,6 @@
         "柯南展"
       ],
       "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
-    },
-    {
-      "id": "ext-0661909152b8aa8b",
-      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T06:17:41.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
@@ -607,8 +607,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -997,37 +997,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-07-14T07:26:12.868Z",
       "lastSeenAt": "2026-07-14T07:26:12.868Z"
-    },
-    {
-      "id": "gnn-309446",
-      "title": "hololive production「盛夏｜墾丁旅行日記」快閃店 宣布 8 月 11 日起於台中大遠百登場",
-      "summary": "由 hololive production 正式授權，NoonX（樂曜日）策劃推出全新系列快閃店 「hololive production 盛夏｜墾丁旅行日記」，即將於 8 月 11 日在台中大遠百 11 樓展開。延續春日旅行日記系列，本次將旅行舞台移至充滿南國風情的墾丁海岸，邀請粉絲與 白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・貝爾絲及儒烏風亭螺鈿一同展開熱情的",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309446",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-06T03:34:41.000Z",
-      "eventStartDate": "2026-08-11",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "閃店 宣布 8 月 11 日起於台中大遠百登場 由 hololive",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "盛夏｜墾丁旅行日記",
-        "hololive production 盛夏｜墾丁旅行日記"
-      ],
-      "searchCorpus": "hololive production「盛夏｜墾丁旅行日記」快閃店 宣布 8 月 11 日起於台中大遠百登場 由 hololive production 正式授權，NoonX（樂曜日）策劃推出全新系列快閃店 「hololive production 盛夏｜墾丁旅行日記」，即將於 8 月 11 日在台中大遠百 11 樓展開。延續春日旅行日記系列，本次將旅行舞台移至充滿南國風情的墾丁海岸，邀請粉絲與 白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・貝爾絲及儒烏風亭螺鈿一同展開熱情的",
-      "dateConfidence": "medium",
-      "dateSource": "8 月 11 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-06T03:35:05.926Z",
-      "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
       "id": "gnn-309443",
@@ -1481,7 +1450,7 @@
       "summary": "人氣 BL 樂團作品《given 被贈與的未來》與日本彩妝品牌 iCouleur 聯名合作，限定週邊商品快閃店將自 12/4 起於西門町草咖啡限時登場。 日本的 iCouleur 品牌概念為「以我的推，點亮彩繪我的人生」，推出的彩妝商品經常成為話題，其延伸的彩妝意象商品也深受喜愛，此次將 given 的 8 位角色融入質感週邊中，不論是日常實用還是收藏，都能讓",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=313424",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -1503,8 +1472,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "gnn-313300",
@@ -1538,6 +1507,39 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-13T06:46:02.845Z",
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
+    },
+    {
+      "id": "gnn-313498",
+      "title": "米津玄師世界巡演「GHOST」前進台北大巨蛋 12 月 26、27 日一連兩天登場",
+      "summary": "日本人氣歌手米津玄師，繼去年 3 月「KENSHI YONEZU 2025 WORLD TOUR / JUNK」在台北小巨蛋登場後，主辦單位大鴻藝術 BIG ART、超級圓頂 SUPER DOME今（15）日宣布，米津玄師將於 12 月 26 日、27 日一連兩天登上臺北大巨蛋舉辦全新世界巡迴演唱會「KENSHI YONEZU 2026-2027 WORLD TOUR / GHOST」的消息。 從 VOCALOID 創作者「ハチ（HACHI）」發跡，多才多藝的米津玄師",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313498",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-15T14:12:29.000Z",
+      "eventStartDate": "2026-12-26",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GHOST",
+        "KENSHI YONEZU 2025 WORLD TOUR / JUNK",
+        "KENSHI YONEZU 2026-2027 WORLD TOUR / GHOST",
+        "ハチ（HACHI）"
+      ],
+      "searchCorpus": "米津玄師世界巡演「GHOST」前進台北大巨蛋 12 月 26、27 日一連兩天登場 日本人氣歌手米津玄師，繼去年 3 月「KENSHI YONEZU 2025 WORLD TOUR / JUNK」在台北小巨蛋登場後，主辦單位大鴻藝術 BIG ART、超級圓頂 SUPER DOME今（15）日宣布，米津玄師將於 12 月 26 日、27 日一連兩天登上臺北大巨蛋舉辦全新世界巡迴演唱會「KENSHI YONEZU 2026-2027 WORLD TOUR / GHOST」的消息。 從 VOCALOID 創作者「ハチ（HACHI）」發跡，多才多藝的米津玄師",
+      "dateConfidence": "medium",
+      "dateSource": "12 月 26 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "gnn-310732",
@@ -1630,39 +1632,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-07T05:57:11.700Z",
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
-    },
-    {
-      "id": "gnn-310753",
-      "title": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎複製原畫展 台中場正式開展",
-      "summary": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310753",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-31T05:03:14.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "台中中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "JOJO 的奇妙冒險",
-        "JOJO 的奇妙冒險 星塵遠征軍",
-        "飆馬野郎 JOJO 的奇妙冒險",
-        "主角立牌區"
-      ],
-      "searchCorpus": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎複製原畫展 台中場正式開展 《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "gnn-311058",
@@ -1872,8 +1841,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1959,8 +1928,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1990,8 +1959,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -2018,8 +1987,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-16T04:29:56.993Z",
+      "lastSeenAt": "2026-10-16T04:29:56.993Z"
     },
     {
       "id": "ext-bf19739780c7e9db",
@@ -2176,39 +2145,70 @@
   ],
   "archive": [
     {
-      "id": "gnn-310709",
-      "title": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲",
-      "summary": "日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310709",
+      "id": "gnn-310753",
+      "title": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎複製原畫展 台中場正式開展",
+      "summary": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310753",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
       "locations": [
-        "台北"
+        "台中"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-30T13:23:09.000Z",
+      "publishedAt": "2026-08-31T05:03:14.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "",
+      "venue": "台中中友百貨",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "Fatal",
-        "ONIGOTO",
-        "＂IDOL1ST KENTY＂ ASIA TOUR 2026",
-        "3000 年前開始就是偶像",
-        "天生偶像"
+        "JOJO 的奇妙冒險",
+        "JOJO 的奇妙冒險 星塵遠征軍",
+        "飆馬野郎 JOJO 的奇妙冒險",
+        "主角立牌區"
       ],
-      "searchCorpus": "中島健人亞巡台北場本週登場 連唱兩天為歌迷帶來「Fatal」、「ONIGOTO」等多首人氣歌曲 日本人氣男星中島健人本週末（29、30 日）帶著個人亞洲巡演「＂IDOL1ST KENTY＂ ASIA TOUR 2026」登上 Zepp New Taipei，睽違一年要再度與台灣歌迷見面。這回他將「3000 年前開始就是偶像」的設定搬上舞台，化身被封印三千年的「天生偶像」，演唱會一開場便要集結全場 U:nity（歌迷名稱）之力解除封印，在震耳欲聾的歡呼聲中，中島健人身穿華麗",
+      "searchCorpus": "《JOJO 的奇妙冒險》星塵遠征軍快閃店＆飆馬野郎複製原畫展 台中場正式開展 《JOJO 的奇妙冒險 星塵遠征軍》快閃店以及《飆馬野郎 JOJO 的奇妙冒險》複製原畫展，上週末正式移師台中中友百貨舉行。現場除帶來多項週邊外，粉絲也可以藉由《飆馬野郎 JOJO 的奇妙冒險》複製原畫展體驗作品魅力。 首先在快閃店的部分，這次準備了多個拍照打卡點等候粉絲到來，像是入口超越等身尺寸的「主角立牌區」、左側「主",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-08-31T05:32:32.134Z",
-      "lastSeenAt": "2026-08-31T05:32:32.134Z",
-      "archivedAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-10-16T04:29:56.993Z"
+    },
+    {
+      "id": "gnn-309446",
+      "title": "hololive production「盛夏｜墾丁旅行日記」快閃店 宣布 8 月 11 日起於台中大遠百登場",
+      "summary": "由 hololive production 正式授權，NoonX（樂曜日）策劃推出全新系列快閃店 「hololive production 盛夏｜墾丁旅行日記」，即將於 8 月 11 日在台中大遠百 11 樓展開。延續春日旅行日記系列，本次將旅行舞台移至充滿南國風情的墾丁海岸，邀請粉絲與 白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・貝爾絲及儒烏風亭螺鈿一同展開熱情的",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309446",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-06T03:34:41.000Z",
+      "eventStartDate": "2026-08-11",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "閃店 宣布 8 月 11 日起於台中大遠百登場 由 hololive",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "盛夏｜墾丁旅行日記",
+        "hololive production 盛夏｜墾丁旅行日記"
+      ],
+      "searchCorpus": "hololive production「盛夏｜墾丁旅行日記」快閃店 宣布 8 月 11 日起於台中大遠百登場 由 hololive production 正式授權，NoonX（樂曜日）策劃推出全新系列快閃店 「hololive production 盛夏｜墾丁旅行日記」，即將於 8 月 11 日在台中大遠百 11 樓展開。延續春日旅行日記系列，本次將旅行舞台移至充滿南國風情的墾丁海岸，邀請粉絲與 白上吹雪、寶鐘瑪琳、角卷綿芽、可波・卡娜埃露、哈珂斯・貝爾絲及儒烏風亭螺鈿一同展開熱情的",
+      "dateConfidence": "medium",
+      "dateSource": "8 月 11 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-06T03:35:05.926Z",
+      "lastSeenAt": "2026-08-06T03:35:05.926Z",
+      "archivedAt": "2026-10-16T04:29:56.993Z"
     }
   ]
 }
