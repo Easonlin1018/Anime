@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-18T04:30:06.681Z",
-    "lastSuccessfulUpdateAt": "2026-10-18T04:30:06.681Z",
+    "updatedAt": "2026-10-19T04:38:08.597Z",
+    "lastSuccessfulUpdateAt": "2026-10-19T04:38:08.597Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
     "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 627,
-    "articleCandidateCount": 226,
-    "articleFetchSuccessCount": 35,
+    "uniqueNewsCount": 628,
+    "articleCandidateCount": 227,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 3,
-    "cachedEventCount": 58,
+    "matchedEventCount": 20,
+    "newEventCount": 1,
+    "cachedEventCount": 57,
     "rateLimitedCount": 0,
     "archiveCount": 0,
     "storedEventCount": 69,
-    "expiredRemovedCount": 16,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 46,
+    "undatedOldRemovedCount": 44,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 135,
+    "nonActivityRemovedCount": 139,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -190,8 +190,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/9",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-1457b6222baff2a4",
@@ -220,8 +220,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 9 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-0661909152b8aa8b",
@@ -607,8 +607,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -841,8 +841,8 @@
       "dateConfidence": "medium",
       "dateSource": "9月1日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-1e3eb4e0df99540b",
@@ -903,8 +903,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1691,8 +1691,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "gnn-311282",
@@ -1841,13 +1841,13 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-d409522840b24277",
       "title": "高雄動漫迷衝！免費入場7大動漫IP高雄快閃店，JOJO、孤獨搖滾、史努比快閃高雄買爆|生活",
-      "summary": "WalkerLand",
+      "summary": "WalkerLand 窩客島",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE56SkRsUnRjY2hMcjlscVdueHRYY3ZpdkdXeXVjMm9wLVBGdG1QdlpvbkxiTzctZWE3UmExY0hxUUFlQXlObENEVjNBc25FVnhTMHVMMlpzUmpRTkRhc2c?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1857,7 +1857,7 @@
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-26T09:40:00.000Z",
+      "publishedAt": "2026-09-26T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1865,12 +1865,12 @@
       "admissionType": "免費入場",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "高雄動漫迷衝！免費入場7大動漫IP高雄快閃店，JOJO、孤獨搖滾、史努比快閃高雄買爆|生活 WalkerLand",
+      "searchCorpus": "高雄動漫迷衝！免費入場7大動漫IP高雄快閃店，JOJO、孤獨搖滾、史努比快閃高雄買爆|生活 WalkerLand 窩客島",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-30T05:30:31.204Z",
-      "lastSeenAt": "2026-09-30T05:30:31.204Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1928,8 +1928,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -2043,8 +2043,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-10T05:50:33.180Z",
-      "lastSeenAt": "2026-10-10T05:50:33.180Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "gnn-312921",
@@ -2103,8 +2103,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -2131,8 +2131,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
       "id": "ext-fbbc400ad3ccb14f",
