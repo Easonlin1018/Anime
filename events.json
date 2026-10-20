@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-19T04:38:08.597Z",
-    "lastSuccessfulUpdateAt": "2026-10-19T04:38:08.597Z",
+    "updatedAt": "2026-10-20T04:48:13.049Z",
+    "lastSuccessfulUpdateAt": "2026-10-20T04:48:13.049Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
     "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 628,
+    "uniqueNewsCount": 625,
     "articleCandidateCount": 227,
     "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 20,
-    "newEventCount": 1,
-    "cachedEventCount": 57,
+    "matchedEventCount": 18,
+    "newEventCount": 3,
+    "cachedEventCount": 53,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 69,
+    "archiveCount": 7,
+    "storedEventCount": 64,
     "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 44,
+    "undatedOldRemovedCount": 46,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 139,
+    "foreignRemovedCount": 2,
+    "nonActivityRemovedCount": 135,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -162,122 +162,6 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-10-05T05:37:27.563Z",
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
-      "id": "ext-24b07d0d8316ac7a",
-      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "柯南展"
-      ],
-      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
-    },
-    {
-      "id": "ext-1457b6222baff2a4",
-      "title": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9tbUJ0ck16N3ZmS1BJTG5mWXpYdXM2NmtfaTc4OC1JeHdhaFMydFB4Wmk2bUJrX0tVVjZSUFR5XzVKY2NKV1VYZ3lmSWhCZFlJb1JSM01UWnR1dEtfUFU1enk3ekoxYXdQYkNCUHZQZm5ZLUR4STln?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "柯南展"
-      ],
-      "searchCorpus": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！ SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "10 月 9 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
-    },
-    {
-      "id": "ext-0661909152b8aa8b",
-      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T06:17:41.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
-    },
-    {
-      "id": "ext-bd9ab5f8b7a4f06d",
-      "title": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！",
-      "summary": "遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBkZDZFdExTM1ZZeEVGcmxBTFhYRDVyaGludjJmcVJtRkFpS1FTUTk3Qm5OenJkOE1fUTU5b2h6OVR2eFRoaUQwVnUtcEtVX1NXRWFMUklEaHF3SUNDeUE?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！ 遊戲基地Gamebase",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z"
     },
     {
       "id": "gnn-313100",
@@ -607,8 +491,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -903,8 +787,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1126,36 +1010,6 @@
       "lastSeenAt": "2026-08-25T01:51:26.169Z"
     },
     {
-      "id": "gnn-309636",
-      "title": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購",
-      "summary": "2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309636",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-10T07:04:54.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "FLASHLIGHT"
-      ],
-      "searchCorpus": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購 2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
-      "dateConfidence": "medium",
-      "dateSource": "10 月 9 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z"
-    },
-    {
       "id": "gnn-312126",
       "title": "《麵包超人》快閃店三地串連登場 最新電影《潘坦與約定之星》9 月起聯動開跑",
       "summary": "配合最新電影《麵包超人電影版：潘坦與約定之星》10/16 在台上映，將以接力的方式，從 9 月下旬開始，陸續在新店裕隆城、遠東 SOGO 百貨忠孝館，及 Big City 新竹巨城購物中心登場，除了帶來滿滿的《麵包超人》周邊商品，各項電影聯動活動更是豐富，不只有拍照牆，還有贈著色手冊和電影優惠票等好禮。 【以下內容為廠商提供資料原文",
@@ -1189,40 +1043,6 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "gnn-309049",
-      "title": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場",
-      "summary": "聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309049",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-30T02:30:55.000Z",
-      "eventStartDate": "2026-10-17",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "BanG Dream!",
-        "D4DJ",
-        "BanG Dream！",
-        "TSUMUGI RISA FAN MEETING 2026 in TAIPEI",
-        "CHU&sup2"
-      ],
-      "searchCorpus": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場 聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
-      "dateConfidence": "medium",
-      "dateSource": "10 月 17 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z"
-    },
-    {
       "id": "gnn-310845",
       "title": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行",
       "summary": "日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
@@ -1251,6 +1071,39 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-09-02T04:31:31.753Z",
       "lastSeenAt": "2026-09-02T04:31:31.753Z"
+    },
+    {
+      "id": "gnn-313628",
+      "title": "《崩壞 3rd》攜手萌番 More Fun 推出休伯利安啟航聯動主題餐廳 10 月 23 日正式開張",
+      "summary": "IP 授權代理品牌「More Fun 萌番」今（19）日正式宣布，將與人氣手機遊戲《崩壞 3rd》自 2026 年 10 月 23 日（五）至 2026 年 12 月 27 日（日）止攜手合作，於台北、高雄展開期間限定的聯動主題餐廳活動。 煙火！好友！休伯利安啟航！ 官方表示，本次主題餐廳以「煙火慶典」為概念，依照角色形象設計六款期間限定主題餐點，將各角色的代表",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313628",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-19T08:22:37.000Z",
+      "eventStartDate": "2026-10-23",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "崩壞 3rd",
+        "More Fun 萌番",
+        "煙火慶典"
+      ],
+      "searchCorpus": "《崩壞 3rd》攜手萌番 More Fun 推出休伯利安啟航聯動主題餐廳 10 月 23 日正式開張 IP 授權代理品牌「More Fun 萌番」今（19）日正式宣布，將與人氣手機遊戲《崩壞 3rd》自 2026 年 10 月 23 日（五）至 2026 年 12 月 27 日（日）止攜手合作，於台北、高雄展開期間限定的聯動主題餐廳活動。 煙火！好友！休伯利安啟航！ 官方表示，本次主題餐廳以「煙火慶典」為概念，依照角色形象設計六款期間限定主題餐點，將各角色的代表",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 23 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "gnn-313419",
@@ -1509,6 +1362,37 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
+      "id": "ext-7aea1ed6799d2216",
+      "title": "「飛べ！」 《排球少年!!》動畫 10 週年紀念展 12 月 25 日台北松菸登場，重現熱血青春",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE44WUFqU2F3SkRHaTFKNVBhWml5YXJOT29iU3VGWGtvRWtDTXZkTnpLZXMxOFRuSWR3RE1kdVhDMjZBbnVMQjBBSmIwV09jdkxwZzFHVEc5X1BscUY1azFHRV9BbDZ4RWNhQmNOZWxRWmJIcnNTLXY4?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-19T05:00:00.000Z",
+      "eventStartDate": "2026-12-25",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "排球少年!!",
+        "飛べ！"
+      ],
+      "searchCorpus": "「飛べ！」 《排球少年!!》動畫 10 週年紀念展 12 月 25 日台北松菸登場，重現熱血青春 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "12 月 25 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
       "id": "gnn-313498",
       "title": "米津玄師世界巡演「GHOST」前進台北大巨蛋 12 月 26、27 日一連兩天登場",
       "summary": "日本人氣歌手米津玄師，繼去年 3 月「KENSHI YONEZU 2025 WORLD TOUR / JUNK」在台北小巨蛋登場後，主辦單位大鴻藝術 BIG ART、超級圓頂 SUPER DOME今（15）日宣布，米津玄師將於 12 月 26 日、27 日一連兩天登上臺北大巨蛋舉辦全新世界巡迴演唱會「KENSHI YONEZU 2026-2027 WORLD TOUR / GHOST」的消息。 從 VOCALOID 創作者「ハチ（HACHI）」發跡，多才多藝的米津玄師",
@@ -1634,39 +1518,6 @@
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
     },
     {
-      "id": "gnn-311058",
-      "title": "東立將於高雄國際動漫節邀請到《與妳相戀到生命盡頭》作者あおのなち舉行簽名會",
-      "summary": "東立出版社宣布，將於高雄國際動漫節期間邀請到《與妳相戀到生命盡頭》作者作者あおのなち來台舉行簽名會的消息。 あおのなち為日本漫畫家，自 2018 年起於日本一迅社漫畫雜誌「Comic 百合姬」開始連載《與妳相戀到生命盡頭》，而後移至「百合姬@pixiv」連載至今。あおのなち曾將遊戲作品《獄都事變》改編為漫畫，擔任BL作品《秋実",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311058",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：簽名會",
-      "sourceTag": "簽名會",
-      "type": "簽名會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-04T06:33:32.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "與妳相戀到生命盡頭",
-        "獄都事變",
-        "Comic 百合姬",
-        "百合姬@pixiv"
-      ],
-      "searchCorpus": "東立將於高雄國際動漫節邀請到《與妳相戀到生命盡頭》作者あおのなち舉行簽名會 東立出版社宣布，將於高雄國際動漫節期間邀請到《與妳相戀到生命盡頭》作者作者あおのなち來台舉行簽名會的消息。 あおのなち為日本漫畫家，自 2018 年起於日本一迅社漫畫雜誌「Comic 百合姬」開始連載《與妳相戀到生命盡頭》，而後移至「百合姬@pixiv」連載至今。あおのなち曾將遊戲作品《獄都事變》改編為漫畫，擔任BL作品《秋実",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-13T06:46:02.845Z",
-      "lastSeenAt": "2026-10-13T06:46:02.845Z"
-    },
-    {
       "id": "ext-ea4771a92a9a3816",
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
       "summary": "WalkerLand 窩客島",
@@ -1691,8 +1542,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "gnn-311282",
@@ -1841,8 +1692,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1869,8 +1720,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1928,8 +1779,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -2043,8 +1894,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "gnn-312921",
@@ -2103,8 +1954,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -2131,8 +1982,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
+      "discoveredAt": "2026-10-20T04:48:13.049Z",
+      "lastSeenAt": "2026-10-20T04:48:13.049Z"
     },
     {
       "id": "ext-fbbc400ad3ccb14f",
@@ -2199,5 +2050,226 @@
       "lastSeenAt": "2026-10-12T05:54:52.213Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-24b07d0d8316ac7a",
+      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "柯南展"
+      ],
+      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
+      "id": "ext-1457b6222baff2a4",
+      "title": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9tbUJ0ck16N3ZmS1BJTG5mWXpYdXM2NmtfaTc4OC1JeHdhaFMydFB4Wmk2bUJrX0tVVjZSUFR5XzVKY2NKV1VYZ3lmSWhCZFlJb1JSM01UWnR1dEtfUFU1enk3ekoxYXdQYkNCUHZQZm5ZLUR4STln?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "柯南展"
+      ],
+      "searchCorpus": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！ SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 9 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
+      "id": "ext-bd9ab5f8b7a4f06d",
+      "title": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！",
+      "summary": "遊戲基地Gamebase",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBkZDZFdExTM1ZZeEVGcmxBTFhYRDVyaGludjJmcVJtRkFpS1FTUTk3Qm5OenJkOE1fUTU5b2h6OVR2eFRoaUQwVnUtcEtVX1NXRWFMUklEaHF3SUNDeUE?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！ 遊戲基地Gamebase",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-18T04:30:06.681Z",
+      "lastSeenAt": "2026-10-18T04:30:06.681Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
+      "id": "ext-0661909152b8aa8b",
+      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
+      "summary": "PChome Online 新聞",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T06:17:41.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
+      "dateConfidence": "medium",
+      "dateSource": "10/9",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-18T04:30:06.681Z",
+      "lastSeenAt": "2026-10-18T04:30:06.681Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
+      "id": "gnn-311058",
+      "title": "東立將於高雄國際動漫節邀請到《與妳相戀到生命盡頭》作者あおのなち舉行簽名會",
+      "summary": "東立出版社宣布，將於高雄國際動漫節期間邀請到《與妳相戀到生命盡頭》作者作者あおのなち來台舉行簽名會的消息。 あおのなち為日本漫畫家，自 2018 年起於日本一迅社漫畫雜誌「Comic 百合姬」開始連載《與妳相戀到生命盡頭》，而後移至「百合姬@pixiv」連載至今。あおのなち曾將遊戲作品《獄都事變》改編為漫畫，擔任BL作品《秋実",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311058",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：簽名會",
+      "sourceTag": "簽名會",
+      "type": "簽名會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-04T06:33:32.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "與妳相戀到生命盡頭",
+        "獄都事變",
+        "Comic 百合姬",
+        "百合姬@pixiv"
+      ],
+      "searchCorpus": "東立將於高雄國際動漫節邀請到《與妳相戀到生命盡頭》作者あおのなち舉行簽名會 東立出版社宣布，將於高雄國際動漫節期間邀請到《與妳相戀到生命盡頭》作者作者あおのなち來台舉行簽名會的消息。 あおのなち為日本漫畫家，自 2018 年起於日本一迅社漫畫雜誌「Comic 百合姬」開始連載《與妳相戀到生命盡頭》，而後移至「百合姬@pixiv」連載至今。あおのなち曾將遊戲作品《獄都事變》改編為漫畫，擔任BL作品《秋実",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-13T06:46:02.845Z",
+      "lastSeenAt": "2026-10-13T06:46:02.845Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
+      "id": "gnn-309636",
+      "title": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購",
+      "summary": "2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309636",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-10T07:04:54.000Z",
+      "eventStartDate": "2026-10-09",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "FLASHLIGHT"
+      ],
+      "searchCorpus": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購 2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 9 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-11T02:26:32.819Z",
+      "lastSeenAt": "2026-08-11T02:26:32.819Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    },
+    {
+      "id": "gnn-309049",
+      "title": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場",
+      "summary": "聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=309049",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-30T02:30:55.000Z",
+      "eventStartDate": "2026-10-17",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "BanG Dream!",
+        "D4DJ",
+        "BanG Dream！",
+        "TSUMUGI RISA FAN MEETING 2026 in TAIPEI",
+        "CHU&sup2"
+      ],
+      "searchCorpus": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場 聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 17 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-30T03:26:59.703Z",
+      "lastSeenAt": "2026-07-30T03:26:59.703Z",
+      "archivedAt": "2026-10-20T04:48:13.049Z"
+    }
+  ]
 }
