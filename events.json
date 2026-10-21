@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-20T04:48:13.049Z",
-    "lastSuccessfulUpdateAt": "2026-10-20T04:48:13.049Z",
+    "updatedAt": "2026-10-21T04:43:40.175Z",
+    "lastSuccessfulUpdateAt": "2026-10-21T04:43:40.175Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 427,
-    "uniqueNewsCount": 625,
-    "articleCandidateCount": 227,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 325,
+    "uniqueNewsCount": 538,
+    "articleCandidateCount": 140,
+    "articleFetchSuccessCount": 40,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 18,
-    "newEventCount": 3,
-    "cachedEventCount": 53,
+    "matchedEventCount": 8,
+    "newEventCount": 1,
+    "cachedEventCount": 56,
     "rateLimitedCount": 0,
-    "archiveCount": 7,
-    "storedEventCount": 64,
-    "expiredRemovedCount": 15,
+    "archiveCount": 2,
+    "storedEventCount": 62,
+    "expiredRemovedCount": 7,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 46,
+    "undatedOldRemovedCount": 41,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 2,
-    "nonActivityRemovedCount": 135,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 81,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -132,38 +132,6 @@
       "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
-      "id": "gnn-311635",
-      "title": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相",
-      "summary": "由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311635",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-14T09:12:03.000Z",
-      "eventStartDate": "2026-09-17",
-      "eventEndDate": "2026-10-20",
-      "eventStatus": "ongoing",
-      "venue": "超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮",
-      "admissionType": "免費入場",
-      "feeText": "",
-      "workTitles": [
-        "黃泉使者",
-        "獵人 HUNTER&times;HUNTER",
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相 由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
-      "dateConfidence": "high",
-      "dateSource": "9 月 17 日起至 10 月 20 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
       "id": "gnn-313100",
       "title": "《魔道祖師》動畫快閃店「雲深不知處」即日起於誠品生活西門登場",
       "summary": "由噗通企画主辦的《魔道祖師》動畫「雲深不知處」台北快閃店，今日起（10 月 8 日）至 11 月 8 日在誠品生活西門 3AF 正式展開。活動以作品中的「雲深不知處」為主題，規劃沉浸式場景、雙角色主視覺、特色拍照空間及許願牆，並集結逾百款角色周邊。商品將分兩波上架，首波由「經典系列」、「幽花影」及「鶴舞青山」率先登場，預計",
@@ -194,8 +162,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 8 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-13T06:46:02.845Z",
-      "lastSeenAt": "2026-10-13T06:46:02.845Z"
+      "discoveredAt": "2026-10-21T04:43:40.175Z",
+      "lastSeenAt": "2026-10-21T04:43:40.175Z"
     },
     {
       "id": "gnn-313027",
@@ -225,8 +193,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/7",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-13T06:46:02.845Z",
-      "lastSeenAt": "2026-10-13T06:46:02.845Z"
+      "discoveredAt": "2026-10-21T04:43:40.175Z",
+      "lastSeenAt": "2026-10-21T04:43:40.175Z"
     },
     {
       "id": "gnn-312758",
@@ -1043,34 +1011,35 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "gnn-310845",
-      "title": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行",
-      "summary": "日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310845",
+      "id": "gnn-313419",
+      "title": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場",
+      "summary": "人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313419",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-01T10:00:01.000Z",
-      "eventStartDate": "2026-10-18",
+      "publishedAt": "2026-10-15T03:49:09.000Z",
+      "eventStartDate": "2026-10-23",
       "eventEndDate": null,
       "eventStatus": "upcoming",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026"
+        "關於我轉生變成史萊姆這檔事",
+        "動物化版本"
       ],
-      "searchCorpus": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行 日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
+      "searchCorpus": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場 人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
       "dateConfidence": "medium",
-      "dateSource": "10 月 18 日",
+      "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z"
+      "discoveredAt": "2026-10-21T04:43:40.175Z",
+      "lastSeenAt": "2026-10-21T04:43:40.175Z"
     },
     {
       "id": "gnn-313628",
@@ -1104,37 +1073,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-20T04:48:13.049Z",
       "lastSeenAt": "2026-10-20T04:48:13.049Z"
-    },
-    {
-      "id": "gnn-313419",
-      "title": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場",
-      "summary": "人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=313419",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-15T03:49:09.000Z",
-      "eventStartDate": "2026-10-23",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "關於我轉生變成史萊姆這檔事",
-        "動物化版本"
-      ],
-      "searchCorpus": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場 人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
-      "dateConfidence": "medium",
-      "dateSource": "10/23",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "gnn-312929",
@@ -1208,7 +1146,7 @@
       "summary": "《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=313356",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：展覽",
+      "discoverySource": "標籤：展覽",
       "sourceTag": "展覽",
       "type": "展覽",
       "locations": [
@@ -1231,8 +1169,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-14T04:51:12.320Z",
-      "lastSeenAt": "2026-10-14T04:51:12.320Z"
+      "discoveredAt": "2026-10-21T04:43:40.175Z",
+      "lastSeenAt": "2026-10-21T04:43:40.175Z"
     },
     {
       "id": "gnn-311263",
@@ -1325,8 +1263,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-16T04:29:56.993Z",
-      "lastSeenAt": "2026-10-16T04:29:56.993Z"
+      "discoveredAt": "2026-10-21T04:43:40.175Z",
+      "lastSeenAt": "2026-10-21T04:43:40.175Z"
     },
     {
       "id": "gnn-313300",
@@ -1362,10 +1300,10 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "ext-7aea1ed6799d2216",
-      "title": "「飛べ！」 《排球少年!!》動畫 10 週年紀念展 12 月 25 日台北松菸登場，重現熱血青春",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE44WUFqU2F3SkRHaTFKNVBhWml5YXJOT29iU3VGWGtvRWtDTXZkTnpLZXMxOFRuSWR3RE1kdVhDMjZBbnVMQjBBSmIwV09jdkxwZzFHVEc5X1BscUY1azFHRV9BbDZ4RWNhQmNOZWxRWmJIcnNTLXY4?oc=5",
+      "id": "ext-2b28e6740e245a92",
+      "title": "《排球少年!!》動畫10週年紀念展12/25起松菸多功能展演廳盛大登場",
+      "summary": "4Gamers",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQemx0REU3S1FKdHlLNjNkbmJkal9QbTY0R1dnVkk2VnIxVlZGOEwtV2dDbk1YZUxSMVR4bHBfcWxMbDFPRDdZdm8wUHFOUWpUTmd5R3k4M2NMT3dqZGNxOTJhZnc5UHUzRmtjQVkyazctczI3cVVhWGRhbjJYbWlMSUxUX0R2TGlDV3RYRjVfaEpIRkhMZWs5cDFrbUE1VGs4?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
@@ -1374,7 +1312,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-19T05:00:00.000Z",
+      "publishedAt": "2026-10-20T03:03:46.000Z",
       "eventStartDate": "2026-12-25",
       "eventEndDate": null,
       "eventStatus": "upcoming",
@@ -1382,15 +1320,14 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "排球少年!!",
-        "飛べ！"
+        "排球少年!!"
       ],
-      "searchCorpus": "「飛べ！」 《排球少年!!》動畫 10 週年紀念展 12 月 25 日台北松菸登場，重現熱血青春 SouNova 少女星",
+      "searchCorpus": "《排球少年!!》動畫10週年紀念展12/25起松菸多功能展演廳盛大登場 4Gamers",
       "dateConfidence": "medium",
-      "dateSource": "12 月 25 日",
+      "dateSource": "12/25",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-21T04:43:40.175Z",
+      "lastSeenAt": "2026-10-21T04:43:40.175Z"
     },
     {
       "id": "gnn-313498",
@@ -2052,195 +1989,43 @@
   ],
   "archive": [
     {
-      "id": "ext-24b07d0d8316ac7a",
-      "title": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1oTzVpa0EyYWZ4NkxXTVRQSGYwTm05bGpybGU4bDFkZ0FydDU1QlIxOTlGZk5PU2pUUkJHMnFEOWtaQ3pMZWk2R3hHSlpXTnIyRy1sRVZQY0hjRnNHOGpNMDBVRThoN0UxTTJuV1JENA?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "柯南展"
-      ],
-      "searchCorpus": "高雄動漫節 10/9 開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！柯南迷狂喜！同期樂園/飯店/特別篇上映，還有「柯南展」限定票動漫節開賣！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
-    },
-    {
-      "id": "ext-1457b6222baff2a4",
-      "title": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9tbUJ0ck16N3ZmS1BJTG5mWXpYdXM2NmtfaTc4OC1JeHdhaFMydFB4Wmk2bUJrX0tVVjZSUFR5XzVKY2NKV1VYZ3lmSWhCZFlJb1JSM01UWnR1dEtfUFU1enk3ekoxYXdQYkNCUHZQZm5ZLUR4STln?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "柯南展"
-      ],
-      "searchCorpus": "高雄動漫節 10 月 9 日開跑！曼迪熱門動漫周邊 & 福袋報到，還有「柯南展」限定票動漫節開賣！ SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "10 月 9 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
-    },
-    {
-      "id": "ext-bd9ab5f8b7a4f06d",
-      "title": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！",
-      "summary": "遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBkZDZFdExTM1ZZeEVGcmxBTFhYRDVyaGludjJmcVJtRkFpS1FTUTk3Qm5OenJkOE1fUTU5b2h6OVR2eFRoaUQwVnUtcEtVX1NXRWFMUklEaHF3SUNDeUE?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄動漫節10/9開跑！曼迪熱門動漫周邊&福袋報到，多重優惠抽好康！ 遊戲基地Gamebase",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
-    },
-    {
-      "id": "ext-0661909152b8aa8b",
-      "title": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開",
-      "summary": "PChome Online 新聞",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOY3dHUXc3UDZqRWpsSUQ2dHd3RGY3MXU4RGxvYnRqMVpsdHhsMGtGSFNNYkRYRldDREFmdEJCUXUwWXJXa011bGh0TDR0MVM1WlZsbXoycUJtRTJSN2cwaEg4LXhsNHlWbERtekhNUTVrRVBkZW5XcnJmV3JrVVFCZldoejg?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T06:17:41.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節 10/9 開跑 曼迪熱門動漫周邊與福袋等情報公開 PChome Online 新聞",
-      "dateConfidence": "medium",
-      "dateSource": "10/9",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-18T04:30:06.681Z",
-      "lastSeenAt": "2026-10-18T04:30:06.681Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
-    },
-    {
-      "id": "gnn-311058",
-      "title": "東立將於高雄國際動漫節邀請到《與妳相戀到生命盡頭》作者あおのなち舉行簽名會",
-      "summary": "東立出版社宣布，將於高雄國際動漫節期間邀請到《與妳相戀到生命盡頭》作者作者あおのなち來台舉行簽名會的消息。 あおのなち為日本漫畫家，自 2018 年起於日本一迅社漫畫雜誌「Comic 百合姬」開始連載《與妳相戀到生命盡頭》，而後移至「百合姬@pixiv」連載至今。あおのなち曾將遊戲作品《獄都事變》改編為漫畫，擔任BL作品《秋実",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311058",
+      "id": "gnn-311635",
+      "title": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相",
+      "summary": "由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311635",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：簽名會",
-      "sourceTag": "簽名會",
-      "type": "簽名會",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
       "locations": [
-        "高雄"
+        "台中"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-04T06:33:32.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
+      "publishedAt": "2026-09-14T09:12:03.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": "2026-10-20",
       "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
+      "venue": "超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮",
+      "admissionType": "免費入場",
       "feeText": "",
       "workTitles": [
-        "與妳相戀到生命盡頭",
-        "獄都事變",
-        "Comic 百合姬",
-        "百合姬@pixiv"
+        "黃泉使者",
+        "獵人 HUNTER&times;HUNTER",
+        "超動漫研究社"
       ],
-      "searchCorpus": "東立將於高雄國際動漫節邀請到《與妳相戀到生命盡頭》作者あおのなち舉行簽名會 東立出版社宣布，將於高雄國際動漫節期間邀請到《與妳相戀到生命盡頭》作者作者あおのなち來台舉行簽名會的消息。 あおのなち為日本漫畫家，自 2018 年起於日本一迅社漫畫雜誌「Comic 百合姬」開始連載《與妳相戀到生命盡頭》，而後移至「百合姬@pixiv」連載至今。あおのなち曾將遊戲作品《獄都事變》改編為漫畫，擔任BL作品《秋実",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-13T06:46:02.845Z",
-      "lastSeenAt": "2026-10-13T06:46:02.845Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
+      "searchCorpus": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相 由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
+      "dateConfidence": "high",
+      "dateSource": "9 月 17 日起至 10 月 20 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-10-21T04:43:40.175Z"
     },
     {
-      "id": "gnn-309636",
-      "title": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購",
-      "summary": "2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309636",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-10T07:04:54.000Z",
-      "eventStartDate": "2026-10-09",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "FLASHLIGHT"
-      ],
-      "searchCorpus": "韓國 BL 漫畫《FLASHLIGHT》第 3 集 2026 高雄動漫節首賣 即日起開放特裝版事前預購 2026 高雄國際動漫節將於 10 月 9 日（五）至 10 月 12 日（一）在高雄巨蛋登場。台灣角川將推出韓國人氣漫畫家 YANGMA 創作的《FLASHLIGHT》第三集單行本，同步發售收錄豐富特典的豪華特裝版。《FLASHLIGHT》第 3 集預計於 10 月正式發售，自即日起開放特裝版事前限期預購。 第三集劇情隨著有鎮和艾倫感情逐漸升溫，新的危機也悄然逼近。有鎮",
-      "dateConfidence": "medium",
-      "dateSource": "10 月 9 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-11T02:26:32.819Z",
-      "lastSeenAt": "2026-08-11T02:26:32.819Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
-    },
-    {
-      "id": "gnn-309049",
-      "title": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場",
-      "summary": "聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309049",
+      "id": "gnn-310845",
+      "title": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行",
+      "summary": "日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310845",
       "source": "巴哈姆特 GNN",
       "discoverySource": "RSS",
       "sourceTag": "",
@@ -2249,27 +2034,23 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-30T02:30:55.000Z",
-      "eventStartDate": "2026-10-17",
+      "publishedAt": "2026-09-01T10:00:01.000Z",
+      "eventStartDate": "2026-10-18",
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "BanG Dream!",
-        "D4DJ",
-        "BanG Dream！",
-        "TSUMUGI RISA FAN MEETING 2026 in TAIPEI",
-        "CHU&sup2"
+        "小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026"
       ],
-      "searchCorpus": "《BanG Dream!》《D4DJ》聲優紡木吏佐首場台北粉絲見面會 10 月 17 日登場 聲優紡木吏佐宣布將於 2026 年 10 月 17 日（六）在位於台北西門町的 WESTAR 舉辦個人粉絲見面會「TSUMUGI RISA FAN MEETING 2026 in TAIPEI」。 紡木吏佐出身日本沖繩縣，除了聲優活動外，她也活躍於音樂、舞台與現場演出領域，憑藉鮮明的聲線與充滿能量的舞台表現受到粉絲喜愛。她在《BanG Dream！》企劃中飾演 RAISE A SUILEN 的 DJ「CHU&sup2;」，並作為",
+      "searchCorpus": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行 日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
       "dateConfidence": "medium",
-      "dateSource": "10 月 17 日",
+      "dateSource": "10 月 18 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-30T03:26:59.703Z",
-      "lastSeenAt": "2026-07-30T03:26:59.703Z",
-      "archivedAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-09-02T04:31:31.753Z",
+      "lastSeenAt": "2026-09-02T04:31:31.753Z",
+      "archivedAt": "2026-10-21T04:43:40.175Z"
     }
   ]
 }
