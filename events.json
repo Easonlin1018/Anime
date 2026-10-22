@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-21T04:43:40.175Z",
-    "lastSuccessfulUpdateAt": "2026-10-21T04:43:40.175Z",
+    "updatedAt": "2026-10-22T04:41:41.503Z",
+    "lastSuccessfulUpdateAt": "2026-10-22T04:41:41.503Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 325,
-    "uniqueNewsCount": 538,
-    "articleCandidateCount": 140,
-    "articleFetchSuccessCount": 40,
+    "fetchedExternalItemCount": 428,
+    "uniqueNewsCount": 626,
+    "articleCandidateCount": 225,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 8,
-    "newEventCount": 1,
-    "cachedEventCount": 56,
+    "matchedEventCount": 19,
+    "newEventCount": 2,
+    "cachedEventCount": 52,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
-    "storedEventCount": 62,
-    "expiredRemovedCount": 7,
+    "archiveCount": 0,
+    "storedEventCount": 63,
+    "expiredRemovedCount": 17,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 41,
+    "undatedOldRemovedCount": 47,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 81,
+    "nonActivityRemovedCount": 133,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -459,8 +459,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -755,8 +755,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1326,8 +1326,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/25",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-21T04:43:40.175Z",
-      "lastSeenAt": "2026-10-21T04:43:40.175Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "gnn-313498",
@@ -1459,8 +1459,8 @@
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
       "summary": "WalkerLand 窩客島",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -1479,8 +1479,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "gnn-311282",
@@ -1629,8 +1629,40 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+    },
+    {
+      "id": "ext-96e7fa49340abdd1",
+      "title": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈",
+      "summary": "Cosmopolitan",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQanFtMGZpRnZiMWNRUTdoaURsTHJEQURuRDFtYXdTQXJidGNyWWxXTHlOSWVVckVWeS13blo1aGk0eTlZdDR5OHdEYjltTFUwNUl2RFp0VU5Gd0JwN0VjOUQ0YS15aUNfbmFGVzFzTGRTVm01ZHJDczZaRkhTekFvWmE1ZzFUc2s?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "鬼滅之刃",
+        "葬送的芙莉蓮",
+        "超動漫研究社"
+      ],
+      "searchCorpus": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈 Cosmopolitan",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1657,8 +1689,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1716,8 +1748,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -1831,8 +1863,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "gnn-312921",
@@ -1891,8 +1923,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -1919,8 +1951,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-20T04:48:13.049Z",
-      "lastSeenAt": "2026-10-20T04:48:13.049Z"
+      "discoveredAt": "2026-10-22T04:41:41.503Z",
+      "lastSeenAt": "2026-10-22T04:41:41.503Z"
     },
     {
       "id": "ext-fbbc400ad3ccb14f",
@@ -1987,70 +2019,5 @@
       "lastSeenAt": "2026-10-12T05:54:52.213Z"
     }
   ],
-  "archive": [
-    {
-      "id": "gnn-311635",
-      "title": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相",
-      "summary": "由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311635",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-14T09:12:03.000Z",
-      "eventStartDate": "2026-09-17",
-      "eventEndDate": "2026-10-20",
-      "eventStatus": "expired",
-      "venue": "超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮",
-      "admissionType": "免費入場",
-      "feeText": "",
-      "workTitles": [
-        "黃泉使者",
-        "獵人 HUNTER&times;HUNTER",
-        "超動漫研究社"
-      ],
-      "searchCorpus": "木棉花「超動漫研究社」9/17 起前進台中 LaLaport 《黃泉使者》經典場景首度亮相 由木棉花舉辦的「超動漫研究社」快閃店，宣布 9 月 17 日起至 10 月 20 日，將於台中 LaLaport 北館 1 樓舞台區登場的消息，活動將採免費入場。 本次「超動漫研究社」帶來四大作品打卡點，《黃泉使者》入口拱門重現劇中經典的日式門樓與圍牆場景，主要角色立牌也將同步登場，讓粉絲盡情與喜愛的角色合影。《獵人 HUNTER&times;HUNTER》與《",
-      "dateConfidence": "high",
-      "dateSource": "9 月 17 日起至 10 月 20 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z",
-      "archivedAt": "2026-10-21T04:43:40.175Z"
-    },
-    {
-      "id": "gnn-310845",
-      "title": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行",
-      "summary": "日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310845",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-01T10:00:01.000Z",
-      "eventStartDate": "2026-10-18",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026"
-      ],
-      "searchCorpus": "小宮有紗台北粉絲見面會 宣布將於 10 月 18 日於角落文創展演空間舉行 日本人氣演員、聲優小宮有紗（Arisa Komiya），宣布將來台舉行「小宮有紗台北粉絲見面會 Arisa Komiya Fan Meeting in Taipei 2026」的消息，活動目前預定將於 2026 年 10 月 18 日（日），在 Corner House 角落文創展演空間舉行。 小宮有紗活躍於演員、聲優及 DJ 等不同領域，憑藉亮眼的外型、鮮明的個人魅力與多元的活動表現，吸引了眾多粉絲的喜愛。",
-      "dateConfidence": "medium",
-      "dateSource": "10 月 18 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-02T04:31:31.753Z",
-      "lastSeenAt": "2026-09-02T04:31:31.753Z",
-      "archivedAt": "2026-10-21T04:43:40.175Z"
-    }
-  ]
+  "archive": []
 }
