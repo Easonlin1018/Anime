@@ -3,25 +3,25 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-22T04:41:41.503Z",
-    "lastSuccessfulUpdateAt": "2026-10-22T04:41:41.503Z",
+    "updatedAt": "2026-10-23T04:46:46.827Z",
+    "lastSuccessfulUpdateAt": "2026-10-23T04:46:46.827Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 428,
+    "fetchedExternalItemCount": 425,
     "uniqueNewsCount": 626,
-    "articleCandidateCount": 225,
+    "articleCandidateCount": 230,
     "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 2,
+    "matchedEventCount": 23,
+    "newEventCount": 5,
     "cachedEventCount": 52,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 63,
-    "expiredRemovedCount": 17,
+    "storedEventCount": 65,
+    "expiredRemovedCount": 16,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 47,
+    "undatedOldRemovedCount": 48,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
     "nonActivityRemovedCount": 133,
@@ -459,8 +459,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -755,8 +755,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1300,36 +1300,6 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "ext-2b28e6740e245a92",
-      "title": "《排球少年!!》動畫10週年紀念展12/25起松菸多功能展演廳盛大登場",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQemx0REU3S1FKdHlLNjNkbmJkal9QbTY0R1dnVkk2VnIxVlZGOEwtV2dDbk1YZUxSMVR4bHBfcWxMbDFPRDdZdm8wUHFOUWpUTmd5R3k4M2NMT3dqZGNxOTJhZnc5UHUzRmtjQVkyazctczI3cVVhWGRhbjJYbWlMSUxUX0R2TGlDV3RYRjVfaEpIRkhMZWs5cDFrbUE1VGs4?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-20T03:03:46.000Z",
-      "eventStartDate": "2026-12-25",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "松菸",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "排球少年!!"
-      ],
-      "searchCorpus": "《排球少年!!》動畫10週年紀念展12/25起松菸多功能展演廳盛大登場 4Gamers",
-      "dateConfidence": "medium",
-      "dateSource": "12/25",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
-    },
-    {
       "id": "gnn-313498",
       "title": "米津玄師世界巡演「GHOST」前進台北大巨蛋 12 月 26、27 日一連兩天登場",
       "summary": "日本人氣歌手米津玄師，繼去年 3 月「KENSHI YONEZU 2025 WORLD TOUR / JUNK」在台北小巨蛋登場後，主辦單位大鴻藝術 BIG ART、超級圓頂 SUPER DOME今（15）日宣布，米津玄師將於 12 月 26 日、27 日一連兩天登上臺北大巨蛋舉辦全新世界巡迴演唱會「KENSHI YONEZU 2026-2027 WORLD TOUR / GHOST」的消息。 從 VOCALOID 創作者「ハチ（HACHI）」發跡，多才多藝的米津玄師",
@@ -1459,8 +1429,8 @@
       "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
       "summary": "WalkerLand 窩客島",
       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
       "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
@@ -1479,8 +1449,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "gnn-311282",
@@ -1629,8 +1599,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-96e7fa49340abdd1",
@@ -1661,8 +1631,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1689,8 +1659,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+    },
+    {
+      "id": "ext-97c762ded8f5f27c",
+      "title": "華碩微星亮相非洲動漫展 台灣電競品牌搶攻南非市場",
+      "summary": "放言Fount Media",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBibjB2MTI4YjNubDNqXzdzbnpIQnZsdGdiNGZwTUxDOElBdnBLRGhwdDlidllLZmZRcUpPYnRFQml3bHRJT1FWdWF0UHFkS0xfZWc?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-09-27T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "華碩微星亮相非洲動漫展 台灣電競品牌搶攻南非市場 放言Fount Media",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1748,8 +1746,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -1776,8 +1774,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-17T04:23:06.755Z",
-      "lastSeenAt": "2026-10-17T04:23:06.755Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1863,8 +1861,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "gnn-312921",
@@ -1899,6 +1897,39 @@
       "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
+      "id": "ext-a009f9af507a034e",
+      "title": "「2026高雄動漫節」國慶連假熱鬧登場！木棉花《葬送的芙莉蓮》《家庭教師》《魔法少女小圓》強作齊聚！七大超值福袋、六重滿額贈攻略懶人包",
+      "summary": "oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBlUzFXV0psX3I0TE5OTnJSTl9JTThBUzZxVHA4VlNGa0JzbzNCY2YxVHZodlUyTmFfZFFLMHMyVEVnd2gyQUJ3cElJOVA2eTN6Q2R3?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-06T09:35:27.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "葬送的芙莉蓮",
+        "家庭教師",
+        "魔法少女小圓",
+        "2026高雄動漫節"
+      ],
+      "searchCorpus": "「2026高雄動漫節」國慶連假熱鬧登場！木棉花《葬送的芙莉蓮》《家庭教師》《魔法少女小圓》強作齊聚！七大超值福袋、六重滿額贈攻略懶人包 oneone宇宙",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+    },
+    {
       "id": "ext-7c400c44b4fc4d85",
       "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
       "summary": "蕃新聞",
@@ -1923,8 +1954,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -2017,6 +2048,36 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-12T05:54:52.213Z",
       "lastSeenAt": "2026-10-12T05:54:52.213Z"
+    },
+    {
+      "id": "ext-8fd34b4cf82c9d34",
+      "title": "《排球少年!!》動畫10週年紀念展降臨台北松菸！10 月 28 日預售票開賣，重溫熱血名場面",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQZnVBWmZhWEZpcGZsaVhqMmQtR29ab2g3SEdDb2FMT0FUT3F2bTZtX3dBZV93RzBUZ2ZGSWk4SFotdUhKM09LZmxJTmZjNE9Ia09vRkVHRkF2QnNvVC05TUtfWUIycjRldzNGbTFCS1J1NWxWcnhoVW84Y3FyWE1Fdl9ONEpWTWNnVkRv?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-22T06:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "松菸",
+      "admissionType": "購票入場",
+      "feeText": "",
+      "workTitles": [
+        "排球少年!!"
+      ],
+      "searchCorpus": "《排球少年!!》動畫10週年紀念展降臨台北松菸！10 月 28 日預售票開賣，重溫熱血名場面 SouNova 少女星",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-23T04:46:46.827Z",
+      "lastSeenAt": "2026-10-23T04:46:46.827Z"
     }
   ],
   "archive": []
