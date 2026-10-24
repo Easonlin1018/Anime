@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-23T04:46:46.827Z",
-    "lastSuccessfulUpdateAt": "2026-10-23T04:46:46.827Z",
+    "updatedAt": "2026-10-24T04:34:08.047Z",
+    "lastSuccessfulUpdateAt": "2026-10-24T04:34:08.047Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 425,
-    "uniqueNewsCount": 626,
-    "articleCandidateCount": 230,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 342,
+    "uniqueNewsCount": 542,
+    "articleCandidateCount": 229,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 23,
-    "newEventCount": 5,
-    "cachedEventCount": 52,
+    "matchedEventCount": 27,
+    "newEventCount": 8,
+    "cachedEventCount": 53,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 65,
-    "expiredRemovedCount": 16,
+    "storedEventCount": 68,
+    "expiredRemovedCount": 15,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 48,
+    "undatedOldRemovedCount": 44,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 133,
+    "nonActivityRemovedCount": 136,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -459,8 +459,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -755,8 +755,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1106,6 +1106,36 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
+      "id": "ext-bd497bb13b9afbf8",
+      "title": "《咒術迴戰》快閃店10 月 28 日重磅降臨松菸！集結五條悟、夏油傑、乙骨憂太、虎杖悠仁等13 位角色引爆咒術狂潮",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1BamQ4Y05tTW8yRXFRYmdJemxvdXFZV010RExScEV3ZS1SdzNzckJmVDBTMk1iS3JaeV9XaTA5cUFwSERoajZxOGZ1dmlmRDdBRFk3UzF5M1NNdWNpNTBjWU9R?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-01T07:00:00.000Z",
+      "eventStartDate": "2026-10-28",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "咒術迴戰"
+      ],
+      "searchCorpus": "《咒術迴戰》快閃店10 月 28 日重磅降臨松菸！集結五條悟、夏油傑、乙骨憂太、虎杖悠仁等13 位角色引爆咒術狂潮 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "10 月 28 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+    },
+    {
       "id": "gnn-313025",
       "title": "《咒術迴戰》快閃店 10 月 28 日起於松山文創園區「藝巷空間」登場",
       "summary": "動畫《咒術迴戰》快閃店即將於 2026 年 10 月 28 日（三）起，在台北松山文創園區「藝巷空間」登場。本次快閃店特別以動畫三大篇「懷玉&middot;玉折」、「劇場版 0」以及「澀谷事變」為主題，打造造景展區，本次快 閃店採免費入場，首日（10/28）將於下午 13:00 起正式開放民眾進場。 除了展區佈景，本次快閃店更重磅推出多款全台首發限",
@@ -1449,8 +1479,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "gnn-311282",
@@ -1515,7 +1545,7 @@
     {
       "id": "ext-4da361fb0d8dbbec",
       "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
-      "summary": "gnn.gamer.com.tw",
+      "summary": "GNN 新聞網",
       "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE50Y2FVN04yX01nV2ZYaXNxNTNNcGdyeFpuUnpOMU9FN0RIUVlqaEZrb3dpSmlLWXo5Qk5BTTFvbG1hcncxdG9PWlZibjRzQ2t5Q1lFdER6THk?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
@@ -1535,12 +1565,12 @@
       "workTitles": [
         "2026 高雄國際動漫節"
       ],
-      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 gnn.gamer.com.tw",
+      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 GNN 新聞網",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-02T05:35:00.379Z",
-      "lastSeenAt": "2026-10-02T05:35:00.379Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-c6f61eee1ee05db4",
@@ -1599,8 +1629,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-96e7fa49340abdd1",
@@ -1631,8 +1661,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+    },
+    {
+      "id": "ext-a5446f5b03f4a1c1",
+      "title": "青文出版公開 2026 高雄國際動漫節推薦新書與現場優惠活動",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1IS0lEZi1NOXI3eWJlOXdEczZJM2YySE5ZUkVRR09HTFg4TEtBTlZ6Z1VTMm9Mc2VzaHBROURWV2FoRXcwclNTc0RsNTVNSFVfQnU2NVl4Vkw?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-23T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "青文出版公開 2026 高雄國際動漫節推薦新書與現場優惠活動 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1659,8 +1717,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-97c762ded8f5f27c",
@@ -1687,8 +1745,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1746,8 +1804,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+    },
+    {
+      "id": "ext-318a3b4d7bcbcb26",
+      "title": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1aSFdta3JyWnBTenYyQXIwczBUSldDNlFFWVNVVmFtcG9xczFkV1FNVVJReGJscjFldnRQbnk3Z2UtSkhrS0luXzdKWVHSAVJBVV95cUxOdEhkQ2ZGZ1kxSjlBSU5DM1pVcGEtZU5mcHUyWGowM3lXb0ZwMmZ3QXl5MmhmaFBQb3JqMVZJdEhIYlg1cDF4bWFxT1dkT2ZUWHFB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "688元",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-98c880fa22bfcf62",
@@ -1774,8 +1860,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1861,8 +1947,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "gnn-312921",
@@ -1930,10 +2016,10 @@
       "lastSeenAt": "2026-10-23T04:46:46.827Z"
     },
     {
-      "id": "ext-7c400c44b4fc4d85",
+      "id": "ext-ad36b19a9eda0780",
       "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
-      "summary": "蕃新聞",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1qQzlLQWJJR0MwM1NnYXBoaWZWWGdLeEE1bHlPQURPdnZ0cEVXVDU0cTZGakxQVUtIOEhxdFBJR3pDbjJCOTAyUzZOcW9nV0gycGc?oc=5",
+      "summary": "立報傳媒",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1iWGZ2SEJwZ0JWaEtMR0FqWlQ0RzBWNWpIemZVbFpMcEF6MjJRYWQya0VCMWV2Smt1TjJRS21YcjFRVDFOSEk4N0tmZFLSAUxBVV95cUxNYlhmdkhCcGdCVmhLTEdBalpUNEcwVjVqSHpmVWxaTHBBejIyUWFkMmtFQjFldkprdU4yUUttWHIxUVQxTkhJODdLZmRS?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
@@ -1942,7 +2028,7 @@
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-08T06:20:00.000Z",
+      "publishedAt": "2026-10-08T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1950,12 +2036,12 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理 蕃新聞",
+      "searchCorpus": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理 立報傳媒",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -2076,8 +2162,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     }
   ],
   "archive": []
