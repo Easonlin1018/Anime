@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-24T04:34:08.047Z",
-    "lastSuccessfulUpdateAt": "2026-10-24T04:34:08.047Z",
+    "updatedAt": "2026-10-25T04:38:35.372Z",
+    "lastSuccessfulUpdateAt": "2026-10-25T04:38:35.372Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 342,
-    "uniqueNewsCount": 542,
-    "articleCandidateCount": 229,
+    "fetchedExternalItemCount": 426,
+    "uniqueNewsCount": 632,
+    "articleCandidateCount": 230,
     "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 27,
-    "newEventCount": 8,
-    "cachedEventCount": 53,
+    "matchedEventCount": 21,
+    "newEventCount": 3,
+    "cachedEventCount": 52,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 68,
-    "expiredRemovedCount": 15,
+    "archiveCount": 3,
+    "storedEventCount": 65,
+    "expiredRemovedCount": 19,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 44,
+    "undatedOldRemovedCount": 45,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 136,
+    "nonActivityRemovedCount": 137,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -459,8 +459,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -697,37 +697,6 @@
       "lastSeenAt": "2026-10-19T04:38:08.597Z"
     },
     {
-      "id": "ext-1e3eb4e0df99540b",
-      "title": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE55NzVNaDZwVkZpWTIybEd0X050a1dIUndEd3o3SmlBa1V3b0kxMlhHYzlrVHYwZmtkNi1ZR2ZYakowZ25SaU15eWZfSUFPUm5LODBXUzg5OWZGcTBxZVkzSVA3TjNreE95RVJNb1dfNUNMb2NJNFYzRGRudHg4UQ?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-20T07:00:00.000Z",
-      "eventStartDate": "2026-08-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "三創！ Paradaily",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "緋染天空 Heaven Burns Red",
-        "開箱"
-      ],
-      "searchCorpus": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "8月20日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
-    },
-    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
       "summary": "4Gamers",
@@ -755,8 +724,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1132,8 +1101,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 28 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "gnn-313025",
@@ -1455,64 +1424,6 @@
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
     },
     {
-      "id": "ext-ea4771a92a9a3816",
-      "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
-      "summary": "WalkerLand 窩客島",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-09T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "松菸",
-      "admissionType": "免費入場",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand 窩客島",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
-    },
-    {
-      "id": "gnn-311282",
-      "title": "XRAGE《NANA》主題快閃店登場 台中限定企劃打造矢澤愛式搖滾日常",
-      "summary": "XRAGE 再度攜手經典漫畫《NANA》，將於台中打造期間限定主題快閃店。以矢澤愛筆下充滿搖滾、時尚與青春氣息的《NANA》世界為靈感，XRAGE 將作品中令人難忘的角色、樂團元素與龐克美學融入潮流服飾，從 BLAST 的搖滾靈魂，到奈奈與娜娜之間交織著友情、愛情與夢想的故事，都將在這次快閃店中化為獨特的視覺體驗。繼第一彈聯名引後，本",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311282",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-09T08:31:46.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "NANA"
-      ],
-      "searchCorpus": "XRAGE《NANA》主題快閃店登場 台中限定企劃打造矢澤愛式搖滾日常 XRAGE 再度攜手經典漫畫《NANA》，將於台中打造期間限定主題快閃店。以矢澤愛筆下充滿搖滾、時尚與青春氣息的《NANA》世界為靈感，XRAGE 將作品中令人難忘的角色、樂團元素與龐克美學融入潮流服飾，從 BLAST 的搖滾靈魂，到奈奈與娜娜之間交織著友情、愛情與夢想的故事，都將在這次快閃店中化為獨特的視覺體驗。繼第一彈聯名引後，本",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
       "id": "ext-2470cbd502b0f05a",
       "title": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺",
       "summary": "NOWnews今日新聞",
@@ -1629,8 +1540,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-96e7fa49340abdd1",
@@ -1661,8 +1572,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-a5446f5b03f4a1c1",
@@ -1717,8 +1628,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-97c762ded8f5f27c",
@@ -1804,8 +1715,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-318a3b4d7bcbcb26",
@@ -1832,36 +1743,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
-    },
-    {
-      "id": "ext-98c880fa22bfcf62",
-      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "1000元起",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1891,8 +1774,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-16T04:29:56.993Z",
-      "lastSeenAt": "2026-10-16T04:29:56.993Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
+    },
+    {
+      "id": "ext-98c880fa22bfcf62",
+      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "1000元起",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-bf19739780c7e9db",
@@ -1947,8 +1858,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "gnn-312921",
@@ -2068,8 +1979,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-22T04:41:41.503Z",
-      "lastSeenAt": "2026-10-22T04:41:41.503Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     },
     {
       "id": "ext-fbbc400ad3ccb14f",
@@ -2162,9 +2073,102 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-25T04:38:35.372Z",
+      "lastSeenAt": "2026-10-25T04:38:35.372Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-311282",
+      "title": "XRAGE《NANA》主題快閃店登場 台中限定企劃打造矢澤愛式搖滾日常",
+      "summary": "XRAGE 再度攜手經典漫畫《NANA》，將於台中打造期間限定主題快閃店。以矢澤愛筆下充滿搖滾、時尚與青春氣息的《NANA》世界為靈感，XRAGE 將作品中令人難忘的角色、樂團元素與龐克美學融入潮流服飾，從 BLAST 的搖滾靈魂，到奈奈與娜娜之間交織著友情、愛情與夢想的故事，都將在這次快閃店中化為獨特的視覺體驗。繼第一彈聯名引後，本",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311282",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T08:31:46.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "NANA"
+      ],
+      "searchCorpus": "XRAGE《NANA》主題快閃店登場 台中限定企劃打造矢澤愛式搖滾日常 XRAGE 再度攜手經典漫畫《NANA》，將於台中打造期間限定主題快閃店。以矢澤愛筆下充滿搖滾、時尚與青春氣息的《NANA》世界為靈感，XRAGE 將作品中令人難忘的角色、樂團元素與龐克美學融入潮流服飾，從 BLAST 的搖滾靈魂，到奈奈與娜娜之間交織著友情、愛情與夢想的故事，都將在這次快閃店中化為獨特的視覺體驗。繼第一彈聯名引後，本",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-10-25T04:38:35.372Z"
+    },
+    {
+      "id": "ext-ea4771a92a9a3816",
+      "title": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活",
+      "summary": "WalkerLand 窩客島",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1Icm0zdVhGN2ZSeTk0eXJUNENndHJSazdEMUtZVExHTzM4TlFHcnBXN3Bac1JuaE1uMEVLdjJFcU9aUFZSVTNFZG1VTXFaNGF2eF9aUkJiU094M0J4R0E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "松菸",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "13大IP台北快閃店清單！免費入場松菸史努比、京站小圓快閃店，超人氣IP周邊新品收|生活 WalkerLand 窩客島",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-24T04:34:08.047Z",
+      "lastSeenAt": "2026-10-24T04:34:08.047Z",
+      "archivedAt": "2026-10-25T04:38:35.372Z"
+    },
+    {
+      "id": "ext-1e3eb4e0df99540b",
+      "title": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE55NzVNaDZwVkZpWTIybEd0X050a1dIUndEd3o3SmlBa1V3b0kxMlhHYzlrVHYwZmtkNi1ZR2ZYakowZ25SaU15eWZfSUFPUm5LODBXUzg5OWZGcTBxZVkzSVA3TjNreE95RVJNb1dfNUNMb2NJNFYzRGRudHg4UQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-20T07:00:00.000Z",
+      "eventStartDate": "2026-08-20",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "三創！ Paradaily",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "緋染天空 Heaven Burns Red",
+        "開箱"
+      ],
+      "searchCorpus": "【開箱】《緋染天空 Heaven Burns Red》快閃店 8月20日 進駐三創！ Paradaily",
+      "dateConfidence": "medium",
+      "dateSource": "8月20日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z",
+      "archivedAt": "2026-10-25T04:38:35.372Z"
+    }
+  ]
 }
