@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-26T04:44:13.931Z",
-    "lastSuccessfulUpdateAt": "2026-10-26T04:44:13.931Z",
+    "updatedAt": "2026-10-27T05:01:18.722Z",
+    "lastSuccessfulUpdateAt": "2026-10-27T05:01:18.722Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 425,
-    "uniqueNewsCount": 635,
-    "articleCandidateCount": 232,
+    "fetchedExternalItemCount": 347,
+    "uniqueNewsCount": 543,
+    "articleCandidateCount": 183,
     "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 25,
-    "newEventCount": 6,
-    "cachedEventCount": 51,
+    "matchedEventCount": 19,
+    "newEventCount": 1,
+    "cachedEventCount": 53,
     "rateLimitedCount": 0,
     "archiveCount": 1,
-    "storedEventCount": 66,
-    "expiredRemovedCount": 20,
+    "storedEventCount": 65,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 42,
+    "undatedOldRemovedCount": 45,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 138,
+    "nonActivityRemovedCount": 102,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -96,40 +96,6 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-10-05T05:37:27.563Z",
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
-      "id": "gnn-312252",
-      "title": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景",
-      "summary": "繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312252",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "快閃店",
-      "locations": [
-        "台中",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-23T09:04:12.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-26",
-      "eventStatus": "ongoing",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "台味",
-        "Tom and Jerry 台味",
-        "Tom and Jerry 台味快閃店－台中站",
-        "台中驛"
-      ],
-      "searchCorpus": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景 繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
-      "dateConfidence": "high",
-      "dateSource": "9 月 24 日起至 10 月 26 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z"
     },
     {
       "id": "gnn-313100",
@@ -724,8 +690,8 @@
       "dateConfidence": "medium",
       "dateSource": "7/20",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-60341764dad0f6d6",
@@ -1420,6 +1386,36 @@
       "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
+      "id": "ext-c6f61eee1ee05db4",
+      "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
+      "summary": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05cGxrQXR6QjRqSmEtaU1pbnI3am5WNXJTcWZheTBOeWJ0WU02aXlsOGdvVVJhdGFibU1NU1QtbktXclZxZXlJWGpUMXM5Skg3YUNfR0Z3?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-09-15T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026十鼓魔法動漫祭LPS-TNTDCC"
+      ],
+      "searchCorpus": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞 LINE TODAY",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+    },
+    {
       "id": "ext-4da361fb0d8dbbec",
       "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
       "summary": "GNN 新聞網",
@@ -1450,36 +1446,6 @@
       "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
-      "id": "ext-c6f61eee1ee05db4",
-      "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
-      "summary": "LINE TODAY",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05cGxrQXR6QjRqSmEtaU1pbnI3am5WNXJTcWZheTBOeWJ0WU02aXlsOGdvVVJhdGFibU1NU1QtbktXclZxZXlJWGpUMXM5Skg3YUNfR0Z3?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-09-15T23:31:37.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026十鼓魔法動漫祭LPS-TNTDCC"
-      ],
-      "searchCorpus": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞 LINE TODAY",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-09-18T04:41:47.357Z",
-      "lastSeenAt": "2026-09-18T04:41:47.357Z"
-    },
-    {
       "id": "ext-090d422f06b144bf",
       "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
       "summary": "台灣好報",
@@ -1506,8 +1472,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-96e7fa49340abdd1",
@@ -1566,8 +1532,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1594,8 +1560,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-97c762ded8f5f27c",
@@ -1622,8 +1588,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-99194c34f716b0e6",
@@ -1741,8 +1707,36 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+    },
+    {
+      "id": "ext-bf19739780c7e9db",
+      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
+      "summary": "遊戲基地Gamebase",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-ed1c9c5566bc5e18",
@@ -1802,34 +1796,6 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-26T04:44:13.931Z",
       "lastSeenAt": "2026-10-26T04:44:13.931Z"
-    },
-    {
-      "id": "ext-bf19739780c7e9db",
-      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
-      "summary": "遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "ext-0bc936f6ef584ef3",
@@ -1921,8 +1887,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-23T04:46:46.827Z",
-      "lastSeenAt": "2026-10-23T04:46:46.827Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1949,8 +1915,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -1977,8 +1943,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-fbbc400ad3ccb14f",
@@ -2071,8 +2037,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-ee991a0fdfbafb54",
@@ -2107,39 +2073,39 @@
   ],
   "archive": [
     {
-      "id": "gnn-309993",
-      "title": "《偶像夢幻祭》迎來十週年里程碑「聚光舞台主題快閃店」8 月 21 日起於北中南登場",
-      "summary": "為慶祝人氣偶像 IP《偶像夢幻祭》迎來十週年里程碑，主辦方 Smarprise 將自 8 月 21 日起，分別於台中、台北、高雄三地巡迴舉辦「聚光舞台主題快閃店」活動，集結全 58 位偶像推出快閃周邊商品，涵蓋 10 大商品類別，並同步推出購買特典、集點企畫、遊戲內限定稱號及 SNS 投稿特典等內容，為玩家帶來期間限定的線上遊戲結合實體活動參",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=309993",
+      "id": "gnn-312252",
+      "title": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景",
+      "summary": "繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312252",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
-      "sourceTag": "快閃店",
+      "discoverySource": "RSS",
+      "sourceTag": "",
       "type": "快閃店",
       "locations": [
-        "台北",
         "台中",
-        "高雄",
-        "全台"
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-08-17T09:03:12.000Z",
-      "eventStartDate": "2026-08-21",
-      "eventEndDate": null,
+      "publishedAt": "2026-09-23T09:04:12.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-26",
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "偶像夢幻祭",
-        "聚光舞台主題"
+        "台味",
+        "Tom and Jerry 台味",
+        "Tom and Jerry 台味快閃店－台中站",
+        "台中驛"
       ],
-      "searchCorpus": "《偶像夢幻祭》迎來十週年里程碑「聚光舞台主題快閃店」8 月 21 日起於北中南登場 為慶祝人氣偶像 IP《偶像夢幻祭》迎來十週年里程碑，主辦方 Smarprise 將自 8 月 21 日起，分別於台中、台北、高雄三地巡迴舉辦「聚光舞台主題快閃店」活動，集結全 58 位偶像推出快閃周邊商品，涵蓋 10 大商品類別，並同步推出購買特典、集點企畫、遊戲內限定稱號及 SNS 投稿特典等內容，為玩家帶來期間限定的線上遊戲結合實體活動參",
-      "dateConfidence": "medium",
-      "dateSource": "8 月 21 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-18T01:49:50.020Z",
-      "lastSeenAt": "2026-08-18T01:49:50.020Z",
-      "archivedAt": "2026-10-26T04:44:13.931Z"
+      "searchCorpus": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景 繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
+      "dateConfidence": "high",
+      "dateSource": "9 月 24 日起至 10 月 26 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-09-24T04:48:17.920Z",
+      "lastSeenAt": "2026-09-24T04:48:17.920Z",
+      "archivedAt": "2026-10-27T05:01:18.722Z"
     }
   ]
 }
