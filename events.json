@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-27T05:01:18.722Z",
-    "lastSuccessfulUpdateAt": "2026-10-27T05:01:18.722Z",
+    "updatedAt": "2026-10-28T05:39:48.631Z",
+    "lastSuccessfulUpdateAt": "2026-10-28T05:39:48.631Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 347,
-    "uniqueNewsCount": 543,
-    "articleCandidateCount": 183,
-    "articleFetchSuccessCount": 37,
+    "fetchedExternalItemCount": 363,
+    "uniqueNewsCount": 584,
+    "articleCandidateCount": 185,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 19,
-    "newEventCount": 1,
-    "cachedEventCount": 53,
+    "matchedEventCount": 17,
+    "newEventCount": 4,
+    "cachedEventCount": 56,
     "rateLimitedCount": 0,
     "archiveCount": 1,
     "storedEventCount": 65,
-    "expiredRemovedCount": 14,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 45,
+    "undatedOldRemovedCount": 34,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 102,
+    "nonActivityRemovedCount": 118,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -425,8 +425,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -1072,6 +1072,37 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
+      "id": "gnn-314011",
+      "title": "技嘉 40 週年品牌特展 10/29 - 11/1 松菸一號倉庫登場 免費感受從經典主機板到 AI 創新科技",
+      "summary": "技嘉科技（GIGABYTE）宣布，為慶祝創立 40 週年，將於 10 月 29 日至 11 月 1 日在台北松山文創園區一號倉庫舉辦「GIGABYTE 40｜INFINITE POSSIBILITIES」40 週年品牌主題特展。官方表示，將透過「走進技嘉的每一步，感受技術的進化」為核心概念，結合歷史產品展示、沉浸式情境體驗、互動科技及 AI 創作，帶領民眾回顧技嘉自 1986 年成立至今的創新",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314011",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-27T10:56:04.000Z",
+      "eventStartDate": "2026-10-29",
+      "eventEndDate": "2026-11-01",
+      "eventStatus": "upcoming",
+      "venue": "松山文創園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GIGABYTE 40｜INFINITE POSSIBILITIES",
+        "走進技嘉的每一步，感受技術的進化"
+      ],
+      "searchCorpus": "技嘉 40 週年品牌特展 10/29 - 11/1 松菸一號倉庫登場 免費感受從經典主機板到 AI 創新科技 技嘉科技（GIGABYTE）宣布，為慶祝創立 40 週年，將於 10 月 29 日至 11 月 1 日在台北松山文創園區一號倉庫舉辦「GIGABYTE 40｜INFINITE POSSIBILITIES」40 週年品牌主題特展。官方表示，將透過「走進技嘉的每一步，感受技術的進化」為核心概念，結合歷史產品展示、沉浸式情境體驗、互動科技及 AI 創作，帶領民眾回顧技嘉自 1986 年成立至今的創新",
+      "dateConfidence": "high",
+      "dateSource": "10 月 29 日至 11 月 1 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+    },
+    {
       "id": "gnn-313356",
       "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代",
       "summary": "《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
@@ -1356,36 +1387,6 @@
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
     },
     {
-      "id": "ext-2470cbd502b0f05a",
-      "title": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1JYnZyWHFsMXlWMnBXY0taR01GbU9vM0Z0c1hLOUtaSHQzQnJBRmpsZnFoMEdTcFhKZFA0N01IbUlMeDMtdExmbjRObjnSAVJBVV95cUxNNGN4NVpaUnJXY3k4Q0FGR3hkQUw0ZHVHb3gzS3lEcVJUY0lBU29iclVzYTE4UGVydW1TSVgyb0ZBZ0RzQTdseDBsYjYxSlp6WjlR?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-12T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "三創快閃店排爆 重演漫博開幕秒殺 NOW",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "家庭教師"
-      ],
-      "searchCorpus": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-11T05:44:24.040Z",
-      "lastSeenAt": "2026-10-11T05:44:24.040Z"
-    },
-    {
       "id": "ext-c6f61eee1ee05db4",
       "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
       "summary": "LINE TODAY",
@@ -1446,36 +1447,6 @@
       "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
-      "id": "ext-090d422f06b144bf",
-      "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
-      "summary": "台灣好報",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qMTZqOGhkR0Q4amJVNm04RlhtcmZ3MGZxZWdyZDRxdjh0TEEyQ3ZrQkM0MGhLRVRjLXZzb0hxd29PTmg5dDZtRmdITzJySTM3enJj?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-17T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "漫味食光"
-      ],
-      "searchCorpus": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場 台灣好報",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
-    },
-    {
       "id": "ext-96e7fa49340abdd1",
       "title": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈",
       "summary": "Cosmopolitan",
@@ -1504,8 +1475,38 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+    },
+    {
+      "id": "ext-090d422f06b144bf",
+      "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
+      "summary": "台灣好報",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qMTZqOGhkR0Q4amJVNm04RlhtcmZ3MGZxZWdyZDRxdjh0TEEyQ3ZrQkM0MGhLRVRjLXZzb0hxd29PTmg5dDZtRmdITzJySTM3enJj?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "漫味食光"
+      ],
+      "searchCorpus": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場 台灣好報",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
       "id": "ext-a5446f5b03f4a1c1",
@@ -1647,8 +1648,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
     },
     {
       "id": "ext-318a3b4d7bcbcb26",
@@ -1675,8 +1676,39 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+    },
+    {
+      "id": "ext-ed1c9c5566bc5e18",
+      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "棕色塵埃2",
+        "Brown Dust2"
+      ],
+      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
     },
     {
       "id": "ext-fec5eb36ece51cf1",
@@ -1739,37 +1771,6 @@
       "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
-      "id": "ext-ed1c9c5566bc5e18",
-      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "棕色塵埃2",
-        "Brown Dust2"
-      ],
-      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
-    },
-    {
       "id": "ext-98c880fa22bfcf62",
       "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
       "summary": "NOWnews今日新聞",
@@ -1822,8 +1823,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
     },
     {
       "id": "gnn-312921",
@@ -2037,8 +2038,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
     },
     {
       "id": "ext-ee991a0fdfbafb54",
@@ -2067,45 +2068,41 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-26T04:44:13.931Z",
-      "lastSeenAt": "2026-10-26T04:44:13.931Z"
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-312252",
-      "title": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景",
-      "summary": "繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312252",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
+      "id": "ext-2470cbd502b0f05a",
+      "title": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1JYnZyWHFsMXlWMnBXY0taR01GbU9vM0Z0c1hLOUtaSHQzQnJBRmpsZnFoMEdTcFhKZFA0N01IbUlMeDMtdExmbjRObjnSAVJBVV95cUxNNGN4NVpaUnJXY3k4Q0FGR3hkQUw0ZHVHb3gzS3lEcVJUY0lBU29iclVzYTE4UGVydW1TSVgyb0ZBZ0RzQTdseDBsYjYxSlp6WjlR?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
       "type": "快閃店",
       "locations": [
-        "台中",
-        "高雄"
+        "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-23T09:04:12.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-26",
+      "publishedAt": "2026-09-12T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "",
+      "venue": "三創快閃店排爆 重演漫博開幕秒殺 NOW",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "台味",
-        "Tom and Jerry 台味",
-        "Tom and Jerry 台味快閃店－台中站",
-        "台中驛"
+        "家庭教師"
       ],
-      "searchCorpus": "湯姆貓與傑利鼠「台味快閃店」台中站接棒 百年古蹟 x 復古花磚打造懷舊趣味場景 繼高雄站後，「Tom and Jerry 台味快閃店」第二站正式插旗台中。自 9 月 24 日起至 10 月 26 日，「Tom and Jerry 台味快閃店－台中站」將於臺中驛鐵道文化園區鐵鹿大街 A2 登場。本次特別選址台中百年鐵道歷史場所，首次結合百年古蹟「台中驛」，將經典花磚、台灣街景與 Tom and Jerry 融合，打造充滿懷舊氛圍又趣味十足的台味快閃體驗。 【以下",
-      "dateConfidence": "high",
-      "dateSource": "9 月 24 日起至 10 月 26 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-09-24T04:48:17.920Z",
-      "lastSeenAt": "2026-09-24T04:48:17.920Z",
-      "archivedAt": "2026-10-27T05:01:18.722Z"
+      "searchCorpus": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z",
+      "archivedAt": "2026-10-28T05:39:48.631Z"
     }
   ]
 }
