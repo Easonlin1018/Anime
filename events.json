@@ -3,71 +3,65 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-28T05:39:48.631Z",
-    "lastSuccessfulUpdateAt": "2026-10-28T05:39:48.631Z",
+    "updatedAt": "2026-10-29T05:45:16.760Z",
+    "lastSuccessfulUpdateAt": "2026-10-29T05:45:16.760Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 363,
-    "uniqueNewsCount": 584,
-    "articleCandidateCount": 185,
-    "articleFetchSuccessCount": 35,
+    "fetchedExternalItemCount": 241,
+    "uniqueNewsCount": 453,
+    "articleCandidateCount": 141,
+    "articleFetchSuccessCount": 38,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 17,
-    "newEventCount": 4,
+    "matchedEventCount": 12,
+    "newEventCount": 2,
     "cachedEventCount": 56,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
+    "archiveCount": 2,
     "storedEventCount": 65,
-    "expiredRemovedCount": 10,
+    "expiredRemovedCount": 5,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 34,
+    "undatedOldRemovedCount": 36,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 118,
+    "nonActivityRemovedCount": 86,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
     {
-      "id": "gnn-312354",
-      "title": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場",
-      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312354",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
+      "id": "ext-357be6ef64d9ab44",
+      "title": "膽大黨動畫展10/29中午預售 12/25華山開展規劃限定特典",
+      "summary": "立報傳媒",
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE91dWRuaHVqTFc1RGdIVWtUVnE3T3NCZEUwa2NYU3lYQ3pxaG9zbTltMnNZd25Dd3ltRnBFY0FOUzlVQzBiQlFqcA?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-24T10:27:42.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-28",
-      "eventStatus": "ongoing",
-      "venue": "三創園區可愛登場 守護小鎮的《飛天小女警",
+      "publishedAt": "2026-10-29T00:40:35.000Z",
+      "eventStartDate": "2026-10-29",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "華山開展規劃限定特典 立報傳媒",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [
-        "飛天小女警",
-        "熊熊遇見你",
-        "飛天小女警Ｘ熊熊遇見你",
-        "Power Playdate",
-        "主視覺區"
-      ],
-      "searchCorpus": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
-      "dateConfidence": "high",
-      "dateSource": "自即日起至 10/28",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-13T06:46:02.845Z",
-      "lastSeenAt": "2026-10-13T06:46:02.845Z"
+      "workTitles": [],
+      "searchCorpus": "膽大黨動畫展10/29中午預售 12/25華山開展規劃限定特典 立報傳媒",
+      "dateConfidence": "medium",
+      "dateSource": "10/29",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
-      "id": "gnn-311846",
-      "title": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場",
-      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311846",
+      "id": "gnn-313419",
+      "title": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場",
+      "summary": "人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313419",
       "source": "巴哈姆特 GNN",
       "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
@@ -76,26 +70,23 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-17T03:50:21.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-28",
-      "eventStatus": "ongoing",
-      "venue": "三創園區登場 守護小鎮的《飛天小女警》花",
+      "publishedAt": "2026-10-15T03:49:09.000Z",
+      "eventStartDate": "2026-10-23",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "飛天小女警",
-        "熊熊遇見你",
-        "飛天小女警 X 熊熊遇見你",
-        "飛天小女警Ｘ熊熊遇見你",
-        "主視覺區"
+        "關於我轉生變成史萊姆這檔事",
+        "動物化版本"
       ],
-      "searchCorpus": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
-      "dateConfidence": "high",
-      "dateSource": "9/24~10/28",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
+      "searchCorpus": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場 人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
+      "dateConfidence": "medium",
+      "dateSource": "10/23",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "gnn-313100",
@@ -128,8 +119,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 8 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-21T04:43:40.175Z",
-      "lastSeenAt": "2026-10-21T04:43:40.175Z"
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "gnn-313027",
@@ -912,37 +903,6 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "gnn-313419",
-      "title": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場",
-      "summary": "人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=313419",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-15T03:49:09.000Z",
-      "eventStartDate": "2026-10-23",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "關於我轉生變成史萊姆這檔事",
-        "動物化版本"
-      ],
-      "searchCorpus": "《關於我轉生變成史萊姆這檔事》期間限定快閃店 10/23 台北西門草咖啡 KUSA CAFE 登場 人氣網路小說改編動畫《關於我轉生變成史萊姆這檔事》快閃店即將於台北西門草咖啡 KUSA CAFE 限時登場，全新主題周邊與限定特典台灣首次販售。 本次快閃店特別推出全新繪製的主題視覺，將利姆路、紅丸、蜜莉姆、迪亞布羅與魯米納斯等熱門角色，換上超萌的「動物化版本」造型。現場將販售多款全新主題週邊，包含資料夾、壓克力立",
-      "dateConfidence": "medium",
-      "dateSource": "10/23",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-21T04:43:40.175Z",
-      "lastSeenAt": "2026-10-21T04:43:40.175Z"
-    },
-    {
       "id": "gnn-313628",
       "title": "《崩壞 3rd》攜手萌番 More Fun 推出休伯利安啟航聯動主題餐廳 10 月 23 日正式開張",
       "summary": "IP 授權代理品牌「More Fun 萌番」今（19）日正式宣布，將與人氣手機遊戲《崩壞 3rd》自 2026 年 10 月 23 日（五）至 2026 年 12 月 27 日（日）止攜手合作，於台北、高雄展開期間限定的聯動主題餐廳活動。 煙火！好友！休伯利安啟航！ 官方表示，本次主題餐廳以「煙火慶典」為概念，依照角色形象設計六款期間限定主題餐點，將各角色的代表",
@@ -1131,8 +1091,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-21T04:43:40.175Z",
-      "lastSeenAt": "2026-10-21T04:43:40.175Z"
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "gnn-311263",
@@ -1198,6 +1158,38 @@
       "lastSeenAt": "2026-09-23T04:43:29.841Z"
     },
     {
+      "id": "gnn-314094",
+      "title": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕",
+      "summary": "人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314094",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-29T02:51:06.000Z",
+      "eventStartDate": "2026-11-21",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "95 元",
+      "workTitles": [
+        "吉伊卡哇大判燒",
+        "CHIIKAWA OBANYAKI in TAIPEI"
+      ],
+      "searchCorpus": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕 人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 21 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+    },
+    {
       "id": "gnn-313424",
       "title": "《given 被贈與的未來》 × 日本彩妝品牌 iCouleur Collaboration 限定快閃店 12/4 在台登場",
       "summary": "人氣 BL 樂團作品《given 被贈與的未來》與日本彩妝品牌 iCouleur 聯名合作，限定週邊商品快閃店將自 12/4 起於西門町草咖啡限時登場。 日本的 iCouleur 品牌概念為「以我的推，點亮彩繪我的人生」，推出的彩妝商品經常成為話題，其延伸的彩妝意象商品也深受喜愛，此次將 given 的 8 位角色融入質感週邊中，不論是日常實用還是收藏，都能讓",
@@ -1225,8 +1217,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-21T04:43:40.175Z",
-      "lastSeenAt": "2026-10-21T04:43:40.175Z"
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "gnn-313300",
@@ -1387,6 +1379,36 @@
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
     },
     {
+      "id": "ext-4da361fb0d8dbbec",
+      "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE50Y2FVN04yX01nV2ZYaXNxNTNNcGdyeFpuUnpOMU9FN0RIUVlqaEZrb3dpSmlLWXo5Qk5BTTFvbG1hcncxdG9PWlZibjRzQ2t5Q1lFdER6THk?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-15T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026 高雄國際動漫節"
+      ],
+      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+    },
+    {
       "id": "ext-c6f61eee1ee05db4",
       "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
       "summary": "LINE TODAY",
@@ -1415,36 +1437,6 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-27T05:01:18.722Z",
       "lastSeenAt": "2026-10-27T05:01:18.722Z"
-    },
-    {
-      "id": "ext-4da361fb0d8dbbec",
-      "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE50Y2FVN04yX01nV2ZYaXNxNTNNcGdyeFpuUnpOMU9FN0RIUVlqaEZrb3dpSmlLWXo5Qk5BTTFvbG1hcncxdG9PWlZibjRzQ2t5Q1lFdER6THk?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-15T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026 高雄國際動漫節"
-      ],
-      "searchCorpus": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-24T04:34:08.047Z",
-      "lastSeenAt": "2026-10-24T04:34:08.047Z"
     },
     {
       "id": "ext-96e7fa49340abdd1",
@@ -1916,8 +1908,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -2024,7 +2016,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-22T06:00:00.000Z",
+      "publishedAt": "2026-10-22T07:21:21.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -2038,8 +2030,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "ext-ee991a0fdfbafb54",
@@ -2074,35 +2066,74 @@
   ],
   "archive": [
     {
-      "id": "ext-2470cbd502b0f05a",
-      "title": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1JYnZyWHFsMXlWMnBXY0taR01GbU9vM0Z0c1hLOUtaSHQzQnJBRmpsZnFoMEdTcFhKZFA0N01IbUlMeDMtdExmbjRObjnSAVJBVV95cUxNNGN4NVpaUnJXY3k4Q0FGR3hkQUw0ZHVHb3gzS3lEcVJUY0lBU29iclVzYTE4UGVydW1TSVgyb0ZBZ0RzQTdseDBsYjYxSlp6WjlR?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
+      "id": "gnn-312354",
+      "title": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場",
+      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312354",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-12T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
+      "publishedAt": "2026-09-24T10:27:42.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-28",
       "eventStatus": "expired",
-      "venue": "三創快閃店排爆 重演漫博開幕秒殺 NOW",
+      "venue": "三創園區可愛登場 守護小鎮的《飛天小女警",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "家庭教師"
+        "飛天小女警",
+        "熊熊遇見你",
+        "飛天小女警Ｘ熊熊遇見你",
+        "Power Playdate",
+        "主視覺區"
       ],
-      "searchCorpus": "《家庭教師》大空戒又買不到！三創快閃店排爆 重演漫博開幕秒殺 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-11T05:44:24.040Z",
-      "lastSeenAt": "2026-10-11T05:44:24.040Z",
-      "archivedAt": "2026-10-28T05:39:48.631Z"
+      "searchCorpus": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
+      "dateConfidence": "high",
+      "dateSource": "自即日起至 10/28",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-13T06:46:02.845Z",
+      "lastSeenAt": "2026-10-13T06:46:02.845Z",
+      "archivedAt": "2026-10-29T05:45:16.760Z"
+    },
+    {
+      "id": "gnn-311846",
+      "title": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場",
+      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311846",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T03:50:21.000Z",
+      "eventStartDate": "2026-09-24",
+      "eventEndDate": "2026-10-28",
+      "eventStatus": "expired",
+      "venue": "三創園區登場 守護小鎮的《飛天小女警》花",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "飛天小女警",
+        "熊熊遇見你",
+        "飛天小女警 X 熊熊遇見你",
+        "飛天小女警Ｘ熊熊遇見你",
+        "主視覺區"
+      ],
+      "searchCorpus": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
+      "dateConfidence": "high",
+      "dateSource": "9/24~10/28",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-10-29T05:45:16.760Z"
     }
   ]
 }
