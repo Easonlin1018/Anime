@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-10-29T05:45:16.760Z",
-    "lastSuccessfulUpdateAt": "2026-10-29T05:45:16.760Z",
+    "updatedAt": "2026-10-30T05:45:27.811Z",
+    "lastSuccessfulUpdateAt": "2026-10-30T05:45:27.811Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 241,
-    "uniqueNewsCount": 453,
-    "articleCandidateCount": 141,
-    "articleFetchSuccessCount": 38,
+    "fetchedExternalItemCount": 375,
+    "uniqueNewsCount": 578,
+    "articleCandidateCount": 230,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 12,
-    "newEventCount": 2,
-    "cachedEventCount": 56,
+    "matchedEventCount": 27,
+    "newEventCount": 6,
+    "cachedEventCount": 51,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
-    "storedEventCount": 65,
-    "expiredRemovedCount": 5,
+    "archiveCount": 0,
+    "storedEventCount": 67,
+    "expiredRemovedCount": 14,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 36,
+    "undatedOldRemovedCount": 45,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 86,
+    "foreignRemovedCount": 1,
+    "nonActivityRemovedCount": 138,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -54,8 +54,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/29",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "gnn-313419",
@@ -416,8 +416,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -1063,6 +1063,36 @@
       "lastSeenAt": "2026-10-28T05:39:48.631Z"
     },
     {
+      "id": "ext-c8daa771ed4deb34",
+      "title": "【名偵探柯南TV 動畫播放30 週年紀念展】11 月 1 日高雄夢時代壓軸登場！經典動畫製作幕後完整呈現，邀請粉絲共赴柯南動畫盛宴",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbnAwcElOMnpjcGdtQmc2bG5zd0FKS3kxQUFKRzFyNFF1ZkZJcy1KcWxJNkowcE13NjF2WFpGX2xtMmViaGFVQ3NLZElVMVhpcGMzTEtoUkFVYzBVMVczaHBUZTBVckpzdGNNM1lEbUQ4cjZybWpiUTl1QVA1OXVDME1va1haUVU1MXEzbHhKaHVsNU9F?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-14T07:00:00.000Z",
+      "eventStartDate": "2026-11-01",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南TV 動畫播放30 週年紀念展"
+      ],
+      "searchCorpus": "【名偵探柯南TV 動畫播放30 週年紀念展】11 月 1 日高雄夢時代壓軸登場！經典動畫製作幕後完整呈現，邀請粉絲共赴柯南動畫盛宴 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 1 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
+    },
+    {
       "id": "gnn-313356",
       "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代",
       "summary": "《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
@@ -1379,6 +1409,36 @@
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
     },
     {
+      "id": "ext-c6f61eee1ee05db4",
+      "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
+      "summary": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05cGxrQXR6QjRqSmEtaU1pbnI3am5WNXJTcWZheTBOeWJ0WU02aXlsOGdvVVJhdGFibU1NU1QtbktXclZxZXlJWGpUMXM5Skg3YUNfR0Z3?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-09-15T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026十鼓魔法動漫祭LPS-TNTDCC"
+      ],
+      "searchCorpus": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞 LINE TODAY",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
+    },
+    {
       "id": "ext-4da361fb0d8dbbec",
       "title": "台灣角川公開「2026 高雄國際動漫節」首賣新書與週邊商品資訊",
       "summary": "GNN 新聞網",
@@ -1409,19 +1469,19 @@
       "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
-      "id": "ext-c6f61eee1ee05db4",
-      "title": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞",
-      "summary": "LINE TODAY",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05cGxrQXR6QjRqSmEtaU1pbnI3am5WNXJTcWZheTBOeWJ0WU02aXlsOGdvVVJhdGFibU1NU1QtbktXclZxZXlJWGpUMXM5Skg3YUNfR0Z3?oc=5",
+      "id": "ext-090d422f06b144bf",
+      "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
+      "summary": "台灣好報",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qMTZqOGhkR0Q4amJVNm04RlhtcmZ3MGZxZWdyZDRxdjh0TEEyQ3ZrQkM0MGhLRVRjLXZzb0hxd29PTmg5dDZtRmdITzJySTM3enJj?oc=5",
       "source": "Google News－台灣動漫活動",
       "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
-        "台灣"
+        "台中"
       ],
-      "confidence": "candidate",
-      "publishedAt": "2026-09-15T07:00:00.000Z",
+      "confidence": "high",
+      "publishedAt": "2026-09-17T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1429,14 +1489,14 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "2026十鼓魔法動漫祭LPS-TNTDCC"
+        "漫味食光"
       ],
-      "searchCorpus": "「2026十鼓魔法動漫祭LPS-TNTDCC」跨界降臨 席珍現身盛會加開動漫市集展演 | 台灣好新聞 LINE TODAY",
+      "searchCorpus": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場 台灣好報",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-96e7fa49340abdd1",
@@ -1467,38 +1527,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
-    },
-    {
-      "id": "ext-090d422f06b144bf",
-      "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
-      "summary": "台灣好報",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qMTZqOGhkR0Q4amJVNm04RlhtcmZ3MGZxZWdyZDRxdjh0TEEyQ3ZrQkM0MGhLRVRjLXZzb0hxd29PTmg5dDZtRmdITzJySTM3enJj?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-17T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "漫味食光"
-      ],
-      "searchCorpus": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場 台灣好報",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-a5446f5b03f4a1c1",
@@ -1525,8 +1555,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-d409522840b24277",
@@ -1553,8 +1583,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-97c762ded8f5f27c",
@@ -1668,39 +1698,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
-    },
-    {
-      "id": "ext-ed1c9c5566bc5e18",
-      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "棕色塵埃2",
-        "Brown Dust2"
-      ],
-      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-fec5eb36ece51cf1",
@@ -1731,8 +1730,39 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
+    },
+    {
+      "id": "ext-ed1c9c5566bc5e18",
+      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "棕色塵埃2",
+        "Brown Dust2"
+      ],
+      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-bf19739780c7e9db",
@@ -1815,8 +1845,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "gnn-312921",
@@ -1884,6 +1914,34 @@
       "lastSeenAt": "2026-10-27T05:01:18.722Z"
     },
     {
+      "id": "ext-c660ed55ec6f232c",
+      "title": "高雄動漫節福袋藏好康- 時尚消費- 中國時報",
+      "summary": "中時新聞網",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA1b2pHeExiaW8wRmJKdFZkTXlkdmUxODYyUXh4RGIxV2tWdEFfXzJ1OEpiaXFmdGZ1aUJUeU9MVzFrYlRLWEhNVFNWeVE0X1N3U2tTeHMxenk0bVhpZTVTdHk5QUdBakotcV8w?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-08T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節福袋藏好康- 時尚消費- 中國時報 中時新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
+    },
+    {
       "id": "ext-ad36b19a9eda0780",
       "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
       "summary": "立報傳媒",
@@ -1936,8 +1994,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-fbbc400ad3ccb14f",
@@ -2030,8 +2088,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-ee991a0fdfbafb54",
@@ -2060,80 +2118,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     }
   ],
-  "archive": [
-    {
-      "id": "gnn-312354",
-      "title": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場",
-      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312354",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-24T10:27:42.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-28",
-      "eventStatus": "expired",
-      "venue": "三創園區可愛登場 守護小鎮的《飛天小女警",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "飛天小女警",
-        "熊熊遇見你",
-        "飛天小女警Ｘ熊熊遇見你",
-        "Power Playdate",
-        "主視覺區"
-      ],
-      "searchCorpus": "「飛天小女警Ｘ熊熊遇見你」快閃店自即日起台北三創園區可愛登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店自即日起至 10/28 於台北三創園區一樓登場。 1/14 快閃店以「Power Playdate」為主題，現場充滿開心玩耍氛圍，「主視覺區」飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。入",
-      "dateConfidence": "high",
-      "dateSource": "自即日起至 10/28",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-13T06:46:02.845Z",
-      "lastSeenAt": "2026-10-13T06:46:02.845Z",
-      "archivedAt": "2026-10-29T05:45:16.760Z"
-    },
-    {
-      "id": "gnn-311846",
-      "title": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場",
-      "summary": "守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311846",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-17T03:50:21.000Z",
-      "eventStartDate": "2026-09-24",
-      "eventEndDate": "2026-10-28",
-      "eventStatus": "expired",
-      "venue": "三創園區登場 守護小鎮的《飛天小女警》花",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "飛天小女警",
-        "熊熊遇見你",
-        "飛天小女警 X 熊熊遇見你",
-        "飛天小女警Ｘ熊熊遇見你",
-        "主視覺區"
-      ],
-      "searchCorpus": "「飛天小女警 X 熊熊遇見你」快閃店 9/24 台北三創園區登場 守護小鎮的《飛天小女警》花花、泡泡及毛毛三姐妹，今年與《熊熊遇見你》三兄弟聯手出擊。「飛天小女警Ｘ熊熊遇見你」快閃店 9/24～10/28 將於台北三創園區一樓登場。現場打造七大拍照打卡點，首推特別創作的跨界聯名圖素的「主視覺區」，飛天小女警戴著大大的熊熊連帽探出頭，熊熊三兄弟則穿上《飛天小女警》經典服裝。拍完再",
-      "dateConfidence": "high",
-      "dateSource": "9/24~10/28",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z",
-      "archivedAt": "2026-10-29T05:45:16.760Z"
-    }
-  ]
+  "archive": []
 }
