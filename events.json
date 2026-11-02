@@ -3,32 +3,64 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-01T05:59:43.708Z",
-    "lastSuccessfulUpdateAt": "2026-11-01T05:59:43.708Z",
+    "updatedAt": "2026-11-02T05:59:04.042Z",
+    "lastSuccessfulUpdateAt": "2026-11-02T05:59:04.042Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 294,
-    "uniqueNewsCount": 493,
-    "articleCandidateCount": 183,
+    "fetchedExternalItemCount": 244,
+    "uniqueNewsCount": 455,
+    "articleCandidateCount": 145,
     "articleFetchSuccessCount": 38,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 14,
-    "newEventCount": 1,
-    "cachedEventCount": 59,
+    "matchedEventCount": 10,
+    "newEventCount": 2,
+    "cachedEventCount": 56,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 66,
-    "expiredRemovedCount": 12,
-    "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 50,
+    "archiveCount": 4,
+    "storedEventCount": 63,
+    "expiredRemovedCount": 5,
+    "recapRemovedCount": 1,
+    "undatedOldRemovedCount": 38,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 105,
+    "nonActivityRemovedCount": 88,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-313356",
+      "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代",
+      "summary": "《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313356",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "展覽",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-14T04:30:02.000Z",
+      "eventStartDate": "2026-11-01",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "名偵探柯南 TV 動畫播放 30 週年紀念展",
+        "TV 動畫製作"
+      ],
+      "searchCorpus": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代 《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 1 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
+    },
     {
       "id": "ext-357be6ef64d9ab44",
       "title": "膽大黨動畫展10/29中午預售 12/25華山開展規劃限定特典",
@@ -54,8 +86,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/29",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-01T05:59:43.708Z",
-      "lastSeenAt": "2026-11-01T05:59:43.708Z"
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
       "id": "gnn-313419",
@@ -85,8 +117,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
       "id": "gnn-313100",
@@ -119,8 +151,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 8 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
       "id": "gnn-313027",
@@ -808,37 +840,6 @@
       "lastSeenAt": "2026-08-06T03:35:05.926Z"
     },
     {
-      "id": "gnn-308926",
-      "title": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場",
-      "summary": "《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308926",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-28T08:21:41.000Z",
-      "eventStartDate": "2026-08-28",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "我在意的對象並不是男人",
-        "A-BASE"
-      ],
-      "searchCorpus": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場 《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
-      "dateConfidence": "medium",
-      "dateSource": "2026 年 8 月 28 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-08-13T02:46:19.616Z",
-      "lastSeenAt": "2026-08-13T02:46:19.616Z"
-    },
-    {
       "id": "gnn-310339",
       "title": "台灣大攜手 Riot Games 打造《特戰英豪》新地圖「頂峰亭閣」主題特展",
       "summary": "台灣大哥大宣布，攜手 Riot Games 在台北東區商圈為《特戰英豪》打造新地圖「頂峰亭閣」主題特展，玩家至 8 月 30 日以前可以體驗遊戲地圖所延伸的場景，以及互動遊戲等。 現場規劃 4 大主題區域，玩家可隨著路線，步入並感受巡禮過程。完成參展任務，玩家不僅可獲得「頂峰亭閣」特展限定周邊；達成",
@@ -1032,37 +1033,6 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "gnn-314011",
-      "title": "技嘉 40 週年品牌特展 10/29 - 11/1 松菸一號倉庫登場 免費感受從經典主機板到 AI 創新科技",
-      "summary": "技嘉科技（GIGABYTE）宣布，為慶祝創立 40 週年，將於 10 月 29 日至 11 月 1 日在台北松山文創園區一號倉庫舉辦「GIGABYTE 40｜INFINITE POSSIBILITIES」40 週年品牌主題特展。官方表示，將透過「走進技嘉的每一步，感受技術的進化」為核心概念，結合歷史產品展示、沉浸式情境體驗、互動科技及 AI 創作，帶領民眾回顧技嘉自 1986 年成立至今的創新",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=314011",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-27T10:56:04.000Z",
-      "eventStartDate": "2026-10-29",
-      "eventEndDate": "2026-11-01",
-      "eventStatus": "upcoming",
-      "venue": "松山文創園區",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "GIGABYTE 40｜INFINITE POSSIBILITIES",
-        "走進技嘉的每一步，感受技術的進化"
-      ],
-      "searchCorpus": "技嘉 40 週年品牌特展 10/29 - 11/1 松菸一號倉庫登場 免費感受從經典主機板到 AI 創新科技 技嘉科技（GIGABYTE）宣布，為慶祝創立 40 週年，將於 10 月 29 日至 11 月 1 日在台北松山文創園區一號倉庫舉辦「GIGABYTE 40｜INFINITE POSSIBILITIES」40 週年品牌主題特展。官方表示，將透過「走進技嘉的每一步，感受技術的進化」為核心概念，結合歷史產品展示、沉浸式情境體驗、互動科技及 AI 創作，帶領民眾回顧技嘉自 1986 年成立至今的創新",
-      "dateConfidence": "high",
-      "dateSource": "10 月 29 日至 11 月 1 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
-    },
-    {
       "id": "ext-c8daa771ed4deb34",
       "title": "【名偵探柯南TV 動畫播放30 週年紀念展】11 月 1 日高雄夢時代壓軸登場！經典動畫製作幕後完整呈現，邀請粉絲共赴柯南動畫盛宴",
       "summary": "SouNova 少女星",
@@ -1091,38 +1061,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-30T05:45:27.811Z",
       "lastSeenAt": "2026-10-30T05:45:27.811Z"
-    },
-    {
-      "id": "gnn-313356",
-      "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代",
-      "summary": "《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=313356",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：展覽",
-      "sourceTag": "展覽",
-      "type": "展覽",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-14T04:30:02.000Z",
-      "eventStartDate": "2026-11-01",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "高雄夢時代",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "名偵探柯南",
-        "名偵探柯南 TV 動畫播放 30 週年紀念展",
-        "TV 動畫製作"
-      ],
-      "searchCorpus": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代 《名偵探柯南》TV 動畫播放 30 週年紀念展，宣布將於 11 月 1 日移師高雄夢時代，為本次巡迴展覽揭開南台灣最終站序幕。本次展覽延續日本官方展覽以「TV 動畫製作」為核心的策展概念，將帶領粉絲深入《名偵探柯南》30 年來的動畫幕後世界，從企劃、設定、線稿、上色、角色動態到聲音製作，讓粉絲一步步跟著動畫動畫製作的角度重新",
-      "dateConfidence": "medium",
-      "dateSource": "11 月 1 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
       "id": "gnn-311263",
@@ -1155,6 +1093,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-09-09T04:40:05.018Z",
       "lastSeenAt": "2026-09-09T04:40:05.018Z"
+    },
+    {
+      "id": "ext-94178947d4b5f712",
+      "title": "《KERORO軍曹☆》主題 Café 11 月 6 日北中南同步登場！主題餐點、限定特典、精彩周邊，全面引爆藍星人的味蕾與荷包！",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5iRjVFS2pnSXZyNmg0Nmk3RDNsZjc2WjVzYVBCVXZ2Ry1Zb1VIQjYyaFZnUVRIeV9QN09yc1U0U0lMSTZna2lJRHZKazF1a3B2YUVhSmlhMFVRd2YwLUs3REVVeTNBOVRIVlVza2lleGE?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-30T05:00:00.000Z",
+      "eventStartDate": "2026-11-06",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "KERORO軍曹☆"
+      ],
+      "searchCorpus": "《KERORO軍曹☆》主題 Café 11 月 6 日北中南同步登場！主題餐點、限定特典、精彩周邊，全面引爆藍星人的味蕾與荷包！ SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 6 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
       "id": "gnn-314255",
@@ -1278,8 +1246,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
       "id": "gnn-313300",
@@ -1438,68 +1406,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-07T05:57:11.700Z",
       "lastSeenAt": "2026-10-07T05:57:11.700Z"
-    },
-    {
-      "id": "ext-090d422f06b144bf",
-      "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
-      "summary": "台灣好報",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qMTZqOGhkR0Q4amJVNm04RlhtcmZ3MGZxZWdyZDRxdjh0TEEyQ3ZrQkM0MGhLRVRjLXZzb0hxd29PTmg5dDZtRmdITzJySTM3enJj?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-17T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "漫味食光"
-      ],
-      "searchCorpus": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場 台灣好報",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-01T05:59:43.708Z",
-      "lastSeenAt": "2026-11-01T05:59:43.708Z"
-    },
-    {
-      "id": "ext-96e7fa49340abdd1",
-      "title": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈",
-      "summary": "Cosmopolitan",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQanFtMGZpRnZiMWNRUTdoaURsTHJEQURuRDFtYXdTQXJidGNyWWxXTHlOSWVVckVWeS13blo1aGk0eTlZdDR5OHdEYjltTFUwNUl2RFp0VU5Gd0JwN0VjOUQ0YS15aUNfbmFGVzFzTGRTVm01ZHJDczZaRkhTekFvWmE1ZzFUc2s?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-17T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "鬼滅之刃",
-        "葬送的芙莉蓮",
-        "超動漫研究社"
-      ],
-      "searchCorpus": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈 Cosmopolitan",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-30T05:45:27.811Z",
-      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-a5446f5b03f4a1c1",
@@ -1881,8 +1787,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-01T05:59:43.708Z",
-      "lastSeenAt": "2026-11-01T05:59:43.708Z"
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
       "id": "ext-c660ed55ec6f232c",
@@ -2063,10 +1969,10 @@
       "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
-      "id": "ext-ee991a0fdfbafb54",
-      "title": "紗南、羽山回來了！《玩偶遊戲》快閃店登陸華山 巨大巴比特裝置、50 多款聯名商品亮相",
-      "summary": "上報Up Media",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5OanF5bDA0S0dxaXJNYlpGd3dmU2NNaFZIVno2MFdORE91NE55TnU5U1ZLZXdWYk5xcmtjS0VKU0F5Z1NOSGhPdzhnLTBzbnRiMU1SX0RIaTlybVluanlr?oc=5",
+      "id": "ext-afedd8ddd1643f2b",
+      "title": "排球少年、膽大膽12月來台展出 《玩偶遊戲》快閃店華山登場",
+      "summary": "ETtoday新聞雲",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBwZ29waXpXbXc1R1dYN044UTB5OURhTmxFVEc1d3kwUmw4cGlSRjVRWFNYUmYyVmxvQ1BuVjNvZENYcWtDV2ZsQTE2V24tZFlybDY4RVlkV0lyMi1IVGfSAUtBVV95cUxOMWI5bW9SdXJzbXduUTVNRURJc0VUbjZHRHJYNThaT0pzZG4yTVdEXzYtQ2hMMThFQkpuSHhmSFdXOFRmdDctLWxIRlE?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
@@ -2075,23 +1981,152 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-25T01:00:00.000Z",
+      "publishedAt": "2026-10-27T04:30:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
-      "venue": "華山 巨大巴比特裝置、50 多款聯名商品",
+      "venue": "華山登場 ETtoday新聞雲",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
         "玩偶遊戲"
       ],
-      "searchCorpus": "紗南、羽山回來了！《玩偶遊戲》快閃店登陸華山 巨大巴比特裝置、50 多款聯名商品亮相 上報Up Media",
+      "searchCorpus": "排球少年、膽大膽12月來台展出 《玩偶遊戲》快閃店華山登場 ETtoday新聞雲",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-02T05:59:04.042Z",
+      "lastSeenAt": "2026-11-02T05:59:04.042Z"
+    }
+  ],
+  "archive": [
+    {
+      "id": "gnn-314011",
+      "title": "技嘉 40 週年品牌特展 10/29 - 11/1 松菸一號倉庫登場 免費感受從經典主機板到 AI 創新科技",
+      "summary": "技嘉科技（GIGABYTE）宣布，為慶祝創立 40 週年，將於 10 月 29 日至 11 月 1 日在台北松山文創園區一號倉庫舉辦「GIGABYTE 40｜INFINITE POSSIBILITIES」40 週年品牌主題特展。官方表示，將透過「走進技嘉的每一步，感受技術的進化」為核心概念，結合歷史產品展示、沉浸式情境體驗、互動科技及 AI 創作，帶領民眾回顧技嘉自 1986 年成立至今的創新",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314011",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-27T10:56:04.000Z",
+      "eventStartDate": "2026-10-29",
+      "eventEndDate": "2026-11-01",
+      "eventStatus": "expired",
+      "venue": "松山文創園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GIGABYTE 40｜INFINITE POSSIBILITIES",
+        "走進技嘉的每一步，感受技術的進化"
+      ],
+      "searchCorpus": "技嘉 40 週年品牌特展 10/29 - 11/1 松菸一號倉庫登場 免費感受從經典主機板到 AI 創新科技 技嘉科技（GIGABYTE）宣布，為慶祝創立 40 週年，將於 10 月 29 日至 11 月 1 日在台北松山文創園區一號倉庫舉辦「GIGABYTE 40｜INFINITE POSSIBILITIES」40 週年品牌主題特展。官方表示，將透過「走進技嘉的每一步，感受技術的進化」為核心概念，結合歷史產品展示、沉浸式情境體驗、互動科技及 AI 創作，帶領民眾回顧技嘉自 1986 年成立至今的創新",
+      "dateConfidence": "high",
+      "dateSource": "10 月 29 日至 11 月 1 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z",
+      "archivedAt": "2026-11-02T05:59:04.042Z"
+    },
+    {
+      "id": "ext-090d422f06b144bf",
+      "title": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場",
+      "summary": "台灣好報",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qMTZqOGhkR0Q4amJVNm04RlhtcmZ3MGZxZWdyZDRxdjh0TEEyQ3ZrQkM0MGhLRVRjLXZzb0hxd29PTmg5dDZtRmdITzJySTM3enJj?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "漫味食光"
+      ],
+      "searchCorpus": "台中國際動漫博覽會「漫味食光」台灣大道市政大樓登場 台灣好報",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-01T05:59:43.708Z",
+      "lastSeenAt": "2026-11-01T05:59:43.708Z",
+      "archivedAt": "2026-11-02T05:59:04.042Z"
+    },
+    {
+      "id": "ext-96e7fa49340abdd1",
+      "title": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈",
+      "summary": "Cosmopolitan",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQanFtMGZpRnZiMWNRUTdoaURsTHJEQURuRDFtYXdTQXJidGNyWWxXTHlOSWVVckVWeS13blo1aGk0eTlZdDR5OHdEYjltTFUwNUl2RFp0VU5Gd0JwN0VjOUQ0YS15aUNfbmFGVzFzTGRTVm01ZHJDczZaRkhTekFvWmE1ZzFUc2s?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-17T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "鬼滅之刃",
+        "葬送的芙莉蓮",
+        "超動漫研究社"
+      ],
+      "searchCorpus": "「超動漫研究社」快閃店限時登場台中LaLaport！《鬼滅之刃》 《葬送的芙莉蓮》限量福袋＋滿額贈 Cosmopolitan",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-30T05:45:27.811Z",
-      "lastSeenAt": "2026-10-30T05:45:27.811Z"
+      "lastSeenAt": "2026-10-30T05:45:27.811Z",
+      "archivedAt": "2026-11-02T05:59:04.042Z"
+    },
+    {
+      "id": "gnn-308926",
+      "title": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場",
+      "summary": "《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308926",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-28T08:21:41.000Z",
+      "eventStartDate": "2026-08-28",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "我在意的對象並不是男人",
+        "A-BASE"
+      ],
+      "searchCorpus": "《我在意的對象並不是男人》快閃店將於 8/28 在西門 A-BASE 登場 《我在意的對象並不是男人》POP UP STORE，將於 2026 年 8 月 28 日（五）起在台北西門的「A-BASE」舉辦。 本次活動所有商品皆使用原作 Sumiko Arai 特別全新繪製的插畫視覺圖，是僅限本次 POP UP STORE 才能見到的珍貴周邊。本次活動將販售壓克力立牌、壓克力裝飾板、金屬徽章 Vol.1、吉他造型壓克力鑰匙圈、吉他彈片組、書籤組、造型貼紙包 Vol.1",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 8 月 28 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-08-13T02:46:19.616Z",
+      "lastSeenAt": "2026-08-13T02:46:19.616Z",
+      "archivedAt": "2026-11-02T05:59:04.042Z"
     }
-  ],
-  "archive": []
+  ]
 }
