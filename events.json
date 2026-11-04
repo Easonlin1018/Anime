@@ -3,32 +3,62 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-03T06:44:46.321Z",
-    "lastSuccessfulUpdateAt": "2026-11-03T06:44:46.321Z",
+    "updatedAt": "2026-11-04T06:17:08.332Z",
+    "lastSuccessfulUpdateAt": "2026-11-04T06:17:08.332Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 208,
-    "fetchedExternalItemCount": 373,
-    "uniqueNewsCount": 581,
-    "articleCandidateCount": 233,
-    "articleFetchSuccessCount": 36,
+    "fetchedExternalItemCount": 326,
+    "uniqueNewsCount": 539,
+    "articleCandidateCount": 188,
+    "articleFetchSuccessCount": 34,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 22,
-    "newEventCount": 4,
-    "cachedEventCount": 52,
+    "newEventCount": 6,
+    "cachedEventCount": 54,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 63,
-    "expiredRemovedCount": 16,
+    "storedEventCount": 64,
+    "expiredRemovedCount": 10,
     "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 49,
+    "undatedOldRemovedCount": 32,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 139,
+    "foreignRemovedCount": 2,
+    "nonActivityRemovedCount": 117,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-314431",
+      "title": "黏土人 20 週年紀念展台灣巡迴最終站 今日正式於台北三創開展",
+      "summary": "日本模型商 Good Smile Company 攜手 GAME 休閒館舉行黏土人20週年紀念展台北最終站，今日（11/4）起正式於台北三創生活園區開展。 現場有 200 多款黏土人的系列商品展示，以及黏土人的拍攝場景區，讓粉絲能夠攜帶自己的黏土人一同玩樂。 1/22 會場限定商品 同時，官方表示活動期間參與相關社群活動，即可獲得「黏土人 20 週年紀念資料夾」",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314431",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-04T04:13:36.000Z",
+      "eventStartDate": "2026-11-04",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "三創生活園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "黏土人 20 週年紀念資料夾"
+      ],
+      "searchCorpus": "黏土人 20 週年紀念展台灣巡迴最終站 今日正式於台北三創開展 日本模型商 Good Smile Company 攜手 GAME 休閒館舉行黏土人20週年紀念展台北最終站，今日（11/4）起正式於台北三創生活園區開展。 現場有 200 多款黏土人的系列商品展示，以及黏土人的拍攝場景區，讓粉絲能夠攜帶自己的黏土人一同玩樂。 1/22 會場限定商品 同時，官方表示活動期間參與相關社群活動，即可獲得「黏土人 20 週年紀念資料夾」",
+      "dateConfidence": "medium",
+      "dateSource": "11/4",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
+    },
     {
       "id": "gnn-313356",
       "title": "「名偵探柯南 TV 動畫播放 30 週年紀念展」宣布 11 月 1 日起前進高雄夢時代",
@@ -86,8 +116,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/29",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
       "id": "gnn-313419",
@@ -448,8 +478,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
       "id": "ext-5f235300259b09ab",
@@ -1121,8 +1151,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 6 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
       "id": "gnn-314255",
@@ -1281,6 +1311,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-13T06:46:02.845Z",
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
+    },
+    {
+      "id": "ext-7589f44a2b0fbf10",
+      "title": "《排球少年!!》動畫10週年紀念展來台 12/25松菸重溫校隊對決",
+      "summary": "立報傳媒",
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1FVGVzOENJeFRvZlgzNXVsYnNLellEcHNjOUhHVGdqWVM5N0pGdnQzTUVNOEJoZXU4cnFCSGszR3VBUmJxRVIwNg?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-04T02:45:36.000Z",
+      "eventStartDate": "2026-12-25",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "排球少年!!"
+      ],
+      "searchCorpus": "《排球少年!!》動畫10週年紀念展來台 12/25松菸重溫校隊對決 立報傳媒",
+      "dateConfidence": "medium",
+      "dateSource": "12/25",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
       "id": "gnn-313498",
@@ -1575,8 +1635,64 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
+    },
+    {
+      "id": "ext-98c880fa22bfcf62",
+      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "1000元起",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
+    },
+    {
+      "id": "ext-bf19739780c7e9db",
+      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
+      "summary": "遊戲基地Gamebase",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
       "id": "ext-fec5eb36ece51cf1",
@@ -1604,34 +1720,6 @@
         "日本展"
       ],
       "searchCorpus": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
-    },
-    {
-      "id": "ext-98c880fa22bfcf62",
-      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "1000元起",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
@@ -1670,34 +1758,6 @@
       "lastSeenAt": "2026-10-31T05:38:06.697Z"
     },
     {
-      "id": "ext-bf19739780c7e9db",
-      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
-      "summary": "遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
-    },
-    {
       "id": "ext-0bc936f6ef584ef3",
       "title": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假",
       "summary": "Zeek玩家誌",
@@ -1722,8 +1782,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
       "id": "gnn-312921",
@@ -1791,34 +1851,6 @@
       "lastSeenAt": "2026-11-02T05:59:04.042Z"
     },
     {
-      "id": "ext-c660ed55ec6f232c",
-      "title": "高雄動漫節福袋藏好康- 時尚消費- 中國時報",
-      "summary": "中時新聞網",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA1b2pHeExiaW8wRmJKdFZkTXlkdmUxODYyUXh4RGIxV2tWdEFfXzJ1OEpiaXFmdGZ1aUJUeU9MVzFrYlRLWEhNVFNWeVE0X1N3U2tTeHMxenk0bVhpZTVTdHk5QUdBakotcV8w?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-08T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節福袋藏好康- 時尚消費- 中國時報 中時新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-30T05:45:27.811Z",
-      "lastSeenAt": "2026-10-30T05:45:27.811Z"
-    },
-    {
       "id": "ext-ad36b19a9eda0780",
       "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
       "summary": "立報傳媒",
@@ -1845,6 +1877,34 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-29T05:45:16.760Z",
       "lastSeenAt": "2026-10-29T05:45:16.760Z"
+    },
+    {
+      "id": "ext-c660ed55ec6f232c",
+      "title": "高雄動漫節福袋藏好康- 時尚消費- 中國時報",
+      "summary": "中時新聞網",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA1b2pHeExiaW8wRmJKdFZkTXlkdmUxODYyUXh4RGIxV2tWdEFfXzJ1OEpiaXFmdGZ1aUJUeU9MVzFrYlRLWEhNVFNWeVE0X1N3U2tTeHMxenk0bVhpZTVTdHk5QUdBakotcV8w?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-08T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節福袋藏好康- 時尚消費- 中國時報 中時新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z"
     },
     {
       "id": "ext-482caefbe8eb9b75",
@@ -1939,36 +1999,6 @@
       "lastSeenAt": "2026-10-12T05:54:52.213Z"
     },
     {
-      "id": "ext-8fd34b4cf82c9d34",
-      "title": "《排球少年!!》動畫10週年紀念展降臨台北松菸！10 月 28 日預售票開賣，重溫熱血名場面",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQZnVBWmZhWEZpcGZsaVhqMmQtR29ab2g3SEdDb2FMT0FUT3F2bTZtX3dBZV93RzBUZ2ZGSWk4SFotdUhKM09LZmxJTmZjNE9Ia09vRkVHRkF2QnNvVC05TUtfWUIycjRldzNGbTFCS1J1NWxWcnhoVW84Y3FyWE1Fdl9ONEpWTWNnVkRv?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-22T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "松菸",
-      "admissionType": "購票入場",
-      "feeText": "",
-      "workTitles": [
-        "排球少年!!"
-      ],
-      "searchCorpus": "《排球少年!!》動畫10週年紀念展降臨台北松菸！10 月 28 日預售票開賣，重溫熱血名場面 SouNova 少女星",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
-    },
-    {
       "id": "ext-afedd8ddd1643f2b",
       "title": "排球少年、膽大膽12月來台展出 《玩偶遊戲》快閃店華山登場",
       "summary": "ETtoday新聞雲",
@@ -1995,8 +2025,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z"
     }
   ],
   "archive": []
