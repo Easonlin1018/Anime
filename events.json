@@ -3,39 +3,72 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-05T06:42:55.444Z",
-    "lastSuccessfulUpdateAt": "2026-11-05T06:42:55.444Z",
+    "updatedAt": "2026-11-06T06:40:09.861Z",
+    "lastSuccessfulUpdateAt": "2026-11-06T06:40:09.861Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
     "fetchedExternalItemCount": 231,
-    "uniqueNewsCount": 441,
+    "uniqueNewsCount": 444,
     "articleCandidateCount": 142,
-    "articleFetchSuccessCount": 38,
+    "articleFetchSuccessCount": 40,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 13,
-    "newEventCount": 4,
-    "cachedEventCount": 57,
+    "matchedEventCount": 9,
+    "newEventCount": 1,
+    "cachedEventCount": 59,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
+    "archiveCount": 1,
     "storedEventCount": 67,
     "expiredRemovedCount": 6,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 36,
+    "undatedOldRemovedCount": 35,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 85,
+    "nonActivityRemovedCount": 90,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-314595",
+      "title": "《KERORO 軍曹☆》期間限定主題 Café 即日起正式在台登場",
+      "summary": "《KERORO 軍曹☆》期間限定主題 Caf&eacute; 自即日起至 12/23 於三創生活園區和高雄夢時代展開，台中 LaLaport 的 Caf&eacute; stand 也同步提供飲料外帶服務，不僅規劃了以角色為主題的特色餐點與豐富特典，更準備了滿額特典、首週限定紀念卡、KERORO 慶生專屬活動、全新抽卡機及周邊商品。 1/6 活動期間，店內將以最新電視動畫《KERORO軍曹☆》視",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314595",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-06T06:06:50.000Z",
+      "eventStartDate": "2026-11-06",
+      "eventEndDate": "2026-12-23",
+      "eventStatus": "ongoing",
+      "venue": "三創生活園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "KERORO 軍曹☆",
+        "KERORO軍曹☆"
+      ],
+      "searchCorpus": "《KERORO 軍曹☆》期間限定主題 Café 即日起正式在台登場 《KERORO 軍曹☆》期間限定主題 Caf&eacute; 自即日起至 12/23 於三創生活園區和高雄夢時代展開，台中 LaLaport 的 Caf&eacute; stand 也同步提供飲料外帶服務，不僅規劃了以角色為主題的特色餐點與豐富特典，更準備了滿額特典、首週限定紀念卡、KERORO 慶生專屬活動、全新抽卡機及周邊商品。 1/6 活動期間，店內將以最新電視動畫《KERORO軍曹☆》視",
+      "dateConfidence": "high",
+      "dateSource": "自即日起至 12/23",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+    },
     {
       "id": "gnn-314506",
       "title": "《家庭教師 HITMAN REBORN！》《藥師少女的獨語》限定快閃店即日起台北西門地下市開幕",
       "summary": "由 Anique Taiwan 主辦，自即日（11/5）起在台北西門地下市 6 號店鋪推出《家庭教師 HITMAN REBORN！》與《藥師少女的獨語》限定快閃店。 本次《家庭教師 HITMAN REBORN！》以全新主題「覺悟」登場。正因為有想要守護的事物，人才能變得堅強。即使心中仍有迷惘與恐懼，也要為了夥伴向前踏出一步――。透過阿綱一行人將各自的信念化為火焰、挺",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=314506",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -58,8 +91,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
       "id": "gnn-314431",
@@ -120,8 +153,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
       "id": "ext-357be6ef64d9ab44",
@@ -179,8 +212,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
       "id": "gnn-313100",
@@ -685,39 +718,6 @@
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
-      "id": "ext-07a32f8b20799194",
-      "title": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣",
-      "summary": "快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBaR1RhZnpNdnJLSDJTNjhRYXZKVDRoUjNJQTU5UUcwd1hBMDFUVjVYdzJnaUxWYks4azBvRHE0Tzk1QTBBNk5fUnhwd2IydHFOQVMxblJKOFNMd3dES3JTU1VaNjRnZklfb2ZIanZvMDdhQ1E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-28T07:00:00.000Z",
-      "eventStartDate": "2026-09-01",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "名偵探柯南",
-        "沉默魔女的秘密",
-        "Free！",
-        "曼迪秋日祭"
-      ],
-      "searchCorpus": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
-      "dateConfidence": "medium",
-      "dateSource": "9月1日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z"
-    },
-    {
       "id": "ext-5dee1a2d64b8561a",
       "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
       "summary": "4Gamers",
@@ -1193,7 +1193,7 @@
       "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=314508",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -1216,8 +1216,8 @@
       "dateConfidence": "high",
       "dateSource": "11 月 13 日起到 12 月 27 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
       "id": "gnn-312209",
@@ -1310,8 +1310,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
       "id": "gnn-313300",
@@ -1909,8 +1909,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -2096,7 +2096,7 @@
       "summary": "曾為《學園偶像大師》月村手毬、《魔法姊妹露露特莉莉》野野山流／小甜包露露、《戀愛吧，假面天使！》桂御迦等眾多角色獻聲的日本聲優小鹿なお，宣布將來台舉行粉絲見面會的消息。 官方表示，本次特別為台灣粉絲準備約 90 分鐘的 FanMeeting 時間。除了輕鬆的 Talk Show，與大家分享工作、生活以及各種有趣的話題之外，現場也預計準",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=314501",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：見面會",
+      "discoverySource": "標籤：見面會",
       "sourceTag": "見面會",
       "type": "見面會",
       "locations": [
@@ -2119,9 +2119,44 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-06T06:40:09.861Z",
+      "lastSeenAt": "2026-11-06T06:40:09.861Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "ext-07a32f8b20799194",
+      "title": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣",
+      "summary": "快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBaR1RhZnpNdnJLSDJTNjhRYXZKVDRoUjNJQTU5UUcwd1hBMDFUVjVYdzJnaUxWYks4azBvRHE0Tzk1QTBBNk5fUnhwd2IydHFOQVMxblJKOFNMd3dES3JTU1VaNjRnZklfb2ZIanZvMDdhQ1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-28T07:00:00.000Z",
+      "eventStartDate": "2026-09-01",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "沉默魔女的秘密",
+        "Free！",
+        "曼迪秋日祭"
+      ],
+      "searchCorpus": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
+      "dateConfidence": "medium",
+      "dateSource": "9月1日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-19T04:38:08.597Z",
+      "lastSeenAt": "2026-10-19T04:38:08.597Z",
+      "archivedAt": "2026-11-06T06:40:09.861Z"
+    }
+  ]
 }
