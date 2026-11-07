@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-06T06:40:09.861Z",
-    "lastSuccessfulUpdateAt": "2026-11-06T06:40:09.861Z",
+    "updatedAt": "2026-11-07T05:56:06.291Z",
+    "lastSuccessfulUpdateAt": "2026-11-07T05:56:06.291Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 231,
-    "uniqueNewsCount": 444,
-    "articleCandidateCount": 142,
+    "fetchedExternalItemCount": 234,
+    "uniqueNewsCount": 447,
+    "articleCandidateCount": 141,
     "articleFetchSuccessCount": 40,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 9,
-    "newEventCount": 1,
-    "cachedEventCount": 59,
+    "matchedEventCount": 8,
+    "newEventCount": 0,
+    "cachedEventCount": 60,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
+    "archiveCount": 0,
     "storedEventCount": 67,
     "expiredRemovedCount": 6,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 35,
+    "undatedOldRemovedCount": 34,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 90,
+    "nonActivityRemovedCount": 91,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -91,8 +91,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     },
     {
       "id": "gnn-314431",
@@ -153,8 +153,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     },
     {
       "id": "ext-357be6ef64d9ab44",
@@ -212,8 +212,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     },
     {
       "id": "gnn-313100",
@@ -1216,8 +1216,8 @@
       "dateConfidence": "high",
       "dateSource": "11 月 13 日起到 12 月 27 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     },
     {
       "id": "gnn-312209",
@@ -1310,8 +1310,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     },
     {
       "id": "gnn-313300",
@@ -1909,8 +1909,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -2119,44 +2119,9 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-06T06:40:09.861Z",
-      "lastSeenAt": "2026-11-06T06:40:09.861Z"
+      "discoveredAt": "2026-11-07T05:56:06.291Z",
+      "lastSeenAt": "2026-11-07T05:56:06.291Z"
     }
   ],
-  "archive": [
-    {
-      "id": "ext-07a32f8b20799194",
-      "title": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣",
-      "summary": "快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBaR1RhZnpNdnJLSDJTNjhRYXZKVDRoUjNJQTU5UUcwd1hBMDFUVjVYdzJnaUxWYks4azBvRHE0Tzk1QTBBNk5fUnhwd2IydHFOQVMxblJKOFNMd3dES3JTU1VaNjRnZklfb2ZIanZvMDdhQ1E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-28T07:00:00.000Z",
-      "eventStartDate": "2026-09-01",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "名偵探柯南",
-        "沉默魔女的秘密",
-        "Free！",
-        "曼迪秋日祭"
-      ],
-      "searchCorpus": "動漫快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 快閃店「曼迪秋日祭」9月1日起微風信義《名偵探柯南》《沉默魔女的秘密》《Free！》等多部作品精選周邊、抽卡機限時開賣 QooApp",
-      "dateConfidence": "medium",
-      "dateSource": "9月1日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-19T04:38:08.597Z",
-      "lastSeenAt": "2026-10-19T04:38:08.597Z",
-      "archivedAt": "2026-11-06T06:40:09.861Z"
-    }
-  ]
+  "archive": []
 }
