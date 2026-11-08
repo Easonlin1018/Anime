@@ -3,7 +3,7 @@
     const V = window.AnimeTrackerV11;
     if (!V) return;
     const themeSongsApi = () => window.ThemeSongs || window.SpotifyThemes;
-    const parse = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || "") ?? fallback; } catch { return fallback; } };
+    const parse = (key, fallback) => { try { return JSON.parse((window.getAnimeStartupStoredItem ? window.getAnimeStartupStoredItem(key) : localStorage.getItem(key)) || "") ?? fallback; } catch { return fallback; } };
     const save = (key, value) => localStorage.setItem(key, JSON.stringify(value));
     const FILTER_KEY = "anime_tracker_filters_v11";
     const UNDO_KEY = "anime_tracker_last_undo_v11";
@@ -14,6 +14,7 @@
 
     function touch(item) { item.updatedAt = new Date().toISOString(); return item; }
     function persistAnime() {
+        window.assertAnimeStartupWritable?.();
         animeList = V.migrateList(animeList);
         const presentationMigration = window.migrateExistingAnimeRecords?.(animeList);
         if (Array.isArray(presentationMigration?.list)) animeList = presentationMigration.list;
@@ -21,7 +22,30 @@
         localStorage.setItem("anime_tracker_schema_version", "11");
     }
     function currentSettings() { return { eventSettings, filters: state.filters, animeListSort, notificationPermissionAsked: localStorage.getItem("anime_notification_prompted_v11") === "1" }; }
-    function snapshot() { const media=window.CrossMediaTracker?.snapshot?.()||{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])}; return { animeList: V.migrateList(animeList), works:media.works, mangaReadHistory:media.mangaReadHistory, eventOverrides: { ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, settings: currentSettings(), watchHistory: [...watchHistory], reminders: {}, preferences: parse(PREFS_KEY, {}) }; }
+    function snapshot({ persistedOnly = false } = {}) {
+        if (persistedOnly) {
+            const stored = (key, fallback) => {
+                const raw = localStorage.getItem(key);
+                if (raw === null) {
+                    if (key === STORAGE_KEY) throw Error("找不到已儲存的作品清單，未執行上傳。");
+                    return fallback;
+                }
+                const value = JSON.parse(raw);
+                const invalid = Array.isArray(fallback)
+                    ? !Array.isArray(value) || value.some(item => !item || typeof item !== "object" || Array.isArray(item))
+                    : !value || typeof value !== "object" || Array.isArray(value);
+                if (invalid) throw Error("本機資料無法安全讀取，未執行上傳。");
+                return value;
+            };
+            return {
+                animeList:stored(STORAGE_KEY, []), works:stored(V.WORKS_KEY, []),
+                mangaReadHistory:stored(V.MANGA_HISTORY_KEY, []),
+                eventOverrides:stored(EVENT_OVERRIDES_KEY, {}), eventAnimeOverrides:stored(EVENT_ANIME_OVERRIDES_KEY, {}),
+                settings:currentSettings(), watchHistory:stored(V.HISTORY_KEY, []), reminders:{}, preferences:stored(PREFS_KEY, {})
+            };
+        }
+        const media=window.CrossMediaTracker?.snapshot?.()||{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])}; return { animeList: window.__ANIME_STARTUP_STORAGE__?.persisted === false ? JSON.parse(JSON.stringify(window.__ANIME_STARTUP_STORAGE__.originalList || animeList)) : V.migrateList(animeList), works:media.works, mangaReadHistory:media.mangaReadHistory, eventOverrides: { ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, settings: currentSettings(), watchHistory: [...watchHistory], reminders: {}, preferences: parse(PREFS_KEY, {}) };
+    }
     function createRestorePoint(reason) {
         const points = parse(V.RESTORE_KEY, []);
         points.unshift({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), reason, animeCount: animeList.length, data: V.createBackup(snapshot()) });
@@ -114,11 +138,39 @@
         }
     }
 
-    animeList = V.migrateList(animeList);
-    persistAnime();
+    function bootstrapAnimeStorage() {
+        if (window.__ANIME_STARTUP_STORAGE__?.persisted === false) return;
+        // The main startup migration has already persisted its data. Supply only
+        // missing display defaults here, preserving every original tracking field.
+        animeList = animeList.map(item => ({ ...V.migrateAnime(item), ...item }));
+        try {
+            if (localStorage.getItem("anime_tracker_schema_version") !== "11") localStorage.setItem("anime_tracker_schema_version", "11");
+        } catch (error) { window.warnAnimeStartupStorage?.("v11-schema", error); }
+    }
+    bootstrapAnimeStorage();
 
     const originalSaveAndRender = saveAndRender;
-    saveAndRender = function () { animeList = animeList.map(item => touch(V.migrateAnime(item))); persistAnime(); originalSaveAndRender(); refreshV11(); if(localStorage.getItem("anime_tracker_auto_sync_v11")==="1"){clearTimeout(autoSyncTimer);autoSyncTimer=setTimeout(()=>handleSync("upload"),1500);} };
+    function requestAnimeAutoSync({ persistedOnly = false } = {}) {
+        clearTimeout(autoSyncTimer);
+        autoSyncTimer = null;
+        if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending || localStorage.getItem("anime_tracker_auto_sync_v11") !== "1") return;
+        autoSyncTimer = setTimeout(() => {
+            autoSyncTimer = null;
+            if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending || localStorage.getItem("anime_tracker_auto_sync_v11") !== "1") return;
+            void handleSync("upload", { persistedOnly });
+        }, 1500);
+    }
+    window.requestAnimeAutoSync = requestAnimeAutoSync;
+
+    saveAndRender = function (options = {}) {
+        if (!options.metadataOnly) {
+            animeList = animeList.map(item => touch(V.migrateAnime(item)));
+            persistAnime();
+        }
+        originalSaveAndRender(options);
+        refreshV11();
+        requestAnimeAutoSync();
+    };
     const originalMoveCategory = moveCategory;
     moveCategory = function (id, category) { const item = animeList.find(x => String(x.id) === String(id)); if (item) touch(item); originalMoveCategory(id, category); };
     updateProgress = function (id, delta) {
@@ -287,8 +339,8 @@
         if (event.target.matches("[data-select-none]")) state.selected.clear(), renderList();
         if (event.target.matches("[data-run-batch]")) runBatch();
         if (event.target.matches("[data-undo]")) undoLast();
-        if (event.target.matches("[data-clear-filters]")) { state.filters = {}; save(FILTER_KEY, state.filters); document.querySelectorAll("[data-filter]").forEach(x => x.type === "checkbox" ? x.checked = false : x.value = ""); renderList(); }
-        const chip = event.target.closest("[data-remove-filter]"); if (chip) { delete state.filters[chip.dataset.removeFilter]; save(FILTER_KEY, state.filters); renderList(); }
+        if (event.target.matches("[data-clear-filters]")) { state.filters = {}; persistViewFilters(); document.querySelectorAll("[data-filter]").forEach(x => x.type === "checkbox" ? x.checked = false : x.value = ""); renderList(); }
+        const chip = event.target.closest("[data-remove-filter]"); if (chip) { delete state.filters[chip.dataset.removeFilter]; persistViewFilters(); renderList(); }
         const nav = event.target.closest("[data-cal-nav]"); if (nav) { state.calendarDate.setMonth(state.calendarDate.getMonth() + Number(nav.dataset.calNav)); renderCalendar(); }
         if (event.target.closest("[data-cal-today]")) { state.calendarDate = new Date(); renderCalendar(); }
         const day = event.target.closest("[data-calendar-day]"); if (day) renderDayItems(day.dataset.calendarDay);
@@ -297,9 +349,15 @@
     }
     function delegatedChange(event) {
         if (event.target.matches("[data-select-anime]")) { const id = String(event.target.dataset.selectAnime); event.target.checked ? state.selected.add(id) : state.selected.delete(id); event.target.closest(".anime-item")?.classList.toggle("v11-selected", event.target.checked); }
-        if (event.target.matches("[data-filter]")) { const key = event.target.dataset.filter, raw = event.target.type === "checkbox" ? event.target.checked : event.target.value.trim(); if (!raw) delete state.filters[key]; else state.filters[key] = ["status","platform","tags"].includes(key) ? [raw] : raw; save(FILTER_KEY, state.filters); renderList(); }
+        if (event.target.matches("[data-filter]")) { const key = event.target.dataset.filter, raw = event.target.type === "checkbox" ? event.target.checked : event.target.value.trim(); if (!raw) delete state.filters[key]; else state.filters[key] = ["status","platform","tags"].includes(key) ? [raw] : raw; persistViewFilters(); renderList(); }
         if (event.target.id === "v11-calendar-view") { state.calendarView = event.target.value; renderCalendar(); }
         if (event.target.id === "v11-calendar-filter") { state.calendarTypes = new Set([...event.target.selectedOptions].map(x => x.value)); renderCalendar(); }
+    }
+
+    function persistViewFilters() {
+        if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return false;
+        try { save(FILTER_KEY, state.filters); return true; }
+        catch (error) { window.warnAnimeStartupStorage?.("view-filters", error); return false; }
     }
 
     function renderFilterChips() { const box = document.getElementById("v11-filter-chips"); if (!box) return; box.innerHTML = Object.entries(state.filters).map(([key,value]) => `<span class="v11-chip">${escapeHtml(key)}：${escapeHtml(Array.isArray(value)?value.join("、"):value===true?"是":value)}<button data-remove-filter="${escapeHtml(key)}" aria-label="清除 ${escapeHtml(key)}">×</button></span>`).join(""); }
@@ -384,6 +442,7 @@
             document.documentElement.dataset.swCacheNames = JSON.stringify(event.data.cacheNames || []);
         });
         navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return;
             const key = "anime_tracker_sw_reload_version";
             if (sessionStorage.getItem(key) === reloadVersion) return;
             sessionStorage.setItem(key, reloadVersion);
@@ -398,23 +457,99 @@
         }).catch(error => console.warn("Service Worker 註冊失敗：", error));
     }
 
-    function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.onchange=()=>localStorage.setItem("anime_tracker_auto_sync_v11",autoSync.checked?"1":"0");window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();registerAppServiceWorker();}
-    function exportBackup(){const backup=V.createBackup(snapshot()),blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"}),link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`anime_tracker_v11_${new Date().toISOString().slice(0,10)}.json`;link.click();URL.revokeObjectURL(link.href);}
+    function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.disabled=Boolean(window.__ANIME_STARTUP_STORAGE__?.recoveryPending);autoSync.onchange=()=>changeAutoSyncSetting(autoSync);window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();registerAppServiceWorker();}
+    function changeAutoSyncSetting(control) {
+        const previous = localStorage.getItem("anime_tracker_auto_sync_v11") === "1";
+        if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) {
+            control.checked = previous; control.disabled = true;
+            return false;
+        }
+        try {
+            window.assertAnimeStartupWritable?.();
+            localStorage.setItem("anime_tracker_auto_sync_v11", control.checked ? "1" : "0");
+            return true;
+        } catch (error) {
+            control.checked = previous;
+            control.disabled = Boolean(window.__ANIME_STARTUP_STORAGE__?.recoveryPending);
+            window.warnAnimeStartupStorage?.("auto-sync-setting", error);
+            return false;
+        }
+    }
+    function exportBackup(){const data=snapshot(),backup=V.createBackup(data);if(window.__ANIME_STARTUP_STORAGE__?.persisted===false){backup[V.STORAGE_KEY]=data.animeList;backup.works=data.works;backup.watchHistory=data.watchHistory;backup[V.MANGA_HISTORY_KEY]=data.mangaReadHistory;backup.eventOverrides=data.eventOverrides;backup.eventAnimeOverrides=data.eventAnimeOverrides;}const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"}),link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`anime_tracker_v11_${new Date().toISOString().slice(0,10)}.json`;link.click();URL.revokeObjectURL(link.href);}
     function readImport(event){const file=event.target.files[0];event.target.value="";if(!file)return;if(file.size>10*1024*1024)return showToast("匯入檔案不可超過 10 MB");const reader=new FileReader();reader.onload=()=>{try{const validation=V.validateBackup(reader.result);if(!validation.valid)throw Error(validation.error);pendingImport=validation.normalized;const p=validation.preview;document.getElementById("v11-import-preview").textContent=`備份格式：${p.format}｜版本：${p.schemaVersion}｜匯出：${p.exportedAt||"未知"}｜動畫：${p.animeCount} 部｜作品主體：${p.workCount}｜漫畫：${p.mangaCount}｜活動修正：${p.overrideCount}｜觀看紀錄：${p.historyCount}｜漫畫閱讀紀錄：${p.mangaHistoryCount}${p.requiresEmptyConfirmation?"｜⚠️ 備份內沒有任何作品，套用前會再次確認":""}`;document.getElementById("v11-import-modal").hidden=false}catch(error){pendingImport=null;showToast(`匯入失敗：${escapeHtml(error.message)}`)}};reader.onerror=()=>{pendingImport=null;showToast("匯入失敗：無法讀取檔案")};reader.readAsText(file);}
     function applyImport(mode){if(!pendingImport)return;const totalWorks=pendingImport.works.length||pendingImport[V.STORAGE_KEY].length;if(totalWorks===0&&!confirm("此備份包含 0 部作品。確定仍要繼續匯入？"))return;if(mode==="replace"&&!confirm("完全覆蓋會取代目前資料。系統會先建立還原點，確定繼續？"))return;let result;try{result=V.importBackup(snapshot(),pendingImport,mode)}catch(error){showToast(`匯入失敗：${escapeHtml(error.message)}`);return}createRestorePoint("匯入前自動還原點");animeList=result.animeList;eventOverrides=result.eventOverrides;eventAnimeOverrides=result.eventAnimeOverrides;watchHistory=result.watchHistory;state.lastImportRestore=parse(V.RESTORE_KEY,[])[0]?.id;save(V.HISTORY_KEY,watchHistory);save(EVENT_OVERRIDES_KEY,eventOverrides);save(EVENT_ANIME_OVERRIDES_KEY,eventAnimeOverrides);persistAnime();window.CrossMediaTracker?.replaceData?.(result.works,result.mangaReadHistory);renderList();renderEvents();closeV11Modals();showToast(`匯入完成：已處理 ${result.importedAnimeCount} 部動畫、${result.importedWorkCount} 個作品主體`);}
     function renderRestorePoints(){const box=document.getElementById("v11-restores");if(!box)return;const points=parse(V.RESTORE_KEY,[]);box.innerHTML='<h3>最近 5 個本機還原點</h3>'+points.map(x=>`<div class="v11-card">${escapeHtml(new Date(x.createdAt).toLocaleString("zh-TW"))}｜${x.animeCount} 部｜${escapeHtml(x.reason)} <button data-restore-id="${escapeHtml(x.id)}">還原</button></div>`).join("")||"尚無還原點";}
     function restorePoint(id){const point=parse(V.RESTORE_KEY,[]).find(x=>x.id===id);if(!point||!confirm(`確定還原 ${new Date(point.createdAt).toLocaleString("zh-TW")} 的資料？目前資料會先建立還原點。`))return;createRestorePoint("還原前自動備份");const result=V.importBackup(snapshot(),point.data,"replace");animeList=result.animeList;eventOverrides=result.eventOverrides;eventAnimeOverrides=result.eventAnimeOverrides;watchHistory=result.watchHistory;save(V.HISTORY_KEY,watchHistory);save(EVENT_OVERRIDES_KEY,eventOverrides);save(EVENT_ANIME_OVERRIDES_KEY,eventAnimeOverrides);persistAnime();window.CrossMediaTracker?.replaceData?.(result.works,result.mangaReadHistory);renderList();renderEvents();showToast("還原完成");}
     function undoImport(){if(!state.lastImportRestore)return showToast("本次尚未匯入資料");restorePoint(state.lastImportRestore);state.lastImportRestore=null;}
-    async function requestAnimeNotifications(){localStorage.setItem("anime_notification_prompted_v11","1");if(!("Notification" in window))return showToast("此瀏覽器不支援通知");const permission=await Notification.requestPermission();showToast(permission==="granted"?"通知已開啟":"通知未授權");}
+    async function requestAnimeNotifications(){if(window.__ANIME_STARTUP_STORAGE__?.recoveryPending)return;try{window.assertAnimeStartupWritable?.();localStorage.setItem("anime_notification_prompted_v11","1");}catch(error){window.warnAnimeStartupStorage?.("notification-setting",error);return;}if(!("Notification" in window))return showToast("此瀏覽器不支援通知");const permission=await Notification.requestPermission();showToast(permission==="granted"?"通知已開啟":"通知未授權");}
     function onlineState(){const offline=!navigator.onLine;document.getElementById("v11-offline")?.classList.toggle("show",offline);document.getElementById("work-event-btn")?.toggleAttribute("disabled",offline);if(!offline&&typeof loadEvents==="function")loadEvents();}
 
     function syncConfigured(){return Boolean(window.ANIME_SYNC_CONFIG?.supabaseUrl&&window.ANIME_SYNC_CONFIG?.anonKey&&window.supabase?.createClient)}
     function renderSyncStatus(message){const box=document.getElementById("v11-sync-status");if(!box)return;box.textContent=message||(syncConfigured()?`同步已設定｜最後同步：${localStorage.getItem("anime_tracker_last_sync_v11")||"尚未同步"}`:"尚未設定雲端同步");}
-    async function handleSync(action){if(!syncConfigured())return renderSyncStatus("尚未設定雲端同步");const client=window.supabase.createClient(window.ANIME_SYNC_CONFIG.supabaseUrl,window.ANIME_SYNC_CONFIG.anonKey);try{if(action==="login"){const email=document.getElementById("v11-sync-email").value.trim();if(!email)throw Error("請輸入 Email");await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.href}});renderSyncStatus("Magic Link 已寄出")}else if(action==="logout"){await client.auth.signOut();renderSyncStatus("已登出")}else{const {data:{user}}=await client.auth.getUser();if(!user)throw Error("請先登入");if(action==="upload"){await client.from("anime_tracker_payloads").upsert({user_id:user.id,payload:V.createBackup(snapshot()),updated_at:new Date().toISOString()});localStorage.setItem("anime_tracker_last_sync_v11",new Date().toISOString());renderSyncStatus("上傳完成")}if(action==="download"){const {data,error}=await client.from("anime_tracker_payloads").select("payload").eq("user_id",user.id).single();if(error)throw error;const choice=(prompt("雲端資料處理方式：合併／本機／雲端","合併")||"合併").trim();if(!["合併","本機","雲端"].includes(choice))throw Error("無效的衝突處理方式");if(choice!=="本機")createRestorePoint("雲端下載前自動還原點");const merged=V.mergeCloudPayload(snapshot(),{animeList:data.payload[V.STORAGE_KEY],works:data.payload.works,mangaReadHistory:data.payload[V.MANGA_HISTORY_KEY],eventOverrides:data.payload.eventOverrides,eventAnimeOverrides:data.payload.eventAnimeOverrides,settings:data.payload.settings,watchHistory:data.payload.watchHistory},choice==="本機"?"local":choice==="雲端"?"cloud":"merge");animeList=merged.animeList;eventOverrides=merged.eventOverrides;eventAnimeOverrides=merged.eventAnimeOverrides||{};watchHistory=merged.watchHistory;persistAnime();window.CrossMediaTracker?.replaceData?.(merged.works,merged.mangaReadHistory);save(EVENT_OVERRIDES_KEY,eventOverrides);save(EVENT_ANIME_OVERRIDES_KEY,eventAnimeOverrides);save(V.HISTORY_KEY,watchHistory);renderList();renderEvents();renderSyncStatus("下載處理完成")}}}catch(error){renderSyncStatus(`同步失敗：${error.message}`)}}
+    async function handleSync(action, { persistedOnly = false } = {}) {
+        const recoveryBlocked = () => {
+            if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return false;
+            renderSyncStatus("原始資料復原尚未完成，目前只能查看或匯出備份。");
+            return true;
+        };
+        if (recoveryBlocked()) return;
+        if (!syncConfigured()) return renderSyncStatus("尚未設定雲端同步");
+        try {
+            const client = window.supabase.createClient(window.ANIME_SYNC_CONFIG.supabaseUrl, window.ANIME_SYNC_CONFIG.anonKey);
+            if (action === "login") {
+                const email = document.getElementById("v11-sync-email").value.trim();
+                if (!email) throw Error("請輸入 Email");
+                await client.auth.signInWithOtp({ email, options:{ emailRedirectTo:location.href } });
+                renderSyncStatus("Magic Link 已寄出");
+            } else if (action === "logout") {
+                await client.auth.signOut();
+                renderSyncStatus("已登出");
+            } else {
+                const { data:{ user } } = await client.auth.getUser();
+                if (recoveryBlocked()) return;
+                if (!user) throw Error("請先登入");
+                if (action === "upload") {
+                    const { error } = await client.from("anime_tracker_payloads").upsert({
+                        user_id:user.id,
+                        payload:V.createBackup(snapshot({ persistedOnly }), { preserveStoredRecords:persistedOnly }),
+                        updated_at:new Date().toISOString()
+                    });
+                    if (error) throw error;
+                    if (recoveryBlocked()) return;
+                    localStorage.setItem("anime_tracker_last_sync_v11", new Date().toISOString());
+                    renderSyncStatus("上傳完成");
+                }
+                if (action === "download") {
+                    const { data, error } = await client.from("anime_tracker_payloads").select("payload").eq("user_id", user.id).single();
+                    if (recoveryBlocked()) return;
+                    if (error) throw error;
+                    const choice = (prompt("雲端資料處理方式：合併／本機／雲端", "合併") || "合併").trim();
+                    if (!["合併", "本機", "雲端"].includes(choice)) throw Error("無效的衝突處理方式");
+                    if (choice !== "本機") createRestorePoint("雲端下載前自動還原點");
+                    const merged = V.mergeCloudPayload(snapshot(), {
+                        animeList:data.payload[V.STORAGE_KEY], works:data.payload.works, mangaReadHistory:data.payload[V.MANGA_HISTORY_KEY],
+                        eventOverrides:data.payload.eventOverrides, eventAnimeOverrides:data.payload.eventAnimeOverrides,
+                        settings:data.payload.settings, watchHistory:data.payload.watchHistory
+                    }, choice === "本機" ? "local" : choice === "雲端" ? "cloud" : "merge");
+                    animeList = merged.animeList;
+                    eventOverrides = merged.eventOverrides;
+                    eventAnimeOverrides = merged.eventAnimeOverrides || {};
+                    watchHistory = merged.watchHistory;
+                    persistAnime();
+                    window.CrossMediaTracker?.replaceData?.(merged.works, merged.mangaReadHistory);
+                    save(EVENT_OVERRIDES_KEY, eventOverrides);
+                    save(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
+                    save(V.HISTORY_KEY, watchHistory);
+                    renderList(); renderEvents(); renderSyncStatus("下載處理完成");
+                }
+            }
+        } catch (error) { renderSyncStatus(`同步失敗：${error.message}`); }
+    }
 
     function refreshV11(){renderReminders();renderStats();if(!document.querySelector('[data-v11-page-group="planner"]')?.hidden)renderCalendar();}
     window.exportData = exportBackup;
     window.importData = readImport;
     window.openAnimeDetail = openAnimeDetail;
+    window.refreshV11 = refreshV11;
     addShell(); renderList(); refreshV11();
 })();

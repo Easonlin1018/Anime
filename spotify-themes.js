@@ -16,11 +16,12 @@
     let currentAnime = null, currentContainer = null, controller = null, searchTimer = null, lookupGeneration = 0;
     const candidatesBySong = new Map();
     const automaticLookupAttempts = new Set();
-    const cache = (() => { try { return JSON.parse(localStorage.getItem(CACHE_KEY) || "{}") || {}; } catch { return {}; } })();
+    const readStored = key => window.getAnimeStartupStoredItem ? window.getAnimeStartupStoredItem(key) : localStorage.getItem(key);
+    const cache = (() => { try { return JSON.parse(readStored(CACHE_KEY) || "{}") || {}; } catch { return {}; } })();
     const element = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text !== undefined) node.textContent = String(text); return node; };
     const button = (text, action) => { const node = element("button", "", text); node.type = "button"; node.addEventListener("click", action); return node; };
     const safeUrl = value => { try { const url = new URL(value); return ["http:", "https:"].includes(url.protocol) ? url.href : ""; } catch { return ""; } };
-    const saveCache = () => localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    const saveCache = () => { if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return false; localStorage.setItem(CACHE_KEY, JSON.stringify(cache)); return true; };
     const ttlFor = anime => /FINISHED|completed/i.test(`${anime.status} ${anime.category}`) ? 30 * 86400000 : /NOT_YET|waiting/i.test(`${anime.status} ${anime.category}`) ? 86400000 : 3 * 86400000;
     function cachedEntry(key) {
         const item = cache[key];
@@ -361,7 +362,7 @@
     }
     function rememberUndo(anime) { localStorage.setItem(UNDO_KEY, JSON.stringify({ animeId: anime.id, themeSongs: anime.themeSongs, at: new Date().toISOString() })); }
     function persist(anime) { const id=String(anime.id),container=currentContainer,expanded=Boolean(container?.querySelector("details.theme-details")?.open); anime.themeSongs = V.normalizeThemeSongs(anime.themeSongs); anime.updatedAt = new Date().toISOString(); saveAndRender(); const fresh=animeList.find(item=>String(item.id)===id)||anime; renderForAnime(fresh, container, { expanded }); }
-    function restoreUndo() { try { const undo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null"); if (!undo || String(undo.animeId) !== String(currentAnime.id)) return setStatus("沒有此作品可復原的主題曲修改"); currentAnime.themeSongs = undo.themeSongs; localStorage.removeItem(UNDO_KEY); persist(currentAnime); setStatus("已復原上一次主題曲修改"); } catch { setStatus("復原資料損壞"); } }
+    function restoreUndo() { try { const undo = JSON.parse(readStored(UNDO_KEY) || "null"); if (!undo || String(undo.animeId) !== String(currentAnime.id)) return setStatus("沒有此作品可復原的主題曲修改"); currentAnime.themeSongs = undo.themeSongs; localStorage.removeItem(UNDO_KEY); persist(currentAnime); setStatus("已復原上一次主題曲修改"); } catch { setStatus("復原資料損壞"); } }
     function setStatus(message) { const box = currentContainer?.querySelector(".theme-status"); if (box) box.textContent = message; }
     function allSongs(anime) { return [...anime.themeSongs.openings, ...anime.themeSongs.endings]; }
     function songGroup(anime, type) { return type === "OP" ? anime.themeSongs.openings : anime.themeSongs.endings; }
@@ -389,7 +390,7 @@
         return context;
     }
     function isThemeLookupCurrent(context, anime) {
-        return Boolean(context && !context.signal.aborted && context.controller === controller && context.generation === lookupGeneration
+        return Boolean(!window.__ANIME_STARTUP_STORAGE__?.recoveryPending && context && !context.signal.aborted && context.controller === controller && context.generation === lookupGeneration
             && context.animeId === String(anime?.id || ""));
     }
     function finishThemeLookup(context) { if (controller === context?.controller) controller = null; }
@@ -477,10 +478,12 @@
     function renderCandidates(song, tracks) { const box = element("div", "theme-candidates"); box.append(element("strong", "", "Spotify 候選版本")); tracks.slice(0, 5).forEach(track => { const row = element("div", "v11-card", `${track.name} — ${(track.artists || []).join("、")}（${track.matchScore ?? V.calculateSpotifyMatchScore(song, track)} 分）`); row.append(button("選這個版本", () => chooseTrack(song, track))); box.append(row); }); return box; }
 
     function invalidateThemeLookupCache(anime) {
+        if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return false;
         themeCacheKeysForAnime(anime).forEach(key => delete cache[key]);
         saveCache();
     }
     async function maybeAutoLoadThemeSongs() {
+        if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending || window.__ANIME_STARTUP_STORAGE__?.persisted === false) return;
         if (!currentAnime) return false;
         if (!navigator.onLine) { setStatus("目前離線，顯示已儲存的主題曲資料"); return false; }
         if (!claimAutomaticLookup(currentAnime, true)) return false;
@@ -488,6 +491,7 @@
         return true;
     }
     async function autoFind(force, options = {}) {
+        if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return false;
         if (!navigator.onLine) return setStatus("目前離線，顯示已儲存的主題曲資料");
         const anime = currentAnime, container = currentContainer;
         if (!anime || !container) return false;
@@ -545,7 +549,7 @@
         const animeId = String(anime?.id || ""), cacheKey = `source:${animeId}`;
         const keys = themeCacheKeysForAnime(anime);
         let themeUndo = null;
-        try { themeUndo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null"); } catch {}
+        try { themeUndo = JSON.parse(readStored(UNDO_KEY) || "null"); } catch {}
         return {
             animeId,
             cacheKey,
@@ -576,7 +580,7 @@
         const songs = V.normalizeThemeSongs(anime?.themeSongs);
         [...songs.openings, ...songs.endings].forEach(song => candidatesBySong.delete(song.id));
         try {
-            const undo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null");
+            const undo = JSON.parse(readStored(UNDO_KEY) || "null");
             if (String(undo?.animeId || "") === animeId) localStorage.removeItem(UNDO_KEY);
         } catch { localStorage.removeItem(UNDO_KEY); }
         if (String(currentAnime?.id || "") === animeId) close();
@@ -605,7 +609,7 @@
         });
         if (changed) saveCache();
         try {
-            const undo = JSON.parse(localStorage.getItem(UNDO_KEY) || "null");
+            const undo = JSON.parse(readStored(UNDO_KEY) || "null");
             if (undo?.animeId != null && !activeIds.has(String(undo.animeId))) localStorage.removeItem(UNDO_KEY);
         } catch { localStorage.removeItem(UNDO_KEY); }
     }
@@ -633,5 +637,8 @@
     const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs, fetchAnimeThemesThemeSongs, fetchJikanThemeSongs, requestAnimeThemesJson, normalizeAnimeThemesSongs, animeThemesUrl, hasThemeSongData, themeSongStatus, claimAutomaticLookup, requestJikanJson, parseRetryAfterMs, invalidateThemeLookupCache, beginThemeLookup, isThemeLookupCurrent, applyThemeLookupResult, requestNativeTitleJson, lookupNativeThemeSongTitle, enrichThemeSongsWithNativeTitles, appleMusicSearchUrl, appleMusicLookupUrl, hasJapaneseTitle, nativeTitleCacheKey };
     window.ThemeSongs = api;
     window.SpotifyThemes = api;
-    pruneDeletedAnimeCaches();
+    if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending && window.__ANIME_STARTUP_STORAGE__?.persisted !== false) {
+        try { pruneDeletedAnimeCaches(); }
+        catch (error) { window.warnAnimeStartupStorage?.("theme-cache", error); }
+    }
 })();
