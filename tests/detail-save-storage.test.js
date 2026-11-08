@@ -47,7 +47,8 @@ function runtime(list = [anime()], options = {}) {
         ...(options.autoSync ? { anime_tracker_auto_sync_v11:"1" } : {}), ...(options.seed || {})
     }));
     const writes = [], nodes = new Map(), timers = new Map();
-    const traces = { toasts:[], warnings:[], renders:[], uploads:[], closed:0, guards:0, notes:[] };
+    const traces = { toasts:[], warnings:[], renders:[], uploads:[], closed:0, guards:0, notes:[], alertScrolls:[], alertFocus:[] };
+    const alert = { hidden:true, textContent:"", scrollIntoView:config => traces.alertScrolls.push(clone(config)), focus:config => traces.alertFocus.push(clone(config)) };
     const controls = new Map();
     const memory = clone(options.memory || list);
     const item = memory.find(row => row.id === (options.targetId || "one")) || memory[0];
@@ -64,7 +65,7 @@ function runtime(list = [anime()], options = {}) {
         dataset:{ id:options.targetId || "one" },
         elements:{ namedItem:key => controls.get(key) },
         addEventListener() {},
-        querySelector:() => ({ before:note => traces.notes.push(note.textContent) })
+        querySelector:selector => selector === '[role="alert"]' ? alert : selector === ".v11-toolbar" ? { before:note => traces.notes.push(note.textContent) } : null
     };
     class TestFormData {
         constructor(target) {
@@ -117,7 +118,7 @@ function runtime(list = [anime()], options = {}) {
     if (options.missingWriter) context.commitAnimeStartupChanges = undefined;
     writes.length = 0;
     return {
-        api:context, form, controls, localStorage, writes, traces, timers, data, node,
+        api:context, form, controls, localStorage, writes, traces, timers, data, node, alert,
         set:(key, value) => { controls.get(key).value = String(value); },
         save:() => context.saveDetail({ currentTarget:form, preventDefault() {} }),
         flush:() => { for (const [id, fn] of timers) { timers.delete(id); fn(); } }
@@ -165,6 +166,11 @@ for (const options of [{ failKey:V.STORAGE_KEY }, { writerError:true }, { missin
         assert.equal(run.timers.size, 0);
         assert.ok(run.traces.toasts.every(message => !message.includes("詳細資料已儲存")));
         assert.ok(run.traces.toasts.some(message => message.includes("尚未儲存")));
+        assert.equal(run.alert.hidden, false, "A visible in-form alert remains above the detail modal");
+        assert.match(run.alert.textContent, /詳細資料尚未儲存.*原始資料與觀看歷史仍保留/);
+        assert.equal(run.alert.textContent, run.traces.toasts.at(-1));
+        assert.deepEqual(run.traces.alertScrolls, [{ block:"nearest" }]);
+        assert.deepEqual(run.traces.alertFocus, [{ preventScroll:true }]);
     });
 }
 
@@ -176,6 +182,26 @@ test("detail correction needs no new history or journal write when those keys ca
         assert.equal(run.localStorage.getItem(V.HISTORY_KEY), before[V.HISTORY_KEY]);
         assert.deepEqual(run.writes.map(write => write.key), [V.STORAGE_KEY]);
     }
+});
+
+test("retry clears the previous in-form failure before attempting a successful safe save", () => {
+    const options = { failKey:V.STORAGE_KEY }, run = runtime([anime()], options);
+    run.set("currentEpisode", 12);
+    assert.equal(run.save(), false);
+    assert.equal(run.alert.hidden, false);
+    assert.match(run.alert.textContent, /尚未儲存/);
+    options.failKey = null;
+    const commit = run.api.commitAnimeStartupChanges;
+    run.api.commitAnimeStartupChanges = (...args) => {
+        assert.equal(run.alert.hidden, true, "Retry removes the obsolete warning before persistence");
+        assert.equal(run.alert.textContent, "");
+        return commit(...args);
+    };
+    assert.equal(run.save(), true);
+    assert.equal(run.alert.hidden, true);
+    assert.equal(run.alert.textContent, "");
+    assert.equal(JSON.parse(run.localStorage.getItem(V.STORAGE_KEY))[0].category, "completed");
+    assert.equal(run.traces.closed, 1);
 });
 
 test("failed detail save can reload the original data and retry successfully without losing history", () => {
@@ -200,6 +226,8 @@ for (const rawHistory of ["{bad json", "{}", "[null]", "[[]]", '["bad record"]']
         assert.deepEqual(run.localStorage.snapshot(), before);
         assert.equal(run.writes.length, 0);
         assert.equal(run.api.animeList[0].currentEpisode, 5);
+        assert.equal(run.alert.hidden, false);
+        assert.match(run.alert.textContent, /尚未儲存/);
     });
 }
 
