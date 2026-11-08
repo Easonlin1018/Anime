@@ -1268,6 +1268,47 @@
         return current > 0 && (total === null || current < total);
     }
 
+    function correctAnimeDetailProgress(item, changes = {}, at = new Date().toISOString()) {
+        const unchanged = reason => ({ changed:false, reason, anime:item, historyRecord:null });
+        if (!item || typeof item !== "object" || Array.isArray(item)) return unchanged("invalid-record");
+        if (item.deletedAt || item.category === "_deleted") return unchanged("deleted");
+        // Normal progress corrections must not change a separate review session.
+        if (item.category === "review") return unchanged("review-protected");
+        if (!changes || typeof changes !== "object" || Array.isArray(changes)) return unchanged("invalid-progress");
+        const has = key => Object.prototype.hasOwnProperty.call(changes, key);
+        const count = (value, unknownAllowed = false) => {
+            if (unknownAllowed && (value === null || value === "")) return null;
+            if (!["number", "string"].includes(typeof value) || (typeof value === "string" && !value.trim())) return NaN;
+            const parsed = Number(value);
+            if (!Number.isSafeInteger(parsed) || parsed < 0) return NaN;
+            return unknownAllowed && parsed === 0 ? null : parsed;
+        };
+        const previous = getNormalAnimeProgress(item);
+        const current = has("currentEpisode") ? count(changes.currentEpisode) : previous.current;
+        const total = has("totalEpisodes") ? count(changes.totalEpisodes, true) : previous.total;
+        if (Number.isNaN(current) || Number.isNaN(total)) return unchanged("invalid-progress");
+        const categoryChanged = changes.categoryExplicitlyChanged === true && changes.category !== item.category;
+        if (categoryChanged && !["watching", "backlog", "waiting", "review", "completed"].includes(changes.category)) return unchanged("invalid-category");
+        const progressChanged = has("currentEpisode") && current !== previous.current;
+        const totalChanged = has("totalEpisodes") && total !== previous.total;
+        const updated = { ...item };
+        // Only explicit corrections update aliases; an unrelated detail edit must
+        // not normalize legacy progress or append a fictitious viewing event.
+        if (progressChanged) updated.currentEpisode = updated.watched = current;
+        if (totalChanged) updated.totalEpisodes = updated.episodes = total;
+        if (categoryChanged) {
+            updated.category = changes.category;
+            updated.categorySource = "manual";
+            updated.categoryManuallyEdited = true;
+        } else if ((progressChanged || totalChanged) && total !== null && current >= total
+            && item.categorySource !== "manual" && item.categoryManuallyEdited !== true) {
+            updated.category = "completed";
+        }
+        if (!progressChanged && !totalChanged && !categoryChanged) return unchanged("unchanged");
+        updated.updatedAt = iso(Math.max(Date.parse(iso(at)), (Date.parse(item.updatedAt) || 0) + 1));
+        return { changed:true, reason:"corrected", anime:updated, historyRecord:null };
+    }
+
     function updateAnimeProgress(list, id, delta = 1, at = new Date().toISOString()) {
         const targetId = String(id), change = Number(delta);
         const index = findAnimeRecordIndex(list, targetId);
@@ -2069,5 +2110,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe|animethemes\.moe|itunes\.apple\.com|music\.apple\.com)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, getNormalAnimeProgress, isAnimeCurrentlyWatching, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, getNormalAnimeProgress, isAnimeCurrentlyWatching, correctAnimeDetailProgress, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });

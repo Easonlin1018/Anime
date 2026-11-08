@@ -909,7 +909,7 @@ function restoreAnimeStartupStorage(originals) {
 function isAnimeStartupSnapshot(snapshot) {
     const keys = [STORAGE_KEY, EVENT_OVERRIDES_KEY, EVENT_ANIME_OVERRIDES_KEY,
         AnimeTrackerV11.HISTORY_KEY, AnimeTrackerV11.WORKS_KEY, AnimeTrackerV11.MANGA_HISTORY_KEY,
-        "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1"];
+        "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1", "anime_tracker_last_undo_v11"];
     return snapshot && typeof snapshot === "object" && !Array.isArray(snapshot)
         && [0, 1].includes(snapshot.state) && Array.isArray(snapshot.originalList)
         && snapshot.originals && typeof snapshot.originals === "object" && !Array.isArray(snapshot.originals)
@@ -925,9 +925,9 @@ function commitAnimeStartupChanges(writes, originalList) {
     const pendingKey = "anime_tracker_startup_pending_v1";
     const keys = [STORAGE_KEY, EVENT_OVERRIDES_KEY, EVENT_ANIME_OVERRIDES_KEY,
         AnimeTrackerV11.HISTORY_KEY, AnimeTrackerV11.WORKS_KEY, AnimeTrackerV11.MANGA_HISTORY_KEY,
-        "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1"];
+        "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1", "anime_tracker_last_undo_v11"];
     const originals = Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)]));
-    // Only multi-key startup migration needs a durable recovery snapshot.
+    // Multi-key migrations and batch edits share the same durable recovery snapshot.
     const snapshot = changes.length > 1 ? { state:0, originals, originalList } : null;
     const written = [];
     let journalCreated = false;

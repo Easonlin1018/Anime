@@ -561,8 +561,8 @@
         };
     }
 
-    function themeCacheKeysForAnime(anime) {
-        const sourceKey = `source:${String(anime?.id || "")}`, source = cache[sourceKey]?.value;
+    function themeCacheKeysForAnime(anime, cacheSnapshot = cache) {
+        const sourceKey = `source:${String(anime?.id || "")}`, source = cacheSnapshot[sourceKey]?.value;
         const keys = new Set([sourceKey]);
         const anilistId = V.getAnimeAniListIdentity(anime); if (anilistId) keys.add(`animethemes:${anilistId}`);
         [anime?.malId, source?.selected?.mal_id].filter(Boolean).forEach(malId => keys.add(`themes:${Number(malId)}`));
@@ -634,7 +634,13 @@
         if (undo) localStorage.setItem(UNDO_KEY, JSON.stringify(undo));
         else localStorage.removeItem(UNDO_KEY);
     }
-    const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, findAnimeThemeSource, fetchAnimeThemeSongs, fetchAnimeThemesThemeSongs, fetchJikanThemeSongs, requestAnimeThemesJson, normalizeAnimeThemesSongs, animeThemesUrl, hasThemeSongData, themeSongStatus, claimAutomaticLookup, requestJikanJson, parseRetryAfterMs, invalidateThemeLookupCache, beginThemeLookup, isThemeLookupCurrent, applyThemeLookupResult, requestNativeTitleJson, lookupNativeThemeSongTitle, enrichThemeSongsWithNativeTitles, appleMusicSearchUrl, appleMusicLookupUrl, hasJapaneseTitle, nativeTitleCacheKey };
+    function applyPersistedSnapshot(snapshot, deletedIds = []) {
+        // The caller has already committed this cache together with its anime changes.
+        Object.keys(cache).forEach(key => delete cache[key]);
+        Object.assign(cache, snapshot);
+        if (new Set([...deletedIds].map(String)).has(String(currentAnime?.id))) close();
+    }
+    const api = { renderForAnime, expand, close, snapshotAnimeCleanup, cleanupAnime, restoreAnimeCleanupSnapshot, restoreCacheSnapshot, applyPersistedSnapshot, themeCacheKeysForAnime, findAnimeThemeSource, fetchAnimeThemeSongs, fetchAnimeThemesThemeSongs, fetchJikanThemeSongs, requestAnimeThemesJson, normalizeAnimeThemesSongs, animeThemesUrl, hasThemeSongData, themeSongStatus, claimAutomaticLookup, requestJikanJson, parseRetryAfterMs, invalidateThemeLookupCache, beginThemeLookup, isThemeLookupCurrent, applyThemeLookupResult, requestNativeTitleJson, lookupNativeThemeSongTitle, enrichThemeSongsWithNativeTitles, appleMusicSearchUrl, appleMusicLookupUrl, hasJapaneseTitle, nativeTitleCacheKey };
     window.ThemeSongs = api;
     window.SpotifyThemes = api;
     if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending && window.__ANIME_STARTUP_STORAGE__?.persisted !== false) {
