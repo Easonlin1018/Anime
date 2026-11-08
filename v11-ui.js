@@ -807,7 +807,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "theme-songs-native-title-1";
+        const reloadVersion = "currently-watching-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
@@ -820,7 +820,7 @@
             sessionStorage.setItem(key, reloadVersion);
             location.reload();
         });
-        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`).then(async reg => {
+        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`, { updateViaCache:"none" }).then(async reg => {
             reg.addEventListener("updatefound",()=>showToast("發現新版本，安裝完成後會自動套用"));
             await reg.update();
             const worker = navigator.serviceWorker.controller || reg.active || reg.waiting || reg.installing;
