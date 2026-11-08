@@ -19,7 +19,7 @@
         localStorage.setItem(V.WORKS_KEY, JSON.stringify(works));
         localStorage.setItem(V.MANGA_HISTORY_KEY, JSON.stringify(mangaHistory));
     }
-    function syncAnime() { works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works); if (window.__ANIME_STARTUP_STORAGE__?.persisted !== false) persist(); }
+    function syncAnime(persistReferences = false) { works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works); if (persistReferences && window.__ANIME_STARTUP_STORAGE__?.persisted !== false) persist(); }
     function activeMediaEntries(work) { return (work?.mediaEntries || []).filter(entry => !entry.deletedAt); }
     function findWork(workId) { return works.find(work => String(work.workId) === String(workId)); }
     function findWorkByMediaId(mediaId, includeDeleted = false) { return works.find(work => (includeDeleted ? work.mediaEntries : activeMediaEntries(work)).some(entry => String(entry.id) === String(mediaId))); }
@@ -128,9 +128,9 @@
     function replaceData(nextWorks,nextHistory){works=V.migrateWorks(typeof animeList==="undefined"?[]:animeList,nextWorks||[]);mangaHistory=Array.isArray(nextHistory)?nextHistory:[];persist();renderMangaPage();}
     function snapshotAnimeDeletion(animeId){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!work||!entry)return null;return{workId:work.workId,mediaId:entry.id,entryDeletedAt:entry.deletedAt??null,entryUpdatedAt:entry.updatedAt??null,workUpdatedAt:work.updatedAt??null};}
     function markAnimeDeleted(animeId, deletedAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry)return false;entry.deletedAt=deletedAt;entry.updatedAt=deletedAt;work.updatedAt=deletedAt;persist();renderMangaPage();return true;}
-    function restoreAnime(animeId, restoredAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry){syncAnime();return false;}entry.deletedAt=null;entry.updatedAt=restoredAt;work.updatedAt=restoredAt;persist();renderMangaPage();return true;}
+    function restoreAnime(animeId, restoredAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry){syncAnime(true);return false;}entry.deletedAt=null;entry.updatedAt=restoredAt;work.updatedAt=restoredAt;persist();renderMangaPage();return true;}
     function restoreAnimeDeletionSnapshot(snapshot){if(!snapshot)return false;const work=findWork(snapshot.workId)||findWorkByMediaId(snapshot.mediaId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(snapshot.mediaId));if(!work||!entry)return false;entry.deletedAt=snapshot.entryDeletedAt??null;entry.updatedAt=snapshot.entryUpdatedAt??entry.updatedAt;work.updatedAt=snapshot.workUpdatedAt??work.updatedAt;persist();renderMangaPage();return true;}
-    function syncAnimeReferences(){syncAnime();renderMangaPage();return works;}
+    function syncAnimeReferences(){syncAnime(true);renderMangaPage();return works;}
     function eventContext(work,media){return{...media,workId:work.workId,aliases:[...new Set([...work.aliases,...media.aliases])],publisher:media.publisher};}
 
     window.CrossMediaTracker={snapshot,replaceData,renderMangaPage,renderSearchResults,enhanceAnimeDetail,openWorkDetail,findWorkByMediaId,snapshotAnimeDeletion,markAnimeDeleted,restoreAnime,restoreAnimeDeletionSnapshot,syncAnimeReferences,mediaBadgesForAnime(anime){const work=findWorkByMediaId(anime.id);return work?mediaBadges(work):'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';},appendMangaReminders,appendMangaStatistics,eventContext};

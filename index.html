@@ -526,7 +526,7 @@
 
         <select id="batch-category-target">
             <option value="backlog">🎬 官方已完結（補番中）</option>
-            <option value="watching">⚡ 正在連載 / 正在追</option>
+            <option value="watching">⚡ 正在連載</option>
             <option value="review">🧠 溫故知新（需要複習區）</option>
             <option value="waiting">⏳ 敲碗等待開播</option>
         </select>
@@ -603,13 +603,13 @@
         <div id="event-list"></div>
     </div>
 
-    <div class="section" id="anime-section"><div class="section-title">⚡ 正在連載 / 正在追</div><div id="list-watching"></div></div>
+    <div class="section" id="anime-section"><div class="section-title">⚡ 正在連載</div><div class="tiny-note">這是播出分類；已開始觀看的作品會優先顯示在「正在看」。</div><div id="list-watching"></div></div>
     <div class="section" id="backlog-section">
         <div class="section-title">🎬 官方已完結（補番中）</div>
         <div class="anime-list-toolbar" role="search" aria-label="搜尋與排序動漫">
             <input id="anime-list-search" type="search" placeholder="搜尋作品名稱、別名、平台或筆記" autocomplete="off">
             <select id="anime-list-sort" aria-label="動漫排序方式">
-                <option value="watching-first">正在看優先</option>
+                <option value="watching-first">正在連載優先</option>
                 <option value="recent-watched">最近觀看</option>
                 <option value="name">名稱</option>
                 <option value="progress-desc">進度最高</option>
@@ -2176,6 +2176,8 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "aliases",
     "anilistTitles",
     "startDate",
+    "endDate",
+    "finishedAiringEvidence",
     "year",
     "relations",
     "lastMetadataSync"
@@ -2202,6 +2204,14 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
 
     const airedEpisode = getKnownAiredEpisode(media, syncedAt);
     if (airedEpisode) patch.airedEpisode = airedEpisode;
+    if (Object.prototype.hasOwnProperty.call(media, "endDate")) {
+        patch.endDate = media.endDate && typeof media.endDate === "object" ? { ...media.endDate } : null;
+    }
+    if (String(media.status || "").toUpperCase() === "FINISHED" && anime.category === "watching") {
+        // Keep a negative proof: normalised episode counts must not erase a
+        // contradiction and make the next startup treat this response as trusted.
+        patch.finishedAiringEvidence = hasTrustedFinishedAiringEvidence({ ...media, lastMetadataSync:syncedAt }, syncedAt);
+    }
 
     if (Number(media?.episodes) > 0) {
         patch.episodes = Number(media.episodes);
@@ -2357,8 +2367,60 @@ function hasManualAnimeCategory(anime) {
 function applyAutomaticCategoryFromMedia(anime, media, now = new Date()) {
     const category = getAutomaticCategoryTransition(anime, media, now);
     if (!category || anime.categorySource !== "automatic" || anime.categoryManuallyEdited !== false) return false;
+    const reference = new Date(now).getTime();
+    if (!Number.isFinite(reference)) return false;
     anime.category = category;
+    anime.updatedAt = new Date(Math.max(reference, (Date.parse(anime.updatedAt) || 0) + 1)).toISOString();
     return true;
+}
+
+function hasTrustedFinishedAiringEvidence(media, now = new Date()) {
+    if (String(media?.status || "").toUpperCase() !== "FINISHED" || media.finishedAiringEvidence === false) return false;
+    const reference = new Date(now).getTime();
+    const fetched = Date.parse(media.lastMetadataSync || "");
+    const numeric = value => ["number", "string"].includes(typeof value)
+        && !(typeof value === "string" && !value.trim()) && Number.isFinite(Number(value));
+    const total = Number(media.episodes);
+    if (!Number.isFinite(reference) || !Number.isFinite(fetched) || fetched > reference
+        || reference - fetched > 6 * 60 * 60 * 1000 || !numeric(media.episodes) || !Number.isSafeInteger(total) || total <= 0) return false;
+    const day = (value, complete = true) => {
+        if (!value || !Number.isInteger(value.year) || value.year <= 0) return NaN;
+        if (complete && (value.month == null || value.day == null)) return NaN;
+        const month = value.month ?? 1, date = value.day ?? 1;
+        if (![month, date].every(v => Number.isInteger(v) && v > 0)) return NaN;
+        const stamp = Date.UTC(value.year, month - 1, date);
+        const checked = new Date(stamp);
+        return checked.getUTCFullYear() === value.year && checked.getUTCMonth() + 1 === month
+            && checked.getUTCDate() === date ? stamp : NaN;
+    };
+    const malformedDate = value => {
+        if (value == null) return false;
+        if (typeof value !== "object" || Array.isArray(value)) return true;
+        if (value.year != null && (!Number.isInteger(value.year) || value.year < 1 || value.year > 9999)) return true;
+        if (value.month != null && (!Number.isInteger(value.month) || value.month < 1 || value.month > 12)) return true;
+        if (value.day != null && (!Number.isInteger(value.day) || value.day < 1 || value.day > 31)) return true;
+        return value.year != null && value.month != null && value.day != null && !Number.isFinite(day(value));
+    };
+    if (malformedDate(media.startDate) || malformedDate(media.endDate)) return false;
+    const start = day(media.startDate, false), end = day(media.endDate), earliestEnd = day(media.endDate, false);
+    if ((Number.isFinite(start) && start > reference) || (Number.isFinite(earliestEnd) && earliestEnd > reference)
+        || (Number.isFinite(start) && Number.isFinite(end) && end < start)) return false;
+    if (media.releasedEpisodes != null) {
+        const released = Number(media.releasedEpisodes);
+        if (!numeric(media.releasedEpisodes) || !Number.isSafeInteger(released) || released !== total) return false;
+    }
+    const next = media.nextAiringEpisode;
+    if (next != null && (typeof next !== "object" || Array.isArray(next))) return false;
+    if (media.airingSchedule?.nodes != null && !Array.isArray(media.airingSchedule.nodes)) return false;
+    const entries = [media.airedEpisode,
+        ...(Array.isArray(media.airingSchedule?.nodes) ? media.airingSchedule.nodes : [])].filter(entry => entry != null);
+    if (next && (next.episode != null || next.airingAt != null || next.timeUntilAiring != null)) entries.push(next);
+    const seconds = reference / 1000;
+    if (entries.some(entry => !numeric(entry?.episode) || !numeric(entry?.airingAt)
+        || (entry?.timeUntilAiring != null && !numeric(entry.timeUntilAiring)) || !isValidAiringScheduleEntry(entry, seconds)
+        || Number(entry.airingAt) > seconds || Number(entry.episode) > total)) return false;
+    const finalEpisode = entries.some(entry => Number(entry.episode) === total && Number(entry.airingAt) <= seconds);
+    return finalEpisode || (Number.isFinite(end) && end + 86400000 <= reference);
 }
 
 function getAutomaticCategoryTransition(anime, media, now = new Date()) {
@@ -2367,7 +2429,9 @@ function getAutomaticCategoryTransition(anime, media, now = new Date()) {
     if (anime.category === "waiting" && state === "releasing") return "watching";
     if (anime.category === "waiting" && state === "finished") return "backlog";
     if (anime.category === "backlog" && state === "not-yet-released") return "waiting";
-    // Never demote watching or reinterpret completed/review as a broadcast state.
+    if (anime.category === "watching" && anime.categorySource === "automatic" && anime.categoryManuallyEdited === false
+        && hasTrustedFinishedAiringEvidence({ ...media, lastMetadataSync:media.lastMetadataSync ?? anime.lastMetadataSync }, now)) return "backlog";
+    // Completed/review records remain explicit user tracking states.
     return null;
 }
 
@@ -2389,6 +2453,9 @@ function buildStoredAnimeMediaSnapshot(anime) {
         airedEpisode:anime?.airedEpisode,
         nextAiringEpisode:{ episode:anime?.nextEpisode, airingAt:anime?.nextAiringAt },
         startDate:getStructuredMediaStartDate(anime),
+        endDate:anime?.endDate,
+        lastMetadataSync:anime?.lastMetadataSync,
+        finishedAiringEvidence:anime?.finishedAiringEvidence,
         episodes:anime?.episodes,
         relations:{ edges:Array.isArray(anime?.relations) ? anime.relations : [] }
     };
@@ -2445,6 +2512,7 @@ function migrateExistingAnimeRecordsPass(list, now = new Date()) {
         const episodeCount = Number(next.episodes);
         const knownEpisodes = Number.isFinite(totalEpisodes) && totalEpisodes > 0 ? totalEpisodes : episodeCount;
         if (String(next.status || "").toUpperCase() === "FINISHED"
+            && original.category !== "watching"
             && (!Number.isFinite(knownEpisodes) || knownEpisodes <= 0)
             && Number.isSafeInteger(releasedEpisodes) && releasedEpisodes > 0) {
             next.episodes = releasedEpisodes;
@@ -3310,7 +3378,7 @@ async function syncAnimeMetadata(showMessage = false) {
             const media = !anime.deletedAt && updates.get(getAniListMediaId(anime));
             if (!media) return anime;
             const next = applyMediaMetadata(JSON.parse(JSON.stringify(anime)), media, now);
-            next.updatedAt = now;
+            next.updatedAt = new Date(Math.max(Date.parse(now), Date.parse(next.updatedAt) || 0)).toISOString();
             synced++;
             return next;
         });
@@ -3667,7 +3735,7 @@ function confirmAnimeWatching(id, externalIdentity = null) {
     externalIdentity ||= confirmedIdentity;
     try { assertAnimeStartupWritable(); }
     catch { return false; }
-    if (!confirm(`將《${target.anime.title}》移到「追番中」？只變更這一部作品的分類，觀看進度、筆記與觀看歷史會保留。`)) return false;
+    if (!confirm(`確認《${target.anime.title}》已開播，移到「正在連載」？只變更這一部作品的播出分類，觀看進度、筆記與觀看歷史會保留。`)) return false;
     target = findTarget(animeList);
     if (!target || (!confirmedIdentity && target.anime !== confirmedRecord)) {
         showToast("這部作品的狀態已變更，尚未執行分類確認。"); return false;
@@ -3702,7 +3770,7 @@ function confirmAnimeWatching(id, externalIdentity = null) {
     renderList();
     window.refreshV11?.();
     window.requestAnimeAutoSync?.({ persistedOnly:true });
-    showToast("已移到追番中；觀看進度、筆記與觀看歷史維持不變。");
+    showToast("已移到正在連載；觀看進度、筆記與觀看歷史維持不變。");
     return true;
 }
 
@@ -3815,7 +3883,7 @@ function buildAnimeItem(anime) {
     } else if (anime.category === "waiting") {
         const blocked = window.__ANIME_STARTUP_STORAGE__?.recoveryPending ? " disabled" : "";
         actions = '<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中……</div>';
-        if (canConfirmAnimeWatching(anime)) actions += `<button type="button" data-confirm-anime-watching="${animeDataId}" data-confirm-anime-identity="${escapeHtml(String(getAniListMediaId(anime) || ""))}"${blocked}>確認開始追番</button>`;
+        if (canConfirmAnimeWatching(anime)) actions += `<button type="button" data-confirm-anime-watching="${animeDataId}" data-confirm-anime-identity="${escapeHtml(String(getAniListMediaId(anime) || ""))}"${blocked}>確認已開播</button>`;
     } else {
         actions =
             `<button onclick='moveCategory(${animeId},"watching")'>🔄 重看</button>` +
@@ -3941,6 +4009,7 @@ function renderList() {
     const normalizedQuery = normalizeAnimeSearchText(animeListQuery);
     const visibleAnime = animeList
         .filter(anime => !anime.deletedAt)
+        .filter(anime => !AnimeTrackerV11.isAnimeCurrentlyWatching(anime))
         .filter(anime => !normalizedQuery || animeSearchText(anime).includes(normalizedQuery))
         .sort(compareAnime);
     const activeAnime = animeList.filter(anime => !anime.deletedAt);
@@ -4001,7 +4070,7 @@ function renderList() {
         }
 
         const emptyMessages = {
-            watching: "暫無連載中動漫",
+            watching: "暫無正在連載的動畫",
             backlog: "暫無補番中動漫",
             review: "目前空空如也",
             waiting: "暫無敲碗中動漫",

@@ -193,7 +193,7 @@ function successfulConfirmation(run, beforeList, id) {
     assert.deepEqual(copy(run.api.animeList), expected, "Only category, ownership and the selected record's version timestamp change");
     assert.deepEqual(JSON.parse(run.localStorage.getItem(V.STORAGE_KEY)), expected);
     assert.equal(run.trace.confirms.length, 1, "A user confirmation is required before the write");
-    assert.match(run.trace.confirms[0], /watching|追番/u);
+    assert.match(run.trace.confirms[0], /watching|正在連載/u);
     assert.ok(run.trace.confirms[0].includes(beforeList.find(item => String(item.id) === String(id)).title),
         "The confirmation names the work whose category will change");
     assert.match(run.trace.confirms[0], /進度.*保留/u);
@@ -209,7 +209,7 @@ function successfulConfirmation(run, beforeList, id) {
         assert.deepEqual(state.memory, expected, "UI only publishes the saved category change");
         assert.deepEqual(state.stored, expected, "Persistence precedes rendering the success state");
     }
-    assert.ok(run.trace.toasts.some(message => /watching|追番/u.test(message)), "Successful save gives visible feedback");
+    assert.ok(run.trace.toasts.some(message => /watching|正在連載/u.test(message)), "Successful save gives visible feedback");
 }
 
 test("legacy waiting without ownership markers has an explicit single-record confirmation preserving every other field", () => {
@@ -400,14 +400,14 @@ test("real waiting-card renderer exposes the explicit action for generic titles 
     const run = runtime();
     for (const identity of [101, 202, 903]) {
         const record = legacy(identity), markup = run.api.buildAnimeItem(record);
-        assert.match(markup, /確認開始追番/u);
+        assert.match(markup, /確認已開播/u);
         assert.ok(markup.includes(`data-confirm-anime-watching="${record.id}"`), "Renderer wires the action to this local record ID");
         assert.ok(markup.includes(`data-confirm-anime-identity="${identity}"`), "Card action carries external identity for legacy ID collisions");
         assert.ok(markup.includes(record.title), "The action is available independently of the work's title");
     }
     for (const category of ["watching", "backlog", "review", "completed"]) {
         const markup = run.api.buildAnimeItem(legacy(101, { category }));
-        assert.doesNotMatch(markup, /data-confirm-anime-watching|確認開始追番/u);
+        assert.doesNotMatch(markup, /data-confirm-anime-watching|確認已開播/u);
     }
 });
 
