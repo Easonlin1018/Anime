@@ -1644,18 +1644,18 @@
         });
     }
 
-    function createBackup(data) {
-        const anime = migrateList(data.animeList);
-        const works = migrateWorks(anime, data.works || []);
+    function createBackup(data, { preserveStoredRecords = false } = {}) {
+        const anime = preserveStoredRecords ? arrayOf(data.animeList) : migrateList(data.animeList);
+        const works = preserveStoredRecords ? arrayOf(data.works) : migrateWorks(anime, data.works || []);
         return {
             schemaVersion: SCHEMA_VERSION,
             exportedAt: new Date().toISOString(),
             [STORAGE_KEY]: anime,
             works,
-            mediaEntries:works.flatMap(work => work.mediaEntries.map(entry => ({ ...entry, workId:work.workId }))),
+            mediaEntries:works.flatMap(work => arrayOf(work.mediaEntries).map(entry => ({ ...entry, workId:work.workId }))),
             [MANGA_HISTORY_KEY]:arrayOf(data.mangaReadHistory),
-            mangaReminders:works.flatMap(work => work.mediaEntries.filter(entry => entry.mediaType === "manga" && entry.reminderEnabled).map(entry => ({ workId:work.workId, mediaId:entry.id, nextChapterAt:entry.nextChapterAt }))),
-            manualMediaRelations:works.flatMap(work => work.mediaEntries.filter(entry => entry.relationLocked).map(entry => ({ workId:work.workId, mediaId:entry.id, relationType:entry.relationType }))),
+            mangaReminders:works.flatMap(work => arrayOf(work.mediaEntries).filter(entry => entry.mediaType === "manga" && entry.reminderEnabled).map(entry => ({ workId:work.workId, mediaId:entry.id, nextChapterAt:entry.nextChapterAt }))),
+            manualMediaRelations:works.flatMap(work => arrayOf(work.mediaEntries).filter(entry => entry.relationLocked).map(entry => ({ workId:work.workId, mediaId:entry.id, relationType:entry.relationType }))),
             eventOverrides: data.eventOverrides || {},
             eventAnimeOverrides:data.eventAnimeOverrides || {},
             settings: data.settings || {},

@@ -844,10 +844,37 @@ function prepareAnimeStartupMigration(list, state) {
     if (migration.changed) backups.push("anime_tracker_title_series_migration_backup_v1");
     const activeIds = animeList.filter(item => !item.deletedAt).map(item => item.id);
     state = { ...state,
-        eventAnimeOverrides:AnimeTrackerV11.pruneAnimeIdOverrides(state.eventAnimeOverrides, activeIds),
+        eventAnimeOverrides:AnimeTrackerV11.pruneAnimeIdOverrides(migrateEventAnimeOverrides(state.eventOverrides, state.eventAnimeOverrides), activeIds),
         eventOverrides:AnimeTrackerV11.pruneAnimeIdOverrides(state.eventOverrides, activeIds)
     };
     return { list:animeList, state, recovery, reconciliation, migration, backups };
+}
+
+function normalizeAnimeIdList(value) {
+    return [...new Set((Array.isArray(value) ? value : []).map(id => String(id)).filter(Boolean))];
+}
+
+function migrateEventAnimeOverrides(legacyOverrides = eventOverrides, currentOverrides = eventAnimeOverrides) {
+    const migrated = {};
+    const ids = new Set([...Object.keys(legacyOverrides || {}), ...Object.keys(currentOverrides || {})]);
+    ids.forEach(eventId => {
+        const legacyManual = legacyOverrides?.[eventId] || {};
+        const current = currentOverrides?.[eventId] || {};
+        const includeAnimeIds = normalizeAnimeIdList([
+            ...normalizeAnimeIdList(legacyManual.includeAnimeIds),
+            ...normalizeAnimeIdList(current.includeAnimeIds)
+        ]);
+        const excludeAnimeIds = normalizeAnimeIdList([
+            ...normalizeAnimeIdList(legacyManual.excludeAnimeIds),
+            ...normalizeAnimeIdList(current.excludeAnimeIds)
+        ]);
+        const includeMediaIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.includeMediaIds), ...normalizeAnimeIdList(current.includeMediaIds)]);
+        const excludeMediaIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.excludeMediaIds), ...normalizeAnimeIdList(current.excludeMediaIds)]);
+        const includeWorkIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.includeWorkIds), ...normalizeAnimeIdList(current.includeWorkIds)]);
+        const excludeWorkIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.excludeWorkIds), ...normalizeAnimeIdList(current.excludeWorkIds)]);
+        if (includeAnimeIds.length || excludeAnimeIds.length || includeMediaIds.length || excludeMediaIds.length || includeWorkIds.length || excludeWorkIds.length) migrated[eventId] = { includeAnimeIds, excludeAnimeIds, includeMediaIds, excludeMediaIds, includeWorkIds, excludeWorkIds };
+    });
+    return migrated;
 }
 
 function startupAnimeView(list) {
@@ -961,14 +988,29 @@ function installAnimeStartupRecoveryGuard() {
     window.__ANIME_STARTUP_RECOVERY_GUARD__ = true;
     const guard = event => {
         if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return;
-        const allowed = event.target?.closest?.("#v11-export, .anime-title, [data-open-detail], [data-close-modal], .v11-nav button, a[href]");
-        if (event.type === "submit" || (!allowed && event.target?.closest?.("button"))) {
+        const allowed = event.target?.closest?.("#v11-export, .anime-title, [data-open-detail], [data-open-themes], [data-open-work], [data-media-tab], [data-close-modal], .v11-nav button, a[href], #anime-list-clear, [data-clear-filters], [data-remove-filter], [data-cal-nav], [data-cal-today], [data-calendar-day], [data-tab]");
+        const viewControl = event.target?.closest?.("#anime-list-search, #anime-list-sort, #event-keyword, #event-location, #event-type, #event-admission, #cross-media-search, [data-filter], [data-work-filter], #v11-calendar-view, #v11-calendar-filter");
+        const editingControl = event.target?.closest?.("input, select, textarea");
+        const mutatingAction = event.target?.closest?.("[data-sync], [data-run-batch], [data-undo], [data-stat-action], [data-restore-id], [data-import-mode], [data-progress-action], [data-confirm-anime-watching], [data-manga-progress], [data-manga-volume], [data-manga-complete], [data-manga-reset], [data-manual-media], [data-add-candidate], [data-add-ebook]");
+        const readOnlyKey = event.type === "keydown" && (["Tab", "Escape", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End", "PageUp", "PageDown", "Shift", "Control", "Meta", "Alt"].includes(event.key)
+            || ((event.ctrlKey || event.metaKey) && ["a", "c"].includes(String(event.key).toLowerCase())));
+        const editEvent = ["change", "input", "keydown"].includes(event.type) && !readOnlyKey;
+        if (event.type === "submit" || (event.type === "click" && !allowed && event.target?.closest?.("button"))
+            || ((event.type === "click" || editEvent) && mutatingAction && event.key !== "Escape")
+            || (editEvent && editingControl && !viewControl && event.key !== "Escape")) {
+            if (event.target?.id === "v11-auto-sync") {
+                event.target.checked = localStorage.getItem("anime_tracker_auto_sync_v11") === "1";
+                event.target.disabled = true;
+            }
             event.preventDefault(); event.stopImmediatePropagation();
             try { assertAnimeStartupWritable(); } catch {}
         }
     };
     document.addEventListener?.("click", guard, true);
     document.addEventListener?.("submit", guard, true);
+    document.addEventListener?.("change", guard, true);
+    document.addEventListener?.("input", guard, true);
+    document.addEventListener?.("keydown", guard, true);
 }
 
 function saveAndRender(options = {}) {
@@ -2352,6 +2394,13 @@ function buildStoredAnimeMediaSnapshot(anime) {
     };
 }
 
+function canConfirmAnimeWatching(anime, now = new Date()) {
+    if (!anime || anime.deletedAt || anime.category !== "waiting" || hasManualAnimeCategory(anime)) return false;
+    // Fully owned automatic records already use the automatic transition path.
+    if (anime.categorySource === "automatic" && anime.categoryManuallyEdited === false) return false;
+    return getAutomaticCategoryTransition(anime, buildStoredAnimeMediaSnapshot(anime), now) === "watching";
+}
+
 function migrateExistingAnimeRecordsPass(list, now = new Date()) {
     let titleChanged = 0;
     let categoryChanged = 0;
@@ -3489,6 +3538,7 @@ async function startLiveEventSearch(query, button = null, animeId = "", mediaCon
 }
 
 async function resumePendingLiveSearch() {
+    if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return;
     let pending;
     try {
         pending = JSON.parse(localStorage.getItem(LIVE_SEARCH_PENDING_KEY) || "null");
@@ -3607,7 +3657,7 @@ function confirmAnimeWatching(id, externalIdentity = null) {
             String(anime.id) === String(id)
             && (!externalIdentity || getAniListMediaId(anime) === String(externalIdentity)));
         return matches.length === 1 && !matches[0].anime.deletedAt
-            && matches[0].anime.category === "waiting" ? matches[0] : null;
+            && canConfirmAnimeWatching(matches[0].anime) ? matches[0] : null;
     };
     let target = findTarget(animeList);
     if (!target) { showToast("目前無法唯一確認這部待播作品，請重新載入清單後再試。"); return false; }
@@ -3622,7 +3672,7 @@ function confirmAnimeWatching(id, externalIdentity = null) {
     if (!target || (!confirmedIdentity && target.anime !== confirmedRecord)) {
         showToast("這部作品的狀態已變更，尚未執行分類確認。"); return false;
     }
-    let nextStoredList;
+    let nextStoredList, confirmedAt;
     try {
         assertAnimeStartupWritable();
         // Use the latest persisted records, not startup-only display defaults or unrelated unsaved edits.
@@ -3631,9 +3681,10 @@ function confirmAnimeWatching(id, externalIdentity = null) {
         if (!storedTarget) throw new Error("Persisted waiting record could not be identified safely");
         if (!confirmedIdentity && (getAniListMediaId(storedTarget.anime)
             || storedTarget.anime.title !== confirmedTitle)) throw new Error("Persisted record identity changed");
+        confirmedAt = new Date(Math.max(Date.now(), (Date.parse(storedTarget.anime.updatedAt) || 0) + 1)).toISOString();
         nextStoredList = stored.slice();
         nextStoredList[storedTarget.index] = { ...storedTarget.anime,
-            category:"watching", categorySource:"manual", categoryManuallyEdited:true
+            category:"watching", categorySource:"manual", categoryManuallyEdited:true, updatedAt:confirmedAt
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(nextStoredList));
     } catch (error) {
@@ -3643,13 +3694,14 @@ function confirmAnimeWatching(id, externalIdentity = null) {
     }
     const nextList = animeList.slice();
     nextList[target.index] = { ...target.anime,
-        category:"watching", categorySource:"manual", categoryManuallyEdited:true
+        category:"watching", categorySource:"manual", categoryManuallyEdited:true, updatedAt:confirmedAt
     };
     animeList = nextList;
     if (window.__ANIME_STARTUP_STORAGE__?.persisted === false)
         window.__ANIME_STARTUP_STORAGE__.originalList = JSON.parse(JSON.stringify(nextStoredList));
     renderList();
     window.refreshV11?.();
+    window.requestAnimeAutoSync?.({ persistedOnly:true });
     showToast("已移到追番中；觀看進度、筆記與觀看歷史維持不變。");
     return true;
 }
@@ -3762,8 +3814,8 @@ function buildAnimeItem(anime) {
             `<button class="btn-next" onclick='moveCategory(${animeId},"completed")'>🎉 複習完</button>`;
     } else if (anime.category === "waiting") {
         const blocked = window.__ANIME_STARTUP_STORAGE__?.recoveryPending ? " disabled" : "";
-        actions = '<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中……</div>'
-            + `<button type="button" data-confirm-anime-watching="${animeDataId}" data-confirm-anime-identity="${escapeHtml(String(getAniListMediaId(anime) || ""))}"${blocked}>確認開始追番</button>`;
+        actions = '<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中……</div>';
+        if (canConfirmAnimeWatching(anime)) actions += `<button type="button" data-confirm-anime-watching="${animeDataId}" data-confirm-anime-identity="${escapeHtml(String(getAniListMediaId(anime) || ""))}"${blocked}>確認開始追番</button>`;
     } else {
         actions =
             `<button onclick='moveCategory(${animeId},"watching")'>🔄 重看</button>` +
@@ -4043,34 +4095,6 @@ window.searchEventsByMedia = function (work, media) {
     return searchEventsByWork(media?.title || work?.title || "", null, context);
 };
 
-function normalizeAnimeIdList(value) {
-    return [...new Set((Array.isArray(value) ? value : []).map(id => String(id)).filter(Boolean))];
-}
-
-function migrateEventAnimeOverrides() {
-    const migrated = {};
-    const ids = new Set([...Object.keys(eventOverrides || {}), ...Object.keys(eventAnimeOverrides || {})]);
-    ids.forEach(eventId => {
-        const legacyManual = eventOverrides?.[eventId] || {};
-        const current = eventAnimeOverrides?.[eventId] || {};
-        const includeAnimeIds = normalizeAnimeIdList([
-            ...normalizeAnimeIdList(legacyManual.includeAnimeIds),
-            ...normalizeAnimeIdList(current.includeAnimeIds)
-        ]);
-        const excludeAnimeIds = normalizeAnimeIdList([
-            ...normalizeAnimeIdList(legacyManual.excludeAnimeIds),
-            ...normalizeAnimeIdList(current.excludeAnimeIds)
-        ]);
-        const includeMediaIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.includeMediaIds), ...normalizeAnimeIdList(current.includeMediaIds)]);
-        const excludeMediaIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.excludeMediaIds), ...normalizeAnimeIdList(current.excludeMediaIds)]);
-        const includeWorkIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.includeWorkIds), ...normalizeAnimeIdList(current.includeWorkIds)]);
-        const excludeWorkIds = normalizeAnimeIdList([...normalizeAnimeIdList(legacyManual.excludeWorkIds), ...normalizeAnimeIdList(current.excludeWorkIds)]);
-        if (includeAnimeIds.length || excludeAnimeIds.length || includeMediaIds.length || excludeMediaIds.length || includeWorkIds.length || excludeWorkIds.length) migrated[eventId] = { includeAnimeIds, excludeAnimeIds, includeMediaIds, excludeMediaIds, includeWorkIds, excludeWorkIds };
-    });
-    eventAnimeOverrides = migrated;
-    localStorage.setItem(EVENT_ANIME_OVERRIDES_KEY, JSON.stringify(eventAnimeOverrides));
-}
-
 function eventAnimeOverride(id) {
     return eventAnimeOverrides[String(id)] || { includeAnimeIds:[], excludeAnimeIds:[], includeMediaIds:[], excludeMediaIds:[], includeWorkIds:[], excludeWorkIds:[] };
 }
@@ -4101,8 +4125,6 @@ function filterEventsForAnime(events, anime) {
         return result.matched === true && result.confidence === "high" && result.score >= 80;
     });
 }
-
-migrateEventAnimeOverrides();
 
 function applyEventOverride(event) {
     const override = eventOverrides[event.id] || {};
@@ -4143,6 +4165,7 @@ function requestEventNotifications() {
 }
 
 function notifyNewEvents(events) {
+    if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return;
     if (!("Notification" in window) || Notification.permission !== "granted") return;
     const oldIds = new Set(JSON.parse(localStorage.getItem(EVENT_SEEN_KEY) || "[]"));
     const fresh = events.filter(event => !oldIds.has(event.id));
@@ -4668,7 +4691,7 @@ function exportEventData() {
 function importEventData(inputEvent) {
     const file = inputEvent.target.files[0]; if (!file) return;
     const reader = new FileReader();
-    reader.onload = e => { try { const data=JSON.parse(e.target.result); eventPrefs=data.prefs||{}; eventOverrides=data.overrides||{}; eventAnimeOverrides=data.animeOverrides||{}; eventSettings=data.settings||{}; migrateEventAnimeOverrides(); saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("📥 活動收藏與修正資料已還原"); } catch { showToast("❌ 活動資料格式錯誤"); } inputEvent.target.value=""; };
+    reader.onload = e => { try { const data=JSON.parse(e.target.result); eventPrefs=data.prefs||{}; eventOverrides=data.overrides||{}; eventAnimeOverrides=data.animeOverrides||{}; eventSettings=data.settings||{}; eventAnimeOverrides=migrateEventAnimeOverrides(); saveEventLocalData(); fillEventFilters(); renderEvents(); showToast("📥 活動收藏與修正資料已還原"); } catch { showToast("❌ 活動資料格式錯誤"); } inputEvent.target.value=""; };
     reader.readAsText(file);
 }
 
@@ -4791,7 +4814,10 @@ document.getElementById("anime-list-clear").addEventListener("click", () => {
 });
 animeListSortSelect.addEventListener("change", event => {
     animeListSort = event.target.value;
-    localStorage.setItem(ANIME_SORT_KEY, animeListSort);
+    if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending) {
+        try { localStorage.setItem(ANIME_SORT_KEY, animeListSort); }
+        catch (error) { warnAnimeStartupStorage("view-sort", error); }
+    }
     renderList();
 });
 

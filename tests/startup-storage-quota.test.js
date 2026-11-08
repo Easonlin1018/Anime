@@ -64,7 +64,7 @@ function seed(list = [anime()], extra = {}) {
     return {
         [V.STORAGE_KEY]:JSON.stringify(list),
         [EVENT_KEY]:JSON.stringify({ event:{ includeAnimeIds:[list[0].id], notes:"retain" } }),
-        [EVENT_ANIME_KEY]:JSON.stringify({ event:{ includeAnimeIds:[list[0].id] } }),
+        [EVENT_ANIME_KEY]:JSON.stringify({ event:{ includeAnimeIds:[list[0].id], excludeAnimeIds:[], includeMediaIds:[], excludeMediaIds:[], includeWorkIds:[], excludeWorkIds:[] } }),
         [V.HISTORY_KEY]:JSON.stringify([{ id:"history", animeId:list[0].id, delta:1, at:before }]),
         [V.WORKS_KEY]:JSON.stringify([]),
         [V.MANGA_HISTORY_KEY]:JSON.stringify([{ id:"manga-history", workId:"other", delta:2 }]),
@@ -599,4 +599,303 @@ test("successful duplicate migration preserves every watch-history entry and tom
     assert.equal(store.trace[historyIndex].before[V.STORAGE_KEY], store.getItem(V.STORAGE_KEY));
     assert.equal(store.trace[historyIndex].before[V.HISTORY_KEY], initial[V.HISTORY_KEY],
         "An observable intermediate state exists: a journal is recoverable, not a cross-key atomic transaction");
+});
+
+// Reviewer C: run the real capture guards and setting handlers against the same
+// quota/recovery storage used for production startup above.
+function recoveryControl(selectors, extra = {}) {
+    return { id:"", type:"text", value:"", checked:false, dataset:{}, ...extra,
+        closest(selector) { return selector.split(",").some(part => selectors.includes(part.trim())) ? this : null; },
+        matches(selector) { return Boolean(this.closest(selector)); }
+    };
+}
+
+function recoveryEvent(run, type, target, handler = () => {}, extra = {}) {
+    const event = { type, target, prevented:false, stopped:false, ...extra,
+        preventDefault() { this.prevented = true; },
+        stopImmediatePropagation() { this.stopped = true; }, stopPropagation() {} };
+    for (const capture of run.trace.handlers.filter(item => item.type === type && item.capture)) {
+        capture.handler(event);
+        if (event.stopped) break;
+    }
+    if (!event.stopped) handler(event);
+    return event;
+}
+
+function recoveryControlsRun(options = {}) {
+    const initial = seed([anime()], { [PENDING_KEY]:"unreadable pending journal",
+        anime_tracker_auto_sync_v11:"1", anime_tracker_filters_v11:JSON.stringify({ platform:["original"] }),
+        anime_list_sort_v11:"watching-first", ...options.initial });
+    const store = storage(initial, options.storage), run = runtime(store);
+    run.boot();
+    run.api.state = { filters:{ platform:["original"] }, selected:new Set(), calendarDate:new Date(at) };
+    run.api.FILTER_KEY = "anime_tracker_filters_v11";
+    run.api.save = (key, value) => store.setItem(key, JSON.stringify(value));
+    run.api.renderList = () => run.trace.refreshes++;
+    vm.runInContext(between(ui, "function delegatedClick", "function renderFilterChips"), run.api);
+    vm.runInContext(between(ui, "function changeAutoSyncSetting", "function exportBackup"), run.api);
+    return { ...run, initial };
+}
+
+test("recovery change filters still browse the original view without persisting preferences", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    const control = recoveryControl(["input", "[data-filter]"], { value:"new view", dataset:{ filter:"platform" } });
+    const event = recoveryEvent(run, "change", control, run.api.delegatedChange);
+    assert.equal(event.stopped, false);
+    assert.deepEqual(copy(run.api.state.filters), { platform:["new view"] });
+    assert.ok(run.trace.refreshes > 0);
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("recovery clear-filter and remove-filter clicks stay usable without writing storage", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    for (const [selector, dataset] of [["[data-remove-filter]", { removeFilter:"platform" }], ["[data-clear-filters]", {}]]) {
+        run.api.state.filters = { platform:["original"] };
+        const control = recoveryControl(["button", selector], { dataset });
+        const event = recoveryEvent(run, "click", control, run.api.delegatedClick);
+        assert.equal(event.stopped, false, selector);
+        assert.deepEqual(copy(run.api.state.filters), {});
+    }
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("recovery change/input/keyboard guards stop writing controls before their handlers", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    for (const [type, selectors, extra] of [
+        ["change", ["input", "#event-import-file"], { id:"event-import-file", type:"file" }],
+        ["input", ["input", "#search-input"], { id:"search-input" }],
+        ["keydown", ["input", "#work-event-input"], { id:"work-event-input", key:"Enter" }]
+    ]) {
+        let called = false;
+        const control = recoveryControl(selectors, extra);
+        const event = recoveryEvent(run, type, control, () => { called = true; run.localStorage.setItem("unexpected", "write"); }, { key:extra.key });
+        assert.equal(event.prevented, true, type);
+        assert.equal(event.stopped, true, type);
+        assert.equal(called, false, type);
+    }
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("recovery auto-sync change restores its persisted checkbox state and does not write", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    const control = recoveryControl(["input", "#v11-auto-sync"], { id:"v11-auto-sync", type:"checkbox", checked:false });
+    const event = recoveryEvent(run, "change", control, () => assert.fail("Capture must precede checkbox handler"));
+    assert.equal(event.stopped, true);
+    assert.equal(control.checked, true);
+    control.checked = false;
+    assert.equal(run.api.changeAutoSyncSetting(control), false, "The handler itself also protects programmatic dispatch");
+    assert.equal(control.checked, true);
+    assert.equal(control.disabled, true);
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("auto-sync setting quota failure is caught and restores the old checked value", () => {
+    const run = recoveryControlsRun({ storage:{ failKey:"anime_tracker_auto_sync_v11" } });
+    run.api.window.__ANIME_STARTUP_STORAGE__.recoveryPending = false;
+    const before = run.localStorage.snapshot(), control = { checked:false };
+    assert.doesNotThrow(() => assert.equal(run.api.changeAutoSyncSetting(control), false));
+    assert.equal(control.checked, true);
+    assert.deepEqual(run.localStorage.snapshot(), before);
+});
+
+test("filter quota failure does not abort browsing or erase the persisted filter", () => {
+    const run = recoveryControlsRun({ storage:{ failKey:"anime_tracker_filters_v11" } });
+    run.api.window.__ANIME_STARTUP_STORAGE__.recoveryPending = false;
+    const before = run.localStorage.snapshot();
+    const control = recoveryControl(["input", "[data-filter]"], { value:"temporary", dataset:{ filter:"platform" } });
+    assert.doesNotThrow(() => recoveryEvent(run, "change", control, run.api.delegatedChange));
+    assert.deepEqual(copy(run.api.state.filters), { platform:["temporary"] });
+    assert.deepEqual(run.localStorage.snapshot(), before);
+});
+
+function installSortHandler(run) {
+    const control = recoveryControl(["select", "#anime-list-sort"], { id:"anime-list-sort", value:"updated-desc" });
+    control.addEventListener = (_type, handler) => { control.handler = handler; };
+    run.api.animeListSortSelect = control;
+    run.api.ANIME_SORT_KEY = "anime_list_sort_v11";
+    vm.runInContext(between(html, 'animeListSortSelect.addEventListener("change"', 'document.getElementById("event-keyword")'), run.api);
+    return control;
+}
+
+test("recovery sorting is view-only and cannot spend storage quota", () => {
+    const run = recoveryControlsRun(), control = installSortHandler(run), writes = run.localStorage.trace.length;
+    assert.doesNotThrow(() => recoveryEvent(run, "change", control, control.handler));
+    assert.equal(run.api.animeListSort, "updated-desc");
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("sort preference quota failure leaves a usable temporary sorted view", () => {
+    const run = recoveryControlsRun({ storage:{ failKey:"anime_list_sort_v11" } });
+    run.api.window.__ANIME_STARTUP_STORAGE__.recoveryPending = false;
+    const control = installSortHandler(run), before = run.localStorage.snapshot();
+    assert.doesNotThrow(() => recoveryEvent(run, "change", control, control.handler));
+    assert.equal(run.api.animeListSort, "updated-desc");
+    assert.deepEqual(run.localStorage.snapshot(), before);
+});
+
+test("recovery permits navigation, original details, calendar browsing, search and backup export events", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    for (const selector of ["#v11-export", "[data-open-detail]", "[data-open-themes]", "[data-open-work]", "[data-media-tab]", ".v11-nav button", "[data-cal-nav]", "[data-tab]", "a[href]"]) {
+        let visited = false;
+        const event = recoveryEvent(run, "click", recoveryControl(["button", selector]), () => { visited = true; });
+        assert.equal(event.stopped, false, selector);
+        assert.equal(visited, true, selector);
+    }
+    let searched = false;
+    recoveryEvent(run, "input", recoveryControl(["input", "#anime-list-search"]), () => { searched = true; });
+    assert.equal(searched, true);
+    assert.equal(run.localStorage.trace.length, writes);
+});
+
+test("recovery notifications and pending-search resume cannot write or delete auxiliary keys", async () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    run.api.EVENT_SEEN_KEY = "existing_event_seen";
+    run.api.LIVE_SEARCH_PENDING_KEY = "existing_live_pending";
+    run.api.Notification = function () { assert.fail("No notifications during recovery"); };
+    run.api.Notification.permission = "granted";
+    run.api.window.Notification = run.api.Notification;
+    run.api.pollLiveSearchResult = () => assert.fail("Pending remote activity stays paused during recovery");
+    vm.runInContext(between(html, "function notifyNewEvents", "function normalizeMatchText"), run.api);
+    vm.runInContext(between(html, "async function resumePendingLiveSearch", "async function searchEventsByWork"), run.api);
+    vm.runInContext(between(ui, "async function requestAnimeNotifications", "function onlineState"), run.api);
+    assert.doesNotThrow(() => run.api.notifyNewEvents([{ id:"new-event" }]));
+    await assert.doesNotReject(run.api.resumePendingLiveSearch());
+    await assert.doesNotReject(run.api.requestAnimeNotifications());
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("legacy event-override preparation is pure and preserves its existing merge semantics", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    const old = { event:{ includeAnimeIds:[101, "101"], excludeAnimeIds:[202], includeWorkIds:["work-old"] } };
+    const current = { event:{ includeAnimeIds:["local-new"], includeMediaIds:["media-new"], excludeWorkIds:["work-excluded"] } };
+    const before = JSON.stringify({ old, current });
+    assert.deepEqual(copy(run.api.migrateEventAnimeOverrides(old, current)), { event:{
+        includeAnimeIds:["101", "local-new"], excludeAnimeIds:["202"], includeMediaIds:["media-new"],
+        excludeMediaIds:[], includeWorkIds:["work-old"], excludeWorkIds:["work-excluded"]
+    } });
+    assert.equal(JSON.stringify({ old, current }), before);
+    assert.equal(run.localStorage.trace.length, writes);
+});
+
+test("legacy override startup waits for the recovery journal before main/auxiliary writes", () => {
+    const initial = seed([anime()], {
+        [EVENT_KEY]:JSON.stringify({ event:{ includeAnimeIds:["local-101"], includeWorkIds:["legacy-work"] } }),
+        [EVENT_ANIME_KEY]:JSON.stringify({ event:{ includeAnimeIds:["local-101"] } })
+    });
+    const store = storage(initial, { failKey:PENDING_KEY }), run = runtime(store);
+    // Execute the actual late event startup section, which previously invoked a
+    // storage-writing migration before loadStoredAnime initialized recovery.
+    vm.runInContext(between(html, "function eventAnimeOverride", "function applyEventOverride"), run.api);
+    assert.equal(store.trace.length, 0, "No premature event-override persistence");
+    failedBootPreservesOriginal(run, initial);
+    assert.equal(store.trace.filter(entry => entry.committed).length, 0);
+    assert.ok(store.trace.some(entry => entry.key === PENDING_KEY && !entry.committed));
+    const retryStore = storage(initial), retry = runtime(retryStore);
+    retry.boot();
+    const saved = JSON.parse(retryStore.getItem(EVENT_ANIME_KEY));
+    assert.deepEqual(saved.event.includeWorkIds, ["legacy-work"]);
+    assert.deepEqual(saved.event.includeAnimeIds, ["local-101"]);
+    const journalIndex = retryStore.trace.findIndex(entry => entry.key === PENDING_KEY && entry.committed);
+    const mainIndex = retryStore.trace.findIndex(entry => entry.key === V.STORAGE_KEY && entry.committed);
+    const overrideIndex = retryStore.trace.findIndex(entry => entry.key === EVENT_ANIME_KEY && entry.committed);
+    assert.ok(journalIndex >= 0 && mainIndex > journalIndex && overrideIndex > mainIndex);
+});
+
+test("recovery also blocks mutating data actions on anchors and non-button keyboard targets", () => {
+    const run = recoveryControlsRun(), writes = run.localStorage.trace.length;
+    for (const [type, selectors, extra] of [
+        ["click", ["a[href]", "[data-sync]"], {}],
+        ["click", ["[data-progress-action]"], {}],
+        ["keydown", ["[data-restore-id]"], { key:"Enter" }]
+    ]) {
+        let invoked = false;
+        const event = recoveryEvent(run, type, recoveryControl(selectors), () => { invoked = true; run.localStorage.setItem("forbidden", "write"); }, extra);
+        assert.equal(event.prevented, true);
+        assert.equal(event.stopped, true);
+        assert.equal(invoked, false);
+    }
+    assert.equal(run.localStorage.trace.length, writes);
+});
+
+test("recovery preserves copying, text selection, focus and arrow navigation in original details", () => {
+    const run = recoveryControlsRun(), control = recoveryControl(["textarea"]);
+    for (const extra of [{ key:"c", ctrlKey:true }, { key:"a", ctrlKey:true }, { key:"c", metaKey:true },
+        { key:"a", metaKey:true }, { key:"Tab" }, { key:"ArrowDown" }, { key:"Home" }, { key:"Escape" }]) {
+        let usable = false;
+        const event = recoveryEvent(run, "keydown", control, () => { usable = true; }, extra);
+        assert.equal(event.prevented, false, JSON.stringify(extra));
+        assert.equal(usable, true, JSON.stringify(extra));
+    }
+});
+
+class RecoveryThemeElement {
+    constructor(tag) { this.tagName = tag; this.className = ""; this.textContent = ""; this.childNodes = []; this.dataset = {}; this.handlers = {}; }
+    append(...children) { this.childNodes.push(...children); }
+    replaceChildren(...children) { this.childNodes = [...children]; }
+    addEventListener(type, handler) { this.handlers[type] = handler; }
+    setAttribute() {}
+    querySelectorAll(selector) {
+        const [tag, className] = selector.split(".");
+        const matches = node => node instanceof RecoveryThemeElement && (!tag || node.tagName === tag)
+            && (!className || node.className.split(" ").includes(className));
+        return this.childNodes.flatMap(node => node instanceof RecoveryThemeElement
+            ? [...(matches(node) ? [node] : []), ...node.querySelectorAll(selector)] : []);
+    }
+    querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
+    remove() {}
+}
+
+test("recovery can render and expand stored Theme Songs without lookup, cache, undo or main writes", async () => {
+    const original = anime(101, { themeSongs:{ openings:[{ type:"OP", sequence:1, title:"Stored OP", artist:"Stored artist" }], endings:[] } });
+    const run = recoveryControlsRun({ initial:{ [V.STORAGE_KEY]:JSON.stringify([original]) } });
+    run.api.navigator = { onLine:true };
+    run.api.AbortController = AbortController;
+    run.api.fetch = () => assert.fail("Expanding stored songs must not start a lookup during recovery");
+    run.api.document.createElement = tag => new RecoveryThemeElement(tag);
+    run.api.document.createTextNode = text => ({ textContent:text });
+    const writes = run.localStorage.trace.length;
+    vm.runInContext(themes, run.api);
+    const container = new RecoveryThemeElement("div"), api = run.api.window.ThemeSongs;
+    api.renderForAnime(run.api.animeList[0], container, { expanded:true });
+    assert.equal(api.expand(container), true);
+    const details = container.querySelector("details.theme-details");
+    details.handlers.toggle();
+    await Promise.resolve();
+    assert.ok(container.querySelectorAll("div.theme-song-title").some(node => node.textContent === "Stored OP"));
+    // Explicit recoveryPending protects late callbacks even if persisted was true.
+    run.api.window.__ANIME_STARTUP_STORAGE__.recoveryPending = false;
+    const lookup = api.beginThemeLookup(run.api.animeList[0]);
+    run.api.window.__ANIME_STARTUP_STORAGE__.recoveryPending = true;
+    run.api.window.__ANIME_STARTUP_STORAGE__.persisted = true;
+    const priorSongs = copy(run.api.animeList[0].themeSongs);
+    assert.equal(api.isThemeLookupCurrent(lookup, run.api.animeList[0]), false);
+    assert.equal(api.applyThemeLookupResult(run.api.animeList[0], { songs:{ openings:[], endings:[] } }, lookup), false);
+    assert.equal(api.invalidateThemeLookupCache(run.api.animeList[0]), false);
+    assert.deepEqual(copy(run.api.animeList[0].themeSongs), priorSongs);
+    assert.equal(run.localStorage.trace.length, writes);
+    originalKeysUnchanged(run.localStorage, run.initial);
+});
+
+test("service-worker controller changes do not write session settings or reload a recovery view", async () => {
+    const run = recoveryControlsRun(), listeners = new Map(), session = storage({ previous:"retain" });
+    run.api.sessionStorage = session;
+    run.api.navigator = { serviceWorker:{
+        controller:null,
+        addEventListener:(type, handler) => listeners.set(type, handler),
+        register:async () => ({ addEventListener:() => {}, update:async () => {}, active:null })
+    } };
+    run.api.location = { reload:() => assert.fail("Keep the usable recovery view open") };
+    vm.runInContext(between(ui, "function registerAppServiceWorker", "function wireStaticControls"), run.api);
+    assert.doesNotThrow(() => run.api.registerAppServiceWorker());
+    assert.doesNotThrow(() => listeners.get("controllerchange")());
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.deepEqual(session.snapshot(), { previous:"retain" });
+    assert.deepEqual(session.trace, []);
 });

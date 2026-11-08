@@ -107,11 +107,14 @@ function storage(list, options = {}) {
 
 function runtime(list = [legacy()], options = {}) {
     const localStorage = options.storage || storage(list, options);
-    const trace = { confirms:[], toasts:[], warnings:[], errors:[], renders:[], refreshes:[], clickHandlers:[] };
+    const trace = { confirms:[], toasts:[], warnings:[], errors:[], renders:[], refreshes:[], clickHandlers:[], uploads:[], clients:0 };
+    const timers = new Map();
     const migratedCalls = [];
     const guardedV = { ...V, migrateList:() => { migratedCalls.push("migrateList"); throw new Error("Confirmation must not migrate unrelated records"); } };
     const context = vm.createContext({
         animeList:copy(list), STORAGE_KEY:V.STORAGE_KEY, localStorage,
+        EVENT_OVERRIDES_KEY:"anime_event_overrides_v10", EVENT_ANIME_OVERRIDES_KEY:"anime_event_anime_overrides_v11",
+        eventOverrides:{}, eventAnimeOverrides:{}, eventSettings:{}, animeListSort:"watching-first",
         AnimeTrackerV11:guardedV, window:{ AnimeTrackerV11:guardedV },
         document:{ addEventListener:(type, handler) => { if (type === "click") trace.clickHandlers.push(handler); } },
         confirm:message => {
@@ -125,18 +128,61 @@ function runtime(list = [legacy()], options = {}) {
         renderList:() => trace.renders.push({ memory:copy(context.animeList), stored:JSON.parse(localStorage.getItem(V.STORAGE_KEY)) }),
         refreshV11:() => trace.refreshes.push({ memory:copy(context.animeList), stored:JSON.parse(localStorage.getItem(V.STORAGE_KEY)) }),
         saveAndRender:() => { migratedCalls.push("saveAndRender"); throw new Error("Confirmation must not call general saveAndRender"); },
-        Date
+        Date:class extends Date {
+            constructor(...args) { super(...(args.length ? args : [options.now || at])); }
+            static now() { return Date.parse(options.now || at); }
+        }
     });
     context.window.refreshV11 = context.refreshV11;
     vm.runInContext(production, context, { filename:"production-manual-watching-confirmation.js" });
     vm.runInContext(productionDelegate, context, { filename:"production-manual-watching-click.js" });
     if (options.recoveryPending) context.window.__ANIME_STARTUP_STORAGE__ = { persisted:false, recoveryPending:true, originalList:copy(list) };
-    return { api:context, localStorage, trace, migratedCalls };
+    const syncStatus = { textContent:"" };
+    if (options.enableSync) {
+        if (options.autoSync !== false) localStorage.setItem("anime_tracker_auto_sync_v11", "1");
+        context.document.getElementById = () => syncStatus;
+        context.setTimeout = callback => { const id = Symbol(); timers.set(id, callback); return id; };
+        context.clearTimeout = id => timers.delete(id);
+        context.window.CrossMediaTracker = { snapshot:() => { throw Error("Confirmation sync must not migrate or persist cross-media data"); } };
+        context.window.ANIME_SYNC_CONFIG = { supabaseUrl:"https://example.invalid", anonKey:"synthetic-test-key" };
+        context.window.supabase = { createClient:() => {
+            trace.clients++;
+            return {
+                auth:{ getUser:async () => { options.onGetUser?.(context); return { data:{ user:{ id:"synthetic-user" } } }; } },
+                from:table => {
+                    assert.equal(table, "anime_tracker_payloads");
+                    return { upsert:async value => {
+                        trace.uploads.push(copy(value)); options.onUpload?.(context);
+                        return { error:options.uploadError || null };
+                    } };
+                }
+            };
+        } };
+        const ui = fs.readFileSync(path.join(__dirname, "..", "v11-ui.js"), "utf8");
+        const uiFunction = name => {
+            const start = ui.search(new RegExp(`    (?:async )?function ${name}\\(`));
+            assert.ok(start >= 0, `Missing UI function ${name}`);
+            if (name === "requestAnimeAutoSync") return ui.slice(start, ui.indexOf("\n    window.requestAnimeAutoSync", start));
+            const rest = ui.slice(start), match = /\n    (?:async )?function /.exec(rest);
+            assert.ok(match, `Missing UI boundary after ${name}`);
+            return rest.slice(0, match.index);
+        };
+        vm.runInContext(ui.slice(0, ui.indexOf("    function bootstrapAnimeStorage")) + "\n"
+            + ["requestAnimeAutoSync", "syncConfigured", "renderSyncStatus", "handleSync"].map(uiFunction).join("\n")
+            + "\nwindow.requestAnimeAutoSync=requestAnimeAutoSync;\n})();", context);
+        localStorage.operations.length = 0;
+    }
+    return { api:context, localStorage, trace, migratedCalls, syncStatus, timers,
+        flushSync:async () => {
+            for (const [id, callback] of timers) { timers.delete(id); callback(); }
+            await new Promise(resolve => setImmediate(resolve));
+        }
+    };
 }
 
 function expectedConfirmed(list, id) {
     return list.map(item => String(item.id) === String(id)
-        ? { ...item, category:"watching", categorySource:"manual", categoryManuallyEdited:true }
+        ? { ...item, category:"watching", categorySource:"manual", categoryManuallyEdited:true, updatedAt:at }
         : item);
 }
 
@@ -144,7 +190,7 @@ function successfulConfirmation(run, beforeList, id) {
     const beforeStorage = run.localStorage.snapshot();
     assert.doesNotThrow(() => run.api.confirmAnimeWatching(id));
     const expected = expectedConfirmed(beforeList, id);
-    assert.deepEqual(copy(run.api.animeList), expected, "The action changes exactly three category/ownership fields");
+    assert.deepEqual(copy(run.api.animeList), expected, "Only category, ownership and the selected record's version timestamp change");
     assert.deepEqual(JSON.parse(run.localStorage.getItem(V.STORAGE_KEY)), expected);
     assert.equal(run.trace.confirms.length, 1, "A user confirmation is required before the write");
     assert.match(run.trace.confirms[0], /watching|追番/u);
@@ -190,9 +236,15 @@ for (const [label, ownership] of [
     ["explicit automatic", { categorySource:"automatic", categoryManuallyEdited:false }],
     ["explicit manual waiting", { categorySource:"manual", categoryManuallyEdited:true }]
 ]) {
-    test(`${label}: the user's explicit confirmation takes manual ownership without changing progress or timestamps`, () => {
+    test(`${label}: confirmation respects existing ownership and changes only the eligible legacy record`, () => {
         const list = [legacy(101, ownership)];
-        successfulConfirmation(runtime(list), list, "local-101");
+        const run = runtime(list);
+        if (label.startsWith("explicit")) {
+            assert.equal(run.api.confirmAnimeWatching("local-101"), false);
+            assert.deepEqual(copy(run.api.animeList), list);
+            assert.deepEqual(run.localStorage.operations, []);
+            assert.equal(run.trace.confirms.length, 0);
+        } else successfulConfirmation(run, list, "local-101");
     });
 }
 
@@ -229,6 +281,8 @@ for (const [label, list, id] of [
     ["unknown local ID", [legacy()], "missing"],
     ["deleted waiting", [legacy(101, { deletedAt:before })], "local-101"],
     ["non-waiting", [legacy(101, { category:"review" })], "local-101"],
+    ["unknown airing evidence", [legacy(101, { status:"", startDate:{}, releasedEpisodes:null, nextEpisode:null })], "local-101"],
+    ["not yet aired", [legacy(101, { status:"NOT_YET_RELEASED", startDate:{ year:2027, month:1, day:1 }, releasedEpisodes:0, nextEpisode:1 })], "local-101"],
     ["ambiguous local ID", [legacy(), legacy(202, { id:"local-101" })], "local-101"]
 ]) {
     test(`${label} cannot confirm an unintended record or create a saved success state`, () => {
@@ -271,7 +325,7 @@ test("explicit external identity selects exactly one record when a legacy local 
     const run = runtime(list), beforeStorage = run.localStorage.snapshot();
     assert.equal(run.api.confirmAnimeWatching("local-101", "202"), true);
     const expected = copy(list);
-    expected[1] = { ...expected[1], category:"watching", categorySource:"manual", categoryManuallyEdited:true };
+    expected[1] = { ...expected[1], category:"watching", categorySource:"manual", categoryManuallyEdited:true, updatedAt:at };
     assert.deepEqual(copy(run.api.animeList), expected);
     assert.deepEqual(JSON.parse(run.localStorage.getItem(V.STORAGE_KEY)), expected);
     assert.equal(JSON.stringify(run.api.animeList[0]), JSON.stringify(list[0]));
@@ -295,6 +349,8 @@ for (const identity of ["999", "303"]) {
 for (const [label, replacement] of [
     ["deleted", item => ({ ...item, deletedAt:before })],
     ["no longer waiting", item => ({ ...item, category:"watching" })],
+    ["manually kept waiting", item => ({ ...item, categorySource:"manual", categoryManuallyEdited:true })],
+    ["no longer known to be airing", item => ({ ...item, status:"", startDate:{}, releasedEpisodes:null, nextEpisode:null })],
     ["different external identity", item => ({ ...item, anilistId:202, sourceId:"202" })]
 ]) {
     test(`a record ${label} while the dialog is open is rechecked before saving`, () => {
@@ -375,7 +431,7 @@ test("the actual delegated waiting-card click carries identity and confirms only
     });
     assert.equal(prevented, true);
     assert.deepEqual(copy(run.api.animeList), [list[0], {
-        ...list[1], category:"watching", categorySource:"manual", categoryManuallyEdited:true
+        ...list[1], category:"watching", categorySource:"manual", categoryManuallyEdited:true, updatedAt:at
     }]);
     assert.equal(run.trace.confirms.length, 1);
 });
@@ -407,7 +463,8 @@ test("failed-startup display defaults never leak into persisted target or other 
     assert.deepEqual(copy(run.api.window.__ANIME_STARTUP_STORAGE__.originalList), expectedRaw);
     assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__.persisted, false, "Single-record confirmation does not claim unrelated startup migrations completed");
     assert.equal(JSON.stringify(expectedRaw[1]), JSON.stringify(raw[1]));
-    for (const key of ["createdAt", "addedAt", "updatedAt", "lastWatchedAt"]) assert.equal(Object.hasOwn(expectedRaw[0], key), false);
+    for (const key of ["createdAt", "addedAt", "lastWatchedAt"]) assert.equal(Object.hasOwn(expectedRaw[0], key), false);
+    assert.equal(expectedRaw[0].updatedAt, at, "Only the confirmation's version timestamp is added");
 });
 
 test("confirmation preserves another record's newer persisted edit instead of saving unrelated stale memory", () => {
@@ -438,7 +495,9 @@ test("real near-capacity ownership growth leaves persisted and visible data unch
 });
 
 for (const [label, value] of [["invalid JSON", "invalid-json"], ["non-array", "{}"],
-    ["missing target", JSON.stringify([legacy(202)])], ["changed category", JSON.stringify([legacy(101, { category:"review" })])]]) {
+    ["missing target", JSON.stringify([legacy(202)])], ["changed category", JSON.stringify([legacy(101, { category:"review" })])],
+    ["manual waiting ownership", JSON.stringify([legacy(101, { categorySource:"manual", categoryManuallyEdited:true })])],
+    ["missing airing evidence", JSON.stringify([legacy(101, { status:"", startDate:{}, releasedEpisodes:null, nextEpisode:null })])]]) {
     test(`unsafe persisted ${label} cannot be overwritten by classification confirmation`, () => {
         const list = [legacy()], localStorage = storage(list);
         localStorage.setItem(V.STORAGE_KEY, value);
@@ -481,7 +540,7 @@ test("real startup and v11 bootstrap preserve confirmed raw progress and timesta
     vm.runInContext(ui.slice(0, ui.indexOf("const originalSaveAndRender")) + "\n})();", reloaded.api);
     const stored = JSON.parse(run.localStorage.getItem(V.STORAGE_KEY))[0];
     const visible = reloaded.api.animeList[0];
-    for (const key of ["watched", "currentEpisode", "progress", "reviewWatched", "rating", "notes", "updatedAt",
+    for (const key of ["watched", "currentEpisode", "progress", "reviewWatched", "rating", "notes",
         "createdAt", "addedAt", "lastWatchedAt", "lastMetadataSync", "reviewStartedAt", "trackingLifecycleResetAt"]) {
         assert.deepEqual(copy(stored[key]), copy(list[0][key]), `Persisted ${key} survives refresh`);
         assert.deepEqual(copy(visible[key]), copy(list[0][key]), `Visible ${key} survives refresh`);
@@ -489,6 +548,8 @@ test("real startup and v11 bootstrap preserve confirmed raw progress and timesta
     assert.equal(stored.category, "watching");
     assert.equal(stored.categorySource, "manual");
     assert.equal(stored.categoryManuallyEdited, true);
+    assert.equal(stored.updatedAt, at);
+    assert.equal(visible.updatedAt, at);
 });
 
 test("an omitted external argument still binds the confirmation to the original known identity", () => {
@@ -535,3 +596,166 @@ test("in-place replacement of an identity-less title cannot reuse the original c
     assert.equal(run.localStorage.operations.length, 1, "Only the simulated replacement writes");
     assert.equal(run.trace.renders.length, 0);
 });
+
+test("confirmation version wins against a newer pre-confirmation cloud copy on both devices", () => {
+    const list = [legacy(), legacy(202)], run = runtime(list);
+    assert.equal(run.api.confirmAnimeWatching(list[0].id), true);
+    const saved = JSON.parse(run.localStorage.getItem(V.STORAGE_KEY));
+    const cloud = copy(list);
+    cloud[0].updatedAt = "2026-10-07T00:00:00.000Z";
+    cloud[1].notes = "newer note on the other device";
+    cloud[1].updatedAt = "2026-10-07T00:00:00.000Z";
+    for (const merged of [V.mergeById(saved, cloud), V.mergeById(cloud, saved)]) {
+        assert.equal(merged[0].category, "watching");
+        assert.equal(merged[0].categorySource, "manual");
+        assert.equal(merged[0].categoryManuallyEdited, true);
+        assert.equal(merged[0].updatedAt, at);
+        assert.equal(merged[1].notes, cloud[1].notes, "The other record still uses its own version");
+    }
+    for (const merged of [V.mergeCloudPayload({ animeList:saved }, { animeList:cloud }),
+        V.mergeCloudPayload({ animeList:cloud }, { animeList:saved })]) {
+        assert.equal(merged.animeList[0].category, "watching");
+        assert.equal(merged.animeList[0].categorySource, "manual");
+        assert.equal(merged.animeList[0].categoryManuallyEdited, true);
+        assert.equal(merged.animeList[0].updatedAt, at);
+        assert.equal(merged.animeList[1].notes, cloud[1].notes);
+    }
+    assert.deepEqual(saved, expectedConfirmed(list, list[0].id));
+});
+
+test("confirmation timestamp remains strictly newer when the saved row is ahead of the device clock", () => {
+    const list = [legacy(101, { updatedAt:"2026-10-20T00:00:00.000Z" }), legacy(202)];
+    const run = runtime(list);
+    assert.equal(run.api.confirmAnimeWatching(list[0].id), true);
+    assert.equal(run.api.animeList[0].updatedAt, "2026-10-20T00:00:00.001Z");
+    assert.deepEqual(copy(run.api.animeList[1]), list[1]);
+});
+
+test("enabled auto-sync uploads only saved raw records without extra migration or main-list persistence", async () => {
+    const list = [legacy(), legacy(202)], run = runtime(list, { enableSync:true });
+    const beforeStorage = run.localStorage.snapshot();
+    assert.equal(run.api.confirmAnimeWatching(list[0].id), true);
+    assert.equal(run.timers.size, 1);
+    assert.equal(run.trace.uploads.length, 0);
+    assert.deepEqual(run.localStorage.operations.map(op => op.key), [V.STORAGE_KEY]);
+    await run.flushSync();
+    assert.equal(run.trace.uploads.length, 1);
+    const payload = run.trace.uploads[0].payload;
+    assert.deepEqual(payload[V.STORAGE_KEY], expectedConfirmed(list, list[0].id));
+    assert.deepEqual(payload.watchHistory, JSON.parse(beforeStorage[V.HISTORY_KEY]));
+    assert.deepEqual(payload.works, JSON.parse(beforeStorage[V.WORKS_KEY]));
+    assert.deepEqual(payload[V.MANGA_HISTORY_KEY], JSON.parse(beforeStorage[V.MANGA_HISTORY_KEY]));
+    assert.deepEqual(run.localStorage.operations.map(op => op.key), [V.STORAGE_KEY, "anime_tracker_last_sync_v11"]);
+    assert.deepEqual(run.migratedCalls, []);
+    assert.equal(run.syncStatus.textContent, "上傳完成");
+    for (const [key, value] of Object.entries(beforeStorage)) if (key !== V.STORAGE_KEY)
+        assert.equal(run.localStorage.getItem(key), value, `Sync leaves original auxiliary ${key} unchanged`);
+});
+
+test("disabled auto-sync leaves confirmation local with no network or timer", async () => {
+    const list = [legacy()], run = runtime(list, { enableSync:true, autoSync:false });
+    assert.equal(run.api.confirmAnimeWatching(list[0].id), true);
+    await run.flushSync();
+    assert.equal(run.trace.clients, 0);
+    assert.equal(run.trace.uploads.length, 0);
+    assert.equal(run.timers.size, 0);
+    assert.deepEqual(run.localStorage.operations.map(op => op.key), [V.STORAGE_KEY]);
+});
+
+test("failed category persistence never schedules or uploads an automatic sync", async () => {
+    const list = [legacy()], run = runtime(list, { enableSync:true, failKey:V.STORAGE_KEY });
+    assert.equal(run.api.confirmAnimeWatching(list[0].id), false);
+    await run.flushSync();
+    assert.equal(run.trace.clients, 0);
+    assert.equal(run.timers.size, 0);
+    assert.deepEqual(copy(run.api.animeList), list);
+});
+
+test("two confirmations reuse the existing debounce and upload both saved rows once", async () => {
+    const list = [legacy(), legacy(202)], run = runtime(list, { enableSync:true });
+    assert.equal(run.api.confirmAnimeWatching(list[0].id), true);
+    assert.equal(run.api.confirmAnimeWatching(list[1].id), true);
+    assert.equal(run.timers.size, 1);
+    await run.flushSync();
+    assert.equal(run.trace.uploads.length, 1);
+    assert.deepEqual(run.trace.uploads[0].payload[V.STORAGE_KEY], expectedConfirmed(expectedConfirmed(list, list[0].id), list[1].id));
+    assert.equal(run.localStorage.operations.filter(op => op.key === V.STORAGE_KEY).length, 2);
+});
+
+for (const label of ["recovery pending", "auto-sync disabled"]) {
+    test(`a previously queued sync is skipped when ${label} before its timer fires`, async () => {
+        const run = runtime([legacy()], { enableSync:true });
+        assert.equal(run.api.confirmAnimeWatching("local-101"), true);
+        if (label === "recovery pending") run.api.window.__ANIME_STARTUP_STORAGE__ = { recoveryPending:true };
+        else run.localStorage.setItem("anime_tracker_auto_sync_v11", "0");
+        const before = run.localStorage.snapshot(), count = run.localStorage.operations.length;
+        await run.flushSync();
+        assert.equal(run.trace.clients, 0);
+        assert.deepEqual(run.localStorage.snapshot(), before);
+        assert.equal(run.localStorage.operations.length, count);
+    });
+}
+
+test("recovery beginning while cloud auth is awaited prevents the upload and local sync marker", async () => {
+    const run = runtime([legacy()], { enableSync:true,
+        onGetUser:context => { context.window.__ANIME_STARTUP_STORAGE__ = { recoveryPending:true }; } });
+    assert.equal(run.api.confirmAnimeWatching("local-101"), true);
+    await run.flushSync();
+    assert.equal(run.trace.uploads.length, 0);
+    assert.equal(run.localStorage.getItem("anime_tracker_last_sync_v11"), null);
+    assert.deepEqual(run.localStorage.operations.map(op => op.key), [V.STORAGE_KEY]);
+});
+
+test("cloud upload failure preserves the local confirmation and reports sync failure without a success marker", async () => {
+    const list = [legacy()], run = runtime(list, { enableSync:true, uploadError:{ message:"synthetic upload failure" } });
+    assert.equal(run.api.confirmAnimeWatching("local-101"), true);
+    await run.flushSync();
+    assert.deepEqual(JSON.parse(run.localStorage.getItem(V.STORAGE_KEY)), expectedConfirmed(list, "local-101"));
+    assert.equal(run.localStorage.getItem("anime_tracker_last_sync_v11"), null);
+    assert.match(run.syncStatus.textContent, /同步失敗/u);
+});
+
+test("an upload already in flight cannot write a sync marker after recovery becomes read-only", async () => {
+    const run = runtime([legacy()], { enableSync:true,
+        onUpload:context => { context.window.__ANIME_STARTUP_STORAGE__ = { recoveryPending:true }; } });
+    assert.equal(run.api.confirmAnimeWatching("local-101"), true);
+    await run.flushSync();
+    assert.equal(run.trace.uploads.length, 1);
+    assert.equal(run.localStorage.getItem("anime_tracker_last_sync_v11"), null);
+    assert.deepEqual(run.localStorage.operations.map(op => op.key), [V.STORAGE_KEY]);
+});
+
+test("quota failure writing the optional last-sync marker cannot undo or repeat the category save", async () => {
+    const list = [legacy()], run = runtime(list, { enableSync:true, failKey:"anime_tracker_last_sync_v11" });
+    assert.equal(run.api.confirmAnimeWatching("local-101"), true);
+    await run.flushSync();
+    assert.equal(run.trace.uploads.length, 1);
+    assert.equal(run.localStorage.operations.filter(op => op.key === V.STORAGE_KEY).length, 1);
+    assert.equal(run.localStorage.getItem("anime_tracker_last_sync_v11"), null);
+    assert.deepEqual(JSON.parse(run.localStorage.getItem(V.STORAGE_KEY)), expectedConfirmed(list, "local-101"));
+    assert.match(run.syncStatus.textContent, /同步失敗/u);
+});
+
+for (const phase of ["before debounce", "while awaiting cloud auth"]) {
+    for (const [label, corrupt] of [
+        ["malformed main JSON", store => store.setItem(V.STORAGE_KEY, "invalid-json")],
+        ["missing main list", store => store.removeItem(V.STORAGE_KEY)],
+        ["invalid main record", store => store.setItem(V.STORAGE_KEY, "[null]")],
+        ["invalid history shape", store => store.setItem(V.HISTORY_KEY, "{}")]
+    ]) {
+        test(`${label} ${phase} blocks upload instead of silently replacing cloud records with empty data`, async () => {
+            const run = runtime([legacy()], { enableSync:true,
+                onGetUser:phase === "while awaiting cloud auth" ? context => corrupt(context.localStorage) : undefined });
+            assert.equal(run.api.confirmAnimeWatching("local-101"), true);
+            if (phase === "before debounce") corrupt(run.localStorage);
+            await run.flushSync();
+            assert.equal(run.trace.uploads.length, 0);
+            assert.equal(run.localStorage.getItem("anime_tracker_last_sync_v11"), null);
+            assert.match(run.syncStatus.textContent, /同步失敗/u);
+            assert.equal(run.api.animeList[0].category, "watching", "The independently saved local confirmation remains visible");
+            assert.equal(run.localStorage.operations.filter(op => op.key === V.STORAGE_KEY).length,
+                label.startsWith("malformed") || label.startsWith("invalid main") || label.startsWith("missing") ? 2 : 1,
+                "Only confirmation and the simulated external corruption touch the main list");
+        });
+    }
+}
