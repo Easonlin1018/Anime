@@ -507,6 +507,7 @@
 </head>
 
 <body>
+<div id="anime-startup-storage-warning" role="status" hidden style="padding:12px;background:#422006;color:#fef3c7;border:1px solid #a16207;border-radius:8px;margin:12px;">啟動資料更新尚未完成。</div>
 <div class="container">
     <h1>🎬 全自動動漫追番基地 v11.0</h1>
 
@@ -691,139 +692,291 @@ const batchBtn = document.getElementById("batch-btn");
 let pendingSingleAnimeSearch = [];
 
 function loadStoredAnime() {
-    const readLocalJson = (key, fallback) => {
+    const pendingKey = "anime_tracker_startup_pending_v1";
+    const startup = window.__ANIME_STARTUP_STORAGE__ = { persisted:false, warnings:[], recoveryPending:false };
+    window.getAnimeStartupStoredItem = getAnimeStartupStoredItem;
+    window.warnAnimeStartupStorage = warnAnimeStartupStorage;
+    window.assertAnimeStartupWritable = assertAnimeStartupWritable;
+    const readJson = (key, fallback) => {
         try {
-            const value = JSON.parse(localStorage.getItem(key) || "");
+            const raw = getAnimeStartupStoredItem(key);
+            if (raw === null) return fallback;
+            const value = JSON.parse(raw);
+            const arrayKey = [STORAGE_KEY, ...OLD_KEYS, AnimeTrackerV11.HISTORY_KEY,
+                AnimeTrackerV11.WORKS_KEY, AnimeTrackerV11.MANGA_HISTORY_KEY].includes(key);
+            const objectKey = [EVENT_OVERRIDES_KEY, EVENT_ANIME_OVERRIDES_KEY,
+                "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1"].includes(key);
+            if (value !== null && ((arrayKey && !Array.isArray(value))
+                || (objectKey && (typeof value !== "object" || Array.isArray(value))))) throw new Error("Invalid stored data shape");
+            if ([STORAGE_KEY, ...OLD_KEYS].includes(key) && Array.isArray(value)
+                && value.some(item => !item || typeof item !== "object" || Array.isArray(item))) throw new Error("Invalid anime record");
             return value ?? fallback;
-        } catch {
-            return fallback;
-        }
+        } catch { (startup.invalidKeys ||= []).push(key); return fallback; }
     };
+    let pending;
     try {
-        const current = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        if (Array.isArray(current)) animeList = current;
-    } catch {
-        animeList = [];
+        const raw = localStorage.getItem(pendingKey);
+        pending = raw === null ? null : JSON.parse(raw);
+        if (raw !== null && !isAnimeStartupSnapshot(pending)) throw new Error("Invalid startup recovery snapshot");
+        if (pending?.state === 0) {
+            if (!pending.originals || !Array.isArray(pending.originalList)) throw new Error("Invalid startup recovery snapshot");
+            startup.recoverySnapshot = pending;
+            const restored = restoreAnimeStartupStorage(pending.originals);
+            if (!restored) throw new Error("Startup recovery is still pending");
+            localStorage.removeItem(pendingKey);
+            startup.recoverySnapshot = null;
+        } else if (pending?.state === 1) {
+            // The durable commit marker means every planned data key was written.
+            try { localStorage.removeItem(pendingKey); }
+            catch (error) { warnAnimeStartupStorage("recovery-cleanup", error); }
+        }
+    } catch (error) {
+        startup.recoveryPending = true;
+        startup.failedStage = "recovery";
+        warnAnimeStartupStorage("recovery", error);
     }
-
-    if (animeList.length === 0) {
+    let originalList = readJson(STORAGE_KEY, []);
+    if (!Array.isArray(originalList)) originalList = [];
+    if (!originalList.length) {
         for (const key of OLD_KEYS) {
-            try {
-                const old = JSON.parse(localStorage.getItem(key) || "[]");
-                if (Array.isArray(old) && old.length > 0) {
-                    animeList = old;
-                    break;
-                }
-            } catch {}
+            const old = readJson(key, []);
+            if (Array.isArray(old) && old.length) { originalList = old; break; }
         }
     }
-
-    animeList = animeList.map(item => ({
-        ...item,
-        lastWatchedAt: item.lastWatchedAt || null,
-        addedAt: item.addedAt || null,
-        aliases: normalizeAnimeAliasList([
-            item.title,
-            ...(Array.isArray(item.aliases) ? item.aliases : [])
-        ])
-    }));
-
-    const duplicateState = {
-        eventOverrides,
-        eventAnimeOverrides,
-        watchHistory:readLocalJson(AnimeTrackerV11.HISTORY_KEY, []),
-        works:readLocalJson(AnimeTrackerV11.WORKS_KEY, []),
-        mangaReadHistory:readLocalJson(AnimeTrackerV11.MANGA_HISTORY_KEY, []),
-        themeCache:readLocalJson("anime_theme_lookup_cache_v1", {}),
-        themeUndo:readLocalJson("anime_theme_last_undo_v1", null)
+    if (startup.recoverySnapshot) originalList = startup.recoverySnapshot.originalList;
+    startup.originalList = JSON.parse(JSON.stringify(originalList));
+    const originalOverrides = readJson(EVENT_OVERRIDES_KEY, eventOverrides);
+    const originalAnimeOverrides = readJson(EVENT_ANIME_OVERRIDES_KEY, eventAnimeOverrides);
+    const originalState = {
+        eventOverrides:originalOverrides, eventAnimeOverrides:originalAnimeOverrides,
+        watchHistory:readJson(AnimeTrackerV11.HISTORY_KEY, []),
+        works:readJson(AnimeTrackerV11.WORKS_KEY, []),
+        mangaReadHistory:readJson(AnimeTrackerV11.MANGA_HISTORY_KEY, []),
+        themeCache:readJson("anime_theme_lookup_cache_v1", {}),
+        themeUndo:readJson("anime_theme_last_undo_v1", null)
     };
-    const legacyIdentityRecovery = AnimeTrackerV11.recoverLegacyAnimeIdentities(animeList, duplicateState);
-    window.__ANIME_LEGACY_IDENTITY_RECOVERY__ = legacyIdentityRecovery.report;
-    if (legacyIdentityRecovery.changed) {
-        try {
-            const backupKey = "anime_tracker_legacy_identity_recovery_backup_v1";
-            if (!localStorage.getItem(backupKey)) {
-                localStorage.setItem(backupKey, JSON.stringify({
-                    createdAt:new Date().toISOString(),
-                    animeList,
-                    ...duplicateState
-                }));
-            }
-        } catch (error) {
-            console.warn("無法建立 legacy identity recovery 備份", error);
-        }
-        animeList = legacyIdentityRecovery.list;
-        if (EVENT_MATCH_DEBUG) console.info("Legacy AniList identity recovery", legacyIdentityRecovery.report);
-    }
-    const reconciliation = AnimeTrackerV11.reconcileExistingAnimeDuplicates(animeList, duplicateState);
-    window.__ANIME_DUPLICATE_RECONCILIATION__ = {
-        changed:reconciliation.changed,
-        mergedCount:reconciliation.mergedCount,
-        legacyBoundCount:reconciliation.legacyBoundCount,
-        reassignedCount:reconciliation.reassignedCount,
-        groups:reconciliation.groups,
-        collisions:reconciliation.collisions
+    const fallback = () => {
+        animeList = startupAnimeView(startup.originalList);
+        eventOverrides = originalOverrides;
+        eventAnimeOverrides = originalAnimeOverrides;
+        window.__ANIME_EXISTING_MEDIA_MIGRATION__ = { totalChanged:0, deferred:true };
+        window.__ANIME_DUPLICATE_RECONCILIATION__ = { changed:false, mergedCount:0, deferred:true };
     };
-    if (reconciliation.changed) {
-        try {
-            const backupKey = reconciliation.reassignedCount > 0
-                ? "anime_tracker_duplicate_migration_backup_v2"
-                : "anime_tracker_duplicate_migration_backup_v1";
-            if (!localStorage.getItem(backupKey)) {
-                localStorage.setItem(backupKey, JSON.stringify({
-                    createdAt:new Date().toISOString(),
-                    animeList,
-                    ...duplicateState
-                }));
-            }
-        } catch (error) {
-            console.warn("無法建立重複資料遷移備份：", error);
-        }
-        animeList = reconciliation.list;
-        eventOverrides = reconciliation.state.eventOverrides;
-        eventAnimeOverrides = reconciliation.state.eventAnimeOverrides;
-        localStorage.setItem(AnimeTrackerV11.HISTORY_KEY, JSON.stringify(reconciliation.state.watchHistory));
-        localStorage.setItem(AnimeTrackerV11.WORKS_KEY, JSON.stringify(reconciliation.state.works));
-        localStorage.setItem(AnimeTrackerV11.MANGA_HISTORY_KEY, JSON.stringify(reconciliation.state.mangaReadHistory));
-        localStorage.setItem("anime_theme_lookup_cache_v1", JSON.stringify(reconciliation.state.themeCache));
-        if (reconciliation.state.themeUndo) localStorage.setItem("anime_theme_last_undo_v1", JSON.stringify(reconciliation.state.themeUndo));
-        else localStorage.removeItem("anime_theme_last_undo_v1");
-        if (EVENT_MATCH_DEBUG) console.info("Anime duplicate reconciliation", {
-            merged:reconciliation.groups,
-            localIdCollisions:reconciliation.collisions
-        });
+    fallback();
+    if (startup.invalidKeys?.length) {
+        startup.failedStage = "stored-data";
+        startup.recoveryPending = true;
+        warnAnimeStartupStorage("stored-data", new Error("Stored data could not be read safely"));
+        installAnimeStartupRecoveryGuard();
+        return;
     }
-
-    const existingMediaMigration = migrateExistingAnimeRecords(animeList);
-    window.__ANIME_EXISTING_MEDIA_MIGRATION__ = existingMediaMigration.report;
-    if (existingMediaMigration.changed) {
-        try {
-            const backupKey = "anime_tracker_title_series_migration_backup_v1";
-            if (!localStorage.getItem(backupKey)) {
-                localStorage.setItem(backupKey, JSON.stringify({
-                    createdAt:new Date().toISOString(),
-                    animeList
-                }));
-            }
-        } catch (error) {
-            console.warn("無法建立既有作品資料遷移備份：", error);
-        }
-        animeList = existingMediaMigration.list;
-        if (EVENT_MATCH_DEBUG) console.info("Existing anime metadata migration", existingMediaMigration.report);
+    if (startup.recoveryPending) { installAnimeStartupRecoveryGuard(); return; }
+    const plan = prepareAnimeStartupMigration(originalList, originalState);
+    const writes = [{ key:STORAGE_KEY, value:JSON.stringify(plan.list) }];
+    if (plan.reconciliation.changed) {
+        for (const [key, value] of [
+            [AnimeTrackerV11.HISTORY_KEY, plan.state.watchHistory],
+            [AnimeTrackerV11.WORKS_KEY, plan.state.works],
+            [AnimeTrackerV11.MANGA_HISTORY_KEY, plan.state.mangaReadHistory],
+            ["anime_theme_lookup_cache_v1", plan.state.themeCache]
+        ]) writes.push({ key, value:JSON.stringify(value) });
+        // Startup never deletes an existing undo key.
+        if (plan.state.themeUndo != null) writes.push({ key:"anime_theme_last_undo_v1", value:JSON.stringify(plan.state.themeUndo) });
     }
-
-    const activeAnimeIds = animeList.filter(item => !item.deletedAt).map(item => item.id);
-    eventAnimeOverrides = AnimeTrackerV11.pruneAnimeIdOverrides(eventAnimeOverrides, activeAnimeIds);
-    eventOverrides = AnimeTrackerV11.pruneAnimeIdOverrides(eventOverrides, activeAnimeIds);
-    localStorage.setItem(EVENT_ANIME_OVERRIDES_KEY, JSON.stringify(eventAnimeOverrides));
-    localStorage.setItem(EVENT_OVERRIDES_KEY, JSON.stringify(eventOverrides));
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
+    writes.push({ key:EVENT_ANIME_OVERRIDES_KEY, value:JSON.stringify(plan.state.eventAnimeOverrides) },
+        { key:EVENT_OVERRIDES_KEY, value:JSON.stringify(plan.state.eventOverrides) });
+    try {
+        commitAnimeStartupChanges(writes, startup.originalList);
+    } catch (error) {
+        fallback();
+        warnAnimeStartupStorage(startup.failedStage || "migration", error);
+        installAnimeStartupRecoveryGuard();
+        return;
+    }
+    animeList = plan.list;
+    eventOverrides = plan.state.eventOverrides;
+    eventAnimeOverrides = plan.state.eventAnimeOverrides;
+    startup.persisted = true;
+    window.__ANIME_LEGACY_IDENTITY_RECOVERY__ = plan.recovery.report;
+    window.__ANIME_DUPLICATE_RECONCILIATION__ = plan.reconciliation;
+    window.__ANIME_EXISTING_MEDIA_MIGRATION__ = plan.migration.report;
+    // Optional backups cannot consume the space required for the actual migration.
+    for (const key of plan.backups) {
+        try {
+            if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify({
+                createdAt:new Date().toISOString(), animeList:startup.originalList, ...originalState
+            }));
+        } catch (error) { warnAnimeStartupStorage("backup", error); }
+    }
 }
 
-function saveAndRender() {
-    animeList = migrateExistingAnimeRecords(animeList).list;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
+function prepareAnimeStartupMigration(list, state) {
+    let animeList = list.map(item => ({ ...item,
+        aliases:normalizeAnimeAliasList([item.title, ...(Array.isArray(item.aliases) ? item.aliases : [])])
+    }));
+    const backups = [];
+    const recovery = AnimeTrackerV11.recoverLegacyAnimeIdentities(animeList, state);
+    if (recovery.changed) { animeList = recovery.list; backups.push("anime_tracker_legacy_identity_recovery_backup_v1"); }
+    const reconciliation = AnimeTrackerV11.reconcileExistingAnimeDuplicates(animeList, state);
+    animeList = reconciliation.list;
+    state = reconciliation.state;
+    // Identity helpers also supply schema defaults. Preserve original user data
+    // for records that were not merged; duplicate groups retain their existing policy.
+    const trackingFields = ["watched", "currentEpisode", "progress", "reviewWatched", "rating", "notes", "note", "memo",
+        "createdAt", "addedAt", "updatedAt", "lastWatchedAt", "lastMetadataSync", "reviewSessionActive",
+        "reviewStartedAt", "reviewCompletedAt", "trackingLifecycleResetAt", "nextEpisodeAt", "nextSeasonDate"];
+    animeList = animeList.map(item => {
+        const identity = AnimeTrackerV11.getAnimeAniListIdentity(item);
+        const matches = recovery.list.map((source, index) => ({ source, index })).filter(({ source }) =>
+            identity ? AnimeTrackerV11.getAnimeAniListIdentity(source) === identity : String(source.id) === String(item.id));
+        if (matches.length !== 1) return item;
+        const original = list[matches[0].index], next = { ...item };
+        for (const key of trackingFields) {
+            if (Object.prototype.hasOwnProperty.call(original, key)) next[key] = original[key];
+            else delete next[key];
+        }
+        return next;
+    });
+    if (reconciliation.changed) backups.push(reconciliation.reassignedCount > 0
+        ? "anime_tracker_duplicate_migration_backup_v2" : "anime_tracker_duplicate_migration_backup_v1");
+    const migration = migrateExistingAnimeRecords(animeList);
+    animeList = migration.list;
+    if (migration.changed) backups.push("anime_tracker_title_series_migration_backup_v1");
+    const activeIds = animeList.filter(item => !item.deletedAt).map(item => item.id);
+    state = { ...state,
+        eventAnimeOverrides:AnimeTrackerV11.pruneAnimeIdOverrides(state.eventAnimeOverrides, activeIds),
+        eventOverrides:AnimeTrackerV11.pruneAnimeIdOverrides(state.eventOverrides, activeIds)
+    };
+    return { list:animeList, state, recovery, reconciliation, migration, backups };
+}
+
+function startupAnimeView(list) {
+    // Supply missing display defaults without overwriting any original tracking fields.
+    return list.map(item => ({ ...AnimeTrackerV11.migrateAnime(item), ...item,
+        aliases:normalizeAnimeAliasList(Array.isArray(item.aliases) ? item.aliases : [item.title])
+    }));
+}
+
+function getAnimeStartupStoredItem(key) {
+    const originals = window.__ANIME_STARTUP_STORAGE__?.recoverySnapshot?.originals;
+    return originals && Object.prototype.hasOwnProperty.call(originals, key) ? originals[key] : localStorage.getItem(key);
+}
+
+function restoreAnimeStartupStorage(originals) {
+    let restored = true;
+    // Restore shrinking values first so recovery also works at the quota boundary.
+    const keys = Object.keys(originals).reverse().sort((a, b) => {
+        const delta = key => (originals[key]?.length || 0) - (localStorage.getItem(key)?.length || 0);
+        return delta(a) - delta(b);
+    });
+    for (const key of keys) {
+        try {
+            if (localStorage.getItem(key) === originals[key]) continue;
+            if (originals[key] === null) localStorage.removeItem(key); // Only a key created by this attempted migration.
+            else localStorage.setItem(key, originals[key]);
+        } catch { restored = false; }
+    }
+    return restored;
+}
+
+function isAnimeStartupSnapshot(snapshot) {
+    const keys = [STORAGE_KEY, EVENT_OVERRIDES_KEY, EVENT_ANIME_OVERRIDES_KEY,
+        AnimeTrackerV11.HISTORY_KEY, AnimeTrackerV11.WORKS_KEY, AnimeTrackerV11.MANGA_HISTORY_KEY,
+        "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1"];
+    return snapshot && typeof snapshot === "object" && !Array.isArray(snapshot)
+        && [0, 1].includes(snapshot.state) && Array.isArray(snapshot.originalList)
+        && snapshot.originals && typeof snapshot.originals === "object" && !Array.isArray(snapshot.originals)
+        && Object.entries(snapshot.originals).every(([key, value]) => keys.includes(key)
+            && (value === null || typeof value === "string"));
+}
+
+function commitAnimeStartupChanges(writes, originalList) {
+    const startup = window.__ANIME_STARTUP_STORAGE__;
+    const changes = writes.filter(({ key, value }) => localStorage.getItem(key) !== value
+        && !(localStorage.getItem(key) === null && ["{}", "[]", "null"].includes(value)));
+    if (!changes.length) return;
+    const pendingKey = "anime_tracker_startup_pending_v1";
+    const keys = [STORAGE_KEY, EVENT_OVERRIDES_KEY, EVENT_ANIME_OVERRIDES_KEY,
+        AnimeTrackerV11.HISTORY_KEY, AnimeTrackerV11.WORKS_KEY, AnimeTrackerV11.MANGA_HISTORY_KEY,
+        "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1"];
+    const originals = Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)]));
+    // Only multi-key startup migration needs a durable recovery snapshot.
+    const snapshot = changes.length > 1 ? { state:0, originals, originalList } : null;
+    const written = [];
+    let journalCreated = false;
+    try {
+        if (snapshot) {
+            startup.failedStage = "recovery-snapshot";
+            if (localStorage.getItem(pendingKey)) throw new Error("Existing recovery snapshot must be retained");
+            localStorage.setItem(pendingKey, JSON.stringify(snapshot));
+            journalCreated = true;
+        }
+        for (const { key, value } of changes) {
+            startup.failedStage = key;
+            localStorage.setItem(key, value);
+            written.push(key);
+        }
+        if (snapshot) localStorage.setItem(pendingKey, JSON.stringify({ ...snapshot, state:1 }));
+    } catch (error) {
+        const rollback = Object.fromEntries(written.map(key => [key, originals[key]]));
+        const restored = restoreAnimeStartupStorage(rollback);
+        if (journalCreated) {
+            if (restored) {
+                try { localStorage.removeItem(pendingKey); }
+                catch { startup.recoveryPending = true; startup.recoverySnapshot = snapshot; }
+            } else { startup.recoveryPending = true; startup.recoverySnapshot = snapshot; }
+        }
+        throw error;
+    }
+    startup.failedStage = null;
+    startup.persisted = true;
+    if (snapshot) {
+        try { localStorage.removeItem(pendingKey); }
+        catch (error) { warnAnimeStartupStorage("recovery-cleanup", error); }
+    }
+}
+
+function warnAnimeStartupStorage(stage, error) {
+    const startup = window.__ANIME_STARTUP_STORAGE__ ||= { persisted:false, warnings:[] };
+    startup.warnings.push({ stage, name:error?.name || "Error" });
+    const message = (startup.persisted || stage === "recovery-cleanup")
+        ? "作品資料已儲存，但本機備份或初始化資訊無法寫入。既有資料與備份仍保留。"
+        : "本機儲存空間不足或暫時無法寫入，啟動更新尚未完成。原始資料仍可查看，請勿清除網站資料。";
+    const banner = document.getElementById("anime-startup-storage-warning");
+    if (banner) { banner.hidden = false; banner.textContent = message; }
+    console.warn(message, error);
+    try { showToast(message, 9000); } catch {}
+}
+
+function assertAnimeStartupWritable() {
+    if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) {
+        const error = new Error("原始資料復原尚未完成，目前只能查看或匯出備份。");
+        warnAnimeStartupStorage("read-only", error);
+        throw error;
+    }
+}
+
+function installAnimeStartupRecoveryGuard() {
+    if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending || window.__ANIME_STARTUP_RECOVERY_GUARD__) return;
+    window.__ANIME_STARTUP_RECOVERY_GUARD__ = true;
+    const guard = event => {
+        if (!window.__ANIME_STARTUP_STORAGE__?.recoveryPending) return;
+        const allowed = event.target?.closest?.("#v11-export, .anime-title, [data-open-detail], [data-close-modal], .v11-nav button, a[href]");
+        if (event.type === "submit" || (!allowed && event.target?.closest?.("button"))) {
+            event.preventDefault(); event.stopImmediatePropagation();
+            try { assertAnimeStartupWritable(); } catch {}
+        }
+    };
+    document.addEventListener?.("click", guard, true);
+    document.addEventListener?.("submit", guard, true);
+}
+
+function saveAndRender(options = {}) {
+    assertAnimeStartupWritable();
+    const migration = migrateExistingAnimeRecords(Array.isArray(options.animeList) ? options.animeList : animeList);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(migration.list));
+    animeList = migration.list;
+    window.__ANIME_EXISTING_MEDIA_MIGRATION__ = migration.report;
     renderList();
 }
 
@@ -1826,6 +1979,7 @@ const MEDIA_FIELDS = `
     startDate { year month day }
     endDate { year month day }
     nextAiringEpisode { airingAt episode timeUntilAiring }
+    airingSchedule(notYetAired: false, perPage: 1) { nodes { airingAt episode } }
     externalLinks { site url type }
     relations {
         edges {
@@ -1956,10 +2110,15 @@ function normalizeStreamingLinks(links) {
     return [...unique.values()].slice(0, 8);
 }
 
-function releasedEpisodeCount(media, existing = {}) {
-    if (media?.nextAiringEpisode?.episode) return Math.max(0, Number(media.nextAiringEpisode.episode) - 1);
-    if (media?.status === "FINISHED" && Number(media?.episodes) > 0) return Number(media.episodes);
-    return Number(existing.releasedEpisodes) || 0;
+function releasedEpisodeCount(media, existing = {}, now = new Date()) {
+    const state = resolveMediaAiringState(media, now);
+    const next = media?.nextAiringEpisode;
+    const inferred = state === "releasing" && isValidAiringScheduleEntry(next, new Date(now).getTime() / 1000)
+        && Number(next.episode) > 1 ? Number(next.episode) - 1 : 0;
+    const finished = state === "finished" && Number(media?.episodes) > 0 ? Number(media.episodes) : 0;
+    const reported = Number.isSafeInteger(Number(media?.releasedEpisodes)) && Number(media.releasedEpisodes) > 0
+        ? Number(media.releasedEpisodes) : 0;
+    return Math.max(0, inferred, finished, reported, getKnownAiredEpisode(media, now)?.episode || 0, Number(existing.releasedEpisodes) || 0);
 }
 
 const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
@@ -1968,6 +2127,7 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "episodes",
     "totalEpisodes",
     "releasedEpisodes",
+    "airedEpisode",
     "nextEpisode",
     "nextAiringAt",
     "streamingLinks",
@@ -1983,7 +2143,7 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
     const patch = {
         status: media?.status || anime.status || "UNKNOWN",
         format: media?.format || anime.format || "",
-        releasedEpisodes: releasedEpisodeCount(media, anime),
+        releasedEpisodes: releasedEpisodeCount(media, anime, syncedAt),
         aliases: normalizeAnimeAliasList([
             ...(Array.isArray(anime.aliases) ? anime.aliases : []),
             previousTitle,
@@ -1997,6 +2157,9 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
         },
         lastMetadataSync: syncedAt
     };
+
+    const airedEpisode = getKnownAiredEpisode(media, syncedAt);
+    if (airedEpisode) patch.airedEpisode = airedEpisode;
 
     if (Number(media?.episodes) > 0) {
         patch.episodes = Number(media.episodes);
@@ -2035,7 +2198,7 @@ function applyMetadataManagedPatch(anime, patch) {
 }
 
 function applyMediaMetadata(anime, media, syncedAt = new Date().toISOString()) {
-    if (!anime || typeof anime !== "object" || !media || typeof media !== "object") return anime;
+    if (!anime || typeof anime !== "object" || anime.deletedAt || !media || typeof media !== "object") return anime;
     normalizeManagedGeneratedTitleFields(anime);
     const previousTitle = anime.title;
     refreshGeneratedAnimeTitle(anime, media);
@@ -2047,20 +2210,59 @@ function applyMediaMetadata(anime, media, syncedAt = new Date().toISOString()) {
 }
 
 function isMediaClearlyNotYetReleased(media, now = new Date()) {
+    return resolveMediaAiringState(media, now) === "not-yet-released";
+}
+
+function isValidAiringScheduleEntry(entry, reference) {
+    return Number.isFinite(reference) && Number.isSafeInteger(Number(entry?.episode)) && Number(entry.episode) > 0
+        && Number.isFinite(Number(entry.airingAt)) && Number(entry.airingAt) > 0
+        && (entry.timeUntilAiring == null || (Number.isFinite(Number(entry.timeUntilAiring))
+            && Math.abs(Number(entry.airingAt) - reference - Number(entry.timeUntilAiring)) <= 300));
+}
+
+function getKnownAiredEpisode(media, now = new Date()) {
+    const reference = new Date(now).getTime() / 1000;
+    if (!Number.isFinite(reference)) return null;
+    const candidates = [media?.airedEpisode, media?.nextAiringEpisode, ...(Array.isArray(media?.airingSchedule?.nodes) ? media.airingSchedule.nodes : [])];
+    return candidates.filter(entry => isValidAiringScheduleEntry(entry, reference) && Number(entry.airingAt) <= reference)
+        .map(entry => ({ episode:Number(entry.episode), airingAt:Number(entry.airingAt) }))
+        .sort((a, b) => b.airingAt - a.airingAt || b.episode - a.episode)[0] || null;
+}
+
+function resolveMediaAiringState(media, now = new Date()) {
     const status = String(media?.status || "").toUpperCase();
-    if (status === "NOT_YET_RELEASED") return true;
-    if (["FINISHED", "RELEASING", "CANCELLED"].includes(status)) return false;
+    if (status === "FINISHED") return "finished";
+    if (status === "CANCELLED") return "cancelled";
+    if (status === "RELEASING") return "releasing";
+    if (getKnownAiredEpisode(media, now)) return "releasing";
 
     const startDate = getStructuredMediaStartDate(media);
-    if (!startDate.year) return false;
-    const start = new Date(Date.UTC(startDate.year, (startDate.month || 1) - 1, startDate.day || 1));
-    const reference = now instanceof Date ? now : new Date(now);
-    return !Number.isNaN(start.getTime()) && !Number.isNaN(reference.getTime()) && start.getTime() > reference.getTime();
+    const reference = new Date(now).getTime();
+    const start = startDate.year ? Date.UTC(startDate.year, (startDate.month || 1) - 1, startDate.day || 1) : NaN;
+    const calendarDate = new Date(start);
+    const validStart = calendarDate.getUTCFullYear() === startDate.year
+        && calendarDate.getUTCMonth() + 1 === (startDate.month || 1) && calendarDate.getUTCDate() === (startDate.day || 1);
+    const futureStart = validStart && Number.isFinite(reference) && start > reference;
+    const released = Number(media?.releasedEpisodes);
+    const next = media?.nextAiringEpisode;
+    const nextEpisode = Number(next?.episode);
+    // A numbered next episode after an explicit past premiere day supplies additional schedule evidence.
+    // Waiting until that whole day has elapsed avoids interpreting the date as a premiere time.
+    if (validStart && startDate.month && startDate.day && start + 86400000 <= reference
+        && nextEpisode > 1 && isValidAiringScheduleEntry(next, reference / 1000)
+        && Number(next.airingAt) > reference / 1000) return "releasing";
+    // A pending first episode contradicts a cached count; a month or past date alone never proves release.
+    const contradictingNext = Number(next?.airingAt) > reference / 1000
+        && Number.isSafeInteger(nextEpisode) && nextEpisode > 0 && nextEpisode <= released;
+    if (!futureStart && Number.isFinite(reference) && Number.isSafeInteger(released) && released > 0 && !contradictingNext) return "releasing";
+    if (status === "NOT_YET_RELEASED" || futureStart) return "not-yet-released";
+    return "unknown";
 }
 
 function resolveAutomaticMediaCategory(media, now = new Date()) {
-    if (isMediaClearlyNotYetReleased(media, now)) return "waiting";
-    return String(media?.status || "").toUpperCase() === "FINISHED" ? "backlog" : "watching";
+    const state = resolveMediaAiringState(media, now);
+    if (state === "not-yet-released") return "waiting";
+    return state === "finished" ? "backlog" : "watching";
 }
 
 function buildFreshAnimeTrackingLifecycle(media, context = {}, now = new Date().toISOString()) {
@@ -2111,12 +2313,20 @@ function hasManualAnimeCategory(anime) {
 }
 
 function applyAutomaticCategoryFromMedia(anime, media, now = new Date()) {
-    if (!anime || anime.deletedAt || hasManualAnimeCategory(anime) || !isMediaClearlyNotYetReleased(media, now)) return false;
-    if (anime.category === "waiting" && anime.categorySource === "automatic" && anime.categoryManuallyEdited === false) return false;
-    anime.category = "waiting";
-    anime.categorySource = "automatic";
-    anime.categoryManuallyEdited = false;
+    const category = getAutomaticCategoryTransition(anime, media, now);
+    if (!category || anime.categorySource !== "automatic" || anime.categoryManuallyEdited !== false) return false;
+    anime.category = category;
     return true;
+}
+
+function getAutomaticCategoryTransition(anime, media, now = new Date()) {
+    if (!anime || anime.deletedAt || hasManualAnimeCategory(anime)) return null;
+    const state = resolveMediaAiringState(media, now);
+    if (anime.category === "waiting" && state === "releasing") return "watching";
+    if (anime.category === "waiting" && state === "finished") return "backlog";
+    if (anime.category === "backlog" && state === "not-yet-released") return "waiting";
+    // Never demote watching or reinterpret completed/review as a broadcast state.
+    return null;
 }
 
 function buildStoredAnimeMediaSnapshot(anime) {
@@ -2133,6 +2343,9 @@ function buildStoredAnimeMediaSnapshot(anime) {
         synonyms:Array.isArray(anime?.aliases) ? anime.aliases : [],
         format:anime?.format || "",
         status:anime?.status || "UNKNOWN",
+        releasedEpisodes:anime?.releasedEpisodes,
+        airedEpisode:anime?.airedEpisode,
+        nextAiringEpisode:{ episode:anime?.nextEpisode, airingAt:anime?.nextAiringAt },
         startDate:getStructuredMediaStartDate(anime),
         episodes:anime?.episodes,
         relations:{ edges:Array.isArray(anime?.relations) ? anime.relations : [] }
@@ -2278,6 +2491,13 @@ function migrateExistingAnimeRecords(list, now = new Date()) {
         }
     }
     aggregate.totalChanged = changedIds.size;
+    const categoryReviewRequired = current.flatMap(anime => {
+        const suggestedCategory = getAutomaticCategoryTransition(anime, buildStoredAnimeMediaSnapshot(anime), now);
+        return suggestedCategory && (anime.categorySource !== "automatic" || anime.categoryManuallyEdited !== false)
+            ? [{ id:anime.id, anilistId:getAniListMediaId(anime), category:anime.category, suggestedCategory, reason:"missing-automatic-category-markers" }]
+            : [];
+    });
+    if (categoryReviewRequired.length) aggregate.categoryReviewRequired = categoryReviewRequired;
     return { list:current, changed, report:aggregate };
 }
 
@@ -3025,17 +3245,29 @@ async function syncAnimeMetadata(showMessage = false) {
     if (status) status.textContent = "正在從 AniList 同步集數、下集時間與觀看平台……";
     try {
         let synced = 0;
+        const updates = new Map();
         for (let i = 0; i < ids.length; i += 50) {
-            const mediaList = await requestAniListMediaPage(ids.slice(i, i + 50));
+            const batchIds = ids.slice(i, i + 50);
+            const mediaList = await requestAniListMediaPage(batchIds);
             for (const media of mediaList) {
-                const anime = animeList.find(item => getAniListMediaId(item) === String(media.id));
-                if (anime) { applyMediaMetadata(anime, media); synced++; }
+                const identity = String(media?.id || "");
+                if (batchIds.some(id => String(id) === identity)) updates.set(identity, media);
             }
             if (i + 50 < ids.length) await delay(800);
         }
         const now = new Date().toISOString();
-        localStorage.setItem(ANIME_SYNC_KEY, now);
-        saveAndRender();
+        // Apply to the latest list after all requests succeed, preserving intervening edits/deletions.
+        const nextList = animeList.map(anime => {
+            const media = !anime.deletedAt && updates.get(getAniListMediaId(anime));
+            if (!media) return anime;
+            const next = applyMediaMetadata(JSON.parse(JSON.stringify(anime)), media, now);
+            next.updatedAt = now;
+            synced++;
+            return next;
+        });
+        saveAndRender({ metadataOnly:true, animeList:nextList });
+        try { localStorage.setItem(ANIME_SYNC_KEY, now); }
+        catch (error) { console.warn("播出資訊已儲存，但無法儲存同步時間", error); }
         renderAiringCalendar();
         if (showMessage) showToast(`✅ 已同步 ${synced} 部作品的播出資訊！`, 4500);
     } catch (error) {
@@ -3048,6 +3280,7 @@ async function syncAnimeMetadata(showMessage = false) {
 }
 
 function maybeAutoSyncAnimeMetadata() {
+    if (window.__ANIME_STARTUP_STORAGE__?.persisted === false) { renderAiringCalendar(); return; }
     const last = Date.parse(localStorage.getItem(ANIME_SYNC_KEY) || "");
     if (!Number.isFinite(last) || Date.now() - last > 6 * 60 * 60 * 1000) syncAnimeMetadata(false);
     else renderAiringCalendar();
@@ -3368,6 +3601,59 @@ function editTitle(id) {
     }
 }
 
+function confirmAnimeWatching(id, externalIdentity = null) {
+    const findTarget = list => {
+        const matches = list.map((anime, index) => ({ anime, index })).filter(({ anime }) =>
+            String(anime.id) === String(id)
+            && (!externalIdentity || getAniListMediaId(anime) === String(externalIdentity)));
+        return matches.length === 1 && !matches[0].anime.deletedAt
+            && matches[0].anime.category === "waiting" ? matches[0] : null;
+    };
+    let target = findTarget(animeList);
+    if (!target) { showToast("目前無法唯一確認這部待播作品，請重新載入清單後再試。"); return false; }
+    const confirmedRecord = target.anime;
+    const confirmedIdentity = getAniListMediaId(confirmedRecord) || null;
+    const confirmedTitle = confirmedRecord.title;
+    externalIdentity ||= confirmedIdentity;
+    try { assertAnimeStartupWritable(); }
+    catch { return false; }
+    if (!confirm(`將《${target.anime.title}》移到「追番中」？只變更這一部作品的分類，觀看進度、筆記與觀看歷史會保留。`)) return false;
+    target = findTarget(animeList);
+    if (!target || (!confirmedIdentity && target.anime !== confirmedRecord)) {
+        showToast("這部作品的狀態已變更，尚未執行分類確認。"); return false;
+    }
+    let nextStoredList;
+    try {
+        assertAnimeStartupWritable();
+        // Use the latest persisted records, not startup-only display defaults or unrelated unsaved edits.
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        const storedTarget = Array.isArray(stored) ? findTarget(stored) : null;
+        if (!storedTarget) throw new Error("Persisted waiting record could not be identified safely");
+        if (!confirmedIdentity && (getAniListMediaId(storedTarget.anime)
+            || storedTarget.anime.title !== confirmedTitle)) throw new Error("Persisted record identity changed");
+        nextStoredList = stored.slice();
+        nextStoredList[storedTarget.index] = { ...storedTarget.anime,
+            category:"watching", categorySource:"manual", categoryManuallyEdited:true
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextStoredList));
+    } catch (error) {
+        console.warn("無法儲存分類確認", error);
+        showToast("分類尚未變更：本機儲存空間不足或暫時無法寫入。原始資料仍保留。", 7000);
+        return false;
+    }
+    const nextList = animeList.slice();
+    nextList[target.index] = { ...target.anime,
+        category:"watching", categorySource:"manual", categoryManuallyEdited:true
+    };
+    animeList = nextList;
+    if (window.__ANIME_STARTUP_STORAGE__?.persisted === false)
+        window.__ANIME_STARTUP_STORAGE__.originalList = JSON.parse(JSON.stringify(nextStoredList));
+    renderList();
+    window.refreshV11?.();
+    showToast("已移到追番中；觀看進度、筆記與觀看歷史維持不變。");
+    return true;
+}
+
 function moveCategory(id, category) {
     const previous = animeList.find(item => String(item.id) === String(id) && !item.deletedAt);
     const previousCategory = previous?.category;
@@ -3475,7 +3761,9 @@ function buildAnimeItem(anime) {
             `<button type="button" data-progress-action="increment" data-anime-id="${animeDataId}">➕ 複習 1 集</button>` +
             `<button class="btn-next" onclick='moveCategory(${animeId},"completed")'>🎉 複習完</button>`;
     } else if (anime.category === "waiting") {
-        actions = '<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中……</div>';
+        const blocked = window.__ANIME_STARTUP_STORAGE__?.recoveryPending ? " disabled" : "";
+        actions = '<div style="font-size:11px;color:#94a3b8;padding:6px;">🛰️ 智慧監測開播中……</div>'
+            + `<button type="button" data-confirm-anime-watching="${animeDataId}" data-confirm-anime-identity="${escapeHtml(String(getAniListMediaId(anime) || ""))}"${blocked}>確認開始追番</button>`;
     } else {
         actions =
             `<button onclick='moveCategory(${animeId},"watching")'>🔄 重看</button>` +
@@ -4521,6 +4809,13 @@ document.getElementById("event-location").addEventListener("change", () => { fil
 document.getElementById("event-type").addEventListener("change", renderEvents);
 document.getElementById("event-admission").addEventListener("change", renderEvents);
 document.getElementById("work-event-input").addEventListener("keydown", event => { if (event.key === "Enter") { event.preventDefault(); searchEventsByWork(); } });
+
+document.addEventListener("click", event => {
+    const button = event.target.closest("[data-confirm-anime-watching]");
+    if (!button || button.disabled) return;
+    event.preventDefault();
+    confirmAnimeWatching(button.dataset.confirmAnimeWatching, button.dataset.confirmAnimeIdentity || null);
+});
 
 loadStoredAnime();
 renderList();

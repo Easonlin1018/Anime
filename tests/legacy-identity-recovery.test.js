@@ -194,13 +194,28 @@ test("17. cloud payload reconciliation recovers identity safely", () => {
     assert.equal(V.getAnimeAniListIdentity(result.animeList[0]), "101");
 });
 
-test("18. startup recovery precedes duplicate and metadata migrations and creates one-time backup", () => {
-    const recoveryPosition = html.indexOf("AnimeTrackerV11.recoverLegacyAnimeIdentities(animeList, duplicateState)");
-    const duplicatePosition = html.indexOf("AnimeTrackerV11.reconcileExistingAnimeDuplicates(animeList, duplicateState)");
-    const migrationPosition = html.indexOf("migrateExistingAnimeRecords(animeList)");
-    assert.ok(recoveryPosition > 0 && recoveryPosition < duplicatePosition && duplicatePosition < migrationPosition);
-    assert.match(html, /anime_tracker_legacy_identity_recovery_backup_v1/);
-    assert.match(html, /if \(!localStorage\.getItem\(backupKey\)\)/);
+test("18. startup plan recovers identity before duplicate and metadata migrations without modifying source data", () => {
+    const calls = [];
+    const start = html.indexOf("function prepareAnimeStartupMigration");
+    const end = html.indexOf("function startupAnimeView", start);
+    const aliasStart = html.indexOf("function normalizeAnimeAliasList");
+    const aliasEnd = html.indexOf("function deriveAliasVariants", aliasStart);
+    const core = { ...V,
+        recoverLegacyAnimeIdentities(...args) { calls.push("identity"); return V.recoverLegacyAnimeIdentities(...args); },
+        reconcileExistingAnimeDuplicates(...args) { calls.push("duplicates"); return V.reconcileExistingAnimeDuplicates(...args); }
+    };
+    const planStartup = Function("AnimeTrackerV11", "migrateExistingAnimeRecords", `${html.slice(titleStart, titleEnd)}
+        ${html.slice(aliasStart, aliasEnd)}
+        ${html.slice(start, end)} return prepareAnimeStartupMigration;`)(core,
+        (...args) => { calls.push("metadata"); return pageApi.migrateExistingAnimeRecords(...args); });
+    const original = [anime("local", "fixture")];
+    const before = JSON.stringify(original);
+    const state = workState([entry("local", 101, "fixture")], { eventOverrides:{}, eventAnimeOverrides:{} });
+    const plan = planStartup(original, state);
+    assert.deepEqual(calls, ["identity", "duplicates", "metadata"]);
+    assert.equal(V.getAnimeAniListIdentity(plan.list[0]), "101");
+    assert.ok(plan.backups.includes("anime_tracker_legacy_identity_recovery_backup_v1"));
+    assert.equal(JSON.stringify(original), before);
 });
 
 function countDuplicates(values) {

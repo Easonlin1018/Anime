@@ -3,7 +3,7 @@
     const V = window.AnimeTrackerV11;
     if (!V) return;
     const themeSongsApi = () => window.ThemeSongs || window.SpotifyThemes;
-    const parse = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || "") ?? fallback; } catch { return fallback; } };
+    const parse = (key, fallback) => { try { return JSON.parse((window.getAnimeStartupStoredItem ? window.getAnimeStartupStoredItem(key) : localStorage.getItem(key)) || "") ?? fallback; } catch { return fallback; } };
     const save = (key, value) => localStorage.setItem(key, JSON.stringify(value));
     const FILTER_KEY = "anime_tracker_filters_v11";
     const UNDO_KEY = "anime_tracker_last_undo_v11";
@@ -14,6 +14,7 @@
 
     function touch(item) { item.updatedAt = new Date().toISOString(); return item; }
     function persistAnime() {
+        window.assertAnimeStartupWritable?.();
         animeList = V.migrateList(animeList);
         const presentationMigration = window.migrateExistingAnimeRecords?.(animeList);
         if (Array.isArray(presentationMigration?.list)) animeList = presentationMigration.list;
@@ -21,7 +22,7 @@
         localStorage.setItem("anime_tracker_schema_version", "11");
     }
     function currentSettings() { return { eventSettings, filters: state.filters, animeListSort, notificationPermissionAsked: localStorage.getItem("anime_notification_prompted_v11") === "1" }; }
-    function snapshot() { const media=window.CrossMediaTracker?.snapshot?.()||{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])}; return { animeList: V.migrateList(animeList), works:media.works, mangaReadHistory:media.mangaReadHistory, eventOverrides: { ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, settings: currentSettings(), watchHistory: [...watchHistory], reminders: {}, preferences: parse(PREFS_KEY, {}) }; }
+    function snapshot() { const media=window.CrossMediaTracker?.snapshot?.()||{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])}; return { animeList: window.__ANIME_STARTUP_STORAGE__?.persisted === false ? JSON.parse(JSON.stringify(window.__ANIME_STARTUP_STORAGE__.originalList || animeList)) : V.migrateList(animeList), works:media.works, mangaReadHistory:media.mangaReadHistory, eventOverrides: { ...eventOverrides }, eventAnimeOverrides:{ ...eventAnimeOverrides }, settings: currentSettings(), watchHistory: [...watchHistory], reminders: {}, preferences: parse(PREFS_KEY, {}) }; }
     function createRestorePoint(reason) {
         const points = parse(V.RESTORE_KEY, []);
         points.unshift({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), reason, animeCount: animeList.length, data: V.createBackup(snapshot()) });
@@ -114,11 +115,30 @@
         }
     }
 
-    animeList = V.migrateList(animeList);
-    persistAnime();
+    function bootstrapAnimeStorage() {
+        if (window.__ANIME_STARTUP_STORAGE__?.persisted === false) return;
+        // The main startup migration has already persisted its data. Supply only
+        // missing display defaults here, preserving every original tracking field.
+        animeList = animeList.map(item => ({ ...V.migrateAnime(item), ...item }));
+        try {
+            if (localStorage.getItem("anime_tracker_schema_version") !== "11") localStorage.setItem("anime_tracker_schema_version", "11");
+        } catch (error) { window.warnAnimeStartupStorage?.("v11-schema", error); }
+    }
+    bootstrapAnimeStorage();
 
     const originalSaveAndRender = saveAndRender;
-    saveAndRender = function () { animeList = animeList.map(item => touch(V.migrateAnime(item))); persistAnime(); originalSaveAndRender(); refreshV11(); if(localStorage.getItem("anime_tracker_auto_sync_v11")==="1"){clearTimeout(autoSyncTimer);autoSyncTimer=setTimeout(()=>handleSync("upload"),1500);} };
+    saveAndRender = function (options = {}) {
+        if (!options.metadataOnly) {
+            animeList = animeList.map(item => touch(V.migrateAnime(item)));
+            persistAnime();
+        }
+        originalSaveAndRender(options);
+        refreshV11();
+        if(localStorage.getItem("anime_tracker_auto_sync_v11")==="1"){
+            clearTimeout(autoSyncTimer);
+            autoSyncTimer=setTimeout(()=>handleSync("upload"),1500);
+        }
+    };
     const originalMoveCategory = moveCategory;
     moveCategory = function (id, category) { const item = animeList.find(x => String(x.id) === String(id)); if (item) touch(item); originalMoveCategory(id, category); };
     updateProgress = function (id, delta) {
@@ -399,7 +419,7 @@
     }
 
     function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.onchange=()=>localStorage.setItem("anime_tracker_auto_sync_v11",autoSync.checked?"1":"0");window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();registerAppServiceWorker();}
-    function exportBackup(){const backup=V.createBackup(snapshot()),blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"}),link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`anime_tracker_v11_${new Date().toISOString().slice(0,10)}.json`;link.click();URL.revokeObjectURL(link.href);}
+    function exportBackup(){const data=snapshot(),backup=V.createBackup(data);if(window.__ANIME_STARTUP_STORAGE__?.persisted===false){backup[V.STORAGE_KEY]=data.animeList;backup.works=data.works;backup.watchHistory=data.watchHistory;backup[V.MANGA_HISTORY_KEY]=data.mangaReadHistory;backup.eventOverrides=data.eventOverrides;backup.eventAnimeOverrides=data.eventAnimeOverrides;}const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"}),link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`anime_tracker_v11_${new Date().toISOString().slice(0,10)}.json`;link.click();URL.revokeObjectURL(link.href);}
     function readImport(event){const file=event.target.files[0];event.target.value="";if(!file)return;if(file.size>10*1024*1024)return showToast("匯入檔案不可超過 10 MB");const reader=new FileReader();reader.onload=()=>{try{const validation=V.validateBackup(reader.result);if(!validation.valid)throw Error(validation.error);pendingImport=validation.normalized;const p=validation.preview;document.getElementById("v11-import-preview").textContent=`備份格式：${p.format}｜版本：${p.schemaVersion}｜匯出：${p.exportedAt||"未知"}｜動畫：${p.animeCount} 部｜作品主體：${p.workCount}｜漫畫：${p.mangaCount}｜活動修正：${p.overrideCount}｜觀看紀錄：${p.historyCount}｜漫畫閱讀紀錄：${p.mangaHistoryCount}${p.requiresEmptyConfirmation?"｜⚠️ 備份內沒有任何作品，套用前會再次確認":""}`;document.getElementById("v11-import-modal").hidden=false}catch(error){pendingImport=null;showToast(`匯入失敗：${escapeHtml(error.message)}`)}};reader.onerror=()=>{pendingImport=null;showToast("匯入失敗：無法讀取檔案")};reader.readAsText(file);}
     function applyImport(mode){if(!pendingImport)return;const totalWorks=pendingImport.works.length||pendingImport[V.STORAGE_KEY].length;if(totalWorks===0&&!confirm("此備份包含 0 部作品。確定仍要繼續匯入？"))return;if(mode==="replace"&&!confirm("完全覆蓋會取代目前資料。系統會先建立還原點，確定繼續？"))return;let result;try{result=V.importBackup(snapshot(),pendingImport,mode)}catch(error){showToast(`匯入失敗：${escapeHtml(error.message)}`);return}createRestorePoint("匯入前自動還原點");animeList=result.animeList;eventOverrides=result.eventOverrides;eventAnimeOverrides=result.eventAnimeOverrides;watchHistory=result.watchHistory;state.lastImportRestore=parse(V.RESTORE_KEY,[])[0]?.id;save(V.HISTORY_KEY,watchHistory);save(EVENT_OVERRIDES_KEY,eventOverrides);save(EVENT_ANIME_OVERRIDES_KEY,eventAnimeOverrides);persistAnime();window.CrossMediaTracker?.replaceData?.(result.works,result.mangaReadHistory);renderList();renderEvents();closeV11Modals();showToast(`匯入完成：已處理 ${result.importedAnimeCount} 部動畫、${result.importedWorkCount} 個作品主體`);}
     function renderRestorePoints(){const box=document.getElementById("v11-restores");if(!box)return;const points=parse(V.RESTORE_KEY,[]);box.innerHTML='<h3>最近 5 個本機還原點</h3>'+points.map(x=>`<div class="v11-card">${escapeHtml(new Date(x.createdAt).toLocaleString("zh-TW"))}｜${x.animeCount} 部｜${escapeHtml(x.reason)} <button data-restore-id="${escapeHtml(x.id)}">還原</button></div>`).join("")||"尚無還原點";}
@@ -416,5 +436,6 @@
     window.exportData = exportBackup;
     window.importData = readImport;
     window.openAnimeDetail = openAnimeDetail;
+    window.refreshV11 = refreshV11;
     addShell(); renderList(); refreshV11();
 })();

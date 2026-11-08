@@ -2,7 +2,7 @@
     "use strict";
     const V = window.AnimeTrackerV11;
     if (!V) return;
-    const parse = (key, fallback) => { try { const value=JSON.parse(localStorage.getItem(key) || ""); return value ?? fallback; } catch { return fallback; } };
+    const parse = (key, fallback) => { try { const value=JSON.parse((window.getAnimeStartupStoredItem ? window.getAnimeStartupStoredItem(key) : localStorage.getItem(key)) || ""); return value ?? fallback; } catch { return fallback; } };
     const esc = value => typeof window.escapeHtml === "function" ? window.escapeHtml(String(value ?? "")) : String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
     const mediaLabels = { anime:"🎬 動畫", manga:"📚 漫畫", novel:"📖 小說" };
     const readingLabels = { planning:"準備閱讀", reading:"閱讀中", completed:"已讀完", paused:"暫停", dropped:"棄讀" };
@@ -14,11 +14,12 @@
     let query = "";
 
     function persist() {
+        window.assertAnimeStartupWritable?.();
         works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works);
         localStorage.setItem(V.WORKS_KEY, JSON.stringify(works));
         localStorage.setItem(V.MANGA_HISTORY_KEY, JSON.stringify(mangaHistory));
     }
-    function syncAnime() { works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works); persist(); }
+    function syncAnime() { works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works); if (window.__ANIME_STARTUP_STORAGE__?.persisted !== false) persist(); }
     function activeMediaEntries(work) { return (work?.mediaEntries || []).filter(entry => !entry.deletedAt); }
     function findWork(workId) { return works.find(work => String(work.workId) === String(workId)); }
     function findWorkByMediaId(mediaId, includeDeleted = false) { return works.find(work => (includeDeleted ? work.mediaEntries : activeMediaEntries(work)).some(entry => String(entry.id) === String(mediaId))); }
@@ -123,7 +124,7 @@
 
     function appendMangaReminders(container){if(!container)return;const items=works.flatMap(work=>activeMediaEntries(work).filter(entry=>entry.mediaType==="manga"&&entry.reminderEnabled).map(entry=>({work,entry,info:V.mangaUpdateInfo(entry)})));container.insertAdjacentHTML("beforeend",items.map(({work,entry,info})=>`<div class="v11-card"><span class="v11-badge ${info.unread?"danger":info.known?"good":"warn"}">${esc(info.label)}</span><strong>${esc(entry.title)}</strong><div>${info.known?`下一話：${esc(new Date(entry.nextChapterAt).toLocaleString("zh-TW"))}`:"更新時間未知，需人工設定"}</div><button data-open-work="${esc(work.workId)}" data-media-id="${esc(entry.id)}">查看漫畫</button></div>`).join(""));}
     function appendMangaStatistics(container){if(!container)return;const s=V.mangaStats(mangaHistory,works);container.insertAdjacentHTML("beforeend",`<h3>漫畫閱讀統計</h3><div class="v11-grid v11-stats-grid">${[["今天讀幾話",s.today],["本週讀幾話",s.week],["本月讀幾話",s.month],["總閱讀話數",s.total],["閱讀中作品",s.reading],["完成漫畫",s.completed],["常用閱讀平台",s.topPlatform]].map(([label,value])=>`<div class="v11-card v11-stat">${label}<strong class="v11-stat-value">${esc(value)}</strong></div>`).join("")}</div><div class="tiny-note">漫畫閱讀統計只來自 manga_read_history_v1，不會把舊 currentChapter 算成今天閱讀。</div>`);}
-    function snapshot(){syncAnime();return{works,mangaReadHistory:mangaHistory};}
+    function snapshot(){if(window.__ANIME_STARTUP_STORAGE__?.persisted===false)return{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])};syncAnime();return{works,mangaReadHistory:mangaHistory};}
     function replaceData(nextWorks,nextHistory){works=V.migrateWorks(typeof animeList==="undefined"?[]:animeList,nextWorks||[]);mangaHistory=Array.isArray(nextHistory)?nextHistory:[];persist();renderMangaPage();}
     function snapshotAnimeDeletion(animeId){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!work||!entry)return null;return{workId:work.workId,mediaId:entry.id,entryDeletedAt:entry.deletedAt??null,entryUpdatedAt:entry.updatedAt??null,workUpdatedAt:work.updatedAt??null};}
     function markAnimeDeleted(animeId, deletedAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry)return false;entry.deletedAt=deletedAt;entry.updatedAt=deletedAt;work.updatedAt=deletedAt;persist();renderMangaPage();return true;}
@@ -133,5 +134,15 @@
     function eventContext(work,media){return{...media,workId:work.workId,aliases:[...new Set([...work.aliases,...media.aliases])],publisher:media.publisher};}
 
     window.CrossMediaTracker={snapshot,replaceData,renderMangaPage,renderSearchResults,enhanceAnimeDetail,openWorkDetail,findWorkByMediaId,snapshotAnimeDeletion,markAnimeDeleted,restoreAnime,restoreAnimeDeletionSnapshot,syncAnimeReferences,mediaBadgesForAnime(anime){const work=findWorkByMediaId(anime.id);return work?mediaBadges(work):'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';},appendMangaReminders,appendMangaStatistics,eventContext};
-    persist();addShell();renderMangaPage();if(typeof renderList==="function")renderList();
+    // Keep derived work identities stable, without rewriting unchanged history at boot.
+    if (window.__ANIME_STARTUP_STORAGE__?.persisted !== false) {
+        try {
+            const value = JSON.stringify(works);
+            if (localStorage.getItem(V.WORKS_KEY) !== value) localStorage.setItem(V.WORKS_KEY, value);
+        } catch (error) {
+            works = parse(V.WORKS_KEY, []);
+            window.warnAnimeStartupStorage?.("cross-media", error);
+        }
+    }
+    addShell();renderMangaPage();if(typeof renderList==="function")renderList();
 })();

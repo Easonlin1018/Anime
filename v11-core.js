@@ -649,7 +649,9 @@
             if (preferredManualCategory) merged.categorySource = "manual";
             else if (categoryOwner.categorySource !== undefined) merged.categorySource = categoryOwner.categorySource;
             else delete merged.categorySource;
-            merged.categoryManuallyEdited = preferredManualCategory ? true : categoryOwner.categoryManuallyEdited === true;
+            if (preferredManualCategory) merged.categoryManuallyEdited = true;
+            else if (Object.prototype.hasOwnProperty.call(categoryOwner, "categoryManuallyEdited")) merged.categoryManuallyEdited = categoryOwner.categoryManuallyEdited;
+            else delete merged.categoryManuallyEdited;
         } else {
             merged.deletedAt = latestDeletion?.deletedAt || latestDeletion?.updatedAt || null;
             merged.category = "_deleted";
@@ -1737,7 +1739,13 @@
         migrateList(incoming).forEach(item => {
             const old = map.get(String(item.id));
             if (!old) map.set(String(item.id), item);
-            else if (Date.parse(item.updatedAt) >= Date.parse(old.updatedAt)) map.set(String(item.id), { ...old, ...item, themeSongs: mergeThemeSongs(old.themeSongs, item.themeSongs) });
+            else if (Date.parse(item.updatedAt) >= Date.parse(old.updatedAt)) {
+                const merged = { ...old, ...item, themeSongs: mergeThemeSongs(old.themeSongs, item.themeSongs) };
+                for (const field of ["categorySource", "categoryManuallyEdited"]) {
+                    if (!Object.prototype.hasOwnProperty.call(item, field)) delete merged[field];
+                }
+                map.set(String(item.id), merged);
+            }
             else map.set(String(item.id), { ...old, themeSongs: mergeThemeSongs(old.themeSongs, item.themeSongs) });
         });
         return [...map.values()];
