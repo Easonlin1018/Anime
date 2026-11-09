@@ -3,23 +3,23 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-08T05:58:05.365Z",
-    "lastSuccessfulUpdateAt": "2026-11-08T05:58:05.365Z",
+    "updatedAt": "2026-11-09T06:22:52.770Z",
+    "lastSuccessfulUpdateAt": "2026-11-09T06:22:52.770Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 236,
-    "uniqueNewsCount": 449,
-    "articleCandidateCount": 141,
+    "fetchedExternalItemCount": 237,
+    "uniqueNewsCount": 450,
+    "articleCandidateCount": 143,
     "articleFetchSuccessCount": 40,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 8,
-    "newEventCount": 0,
-    "cachedEventCount": 59,
+    "matchedEventCount": 9,
+    "newEventCount": 1,
+    "cachedEventCount": 56,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 66,
-    "expiredRemovedCount": 6,
+    "archiveCount": 3,
+    "storedEventCount": 64,
+    "expiredRemovedCount": 7,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 34,
     "missingDateRemovedCount": 0,
@@ -91,8 +91,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     },
     {
       "id": "gnn-314431",
@@ -153,8 +153,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     },
     {
       "id": "ext-357be6ef64d9ab44",
@@ -212,8 +212,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     },
     {
       "id": "gnn-313100",
@@ -643,79 +643,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-13T06:46:02.845Z",
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
-    },
-    {
-      "id": "gnn-311103",
-      "title": "《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店今日起於北中南威秀影城登場",
-      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》今日（9 月 4 日）在台上映，台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店。店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」，再到「主視覺區」與小圓充滿希望的身影合影，最後還有「",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311103",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "台中",
-        "高雄",
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-04T09:49:51.000Z",
-      "eventStartDate": "2026-09-04",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
-        "魔法少女小圓",
-        "角色背景打卡區",
-        "主視覺區"
-      ],
-      "searchCorpus": "《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店今日起於北中南威秀影城登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》今日（9 月 4 日）在台上映，台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店。店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」，再到「主視覺區」與小圓充滿希望的身影合影，最後還有「",
-      "dateConfidence": "medium",
-      "dateSource": "9 月 4 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
-      "id": "gnn-310540",
-      "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
-      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=310540",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "台中",
-        "高雄",
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-08-27T08:19:38.000Z",
-      "eventStartDate": "2026-09-04",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉",
-        "魔法少女小圓",
-        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
-        "角色背景打卡區",
-        "主視覺區"
-      ],
-      "searchCorpus": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
-      "dateConfidence": "medium",
-      "dateSource": "9 月 4 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
     },
     {
       "id": "ext-5dee1a2d64b8561a",
@@ -1157,37 +1084,6 @@
       "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
-      "id": "gnn-314255",
-      "title": "《勝利女神：妮姬》四週年特展「NIKKE 4th Anniversary｜屬於我們的四年」將於華山登場",
-      "summary": "由 Level Infinite 與 SHIFT UP 聯手開發的美少女槍戰動作遊戲《勝利女神：妮姬》（PC／iOS／Android）為歡慶遊戲四週年，將於 11 月 7 日至 11 月 8 日在台北華山 1914 文創園區中 7A 館舉辦「NIKKE 4th Anniversary｜屬於我們的四年」實體特展。 走進妮姬的世界，遊戲場景化為實體體驗 本次四週年特展將遊戲中的場景帶進現實，從指揮官報到、指揮官室",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=314255",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-30T08:35:38.000Z",
-      "eventStartDate": "2026-11-07",
-      "eventEndDate": "2026-11-08",
-      "eventStatus": "upcoming",
-      "venue": "華山 1914",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "勝利女神：妮姬",
-        "NIKKE 4th Anniversary｜屬於我們的四年"
-      ],
-      "searchCorpus": "《勝利女神：妮姬》四週年特展「NIKKE 4th Anniversary｜屬於我們的四年」將於華山登場 由 Level Infinite 與 SHIFT UP 聯手開發的美少女槍戰動作遊戲《勝利女神：妮姬》（PC／iOS／Android）為歡慶遊戲四週年，將於 11 月 7 日至 11 月 8 日在台北華山 1914 文創園區中 7A 館舉辦「NIKKE 4th Anniversary｜屬於我們的四年」實體特展。 走進妮姬的世界，遊戲場景化為實體體驗 本次四週年特展將遊戲中的場景帶進現實，從指揮官報到、指揮官室",
-      "dateConfidence": "high",
-      "dateSource": "11 月 7 日至 11 月 8 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-11-01T05:59:43.708Z",
-      "lastSeenAt": "2026-11-01T05:59:43.708Z"
-    },
-    {
       "id": "gnn-314508",
       "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場",
       "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
@@ -1216,8 +1112,8 @@
       "dateConfidence": "high",
       "dateSource": "11 月 13 日起到 12 月 27 日",
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     },
     {
       "id": "gnn-312209",
@@ -1310,8 +1206,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     },
     {
       "id": "gnn-313300",
@@ -1881,8 +1777,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -2063,6 +1959,34 @@
       "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
+      "id": "ext-7528ceaeeb551aa7",
+      "title": "松菸咒術迴戰快閃店！三大主題打卡點免費入場，五條悟、玉犬周邊新品一次看|生活",
+      "summary": "WalkerLand 窩客島",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBUbmdnV25KbWxNekMydlR3MHhJUzRaRnNZTjkzWUthaTE3aUVkODc5M1FQSF9mcm90RlhlMjlOR1kyd2Z2QVloYnVuUHFqTVpQMk12SGpqY1NUdjV4S1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-03T10:10:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "松菸",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "松菸咒術迴戰快閃店！三大主題打卡點免費入場，五條悟、玉犬周邊新品一次看|生活 WalkerLand 窩客島",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
+    },
+    {
       "id": "gnn-314501",
       "title": "《學園偶像大師》月村手毬聲優小鹿なお粉絲見面會 宣布 2027 年 1 月台北登場",
       "summary": "曾為《學園偶像大師》月村手毬、《魔法姊妹露露特莉莉》野野山流／小甜包露露、《戀愛吧，假面天使！》桂御迦等眾多角色獻聲的日本聲優小鹿なお，宣布將來台舉行粉絲見面會的消息。 官方表示，本次特別為台灣粉絲準備約 90 分鐘的 FanMeeting 時間。除了輕鬆的 Talk Show，與大家分享工作、生活以及各種有趣的話題之外，現場也預計準",
@@ -2091,39 +2015,117 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-08T05:58:05.365Z",
-      "lastSeenAt": "2026-11-08T05:58:05.365Z"
+      "discoveredAt": "2026-11-09T06:22:52.770Z",
+      "lastSeenAt": "2026-11-09T06:22:52.770Z"
     }
   ],
   "archive": [
     {
-      "id": "ext-a5446f5b03f4a1c1",
-      "title": "青文出版公開 2026 高雄國際動漫節推薦新書與現場優惠活動",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1IS0lEZi1NOXI3eWJlOXdEczZJM2YySE5ZUkVRR09HTFg4TEtBTlZ6Z1VTMm9Mc2VzaHBROURWV2FoRXcwclNTc0RsNTVNSFVfQnU2NVl4Vkw?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
+      "id": "gnn-314255",
+      "title": "《勝利女神：妮姬》四週年特展「NIKKE 4th Anniversary｜屬於我們的四年」將於華山登場",
+      "summary": "由 Level Infinite 與 SHIFT UP 聯手開發的美少女槍戰動作遊戲《勝利女神：妮姬》（PC／iOS／Android）為歡慶遊戲四週年，將於 11 月 7 日至 11 月 8 日在台北華山 1914 文創園區中 7A 館舉辦「NIKKE 4th Anniversary｜屬於我們的四年」實體特展。 走進妮姬的世界，遊戲場景化為實體體驗 本次四週年特展將遊戲中的場景帶進現實，從指揮官報到、指揮官室",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314255",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
       "locations": [
-        "高雄"
+        "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-23T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
+      "publishedAt": "2026-10-30T08:35:38.000Z",
+      "eventStartDate": "2026-11-07",
+      "eventEndDate": "2026-11-08",
       "eventStatus": "expired",
-      "venue": "",
+      "venue": "華山 1914",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "青文出版公開 2026 高雄國際動漫節推薦新書與現場優惠活動 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z",
-      "archivedAt": "2026-11-08T05:58:05.365Z"
+      "workTitles": [
+        "勝利女神：妮姬",
+        "NIKKE 4th Anniversary｜屬於我們的四年"
+      ],
+      "searchCorpus": "《勝利女神：妮姬》四週年特展「NIKKE 4th Anniversary｜屬於我們的四年」將於華山登場 由 Level Infinite 與 SHIFT UP 聯手開發的美少女槍戰動作遊戲《勝利女神：妮姬》（PC／iOS／Android）為歡慶遊戲四週年，將於 11 月 7 日至 11 月 8 日在台北華山 1914 文創園區中 7A 館舉辦「NIKKE 4th Anniversary｜屬於我們的四年」實體特展。 走進妮姬的世界，遊戲場景化為實體體驗 本次四週年特展將遊戲中的場景帶進現實，從指揮官報到、指揮官室",
+      "dateConfidence": "high",
+      "dateSource": "11 月 7 日至 11 月 8 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-01T05:59:43.708Z",
+      "lastSeenAt": "2026-11-01T05:59:43.708Z",
+      "archivedAt": "2026-11-09T06:22:52.770Z"
+    },
+    {
+      "id": "gnn-311103",
+      "title": "《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店今日起於北中南威秀影城登場",
+      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》今日（9 月 4 日）在台上映，台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店。店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」，再到「主視覺區」與小圓充滿希望的身影合影，最後還有「",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311103",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-04T09:49:51.000Z",
+      "eventStartDate": "2026-09-04",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "魔法少女小圓",
+        "角色背景打卡區",
+        "主視覺區"
+      ],
+      "searchCorpus": "《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店今日起於北中南威秀影城登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》今日（9 月 4 日）在台上映，台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城也同步推出了快閃店。店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」，再到「主視覺區」與小圓充滿希望的身影合影，最後還有「",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 4 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-11-09T06:22:52.770Z"
+    },
+    {
+      "id": "gnn-310540",
+      "title": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場",
+      "summary": "配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=310540",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-08-27T08:19:38.000Z",
+      "eventStartDate": "2026-09-04",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "魔法少女小圓",
+        "劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉",
+        "角色背景打卡區",
+        "主視覺區"
+      ],
+      "searchCorpus": "《劇場版魔法少女小圓〈瓦爾普吉斯的迴天〉》快閃店 北中南威秀影城 9/4 登場 配合《魔法少女小圓》最新續作《劇場版 魔法少女小圓〈瓦爾普吉斯的迴天〉》將於 9 月 4 日在台上映，官方宣布將同步於台北京站、台中 iFG 遠雄廣場及高雄大遠百威秀影城推出快閃店，店內設置三大打卡點，先從集結鹿目圓、曉美焰及巴麻美等六位魔法少女的「角色背景打卡區」拍起，再到「主視覺區」與小圓充滿希望的身影合影，最",
+      "dateConfidence": "medium",
+      "dateSource": "9 月 4 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-11-09T06:22:52.770Z"
     }
   ]
 }
