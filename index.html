@@ -6,7 +6,7 @@
     <title>全自動動漫追番基地 v11.0</title>
     <meta name="theme-color" content="#0f172a">
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="stylesheet" href="v11-styles.css?v=currently-watching-1">
+    <link rel="stylesheet" href="v11-styles.css?v=poster-fix-1">
 
     <style>
         :root {
@@ -641,7 +641,7 @@
 </div>
 
 <script src="vendor/opencc-js-1.4.1-full.js?v=1.4.1"></script>
-<script src="v11-core.js?v=currently-watching-1"></script>
+<script src="v11-core.js?v=poster-fix-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -2016,6 +2016,7 @@ async function discoverAnimeSearchResults(searchContext = {}, options = {}) {
 const MEDIA_FIELDS = `
     id format
     title { native english romaji }
+    coverImage { large medium }
     synonyms
     status episodes
     startDate { year month day }
@@ -2173,6 +2174,7 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "nextEpisode",
     "nextAiringAt",
     "streamingLinks",
+    "poster",
     "aliases",
     "anilistTitles",
     "startDate",
@@ -2182,6 +2184,25 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "relations",
     "lastMetadataSync"
 ]);
+
+function getAniListPosterUrl(media) {
+    const cover = media?.coverImage;
+    return cover && typeof cover === "object"
+        ? AnimeTrackerV11.resolvePosterUrl(cover, { httpsOnly:true })
+        : "";
+}
+
+function matchesConfirmedPosterIdentity(anime, mediaId) {
+    const integer = value => (typeof value === "number"
+        || (typeof value === "string" && /^\d+$/.test(value.trim()))) ? Number(value) : NaN;
+    const id = integer(mediaId);
+    if (!Number.isSafeInteger(id) || id <= 0) return false;
+    return AnimeTrackerV11.getAnimeAniListIdentity({
+        anilistId:integer(anime.anilistId), aniListId:integer(anime.aniListId),
+        source:anime.source, dataSource:anime.dataSource,
+        sourceId:integer(anime.sourceId), anilistTitles:anime.anilistTitles
+    }) === String(id);
+}
 
 function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString(), previousTitle = anime.title) {
     const patch = {
@@ -2201,6 +2222,13 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
         },
         lastMetadataSync: syncedAt
     };
+
+    const poster = getAniListPosterUrl(media);
+    if (poster && matchesConfirmedPosterIdentity(anime, media.id)
+        && !AnimeTrackerV11.resolvePosterUrl(anime.poster)
+        && !AnimeTrackerV11.resolvePosterUrl(anime.coverImage)) {
+        patch.poster = poster;
+    }
 
     const airedEpisode = getKnownAiredEpisode(media, syncedAt);
     if (airedEpisode) patch.airedEpisode = airedEpisode;
@@ -2664,6 +2692,7 @@ function buildAnimeRecordFromMedia(media, context = {}) {
         nextEpisode:media.nextAiringEpisode?.episode || null,
         nextAiringAt:media.nextAiringEpisode?.airingAt || null,
         streamingLinks:normalizeStreamingLinks(media.externalLinks),
+        poster:getAniListPosterUrl(media),
         rating:null,
         note:"",
         customPlatform:"",
@@ -4919,9 +4948,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=currently-watching-1"></script>
+<script src="v11-ui.js?v=poster-fix-1"></script>
 <script src="spotify-config.js"></script>
-<script src="spotify-themes.js?v=currently-watching-1"></script>
-<script src="cross-media.js?v=currently-watching-1"></script>
+<script src="spotify-themes.js?v=poster-fix-1"></script>
+<script src="cross-media.js?v=poster-fix-1"></script>
 </body>
 </html>

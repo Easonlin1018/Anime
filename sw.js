@@ -1,6 +1,6 @@
-const CACHE_VERSION = "anime-tracker-v11-currently-watching-1";
+const CACHE_VERSION = "anime-tracker-v11-poster-fix-1";
 const APP_CACHE_PREFIX = "anime-tracker-";
-const SHELL = ["./", "./index.html", "./vendor/opencc-js-1.4.1-full.js?v=1.4.1", "./v11-core.js?v=currently-watching-1", "./v11-ui.js?v=currently-watching-1", "./v11-styles.css?v=currently-watching-1", "./cross-media.js?v=currently-watching-1", "./spotify-config.js", "./spotify-themes.js?v=currently-watching-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
+const SHELL = ["./", "./index.html", "./vendor/opencc-js-1.4.1-full.js?v=1.4.1", "./v11-core.js?v=poster-fix-1", "./v11-ui.js?v=poster-fix-1", "./v11-styles.css?v=poster-fix-1", "./cross-media.js?v=poster-fix-1", "./spotify-config.js", "./spotify-themes.js?v=poster-fix-1", "./manifest.webmanifest", "./icons/app-icon.svg"];
 self.addEventListener("install", event => event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(SHELL.map(path => new Request(new URL(path, self.location.href), { cache:"no-store" })))).then(() => self.skipWaiting())));
 self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith(APP_CACHE_PREFIX) && key !== CACHE_VERSION).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener("message", event => {

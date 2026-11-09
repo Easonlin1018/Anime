@@ -93,13 +93,14 @@ function runtime(list = [], options = {}) {
         "restoreAnimeStartupStorage", "isAnimeStartupSnapshot", "commitAnimeStartupChanges"].map(name => productionFunction(html, name));
     vm.runInContext(indexFunctions.join("\n"), context);
     const prefix = ui.slice(0, ui.indexOf("    const originalSaveAndRender"));
-    const uiFunctions = ["animeCategoryLabel", "animeCategoryOptions", "currentlyWatchingPage", "renderCurrentlyWatching", "showPage", "safeUrl", "renderFilterChips", "renderStats"].map(name => productionFunction(ui, name, "    "));
+    const uiFunctions = ["animeCategoryLabel", "animeCategoryOptions", "currentlyWatchingPage", "renderCurrentlyWatching", "showPage", "renderFilterChips", "renderStats"].map(name => productionFunction(ui, name, "    "));
+    const poster = between(ui, "    const ANIME_POSTER_PLACEHOLDER", "    function renderReminders");
     const progress = between(ui, "    updateProgress = function", "    deleteAnime = function");
     const wrappers = between(ui, "    const originalBuildAnimeItem", "    function animeCategoryLabel");
     const syncAndSave = between(ui, "    const originalSaveAndRender", "    const originalMoveCategory");
     const refresh = productionFunction(ui, "refreshV11", "    ");
-    vm.runInContext(prefix + "\n" + uiFunctions.join("\n") + "\n" + syncAndSave + "\n" + wrappers + "\n" + progress + "\n" + refresh
-        + "\nwindow.__ui={renderCurrentlyWatching,currentlyWatchingPage,showPage,animeCategoryOptions,getHistory:()=>watchHistory};\n})();", context);
+    vm.runInContext(prefix + "\n" + uiFunctions.join("\n") + "\n" + poster + "\n" + syncAndSave + "\n" + wrappers + "\n" + progress + "\n" + refresh
+        + "\nwindow.__ui={renderCurrentlyWatching,currentlyWatchingPage,showPage,animeCategoryOptions,handleAnimePosterError,getHistory:()=>watchHistory};\n})();", context);
     localStorage.trace.length = 0;
     return { api:context, localStorage, node, pages, buttons, timers, traces,
         flush:() => { for (const [id, fn] of timers) { timers.delete(id); fn(); } } };
@@ -128,6 +129,42 @@ test("legacy in-progress entries render individually with posters, titles, progr
     assert.doesNotMatch(markup, /Synthetic movie/);
     assert.deepEqual(run.localStorage.snapshot(), before, "Rendering derives membership without storing another list");
     assert.deepEqual(run.localStorage.trace, []);
+});
+
+test("currently-watching covers resolve legacy candidates independently and use a local image when absent", () => {
+    const dataImage = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E";
+    const rows = [
+        anime("one", { title:'Legacy "cover" & <name>', poster:{ large:" ", medium:"https://example.invalid/medium.png?x=1&y=2" } }),
+        anime("two", { poster:"not-a-url", coverImage:dataImage }),
+        anime("three", { poster:{ large:"javascript:alert(1)", medium:{} }, coverImage:"/missing.png" })
+    ];
+    const run = runtime(rows);
+    const before = run.localStorage.snapshot();
+    run.api.window.__ui.renderCurrentlyWatching();
+    const markup = run.node("v11-currently-list").innerHTML;
+    assert.match(markup, /data-open-detail="one"[^>]*><img[^>]*src="https:\/\/example\.invalid\/medium\.png\?x=1&amp;y=2" alt="Legacy &quot;cover&quot; &amp; &lt;name&gt; 封面" data-v11-poster>/);
+    assert.ok(markup.includes('src="' + dataImage + '" alt="Synthetic two 封面" data-v11-poster'));
+    assert.match(markup, /data-open-detail="three"[^>]*><img loading="lazy" decoding="async" src="data:image\/svg\+xml,[^"]+" alt="Synthetic three 封面">/);
+    assert.doesNotMatch(markup, /src="[^"]*(not-a-url|missing\.png|\[object Object\]|javascript:)/);
+    assert.deepEqual(run.localStorage.snapshot(), before);
+    assert.deepEqual(run.localStorage.trace, []);
+});
+
+test("a failed poster load swaps to the local placeholder once and leaves unmarked images alone", () => {
+    const run = runtime([anime()]);
+    const handler = run.api.window.__ui.handleAnimePosterError;
+    const writes = [];
+    let marked = true;
+    const failed = {
+        matches: selector => marked && selector === "img[data-v11-poster]",
+        removeAttribute: key => { assert.equal(key, "data-v11-poster"); marked = false; },
+        set src(value) { assert.equal(marked, false); writes.push(value); }
+    };
+    handler({ target:failed });
+    handler({ target:failed });
+    handler({ target:{ matches:() => false, set src(_) { assert.fail("Unrelated image changed"); } } });
+    assert.equal(writes.length, 1);
+    assert.match(decodeURIComponent(writes[0]), /^data:image\/svg\+xml,<svg[^>]* width="200" height="300"/);
 });
 
 test("unknown-total backlog remains visible while review, completed and deleted entries stay out", () => {

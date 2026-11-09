@@ -97,7 +97,7 @@ function runtime(list = [anime()], options = {}) {
         localStorage, FormData:TestFormData, autoSyncTimer:null,
         window:{ __ANIME_STARTUP_STORAGE__:{ persisted:!options.deferred, recoveryPending:!!options.pending, originalList:clone(list), warnings:[] } },
         document:{ getElementById:node, createElement:() => ({ className:"", textContent:"" }) },
-        safeUrl:() => null, animeCategoryOptions:() => "", escapeHtml:value => String(value ?? ""),
+        animeCategoryOptions:() => "",
         matchingAnime:() => [], themeSongsApi:() => null,
         console:{ warn:(...args) => traces.warnings.push(args) },
         showToast:message => traces.toasts.push(message),
@@ -111,7 +111,8 @@ function runtime(list = [anime()], options = {}) {
     });
     context.window.assertAnimeStartupWritable = () => { if (context.window.__ANIME_STARTUP_STORAGE__.recoveryPending) throw Error("Recovery pending"); };
     context.window.warnAnimeStartupStorage = (...args) => traces.warnings.push(args);
-    vm.runInContext(["restoreAnimeStartupStorage", "commitAnimeStartupChanges"].map(name => productionFunction(html, name)).join("\n"), context);
+    vm.runInContext(["escapeHtml", "restoreAnimeStartupStorage", "commitAnimeStartupChanges"].map(name => productionFunction(html, name)).join("\n"), context);
+    vm.runInContext(ui.slice(ui.indexOf("    const ANIME_POSTER_PLACEHOLDER"), ui.indexOf("    function renderReminders")), context);
     vm.runInContext(["requestAnimeAutoSync", "openAnimeDetail", "saveDetail"].map(name => productionFunction(ui, name, "    ")).join("\n"), context);
     context.openAnimeDetail(form.dataset.id);
     if (options.writerError) context.commitAnimeStartupChanges = () => { throw Error("Synthetic safe writer/journal failure"); };
@@ -349,3 +350,18 @@ for (const [aliases, tags] of [[null, null], ["Synthetic legacy alias", "Synthet
         assert.equal(run.writes.length, 0, "Reopening a legacy record never normalizes persistent fields");
     });
 }
+
+test("detail covers use a validated legacy object or the local placeholder without changing stored data", () => {
+    const legacy = runtime([anime("one", { title:'Legacy "detail" & <name>', poster:" ", coverImage:{ large:"data:text/html,not-an-image", medium:"https://example.invalid/cover.jpg?x=1&y=2" } })]);
+    const missing = runtime([anime("one", { poster:{ large:{}, medium:"./not-an-image" }, coverImage:"" })]);
+    const legacyMarkup = legacy.node("v11-detail-body").innerHTML;
+    const missingMarkup = missing.node("v11-detail-body").innerHTML;
+    assert.match(legacyMarkup, /<img class="v11-poster" src="https:\/\/example\.invalid\/cover\.jpg\?x=1&amp;y=2" alt="Legacy &quot;detail&quot; &amp; &lt;name&gt; 海報" data-v11-poster>/);
+    assert.match(missingMarkup, /<img class="v11-poster" src="data:image\/svg\+xml,[^"]+" alt="Synthetic detail one 海報">/);
+    for (const run of [legacy, missing]) {
+        const before = run.localStorage.snapshot();
+        run.api.openAnimeDetail("one");
+        assert.deepEqual(run.localStorage.snapshot(), before);
+        assert.deepEqual(run.writes, []);
+    }
+});

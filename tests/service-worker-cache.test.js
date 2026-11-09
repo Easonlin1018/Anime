@@ -10,8 +10,8 @@ const root = path.resolve(__dirname, "..");
 const source = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
-const VERSION = "anime-tracker-v11-currently-watching-1";
-const RELEASE = "currently-watching-1";
+const VERSION = "anime-tracker-v11-poster-fix-1";
+const RELEASE = "poster-fix-1";
 const base = "https://isolated.example/Anime/";
 const absolute = value => new URL(typeof value === "string" ? value : value.url, base).href;
 

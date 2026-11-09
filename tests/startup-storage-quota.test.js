@@ -43,7 +43,7 @@ const bootstrap = `${ui.slice(0, ui.indexOf("const originalMoveCategory"))}\n` +
     `${between(ui, "function exportBackup()", "function readImport")}\n` +
     `${between(ui, "function animeCategoryLabel(", "function currentlyWatchingPage()")}\n` +
     `${between(ui, "function renderCurrentlyWatching()", "function addShell()")}\n` +
-    `${between(ui, "function safeUrl(", "function renderReminders")}\n` +
+    `${between(ui, "const ANIME_POSTER_PLACEHOLDER", "function renderReminders")}\n` +
     "window.__quotaTestBootstrap = { history:() => watchHistory, persistAnime, snapshot, exportBackup, renderCurrentlyWatching }; })();";
 
 function anime(identity = 101, extra = {}) {
