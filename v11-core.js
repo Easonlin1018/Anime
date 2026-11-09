@@ -1249,15 +1249,72 @@
         };
     }
 
+    function getNormalAnimeProgress(item) {
+        const count = value => {
+            if (!["number", "string"].includes(typeof value) || (typeof value === "string" && !value.trim())) return null;
+            const parsed = Number(value);
+            return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
+        };
+        const current = count(item?.currentEpisode ?? item?.watched) ?? 0;
+        const canonicalTotal = count(item?.totalEpisodes);
+        const parsedTotal = canonicalTotal !== null && canonicalTotal > 0 ? canonicalTotal : count(item?.episodes);
+        return { current, total:parsedTotal !== null && parsedTotal > 0 ? parsedTotal : null };
+    }
+
+    function isAnimeCurrentlyWatching(item) {
+        if (!item || typeof item !== "object" || Array.isArray(item) || item.deletedAt
+            || ["_deleted", "review", "completed"].includes(item.category)) return false;
+        const { current, total } = getNormalAnimeProgress(item);
+        return current > 0 && (total === null || current < total);
+    }
+
+    function correctAnimeDetailProgress(item, changes = {}, at = new Date().toISOString()) {
+        const unchanged = reason => ({ changed:false, reason, anime:item, historyRecord:null });
+        if (!item || typeof item !== "object" || Array.isArray(item)) return unchanged("invalid-record");
+        if (item.deletedAt || item.category === "_deleted") return unchanged("deleted");
+        // Normal progress corrections must not change a separate review session.
+        if (item.category === "review") return unchanged("review-protected");
+        if (!changes || typeof changes !== "object" || Array.isArray(changes)) return unchanged("invalid-progress");
+        const has = key => Object.prototype.hasOwnProperty.call(changes, key);
+        const count = (value, unknownAllowed = false) => {
+            if (unknownAllowed && (value === null || value === "")) return null;
+            if (!["number", "string"].includes(typeof value) || (typeof value === "string" && !value.trim())) return NaN;
+            const parsed = Number(value);
+            if (!Number.isSafeInteger(parsed) || parsed < 0) return NaN;
+            return unknownAllowed && parsed === 0 ? null : parsed;
+        };
+        const previous = getNormalAnimeProgress(item);
+        const current = has("currentEpisode") ? count(changes.currentEpisode) : previous.current;
+        const total = has("totalEpisodes") ? count(changes.totalEpisodes, true) : previous.total;
+        if (Number.isNaN(current) || Number.isNaN(total)) return unchanged("invalid-progress");
+        const categoryChanged = changes.categoryExplicitlyChanged === true && changes.category !== item.category;
+        if (categoryChanged && !["watching", "backlog", "waiting", "review", "completed"].includes(changes.category)) return unchanged("invalid-category");
+        const progressChanged = has("currentEpisode") && current !== previous.current;
+        const totalChanged = has("totalEpisodes") && total !== previous.total;
+        const updated = { ...item };
+        // Only explicit corrections update aliases; an unrelated detail edit must
+        // not normalize legacy progress or append a fictitious viewing event.
+        if (progressChanged) updated.currentEpisode = updated.watched = current;
+        if (totalChanged) updated.totalEpisodes = updated.episodes = total;
+        if (categoryChanged) {
+            updated.category = changes.category;
+            updated.categorySource = "manual";
+            updated.categoryManuallyEdited = true;
+        } else if ((progressChanged || totalChanged) && total !== null && current >= total
+            && item.categorySource !== "manual" && item.categoryManuallyEdited !== true) {
+            updated.category = "completed";
+        }
+        if (!progressChanged && !totalChanged && !categoryChanged) return unchanged("unchanged");
+        updated.updatedAt = iso(Math.max(Date.parse(iso(at)), (Date.parse(item.updatedAt) || 0) + 1));
+        return { changed:true, reason:"corrected", anime:updated, historyRecord:null };
+    }
+
     function updateAnimeProgress(list, id, delta = 1, at = new Date().toISOString()) {
         const targetId = String(id), change = Number(delta);
         const index = findAnimeRecordIndex(list, targetId);
         if (index < 0) return { list, found: false, changed: false, reason: "not-found", anime: null, historyRecord: null };
-        const old = migrateAnime(list[index], at);
-        const current = Math.max(0, numberOr(old.currentEpisode ?? old.watched));
-        const rawTotal = old.totalEpisodes ?? old.episodes;
-        const parsedTotal = Number(rawTotal);
-        const total = Number.isFinite(parsedTotal) && parsedTotal > 0 ? parsedTotal : null;
+        const old = list[index];
+        const { current, total } = getNormalAnimeProgress(old);
         const requested = Math.max(0, current + (Number.isFinite(change) ? change : 0));
         const nextEpisode = total === null ? requested : Math.min(requested, total);
         if (nextEpisode === current) return { list, found: true, changed: false, reason: change > 0 && total !== null && current >= total ? "at-total" : "unchanged", anime: old, historyRecord: null };
@@ -1265,20 +1322,22 @@
             ...old,
             watched: nextEpisode,
             currentEpisode: nextEpisode,
-            updatedAt: iso(at),
-            lastWatchedAt: change > 0 ? iso(at) : old.lastWatchedAt
+            updatedAt: iso(Math.max(Date.parse(iso(at)), (Date.parse(old.updatedAt) || 0) + 1)),
+            ...(change > 0 ? { lastWatchedAt:iso(at) } : {})
         };
         if (total !== null && nextEpisode >= total) updated.category = "completed";
         const nextList = arrayOf(list).slice(); nextList[index] = updated;
         return { list: nextList, found: true, changed: true, reason: "updated", anime: updated, historyRecord: createWatchRecord(updated, nextEpisode - current, at), total };
     }
 
-    function commitAnimeProgress(storage, list, history, id, delta = 1, at = new Date().toISOString()) {
+    function commitAnimeProgress(storage, list, history, id, delta = 1, at = new Date().toISOString(), persistChanges = null) {
         const result = updateAnimeProgress(list, id, delta, at);
         if (!result.changed) return { ...result, history: arrayOf(history) };
         const nextHistory = [...arrayOf(history), result.historyRecord];
-        storage.setItem(STORAGE_KEY, JSON.stringify(result.list));
-        storage.setItem(HISTORY_KEY, JSON.stringify(nextHistory));
+        const writes = [{ key:STORAGE_KEY, value:JSON.stringify(result.list) }, { key:HISTORY_KEY, value:JSON.stringify(nextHistory) }];
+        // The UI supplies its existing synchronous recovery journal before publishing success.
+        if (typeof persistChanges === "function") persistChanges(writes, list);
+        else writes.forEach(({ key, value }) => storage.setItem(key, value));
         return { ...result, history: nextHistory };
     }
 
@@ -1286,7 +1345,7 @@
         const targetId = String(id), change = Number(delta);
         const index = findAnimeRecordIndex(list, targetId);
         if (index < 0) return { list, found:false, changed:false, reason:"not-found", anime:null, historyRecord:null };
-        const old = migrateAnime(list[index], at);
+        const old = list[index];
         const current = Math.max(0, numberOr(old.reviewWatched));
         const parsedTotal = Number(old.totalEpisodes ?? old.episodes);
         const total = Number.isFinite(parsedTotal) && parsedTotal > 0 ? parsedTotal : null;
@@ -1300,20 +1359,21 @@
             reviewWatched:nextEpisode,
             reviewSessionActive:true,
             reviewStartedAt:old.reviewStartedAt || iso(at),
-            updatedAt:iso(at),
-            lastWatchedAt:change > 0 ? iso(at) : old.lastWatchedAt
+            updatedAt:iso(Math.max(Date.parse(iso(at)), (Date.parse(old.updatedAt) || 0) + 1)),
+            ...(change > 0 ? { lastWatchedAt:iso(at) } : {})
         };
         const nextList = arrayOf(list).slice();
         nextList[index] = updated;
         return { list:nextList, found:true, changed:true, reason:"updated", anime:updated, historyRecord:createReviewWatchRecord(updated, nextEpisode - current, at), total };
     }
 
-    function commitAnimeReviewProgress(storage, list, history, id, delta = 1, at = new Date().toISOString()) {
+    function commitAnimeReviewProgress(storage, list, history, id, delta = 1, at = new Date().toISOString(), persistChanges = null) {
         const result = updateAnimeReviewProgress(list, id, delta, at);
         if (!result.changed) return { ...result, history:arrayOf(history) };
         const nextHistory = [...arrayOf(history), result.historyRecord];
-        storage.setItem(STORAGE_KEY, JSON.stringify(result.list));
-        storage.setItem(HISTORY_KEY, JSON.stringify(nextHistory));
+        const writes = [{ key:STORAGE_KEY, value:JSON.stringify(result.list) }, { key:HISTORY_KEY, value:JSON.stringify(nextHistory) }];
+        if (typeof persistChanges === "function") persistChanges(writes, list);
+        else writes.forEach(({ key, value }) => storage.setItem(key, value));
         return { ...result, history:nextHistory };
     }
 
@@ -1866,7 +1926,7 @@
         const active = migrateList(list).filter(item => !item.deletedAt);
         const ratings = active.map(item => Number(item.rating)).filter(Number.isFinite);
         const frequency = values => Object.entries(values.reduce((acc, value) => (value && (acc[value] = (acc[value] || 0) + 1), acc), {})).sort((a, b) => b[1] - a[1])[0]?.[0] || "—";
-        return { today: sum(records.filter(r => dayKey(r.at) === today)), week: sum(records.filter(r => new Date(r.at) >= weekStart)), month: sum(records.filter(r => dayKey(r.at).startsWith(month))), total: sum(records), completed: active.filter(x => x.category === "completed").length, watching: active.filter(x => x.category === "watching").length, averageRating: ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : "—", streak, topPlatform: frequency(active.map(x => x.platform)), topTag: frequency(active.flatMap(x => x.tags)), trend7: trend(7), trend30: trend(30) };
+        return { today: sum(records.filter(r => dayKey(r.at) === today)), week: sum(records.filter(r => new Date(r.at) >= weekStart)), month: sum(records.filter(r => dayKey(r.at).startsWith(month))), total: sum(records), completed: active.filter(x => x.category === "completed").length, watching: active.filter(x => x.category === "watching").length, currentlyWatching:arrayOf(list).filter(isAnimeCurrentlyWatching).length, averageRating: ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : "—", streak, topPlatform: frequency(active.map(x => x.platform)), topTag: frequency(active.flatMap(x => x.tags)), trend7: trend(7), trend30: trend(30) };
     }
 
     function resetWatchStatistics(storage, at = new Date().toISOString()) {
@@ -2050,5 +2110,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe|animethemes\.moe|itunes\.apple\.com|music\.apple\.com)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, getNormalAnimeProgress, isAnimeCurrentlyWatching, correctAnimeDetailProgress, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });

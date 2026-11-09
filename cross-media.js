@@ -19,7 +19,7 @@
         localStorage.setItem(V.WORKS_KEY, JSON.stringify(works));
         localStorage.setItem(V.MANGA_HISTORY_KEY, JSON.stringify(mangaHistory));
     }
-    function syncAnime() { works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works); if (window.__ANIME_STARTUP_STORAGE__?.persisted !== false) persist(); }
+    function syncAnime(persistReferences = false) { works = V.migrateWorks(typeof animeList === "undefined" ? [] : animeList, works); if (persistReferences && window.__ANIME_STARTUP_STORAGE__?.persisted !== false) persist(); }
     function activeMediaEntries(work) { return (work?.mediaEntries || []).filter(entry => !entry.deletedAt); }
     function findWork(workId) { return works.find(work => String(work.workId) === String(workId)); }
     function findWorkByMediaId(mediaId, includeDeleted = false) { return works.find(work => (includeDeleted ? work.mediaEntries : activeMediaEntries(work)).some(entry => String(entry.id) === String(mediaId))); }
@@ -126,14 +126,16 @@
     function appendMangaStatistics(container){if(!container)return;const s=V.mangaStats(mangaHistory,works);container.insertAdjacentHTML("beforeend",`<h3>漫畫閱讀統計</h3><div class="v11-grid v11-stats-grid">${[["今天讀幾話",s.today],["本週讀幾話",s.week],["本月讀幾話",s.month],["總閱讀話數",s.total],["閱讀中作品",s.reading],["完成漫畫",s.completed],["常用閱讀平台",s.topPlatform]].map(([label,value])=>`<div class="v11-card v11-stat">${label}<strong class="v11-stat-value">${esc(value)}</strong></div>`).join("")}</div><div class="tiny-note">漫畫閱讀統計只來自 manga_read_history_v1，不會把舊 currentChapter 算成今天閱讀。</div>`);}
     function snapshot(){if(window.__ANIME_STARTUP_STORAGE__?.persisted===false)return{works:parse(V.WORKS_KEY,[]),mangaReadHistory:parse(V.MANGA_HISTORY_KEY,[])};syncAnime();return{works,mangaReadHistory:mangaHistory};}
     function replaceData(nextWorks,nextHistory){works=V.migrateWorks(typeof animeList==="undefined"?[]:animeList,nextWorks||[]);mangaHistory=Array.isArray(nextHistory)?nextHistory:[];persist();renderMangaPage();}
+    // Refresh display state after the caller has committed every key; never persist here.
+    function applyPersistedSnapshot(nextWorks,nextHistory){works=V.migrateWorks(typeof animeList==="undefined"?[]:animeList,nextWorks);mangaHistory=nextHistory;}
     function snapshotAnimeDeletion(animeId){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!work||!entry)return null;return{workId:work.workId,mediaId:entry.id,entryDeletedAt:entry.deletedAt??null,entryUpdatedAt:entry.updatedAt??null,workUpdatedAt:work.updatedAt??null};}
     function markAnimeDeleted(animeId, deletedAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry)return false;entry.deletedAt=deletedAt;entry.updatedAt=deletedAt;work.updatedAt=deletedAt;persist();renderMangaPage();return true;}
-    function restoreAnime(animeId, restoredAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry){syncAnime();return false;}entry.deletedAt=null;entry.updatedAt=restoredAt;work.updatedAt=restoredAt;persist();renderMangaPage();return true;}
+    function restoreAnime(animeId, restoredAt = new Date().toISOString()){const work=findWorkByMediaId(animeId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(animeId));if(!entry){syncAnime(true);return false;}entry.deletedAt=null;entry.updatedAt=restoredAt;work.updatedAt=restoredAt;persist();renderMangaPage();return true;}
     function restoreAnimeDeletionSnapshot(snapshot){if(!snapshot)return false;const work=findWork(snapshot.workId)||findWorkByMediaId(snapshot.mediaId,true),entry=work?.mediaEntries.find(item=>String(item.id)===String(snapshot.mediaId));if(!work||!entry)return false;entry.deletedAt=snapshot.entryDeletedAt??null;entry.updatedAt=snapshot.entryUpdatedAt??entry.updatedAt;work.updatedAt=snapshot.workUpdatedAt??work.updatedAt;persist();renderMangaPage();return true;}
-    function syncAnimeReferences(){syncAnime();renderMangaPage();return works;}
+    function syncAnimeReferences(){syncAnime(true);renderMangaPage();return works;}
     function eventContext(work,media){return{...media,workId:work.workId,aliases:[...new Set([...work.aliases,...media.aliases])],publisher:media.publisher};}
 
-    window.CrossMediaTracker={snapshot,replaceData,renderMangaPage,renderSearchResults,enhanceAnimeDetail,openWorkDetail,findWorkByMediaId,snapshotAnimeDeletion,markAnimeDeleted,restoreAnime,restoreAnimeDeletionSnapshot,syncAnimeReferences,mediaBadgesForAnime(anime){const work=findWorkByMediaId(anime.id);return work?mediaBadges(work):'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';},appendMangaReminders,appendMangaStatistics,eventContext};
+    window.CrossMediaTracker={snapshot,replaceData,applyPersistedSnapshot,renderMangaPage,renderSearchResults,enhanceAnimeDetail,openWorkDetail,findWorkByMediaId,snapshotAnimeDeletion,markAnimeDeleted,restoreAnime,restoreAnimeDeletionSnapshot,syncAnimeReferences,mediaBadgesForAnime(anime){const work=findWorkByMediaId(anime.id);return work?mediaBadges(work):'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';},appendMangaReminders,appendMangaStatistics,eventContext};
     // Keep derived work identities stable, without rewriting unchanged history at boot.
     if (window.__ANIME_STARTUP_STORAGE__?.persisted !== false) {
         try {

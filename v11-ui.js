@@ -11,6 +11,7 @@
     const state = { filters: parse(FILTER_KEY, {}), selected: new Set(), batchMode: false, calendarDate: new Date(), calendarView: "month", calendarTypes: new Set(["episode", "movie", "season", "event-start", "event-end"]), installPrompt: null, lastImportRestore: null };
     let watchHistory = parse(V.HISTORY_KEY, []);
     let autoSyncTimer = null;
+    const detailEditSessions = new WeakMap();
 
     function touch(item) { item.updatedAt = new Date().toISOString(); return item; }
     function persistAnime() {
@@ -22,12 +23,15 @@
         localStorage.setItem("anime_tracker_schema_version", "11");
     }
     function currentSettings() { return { eventSettings, filters: state.filters, animeListSort, notificationPermissionAsked: localStorage.getItem("anime_notification_prompted_v11") === "1" }; }
-    function snapshot({ persistedOnly = false } = {}) {
+    function snapshot({ persistedOnly = false, forExport = false } = {}) {
         if (persistedOnly) {
             const stored = (key, fallback) => {
-                const raw = localStorage.getItem(key);
+                const raw = forExport && window.getAnimeStartupStoredItem ? window.getAnimeStartupStoredItem(key) : localStorage.getItem(key);
                 if (raw === null) {
-                    if (key === STORAGE_KEY) throw Error("找不到已儲存的作品清單，未執行上傳。");
+                    if (key === STORAGE_KEY) {
+                        if (forExport) return JSON.parse(JSON.stringify(window.__ANIME_STARTUP_STORAGE__?.originalList || []));
+                        throw Error("找不到已儲存的作品清單，未執行上傳。");
+                    }
                     return fallback;
                 }
                 const value = JSON.parse(raw);
@@ -161,6 +165,10 @@
         }, 1500);
     }
     window.requestAnimeAutoSync = requestAnimeAutoSync;
+    if (window.__ANIME_STARTUP_STORAGE__?.persisted === true
+        && Number(window.__ANIME_EXISTING_MEDIA_MIGRATION__?.categoryChanged) > 0) {
+        requestAnimeAutoSync({ persistedOnly:true });
+    }
 
     saveAndRender = function (options = {}) {
         if (!options.metadataOnly) {
@@ -169,31 +177,64 @@
         }
         originalSaveAndRender(options);
         refreshV11();
-        requestAnimeAutoSync();
+        requestAnimeAutoSync({ persistedOnly:Boolean(options.metadataOnly) });
     };
     const originalMoveCategory = moveCategory;
     moveCategory = function (id, category) { const item = animeList.find(x => String(x.id) === String(id)); if (item) touch(item); originalMoveCategory(id, category); };
     updateProgress = function (id, delta) {
-        const current = animeList.find(item => String(item.id) === String(id) && !item.deletedAt);
-        const wasCompleted = current?.category === "completed";
-        const isReview = current?.category === "review";
-        const result = isReview
-            ? V.commitAnimeReviewProgress(localStorage, animeList, watchHistory, id, delta)
-            : V.commitAnimeProgress(localStorage, animeList, watchHistory, id, delta);
-        if (!result.found) return showToast("找不到要更新的動漫，請重新整理後再試");
-        if (!result.changed) return showToast(result.reason === "at-total" ? "已達總集數，觀看進度不再增加" : "觀看進度沒有變更");
-        animeList = result.list;
-        const updated = result.anime;
-        watchHistory = result.history;
-        if (Number(delta) > 0 && updated.nextEpisodeAt) {
-            const next = new Date(updated.nextEpisodeAt);
-            if (next <= new Date() && updated.broadcastDay) next.setDate(next.getDate() + 7);
-            updated.nextEpisodeAt = next.toISOString();
+        let result, storedList, isReview, wasCompleted;
+        const startup = window.__ANIME_STARTUP_STORAGE__;
+        const startupDeferred = startup?.persisted === false;
+        const uniqueActiveIndex = list => {
+            const matches = list.map((item, index) => ({ item, index })).filter(({ item }) => item
+                && String(item.id) === String(id) && !item.deletedAt && item.category !== "_deleted");
+            return matches.length === 1 ? matches[0].index : -1;
+        };
+        const memoryIndex = uniqueActiveIndex(animeList);
+        if (memoryIndex < 0) { showToast("找不到要更新的動畫，請重新整理後再試"); return false; }
+        try {
+            window.assertAnimeStartupWritable?.();
+            storedList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+            const storedHistory = JSON.parse(localStorage.getItem(V.HISTORY_KEY) || "[]");
+            if (!Array.isArray(storedList) || storedList.some(item => !item || typeof item !== "object" || Array.isArray(item))
+                || !Array.isArray(storedHistory) || storedHistory.some(record => !record || typeof record !== "object" || Array.isArray(record))) throw Error("本機資料無法安全讀取");
+            const storedIndex = uniqueActiveIndex(storedList);
+            if (storedIndex < 0) throw Error("作品的狀態已變更");
+            const stored = storedList[storedIndex], memory = animeList[memoryIndex];
+            if (V.getAnimeAniListIdentity(stored) !== V.getAnimeAniListIdentity(memory)
+                || stored.category !== memory.category
+                || (!V.getAnimeAniListIdentity(stored) && stored.title !== memory.title)) throw Error("作品的狀態已變更");
+            isReview = stored.category === "review";
+            wasCompleted = stored.category === "completed";
+            const persistChanges = (writes, originalList) => {
+                if (typeof commitAnimeStartupChanges !== "function") throw Error("安全儲存尚未就緒");
+                try { commitAnimeStartupChanges(writes, originalList); }
+                finally { if (startupDeferred && startup) startup.persisted = false; }
+            };
+            const commit = isReview ? V.commitAnimeReviewProgress : V.commitAnimeProgress;
+            result = commit(localStorage, storedList, storedHistory, id, delta, new Date().toISOString(), persistChanges);
+        } catch (error) {
+            if (startup?.recoveryPending) {
+                startup.persisted = false;
+                if (storedList) startup.originalList = JSON.parse(JSON.stringify(storedList));
+                if (typeof installAnimeStartupRecoveryGuard === "function") installAnimeStartupRecoveryGuard();
+                window.warnAnimeStartupStorage?.("watch-progress-recovery", error);
+            } else console.warn("觀看進度尚未儲存", error);
+            showToast("觀看進度尚未變更：本機資料暫時無法安全儲存。原始資料與觀看歷史仍保留。", 7000);
+            return false;
         }
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(animeList));
+        if (!result.found) { showToast("找不到要更新的動畫，請重新整理後再試"); return false; }
+        if (!result.changed) { showToast(result.reason === "at-total" ? "已達總集數，觀看進度不再增加" : "觀看進度沒有變更"); return false; }
+        const next = animeList.slice();
+        next[memoryIndex] = { ...next[memoryIndex], ...result.anime };
+        animeList = next;
+        watchHistory = result.history;
+        if (startupDeferred && startup) startup.originalList = JSON.parse(JSON.stringify(result.list));
         renderList();
         refreshV11();
-        if (!isReview && !wasCompleted && updated.category === "completed") void checkAndAddSequel(updated, false);
+        requestAnimeAutoSync({ persistedOnly:true });
+        if (!isReview && !wasCompleted && result.anime.category === "completed") void checkAndAddSequel(result.anime, false);
+        return true;
     };
     deleteAnime = function (id, externalIdentity = null) {
         traceDeleteStep("STEP 1 findAnimeRecordIndex");
@@ -251,32 +292,97 @@
         let html = originalBuildAnimeItem(anime);
         const mediaBadges=window.CrossMediaTracker?.mediaBadgesForAnime?.(anime)||'<span class="v11-badge" aria-label="動畫">🎬 動畫</span>';
         html=html.replace('<div class="anime-meta">',`<div class="cross-media-card-badges">${mediaBadges}</div><div class="anime-meta">`);
-        const checked = state.selected.has(String(anime.id)) ? "checked" : "";
-        return html.replace('<div class="anime-item">', `<div class="anime-item ${checked ? "v11-selected" : ""}" data-anime-id="${escapeHtml(anime.id)}"><input class="v11-batch-check" type="checkbox" aria-label="選取 ${escapeHtml(anime.title)}" data-select-anime="${escapeHtml(anime.id)}" ${state.batchMode ? "" : "hidden"} ${checked}>`);
+        const selectable = (state.currentPage || "anime") === "anime" && !V.isAnimeCurrentlyWatching(anime) && state.batchEligibleIds?.has(String(anime.id));
+        const checked = selectable && state.selected.has(String(anime.id)) ? "checked" : "";
+        return html.replace('<div class="anime-item">', `<div class="anime-item ${checked ? "v11-selected" : ""}" data-anime-id="${escapeHtml(anime.id)}"><input class="v11-batch-check" type="checkbox" aria-label="選取 ${escapeHtml(anime.title)}" data-select-anime="${escapeHtml(anime.id)}" ${state.batchMode && selectable ? "" : "hidden disabled"} ${checked}>`);
     };
     const originalRenderList = renderList;
     renderList = function () {
         const full = animeList;
-        const visible = V.searchFilterSort(full, animeListQuery, state.filters, animeListSort, item => [...eventList, ...eventArchive].some(event => matchingAnime(event).some(match => String(match.id) === String(item.id))));
-        const allowed = new Set(visible.map(item => String(item.id)));
-        animeList = full.map(item => allowed.has(String(item.id)) ? item : { ...item, category: "_v11_filtered" });
-        originalRenderList();
-        animeList = full;
-        const summary = document.getElementById("anime-list-summary"); if (summary) summary.textContent = `顯示 ${visible.length}／${full.filter(x => !x.deletedAt).length} 部`;
+        const mainVisible = getVisibleMainAnime();
+        pruneMainSelection(mainVisible);
+        const allowed = new Set(mainVisible.map(item => String(item.id)));
+        animeList = full.map(item => !item.deletedAt && item.category !== "_deleted" && !V.isAnimeCurrentlyWatching(item) && allowed.has(String(item.id)) ? item : { ...item, category: "_v11_filtered" });
+        try { originalRenderList(); }
+        finally { animeList = full; }
+        const mainCount = full.filter(item => !item.deletedAt && item.category !== "_deleted" && !V.isAnimeCurrentlyWatching(item)).length;
+        const summary = document.getElementById("anime-list-summary"); if (summary) summary.textContent = `顯示 ${mainVisible.length}／${mainCount} 部`;
         renderFilterChips();
         window.CrossMediaTracker?.renderSearchResults?.(animeListQuery);
+        renderCurrentlyWatching();
     };
+
+    function getVisibleMainAnime(list = animeList) {
+        // Split pages using raw progress before filter normalization can change a legacy record.
+        const source = list.filter(item => !item.deletedAt && item.category !== "_deleted" && !V.isAnimeCurrentlyWatching(item));
+        return V.searchFilterSort(source, animeListQuery, state.filters, animeListSort, item => [...eventList, ...eventArchive].some(event => matchingAnime(event).some(match => String(match.id) === String(item.id))));
+    }
+
+    function pruneMainSelection(visible = getVisibleMainAnime()) {
+        const counts = new Map();
+        animeList.filter(item => !item.deletedAt && item.category !== "_deleted").forEach(item => {
+            const id = String(item.id); counts.set(id, (counts.get(id) || 0) + 1);
+        });
+        const eligible = (state.currentPage || "anime") === "anime"
+            ? new Set(visible.filter(item => item.id != null && counts.get(String(item.id)) === 1).map(item => String(item.id)))
+            : new Set();
+        state.batchEligibleIds = eligible;
+        for (const id of state.selected) if (!eligible.has(id)) state.selected.delete(id);
+        return eligible;
+    }
+
+    function selectVisibleMainAnime() {
+        state.selected = new Set(pruneMainSelection());
+        renderList();
+    }
+
+    function animeCategoryLabel(category) {
+        return ({ watching:"正在連載", backlog:"補番中", waiting:"敲碗中", review:"複習中", completed:"已追完" })[category] || "其他分類";
+    }
+
+    function animeCategoryOptions(selected) {
+        const categories = ["watching", "backlog", "waiting", "review", "completed"];
+        if (selected && !categories.includes(selected)) categories.push(selected);
+        return categories.map(category => `<option value="${escapeHtml(category)}"${selected === category ? " selected" : ""}>${escapeHtml(animeCategoryLabel(category))}</option>`).join("");
+    }
+
+    function currentlyWatchingPage() {
+        return '<section class="section v11-page v11-currently-page" data-v11-page-group="currently-watching" hidden><div class="section-title">▶️ 正在看</div><p class="tiny-note">依實際正常觀看進度顯示；動畫的播出分類維持原狀，複習進度另行計算。</p><div id="v11-currently-summary" class="tiny-note" role="status"></div><div id="v11-currently-list"></div></section>';
+    }
+
+    function renderCurrentlyWatching() {
+        const box = document.getElementById("v11-currently-list");
+        if (!box) return;
+        const list = animeList.filter(item => V.isAnimeCurrentlyWatching(item)).slice().sort((a, b) =>
+            (Date.parse(b.lastWatchedAt) || 0) - (Date.parse(a.lastWatchedAt) || 0)
+            || String(a.title || "").localeCompare(String(b.title || ""), "zh-Hant"));
+        const summary = document.getElementById("v11-currently-summary");
+        if (summary) summary.textContent = `${list.length} 部正在看`;
+        box.innerHTML = list.map(item => {
+            const id = escapeHtml(String(item.id));
+            const progress = V.getNormalAnimeProgress(item);
+            const total = progress.total === null ? "未知" : progress.total;
+            const minus = `<button type="button" data-progress-action="decrement" data-anime-id="${id}" aria-label="${escapeHtml(item.title)} 減少 1 集">➖ 減少 1 集</button>`;
+            let card = buildAnimeItem(item);
+            if (card.includes('data-progress-action="increment"')) card = card.replace(/(<button\b[^>]*data-progress-action="increment")/u, match => minus + match);
+            else card = card.replace('<div class="btn-group">', () => `<div class="btn-group">${minus}<button type="button" data-progress-action="increment" data-anime-id="${id}">➕ 看了 1 集</button>`);
+            if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) card = card.replace(/(<button\b[^>]*data-progress-action="(?:increment|decrement)"[^>]*)(>)/gu, "$1 disabled$2");
+            const poster = safeUrl(item.poster || item.coverImage || "");
+            const cover = poster ? `<img src="${escapeHtml(poster)}" alt="${escapeHtml(item.title)} 封面" loading="lazy" decoding="async">` : '<span aria-label="尚無封面">🎬</span>';
+            return `<article class="v11-currently-card"><button type="button" class="v11-currently-cover" data-open-detail="${id}" aria-label="開啟 ${escapeHtml(item.title)} 詳細資料">${cover}</button><div class="v11-currently-body"><div class="v11-currently-progress">觀看進度：${progress.current} / ${escapeHtml(total)} 集 <span class="v11-badge">${escapeHtml(animeCategoryLabel(item.category))}</span></div>${card}</div></article>`;
+        }).join("") || '<div class="empty">目前沒有正在看的動畫。正常觀看進度開始後，未看完的作品會自動出現在這裡。</div>';
+    }
 
     function addShell() {
         document.title = "全自動動漫追番基地 v11.0";
         document.querySelector("h1").textContent = "🎬 全自動動漫追番基地 v11.0";
         const container = document.querySelector(".container");
         const nav = document.createElement("nav"); nav.className = "v11-nav"; nav.setAttribute("aria-label", "主導覽");
-        nav.innerHTML = [["anime","我的動漫"],["reminders","本週待看"],["planner","行事曆"],["events","活動"],["stats","統計"],["data","資料管理"],["sync","設定／同步"]].map(([id,label],i)=>`<button type="button" data-v11-page="${id}" class="${i===0?"active":""}">${label}</button>`).join("");
+        nav.innerHTML = [["anime","我的動漫"],["currently-watching","正在看"],["reminders","本週待看"],["planner","行事曆"],["events","活動"],["stats","統計"],["data","資料管理"],["sync","設定／同步"]].map(([id,label],i)=>`<button type="button" data-v11-page="${id}" class="${i===0?"active":""}">${label}</button>`).join("");
         container.insertBefore(nav, container.firstElementChild.nextSibling);
         [...container.children].forEach(element => { if (element.classList.contains("section")) { element.dataset.v11Original = "1"; element.classList.add("v11-page"); element.dataset.v11PageGroup = element.id === "events-section" ? "events" : "anime"; } });
         const pages = document.createElement("div");
-        pages.innerHTML = reminderPage() + calendarPage() + statsPage() + dataPage() + syncPage();
+        pages.innerHTML = currentlyWatchingPage() + reminderPage() + calendarPage() + statsPage() + dataPage() + syncPage();
         container.append(...pages.children);
         document.body.insertAdjacentHTML("beforeend", detailModal() + importModal() + '<div id="v11-offline" class="v11-offline" role="status">目前離線</div>');
         nav.addEventListener("click", event => { const button = event.target.closest("[data-v11-page]"); if (button) showPage(button.dataset.v11Page); });
@@ -297,15 +403,18 @@
     function importModal() { return '<div id="v11-import-modal" class="v11-modal" hidden><div class="v11-modal-panel" role="dialog" aria-modal="true"><div class="v11-modal-head"><h2>匯入預覽</h2><button data-close-modal>關閉</button></div><div id="v11-import-preview"></div><div class="v11-toolbar"><button data-import-mode="merge">合併</button><button data-import-mode="replace" class="btn-del">完全覆蓋</button></div></div></div>'; }
 
     function showPage(page) {
+        if (page !== (state.currentPage || "anime")) state.selected.clear();
+        state.currentPage = page;
         document.querySelectorAll("[data-v11-page-group]").forEach(element => element.hidden = element.dataset.v11PageGroup !== page);
         document.querySelectorAll("[data-v11-page]").forEach(button => button.classList.toggle("active", button.dataset.v11Page === page));
-        if (page === "reminders") renderReminders(); if (page === "planner") renderCalendar(); if (page === "stats") renderStats(); if (page === "data") renderRestorePoints(); if (page === "sync") renderSyncStatus();
+        if (page === "anime") renderList();
+        if (page === "currently-watching") renderCurrentlyWatching(); if (page === "reminders") renderReminders(); if (page === "planner") renderCalendar(); if (page === "stats") renderStats(); if (page === "data") renderRestorePoints(); if (page === "sync") renderSyncStatus();
         scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function insertAnimeTools() {
         const toolbar = document.querySelector(".anime-list-toolbar"); if (!toolbar) return;
-        toolbar.insertAdjacentHTML("afterend", '<details class="v11-filter-panel"><summary>進階篩選</summary><div class="v11-filter-grid"><label>狀態<select data-filter="status"><option value="">全部</option><option value="watching">正在看</option><option value="backlog">補番中</option><option value="waiting">等待</option><option value="completed">已完成</option></select></label><label>平台<input data-filter="platform" placeholder="平台"></label><label>標籤<input data-filter="tags" placeholder="標籤"></label><label>年份<input data-filter="year" type="number" min="1900" max="2200"></label><label>季度<select data-filter="season"><option value="">全部</option><option>WINTER</option><option>SPRING</option><option>SUMMER</option><option>FALL</option></select></label><label><input data-filter="unfinished" type="checkbox"> 尚未看完</label><label><input data-filter="stale" type="checkbox"> 30 天未觀看</label><label><input data-filter="hasEvents" type="checkbox"> 有活動</label><label><input data-filter="hasNextSeason" type="checkbox"> 有下一季</label><label><input data-filter="reminder" type="checkbox"> 有提醒</label><label><input data-filter="rated" type="checkbox"> 有評分</label></div><div id="v11-filter-chips"></div><button data-clear-filters>全部清除</button></details><div class="v11-toolbar"><button data-batch-toggle>批次選取模式</button><button data-select-visible>選取目前結果</button><button data-select-all>全選</button><button data-select-none>取消全選</button><select id="v11-batch-action"><option value="status">修改狀態</option><option value="platform">修改平台</option><option value="add-tag">新增標籤</option><option value="remove-tag">移除標籤</option><option value="reminder">啟用／停用提醒</option><option value="complete">移到已看完</option><option value="delete">刪除</option></select><input id="v11-batch-value" placeholder="操作值"><button data-run-batch>套用批次操作</button><button data-undo>復原上一步</button></div>');
+        toolbar.insertAdjacentHTML("afterend", '<details class="v11-filter-panel"><summary>進階篩選</summary><div class="v11-filter-grid"><label>狀態<select data-filter="status"><option value="">全部</option><option value="watching">正在連載</option><option value="backlog">補番中</option><option value="waiting">等待</option><option value="completed">已完成</option></select></label><label>平台<input data-filter="platform" placeholder="平台"></label><label>標籤<input data-filter="tags" placeholder="標籤"></label><label>年份<input data-filter="year" type="number" min="1900" max="2200"></label><label>季度<select data-filter="season"><option value="">全部</option><option>WINTER</option><option>SPRING</option><option>SUMMER</option><option>FALL</option></select></label><label><input data-filter="unfinished" type="checkbox"> 尚未看完</label><label><input data-filter="stale" type="checkbox"> 30 天未觀看</label><label><input data-filter="hasEvents" type="checkbox"> 有活動</label><label><input data-filter="hasNextSeason" type="checkbox"> 有下一季</label><label><input data-filter="reminder" type="checkbox"> 有提醒</label><label><input data-filter="rated" type="checkbox"> 有評分</label></div><div id="v11-filter-chips"></div><button data-clear-filters>全部清除</button></details><div class="v11-toolbar"><button data-batch-toggle>批次選取模式</button><button data-select-visible>選取目前結果</button><button data-select-all>全選目前主頁結果</button><button data-select-none>取消全選</button><select id="v11-batch-action"><option value="status">修改狀態</option><option value="platform">修改平台</option><option value="add-tag">新增標籤</option><option value="remove-tag">移除標籤</option><option value="reminder">啟用／停用提醒</option><option value="complete">移到已看完</option><option value="delete">刪除</option></select><select id="v11-batch-category" aria-label="批次分類">'+animeCategoryOptions("watching")+'</select><input id="v11-batch-value" placeholder="操作值" hidden><button data-run-batch>套用批次操作</button><button data-undo>復原上一步</button></div><div class="tiny-note">選取及批次操作僅限「我的動漫」目前顯示結果，切換篩選或頁面會取消隱藏作品的選取。</div>');
         document.querySelectorAll("[data-filter]").forEach(input => { const value = state.filters[input.dataset.filter]; if (input.type === "checkbox") input.checked = Boolean(value); else input.value = Array.isArray(value) ? value[0] || "" : value || ""; });
     }
 
@@ -333,9 +442,9 @@
         if (event.target.id === "anime-list-clear") { const input=document.getElementById("anime-list-search"); if(input)input.value=""; animeListQuery=""; renderList(); }
         const close = event.target.closest("[data-close-modal]"); if (close) return closeV11Modals();
         const card = event.target.closest(".anime-item[data-anime-id]"); if (card && !event.target.closest("button,input,a,select,textarea")) return openAnimeDetail(card.dataset.animeId);
-        if (event.target.matches("[data-batch-toggle]")) { state.batchMode = !state.batchMode; renderList(); }
-        if (event.target.matches("[data-select-visible]")) V.searchFilterSort(animeList, animeListQuery, state.filters, animeListSort).forEach(x => state.selected.add(String(x.id))), renderList();
-        if (event.target.matches("[data-select-all]")) animeList.filter(x => !x.deletedAt).forEach(x => state.selected.add(String(x.id))), renderList();
+        if (event.target.matches("[data-batch-toggle]")) { state.batchMode = !state.batchMode; if (!state.batchMode) state.selected.clear(); renderList(); }
+        if (event.target.matches("[data-select-visible]")) selectVisibleMainAnime();
+        if (event.target.matches("[data-select-all]")) selectVisibleMainAnime();
         if (event.target.matches("[data-select-none]")) state.selected.clear(), renderList();
         if (event.target.matches("[data-run-batch]")) runBatch();
         if (event.target.matches("[data-undo]")) undoLast();
@@ -348,10 +457,15 @@
         const sync = event.target.closest("[data-sync]"); if (sync) handleSync(sync.dataset.sync);
     }
     function delegatedChange(event) {
-        if (event.target.matches("[data-select-anime]")) { const id = String(event.target.dataset.selectAnime); event.target.checked ? state.selected.add(id) : state.selected.delete(id); event.target.closest(".anime-item")?.classList.toggle("v11-selected", event.target.checked); }
+        if (event.target.matches("[data-select-anime]")) { const id = String(event.target.dataset.selectAnime), allowed = pruneMainSelection(); event.target.checked = Boolean(event.target.checked && allowed.has(id)); event.target.checked ? state.selected.add(id) : state.selected.delete(id); event.target.closest(".anime-item")?.classList.toggle("v11-selected", event.target.checked); }
         if (event.target.matches("[data-filter]")) { const key = event.target.dataset.filter, raw = event.target.type === "checkbox" ? event.target.checked : event.target.value.trim(); if (!raw) delete state.filters[key]; else state.filters[key] = ["status","platform","tags"].includes(key) ? [raw] : raw; persistViewFilters(); renderList(); }
         if (event.target.id === "v11-calendar-view") { state.calendarView = event.target.value; renderCalendar(); }
         if (event.target.id === "v11-calendar-filter") { state.calendarTypes = new Set([...event.target.selectedOptions].map(x => x.value)); renderCalendar(); }
+        if (event.target.id === "v11-batch-action") {
+            const category = event.target.value === "status";
+            document.getElementById("v11-batch-category").hidden = !category;
+            document.getElementById("v11-batch-value").hidden = category;
+        }
     }
 
     function persistViewFilters() {
@@ -361,25 +475,179 @@
     }
 
     function renderFilterChips() { const box = document.getElementById("v11-filter-chips"); if (!box) return; box.innerHTML = Object.entries(state.filters).map(([key,value]) => `<span class="v11-chip">${escapeHtml(key)}：${escapeHtml(Array.isArray(value)?value.join("、"):value===true?"是":value)}<button data-remove-filter="${escapeHtml(key)}" aria-label="清除 ${escapeHtml(key)}">×</button></span>`).join(""); }
+    function batchStorageFields() {
+        return [["eventOverrides", EVENT_OVERRIDES_KEY, {}], ["eventAnimeOverrides", EVENT_ANIME_OVERRIDES_KEY, {}],
+            ["watchHistory", V.HISTORY_KEY, []], ["works", V.WORKS_KEY, []], ["mangaReadHistory", V.MANGA_HISTORY_KEY, []],
+            ["themeCache", "anime_theme_lookup_cache_v1", {}], ["themeUndo", "anime_theme_last_undo_v1", null]];
+    }
+    function batchMutationTimestamp(records) {
+        return new Date(Math.max(Date.now(), ...records.map(item => (Date.parse(item.updatedAt) || 0) + 1))).toISOString();
+    }
+    function readBatchStoredState() {
+        const read = (key, fallback) => {
+            const value = JSON.parse(localStorage.getItem(key) ?? JSON.stringify(fallback));
+            if (fallback === null ? value !== null && (!value || typeof value !== "object" || Array.isArray(value))
+                : Array.isArray(fallback) ? !Array.isArray(value) || value.some(item => !item || typeof item !== "object" || Array.isArray(item))
+                    : !value || typeof value !== "object" || Array.isArray(value)) throw Error("本機資料無法安全讀取");
+            return value;
+        };
+        const list = read(STORAGE_KEY, []);
+        if (localStorage.getItem(STORAGE_KEY) === null) throw Error("找不到已儲存的作品清單");
+        const auxiliary = Object.fromEntries(batchStorageFields().map(([name, key, fallback]) => [name, read(key, fallback)]));
+        if (auxiliary.works.some(work => !Array.isArray(work.mediaEntries) || work.mediaEntries.some(entry => !entry || typeof entry !== "object" || Array.isArray(entry)))) throw Error("跨媒體資料無法安全讀取");
+        return { list, auxiliary };
+    }
+    function commitBatchState(next, undo, originalList) {
+        const startup = window.__ANIME_STARTUP_STORAGE__, deferred = startup?.persisted === false;
+        if (typeof commitAnimeStartupChanges !== "function") throw Error("安全儲存尚未就緒");
+        const writes = [{ key:UNDO_KEY, value:JSON.stringify(undo) }, { key:STORAGE_KEY, value:JSON.stringify(next.list) },
+            ...batchStorageFields().map(([name, key]) => ({ key, value:JSON.stringify(next.auxiliary[name]) }))];
+        try { commitAnimeStartupChanges(writes, originalList); }
+        finally { if (deferred && startup) startup.persisted = false; }
+        if (deferred && startup) startup.originalList = JSON.parse(JSON.stringify(next.list));
+    }
+    function publishBatchState(next, targetIds, deletedIds = []) {
+        const targets = new Set(targetIds.map(String));
+        animeList = next.list.map(raw => {
+            const memory = animeList.find(item => String(item.id) === String(raw.id) && V.getAnimeAniListIdentity(item) === V.getAnimeAniListIdentity(raw));
+            const display = { ...(memory && !targets.has(String(raw.id)) ? memory : V.migrateAnime(raw)), ...raw };
+            if (!Array.isArray(display.aliases) || !Array.isArray(display.tags)) {
+                const defaults = V.migrateAnime(raw);
+                display.aliases = defaults.aliases; display.tags = defaults.tags;
+            }
+            return display;
+        });
+        eventOverrides = next.auxiliary.eventOverrides;
+        eventAnimeOverrides = next.auxiliary.eventAnimeOverrides;
+        watchHistory = next.auxiliary.watchHistory;
+        // These APIs hydrate already committed data; they never write or migrate storage again.
+        window.CrossMediaTracker?.applyPersistedSnapshot?.(next.auxiliary.works, next.auxiliary.mangaReadHistory);
+        themeSongsApi()?.applyPersistedSnapshot?.(next.auxiliary.themeCache, deletedIds);
+        state.selected.clear(); renderList(); renderEvents(); refreshV11();
+        window.requestAnimeAutoSync?.({ persistedOnly:true });
+    }
+    function reportBatchStorageFailure(error, originalList) {
+        const startup = window.__ANIME_STARTUP_STORAGE__;
+        if (startup?.recoveryPending) {
+            startup.persisted = false;
+            if (originalList) startup.originalList = JSON.parse(JSON.stringify(originalList));
+            if (typeof installAnimeStartupRecoveryGuard === "function") installAnimeStartupRecoveryGuard();
+            window.warnAnimeStartupStorage?.("batch-recovery", error);
+        } else console.warn("批次操作尚未儲存", error);
+        showToast("批次操作尚未完成：本機資料暫時無法安全儲存。原始資料與復原點仍保留。", 7000);
+    }
     function runBatch() {
+        pruneMainSelection();
         if (!state.selected.size) return showToast("請先選取動漫");
-        const action = document.getElementById("v11-batch-action").value, valueText = document.getElementById("v11-batch-value").value.trim();
-        if (action === "delete") { const names = animeList.filter(x => state.selected.has(String(x.id))).map(x => x.title); if (!confirm(`將刪除 ${names.length} 部：\n${names.slice(0,10).join("、")}\n確定繼續？`)) return; }
+        const ids = [...state.selected], selected = new Set(ids);
+        const action = document.getElementById("v11-batch-action").value;
+        const valueText = action === "status" ? document.getElementById("v11-batch-category").value : document.getElementById("v11-batch-value").value.trim();
+        if (action === "delete") { const names = animeList.filter(x => selected.has(String(x.id))).map(x => x.title); if (!confirm(`將刪除 ${names.length} 部：\n${names.slice(0,10).join("、")}\n確定繼續？`)) return; }
+        const eligible = pruneMainSelection();
+        if (ids.some(id => !eligible.has(id))) return showToast("目前顯示結果已變更，請重新選取後再操作");
         const value = action === "reminder" ? /^(1|true|啟用|是)$/i.test(valueText) : valueText;
-        save(UNDO_KEY, { type: "batch", at: new Date().toISOString(), before: animeList, auxiliary:auxiliaryUndoSnapshot() });
-        if (action === "delete") {
-            const deleted = animeList.filter(item => state.selected.has(String(item.id)));
-            const results = deleted.map(item => {
-                const result = V.markAnimeDeletedById(animeList, item.id, new Date().toISOString(), V.getAnimeAniListIdentity(item));
-                animeList = result.list;
-                return result;
+        let stored, next;
+        try {
+            window.assertAnimeStartupWritable?.();
+            stored = readBatchStoredState();
+            const storedVisible = new Set(getVisibleMainAnime(stored.list).map(item => String(item.id)));
+            const records = ids.map(id => {
+                const matches = stored.list.filter(item => String(item.id) === id && !item.deletedAt && item.category !== "_deleted");
+                const memory = animeList.find(item => String(item.id) === id && !item.deletedAt && item.category !== "_deleted");
+                if (matches.length !== 1 || !storedVisible.has(id) || !memory
+                    || V.getAnimeAniListIdentity(matches[0]) !== V.getAnimeAniListIdentity(memory)
+                    || (!V.getAnimeAniListIdentity(memory) && matches[0].title !== memory.title)) throw Error("選取作品的狀態已變更");
+                return matches[0];
             });
-            results.filter(result => result.changed && result.anime).forEach(result => cleanupAnimeAuxiliaryReferences(result.anime));
-        } else animeList = V.applyBatch(animeList, [...state.selected], action, value);
-        persistAnime(); state.selected.clear(); renderList(); refreshV11(); showToast("批次操作完成，可復原上一步");
+            const now = batchMutationTimestamp(records);
+            const undo = { type:"batch-scoped", at:now, action, records, auxiliary:[], themeCache:[], works:[] };
+            next = { list:stored.list, auxiliary:stored.auxiliary };
+            if (action === "delete") {
+                for (const item of records) {
+                    next.list = V.markAnimeDeletedById(next.list, item.id, now, V.getAnimeAniListIdentity(item)).list;
+                    undo.auxiliary.push(V.captureAnimeAuxiliaryState(stored.auxiliary, item.id));
+                    const cacheKeys = themeSongsApi()?.themeCacheKeysForAnime?.(item, next.auxiliary.themeCache) || [`source:${item.id}`];
+                    cacheKeys.filter(key => Object.prototype.hasOwnProperty.call(next.auxiliary.themeCache, key)).forEach(key => undo.themeCache.push([key, next.auxiliary.themeCache[key]]));
+                    next.auxiliary = V.cleanupAnimeAuxiliaryState(next.auxiliary, item.id);
+                    cacheKeys.forEach(key => delete next.auxiliary.themeCache[key]);
+                }
+                next.auxiliary.works = next.auxiliary.works.map(work => {
+                    const entries = work.mediaEntries.map(entry => {
+                        if (entry.mediaType !== "anime" || !selected.has(String(entry.id))) return entry;
+                        undo.works.push({ workId:work.workId, mediaId:entry.id, sourceId:entry.sourceId, before:entry });
+                        return { ...entry, deletedAt:now, updatedAt:batchMutationTimestamp([entry, { updatedAt:now }]) };
+                    });
+                    return entries.some((entry, index) => entry !== work.mediaEntries[index]) ? { ...work, mediaEntries:entries, updatedAt:batchMutationTimestamp([work, { updatedAt:now }]) } : work;
+                });
+            } else {
+                const fields = { status:["category", "status", "categorySource", "categoryManuallyEdited"], platform:["platform", "customPlatform"],
+                    "add-tag":["tags"], "remove-tag":["tags"], reminder:["reminderEnabled"], complete:["category", "categorySource", "categoryManuallyEdited", "currentEpisode", "watched"] }[action];
+                if (!fields) throw Error("不支援的批次操作");
+                const updates = V.applyBatch(records, ids, action, value, now);
+                const byId = new Map(updates.map((item, index) => [String(item.id), { ...records[index], updatedAt:now,
+                    ...Object.fromEntries(fields.map(field => [field, item[field]])) }]));
+                next.list = stored.list.map(item => records.includes(item) ? byId.get(String(item.id)) : item);
+            }
+            undo.afterRecords = next.list.filter(item => selected.has(String(item.id)) && records.some(record => String(record.id) === String(item.id) && V.getAnimeAniListIdentity(record) === V.getAnimeAniListIdentity(item)));
+            commitBatchState(next, undo, stored.list);
+        } catch (error) { reportBatchStorageFailure(error, stored?.list); return false; }
+        publishBatchState(next, ids, action === "delete" ? ids : []);
+        showToast("批次操作完成，可復原上一步");
+        return true;
+    }
+    function undoScopedBatch(undo) {
+        let stored, next;
+        try {
+            window.assertAnimeStartupWritable?.();
+            stored = readBatchStoredState();
+            const now = batchMutationTimestamp(stored.list.filter(item => undo.records.some(record => String(record.id) === String(item.id)))), replacements = new Map();
+            for (const record of undo.records) {
+                const matches = stored.list.map((item, index) => ({ item, index })).filter(({ item }) => String(item.id) === String(record.id)
+                    && V.getAnimeAniListIdentity(item) === V.getAnimeAniListIdentity(record)
+                    && (V.getAnimeAniListIdentity(record) || item.title === record.title));
+                if (matches.length !== 1) throw Error("作品的身分已變更，無法安全復原");
+                const expected = undo.afterRecords?.find(item => String(item.id) === String(record.id) && V.getAnimeAniListIdentity(item) === V.getAnimeAniListIdentity(record));
+                if (!expected || JSON.stringify(matches[0].item) !== JSON.stringify(expected)) throw Error("作品已有後續變更，未覆蓋新的進度或筆記");
+                replacements.set(matches[0].index, { ...record, updatedAt:now });
+            }
+            next = { list:stored.list.map((item, index) => replacements.get(index) || item), auxiliary:stored.auxiliary };
+            for (const captured of undo.auxiliary || []) {
+                const key = captured.themeCache?.key;
+                next.auxiliary = V.restoreAnimeAuxiliaryState(next.auxiliary, { ...captured, watchHistory:[],
+                    themeCache:key && Object.prototype.hasOwnProperty.call(next.auxiliary.themeCache, key)
+                        ? { key, present:true, value:next.auxiliary.themeCache[key] } : captured.themeCache,
+                    themeUndo:next.auxiliary.themeUndo !== null ? { touched:false } : captured.themeUndo });
+            }
+            const history = next.auxiliary.watchHistory.slice();
+            const historyKey = record => record.id != null ? `id:${record.id}` : JSON.stringify([record.animeId, record.at || record.timestamp, record.delta, record.episode ?? record.reviewEpisode, record.type || "watch"]);
+            const seenHistory = new Set(history.map(historyKey));
+            (undo.auxiliary || []).flatMap(captured => captured.watchHistory || []).sort((a, b) => a.index - b.index).forEach(({ record, index }) => {
+                if (seenHistory.has(historyKey(record))) return;
+                history.splice(Math.min(Math.max(0, index), history.length), 0, record); seenHistory.add(historyKey(record));
+            });
+            next.auxiliary.watchHistory = history;
+            for (const [key, value] of undo.themeCache || []) if (!(key in next.auxiliary.themeCache)) next.auxiliary.themeCache[key] = value;
+            next.auxiliary.works = next.auxiliary.works.map(work => {
+                const entries = work.mediaEntries.map(entry => {
+                    const saved = (undo.works || []).find(item => String(item.workId) === String(work.workId) && String(item.mediaId) === String(entry.id) && String(item.sourceId ?? "") === String(entry.sourceId ?? ""));
+                    if (!saved) return entry;
+                    if (entry.deletedAt !== undo.at) throw Error("關聯作品的刪除狀態已有後續變更，未覆蓋新狀態");
+                    const restored = { ...entry, updatedAt:batchMutationTimestamp([entry, { updatedAt:now }]) };
+                    if (Object.prototype.hasOwnProperty.call(saved.before, "deletedAt")) restored.deletedAt = saved.before.deletedAt;
+                    else delete restored.deletedAt;
+                    return restored;
+                });
+                return entries.some((entry, index) => entry !== work.mediaEntries[index]) ? { ...work, mediaEntries:entries, updatedAt:batchMutationTimestamp([work, { updatedAt:now }]) } : work;
+            });
+            commitBatchState(next, null, stored.list);
+        } catch (error) { reportBatchStorageFailure(error, stored?.list); return false; }
+        publishBatchState(next, undo.records.map(item => String(item.id)));
+        showToast("已復原上一步");
+        return true;
     }
     function undoLast() {
         const undo = parse(UNDO_KEY, null);
+        if (undo?.type === "batch-scoped" && Array.isArray(undo.records)) return undoScopedBatch(undo);
         if (undo?.type === "delete-compact" && undo?.record) {
             const restored = V.restoreDeleteUndoState(animeList, currentDeleteAuxiliaryState(), undo, new Date().toISOString());
             if (!restored.restored) return showToast("找不到可復原的刪除資料");
@@ -409,18 +677,122 @@
     }
 
     function openAnimeDetail(id, expandThemes = false) {
-        const item = animeList.find(x => String(x.id) === String(id)); if (!item) return;
+        const matches = animeList.filter(x => String(x.id) === String(id) && !x.deletedAt && x.category !== "_deleted");
+        if (matches.length !== 1) return;
+        const item = matches[0];
         const history = watchHistory.filter(x => String(x.animeId) === String(item.id)).slice(-20).reverse();
         document.getElementById("v11-detail-title").textContent = item.title;
         const relatedEvents = [...eventList, ...eventArchive].filter(event => matchingAnime(event).some(match => String(match.id) === String(item.id)));
-        document.getElementById("v11-detail-body").innerHTML = `<form id="v11-detail-form" data-id="${escapeHtml(item.id)}"><div class="v11-detail-grid"><div><img class="v11-poster" src="${safeUrl(item.poster) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='100%25' height='100%25' fill='%230f172a'/%3E%3Ctext x='50%25' y='50%25' fill='%2394a3b8' text-anchor='middle'%3EAnime%3C/text%3E%3C/svg%3E"}" alt="${escapeHtml(item.title)} 海報"></div><div><label>正式名稱<input name="title" value="${escapeHtml(item.title)}"></label><label>別名<input name="aliases" value="${escapeHtml(item.aliases.join("、"))}"></label><label>劇情簡介<textarea name="synopsis">${escapeHtml(item.synopsis)}</textarea></label></div></div><div class="v11-filter-grid"><label>狀態<input name="category" value="${escapeHtml(item.category)}"></label><label>目前集數<input name="currentEpisode" type="number" value="${item.currentEpisode}"></label><label>總集數<input name="totalEpisodes" type="number" value="${escapeHtml(item.totalEpisodes || "")}"></label><label>平台<input name="platform" value="${escapeHtml(item.platform)}"></label><label>標籤<input name="tags" value="${escapeHtml(item.tags.join("、"))}"></label><label>年份<input name="year" type="number" value="${escapeHtml(item.year || "")}"></label><label>季度<input name="season" value="${escapeHtml(item.season)}"></label><label>評分<input name="rating" type="number" min="0" max="10" step=".1" value="${escapeHtml(item.rating ?? "")}"></label><label>播出星期<input name="broadcastDay" value="${escapeHtml(item.broadcastDay)}"></label><label>播出時間<input name="broadcastTime" type="time" value="${escapeHtml(item.broadcastTime)}"></label><label>下一集時間<input name="nextEpisodeAt" type="datetime-local" value="${item.nextEpisodeAt ? escapeHtml(item.nextEpisodeAt.slice(0,16)) : ""}"></label><label>下一季日期<input name="nextSeasonDate" type="date" value="${escapeHtml(item.nextSeasonDate || "")}"></label><label><input name="reminderEnabled" type="checkbox" ${item.reminderEnabled?"checked":""}> 啟用提醒</label></div><label>筆記<textarea name="notes">${escapeHtml(item.notes)}</textarea></label><div class="v11-toolbar"><button type="button" onclick="updateProgress('${escapeHtml(item.id)}',-1)">減少 1 集</button><button type="button" onclick="updateProgress('${escapeHtml(item.id)}',1)">增加 1 集</button><button type="submit">儲存詳細資料</button></div><div class="tiny-note">建立：${escapeHtml(item.createdAt)}｜最近觀看：${escapeHtml(item.lastWatchedAt || "尚無")}</div><div id="v11-theme-section"></div><h3>相關活動</h3><div>${relatedEvents.map(x=>escapeHtml(x.title)).join("、")||"目前沒有相關活動"}</div><h3>觀看歷史</h3><div>${history.map(x=>`<div>${escapeHtml(x.at)}｜${x.delta>0?"+":""}${x.delta} 集</div>`).join("")||"尚無紀錄"}</div></form>`;
-        document.getElementById("v11-detail-form").addEventListener("submit", saveDetail);
+        document.getElementById("v11-detail-body").innerHTML = `<form id="v11-detail-form" data-id="${escapeHtml(item.id)}"><div class="v11-detail-grid"><div><img class="v11-poster" src="${safeUrl(item.poster) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='100%25' height='100%25' fill='%230f172a'/%3E%3Ctext x='50%25' y='50%25' fill='%2394a3b8' text-anchor='middle'%3EAnime%3C/text%3E%3C/svg%3E"}" alt="${escapeHtml(item.title)} 海報"></div><div><label>正式名稱<input name="title" value="${escapeHtml(item.title)}"></label><label>別名<input name="aliases" value="${escapeHtml(Array.isArray(item.aliases) ? item.aliases.join("、") : typeof item.aliases === "string" ? item.aliases : "")}"></label><label>劇情簡介<textarea name="synopsis">${escapeHtml(item.synopsis)}</textarea></label></div></div><div class="v11-filter-grid"><label>分類<select name="category">${animeCategoryOptions(item.category)}</select></label><label>目前集數<input name="currentEpisode" type="number" value="${item.currentEpisode}"></label><label>總集數<input name="totalEpisodes" type="number" value="${escapeHtml(item.totalEpisodes || "")}"></label><label>平台<input name="platform" value="${escapeHtml(item.platform)}"></label><label>標籤<input name="tags" value="${escapeHtml(Array.isArray(item.tags) ? item.tags.join("、") : typeof item.tags === "string" ? item.tags : "")}"></label><label>年份<input name="year" type="number" value="${escapeHtml(item.year || "")}"></label><label>季度<input name="season" value="${escapeHtml(item.season)}"></label><label>評分<input name="rating" type="number" min="0" max="10" step=".1" value="${escapeHtml(item.rating ?? "")}"></label><label>播出星期<input name="broadcastDay" value="${escapeHtml(item.broadcastDay)}"></label><label>播出時間<input name="broadcastTime" type="time" value="${escapeHtml(item.broadcastTime)}"></label><label>下一集時間<input name="nextEpisodeAt" type="datetime-local" value="${item.nextEpisodeAt ? escapeHtml(item.nextEpisodeAt.slice(0,16)) : ""}"></label><label>下一季日期<input name="nextSeasonDate" type="date" value="${escapeHtml(item.nextSeasonDate || "")}"></label><label><input name="reminderEnabled" type="checkbox" ${item.reminderEnabled?"checked":""}> 啟用提醒</label></div><label>筆記<textarea name="notes">${escapeHtml(item.notes)}</textarea></label><p id="v11-detail-save-status" role="alert" tabindex="-1" hidden class="tiny-note" style="color:#fca5a5"></p><div class="v11-toolbar"><button type="button" data-progress-action="decrement" data-anime-id="${escapeHtml(item.id)}">減少 1 集</button><button type="button" data-progress-action="increment" data-anime-id="${escapeHtml(item.id)}">增加 1 集</button><button type="submit">儲存詳細資料</button></div><div class="tiny-note">建立：${escapeHtml(item.createdAt)}｜最近觀看：${escapeHtml(item.lastWatchedAt || "尚無")}</div><div id="v11-theme-section"></div><h3>相關活動</h3><div>${relatedEvents.map(x=>escapeHtml(x.title)).join("、")||"目前沒有相關活動"}</div><h3>觀看歷史</h3><div>${history.map(x=>`<div>${escapeHtml(x.at)}｜${x.delta>0?"+":""}${x.delta} 集</div>`).join("")||"尚無紀錄"}</div></form>`;
+        const form = document.getElementById("v11-detail-form");
+        if (item.category === "review") {
+            form.elements.namedItem("currentEpisode").readOnly = true;
+            form.elements.namedItem("totalEpisodes").readOnly = true;
+            form.elements.namedItem("category").disabled = true;
+        }
+        const correctionNote = document.createElement("p");
+        correctionNote.className = "tiny-note";
+        correctionNote.textContent = item.category === "review"
+            ? "複習進度請使用增減按鈕；詳細資料不變更正常觀看進度與分類。"
+            : "直接編輯集數為校正進度，不會新增觀看歷史；記錄一次觀看請使用增減按鈕。";
+        form.querySelector(".v11-toolbar").before(correctionNote);
+        let storedRecord = null;
+        try {
+            const rows = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+            const targets = Array.isArray(rows) ? rows.filter(row => row && String(row.id) === String(item.id) && !row.deletedAt && row.category !== "_deleted") : [];
+            if (targets.length === 1) storedRecord = JSON.stringify(targets[0]);
+        } catch {}
+        detailEditSessions.set(form, { values:new Map(new FormData(form)), storedRecord, identity:V.getAnimeAniListIdentity(item) });
+        form.addEventListener("submit", saveDetail);
         document.getElementById("v11-detail-modal").hidden = false;
         themeSongsApi()?.renderForAnime(item, document.getElementById("v11-theme-section"));
         if (expandThemes) themeSongsApi()?.expand(document.getElementById("v11-theme-section"));
         window.CrossMediaTracker?.enhanceAnimeDetail?.(item, document.getElementById("v11-detail-body"));
     }
-    function saveDetail(event) { event.preventDefault(); const form = event.currentTarget, item = animeList.find(x => String(x.id) === form.dataset.id); if (!item) return; const data = new FormData(form), previousTitle = item.title, previousCategory = item.category; ["title","category","platform","synopsis","season","broadcastDay","broadcastTime","notes"].forEach(key => item[key]=String(data.get(key)||"").trim()); if(item.title&&item.title!==previousTitle){item.displayTitle=item.title;item.titleSource="manual";item.titleManuallyEdited=true;} if(item.category&&item.category!==previousCategory){item.categorySource="manual";item.categoryManuallyEdited=true;} item.aliases=String(data.get("aliases")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.tags=String(data.get("tags")||"").split(/[、,，]/).map(x=>x.trim()).filter(Boolean); item.currentEpisode=item.watched=Number(data.get("currentEpisode"))||0; item.totalEpisodes=item.episodes=Number(data.get("totalEpisodes"))||null; item.year=Number(data.get("year"))||null; item.rating=data.get("rating")===""?null:Number(data.get("rating")); item.nextEpisodeAt=data.get("nextEpisodeAt")?new Date(data.get("nextEpisodeAt")).toISOString():null; item.nextSeasonDate=data.get("nextSeasonDate")||null; item.reminderEnabled=data.get("reminderEnabled")==="on"; item.note=item.notes; item.customPlatform=item.platform; touch(item); persistAnime(); renderList(); refreshV11(); closeV11Modals(); showToast("詳細資料已儲存"); }
+    function saveDetail(event) {
+        event.preventDefault();
+        const form = event.currentTarget, session = detailEditSessions.get(form);
+        const status = form.querySelector('[role="alert"]');
+        if (status) { status.hidden = true; status.textContent = ""; }
+        const startup = window.__ANIME_STARTUP_STORAGE__, startupDeferred = startup?.persisted === false;
+        let storedList, nextList, updated, memoryIndex;
+        try {
+            window.assertAnimeStartupWritable?.();
+            if (!session?.storedRecord) throw Error("無法確認原始作品資料，請重新開啟詳細資料");
+            storedList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+            const history = JSON.parse(localStorage.getItem(V.HISTORY_KEY) || "[]");
+            const validRows = value => Array.isArray(value) && value.every(row => row && typeof row === "object" && !Array.isArray(row));
+            if (!validRows(storedList) || !validRows(history)) throw Error("本機資料無法安全讀取");
+            const activeIndices = list => list.map((row, index) => ({ row, index })).filter(({ row }) => String(row.id) === String(form.dataset.id) && !row.deletedAt && row.category !== "_deleted").map(({ index }) => index);
+            const storedIndices = activeIndices(storedList), memoryIndices = activeIndices(animeList);
+            if (storedIndices.length !== 1 || memoryIndices.length !== 1) throw Error("作品的狀態已變更");
+            const index = storedIndices[0], stored = storedList[index];
+            memoryIndex = memoryIndices[0];
+            if (JSON.stringify(stored) !== session.storedRecord || V.getAnimeAniListIdentity(stored) !== session.identity) throw Error("作品已更新，請重新開啟詳細資料後再試");
+            const data = new FormData(form);
+            const changed = key => (data.get(key) ?? null) !== (session.values.get(key) ?? null);
+            const changes = {};
+            for (const key of ["currentEpisode", "totalEpisodes"]) if (changed(key)) changes[key] = data.get(key);
+            if (changed("category") && stored.category !== "review") { changes.category = data.get("category"); changes.categoryExplicitlyChanged = true; }
+            const correction = V.correctAnimeDetailProgress(stored, changes);
+            if (["invalid-progress", "invalid-category", "deleted", "invalid-record"].includes(correction.reason)) throw Error("集數或分類無效，尚未儲存");
+            updated = { ...correction.anime };
+            // Patch only fields the user edited; defaults shown in the form must
+            // not normalize legacy records, timestamps, or another device's data.
+            for (const key of ["title", "platform", "synopsis", "season", "broadcastDay", "broadcastTime", "notes"]) {
+                if (changed(key)) updated[key] = String(data.get(key) || "").trim();
+            }
+            if (changed("title")) {
+                if (!updated.title) throw Error("請填寫作品名稱");
+                updated.displayTitle = updated.title; updated.titleSource = "manual"; updated.titleManuallyEdited = true;
+            }
+            for (const key of ["aliases", "tags"]) if (changed(key)) updated[key] = String(data.get(key) || "").split(/[、,，]/).map(x => x.trim()).filter(Boolean);
+            for (const key of ["year", "rating"]) if (changed(key)) {
+                const raw = data.get(key), value = raw === "" ? null : Number(raw);
+                if (value !== null && (!Number.isFinite(value) || (key === "rating" && (value < 0 || value > 10)))) throw Error("年份或評分無效");
+                updated[key] = value;
+            }
+            if (changed("nextEpisodeAt")) {
+                const raw = data.get("nextEpisodeAt"), date = raw ? new Date(raw) : null;
+                if (date && !Number.isFinite(date.getTime())) throw Error("下一集時間無效");
+                updated.nextEpisodeAt = date ? date.toISOString() : null;
+            }
+            if (changed("nextSeasonDate")) updated.nextSeasonDate = data.get("nextSeasonDate") || null;
+            if (changed("reminderEnabled")) updated.reminderEnabled = data.get("reminderEnabled") === "on";
+            if (changed("notes")) updated.note = updated.notes;
+            if (changed("platform")) updated.customPlatform = updated.platform;
+            if (JSON.stringify(updated) === JSON.stringify(stored)) { showToast("詳細資料沒有變更"); return false; }
+            updated.updatedAt = new Date(Math.max(Date.now(), (Date.parse(stored.updatedAt) || 0) + 1)).toISOString();
+            nextList = storedList.slice(); nextList[index] = updated;
+            if (typeof commitAnimeStartupChanges !== "function") throw Error("安全儲存尚未就緒");
+            // A correction is one main-list write, not a fabricated watch event.
+            // Native setItem is atomic for this key; no history/journal write is needed.
+            try { commitAnimeStartupChanges([{ key:STORAGE_KEY, value:JSON.stringify(nextList) }], storedList); }
+            finally { if (startupDeferred && startup) startup.persisted = false; }
+        } catch (error) {
+            if (startup?.recoveryPending) {
+                startup.persisted = false;
+                if (storedList) startup.originalList = JSON.parse(JSON.stringify(storedList));
+                if (typeof installAnimeStartupRecoveryGuard === "function") installAnimeStartupRecoveryGuard();
+                window.warnAnimeStartupStorage?.("detail-correction-recovery", error);
+            } else console.warn("詳細資料尚未儲存", error);
+            const message = "詳細資料尚未儲存：" + (error?.message || "本機資料暫時無法安全儲存") + "。原始資料與觀看歷史仍保留。";
+            if (status) {
+                status.textContent = message; status.hidden = false;
+                status.scrollIntoView?.({ block:"nearest" });
+                status.focus?.({ preventScroll:true });
+            }
+            showToast(message, 7000);
+            return false;
+        }
+        const nextMemory = animeList.slice(); nextMemory[memoryIndex] = { ...nextMemory[memoryIndex], ...updated }; animeList = nextMemory;
+        if (startupDeferred && startup) startup.originalList = JSON.parse(JSON.stringify(nextList));
+        renderList(); refreshV11(); closeV11Modals();
+        requestAnimeAutoSync({ persistedOnly:true });
+        showToast("詳細資料已儲存");
+        return true;
+    }
+
     function closeV11Modals(){ themeSongsApi()?.close(); document.querySelectorAll(".v11-modal").forEach(x=>x.hidden=true); }
     function safeUrl(value){ try{const url=new URL(value,location.href);return ["http:","https:","data:"].includes(url.protocol)?url.href:""}catch{return ""} }
 
@@ -428,14 +800,14 @@
     function renderCalendar(){const box=document.getElementById("v11-calendar");if(!box)return;const date=new Date(state.calendarDate),year=date.getFullYear(),month=date.getMonth();document.getElementById("v11-calendar-title").textContent=`${year} 年 ${month+1} 月`;const items=V.calendarItems(animeList,[...eventList,...eventArchive]).filter(x=>state.calendarTypes.has(x.type));const first=new Date(year,month,1),start=new Date(first);start.setDate(start.getDate()-((start.getDay()+6)%7));const days=state.calendarView==="week"?7:42;if(state.calendarView==="week"){start.setTime(date.getTime());start.setDate(start.getDate()-((start.getDay()+6)%7))}box.innerHTML=Array.from({length:days},(_,i)=>{const day=new Date(start);day.setDate(day.getDate()+i);const key=day.toISOString().slice(0,10),dayItems=items.filter(x=>x.date===key);return `<div class="v11-day ${day.getMonth()!==month?"other":""} ${key===new Date().toISOString().slice(0,10)?"today":""}" data-calendar-day="${key}" tabindex="0"><strong>${day.getDate()}</strong>${dayItems.slice(0,4).map(x=>`<button class="v11-calendar-item" data-calendar-day="${key}">${iconType(x.type)} ${escapeHtml(x.title)}</button>`).join("")}</div>`}).join(""); }
     function iconType(type){return ({episode:"📺",movie:"🎬",season:"🌱","event-start":"🎪","event-end":"🏁"})[type]||"•"}
     function renderDayItems(key){const items=V.calendarItems(animeList,[...eventList,...eventArchive]).filter(x=>x.date===key&&state.calendarTypes.has(x.type));document.getElementById("v11-day-items").innerHTML=`<h3>${escapeHtml(key)}</h3>`+items.map(x=>`<button class="v11-card" ${x.animeId?`onclick="document.querySelector('[data-anime-id=&quot;${escapeHtml(x.animeId)}&quot;]')?.click()"`:""}>${iconType(x.type)} ${escapeHtml(x.label)}｜${escapeHtml(x.title)}</button>`).join("");}
-    function renderStats(){const s=V.watchStats(watchHistory,animeList);const labels=[["今天觀看",s.today],["本週觀看",s.week],["本月觀看",s.month],["總觀看",s.total],["完成作品",s.completed],["正在觀看",s.watching],["平均評分",s.averageRating],["連續天數",s.streak],["常用平台",s.topPlatform],["常用標籤",s.topTag]];const bars=data=>`<div class="v11-chart-wrap"><div class="v11-trend">${data.map(x=>`<div class="v11-bar" style="height:${Math.max(3,x.count*10)}px" title="${x.date}: ${x.count}"></div>`).join("")}</div></div>`;const box=document.getElementById("v11-stats");box.innerHTML=`<div class="v11-grid v11-stats-grid">${labels.map(([a,b])=>`<div class="v11-card v11-stat">${a}<strong class="v11-stat-value">${escapeHtml(b)}</strong></div>`).join("")}</div><h3>最近 7 天</h3>${bars(s.trend7)}<h3>最近 30 天</h3>${bars(s.trend30)}`;window.CrossMediaTracker?.appendMangaStatistics?.(box);}
+    function renderStats(){const s=V.watchStats(watchHistory,animeList);const labels=[["今天觀看",s.today],["本週觀看",s.week],["本月觀看",s.month],["總觀看",s.total],["完成作品",s.completed],["正在連載",s.watching],["正在看",s.currentlyWatching],["平均評分",s.averageRating],["連續天數",s.streak],["常用平台",s.topPlatform],["常用標籤",s.topTag]];const bars=data=>`<div class="v11-chart-wrap"><div class="v11-trend">${data.map(x=>`<div class="v11-bar" style="height:${Math.max(3,x.count*10)}px" title="${x.date}: ${x.count}"></div>`).join("")}</div></div>`;const box=document.getElementById("v11-stats");box.innerHTML=`<div class="v11-grid v11-stats-grid">${labels.map(([a,b])=>`<div class="v11-card v11-stat">${a}<strong class="v11-stat-value">${escapeHtml(b)}</strong></div>`).join("")}</div><h3>最近 7 天</h3>${bars(s.trend7)}<h3>最近 30 天</h3>${bars(s.trend30)}`;window.CrossMediaTracker?.appendMangaStatistics?.(box);}
     function resetWatchStatistics(){if(!confirm("只會清除觀看歷史與統計，不會修改動漫進度，確定繼續嗎？"))return;V.resetWatchStatistics(localStorage);watchHistory=[];renderStats();showToast("觀看統計已歸零");}
     function restoreLastWatchStatisticsReset(){const result=V.restoreWatchStatistics(localStorage);if(!result.restored)return showToast("目前沒有可復原的統計重設");watchHistory=result.history;renderStats();showToast(`已恢復 ${result.restoredCount} 筆觀看紀錄`);}
 
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "theme-songs-native-title-1";
+        const reloadVersion = "currently-watching-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
@@ -448,7 +820,7 @@
             sessionStorage.setItem(key, reloadVersion);
             location.reload();
         });
-        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`).then(async reg => {
+        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`, { updateViaCache:"none" }).then(async reg => {
             reg.addEventListener("updatefound",()=>showToast("發現新版本，安裝完成後會自動套用"));
             await reg.update();
             const worker = navigator.serviceWorker.controller || reg.active || reg.waiting || reg.installing;
@@ -475,7 +847,19 @@
             return false;
         }
     }
-    function exportBackup(){const data=snapshot(),backup=V.createBackup(data);if(window.__ANIME_STARTUP_STORAGE__?.persisted===false){backup[V.STORAGE_KEY]=data.animeList;backup.works=data.works;backup.watchHistory=data.watchHistory;backup[V.MANGA_HISTORY_KEY]=data.mangaReadHistory;backup.eventOverrides=data.eventOverrides;backup.eventAnimeOverrides=data.eventAnimeOverrides;}const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"}),link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=`anime_tracker_v11_${new Date().toISOString().slice(0,10)}.json`;link.click();URL.revokeObjectURL(link.href);}
+    function exportBackup(){
+        try {
+            const backup = V.createBackup(snapshot({ persistedOnly:true, forExport:true }), { preserveStoredRecords:true });
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type:"application/json" }), link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `anime_tracker_v11_${new Date().toISOString().slice(0, 10)}.json`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        } catch (error) {
+            console.warn("無法匯出原始備份", error);
+            showToast("原始資料暫時無法安全讀取，備份尚未匯出。原有資料仍保留。", 7000);
+        }
+    }
     function readImport(event){const file=event.target.files[0];event.target.value="";if(!file)return;if(file.size>10*1024*1024)return showToast("匯入檔案不可超過 10 MB");const reader=new FileReader();reader.onload=()=>{try{const validation=V.validateBackup(reader.result);if(!validation.valid)throw Error(validation.error);pendingImport=validation.normalized;const p=validation.preview;document.getElementById("v11-import-preview").textContent=`備份格式：${p.format}｜版本：${p.schemaVersion}｜匯出：${p.exportedAt||"未知"}｜動畫：${p.animeCount} 部｜作品主體：${p.workCount}｜漫畫：${p.mangaCount}｜活動修正：${p.overrideCount}｜觀看紀錄：${p.historyCount}｜漫畫閱讀紀錄：${p.mangaHistoryCount}${p.requiresEmptyConfirmation?"｜⚠️ 備份內沒有任何作品，套用前會再次確認":""}`;document.getElementById("v11-import-modal").hidden=false}catch(error){pendingImport=null;showToast(`匯入失敗：${escapeHtml(error.message)}`)}};reader.onerror=()=>{pendingImport=null;showToast("匯入失敗：無法讀取檔案")};reader.readAsText(file);}
     function applyImport(mode){if(!pendingImport)return;const totalWorks=pendingImport.works.length||pendingImport[V.STORAGE_KEY].length;if(totalWorks===0&&!confirm("此備份包含 0 部作品。確定仍要繼續匯入？"))return;if(mode==="replace"&&!confirm("完全覆蓋會取代目前資料。系統會先建立還原點，確定繼續？"))return;let result;try{result=V.importBackup(snapshot(),pendingImport,mode)}catch(error){showToast(`匯入失敗：${escapeHtml(error.message)}`);return}createRestorePoint("匯入前自動還原點");animeList=result.animeList;eventOverrides=result.eventOverrides;eventAnimeOverrides=result.eventAnimeOverrides;watchHistory=result.watchHistory;state.lastImportRestore=parse(V.RESTORE_KEY,[])[0]?.id;save(V.HISTORY_KEY,watchHistory);save(EVENT_OVERRIDES_KEY,eventOverrides);save(EVENT_ANIME_OVERRIDES_KEY,eventAnimeOverrides);persistAnime();window.CrossMediaTracker?.replaceData?.(result.works,result.mangaReadHistory);renderList();renderEvents();closeV11Modals();showToast(`匯入完成：已處理 ${result.importedAnimeCount} 部動畫、${result.importedWorkCount} 個作品主體`);}
     function renderRestorePoints(){const box=document.getElementById("v11-restores");if(!box)return;const points=parse(V.RESTORE_KEY,[]);box.innerHTML='<h3>最近 5 個本機還原點</h3>'+points.map(x=>`<div class="v11-card">${escapeHtml(new Date(x.createdAt).toLocaleString("zh-TW"))}｜${x.animeCount} 部｜${escapeHtml(x.reason)} <button data-restore-id="${escapeHtml(x.id)}">還原</button></div>`).join("")||"尚無還原點";}
@@ -546,7 +930,7 @@
         } catch (error) { renderSyncStatus(`同步失敗：${error.message}`); }
     }
 
-    function refreshV11(){renderReminders();renderStats();if(!document.querySelector('[data-v11-page-group="planner"]')?.hidden)renderCalendar();}
+    function refreshV11(){renderCurrentlyWatching();renderReminders();renderStats();if(!document.querySelector('[data-v11-page-group="planner"]')?.hidden)renderCalendar();}
     window.exportData = exportBackup;
     window.importData = readImport;
     window.openAnimeDetail = openAnimeDetail;

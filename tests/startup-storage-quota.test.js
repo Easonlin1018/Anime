@@ -41,7 +41,10 @@ const production = [
 // Stop before unrelated progress/delete event handlers; keep its closure variables.
 const bootstrap = `${ui.slice(0, ui.indexOf("const originalMoveCategory"))}\n` +
     `${between(ui, "function exportBackup()", "function readImport")}\n` +
-    "window.__quotaTestBootstrap = { history:() => watchHistory, persistAnime, snapshot, exportBackup }; })();";
+    `${between(ui, "function animeCategoryLabel(", "function currentlyWatchingPage()")}\n` +
+    `${between(ui, "function renderCurrentlyWatching()", "function addShell()")}\n` +
+    `${between(ui, "function safeUrl(", "function renderReminders")}\n` +
+    "window.__quotaTestBootstrap = { history:() => watchHistory, persistAnime, snapshot, exportBackup, renderCurrentlyWatching }; })();";
 
 function anime(identity = 101, extra = {}) {
     const title = `通用測試作品 ${identity}`;
@@ -170,6 +173,7 @@ function runtime(localStorage) {
         boot() {
             context.loadStoredAnime(); context.renderList();
             vm.runInContext(bootstrap, context, { filename:"production-v11-storage-bootstrap.js" });
+            context.window.__quotaTestBootstrap.renderCurrentlyWatching();
             // Run deferred warnings while preserving the toast dismissal timer.
             const pending = timers.splice(0);
             pending.filter(fn => fn !== context.closeToast).forEach(fn => fn());
@@ -194,7 +198,9 @@ function failedBootPreservesOriginal(run, initial) {
     assert.deepEqual(copy(run.api.eventAnimeOverrides), JSON.parse(initial[EVENT_ANIME_KEY]));
     assert.deepEqual(copy(run.api.window.__quotaTestBootstrap.history()), JSON.parse(initial[V.HISTORY_KEY]));
     originalKeysUnchanged(run.localStorage, initial);
-    assert.match(run.nodes.get("list-waiting").innerHTML, /通用測試作品 101/u);
+    const first = JSON.parse(initial[V.STORAGE_KEY])[0];
+    const originalPage = V.isAnimeCurrentlyWatching(first) ? "v11-currently-list" : "list-waiting";
+    assert.match(run.nodes.get(originalPage).innerHTML, /通用測試作品 101/u);
     assert.equal(run.nodes.get("toast-box").style.display, "block", "Failure warning must be visible without blocking rendered UI");
     assert.match(run.nodes.get("toast-msg").innerHTML, /儲存|容量|空間|保留/u);
     assert.ok(run.trace.warnings.length > 0, "The storage failure is reported for diagnosis");
@@ -898,4 +904,54 @@ test("service-worker controller changes do not write session settings or reload 
     await Promise.resolve();
     assert.deepEqual(session.snapshot(), { previous:"retain" });
     assert.deepEqual(session.trace, []);
+});
+
+test("export remains read-only when a successful startup is already at quota", async () => {
+    const store = storage(seed([anime(101, { category:"watching", watched:5, currentEpisode:5 })])), run = runtime(store);
+    run.boot();
+    assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__.persisted, true);
+    store.limit = store.size();
+    const before = store.snapshot(), count = store.trace.length;
+    run.api.window.CrossMediaTracker = { snapshot:() => assert.fail("Export must not invoke a synchronizing cross-media snapshot") };
+    assert.doesNotThrow(() => run.api.window.__quotaTestBootstrap.exportBackup());
+    assert.equal(run.trace.exportClicks, 1);
+    const backup = JSON.parse(await run.trace.exports[0].text());
+    assert.deepEqual(backup[V.STORAGE_KEY], JSON.parse(before[V.STORAGE_KEY]));
+    assert.deepEqual(backup.watchHistory, JSON.parse(before[V.HISTORY_KEY]));
+    assert.deepEqual(backup.works, JSON.parse(before[V.WORKS_KEY]));
+    assert.deepEqual(store.snapshot(), before);
+    assert.equal(store.trace.length, count, "No capacity-consuming writes while exporting");
+});
+
+test("an empty installation can export without manufacturing a main storage key", async () => {
+    const initial = seed(); delete initial[V.STORAGE_KEY];
+    initial[V.HISTORY_KEY] = "[]"; initial[V.WORKS_KEY] = "[]";
+    const store = storage(initial), run = runtime(store);
+    run.boot();
+    const before = store.snapshot(), count = store.trace.length;
+    assert.equal(store.getItem(V.STORAGE_KEY), null);
+    run.api.window.__quotaTestBootstrap.exportBackup();
+    assert.equal(run.trace.exportClicks, 1);
+    const backup = JSON.parse(await run.trace.exports[0].text());
+    assert.deepEqual(backup[V.STORAGE_KEY], []);
+    assert.deepEqual(store.snapshot(), before);
+    assert.equal(store.trace.length, count);
+});
+
+test("cross-media views and snapshots cannot retry quota-failed derived writes after successful main startup", () => {
+    const failure = {}, store = storage(seed(), failure), run = runtime(store);
+    run.boot();
+    assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__.persisted, true);
+    const original = store.snapshot();
+    failure.failKey = V.WORKS_KEY;
+    store.limit = store.size();
+    assert.doesNotThrow(() => vm.runInContext(crossMedia, run.api));
+    assert.ok(run.api.window.CrossMediaTracker);
+    const attempts = store.trace.length;
+    for (let i = 0; i < 2; i++) {
+        assert.doesNotThrow(() => run.api.window.CrossMediaTracker.renderMangaPage());
+        assert.doesNotThrow(() => run.api.window.CrossMediaTracker.snapshot());
+    }
+    assert.equal(store.trace.length, attempts, "Pure views cannot trigger another WORKS/history persistence attempt");
+    assert.deepEqual(store.snapshot(), original);
 });

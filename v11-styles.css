@@ -1,9 +1,17 @@
 :root { --v11-focus: #fbbf24; }
 :focus-visible { outline: 3px solid var(--v11-focus); outline-offset: 2px; }
 .v11-nav { display:flex; flex-wrap:wrap; gap:7px; position:sticky; top:0; z-index:80; padding:10px; margin-bottom:14px; background:rgba(15,23,42,.96); border:1px solid #334155; border-radius:12px; backdrop-filter:blur(8px); }
-.v11-nav button { width:auto; margin:0; padding:8px 10px; font-size:12px; }
+.v11-nav button { width:auto; margin:0; padding:8px 10px; font-size:12px; min-height:44px; touch-action:manipulation; }
 .v11-nav button.active { background:#7c3aed; }
 .v11-page[hidden] { display:none !important; }
+.v11-currently-card { display:grid; grid-template-columns:80px minmax(0,1fr); align-items:start; gap:12px; margin:12px 0; padding:12px; border:1px solid #334155; border-radius:12px; background:#111827; }
+.v11-currently-cover { display:grid; place-items:center; width:80px; min-height:112px; margin:0; padding:0; overflow:hidden; border:1px solid #475569; border-radius:8px; background:#0f172a; color:#cbd5e1; font-size:28px; }
+.v11-currently-cover img { display:block; width:100%; height:auto; aspect-ratio:2/3; object-fit:cover; }
+.v11-currently-body { min-width:0; overflow-wrap:anywhere; }
+.v11-currently-body .anime-item { margin:6px 0 0; padding:0; border:0; background:transparent; }
+.v11-currently-progress { color:#7dd3fc; font-size:13px; font-weight:700; }
+.v11-currently-page .btn-group button { min-height:44px; touch-action:manipulation; }
+@media(max-width:480px){.v11-currently-card{grid-template-columns:56px minmax(0,1fr);gap:9px;padding:10px}.v11-currently-cover{width:56px;min-height:84px}.v11-currently-page .btn-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.v11-currently-page .btn-group button{width:100%;min-width:0;white-space:normal}.v11-currently-progress{line-height:1.6}}
 .v11-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; }
 .v11-card { padding:12px; border:1px solid #334155; background:#111827; border-radius:10px; margin-bottom:9px; }
 .v11-stat strong { display:block; font-size:22px; color:#7dd3fc; }
