@@ -131,40 +131,83 @@ test("legacy in-progress entries render individually with posters, titles, progr
     assert.deepEqual(run.localStorage.trace, []);
 });
 
+test("legacy relative cover paths stay same-origin and unsafe paths are rejected", () => {
+    const options = { baseUrl:"https://example.invalid/Anime/" };
+    assert.deepEqual(V.resolvePosterUrls({
+        large:"./covers/one.png",
+        medium:"https://example.invalid/Anime/covers/one.png"
+    }, options), ["https://example.invalid/Anime/covers/one.png"]);
+    assert.equal(V.resolvePosterUrl("/Anime/covers/two.jpg?size=2", options),
+        "https://example.invalid/Anime/covers/two.jpg?size=2");
+    for (const unsafe of ["//outside.invalid/cover.png", "%2f%2foutside.invalid/cover.png",
+        "../cover.png", "covers/%2e%2e/cover.png", "covers\\cover.png", "arbitrary",
+        "javascript:cover.png", "https://user:pass@example.invalid/cover.png"]) {
+        assert.deepEqual(V.resolvePosterUrls(unsafe, options), [], unsafe);
+    }
+    assert.equal(V.resolvePosterUrl("./covers/one.png", { ...options, httpsOnly:true }), "");
+});
+
 test("currently-watching covers resolve legacy candidates independently and use a local image when absent", () => {
     const dataImage = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E";
     const rows = [
         anime("one", { title:'Legacy "cover" & <name>', poster:{ large:" ", medium:"https://example.invalid/medium.png?x=1&y=2" } }),
         anime("two", { poster:"not-a-url", coverImage:dataImage }),
-        anime("three", { poster:{ large:"javascript:alert(1)", medium:{} }, coverImage:"/missing.png" })
+        anime("three", { poster:{ large:"javascript:alert(1)", medium:{} }, coverImage:"//outside.invalid/missing.png" })
     ];
     const run = runtime(rows);
     const before = run.localStorage.snapshot();
     run.api.window.__ui.renderCurrentlyWatching();
     const markup = run.node("v11-currently-list").innerHTML;
-    assert.match(markup, /data-open-detail="one"[^>]*><img[^>]*src="https:\/\/example\.invalid\/medium\.png\?x=1&amp;y=2" alt="Legacy &quot;cover&quot; &amp; &lt;name&gt; 封面" data-v11-poster>/);
-    assert.ok(markup.includes('src="' + dataImage + '" alt="Synthetic two 封面" data-v11-poster'));
+    assert.match(markup, /data-open-detail="one"[^>]*><img[^>]*src="https:\/\/example\.invalid\/medium\.png\?x=1&amp;y=2" alt="Legacy &quot;cover&quot; &amp; &lt;name&gt; 封面" data-v11-poster="\[\]">/);
+    assert.ok(markup.includes('src="' + dataImage + '" alt="Synthetic two 封面" data-v11-poster="[]"'));
     assert.match(markup, /data-open-detail="three"[^>]*><img loading="lazy" decoding="async" src="data:image\/svg\+xml,[^"]+" alt="Synthetic three 封面">/);
     assert.doesNotMatch(markup, /src="[^"]*(not-a-url|missing\.png|\[object Object\]|javascript:)/);
     assert.deepEqual(run.localStorage.snapshot(), before);
     assert.deepEqual(run.localStorage.trace, []);
 });
 
-test("a failed poster load swaps to the local placeholder once and leaves unmarked images alone", () => {
-    const run = runtime([anime()]);
+test("currently-watching orders and deduplicates legacy and confirmed AniList cover candidates", () => {
+    const medium = "https://example.invalid/medium.webp?x=1&y=2";
+    const remote = "https://example.invalid/anilist.jpg";
+    const rows = [
+        anime("one", {
+            poster:{ large:"./covers/old.png", medium },
+            coverImage:{ large:"http://localhost/isolated/covers/old.png", medium },
+            source:"anilist", anilistCover:{ id:"101", large:medium, medium:remote }
+        }),
+        anime("two", { anilistCover:{ id:"101", large:"https://example.invalid/wrong.jpg" } }),
+        anime("three", { anilistId:null, anilistCover:{ id:"101", large:"https://example.invalid/unknown.jpg" } })
+    ];
+    const run = runtime(rows), before = run.localStorage.snapshot();
+    run.api.window.__ui.renderCurrentlyWatching();
+    const markup = run.node("v11-currently-list").innerHTML;
+    assert.match(markup, /src="http:\/\/localhost\/isolated\/covers\/old\.png" alt="Synthetic one 封面" data-v11-poster="\[&quot;https:\/\/example\.invalid\/medium\.webp\?x=1&amp;y=2&quot;,&quot;https:\/\/example\.invalid\/anilist\.jpg&quot;\]"/);
+    assert.doesNotMatch(markup, /wrong\.jpg|unknown\.jpg/);
+    assert.deepEqual(run.localStorage.snapshot(), before);
+    assert.deepEqual(run.localStorage.trace, []);
+});
+
+test("failed poster loads try each remaining candidate once before the local placeholder", () => {
+    const run = runtime([anime()]), before = run.localStorage.snapshot();
     const handler = run.api.window.__ui.handleAnimePosterError;
     const writes = [];
-    let marked = true;
+    const candidates = ["https://example.invalid/medium.webp", "https://example.invalid/anilist.jpg"];
+    let queue = JSON.stringify(candidates);
     const failed = {
-        matches: selector => marked && selector === "img[data-v11-poster]",
-        removeAttribute: key => { assert.equal(key, "data-v11-poster"); marked = false; },
-        set src(value) { assert.equal(marked, false); writes.push(value); }
+        matches: selector => queue !== null && selector === "img[data-v11-poster]",
+        getAttribute: key => { assert.equal(key, "data-v11-poster"); return queue; },
+        setAttribute: (key, value) => { assert.equal(key, "data-v11-poster"); queue = value; },
+        removeAttribute: key => { assert.equal(key, "data-v11-poster"); queue = null; },
+        set src(value) { writes.push(value); }
     };
-    handler({ target:failed });
-    handler({ target:failed });
+    for (let i = 0; i < 5; i++) handler({ target:failed });
     handler({ target:{ matches:() => false, set src(_) { assert.fail("Unrelated image changed"); } } });
-    assert.equal(writes.length, 1);
-    assert.match(decodeURIComponent(writes[0]), /^data:image\/svg\+xml,<svg[^>]* width="200" height="300"/);
+    assert.equal(queue, null);
+    assert.equal(writes.length, 3);
+    assert.deepEqual(writes.slice(0, 2), candidates);
+    assert.match(decodeURIComponent(writes[2]), /^data:image\/svg\+xml,<svg[^>]* width="200" height="300"/);
+    assert.deepEqual(run.localStorage.snapshot(), before);
+    assert.deepEqual(run.localStorage.trace, []);
 });
 
 test("unknown-total backlog remains visible while review, completed and deleted entries stay out", () => {

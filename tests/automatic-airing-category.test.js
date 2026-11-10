@@ -558,10 +558,12 @@ test("L: a numeric local ID cannot collide with another season's explicit AniLis
 });
 
 test("in-flight deletion and manual progress/category edits are respected at commit time", async () => {
-    const { api, trace } = runtime([fixture(), fixture(102)], { request:async () => {
-        api.animeList[0] = { ...api.animeList[0], deletedAt:at, deletedFromCategory:"waiting" };
-        api.animeList[1] = { ...api.animeList[1], category:"backlog", categorySource:"manual",
+    const { api, localStorage, trace } = runtime([fixture(), fixture(102)], { request:async () => {
+        const latest = JSON.parse(localStorage.getItem(V.STORAGE_KEY));
+        latest[0] = { ...latest[0], deletedAt:at, deletedFromCategory:"waiting" };
+        latest[1] = { ...latest[1], category:"backlog", categorySource:"manual",
             categoryManuallyEdited:true, watched:3, currentEpisode:3 };
+        localStorage.setItem(V.STORAGE_KEY, JSON.stringify(latest));
         return [media(), media(102)];
     } });
     await api.syncAnimeMetadata();

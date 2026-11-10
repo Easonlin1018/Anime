@@ -891,8 +891,10 @@ test("recovery can render and expand stored Theme Songs without lookup, cache, u
 test("service-worker controller changes do not write session settings or reload a recovery view", async () => {
     const run = recoveryControlsRun(), listeners = new Map(), session = storage({ previous:"retain" });
     run.api.sessionStorage = session;
+    run.api.document.baseURI = "https://isolated.example/Anime/";
     run.api.navigator = { serviceWorker:{
         controller:null,
+        getRegistration:async () => undefined,
         addEventListener:(type, handler) => listeners.set(type, handler),
         register:async () => ({ addEventListener:() => {}, update:async () => {}, active:null })
     } };

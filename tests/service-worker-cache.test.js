@@ -5,15 +5,23 @@ const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { webcrypto } = require("node:crypto");
 
 const root = path.resolve(__dirname, "..");
 const source = fs.readFileSync(path.join(root, "sw.js"), "utf8");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
-const VERSION = "anime-tracker-v11-poster-fix-1";
-const RELEASE = "poster-fix-1";
+const VERSION = "anime-tracker-v11-poster-fix-2";
+const RELEASE = "poster-fix-2";
 const base = "https://isolated.example/Anime/";
 const absolute = value => new URL(typeof value === "string" ? value : value.url, base).href;
+const releaseFiles = new Set(["index.html", "v11-core.js", "v11-ui.js", "v11-styles.css", "cross-media.js",
+    "spotify-themes.js", "vendor/opencc-js-1.4.1-full.js", "manifest.webmanifest", "icons/app-icon.svg"]);
+function shellText(value) {
+    const name = new URL(absolute(value)).pathname.slice("/Anime/".length) || "index.html";
+    if (releaseFiles.has(name)) return fs.readFileSync(path.join(root, name), "utf8");
+    if (name === "spotify-config.js") return "/* Synthetic optional config */";
+}
 
 function runtime(options = {}) {
     const listeners = new Map(), stores = new Map();
@@ -30,22 +38,14 @@ function runtime(options = {}) {
         trace.requests.push({ url, cache });
         if (options.offline || options.failUrl?.(url)) throw new TypeError("Synthetic offline request");
         if (options.badUrl?.(url)) return new Response("Synthetic failed response", { status:503 });
-        const body = cache === "reload" || cache === "no-store" ? `CURRENT:${url}` : `HTTP-STALE:${url}`;
+        const fallback = cache === "reload" || cache === "no-store" ? `CURRENT:${url}` : `HTTP-STALE:${url}`;
+        const body = options.bodyOverride?.(url) ?? shellText(url) ?? fallback;
         return new Response(body, { status:200 });
     };
     const open = async name => {
         if (!stores.has(name)) stores.set(name, new Map());
         const rows = stores.get(name);
         return {
-            async addAll(requests) {
-                // addAll commits its batch only if all requests succeed.
-                const loaded = await Promise.all(requests.map(async request => {
-                    const response = await fetch(request);
-                    if (!response.ok) throw new TypeError("Synthetic addAll rejected HTTP error");
-                    return [absolute(request), await response.text()];
-                }));
-                for (const [url, body] of loaded) rows.set(url, { body, status:200 });
-            },
             async match(request) {
                 const entry = rows.get(absolute(request));
                 return entry ? new Response(entry.body, { status:entry.status }) : undefined;
@@ -63,7 +63,7 @@ function runtime(options = {}) {
         async match() { trace.globalMatches++; throw Error("A worker must not read another cache namespace"); }
     };
     const context = vm.createContext({
-        URL, Request, Response, Promise, DOMException, caches, fetch, console:{ warn:() => {} },
+        URL, Request, Response, Promise, DOMException, TextEncoder, crypto:webcrypto, caches, fetch, console:{ warn:() => {} },
         self:{ location:{ href:base + "sw.js?v=" + RELEASE, origin:new URL(base).origin },
             addEventListener:(name, handler) => listeners.set(name, handler),
             skipWaiting:async () => { trace.skips++; }, clients:{ claim:async () => { trace.claims++; } } },
@@ -97,12 +97,15 @@ function registeredWorker(options = {}) {
     const end = ui.indexOf("    function wireStaticControls()", start);
     assert.ok(start >= 0 && end > start);
     const listeners = new Map(), registrations = [], session = new Map(), trace = { reloads:0, updates:0, messages:[], storage:[] };
-    const worker = { scriptURL:base+"sw.js?v="+RELEASE, postMessage:value => trace.messages.push(value) };
+    const worker = { scriptURL:base+"sw.js?v="+(options.existingRelease || RELEASE), postMessage:value => trace.messages.push(value) };
+    const registration = { scope:options.scope || base, active:worker, addEventListener:() => {}, update:async () => { trace.updates++; } };
     const context = vm.createContext({
         window:{ __ANIME_STARTUP_STORAGE__:{ recoveryPending:!!options.recovery } },
+        URL,
         navigator:{ serviceWorker:{ controller:worker, addEventListener:(name, handler) => listeners.set(name, handler),
-            register:async (url, settings) => { registrations.push({ url, settings }); return { active:worker, addEventListener:() => {}, update:async () => { trace.updates++; } }; } } },
-        document:{ documentElement:{ dataset:{} } }, location:{ reload:() => { trace.reloads++; } },
+            getRegistration:async () => options.existingRelease ? registration : undefined,
+            register:async (url, settings) => { registrations.push({ url, settings }); return registration; } } },
+        document:{ baseURI:base, documentElement:{ dataset:{} } }, location:{ reload:() => { trace.reloads++; } },
         sessionStorage:{ getItem:key => session.get(key) ?? null, setItem:(key, value) => session.set(key, String(value)) },
         localStorage:{ setItem:() => trace.storage.push("write"), clear:() => trace.storage.push("clear") },
         showToast:() => {}, console
@@ -124,15 +127,16 @@ test("the release cache and all changed app resources share the current-viewing 
     assert.equal(run.config.SHELL.length, 11);
 });
 
-test("install bypasses stale HTTP responses and completes the entire shell before skipWaiting", async () => {
+test("install bypasses stale HTTP responses and waits with the complete validated shell", async () => {
     const run = runtime();
     run.seed("anime-tracker-v11-theme-songs-native-title-1", "./index.html", "OLD-INDEX");
     await run.dispatch("install");
-    assert.equal(run.trace.skips, 1);
+    assert.equal(run.trace.skips, 0);
+    assert.equal(run.trace.claims, 0);
     assert.equal(run.trace.requests.length, run.config.SHELL.length);
     assert.ok(run.trace.requests.every(request => ["reload", "no-store"].includes(request.cache)));
     const cache = await run.open(VERSION);
-    for (const request of run.config.SHELL) assert.match(await (await cache.match(request)).text(), /^CURRENT:/);
+    for (const request of run.config.SHELL) assert.equal(await (await cache.match(request)).text(), shellText(request));
     assert.equal(await (await (await run.open("anime-tracker-v11-theme-songs-native-title-1")).match("./index.html")).text(), "OLD-INDEX");
 });
 
@@ -170,10 +174,10 @@ test("offline navigation and release resources use only the newly installed shel
     run.seed("other-app-shell-v7", "./index.html", "FOREIGN-HTML");
     run.options.offline = true;
     const navigation = await run.fetch("./unknown-route", "navigate");
-    assert.match(await navigation.response.text(), /^CURRENT:.*\/Anime\/index\.html$/);
+    assert.equal(await navigation.response.text(), html);
     for (const asset of ["v11-core.js", "v11-ui.js", "cross-media.js", "spotify-themes.js", "v11-styles.css"]) {
         const result = await run.fetch(`./${asset}?v=${RELEASE}`);
-        assert.match(await result.response.text(), /^CURRENT:/);
+        assert.equal(await result.response.text(), shellText(`./${asset}?v=${RELEASE}`));
     }
     assert.equal(run.trace.globalMatches, 0);
 });
@@ -183,21 +187,55 @@ test("a missing release asset cannot silently fall back to an old or foreign cac
     const asset = `./v11-ui.js?v=${RELEASE}`;
     run.seed("anime-tracker-v11-theme-songs-native-title-1", asset, "OLD-JS");
     run.seed("other-app-shell-v7", asset, "FOREIGN-JS");
-    await assert.rejects(run.fetch(asset));
+    assert.equal((await run.fetch(asset)).response.status, 503);
     assert.equal(run.trace.globalMatches, 0);
 });
 
-test("a failed HTTP resource response cannot overwrite the good offline release copy", async () => {
+test("an active release serves its cached HTML and scripts even when newer network content is available", async () => {
     const run = runtime();
     await run.dispatch("install");
-    run.options.badUrl = url => url.includes("v11-ui.js");
-    const failedNetwork = await run.fetch(`./v11-ui.js?v=${RELEASE}`);
-    assert.equal(failedNetwork.response.status, 200);
-    assert.match(await failedNetwork.response.text(), /^CURRENT:/);
+    run.options.bodyOverride = () => "NEXT GENERATION";
+    const calls = run.trace.requests.length;
+    const resource = `./v11-ui.js?v=${RELEASE}`;
+    assert.equal(await (await run.fetch("./", "navigate")).response.text(), html);
+    assert.equal(await (await run.fetch("./index.html?reload=1", "navigate")).response.text(), html);
+    assert.equal(await (await run.fetch(resource)).response.text(), ui);
+    assert.equal((await run.fetch("./v11-ui.js?v=another-release")).response.status, 503);
+    assert.equal(run.trace.requests.length, calls);
     run.options.offline = true;
-    const result = await run.fetch(`./v11-ui.js?v=${RELEASE}`);
-    assert.equal(result.response.status, 200);
-    assert.match(await result.response.text(), /^CURRENT:/);
+    assert.equal(await (await run.fetch("./", "navigate")).response.text(), html);
+});
+
+for (const pathname of ["/Anime/", "/Anime/index.html", "/Anime/v11-core.js", "/Anime/v11-styles.css"]) {
+    test(`a stale HTTP 200 for ${pathname} cannot publish a mixed shell`, async () => {
+        const run = runtime({ bodyOverride:url => new URL(url).pathname === pathname ? "STALE VERSION" : undefined });
+        await assert.rejects(run.dispatch("install"), /Shell release mismatch/);
+        assert.equal(run.stores.has(VERSION), false);
+        assert.equal(run.trace.skips, 0);
+        assert.equal(run.trace.claims, 0);
+    });
+}
+
+test("a partially evicted cache returns an error instead of loading incomplete HTML or unpinned JS", async () => {
+    const run = runtime();
+    await run.dispatch("install");
+    const asset = `./v11-core.js?v=${RELEASE}`;
+    run.stores.get(VERSION).delete(absolute(asset));
+    const calls = run.trace.requests.length;
+    assert.equal((await run.fetch("./", "navigate")).response.status, 503);
+    assert.equal((await run.fetch("./index.html", "navigate")).response.status, 503);
+    assert.equal((await run.fetch(asset)).response.status, 503);
+    assert.equal(run.trace.requests.length, calls);
+});
+
+test("an install storage failure keeps the prior release intact", async () => {
+    const run = runtime({ cachePutFailure:true });
+    const previous = "anime-tracker-v11-currently-watching-bridge-1";
+    run.seed(previous, "./index.html", "PREVIOUS HTML");
+    await assert.rejects(run.dispatch("install"), { name:"QuotaExceededError" });
+    assert.equal(await (await (await run.open(previous)).match("./index.html")).text(), "PREVIOUS HTML");
+    assert.deepEqual(run.trace.deleted, []);
+    assert.equal(run.trace.claims, 0);
 });
 
 test("events and ordinary same-origin assets cannot read foreign cache fallbacks", async () => {
@@ -255,7 +293,7 @@ test("timestamped events cannot recover from an older release or another applica
 
 test("cache quota failure preserves a successful online response without publishing stale fallback data", async () => {
     const run = runtime({ cachePutFailure:true });
-    const result = await run.fetch(`./v11-ui.js?v=${RELEASE}`);
+    const result = await run.fetch("./events.json?t=111");
     assert.equal(result.response.status, 200);
     assert.match(await result.response.text(), /^CURRENT:/);
     assert.equal(run.trace.globalMatches, 0);
@@ -293,6 +331,20 @@ test("registration uses the new worker URL, fresh update checks and one reload p
     assert.equal(run.trace.reloads, 1);
     assert.equal(run.session.get("anime_tracker_sw_reload_version"), RELEASE);
     assert.deepEqual(run.trace.storage, []);
+});
+
+test("a bridge registration is reused even when its original script query is older", async () => {
+    const run = registeredWorker({ existingRelease:"currently-watching-1" });
+    await run.settle();
+    assert.equal(run.registrations.length, 0);
+    assert.equal(run.trace.updates, 1);
+});
+
+test("registration does not update an unrelated parent scope worker", async () => {
+    const run = registeredWorker({ existingRelease:"other-app", scope:"https://isolated.example/" });
+    await run.settle();
+    assert.equal(run.registrations.length, 1);
+    assert.equal(run.registrations[0].url, `./sw.js?v=${RELEASE}`);
 });
 
 test("a controller update keeps a recovery-pending original-data view open", async () => {

@@ -27,7 +27,7 @@ const production = [
     between(html, "const MEDIA_FIELDS", "async function requestAniList"),
     between(html, "function stripDisplayYear", "async function searchWikipedia"),
     between(html, "function normalizeAnimeAliasList", "function deriveAliasVariants"),
-    between(html, "function getAniListMediaId", "function getMediaIdentityTitles"),
+    between(html, "function getAniListMediaId", "function getDirectSequelNodes"),
     between(html, "function normalizeStreamingLinks", "function directRelationMediaIds"),
     between(html, "function loadStoredAnime", "function showToast"),
     between(html, "function formatAiringDateTime", "function editAnimeReview"),
@@ -54,9 +54,9 @@ function media(id, coverImage = { large, medium }) {
         episodes:12, startDate:{ year:2026, month:10, day:1 }, coverImage };
 }
 
-function runtime(list = [], responses = []) {
+function runtime(list = [], responses = [], options = {}) {
     const history = JSON.stringify([{ id:"synthetic-history", animeId:"local-101", delta:1, at }]);
-    const store = new Map([[V.STORAGE_KEY, JSON.stringify(list)], [V.HISTORY_KEY, history]]);
+    const store = options.store || new Map([[V.STORAGE_KEY, JSON.stringify(list)], [V.HISTORY_KEY, history]]);
     const requests = [], writes = [], errors = [];
     const api = vm.createContext({
         animeList:copy(list), animeSyncing:false, AnimeTrackerV11:V, V,
@@ -68,7 +68,10 @@ function runtime(list = [], responses = []) {
         console:{ error:error => errors.push(error), warn:error => errors.push(error) },
         setTimeout:() => { throw Error("Synthetic metadata sync must not schedule cloud sync"); },
         clearTimeout:() => {}, renderList:() => {}, refreshV11:() => {},
-        requestAniListMediaPage:async ids => { requests.push(Array.from(ids)); return responses; }
+        requestAniListMediaPage:async ids => {
+            requests.push(Array.from(ids));
+            return options.request ? options.request(ids) : responses;
+        }
     });
     vm.runInContext(production, api, { filename:"production-poster-metadata.js" });
     return { api, store, history, requests, writes, errors };
@@ -82,21 +85,66 @@ test("all AniList query paths select large and medium cover URLs", () => {
 
 test("new records prefer the large HTTPS cover, fall back to medium and reject invalid API values", () => {
     const { api } = runtime();
-    assert.equal(api.buildAnimeRecordFromMedia(media(101)).poster, large);
+    const record = api.buildAnimeRecordFromMedia(media(101));
+    assert.equal(record.poster, large);
+    assert.deepEqual(copy(record.anilistCover), { id:"101", large, medium });
     assert.equal(api.buildAnimeRecordFromMedia(media(101, { large:"http://covers.example.invalid/insecure.jpg", medium })).poster, medium);
     assert.equal(api.buildAnimeRecordFromMedia(media(101, { large:"   ", medium:dataPoster })).poster, "");
     assert.equal(api.buildAnimeRecordFromMedia(media(101, large)).poster, "");
 });
 
-test("metadata poster patch requires a confirmed matching AniList ID and never uses title or local ID", () => {
+test("AniList cover metadata requires matching, non-conflicting confirmed identities", () => {
     const { api } = runtime();
-    assert.equal(api.buildMediaMetadataPatch(anime(101, { poster:"bad cover" }), media(101), at).poster, large);
-    assert.equal(api.buildMediaMetadataPatch(anime(101, { anilistId:"101" }), media("101"), at).poster, large);
-    assert.equal(api.buildMediaMetadataPatch(anime(101, { id:102 }), media(102), at).poster, undefined);
-    assert.equal(api.buildMediaMetadataPatch(anime(101, { id:101, anilistId:null, source:null, sourceId:null }), media(101), at).poster, undefined);
-    assert.equal(api.buildMediaMetadataPatch(anime(101, { anilistId:[101], source:null, sourceId:null }), media(101), at).poster, undefined);
-    assert.equal(api.buildMediaMetadataPatch(anime(1, { anilistId:true, source:null, sourceId:null }), media(1), at).poster, undefined);
-    assert.equal(api.buildMediaMetadataPatch(anime(1), media(true), at).poster, undefined);
+    const cover = (record, response) => api.buildMediaMetadataPatch(record, response, at).anilistCover;
+    assert.deepEqual(copy(cover(anime(101), media(101))), { id:"101", large, medium });
+    assert.deepEqual(copy(cover(anime(101, { anilistId:"101" }), media("101"))), { id:"101", large, medium });
+    for (const record of [
+        anime(101, { id:102, anilistId:101, aniListId:102 }),
+        anime(101, { sourceId:"102" }),
+        anime(101, { source:"mal" }),
+        anime(101, { source:"anilist", dataSource:"mal" }),
+        anime(101, { id:101, anilistId:null, source:null, sourceId:null }),
+        anime(101, { anilistId:[101], source:null, sourceId:null }),
+        anime(101, { anilistId:null, source:null, sourceId:"101", anilistTitles:{ native:"Synthetic anime 101" } })
+    ]) assert.equal(cover(record, media(101)), undefined);
+    assert.equal(cover(anime(101, { id:102 }), media(102)), undefined);
+    assert.equal(cover(anime(1, { anilistId:true, source:null, sourceId:null }), media(1)), undefined);
+    assert.equal(cover(anime(1), media(true)), undefined);
+    assert.deepEqual(copy(cover(anime(101, { anilistId:null, source:null, dataSource:"AniList" }), media(101))), { id:"101", large, medium });
+});
+
+test("an unmarked legacy title match cannot masquerade as a confirmed AniList ID", async () => {
+    const list = [
+        anime(101, { source:null, sourceId:null, anilistTitles:{ native:"Synthetic anime 101" } }),
+        anime(102, { source:null, sourceId:null, anilistId:null, aniListId:"102" }),
+        anime(103, { source:null, sourceId:null, identitySource:"legacy-work-sourceId" }),
+        anime(104, { source:null, sourceId:204, aniListId:104 })
+    ];
+    const run = runtime(list, list.map((_, index) => media(index + 101)));
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.errors, []);
+    assert.deepEqual(run.requests, [[102, 103]]);
+    const saved = JSON.parse(run.store.get(V.STORAGE_KEY));
+    assert.deepEqual(saved[0], list[0]);
+    assert.equal(saved[1].anilistCover?.id, "102");
+    assert.equal(saved[2].anilistCover?.id, "103");
+    assert.deepEqual(saved[3], list[3]);
+});
+
+test("title, year and format inference cannot attach a cover from the same response or a later batch", async () => {
+    const legacy = anime(101, { anilistId:null, source:null, sourceId:null, poster:"old" });
+    const { api } = runtime();
+    assert.equal(api.getExistingAnimeMediaState(media(101), [legacy]).reason, "legacy-title-year-format");
+    const added = api.addOrRestoreSingleMedia(media(101), [legacy]);
+    assert.equal(added.action, "reconciled");
+    assert.equal(added.anime.anilistId, 101);
+    assert.equal(added.anime.poster, "old");
+    assert.equal(added.anime.anilistCover, undefined);
+    assert.equal(V.getConfirmedAnimeAniListId(added.anime), "");
+    const run = runtime([added.anime], [media(101)]);
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.requests, []);
+    assert.deepEqual(run.writes, []);
 });
 
 test("valid legacy covers and existing values with an empty API cover are kept", () => {
@@ -112,8 +160,10 @@ test("valid legacy covers and existing values with an empty API cover are kept",
         assert.deepEqual(patched.poster, original.poster);
         assert.deepEqual(patched.coverImage, original.coverImage);
     }
-    const original = anime(101, { poster:"bad cover" });
-    assert.equal(api.applyMediaMetadata(copy(original), media(101, { large:null, medium:" " }), at).poster, original.poster);
+    const original = anime(101, { poster:"bad cover", anilistCover:{ id:"101", large, medium } });
+    const patched = api.applyMediaMetadata(copy(original), media(101, { large:null, medium:" " }), at);
+    assert.equal(patched.poster, original.poster);
+    assert.deepEqual(patched.anilistCover, original.anilistCover);
 });
 
 test("the existing batch backfills only its confirmed active record and preserves user tracking data", async () => {
@@ -126,7 +176,10 @@ test("the existing batch backfills only its confirmed active record and preserve
     assert.deepEqual(run.requests, [[101, 102, 103]]);
     assert.deepEqual(run.writes, [V.STORAGE_KEY, syncKey]);
     const saved = JSON.parse(run.store.get(V.STORAGE_KEY));
-    assert.deepEqual(saved.map(item => item.poster), [large, dataPoster, "old invalid value", ""]);
+    assert.deepEqual(saved.map(item => item.poster), original.map(item => item.poster));
+    assert.deepEqual(saved[0].anilistCover, { id:"101", large, medium });
+    assert.deepEqual(saved[1].anilistCover, { id:"102", large, medium });
+    assert.equal(saved[2].anilistCover, undefined);
     assert.deepEqual(saved[3], original[3]);
     const fields = ["id", "anilistId", "currentEpisode", "watched", "progress", "reviewWatched", "category",
         "categorySource", "categoryManuallyEdited", "rating", "note", "notes", "lastWatchedAt"];
@@ -134,4 +187,97 @@ test("the existing batch backfills only its confirmed active record and preserve
         for (const field of fields) assert.deepEqual(item[field], original[index][field], field);
     }
     assert.equal(run.store.get(V.HISTORY_KEY), run.history);
+});
+
+
+test("two tabs preserve progress, notes, covers, a tombstone, and history saved during the request", async () => {
+    const original = [anime(101, { poster:"./covers/old.jpg" }), anime(102), anime(103)];
+    let respond;
+    const tabA = runtime(original, [], { request:() => new Promise(resolve => { respond = resolve; }) });
+    const tabB = runtime(original, [], { store:tabA.store });
+    const syncing = tabA.api.syncAnimeMetadata();
+    const editedAt = "2026-11-09T13:00:00.000Z";
+    const secondTabList = copy(original);
+    Object.assign(secondTabList[0], {
+        watched:9, currentEpisode:9, notes:"Another tab's notes",
+        poster:{ large:"./covers/latest.jpg", medium:"/covers/thumb.jpg" },
+        coverImage:"data:image/png;base64,AA==",
+        anilistCover:{ id:"101", large:"https://covers.example.invalid/edited.jpg", medium },
+        updatedAt:editedAt
+    });
+    Object.assign(secondTabList[1], { deletedAt:editedAt, category:"_deleted", updatedAt:editedAt });
+    secondTabList.push(anime(104, { id:"new-after-request" }));
+    const history = JSON.stringify([{ id:"new-history", animeId:secondTabList[0].id, delta:4, at:editedAt }]);
+    tabB.api.localStorage.setItem(V.STORAGE_KEY, JSON.stringify(secondTabList));
+    tabB.api.localStorage.setItem(V.HISTORY_KEY, history);
+    respond([{ ...media(101), episodes:16 }, media(102), media(103), media(104)]);
+    await syncing;
+
+    assert.deepEqual(tabA.errors, []);
+    assert.deepEqual(tabA.requests, [[101, 102, 103]]);
+    assert.deepEqual(tabA.writes, [V.STORAGE_KEY, syncKey]);
+    const saved = JSON.parse(tabA.store.get(V.STORAGE_KEY));
+    assert.equal(saved[0].totalEpisodes, 16);
+    for (const field of ["watched", "currentEpisode", "notes", "poster", "coverImage", "anilistCover", "updatedAt", "category"]) {
+        assert.deepEqual(saved[0][field], secondTabList[0][field], field);
+    }
+    assert.deepEqual(saved[1], secondTabList[1]);
+    assert.deepEqual(saved[2].anilistCover, { id:"103", large, medium });
+    assert.deepEqual(saved[3], secondTabList[3]);
+    assert.equal(tabA.store.get(V.HISTORY_KEY), history);
+    assert.deepEqual(copy(tabA.api.animeList), saved);
+});
+
+test("strict batch IDs include dataSource legacy rows and reject conflicts, wrong sources, duplicates and malformed replies", async () => {
+    const list = [
+        anime(101, { anilistId:null, source:null, dataSource:"AniList" }),
+        anime(102, { aniListId:202 }),
+        anime(103, { source:"mal" }),
+        anime(104, { anilistId:null, source:null, sourceId:null }),
+        anime(105, { id:"duplicate-local" }), anime(106, { id:"duplicate-local" }),
+        anime(107), anime(107, { id:"duplicate-media" }),
+        anime(108), anime(1)
+    ];
+    const run = runtime(list, [media("101"), media(102), media(103), media(104),
+        media(105), media(106), media(107), media(108), media("108"), media(true)]);
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.errors, []);
+    assert.deepEqual(run.requests, [[101, 108, 1]]);
+    const saved = JSON.parse(run.store.get(V.STORAGE_KEY));
+    assert.deepEqual(saved[0].anilistCover, { id:"101", large, medium });
+    assert.deepEqual(saved.slice(1), list.slice(1));
+});
+
+test("a newly attached identity and a new duplicate after the request cannot accept a response", async () => {
+    const list = [anime(101), anime(102), anime(103, { anilistId:null, source:null, sourceId:null })];
+    const run = runtime(list, [], { request:() => {
+        const latest = copy(list);
+        latest[0].deletedAt = at;
+        latest[2].anilistId = 101;
+        latest.push(anime(102, { id:"new-duplicate" }));
+        run.store.set(V.STORAGE_KEY, JSON.stringify(latest, null, 1));
+        return [media(101), media(102)];
+    } });
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.errors, []);
+    assert.deepEqual(run.requests, [[101, 102]]);
+    assert.deepEqual(run.writes, [syncKey]);
+    const raw = run.store.get(V.STORAGE_KEY);
+    assert.match(raw, /^\[\n /u);
+    assert.ok(JSON.parse(raw).every(record => !Object.hasOwn(record, "anilistCover")));
+});
+
+test("a removed or malformed persisted list is never recreated from memory after a request", async () => {
+    for (const raw of [null, "{", "{}", "[null]"]) {
+        const run = runtime([anime(101)], [], { request:() => {
+            if (raw === null) run.store.delete(V.STORAGE_KEY);
+            else run.store.set(V.STORAGE_KEY, raw);
+            return [media(101)];
+        } });
+        await run.api.syncAnimeMetadata();
+        assert.equal(run.errors.length, 1);
+        assert.deepEqual(run.writes, []);
+        assert.equal(run.store.get(V.STORAGE_KEY) ?? null, raw);
+        assert.equal(run.store.get(V.HISTORY_KEY), run.history);
+    }
 });

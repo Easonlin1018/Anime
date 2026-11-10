@@ -362,6 +362,26 @@
         return "";
     }
 
+    function normalizeAniListMediaId(value) {
+        if (typeof value !== "number" && (typeof value !== "string" || !/^\d+$/u.test(value.trim()))) return "";
+        const number = Number(value);
+        return Number.isSafeInteger(number) && number > 0 ? String(number) : "";
+    }
+
+    function getConfirmedAnimeAniListId(item) {
+        if (!item || typeof item !== "object" || Array.isArray(item)
+            || item.identitySource === "legacy-title-year-format") return "";
+        const present = value => value != null && value !== "";
+        const sources = [item.source, item.dataSource].filter(present);
+        if (sources.some(source => typeof source !== "string" || source.trim().toLowerCase() !== "anilist")) return "";
+        // Older title matching wrote a bare anilistId without recording its origin.
+        if (!sources.length && !present(item.aniListId) && item.identitySource !== "legacy-work-sourceId") return "";
+        const values = [item.anilistId, item.aniListId].filter(present);
+        if (sources.length || values.length) values.push(item.sourceId);
+        const ids = values.filter(present).map(normalizeAniListMediaId);
+        return ids[0] && ids.every(id => id === ids[0]) ? ids[0] : "";
+    }
+
     function validPositiveIntegerIdentity(value) {
         const numeric = Number(value);
         return Number.isSafeInteger(numeric) && numeric > 0 ? String(numeric) : "";
@@ -1473,21 +1493,42 @@
         try { const url = new URL(String(value || "")); return ["http:", "https:"].includes(url.protocol) ? url.href : ""; }
         catch { return ""; }
     }
-    function resolvePosterUrl(value, { httpsOnly = false } = {}) {
+    function resolvePosterUrls(value, { httpsOnly = false, baseUrl = "" } = {}) {
         const candidates = value && typeof value === "object" && !Array.isArray(value)
             ? [value.large, value.medium] : [value];
+        const urls = new Set();
         for (const candidate of candidates) {
             if (typeof candidate !== "string") continue;
             const text = candidate.trim();
-            if (!httpsOnly && /^data:image\/[a-z0-9][a-z0-9.+-]*(?:;[^,]*)?,[\s\S]*\S/iu.test(text)) return text;
-            if (!/^https?:\/\/[^/?#]/iu.test(text) || /[\\\s\u0000-\u001F\u007F]/u.test(text)) continue;
+            if (!httpsOnly && /^data:image\/[a-z0-9][a-z0-9.+-]*(?:;[^,]*)?,[\s\S]*\S/iu.test(text)) {
+                urls.add(text);
+                continue;
+            }
+            if (/[\\\s\u0000-\u001F\u007F]/u.test(text)) continue;
             try {
-                const url = new URL(text);
-                if ((url.protocol === "https:" || (!httpsOnly && url.protocol === "http:"))
-                    && url.hostname && !url.username && !url.password) return url.href;
+                if (/^https?:\/\/[^/?#]/iu.test(text)) {
+                    const url = new URL(text);
+                    if ((url.protocol === "https:" || (!httpsOnly && url.protocol === "http:"))
+                        && url.hostname && !url.username && !url.password) urls.add(url.href);
+                    continue;
+                }
+                if (httpsOnly) continue;
+                const path = decodeURIComponent(text.split(/[?#]/u, 1)[0]);
+                if (/^(?:\/\/|[a-z][a-z\d+.-]*:)|(?:^|\/)\.\.(?:\/|$)|[\\\u0000-\u001F\u007F]/iu.test(path)
+                    || !/\.(?:avif|bmp|gif|heic|heif|ico|jpe?g|png|svg|tiff?|webp)$/iu.test(path)) continue;
+                if (!baseUrl) {
+                    urls.add(text);
+                    continue;
+                }
+                const base = new URL(baseUrl);
+                const url = new URL(text, base);
+                if (/^https?:$/u.test(url.protocol) && url.origin === base.origin) urls.add(url.href);
             } catch {}
         }
-        return "";
+        return [...urls];
+    }
+    function resolvePosterUrl(value, options) {
+        return resolvePosterUrls(value, options)[0] || "";
     }
     function normalizeEbookLinks(value) {
         return arrayOf(value).map(link => {
@@ -2126,5 +2167,5 @@
     }
     function shouldCacheRequest(url) { const value = String(url || ""); return !/(supabase|auth\/v1|rest\/v1|cloudflare|workers\.dev|sync-api|api\.spotify\.com|accounts\.spotify\.com|open\.spotify\.com|jikan\.moe|animethemes\.moe|itunes\.apple\.com|music\.apple\.com)/i.test(value); }
 
-    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, resolvePosterUrl, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, getNormalAnimeProgress, isAnimeCurrentlyWatching, correctAnimeDetailProgress, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
+    return { SCHEMA_VERSION, STORAGE_KEY, HISTORY_KEY, WATCH_RESET_UNDO_KEY, RESTORE_KEY, SETTINGS_KEY, WORKS_KEY, MANGA_HISTORY_KEY, migrateAnime, migrateList, getAnimeTitlePresentation, getAnimeAniListIdentity, normalizeAniListMediaId, getConfirmedAnimeAniListId, recoverLegacyAnimeIdentities, collectActiveAnimeAniListIds, legacyAnimeIdentityKey, isConservativeLegacyShadowMatch, describeAnimeIdentity, reconcileExistingAnimeDuplicates, ensureUniqueLocalAnimeIds, findAnimeRecordIndex, remapAnimeAuxiliaryState, updateAnimeTitleById, moveAnimeCategoryById, shouldDiscoverSequelAfterCategoryMove, markAnimeDeletedById, restoreAnimeById, removeAnimeIdFromOverrides, pruneAnimeIdOverrides, cleanupAnimeAuxiliaryState, captureAnimeAuxiliaryState, restoreAnimeAuxiliaryState, createCompactDeleteUndo, runAnimeDeleteTransaction, restoreDeleteUndoState, isStorageQuotaError, normalizeMediaEntry, normalizeWork, migrateWorks, createStandaloneWork, addMediaEntry, detectMangaCandidates, updateMangaProgress, commitMangaProgress, mangaUpdateInfo, adaptationProgress, mangaStats, searchWorks, normalizeEbookLinks, validHttpUrl, resolvePosterUrl, resolvePosterUrls, mergeWorks, normalizeThemeSong, normalizeThemeSongs, parseThemeSongText, normalizeSongTitle, normalizeArtistName, extractSpotifyTrackId, calculateSpotifyMatchScore, selectSpotifyMatch, isSpecialMediaType, mergeThemeSongs, createWatchRecord, createReviewWatchRecord, getNormalAnimeProgress, isAnimeCurrentlyWatching, correctAnimeDetailProgress, updateAnimeProgress, commitAnimeProgress, updateAnimeReviewProgress, commitAnimeReviewProgress, createBackup, normalizeImportedBackup, validateBackup, importBackup, mergeById, searchFilterSort, applyBatch, watchStats, resetWatchStatistics, restoreWatchStatistics, calendarItems, areDuplicateEvents, mergeDuplicateEvents, matchEventToAnime, filterEventsForAnime, mergeCloudPayload, pruneTombstones, purgeExpiredTombstones, shouldCacheRequest, normalizeText, toTraditionalChinese, hasManualAnimeTitle, isSafeAnimeSeriesRelation, buildAnimeSeriesIdentity, assignAnimeSeriesIdentity, getAnimeSeriesKey };
 });

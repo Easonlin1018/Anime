@@ -799,15 +799,34 @@
     );
 
     function renderAnimePoster(item, detail = false) {
-        const poster = V.resolvePosterUrl(item.poster) || V.resolvePosterUrl(item.coverImage);
+        const options = { baseUrl:globalThis.location?.href };
+        const candidates = [
+            ...V.resolvePosterUrls(item.poster, options),
+            ...V.resolvePosterUrls(item.coverImage, options)
+        ];
+        const anilistCover = item.anilistCover;
+        if (anilistCover?.id && anilistCover.id === V.getConfirmedAnimeAniListId(item)) {
+            candidates.push(...V.resolvePosterUrls(anilistCover, { httpsOnly:true }));
+        }
+        const [poster, ...remaining] = new Set(candidates);
         const attributes = detail ? 'class="v11-poster"' : 'loading="lazy" decoding="async"';
         const label = detail ? "海報" : "封面";
-        return `<img ${attributes} src="${escapeHtml(poster || ANIME_POSTER_PLACEHOLDER)}" alt="${escapeHtml(item.title)} ${label}"${poster ? " data-v11-poster" : ""}>`;
+        const queue = poster ? ' data-v11-poster="' + escapeHtml(JSON.stringify(remaining)) + '"' : "";
+        return '<img ' + attributes + ' src="' + escapeHtml(poster || ANIME_POSTER_PLACEHOLDER)
+            + '" alt="' + escapeHtml(item.title) + ' ' + label + '"' + queue + '>';
     }
 
     function handleAnimePosterError(event) {
         const image = event.target;
         if (!image?.matches?.("img[data-v11-poster]")) return;
+        let remaining;
+        try { remaining = JSON.parse(image.getAttribute("data-v11-poster")); } catch {}
+        if (Array.isArray(remaining) && remaining.length) {
+            const [next, ...rest] = remaining;
+            image.setAttribute("data-v11-poster", JSON.stringify(rest));
+            image.src = next;
+            return;
+        }
         image.removeAttribute("data-v11-poster");
         image.src = ANIME_POSTER_PLACEHOLDER;
     }
@@ -823,7 +842,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "poster-fix-1";
+        const reloadVersion = "poster-fix-2";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
@@ -836,13 +855,29 @@
             sessionStorage.setItem(key, reloadVersion);
             location.reload();
         });
-        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`, { updateViaCache:"none" }).then(async reg => {
-            reg.addEventListener("updatefound",()=>showToast("發現新版本，安裝完成後會自動套用"));
-            await reg.update();
-            const worker = navigator.serviceWorker.controller || reg.active || reg.waiting || reg.installing;
+        async function checkAppWorker() {
+            const workers = navigator.serviceWorker;
+            const scope = new URL("./", document.baseURI).href;
+            const script = new URL("./sw.js", scope);
+            const existing = await workers.getRegistration(scope);
+            const installed = existing?.active || existing?.waiting || existing?.installing;
+            const installedUrl = installed ? new URL(installed.scriptURL) : null;
+            // Keep updating the same worker path even if an older page first
+            // registered it with a different release query.
+            const reg = existing?.scope === scope && installedUrl?.origin === script.origin
+                && installedUrl.pathname === script.pathname
+                ? existing : await workers.register(`./sw.js?v=${reloadVersion}`, { updateViaCache:"none" });
+            const notifyWaiting = () => {
+                if (reg.waiting && workers.controller) showToast("新版已準備，請關閉本站分頁與主畫面 App 後重新開啟");
+            };
+            reg.addEventListener("updatefound", () => reg.installing?.addEventListener("statechange", notifyWaiting));
+            notifyWaiting();
+            const worker = workers.controller || reg.active || reg.waiting || reg.installing;
             document.documentElement.dataset.swScriptUrl = String(worker?.scriptURL || "");
             worker?.postMessage({ type:"GET_CACHE_STATUS" });
-        }).catch(error => console.warn("Service Worker 註冊失敗：", error));
+            await reg.update();
+        }
+        checkAppWorker().catch(error => console.warn("Service Worker 更新檢查失敗：", error));
     }
 
     function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.disabled=Boolean(window.__ANIME_STARTUP_STORAGE__?.recoveryPending);autoSync.onchange=()=>changeAutoSyncSetting(autoSync);window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();registerAppServiceWorker();}
