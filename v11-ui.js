@@ -367,7 +367,8 @@
             if (card.includes('data-progress-action="increment"')) card = card.replace(/(<button\b[^>]*data-progress-action="increment")/u, match => minus + match);
             else card = card.replace('<div class="btn-group">', () => `<div class="btn-group">${minus}<button type="button" data-progress-action="increment" data-anime-id="${id}">➕ 看了 1 集</button>`);
             if (window.__ANIME_STARTUP_STORAGE__?.recoveryPending) card = card.replace(/(<button\b[^>]*data-progress-action="(?:increment|decrement)"[^>]*)(>)/gu, "$1 disabled$2");
-            const cover = renderAnimePoster(item);
+            const poster = safeUrl(item.poster || item.coverImage || "");
+            const cover = poster ? `<img src="${escapeHtml(poster)}" alt="${escapeHtml(item.title)} 封面" loading="lazy" decoding="async">` : '<span aria-label="尚無封面">🎬</span>';
             return `<article class="v11-currently-card"><button type="button" class="v11-currently-cover" data-open-detail="${id}" aria-label="開啟 ${escapeHtml(item.title)} 詳細資料">${cover}</button><div class="v11-currently-body"><div class="v11-currently-progress">觀看進度：${progress.current} / ${escapeHtml(total)} 集 <span class="v11-badge">${escapeHtml(animeCategoryLabel(item.category))}</span></div>${card}</div></article>`;
         }).join("") || '<div class="empty">目前沒有正在看的動畫。正常觀看進度開始後，未看完的作品會自動出現在這裡。</div>';
     }
@@ -387,7 +388,6 @@
         nav.addEventListener("click", event => { const button = event.target.closest("[data-v11-page]"); if (button) showPage(button.dataset.v11Page); });
         document.addEventListener("click", delegatedClick);
         document.addEventListener("change", delegatedChange);
-        document.addEventListener("error", handleAnimePosterError, true);
         document.addEventListener("keydown", event => { if (event.key === "Escape") closeV11Modals(); });
         wireStaticControls();
         enableDebouncedSearch();
@@ -683,7 +683,7 @@
         const history = watchHistory.filter(x => String(x.animeId) === String(item.id)).slice(-20).reverse();
         document.getElementById("v11-detail-title").textContent = item.title;
         const relatedEvents = [...eventList, ...eventArchive].filter(event => matchingAnime(event).some(match => String(match.id) === String(item.id)));
-        document.getElementById("v11-detail-body").innerHTML = `<form id="v11-detail-form" data-id="${escapeHtml(item.id)}"><div class="v11-detail-grid"><div>${renderAnimePoster(item, true)}</div><div><label>正式名稱<input name="title" value="${escapeHtml(item.title)}"></label><label>別名<input name="aliases" value="${escapeHtml(Array.isArray(item.aliases) ? item.aliases.join("、") : typeof item.aliases === "string" ? item.aliases : "")}"></label><label>劇情簡介<textarea name="synopsis">${escapeHtml(item.synopsis)}</textarea></label></div></div><div class="v11-filter-grid"><label>分類<select name="category">${animeCategoryOptions(item.category)}</select></label><label>目前集數<input name="currentEpisode" type="number" value="${item.currentEpisode}"></label><label>總集數<input name="totalEpisodes" type="number" value="${escapeHtml(item.totalEpisodes || "")}"></label><label>平台<input name="platform" value="${escapeHtml(item.platform)}"></label><label>標籤<input name="tags" value="${escapeHtml(Array.isArray(item.tags) ? item.tags.join("、") : typeof item.tags === "string" ? item.tags : "")}"></label><label>年份<input name="year" type="number" value="${escapeHtml(item.year || "")}"></label><label>季度<input name="season" value="${escapeHtml(item.season)}"></label><label>評分<input name="rating" type="number" min="0" max="10" step=".1" value="${escapeHtml(item.rating ?? "")}"></label><label>播出星期<input name="broadcastDay" value="${escapeHtml(item.broadcastDay)}"></label><label>播出時間<input name="broadcastTime" type="time" value="${escapeHtml(item.broadcastTime)}"></label><label>下一集時間<input name="nextEpisodeAt" type="datetime-local" value="${item.nextEpisodeAt ? escapeHtml(item.nextEpisodeAt.slice(0,16)) : ""}"></label><label>下一季日期<input name="nextSeasonDate" type="date" value="${escapeHtml(item.nextSeasonDate || "")}"></label><label><input name="reminderEnabled" type="checkbox" ${item.reminderEnabled?"checked":""}> 啟用提醒</label></div><label>筆記<textarea name="notes">${escapeHtml(item.notes)}</textarea></label><p id="v11-detail-save-status" role="alert" tabindex="-1" hidden class="tiny-note" style="color:#fca5a5"></p><div class="v11-toolbar"><button type="button" data-progress-action="decrement" data-anime-id="${escapeHtml(item.id)}">減少 1 集</button><button type="button" data-progress-action="increment" data-anime-id="${escapeHtml(item.id)}">增加 1 集</button><button type="submit">儲存詳細資料</button></div><div class="tiny-note">建立：${escapeHtml(item.createdAt)}｜最近觀看：${escapeHtml(item.lastWatchedAt || "尚無")}</div><div id="v11-theme-section"></div><h3>相關活動</h3><div>${relatedEvents.map(x=>escapeHtml(x.title)).join("、")||"目前沒有相關活動"}</div><h3>觀看歷史</h3><div>${history.map(x=>`<div>${escapeHtml(x.at)}｜${x.delta>0?"+":""}${x.delta} 集</div>`).join("")||"尚無紀錄"}</div></form>`;
+        document.getElementById("v11-detail-body").innerHTML = `<form id="v11-detail-form" data-id="${escapeHtml(item.id)}"><div class="v11-detail-grid"><div><img class="v11-poster" src="${safeUrl(item.poster) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='100%25' height='100%25' fill='%230f172a'/%3E%3Ctext x='50%25' y='50%25' fill='%2394a3b8' text-anchor='middle'%3EAnime%3C/text%3E%3C/svg%3E"}" alt="${escapeHtml(item.title)} 海報"></div><div><label>正式名稱<input name="title" value="${escapeHtml(item.title)}"></label><label>別名<input name="aliases" value="${escapeHtml(Array.isArray(item.aliases) ? item.aliases.join("、") : typeof item.aliases === "string" ? item.aliases : "")}"></label><label>劇情簡介<textarea name="synopsis">${escapeHtml(item.synopsis)}</textarea></label></div></div><div class="v11-filter-grid"><label>分類<select name="category">${animeCategoryOptions(item.category)}</select></label><label>目前集數<input name="currentEpisode" type="number" value="${item.currentEpisode}"></label><label>總集數<input name="totalEpisodes" type="number" value="${escapeHtml(item.totalEpisodes || "")}"></label><label>平台<input name="platform" value="${escapeHtml(item.platform)}"></label><label>標籤<input name="tags" value="${escapeHtml(Array.isArray(item.tags) ? item.tags.join("、") : typeof item.tags === "string" ? item.tags : "")}"></label><label>年份<input name="year" type="number" value="${escapeHtml(item.year || "")}"></label><label>季度<input name="season" value="${escapeHtml(item.season)}"></label><label>評分<input name="rating" type="number" min="0" max="10" step=".1" value="${escapeHtml(item.rating ?? "")}"></label><label>播出星期<input name="broadcastDay" value="${escapeHtml(item.broadcastDay)}"></label><label>播出時間<input name="broadcastTime" type="time" value="${escapeHtml(item.broadcastTime)}"></label><label>下一集時間<input name="nextEpisodeAt" type="datetime-local" value="${item.nextEpisodeAt ? escapeHtml(item.nextEpisodeAt.slice(0,16)) : ""}"></label><label>下一季日期<input name="nextSeasonDate" type="date" value="${escapeHtml(item.nextSeasonDate || "")}"></label><label><input name="reminderEnabled" type="checkbox" ${item.reminderEnabled?"checked":""}> 啟用提醒</label></div><label>筆記<textarea name="notes">${escapeHtml(item.notes)}</textarea></label><p id="v11-detail-save-status" role="alert" tabindex="-1" hidden class="tiny-note" style="color:#fca5a5"></p><div class="v11-toolbar"><button type="button" data-progress-action="decrement" data-anime-id="${escapeHtml(item.id)}">減少 1 集</button><button type="button" data-progress-action="increment" data-anime-id="${escapeHtml(item.id)}">增加 1 集</button><button type="submit">儲存詳細資料</button></div><div class="tiny-note">建立：${escapeHtml(item.createdAt)}｜最近觀看：${escapeHtml(item.lastWatchedAt || "尚無")}</div><div id="v11-theme-section"></div><h3>相關活動</h3><div>${relatedEvents.map(x=>escapeHtml(x.title)).join("、")||"目前沒有相關活動"}</div><h3>觀看歷史</h3><div>${history.map(x=>`<div>${escapeHtml(x.at)}｜${x.delta>0?"+":""}${x.delta} 集</div>`).join("")||"尚無紀錄"}</div></form>`;
         const form = document.getElementById("v11-detail-form");
         if (item.category === "review") {
             form.elements.namedItem("currentEpisode").readOnly = true;
@@ -794,42 +794,7 @@
     }
 
     function closeV11Modals(){ themeSongsApi()?.close(); document.querySelectorAll(".v11-modal").forEach(x=>x.hidden=true); }
-    const ANIME_POSTER_PLACEHOLDER = "data:image/svg+xml," + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><rect width="100%" height="100%" fill="#0f172a"/><text x="50%" y="50%" fill="#94a3b8" text-anchor="middle">Anime</text></svg>'
-    );
-
-    function renderAnimePoster(item, detail = false) {
-        const options = { baseUrl:globalThis.location?.href };
-        const candidates = [
-            ...V.resolvePosterUrls(item.poster, options),
-            ...V.resolvePosterUrls(item.coverImage, options)
-        ];
-        const anilistCover = item.anilistCover;
-        if (anilistCover?.id && anilistCover.id === V.getConfirmedAnimeAniListId(item)) {
-            candidates.push(...V.resolvePosterUrls(anilistCover, { httpsOnly:true }));
-        }
-        const [poster, ...remaining] = new Set(candidates);
-        const attributes = detail ? 'class="v11-poster"' : 'loading="lazy" decoding="async"';
-        const label = detail ? "海報" : "封面";
-        const queue = poster ? ' data-v11-poster="' + escapeHtml(JSON.stringify(remaining)) + '"' : "";
-        return '<img ' + attributes + ' src="' + escapeHtml(poster || ANIME_POSTER_PLACEHOLDER)
-            + '" alt="' + escapeHtml(item.title) + ' ' + label + '"' + queue + '>';
-    }
-
-    function handleAnimePosterError(event) {
-        const image = event.target;
-        if (!image?.matches?.("img[data-v11-poster]")) return;
-        let remaining;
-        try { remaining = JSON.parse(image.getAttribute("data-v11-poster")); } catch {}
-        if (Array.isArray(remaining) && remaining.length) {
-            const [next, ...rest] = remaining;
-            image.setAttribute("data-v11-poster", JSON.stringify(rest));
-            image.src = next;
-            return;
-        }
-        image.removeAttribute("data-v11-poster");
-        image.src = ANIME_POSTER_PLACEHOLDER;
-    }
+    function safeUrl(value){ try{const url=new URL(value,location.href);return ["http:","https:","data:"].includes(url.protocol)?url.href:""}catch{return ""} }
 
     function renderReminders() { const now=new Date(), week=new Date(now); week.setDate(week.getDate()+7); const list=animeList.filter(x=>!x.deletedAt&&x.reminderEnabled&&x.nextEpisodeAt).sort((a,b)=>Date.parse(a.nextEpisodeAt)-Date.parse(b.nextEpisodeAt)); const box=document.getElementById("v11-reminders");box.innerHTML=list.map(item=>{const date=new Date(item.nextEpisodeAt), diff=date-now, due=diff<=0; const days=Math.floor(Math.abs(diff)/86400000), hours=Math.floor(Math.abs(diff)%86400000/3600000), label=due?"已播出・待看":diff<86400000?"今天更新":diff<172800000?"明天更新":date<=week?"本週更新":"稍後";return `<div class="v11-card"><span class="v11-badge ${due?"danger":"good"}">${label}</span><strong>${escapeHtml(item.title)}</strong><div>下一集：${escapeHtml(date.toLocaleString("zh-TW"))}</div><div>${due?"已過":"剩餘"}：${days} 天 ${hours} 小時</div></div>`}).join("")||'<div class="empty">目前沒有啟用動畫提醒的作品。</div>';window.CrossMediaTracker?.appendMangaReminders?.(box); }
     function renderCalendar(){const box=document.getElementById("v11-calendar");if(!box)return;const date=new Date(state.calendarDate),year=date.getFullYear(),month=date.getMonth();document.getElementById("v11-calendar-title").textContent=`${year} 年 ${month+1} 月`;const items=V.calendarItems(animeList,[...eventList,...eventArchive]).filter(x=>state.calendarTypes.has(x.type));const first=new Date(year,month,1),start=new Date(first);start.setDate(start.getDate()-((start.getDay()+6)%7));const days=state.calendarView==="week"?7:42;if(state.calendarView==="week"){start.setTime(date.getTime());start.setDate(start.getDate()-((start.getDay()+6)%7))}box.innerHTML=Array.from({length:days},(_,i)=>{const day=new Date(start);day.setDate(day.getDate()+i);const key=day.toISOString().slice(0,10),dayItems=items.filter(x=>x.date===key);return `<div class="v11-day ${day.getMonth()!==month?"other":""} ${key===new Date().toISOString().slice(0,10)?"today":""}" data-calendar-day="${key}" tabindex="0"><strong>${day.getDate()}</strong>${dayItems.slice(0,4).map(x=>`<button class="v11-calendar-item" data-calendar-day="${key}">${iconType(x.type)} ${escapeHtml(x.title)}</button>`).join("")}</div>`}).join(""); }
@@ -842,7 +807,7 @@
     let pendingImport = null;
     function registerAppServiceWorker(){
         if (!("serviceWorker" in navigator)) return;
-        const reloadVersion = "poster-fix-2";
+        const reloadVersion = "currently-watching-1";
         navigator.serviceWorker.addEventListener("message", event => {
             if (event.data?.type !== "ANIME_SW_CACHE_STATUS") return;
             document.documentElement.dataset.swCacheVersion = String(event.data.cacheVersion || "");
@@ -855,29 +820,13 @@
             sessionStorage.setItem(key, reloadVersion);
             location.reload();
         });
-        async function checkAppWorker() {
-            const workers = navigator.serviceWorker;
-            const scope = new URL("./", document.baseURI).href;
-            const script = new URL("./sw.js", scope);
-            const existing = await workers.getRegistration(scope);
-            const installed = existing?.active || existing?.waiting || existing?.installing;
-            const installedUrl = installed ? new URL(installed.scriptURL) : null;
-            // Keep updating the same worker path even if an older page first
-            // registered it with a different release query.
-            const reg = existing?.scope === scope && installedUrl?.origin === script.origin
-                && installedUrl.pathname === script.pathname
-                ? existing : await workers.register(`./sw.js?v=${reloadVersion}`, { updateViaCache:"none" });
-            const notifyWaiting = () => {
-                if (reg.waiting && workers.controller) showToast("新版已準備，請關閉本站分頁與主畫面 App 後重新開啟");
-            };
-            reg.addEventListener("updatefound", () => reg.installing?.addEventListener("statechange", notifyWaiting));
-            notifyWaiting();
-            const worker = workers.controller || reg.active || reg.waiting || reg.installing;
+        navigator.serviceWorker.register(`./sw.js?v=${reloadVersion}`, { updateViaCache:"none" }).then(async reg => {
+            reg.addEventListener("updatefound",()=>showToast("發現新版本，安裝完成後會自動套用"));
+            await reg.update();
+            const worker = navigator.serviceWorker.controller || reg.active || reg.waiting || reg.installing;
             document.documentElement.dataset.swScriptUrl = String(worker?.scriptURL || "");
             worker?.postMessage({ type:"GET_CACHE_STATUS" });
-            await reg.update();
-        }
-        checkAppWorker().catch(error => console.warn("Service Worker 更新檢查失敗：", error));
+        }).catch(error => console.warn("Service Worker 註冊失敗：", error));
     }
 
     function wireStaticControls(){insertAnimeTools();document.getElementById("v11-export").onclick=exportBackup;document.getElementById("v11-import").onclick=()=>document.getElementById("v11-import-file").click();document.getElementById("v11-import-file").onchange=readImport;document.getElementById("v11-undo-import").onclick=undoImport;document.getElementById("v11-notifications").onclick=requestAnimeNotifications;document.querySelectorAll("[data-import-mode]").forEach(x=>x.onclick=()=>applyImport(x.dataset.importMode));const autoSync=document.getElementById("v11-auto-sync");autoSync.checked=localStorage.getItem("anime_tracker_auto_sync_v11")==="1";autoSync.disabled=Boolean(window.__ANIME_STARTUP_STORAGE__?.recoveryPending);autoSync.onchange=()=>changeAutoSyncSetting(autoSync);window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();state.installPrompt=event;document.getElementById("v11-install").hidden=false});document.getElementById("v11-install").onclick=async()=>{await state.installPrompt?.prompt();state.installPrompt=null};window.addEventListener("online",onlineState);window.addEventListener("offline",onlineState);onlineState();registerAppServiceWorker();}

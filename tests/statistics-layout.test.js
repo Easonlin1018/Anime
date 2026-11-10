@@ -1,9 +1,10 @@
 "use strict";
+const appSourcePath = require("./release-path.cjs");
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const path=require("node:path");
-const css=fs.readFileSync(path.resolve(__dirname,"..","v11-styles.css"),"utf8");
-const ui=fs.readFileSync(path.resolve(__dirname,"..","v11-ui.js"),"utf8");
+const css=fs.readFileSync(appSourcePath("v11-styles.css"),"utf8");
+const ui=fs.readFileSync(appSourcePath("v11-ui.js"),"utf8");
 let passed=0;
 function test(name,fn){try{fn();passed++;console.log(`✓ ${name}`)}catch(error){console.error(`✗ ${name}\n  ${error.stack}`);process.exitCode=1}}
 

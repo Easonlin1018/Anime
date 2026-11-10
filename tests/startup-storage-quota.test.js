@@ -1,17 +1,18 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const root = path.resolve(__dirname, "..");
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
-const themes = fs.readFileSync(path.join(root, "spotify-themes.js"), "utf8");
-const crossMedia = fs.readFileSync(path.join(root, "cross-media.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
+const themes = fs.readFileSync(appSourcePath("spotify-themes.js"), "utf8");
+const crossMedia = fs.readFileSync(appSourcePath("cross-media.js"), "utf8");
 const at = "2026-10-08T13:00:00.000Z";
 const before = "2026-10-01T00:00:00.000Z";
 const copy = value => JSON.parse(JSON.stringify(value));
@@ -39,7 +40,7 @@ const production = [
 
 // Execute the production v11 initializer, including its persistence guard.
 // Stop before unrelated progress/delete event handlers; keep its closure variables.
-const bootstrap = `${ui.slice(0, ui.indexOf("const originalMoveCategory"))}\n` +
+const bootstrap = `${ui.slice(0, ui.indexOf("    updateProgress = function"))}\n` +
     `${between(ui, "function exportBackup()", "function readImport")}\n` +
     `${between(ui, "function animeCategoryLabel(", "function currentlyWatchingPage()")}\n` +
     `${between(ui, "function renderCurrentlyWatching()", "function addShell()")}\n` +
@@ -84,22 +85,22 @@ function seed(list = [anime()], extra = {}) {
 function duplicateSeed() {
     const primary = anime();
     const preferred = anime(202, { id:"preferred", category:"watching", watched:5, currentEpisode:5 });
-    const duplicate = anime(202, { id:"duplicate", category:"watching", watched:3, currentEpisode:3 });
+    const duplicate = anime(404, { id:"preferred", category:"watching", watched:3, currentEpisode:3 });
     const deleted = anime(303, { id:"deleted", category:"_deleted", deletedAt:before, deletedFromCategory:"review" });
     return seed([primary, preferred, duplicate, deleted], {
         [EVENT_KEY]:JSON.stringify({ event:{ includeAnimeIds:["preferred", "duplicate"], hidden:true } }),
         [EVENT_ANIME_KEY]:JSON.stringify({ event:{ includeAnimeIds:["duplicate"] } }),
         [V.HISTORY_KEY]:JSON.stringify([
             ...Array.from({ length:10 }, (_, n) => ({ id:`preferred-history-${n}`, animeId:"preferred", delta:1, at:before })),
-            { id:"duplicate-history", animeId:"duplicate", delta:1, at:before }
+            { id:"duplicate-history", animeId:"preferred", source:"anilist", sourceId:404, anilistId:404, delta:1, at:before }
         ]),
         [V.WORKS_KEY]:JSON.stringify([
             { workId:"work-preferred", title:"通用測試作品 202", mediaEntries:[{ id:"preferred", mediaType:"anime", title:"通用測試作品 202" }] },
-            { workId:"work-duplicate", title:"通用測試作品 202", mediaEntries:[{ id:"duplicate", mediaType:"anime", title:"通用測試作品 202" }] }
+            { workId:"work-duplicate", title:"通用測試作品 404", mediaEntries:[{ id:"preferred", mediaType:"anime", title:"通用測試作品 404", source:"anilist", sourceId:404, anilistId:404 }] }
         ]),
         [V.MANGA_HISTORY_KEY]:JSON.stringify([{ id:"manga-history", workId:"work-duplicate", delta:2 }]),
         anime_theme_lookup_cache_v1:JSON.stringify({ "source:duplicate":{ title:"OP", retained:true } }),
-        anime_theme_last_undo_v1:JSON.stringify({ animeId:"duplicate", before:{ notes:"retain" } })
+        anime_theme_last_undo_v1:JSON.stringify({ animeId:"preferred", source:"anilist", sourceId:404, anilistId:404, before:{ notes:"retain" } })
     });
 }
 
@@ -173,6 +174,7 @@ function runtime(localStorage) {
         boot() {
             context.loadStoredAnime(); context.renderList();
             vm.runInContext(bootstrap, context, { filename:"production-v11-storage-bootstrap.js" });
+            delete context.window.animeUiReady; // This VM runs the UI initializer synchronously.
             context.window.__quotaTestBootstrap.renderCurrentlyWatching();
             // Run deferred warnings while preserving the toast dismissal timer.
             const pending = timers.splice(0);
@@ -223,7 +225,7 @@ test("startup journal creation failure occurs before main or auxiliary data writ
 test("real total-size quota after the main write rolls back growing UUID history references without deleting data", () => {
     const initial = seed([anime(101, { id:"same" }), anime(202, { id:"same" })], {
         [V.HISTORY_KEY]:JSON.stringify(Array.from({ length:100 }, (_, n) => ({
-            id:`collision-history-${n}`, animeId:"same", anilistId:202, delta:1, at:before
+            id:`collision-history-${n}`, animeId:"same", source:"anilist", sourceId:202, anilistId:202, delta:1, at:before
         })))
     });
     const baseline = storage(initial);
@@ -270,14 +272,14 @@ test("pre-existing backups do not permit an unpersisted main-list growth at the 
     assert.equal(store.getItem(CATEGORY_BACKUP), initial[CATEGORY_BACKUP], "An existing backup is never replaced to save capacity");
 });
 
-for (const backupKey of ["anime_tracker_duplicate_migration_backup_v1", "anime_tracker_legacy_identity_recovery_backup_v1"]) {
+for (const backupKey of ["anime_tracker_duplicate_migration_backup_v2", "anime_tracker_legacy_identity_recovery_backup_v1"]) {
     test(`${backupKey} failure remains nonfatal after primary/auxiliary persistence succeeds`, () => {
         let initial = duplicateSeed();
         if (backupKey.includes("legacy_identity")) {
             const legacy = anime(); delete legacy.anilistId; delete legacy.source; delete legacy.sourceId;
             initial = seed([legacy], {
                 [V.WORKS_KEY]:JSON.stringify([{ workId:"legacy-work", title:legacy.title, mediaEntries:[
-                    { id:legacy.id, mediaType:"anime", sourceId:"101", title:legacy.title, aliases:[legacy.title] }
+                    { id:legacy.id, mediaType:"anime", source:"anilist", sourceId:"101", title:legacy.title, aliases:[legacy.title] }
                 ] }])
             });
         }
@@ -310,8 +312,7 @@ test("failed startup preserves raw legacy progress and time fields rather than p
     failedBootPreservesOriginal(runtime(store), initial);
 });
 
-for (const failKey of [EVENT_KEY, EVENT_ANIME_KEY, V.HISTORY_KEY, V.WORKS_KEY,
-    V.MANGA_HISTORY_KEY, "anime_theme_lookup_cache_v1", "anime_theme_last_undo_v1"]) {
+for (const failKey of [EVENT_KEY, EVENT_ANIME_KEY, V.HISTORY_KEY, V.WORKS_KEY, "anime_theme_last_undo_v1"]) {
     test(`auxiliary failure at ${failKey}: rollback retains original list/history/tombstones/undo and rendered UI`, () => {
         const initial = duplicateSeed(), store = storage(initial, { failKey });
         failedBootPreservesOriginal(runtime(store), initial);
@@ -328,7 +329,7 @@ test("the second fresh page load under the same quota reads and renders all orig
 });
 
 for (const failKey of [V.WORKS_KEY, "anime_theme_last_undo_v1"]) {
-test(`failed rollback after ${failKey} remains recoverable across page loads, including original auxiliary UI data`, () => {
+test(`failed rollback after ${failKey} remains recoverable across page loads, including original auxiliary UI data`, async () => {
     const initial = duplicateSeed();
     const store = storage(initial, {
         fail:entry => entry.key === failKey ||
@@ -358,8 +359,8 @@ test(`failed rollback after ${failKey} remains recoverable across page loads, in
         assert.equal(store.trace.length, beforeBlockedWrite, "Recovery write guard throws before touching persistence or memory");
         assert.deepEqual(copy(run.api.animeList), JSON.parse(initial[V.STORAGE_KEY]));
         const beforeSecondaryBoot = store.trace.length;
-        assert.doesNotThrow(() => vm.runInContext(themes, run.api));
-        assert.doesNotThrow(() => vm.runInContext(crossMedia, run.api));
+        await vm.runInContext(themes, run.api);
+        await vm.runInContext(crossMedia, run.api);
         assert.equal(store.trace.length, beforeSecondaryBoot, "Secondary modules must respect pending recovery");
         const mediaSnapshot = run.api.window.CrossMediaTracker.snapshot();
         assert.deepEqual(copy(mediaSnapshot.works), JSON.parse(initial[V.WORKS_KEY]),
@@ -377,7 +378,7 @@ test("a committed journal left by cleanup failure never rolls back successfully 
     assert.equal(first.api.window.__ANIME_STARTUP_STORAGE__?.persisted, true);
     const committed = JSON.parse(store.getItem(V.STORAGE_KEY));
     const history = store.getItem(V.HISTORY_KEY);
-    assert.equal(committed.length, 3);
+    assert.equal(committed.length, 4);
     assert.equal(committed[0].category, "watching");
     assert.ok(store.getItem(PENDING_KEY), "Commit marker survives unsuccessful internal cleanup");
     const second = runtime(store);
@@ -401,7 +402,7 @@ test("a commit-marker write failure rolls back primary and all auxiliary data in
 test("an interrupted pending journal recovers the original record/history view even while main restoration still exceeds quota", () => {
     const original = duplicateSeed(), initial = { ...original };
     const originalList = JSON.parse(original[V.STORAGE_KEY]);
-    initial[V.STORAGE_KEY] = JSON.stringify(originalList.filter(item => item.id !== "duplicate").map(item =>
+    initial[V.STORAGE_KEY] = JSON.stringify(originalList.filter(item => item.anilistId !== 404).map(item =>
         item.id === "local-101" ? { ...item, category:"watching" } : item));
     initial[V.HISTORY_KEY] = JSON.stringify(JSON.parse(original[V.HISTORY_KEY]).map(item => ({ ...item, animeId:"preferred" })));
     initial[PENDING_KEY] = JSON.stringify({
@@ -545,12 +546,12 @@ test("schema metadata quota failure does not abort a successfully persisted prim
     for (const [key, value] of Object.entries(initial)) if (key !== V.STORAGE_KEY) assert.equal(store.getItem(key), value);
 });
 
-test("Theme Songs and cross-media initializers cannot bypass failed startup, rewrite auxiliary data or delete undo", () => {
+test("Theme Songs and cross-media initializers cannot bypass failed startup, rewrite auxiliary data or delete undo", async () => {
     const initial = duplicateSeed(), store = storage(initial, { failKey:V.STORAGE_KEY }), run = runtime(store);
     failedBootPreservesOriginal(run, initial);
     const attempts = store.trace.length;
-    assert.doesNotThrow(() => vm.runInContext(themes, run.api, { filename:"production-themes-quota-bootstrap.js" }));
-    assert.doesNotThrow(() => vm.runInContext(crossMedia, run.api, { filename:"production-cross-media-quota-bootstrap.js" }));
+    await vm.runInContext(themes, run.api, { filename:"production-themes-quota-bootstrap.js" });
+    await vm.runInContext(crossMedia, run.api, { filename:"production-cross-media-quota-bootstrap.js" });
     assert.ok(run.api.window.ThemeSongs && run.api.window.CrossMediaTracker, "Feature APIs still initialize for usable UI");
     assert.equal(store.trace.length, attempts, "Secondary startup scripts cannot persist blocked migrations");
     originalKeysUnchanged(store, initial);
@@ -577,19 +578,25 @@ test("successful startup publishes only persisted category change and leaves his
     assert.match(run.nodes.get("list-watching").innerHTML, /通用測試作品 101/u);
 });
 
-test("successful duplicate migration preserves every watch-history entry and tombstone while remapping references", () => {
+test("a local-key collision preserves every record and remaps only independently identified references", () => {
     const initial = duplicateSeed(), store = storage(initial), run = runtime(store);
     assert.doesNotThrow(() => run.boot());
     assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__?.persisted, true);
     const persisted = JSON.parse(store.getItem(V.STORAGE_KEY));
-    assert.equal(persisted.length, 3);
+    assert.equal(persisted.length, 4);
     assert.equal(persisted.find(item => item.id === "deleted").deletedAt, before);
+    const reassigned = persisted.find(item => item.anilistId === 404);
+    assert.notEqual(reassigned.id, "preferred");
+    assert.equal(reassigned.localIdReassignedFrom, "preferred");
     const history = JSON.parse(store.getItem(V.HISTORY_KEY));
     assert.equal(history.length, 11);
-    assert.ok(history.every(item => item.animeId === "preferred"));
+    assert.ok(history.slice(0, 10).every(item => item.animeId === "preferred"));
+    assert.equal(history[10].animeId, reassigned.id);
     assert.deepEqual(history.map(item => item.id), JSON.parse(initial[V.HISTORY_KEY]).map(item => item.id));
     assert.equal(store.getItem("anime_tracker_last_undo_v11"), initial.anime_tracker_last_undo_v11);
     assert.equal(store.getItem(V.WATCH_RESET_UNDO_KEY), initial[V.WATCH_RESET_UNDO_KEY]);
+    assert.equal(store.getItem(V.MANGA_HISTORY_KEY), initial[V.MANGA_HISTORY_KEY]);
+    assert.equal(store.getItem("anime_theme_lookup_cache_v1"), initial.anime_theme_lookup_cache_v1);
     assert.deepEqual(copy(run.api.animeList), persisted);
     const dataWrites = store.trace.filter(entry => entry.committed && !/backup/u.test(entry.key));
     assert.ok(dataWrites.some(entry => entry.key === V.STORAGE_KEY));
@@ -866,7 +873,7 @@ test("recovery can render and expand stored Theme Songs without lookup, cache, u
     run.api.document.createElement = tag => new RecoveryThemeElement(tag);
     run.api.document.createTextNode = text => ({ textContent:text });
     const writes = run.localStorage.trace.length;
-    vm.runInContext(themes, run.api);
+    await vm.runInContext(themes, run.api);
     const container = new RecoveryThemeElement("div"), api = run.api.window.ThemeSongs;
     api.renderForAnime(run.api.animeList[0], container, { expanded:true });
     assert.equal(api.expand(container), true);
@@ -940,14 +947,14 @@ test("an empty installation can export without manufacturing a main storage key"
     assert.equal(store.trace.length, count);
 });
 
-test("cross-media views and snapshots cannot retry quota-failed derived writes after successful main startup", () => {
+test("cross-media views and snapshots cannot retry quota-failed derived writes after successful main startup", async () => {
     const failure = {}, store = storage(seed(), failure), run = runtime(store);
     run.boot();
     assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__.persisted, true);
     const original = store.snapshot();
     failure.failKey = V.WORKS_KEY;
     store.limit = store.size();
-    assert.doesNotThrow(() => vm.runInContext(crossMedia, run.api));
+    await vm.runInContext(crossMedia, run.api);
     assert.ok(run.api.window.CrossMediaTracker);
     const attempts = store.trace.length;
     for (let i = 0; i < 2; i++) {

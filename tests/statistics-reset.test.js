@@ -1,6 +1,7 @@
 "use strict";
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 let passed=0;
 function test(name,fn){try{fn();passed++;console.log(`✓ ${name}`)}catch(error){console.error(`✗ ${name}\n  ${error.stack}`);process.exitCode=1}}
 function storage(initial={}){const data=new Map(Object.entries(initial));return{getItem:key=>data.get(key)??null,setItem:(key,value)=>data.set(key,String(value)),removeItem:key=>data.delete(key),data}}

@@ -1,10 +1,11 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const candidateStart = html.indexOf("function stripWikipediaDisambiguationSuffix");
 const candidateEnd = html.indexOf("const MEDIA_FIELDS", candidateStart);
 const searchStart = html.indexOf("async function searchAnime(");

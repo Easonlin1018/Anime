@@ -1,8 +1,9 @@
 "use strict";
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 const root = path.resolve(__dirname, "..");
 let passed = 0;
 function test(name, fn) { try { fn(); passed++; console.log(`✓ ${name}`); } catch (error) { console.error(`✗ ${name}\n  ${error.stack}`); process.exitCode = 1; } }
@@ -18,7 +19,7 @@ test("8. 觀看歷史與統計", () => { const now=new Date("2026-07-12T12:00:00
 test("9. 行事曆日期整理", () => { const items=V.calendarItems([{id:"1",title:"A",nextEpisodeAt:"2026-07-12T10:00:00Z",releaseDate:"2026-08-01"}],[{id:"e",title:"活動",eventStartDate:"2026-07-13",eventEndDate:"2026-07-15"}]); assert.deepEqual(items.map(x=>x.type),["episode","event-start","event-end","movie"]); });
 test("10. 活動重複偵測保留來源", () => { const merged=V.mergeDuplicateEvents([{title:"2026 動漫展",eventStartDate:"2026-07-12",venue:"世貿一館",url:"https://a.example/x"},{title:"動漫展",eventStartDate:"2026-07-13",venue:"世貿一館",url:"https://b.example/x"}]); assert.equal(merged.length,1); assert.equal(merged[0].duplicateSources.length,2); });
 
-const html=fs.readFileSync(path.join(root,"index.html"),"utf8");
+const html=fs.readFileSync(appSourcePath("index.html"),"utf8");
 const start=html.indexOf("const BROAD_EVENT_LOCATIONS");
 const end=html.indexOf("function eventTransportHint",start);
 const mapCode=html.slice(start,end);
@@ -27,7 +28,7 @@ test("11. 活動地圖 7 個案例", () => { const cases=[[{title:"展",venue:"�
 test("12. 本機／雲端資料依 updatedAt 合併", () => { const result=V.mergeCloudPayload({animeList:[{id:"a",title:"本機",updatedAt:"2026-01-01"}]},{animeList:[{id:"a",title:"雲端",updatedAt:"2026-02-01"}]}); assert.equal(result.animeList[0].title,"雲端"); });
 test("13. tombstone 保留 30 天並可清理", () => { const recent=new Date(Date.now()-10*86400000).toISOString(),old=new Date(Date.now()-40*86400000).toISOString(); assert.equal(V.pruneTombstones([{id:"a",title:"A",deletedAt:recent},{id:"b",title:"B",deletedAt:old}]).length,1); });
 test("14. 缺少 Supabase 設定時安全降級", () => { assert.match(fs.readFileSync(path.join(root,"sync-config.js"),"utf8"),/\|\| null/); assert.ok(V.mergeCloudPayload({animeList:[]},{animeList:[]}).animeList); });
-test("15. Service Worker 不快取登入與同步 API", () => { const sw=fs.readFileSync(path.join(root,"sw.js"),"utf8"); assert.equal(V.shouldCacheRequest("https://x.supabase.co/auth/v1/token"),false); assert.equal(V.shouldCacheRequest("https://site.example/index.html"),true); assert.match(sw,/auth\\\/v1/); assert.match(sw,/events\.json/); });
+test("15. Service Worker 不快取登入與同步 API", () => { const sw=fs.readFileSync(path.join(root,"sw.js"),"utf8"); assert.equal(V.shouldCacheRequest("https://x.supabase.co/auth/v1/token"),false); assert.equal(V.shouldCacheRequest("https://site.example/index.html"),true); assert.match(sw,/url\.origin !== APP_SCOPE\.origin/); assert.match(sw,/events\.json/); });
 
 console.log("\nLegacy backup import compatibility:");
 test("匯入 1. 純陣列 2 筆", () => { const normalized=V.normalizeImportedBackup([{title:"一"},{title:"二"}]); assert.equal(normalized[V.STORAGE_KEY].length,2); assert.equal(normalized.backupFormat,"舊版純陣列"); assert.equal(V.importBackup({animeList:[]},normalized,"replace").animeList.length,2); });

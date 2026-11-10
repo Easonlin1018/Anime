@@ -1,15 +1,16 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const root = path.resolve(__dirname, "..");
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
 const at = "2026-10-08T13:00:00.000Z"; // 21:00 in Taiwan, before the advertised second episode.
 const before = "2026-10-01T00:00:00.000Z";
 const seconds = value => Date.parse(value) / 1000;
@@ -32,8 +33,8 @@ const production = [
     between(html, "function escapeHtml", "function delay"),
     between(html, "function formatAiringDateTime", "function editAnimeReview"),
     between(html, "function getAnimeTitlePresentation", "function normalizeAnimeSearchText"),
-    between(ui, "function touch", "function currentSettings"),
-    between(ui, "const originalSaveAndRender", "const originalMoveCategory")
+    between(ui, "function persistAnime", "function currentSettings"),
+    between(ui, "const originalSaveAndRender", "updateProgress = function")
 ].join("\n");
 
 function fixture(identity = 101, extra = {}) {
@@ -93,6 +94,8 @@ function runtime(list = [fixture()], options = {}) {
     const calendarStatus = {};
     const context = vm.createContext({
         animeList:copy(list), animeSyncing:false, AnimeTrackerV11:V, V,
+        assertAnimeStorageAvailable:() => {},
+        withAnimeStorageWrite:operation => operation(),
         window:{ AnimeTrackerV11:V }, localStorage, Date:Clock,
         STORAGE_KEY:V.STORAGE_KEY, OLD_KEYS:[], ANIME_SYNC_KEY:"anime_metadata_sync_v10_1",
         EVENT_ANIME_OVERRIDES_KEY:"anime_event_anime_overrides_v10",
@@ -266,7 +269,7 @@ test("missing legacy category markers are preserved and reported without inventi
     }
 });
 
-test("startup duplicate merging preserves missing and unknown category ownership", () => {
+test("startup preserves each ambiguous duplicate and its missing or unknown category ownership", () => {
     for (const markers of [{}, { categorySource:"automatic" },
         { categorySource:"automatic", categoryManuallyEdited:null },
         { categorySource:"automatic", categoryManuallyEdited:"unknown" },
@@ -280,14 +283,15 @@ test("startup duplicate merging preserves missing and unknown category ownership
         const history = localStorage.getItem(V.HISTORY_KEY);
         const undo = localStorage.getItem("anime_tracker_last_undo_v11");
         api.loadStoredAnime();
-        assert.equal(api.window.__ANIME_DUPLICATE_RECONCILIATION__.mergedCount, 1);
-        assert.equal(api.animeList.length, 1);
-        const merged = api.animeList[0];
-        assert.equal(merged.id, canonical.id);
-        assert.equal(merged.category, "waiting");
+        assert.equal(api.window.__ANIME_DUPLICATE_RECONCILIATION__.mergedCount, 0);
+        assert.equal(api.animeList.length, 2);
+        const first = api.animeList.find(item => item.id === canonical.id);
+        const second = api.animeList.find(item => item.id === owner.id);
+        assert.equal(first.category, "watching");
+        assert.equal(second.category, "waiting");
         for (const field of ["categorySource", "categoryManuallyEdited"]) {
-            assert.equal(Object.hasOwn(merged, field), Object.hasOwn(markers, field));
-            assert.equal(merged[field], markers[field]);
+            assert.equal(Object.hasOwn(second, field), Object.hasOwn(markers, field));
+            assert.equal(second[field], markers[field]);
         }
         assert.equal(api.window.__ANIME_EXISTING_MEDIA_MIGRATION__.categoryReviewRequired.length, 1);
         assert.equal(api.window.__ANIME_EXISTING_MEDIA_MIGRATION__.categoryReviewRequired[0].suggestedCategory, "watching");
@@ -299,31 +303,37 @@ test("startup duplicate merging preserves missing and unknown category ownership
     }
 });
 
-test("startup duplicate merging retains an explicitly automatic category owner's false marker", () => {
+test("startup preserves automatic ownership without lending it to a duplicate", () => {
     const canonical = fixture(101, { id:"legacy-canonical", status:"RELEASING" });
     delete canonical.categoryManuallyEdited;
     const owner = fixture(101, { id:"legacy-owner", status:"RELEASING", updatedAt:at });
     const { api } = runtime([canonical, owner]);
     api.loadStoredAnime();
-    assert.equal(api.animeList.length, 1);
-    assert.equal(api.animeList[0].id, canonical.id);
-    assert.equal(api.animeList[0].category, "watching");
-    assert.equal(api.animeList[0].categorySource, "automatic");
-    assert.equal(api.animeList[0].categoryManuallyEdited, false);
-    assert.equal(api.window.__ANIME_EXISTING_MEDIA_MIGRATION__.categoryReviewRequired, undefined);
+    assert.equal(api.animeList.length, 2);
+    const first = api.animeList.find(item => item.id === canonical.id);
+    const second = api.animeList.find(item => item.id === owner.id);
+    assert.equal(first.category, "waiting");
+    assert.equal(Object.hasOwn(first, "categoryManuallyEdited"), false);
+    assert.equal(second.category, "watching");
+    assert.equal(second.categorySource, "automatic");
+    assert.equal(second.categoryManuallyEdited, false);
+    assert.equal(api.window.__ANIME_EXISTING_MEDIA_MIGRATION__.categoryReviewRequired.length, 1);
 });
 
-test("startup duplicate merging prioritizes either manual category marker over newer automatic data", () => {
+test("startup preserves either manual category marker independently of newer automatic duplicates", () => {
     for (const markers of [{ categorySource:"manual", categoryManuallyEdited:false },
         { categorySource:"automatic", categoryManuallyEdited:true }]) {
         const manual = fixture(101, { id:"legacy-manual", status:"RELEASING", ...markers });
         const newer = fixture(101, { id:"legacy-newer", status:"RELEASING", updatedAt:at });
         const { api } = runtime([manual, newer]);
         api.loadStoredAnime();
-        assert.equal(api.animeList.length, 1);
-        assert.equal(api.animeList[0].category, "waiting");
-        assert.equal(api.animeList[0].categorySource, "manual");
-        assert.equal(api.animeList[0].categoryManuallyEdited, true);
+        assert.equal(api.animeList.length, 2);
+        const first = api.animeList.find(item => item.id === manual.id);
+        const second = api.animeList.find(item => item.id === newer.id);
+        assert.equal(first.category, "waiting");
+        assert.equal(first.categorySource, markers.categorySource);
+        assert.equal(first.categoryManuallyEdited, markers.categoryManuallyEdited);
+        assert.equal(second.category, "watching");
         assert.equal(api.window.__ANIME_EXISTING_MEDIA_MIGRATION__.categoryReviewRequired, undefined);
     }
 });

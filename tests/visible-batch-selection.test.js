@@ -1,13 +1,14 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
-const ui = fs.readFileSync(path.join(__dirname, "..", "v11-ui.js"), "utf8");
-const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const V = require(appSourcePath("v11-core.js"));
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const at = "2026-11-08T01:00:00.000Z";
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -59,12 +60,13 @@ function runtime(list, options = {}) {
         openAnimeDetail:() => {}, activeWorkSearch:{ animeId:"" },
         saveEventLocalData:() => { localStorage.setItem("anime_event_overrides_v10", JSON.stringify(context.eventOverrides)); localStorage.setItem("anime_event_anime_overrides_v11", JSON.stringify(context.eventAnimeOverrides)); }
     });
+    context.window.runAnimeStorageWrite = operation => operation();
     context.window.assertAnimeStartupWritable = () => { if (context.window.__ANIME_STARTUP_STORAGE__.recoveryPending) throw Error("Recovery pending"); };
     const indexFunctions = ["escapeHtml", "cleanupAnimeAuxiliaryReferences", "restoreAnimeStartupStorage", "isAnimeStartupSnapshot", "commitAnimeStartupChanges"].map(name => productionFunction(html, name));
     vm.runInContext(indexFunctions.join("\n"), context);
     const prefix = ui.slice(0, ui.indexOf("    const originalSaveAndRender"));
     const wrappers = block(ui, "    const originalBuildAnimeItem", "    function animeCategoryLabel");
-    const functions = ["delegatedClick", "delegatedChange", "persistViewFilters", "renderFilterChips", "batchStorageFields", "batchMutationTimestamp", "readBatchStoredState", "commitBatchState", "publishBatchState", "reportBatchStorageFailure", "runBatch", "undoScopedBatch", "undoLast", "showPage"].map(name => productionFunction(ui, name, "    "));
+    const functions = ["delegatedClick", "delegatedChange", "persistViewFilters", "renderFilterChips", "batchStorageFields", "batchMutationTimestamp", "readBatchStoredState", "commitBatchState", "publishBatchState", "reportBatchStorageFailure", "runBatch", "runBatchLocked", "undoScopedBatch", "undoLast", "undoLastLocked", "showPage"].map(name => productionFunction(ui, name, "    "));
     vm.runInContext(prefix + "\n" + wrappers + "\n" + functions.join("\n")
         + "\nwindow.__selection={state,delegatedClick,delegatedChange,showPage,runBatch,undoLast,getVisibleMainAnime};\n})();", context);
     node("v11-batch-action").value = "delete"; node("v11-batch-category").value = "backlog";
@@ -260,7 +262,7 @@ for(const failKey of ["anime_tracker_startup_pending_v1","anime_tracker_last_und
 }
 
 test("cross-media hydrate supplies legacy display defaults without changing or saving the raw works", () => {
-    const source=fs.readFileSync(path.join(__dirname,"..","cross-media.js"),"utf8");
+    const source=fs.readFileSync(appSourcePath("cross-media.js"),"utf8");
     const context=vm.createContext({V,animeList:[],works:[],mangaHistory:[],localStorage:{setItem:()=>{throw Error("Unexpected storage write");}}});
     vm.runInContext(productionFunction(source,"applyPersistedSnapshot","    "),context);
     const raw=[{workId:"legacy",title:"Legacy",mediaEntries:[{id:"legacy-anime",mediaType:"anime",title:"Legacy anime"},{id:"manga",mediaType:"manga",title:"Legacy manga"}]}],before=clone(raw);
@@ -315,7 +317,7 @@ test("batch undo refuses a newer cross-media deletion state and retains its orig
 });
 
 test("Theme Songs hydrate reads a committed cache, closes a deleted selection and performs no storage write", () => {
-    const source=fs.readFileSync(path.join(__dirname,"..","spotify-themes.js"),"utf8");
+    const source=fs.readFileSync(appSourcePath("spotify-themes.js"),"utf8");
     let closes=0;
     const context=vm.createContext({cache:{old:{keep:true}},currentAnime:{id:"one"},Set,
         close:()=>closes++,localStorage:{setItem:()=>{throw Error("Unexpected storage write");}}});

@@ -1,9 +1,10 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 let passed = 0;
 function test(name, fn) {
@@ -139,8 +140,8 @@ test("11. 舊資料 reviewWatched migration 可重複執行", () => {
 });
 
 test("12. UI 將 review 進度與一般觀看進度分流並傳遞 external identity", () => {
-    const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
-    const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
+    const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
+    const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
     assert.match(html, /已複習 \$\{Number\(anime\.reviewWatched\)/u);
     assert.match(html, /deleteAnime\(\$\{animeId\},\$\{animeExternalIdentity\}\)/u);
     assert.match(ui, /V\.commitAnimeReviewProgress/u);
@@ -265,13 +266,13 @@ test("17. 已完成 session 再次進 review 會建立全新的零進度 session
 });
 
 test("18. 複習完不走一般觀看 progress，也不觸發續作探索", () => {
-    const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+    const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
     assert.equal(V.shouldDiscoverSequelAfterCategoryMove("review", "completed"), false);
     assert.equal(V.shouldDiscoverSequelAfterCategoryMove("watching", "completed"), true);
     assert.equal(V.shouldDiscoverSequelAfterCategoryMove("completed", "completed"), false);
     assert.match(html, /🎉 複習完<\/button>/u);
     assert.match(html, /moveCategory\(\$\{animeId\},"completed"\)/u);
-    assert.match(html, /shouldDiscoverSequelAfterCategoryMove\(previousCategory, category\)/u);
+    assert.match(html, /shouldDiscoverSequelAfterCategoryMove\(saved\.previousCategory, category\)/u);
 });
 
 if (!process.exitCode) console.log(`\nMedia delete/review workflow tests passed: ${passed}/18`);

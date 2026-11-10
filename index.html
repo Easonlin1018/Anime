@@ -6,7 +6,7 @@
     <title>全自動動漫追番基地 v11.0</title>
     <meta name="theme-color" content="#0f172a">
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="stylesheet" href="v11-styles.css?v=poster-fix-2">
+    <link rel="stylesheet" href="v11-styles.css?v=currently-watching-1">
 
     <style>
         :root {
@@ -641,7 +641,7 @@
 </div>
 
 <script src="vendor/opencc-js-1.4.1-full.js?v=1.4.1"></script>
-<script src="v11-core.js?v=poster-fix-2"></script>
+<script src="v11-core.js?v=currently-watching-1"></script>
 <script>
 const STORAGE_KEY = "anime_list_v8_8";
 const ANIME_SORT_KEY = "anime_list_sort_v10_6";
@@ -1015,17 +1015,6 @@ function installAnimeStartupRecoveryGuard() {
 
 function saveAndRender(options = {}) {
     assertAnimeStartupWritable();
-    if (options.metadataOnly) {
-        assertMetadataSyncStorageIdle();
-        const value = JSON.stringify(options.animeList);
-        if (localStorage.getItem(STORAGE_KEY) !== options.expectedStoredValue) {
-            throw new Error("同步期間作品已變更，請重新同步。");
-        }
-        if (value !== options.expectedStoredValue) localStorage.setItem(STORAGE_KEY, value);
-        animeList = options.animeList;
-        renderList();
-        return;
-    }
     const migration = migrateExistingAnimeRecords(Array.isArray(options.animeList) ? options.animeList : animeList);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(migration.list));
     animeList = migration.list;
@@ -2027,7 +2016,6 @@ async function discoverAnimeSearchResults(searchContext = {}, options = {}) {
 const MEDIA_FIELDS = `
     id format
     title { native english romaji }
-    coverImage { large medium }
     synonyms
     status episodes
     startDate { year month day }
@@ -2185,7 +2173,6 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "nextEpisode",
     "nextAiringAt",
     "streamingLinks",
-    "anilistCover",
     "aliases",
     "anilistTitles",
     "startDate",
@@ -2195,15 +2182,6 @@ const MEDIA_METADATA_MANAGED_FIELDS = Object.freeze([
     "relations",
     "lastMetadataSync"
 ]);
-
-function getAniListCover(media) {
-    const id = AnimeTrackerV11.normalizeAniListMediaId(media?.id);
-    const cover = media?.coverImage;
-    if (!id || !cover || typeof cover !== "object" || Array.isArray(cover)) return null;
-    const https = value => typeof value === "string" ? AnimeTrackerV11.resolvePosterUrl(value, { httpsOnly:true }) : "";
-    const large = https(cover.large), medium = https(cover.medium);
-    return large || medium ? { id, large, medium } : null;
-}
 
 function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString(), previousTitle = anime.title) {
     const patch = {
@@ -2223,11 +2201,6 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
         },
         lastMetadataSync: syncedAt
     };
-
-    const cover = getAniListCover(media);
-    if (cover && AnimeTrackerV11.getConfirmedAnimeAniListId(anime) === cover.id) {
-        patch.anilistCover = cover;
-    }
 
     const airedEpisode = getKnownAiredEpisode(media, syncedAt);
     if (airedEpisode) patch.airedEpisode = airedEpisode;
@@ -2655,7 +2628,6 @@ function buildAnimeRecordFromMedia(media, context = {}) {
     const finalTitle = titleDetails.displayTitle;
     const now = new Date().toISOString();
     const lifecycle = buildFreshAnimeTrackingLifecycle(media, context, now);
-    const anilistCover = getAniListCover(media);
     const airDate = media.startDate?.year
         ? `${media.startDate.year}年${media.startDate.month || "?"}月`
         : "未定";
@@ -2692,8 +2664,6 @@ function buildAnimeRecordFromMedia(media, context = {}) {
         nextEpisode:media.nextAiringEpisode?.episode || null,
         nextAiringAt:media.nextAiringEpisode?.airingAt || null,
         streamingLinks:normalizeStreamingLinks(media.externalLinks),
-        poster:anilistCover?.large || anilistCover?.medium || "",
-        ...(anilistCover ? { anilistCover } : {}),
         rating:null,
         note:"",
         customPlatform:"",
@@ -3222,8 +3192,6 @@ function attachAniListIdToLegacyAnime(anime, media) {
         || (String(anime?.source || "").toLowerCase() === "anilist" ? anime?.sourceId : null);
     if (!anime || !mediaId || explicitId) return anime;
     anime.anilistId = Number(mediaId);
-    // Keep the legacy match usable for existing reconciliation without treating it as confirmed.
-    anime.identitySource = "legacy-title-year-format";
     return anime;
 }
 
@@ -3381,106 +3349,44 @@ function renderAiringCalendar() {
     status.innerHTML = `已取得 ${scheduled.length} 部作品的下集時間｜${last ? `上次同步：${escapeHtml(formatEventDate(last))}` : '尚未同步集數'}`;
 }
 
-function assertMetadataSyncStorageIdle() {
-    assertAnimeStartupWritable();
-    if (window.__ANIME_STARTUP_STORAGE__?.persisted === false) {
-        throw new Error("本機資料尚未完成初始化，請稍後再同步。");
-    }
-    const raw = localStorage.getItem("anime_tracker_startup_pending_v1");
-    if (raw === null) return;
-    const pending = JSON.parse(raw);
-    if (!isAnimeStartupSnapshot(pending) || pending.state !== 1) {
-        throw new Error("其他分頁的儲存交易尚未完成，請稍後再同步。");
-    }
-}
-
-function readMetadataSyncSnapshot() {
-    assertMetadataSyncStorageIdle();
-    const raw = localStorage.getItem(STORAGE_KEY);
-    const list = JSON.parse(raw ?? "[]");
-    if (!Array.isArray(list) || list.some(item => !item || typeof item !== "object" || Array.isArray(item))) {
-        throw new Error("無法安全讀取已儲存的作品。");
-    }
-    return { raw, list };
-}
-
-function getMetadataSyncTargets(list) {
-    const localCounts = new Map(), mediaCounts = new Map();
-    const targets = list.map(anime => {
-        const localId = typeof anime.id === "string" || Number.isSafeInteger(anime.id) ? String(anime.id) : "";
-        const mediaId = !anime.deletedAt && anime.category !== "_deleted"
-            ? AnimeTrackerV11.getConfirmedAnimeAniListId(anime) : "";
-        if (localId) localCounts.set(localId, (localCounts.get(localId) || 0) + 1);
-        if (mediaId) mediaCounts.set(mediaId, (mediaCounts.get(mediaId) || 0) + 1);
-        return { anime, localId, mediaId };
-    });
-    return new Map(targets.filter(({ localId, mediaId }) => localCounts.get(localId) === 1 && mediaCounts.get(mediaId) === 1)
-        .map(target => [target.localId, target]));
-}
-
 async function syncAnimeMetadata(showMessage = false) {
     if (animeSyncing) return;
+    const ids = AnimeTrackerV11.collectActiveAnimeAniListIds(animeList);
+    if (ids.length === 0) {
+        renderAiringCalendar();
+        if (showMessage) showToast("目前沒有動漫可以同步。");
+        return;
+    }
     animeSyncing = true;
     const status = document.getElementById("calendar-status");
+    if (status) status.textContent = "正在從 AniList 同步集數、下集時間與觀看平台……";
     try {
-        const requested = getMetadataSyncTargets(readMetadataSyncSnapshot().list);
-        const ids = [...requested.values()].map(target => target.mediaId);
-        if (!ids.length) {
-            renderAiringCalendar();
-            if (showMessage) showToast("目前沒有動漫可以同步。");
-            return;
-        }
-        if (status) status.textContent = "正在從 AniList 同步集數、下集時間與觀看平台……";
-        const updates = new Map(), duplicateIds = new Set();
+        let synced = 0;
+        const updates = new Map();
         for (let i = 0; i < ids.length; i += 50) {
-            const batch = ids.slice(i, i + 50);
-            const batchIds = new Set(batch);
-            const mediaList = await requestAniListMediaPage(batch.map(Number));
+            const batchIds = ids.slice(i, i + 50);
+            const mediaList = await requestAniListMediaPage(batchIds);
             for (const media of mediaList) {
-                const id = AnimeTrackerV11.normalizeAniListMediaId(media?.id);
-                if (!batchIds.has(id) || duplicateIds.has(id)) continue;
-                if (updates.has(id)) {
-                    updates.delete(id);
-                    duplicateIds.add(id);
-                } else {
-                    updates.set(id, media);
-                }
+                const identity = String(media?.id || "");
+                if (batchIds.some(id => String(id) === identity)) updates.set(identity, media);
             }
             if (i + 50 < ids.length) await delay(800);
         }
-
         const now = new Date().toISOString();
-        const latest = readMetadataSyncSnapshot();
-        if (latest.raw === null) throw new Error("已儲存的作品清單不存在，請重新載入。");
-        const current = getMetadataSyncTargets(latest.list);
-        const replacements = new Map();
-        for (const [localId, target] of current) {
-            const before = requested.get(localId);
-            const media = updates.get(target.mediaId);
-            if (!media || before?.mediaId !== target.mediaId) continue;
-            const { anime } = target;
-            if (["createdAt", "addedAt", "trackingLifecycleResetAt", "lastMetadataSync"]
-                .some(field => anime[field] !== before.anime[field])) continue;
-            const patch = buildMediaMetadataPatch(anime, media, now);
-            if (["poster", "coverImage", "anilistCover"]
-                .some(field => JSON.stringify(anime[field]) !== JSON.stringify(before.anime[field]))) delete patch.anilistCover;
-            const next = applyMetadataManagedPatch({ ...anime }, patch);
-            // Keep the existing automatic airing policy for records untouched while the request ran.
-            if (JSON.stringify(anime) === JSON.stringify(before.anime)) applyAutomaticCategoryFromMedia(next, media, now);
-            replacements.set(anime, next);
-        }
-        if (replacements.size) {
-            const nextList = latest.list.map(anime => replacements.get(anime) || anime);
-            saveAndRender({ metadataOnly:true, animeList:nextList, expectedStoredValue:latest.raw });
-        } else {
-            animeList = latest.list;
-            renderList();
-            window.refreshV11?.();
-        }
+        // Apply to the latest list after all requests succeed, preserving intervening edits/deletions.
+        const nextList = animeList.map(anime => {
+            const media = !anime.deletedAt && updates.get(getAniListMediaId(anime));
+            if (!media) return anime;
+            const next = applyMediaMetadata(JSON.parse(JSON.stringify(anime)), media, now);
+            next.updatedAt = new Date(Math.max(Date.parse(now), Date.parse(next.updatedAt) || 0)).toISOString();
+            synced++;
+            return next;
+        });
+        saveAndRender({ metadataOnly:true, animeList:nextList });
         try { localStorage.setItem(ANIME_SYNC_KEY, now); }
         catch (error) { console.warn("播出資訊已儲存，但無法儲存同步時間", error); }
         renderAiringCalendar();
-        if (showMessage) showToast(`✅ 已同步 ${replacements.size} 部作品的播出資訊！`, 4500);
+        if (showMessage) showToast(`✅ 已同步 ${synced} 部作品的播出資訊！`, 4500);
     } catch (error) {
         console.error(error);
         if (status) status.textContent = `同步失敗：${error.message}`;
@@ -5013,9 +4919,9 @@ maybeAutoSyncAnimeMetadata();
 </script>
 <script src="sync-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="v11-ui.js?v=poster-fix-2"></script>
+<script src="v11-ui.js?v=currently-watching-1"></script>
 <script src="spotify-config.js"></script>
-<script src="spotify-themes.js?v=poster-fix-2"></script>
-<script src="cross-media.js?v=poster-fix-2"></script>
+<script src="spotify-themes.js?v=currently-watching-1"></script>
+<script src="cross-media.js?v=currently-watching-1"></script>
 </body>
 </html>

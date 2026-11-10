@@ -1,11 +1,12 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
-const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const titleStart = html.indexOf("function stripDisplayYear");
 const titleEnd = html.indexOf("async function searchWikipedia", titleStart);
 assert.ok(titleStart >= 0 && titleEnd > titleStart, "找不到標題解析程式");
@@ -237,11 +238,11 @@ test("19. tombstone 狀態在 series migration 後保持", () => {
 
 test("20. Service Worker 離線快取固定版 OpenCC 與 series graph cache", () => {
     const sw = fs.readFileSync(path.resolve(__dirname, "..", "sw.js"), "utf8");
-    const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
-    assert.match(sw, /anime-tracker-v11-poster-fix-2/u);
-    assert.match(sw, /vendor\/opencc-js-1\.4\.1-full\.js\?v=1\.4\.1/u);
-    assert.match(sw, /RELEASE_ASSETS = \["v11-core\.js"/u);
-    assert.match(ui, /reloadVersion = "poster-fix-2"/u);
+    const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
+    assert.match(sw, /anime-tracker-v11-poster-fix-3/u);
+    assert.match(sw, /vendor\/opencc-js-1\.4\.1-full\.js/u);
+    assert.match(sw, /"v11-core\.js": "[a-f0-9]{64}"/u);
+    assert.match(ui, /reloadVersion = "poster-fix-3"/u);
 });
 
 test("21. TV 可從安全 synonym 辨識季數", () => {

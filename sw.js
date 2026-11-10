@@ -1,143 +1,187 @@
-const SHELL_RELEASE = "poster-fix-2";
-const CACHE_VERSION = "anime-tracker-v11-poster-fix-2";
-const APP_CACHE_PREFIX = "anime-tracker-";
+const SHELL_RELEASE = "poster-fix-3";
+const CACHE_VERSION = "anime-tracker-v11-poster-fix-3";
+const SHELL_CACHE_PREFIX = `${CACHE_VERSION}-shell-`;
+const LEGACY_CACHE = "anime-tracker-v11-currently-watching-1";
+const DATA_CACHE = "anime-tracker-runtime-v1";
 const APP_SCOPE = new URL("./", self.location.href);
 const appUrl = path => new URL(path, APP_SCOPE).href;
-const RELEASE_ASSETS = ["v11-core.js", "v11-ui.js", "v11-styles.css", "cross-media.js", "spotify-themes.js"];
-const SHELL = ["./", "./index.html", "./vendor/opencc-js-1.4.1-full.js?v=1.4.1",
-    ...RELEASE_ASSETS.map(file => `./${file}?v=${SHELL_RELEASE}`),
-    "./spotify-config.js", "./manifest.webmanifest", "./icons/app-icon.svg"];
-const SHELL_URLS = new Map(SHELL.map(path => {
-    const href = appUrl(path);
-    return [new URL(href).pathname, href];
-}));
-const HTML_PATHS = new Set([APP_SCOPE.pathname, new URL(appUrl("./index.html")).pathname]);
+const releaseUrl = file => appUrl(`releases/${SHELL_RELEASE}/${file}`);
+const HTML_PATHS = new Set([APP_SCOPE.pathname, new URL(appUrl("index.html")).pathname]);
+const EVENTS_URL = appUrl("events.json");
+const READY_URL = releaseUrl(".shell-ready");
 
-// SHA-256 of the release files, with CRLF line endings normalized to LF.
-// The optional Spotify config is a deployment setting and has no release digest.
+// SHA-256 of the immutable UTF-8 release files, normalizing CRLF to LF.
 const SHELL_HASHES = {
-    "index.html": "fd60233dff448f9538c360cb2f5f6b828e25a33f226f72be4696f1ba1b7c2993",
+    "index.html": "9e8a8d5219e81501a2ce5dd2bee990a237f2a413b3381fc6e2a4411e5fff0642",
     "vendor/opencc-js-1.4.1-full.js": "f04e8f700d3a36b01a32bb0f051e6e5aff4b29dd1cb19f0787bb0c959abe36a8",
-    "v11-core.js": "12d96acd29db0f10b05f0b53539a375fbaf72d39769bef067c02b3ac37154f8c",
-    "v11-ui.js": "39c3da97a37d27ac5e2da2a9223ca727ac32555c5f9d612ef8f4ba29c9784dae",
+    "v11-core.js": "8cb839c0109393c82bd170c30991fae04820424a67426f2d1359c29bfab71c1e",
+    "v11-ui.js": "fa1d08d711192ab84922577d56bdd41d88ec69ed919640c932bc5f4f94bdaf9d",
     "v11-styles.css": "8adb744d039b17dcd0b3471bb046a74f66d18611fb16478f831ec43a349b6f6a",
-    "cross-media.js": "66b4bfe2af853ed44ca197fb7bed94b291a4a6d0bc91a1cae6257621a9278688",
-    "spotify-themes.js": "f06fd229b9828242385b084aae613a0e8c3008533897752f2926fae6032b047c",
-    "manifest.webmanifest": "ae92ca0ebd465c39a48665d8d1a31458f7d99822e9ac291ba946f2636047d2ed",
-    "icons/app-icon.svg": "662405018be573f4399086a2d0ac11c6f0193f852eb21a04b5e51cde4600c71a"
+    "cross-media.js": "43717652508d44b16d6b192c49c82acedd3530bad71f2bf611532dfcf127ea01",
+    "spotify-themes.js": "2dd7675165a560fa08c8484aed89216ca4dcbe83d550baab19251f286f87c301"
 };
 
-async function fetchShellAsset(path) {
-    const request = new Request(appUrl(path), { cache:"no-store", redirect:"error" });
-    const response = await fetch(request);
-    if (response.status !== 200 || response.redirected) throw new Error(`Shell asset unavailable: ${path}`);
-    const file = path === "./" ? "index.html" : path.slice(2).split("?")[0];
-    const expected = SHELL_HASHES[file];
-    if (expected) {
-        const text = (await response.clone().text()).replace(/\r\n/g, "\n");
-        const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-        const actual = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, "0")).join("");
-        if (actual !== expected) throw new Error(`Shell release mismatch: ${path}`);
-    }
-    return [request, response];
+const shellFiles = Object.keys(SHELL_HASHES);
+const shellPaths = new Map(shellFiles.map(file => [new URL(releaseUrl(file)).pathname, file]));
+const shellFingerprint = JSON.stringify(SHELL_HASHES);
+const stablePaths = new Set(["manifest.webmanifest", "icons/app-icon.svg", "spotify-config.js", "sync-config.js",
+    ...shellFiles.filter(file => file !== "index.html")].map(file => new URL(appUrl(file)).pathname));
+let preparingRelease;
+
+function hasExpectedType(file, response) {
+    const type = response.headers.get("content-type")?.split(";")[0].trim().toLowerCase();
+    if (file.endsWith(".html")) return type === "text/html";
+    if (file.endsWith(".css")) return type === "text/css";
+    return /^(?:application|text)\/(?:javascript|ecmascript)$/u.test(type || "");
 }
 
-async function installShell() {
-    // Read and validate the complete generation before touching its cache. An
-    // interrupted write can only affect the inactive generation.
-    const entries = await Promise.all(SHELL.map(fetchShellAsset));
-    const cache = await caches.open(CACHE_VERSION);
-    for (const [request, response] of entries) await cache.put(request, response);
+async function fetchShellAsset(file) {
+    const url = releaseUrl(file);
+    const response = await fetch(new Request(url, { cache:"no-store", redirect:"error" }));
+    if (response.status !== 200 || response.redirected || !hasExpectedType(file, response)) {
+        throw new Error(`Shell asset unavailable: ${file}`);
+    }
+    const text = (await response.clone().text()).replace(/\r\n/g, "\n");
+    const hash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    const actual = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, "0")).join("");
+    if (actual !== SHELL_HASHES[file]) throw new Error(`Shell release mismatch: ${file}`);
+    return [url, response];
+}
+
+async function findCompleteRelease() {
+    const names = (await caches.keys()).filter(name => name.startsWith(SHELL_CACHE_PREFIX)).sort().reverse();
+    for (const name of names) {
+        const cache = await caches.open(name);
+        const marker = await cache.match(READY_URL);
+        if (!marker || await marker.text() !== shellFingerprint) continue;
+        const files = await Promise.all(shellFiles.map(file => cache.match(releaseUrl(file))));
+        if (files.every(Boolean)) return cache;
+    }
+    return null;
+}
+
+async function stageRelease() {
+    // Keep the active cache untouched even when a fetch or Cache.put fails.
+    const entries = await Promise.all(shellFiles.map(fetchShellAsset));
+    const random = crypto.getRandomValues(new Uint32Array(2)).join("-");
+    const name = `${SHELL_CACHE_PREFIX}${Date.now()}-${random}`;
+    try {
+        const cache = await caches.open(name);
+        for (const [url, response] of entries) await cache.put(url, response);
+        await cache.put(READY_URL, new Response(shellFingerprint));
+        return cache;
+    } catch (error) {
+        await caches.delete(name).catch(() => {});
+        throw error;
+    }
+}
+
+function ensureRelease() {
+    if (!preparingRelease) {
+        preparingRelease = findCompleteRelease().then(cache => cache || stageRelease())
+            .finally(() => { preparingRelease = undefined; });
+    }
+    return preparingRelease;
 }
 
 function shellUnavailable() {
     return new Response("目前無法讀取完整的網站快取，請在連線後重新開啟。", {
-        status:503, headers:{ "Content-Type":"text/plain; charset=utf-8" }
+        status:503, headers:{ "Content-Type":"text/plain; charset=utf-8", "Cache-Control":"no-store" }
     });
 }
 
-async function serveShell(url, document = false) {
+async function serveRelease(file) {
     try {
-        const cache = await caches.open(CACHE_VERSION);
-        if (document) {
-            const present = await Promise.all(SHELL.map(path => cache.match(appUrl(path))));
-            if (present.some(response => !response)) return shellUnavailable();
-            return present[SHELL.findIndex(path => appUrl(path) === url)] || shellUnavailable();
-        }
-        return await cache.match(url) || shellUnavailable();
+        const cache = await ensureRelease();
+        return await cache.match(releaseUrl(file)) || shellUnavailable();
     } catch { return shellUnavailable(); }
 }
 
-// An installed update waits for old controlled documents to close so they
-// cannot begin loading one release and finish loading another.
-self.addEventListener("install", event => event.waitUntil(installShell()));
-self.addEventListener("activate", event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith(APP_CACHE_PREFIX) && key !== CACHE_VERSION).map(key => caches.delete(key)))).then(() => self.clients.claim())));
+// Do not take over legacy documents before they close. The network still
+// serves the complete legacy shell at its original paths while this waits.
+self.addEventListener("install", event => event.waitUntil(ensureRelease()));
+
+async function storageClientsAreSafe(sender) {
+    try {
+        if (!sender?.id) return false;
+        const controlled = new Set((await self.clients.matchAll({ type:"window" })).map(client => client.id));
+        if (!controlled.has(sender.id)) return false;
+        const all = await self.clients.matchAll({ type:"window", includeUncontrolled:true });
+        return all.every(client => {
+            const url = new URL(client.url);
+            return url.origin !== APP_SCOPE.origin || !url.pathname.startsWith(APP_SCOPE.pathname)
+                || controlled.has(client.id);
+        });
+    } catch { return false; }
+}
+
 self.addEventListener("message", event => {
+    if (event.data?.type === "CHECK_STORAGE_CLIENTS" && event.ports?.[0]) {
+        event.waitUntil(storageClientsAreSafe(event.source).then(safe => event.ports[0].postMessage({
+            type:"ANIME_SW_STORAGE_CLIENTS", release:SHELL_RELEASE, safe
+        })));
+        return;
+    }
     if (event.data?.type !== "GET_CACHE_STATUS") return;
     event.waitUntil(caches.keys().then(cacheNames => event.source?.postMessage({
-        type:"ANIME_SW_CACHE_STATUS",
-        cacheVersion:CACHE_VERSION,
-        cacheNames
+        type:"ANIME_SW_CACHE_STATUS", cacheVersion:CACHE_VERSION, cacheNames
     })));
 });
-function excluded(url) {
-    if (url.origin === self.location.origin) return /(?:spotify-worker|sync-api)/i.test(url.pathname);
-    return /(?:spotify\.com|scdn\.co|jikan\.moe|animethemes\.moe|itunes\.apple\.com|music\.apple\.com|supabase|workers\.dev|cloudflare|auth\/v1|rest\/v1)/i.test(url.href);
-}
-// Never fall back to another release's cache, or to another app's cache.
-async function matchCurrentCache(request) {
-    try { return await (await caches.open(CACHE_VERSION)).match(request); }
-    catch { return undefined; }
-}
-async function cacheResponse(request, response) {
-    if (response.ok) {
-        try { await (await caches.open(CACHE_VERSION)).put(request, response.clone()); }
-        catch { /* Cache quota must not prevent a successful network response. */ }
+
+async function matchData(cacheKey) {
+    for (const name of [DATA_CACHE, LEGACY_CACHE]) {
+        try {
+            if (!await caches.has(name)) continue;
+            const response = await (await caches.open(name)).match(cacheKey);
+            if (response) return response;
+        } catch {}
     }
-    return response;
+    return undefined;
 }
-async function networkFirst(request, options, cacheKey = request) {
+
+async function networkFirstData(request, cacheKey, events = false) {
     try {
-        const response = await fetch(request, options);
+        const response = await fetch(request, { cache:"no-store" });
         if (!response.ok) throw new Error("網站資源暫時無法取得");
-        return await cacheResponse(cacheKey, response);
+        if (events) {
+            const payload = await response.clone().json();
+            if (!payload || typeof payload !== "object") throw new Error("活動資料格式無效");
+        }
+        try { await (await caches.open(DATA_CACHE)).put(cacheKey, response.clone()); }
+        catch { /* Cache quota must not prevent a successful network response. */ }
+        return response;
     } catch (error) {
-        const cached = await matchCurrentCache(cacheKey);
+        const cached = await matchData(cacheKey);
         if (cached) return cached;
         throw error;
     }
 }
+
 self.addEventListener("fetch", event => {
     if (event.request.method !== "GET") return;
     const url = new URL(event.request.url);
-    if (excluded(url)) return;
-    if (url.pathname.endsWith("/events.json")) {
-        // The app's timestamp bypasses HTTP caching, not its offline data copy.
+    if (url.origin !== APP_SCOPE.origin || !url.pathname.startsWith(APP_SCOPE.pathname)) return;
+    const navigation = event.request.mode === "navigate";
+    if (navigation && HTML_PATHS.has(url.pathname)) {
+        event.respondWith(serveRelease("index.html"));
+        return;
+    }
+    const file = shellPaths.get(url.pathname);
+    if (file) {
+        // The app only runs at the canonical entry, keeping one manifest
+        // identity and resolving legacy service URLs against the app root.
+        if (file === "index.html" && navigation) event.respondWith(Response.redirect(APP_SCOPE.href));
+        else event.respondWith(!navigation && url.href === releaseUrl(file)
+            ? serveRelease(file) : Promise.resolve(shellUnavailable()));
+        return;
+    }
+    if (url.pathname === new URL(EVENTS_URL).pathname) {
         const cacheKey = new URL(url);
         cacheKey.searchParams.delete("t");
-        event.respondWith(networkFirst(event.request, { cache:"no-store" }, cacheKey.href));
+        event.respondWith(networkFirstData(event.request, cacheKey.href, true));
         return;
     }
-    if (url.origin !== self.location.origin) return;
-    const shellUrl = SHELL_URLS.get(url.pathname);
-    if (shellUrl) {
-        const document = HTML_PATHS.has(url.pathname);
-        event.respondWith(document || url.href === shellUrl
-            ? serveShell(shellUrl, document) : Promise.resolve(shellUnavailable()));
-        return;
+    if (!navigation && stablePaths.has(url.pathname)) {
+        event.respondWith(networkFirstData(event.request, url.href));
     }
-    if (event.request.mode === "navigate") {
-        const atAppRoot = new URL("./", url).href === APP_SCOPE.href;
-        event.respondWith(networkFirst(event.request, { cache:"no-store" }).catch(error => {
-            if (atAppRoot) return serveShell(appUrl("./index.html"), true);
-            throw error;
-        }));
-        return;
-    }
-    if (/\.(?:html|js|css)$/iu.test(url.pathname)) {
-        event.respondWith(networkFirst(event.request, { cache:"no-store" }));
-        return;
-    }
-    event.respondWith(matchCurrentCache(event.request).then(cached => cached
-        || fetch(event.request).then(response => cacheResponse(event.request, response))));
 });

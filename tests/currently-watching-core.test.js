@@ -1,11 +1,12 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const before = "2026-10-01T00:00:00.000Z";
 const at = "2026-11-08T12:00:00.000Z";
@@ -182,7 +183,7 @@ test("statistics distinguish broadcasting category from genuine currently-watchi
     assert.equal(stats.currentlyWatching, 2);
 });
 
-const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 function productionFunction(name) {
     const start = html.indexOf(`function ${name}(`), following = /\n(?:async )?function /g;
     following.lastIndex = start;

@@ -1,9 +1,10 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 let passed = 0;
 function test(name, fn) {
@@ -201,7 +202,7 @@ test("10. STORAGE_KEY persist QuotaExceededError 會 rollback", () => {
 test("11. localStorage 完全無空間時不刪除，UI 有明確錯誤 toast", () => {
     const storage = quotaStorage(0);
     const { result } = runTransaction({ list:[sibling, target], target, storage });
-    const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
+    const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
     assert.equal(result.stage, "undo");
     assert.equal(result.quotaExceeded, true);
     assert.equal(result.list.filter(item => !item.deletedAt).length, 2);
@@ -219,7 +220,7 @@ test("12. transaction trace 保留 mark、cleanup、persist 順序", () => {
 });
 
 test("13. UI 採 compact undo 且不再把整個 animeList 存進單部刪除復原點", () => {
-    const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
+    const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
     const deleteBlock = ui.slice(ui.indexOf("deleteAnime = function"), ui.indexOf("const originalBuildAnimeItem"));
     assert.match(deleteBlock, /createCompactDeleteUndo/u);
     assert.match(deleteBlock, /runAnimeDeleteTransaction/u);
@@ -227,8 +228,8 @@ test("13. UI 採 compact undo 且不再把整個 animeList 存進單部刪除復
 });
 
 test("14. Spotify 與 CrossMedia 提供 targeted snapshot/restore API", () => {
-    const spotify = fs.readFileSync(path.resolve(__dirname, "..", "spotify-themes.js"), "utf8");
-    const crossMedia = fs.readFileSync(path.resolve(__dirname, "..", "cross-media.js"), "utf8");
+    const spotify = fs.readFileSync(appSourcePath("spotify-themes.js"), "utf8");
+    const crossMedia = fs.readFileSync(appSourcePath("cross-media.js"), "utf8");
     assert.match(spotify, /snapshotAnimeCleanup/u);
     assert.match(spotify, /restoreAnimeCleanupSnapshot/u);
     assert.match(crossMedia, /snapshotAnimeDeletion/u);
@@ -357,7 +358,7 @@ test("17. near-quota partial rollback 會保留真實 persistent recovery，之�
 });
 
 test("18. rollback incomplete 的 UI 必須警告 recoveryRequired，不能宣稱資料未變更", () => {
-    const ui = fs.readFileSync(path.resolve(__dirname, "..", "v11-ui.js"), "utf8");
+    const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
     const deleteBlock = ui.slice(ui.indexOf("deleteAnime = function"), ui.indexOf("const originalBuildAnimeItem"));
     assert.match(deleteBlock, /recoveryRequired/u);
     assert.match(deleteBlock, /復原資料已保留/u);

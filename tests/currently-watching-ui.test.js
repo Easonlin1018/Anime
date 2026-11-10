@@ -1,14 +1,15 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 const root = path.resolve(__dirname, "..");
-const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const clone = value => JSON.parse(JSON.stringify(value));
 const at = "2026-11-08T01:00:00.000Z";
 
@@ -87,6 +88,7 @@ function runtime(list = [], options = {}) {
         installAnimeStartupRecoveryGuard:() => { traces.guardInstalled++; },
         warnAnimeStartupStorage:(...args) => traces.warnings.push(args)
     });
+    context.window.runAnimeStorageWrite = operation => operation();
     context.window.assertAnimeStartupWritable = () => { if (context.window.__ANIME_STARTUP_STORAGE__.recoveryPending) throw Error("Recovery pending"); };
     context.window.warnAnimeStartupStorage = context.warnAnimeStartupStorage;
     const indexFunctions = ["escapeHtml", "getAniListMediaId", "getAnimeTitlePresentation", "formatAiringDateTime", "buildAnimeItem",
@@ -97,7 +99,7 @@ function runtime(list = [], options = {}) {
     const poster = between(ui, "    const ANIME_POSTER_PLACEHOLDER", "    function renderReminders");
     const progress = between(ui, "    updateProgress = function", "    deleteAnime = function");
     const wrappers = between(ui, "    const originalBuildAnimeItem", "    function animeCategoryLabel");
-    const syncAndSave = between(ui, "    const originalSaveAndRender", "    const originalMoveCategory");
+    const syncAndSave = between(ui, "    const originalSaveAndRender", "    updateProgress = function");
     const refresh = productionFunction(ui, "refreshV11", "    ");
     vm.runInContext(prefix + "\n" + uiFunctions.join("\n") + "\n" + poster + "\n" + syncAndSave + "\n" + wrappers + "\n" + progress + "\n" + refresh
         + "\nwindow.__ui={renderCurrentlyWatching,currentlyWatchingPage,showPage,animeCategoryOptions,handleAnimePosterError,getHistory:()=>watchHistory};\n})();", context);
@@ -173,7 +175,7 @@ test("currently-watching orders and deduplicates legacy and confirmed AniList co
         anime("one", {
             poster:{ large:"./covers/old.png", medium },
             coverImage:{ large:"http://localhost/isolated/covers/old.png", medium },
-            source:"anilist", anilistCover:{ id:"101", large:medium, medium:remote }
+            source:"anilist", sourceId:101, anilistCover:{ id:"101", large:medium, medium:remote }
         }),
         anime("two", { anilistCover:{ id:"101", large:"https://example.invalid/wrong.jpg" } }),
         anime("three", { anilistId:null, anilistCover:{ id:"101", large:"https://example.invalid/unknown.jpg" } })
@@ -330,7 +332,7 @@ test("mobile card controls retain touch targets and source IDs containing dollar
     const run=runtime([anime("safe-$&",{currentEpisode:1})]);run.api.window.__ui.renderCurrentlyWatching();
     const markup=run.node("v11-currently-list").innerHTML;
     assert.match(markup,/data-anime-id="safe-\$&amp;"/);assert.equal((markup.match(/data-progress-action="decrement"/g)||[]).length,1);
-    const css=fs.readFileSync(path.join(root,"v11-styles.css"),"utf8");assert.match(css,/\.v11-currently-page \.btn-group button \{ min-height:44px/);assert.match(css,/@media\(max-width:480px\)\{\.v11-currently-card/);
+    const css=fs.readFileSync(appSourcePath("v11-styles.css"),"utf8");assert.match(css,/\.v11-currently-page \.btn-group button \{ min-height:44px/);assert.match(css,/@media\(max-width:480px\)\{\.v11-currently-card/);
 });
 
 test("progress saves the latest persisted raw rows without leaking display defaults or unrelated stale edits",()=>{

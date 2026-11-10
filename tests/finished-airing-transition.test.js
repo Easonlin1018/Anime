@@ -1,15 +1,16 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const root = path.resolve(__dirname, "..");
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
 const at = "2026-11-08T12:00:00.000Z";
 const before = "2026-10-01T00:00:00.000Z";
 const seconds = value => Date.parse(value) / 1000;
@@ -31,8 +32,8 @@ const production = [
     between(html, "function loadStoredAnime", "function showToast"),
     between(html, "function escapeHtml", "function delay"),
     between(html, "function formatAiringDateTime", "function editAnimeReview"),
-    between(ui, "function touch", "function currentSettings"),
-    between(ui, "const originalSaveAndRender", "const originalMoveCategory")
+    between(ui, "function persistAnime", "function currentSettings"),
+    between(ui, "const originalSaveAndRender", "updateProgress = function")
 ].join("\n");
 
 function watching(identity = 9101, extra = {}) {
@@ -118,6 +119,8 @@ function runtime(list = [watching()], options = {}) {
     }
     const context = vm.createContext({
         animeList:copy(list), animeSyncing:false, AnimeTrackerV11:V, V,
+        assertAnimeStorageAvailable:() => {},
+        withAnimeStorageWrite:operation => operation(),
         window:{ AnimeTrackerV11:V }, localStorage, Date:Clock,
         STORAGE_KEY:V.STORAGE_KEY, OLD_KEYS:[], ANIME_SYNC_KEY:"anime_metadata_sync_v10_1",
         EVENT_ANIME_OVERRIDES_KEY:"anime_event_anime_overrides_v11", EVENT_OVERRIDES_KEY:"anime_event_overrides_v10",

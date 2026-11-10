@@ -1,9 +1,10 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 let passed = 0;
 function test(name, fn) {
@@ -21,6 +22,7 @@ function fixture(overrides = {}) {
     return V.migrateAnime({
         id:"local-uuid-1",
         anilistId:100,
+        source:"anilist",
         title:"原始名稱",
         aliases:["原名"],
         category:"watching",
@@ -71,7 +73,10 @@ test("C. UUID 作品補綁 AniList ID 後，本機 reference 與 work media id �
     const withoutExternalId = fixture({anilistId:null});
     const initialWorks = V.migrateWorks([withoutExternalId], [], "2026-01-01T00:00:00.000Z");
     const localAuxiliary = {[withoutExternalId.id]:{wanted:true}};
-    const rebound = {...withoutExternalId, anilistId:103572, updatedAt:"2026-02-01T00:00:00.000Z"};
+    const rebound = V.confirmAnimeAniListIdentity(
+        [withoutExternalId], withoutExternalId.id, V.animeAniListIdentitySnapshot(withoutExternalId),
+        103572, "2026-02-01T00:00:00.000Z"
+    ).anime;
     const refreshedWorks = V.migrateWorks([rebound], initialWorks, "2026-02-01T00:00:00.000Z");
     const entry = refreshedWorks.flatMap(work => work.mediaEntries).find(item => item.id === withoutExternalId.id);
     assert.equal(entry.id, "local-uuid-1");
@@ -154,8 +159,8 @@ test("刪除作品不再出現在 calendar，cross-media 與 Spotify 有 cleanup
     assert.equal(V.calendarItems([deleted], []).length, 0);
     const deletedWork = V.migrateWorks([deleted], []);
     assert.equal(V.searchWorks(deletedWork).length, 0);
-    const crossMedia = fs.readFileSync(path.resolve(__dirname, "..", "cross-media.js"), "utf8");
-    const spotify = fs.readFileSync(path.resolve(__dirname, "..", "spotify-themes.js"), "utf8");
+    const crossMedia = fs.readFileSync(appSourcePath("cross-media.js"), "utf8");
+    const spotify = fs.readFileSync(appSourcePath("spotify-themes.js"), "utf8");
     assert.match(crossMedia, /function markAnimeDeleted\(/);
     assert.match(crossMedia, /function activeMediaEntries\(/);
     assert.match(spotify, /function cleanupAnime\(/);

@@ -1,11 +1,12 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
-const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const start = html.indexOf("function stripDisplayYear");
 const end = html.indexOf("async function searchWikipedia", start);
 assert.ok(start >= 0 && end > start, "找不到標題產生函式");

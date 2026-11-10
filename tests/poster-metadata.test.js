@@ -1,15 +1,16 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const root = path.resolve(__dirname, "..");
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
 const at = "2026-11-09T12:00:00.000Z";
 const large = "https://covers.example.invalid/large.jpg";
 const medium = "https://covers.example.invalid/medium.jpg";
@@ -31,8 +32,8 @@ const production = [
     between(html, "function normalizeStreamingLinks", "function directRelationMediaIds"),
     between(html, "function loadStoredAnime", "function showToast"),
     between(html, "function formatAiringDateTime", "function editAnimeReview"),
-    between(ui, "function touch", "function currentSettings"),
-    between(ui, "const originalSaveAndRender", "const originalMoveCategory")
+    between(ui, "function persistAnime", "function currentSettings"),
+    between(ui, "const originalSaveAndRender", "updateProgress = function")
 ].join("\n");
 
 function anime(id, extra = {}) {
@@ -60,6 +61,8 @@ function runtime(list = [], responses = [], options = {}) {
     const requests = [], writes = [], errors = [];
     const api = vm.createContext({
         animeList:copy(list), animeSyncing:false, AnimeTrackerV11:V, V,
+        assertAnimeStorageAvailable:() => {},
+        withAnimeStorageWrite:operation => operation(),
         window:{ AnimeTrackerV11:V }, autoSyncTimer:null,
         STORAGE_KEY:V.STORAGE_KEY, ANIME_SYNC_KEY:syncKey,
         localStorage:{ getItem:key => store.get(key) ?? null,
@@ -118,23 +121,28 @@ test("an unmarked legacy title match cannot masquerade as a confirmed AniList ID
         anime(101, { source:null, sourceId:null, anilistTitles:{ native:"Synthetic anime 101" } }),
         anime(102, { source:null, sourceId:null, anilistId:null, aniListId:"102" }),
         anime(103, { source:null, sourceId:null, identitySource:"legacy-work-sourceId" }),
-        anime(104, { source:null, sourceId:204, aniListId:104 })
+        anime(104, { source:null, sourceId:204, aniListId:104 }),
+        anime(105)
     ];
     const run = runtime(list, list.map((_, index) => media(index + 101)));
     await run.api.syncAnimeMetadata();
     assert.deepEqual(run.errors, []);
-    assert.deepEqual(run.requests, [[102, 103]]);
+    assert.deepEqual(run.requests, [[105]]);
     const saved = JSON.parse(run.store.get(V.STORAGE_KEY));
     assert.deepEqual(saved[0], list[0]);
-    assert.equal(saved[1].anilistCover?.id, "102");
-    assert.equal(saved[2].anilistCover?.id, "103");
+    assert.deepEqual(saved[1], list[1]);
+    assert.deepEqual(saved[2], list[2]);
     assert.deepEqual(saved[3], list[3]);
+    assert.equal(saved[4].anilistCover?.id, "105");
 });
 
 test("title, year and format inference cannot attach a cover from the same response or a later batch", async () => {
     const legacy = anime(101, { anilistId:null, source:null, sourceId:null, poster:"old" });
     const { api } = runtime();
     assert.equal(api.getExistingAnimeMediaState(media(101), [legacy]).reason, "legacy-title-year-format");
+    const automatic = api.addOrRestoreSingleMedia(media(101), [copy(legacy)], { allowLegacyReconcile:false });
+    assert.equal(automatic.changed, false);
+    assert.deepEqual(copy(automatic.anime), legacy);
     const added = api.addOrRestoreSingleMedia(media(101), [legacy]);
     assert.equal(added.action, "reconciled");
     assert.equal(added.anime.anilistId, 101);
@@ -190,7 +198,7 @@ test("the existing batch backfills only its confirmed active record and preserve
 });
 
 
-test("two tabs preserve progress, notes, covers, a tombstone, and history saved during the request", async () => {
+test("two tabs preserve per-field edits, a tombstone, and history saved during the request", async () => {
     const original = [anime(101, { poster:"./covers/old.jpg" }), anime(102), anime(103)];
     let respond;
     const tabA = runtime(original, [], { request:() => new Promise(resolve => { respond = resolve; }) });
@@ -200,6 +208,7 @@ test("two tabs preserve progress, notes, covers, a tombstone, and history saved 
     const secondTabList = copy(original);
     Object.assign(secondTabList[0], {
         watched:9, currentEpisode:9, notes:"Another tab's notes",
+        totalEpisodes:28, year:2025, category:"waiting", categorySource:"manual",
         poster:{ large:"./covers/latest.jpg", medium:"/covers/thumb.jpg" },
         coverImage:"data:image/png;base64,AA==",
         anilistCover:{ id:"101", large:"https://covers.example.invalid/edited.jpg", medium },
@@ -210,15 +219,16 @@ test("two tabs preserve progress, notes, covers, a tombstone, and history saved 
     const history = JSON.stringify([{ id:"new-history", animeId:secondTabList[0].id, delta:4, at:editedAt }]);
     tabB.api.localStorage.setItem(V.STORAGE_KEY, JSON.stringify(secondTabList));
     tabB.api.localStorage.setItem(V.HISTORY_KEY, history);
-    respond([{ ...media(101), episodes:16 }, media(102), media(103), media(104)]);
+    respond([{ ...media(101), episodes:16, status:"FINISHED", startDate:{ year:2024 } }, media(102), media(103), media(104)]);
     await syncing;
 
     assert.deepEqual(tabA.errors, []);
     assert.deepEqual(tabA.requests, [[101, 102, 103]]);
     assert.deepEqual(tabA.writes, [V.STORAGE_KEY, syncKey]);
     const saved = JSON.parse(tabA.store.get(V.STORAGE_KEY));
-    assert.equal(saved[0].totalEpisodes, 16);
-    for (const field of ["watched", "currentEpisode", "notes", "poster", "coverImage", "anilistCover", "updatedAt", "category"]) {
+    assert.equal(saved[0].status, "FINISHED", "Unedited metadata on the same record may still update");
+    for (const field of ["watched", "currentEpisode", "notes", "poster", "coverImage", "anilistCover", "updatedAt",
+        "category", "categorySource", "episodes", "totalEpisodes", "year", "startDate"]) {
         assert.deepEqual(saved[0][field], secondTabList[0][field], field);
     }
     assert.deepEqual(saved[1], secondTabList[1]);
@@ -226,6 +236,19 @@ test("two tabs preserve progress, notes, covers, a tombstone, and history saved 
     assert.deepEqual(saved[3], secondTabList[3]);
     assert.equal(tabA.store.get(V.HISTORY_KEY), history);
     assert.deepEqual(copy(tabA.api.animeList), saved);
+});
+
+test("explicitly edited totals and years are not replaced by a later batch", async () => {
+    const original = [anime(101, { metadataManuallyEdited:{ totalEpisodes:true, year:true },
+        episodes:28, totalEpisodes:28, year:2025, startDate:{ year:2025 } })];
+    const run = runtime(original, [{ ...media(101), episodes:15, startDate:{ year:2024 } }]);
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.errors, []);
+    const saved = JSON.parse(run.store.get(V.STORAGE_KEY));
+    for (const field of ["episodes", "totalEpisodes", "year", "startDate", "metadataManuallyEdited"]) {
+        assert.deepEqual(saved[0][field], original[0][field], field);
+    }
+    assert.equal(saved[0].anilistCover.id, "101");
 });
 
 test("strict batch IDs include dataSource legacy rows and reject conflicts, wrong sources, duplicates and malformed replies", async () => {
@@ -246,6 +269,15 @@ test("strict batch IDs include dataSource legacy rows and reject conflicts, wron
     const saved = JSON.parse(run.store.get(V.STORAGE_KEY));
     assert.deepEqual(saved[0].anilistCover, { id:"101", large, medium });
     assert.deepEqual(saved.slice(1), list.slice(1));
+});
+
+test("a separate tombstone's duplicate claim prevents automatic pairing with an active row", async () => {
+    const list = [anime(101), anime(101, { id:"other-local", category:"_deleted", deletedAt:at })];
+    const run = runtime(list, [media(101)]);
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.requests, []);
+    assert.deepEqual(run.writes, []);
+    assert.deepEqual(JSON.parse(run.store.get(V.STORAGE_KEY)), list);
 });
 
 test("a newly attached identity and a new duplicate after the request cannot accept a response", async () => {

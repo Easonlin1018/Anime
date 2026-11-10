@@ -1,11 +1,12 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
-const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const titleStart = html.indexOf("function stripDisplayYear");
 const titleEnd = html.indexOf("async function searchWikipedia", titleStart);
 const mediaStart = html.indexOf("function normalizeStreamingLinks");
@@ -154,9 +155,9 @@ test("21. serialize / deserialize round-trip 無 duplicate", () => {
     const payload=V.createBackup({animeList:[anime(1,"A"),anime(2,"B"),anime(3,"C")],works:[]});const imported=V.importBackup({animeList:[],works:[]},JSON.parse(JSON.stringify(payload)),"replace");assert.equal(new Set(imported.animeList.map(x=>x.anilistId)).size,3);
 });
 
-test("22. Supabase merge round-trip 同 AniList ID 最終一筆", () => {
+test("22. Supabase merge preserves distinct local records claiming one AniList ID", () => {
     const activeB=anime("uuid-b","B","watching",{anilistId:2,updatedAt:"2026-08-11T00:00:00.000Z"});const oldDeleted=V.markAnimeDeletedById([anime("old-b","B","backlog",{anilistId:2})],"old-b","2026-08-10T00:00:00.000Z","2").list[0];
-    const merged=V.mergeCloudPayload({animeList:[activeB],works:[]},{animeList:[oldDeleted],works:[]});assert.equal(merged.animeList.filter(x=>x.anilistId===2).length,1);assert.equal(merged.animeList[0].deletedAt,null);
+    const merged=V.mergeCloudPayload({animeList:[activeB],works:[]},{animeList:[oldDeleted],works:[]});assert.equal(merged.animeList.filter(x=>x.anilistId===2).length,2);assert.equal(merged.animeList.find(x=>x.id==="uuid-b").deletedAt,null);assert.equal(merged.animeList.find(x=>x.id==="old-b").deletedAt,oldDeleted.deletedAt);
 });
 
 test("23. 自動找續作遇 tombstone B 時不自動復活", async () => {
