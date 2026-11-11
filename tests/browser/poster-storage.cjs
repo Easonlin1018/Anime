@@ -7,7 +7,7 @@ const path = require("node:path");
 const { chromium, webkit } = require(process.env.POSTER_PLAYWRIGHT || "playwright");
 
 const repo = path.resolve(process.env.POSTER_TEST_REPO || path.join(__dirname, "../.."));
-const release = "poster-fix-3";
+const release = "poster-fix-4";
 const releasePath = "releases/" + release;
 const V = require(path.join(repo, releasePath, "v11-core.js"));
 const scope = "/Anime/";
@@ -21,6 +21,7 @@ const fixture = id => V.migrateAnime({
     title:"Synthetic anime " + id, titleSource:"manual", titleManuallyEdited:true,
     status:"RELEASING", category:"watching", categorySource:"automatic", categoryManuallyEdited:false,
     watched:3, currentEpisode:3, episodes:12, totalEpisodes:12, year:2026, format:"TV",
+    poster:"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'/%3E",
     createdAt:now, updatedAt:now, addedAt:now
 }, now);
 
