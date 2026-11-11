@@ -1,13 +1,14 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const root = path.resolve(__dirname, "..");
-const source = fs.readFileSync(path.join(root, "spotify-themes.js"), "utf8");
+const source = fs.readFileSync(appSourcePath("spotify-themes.js"), "utf8");
 let passed = 0;
 
 async function test(name, fn) {

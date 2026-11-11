@@ -1,8 +1,9 @@
 "use strict";
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 let passed = 0;
 function test(name, fn) {
@@ -54,7 +55,7 @@ test("6. 人工 excludeAnimeIds 永遠優先", () => {
     assert.ok(result.reasons.includes("manual-exclude"));
 });
 test("7. 舊版活動搜尋快取 key 已不再使用", () => {
-    const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+    const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
     assert.doesNotMatch(html, /anime_work_alias_cache_v10_4|anime_live_search_pending_v10_4/);
     assert.match(html, /anime_work_alias_cache_v11_1/);
     assert.match(html, /anime_live_search_pending_v11_1/);
@@ -73,7 +74,7 @@ test("9. 過濾不會刪除或修改 events.json 原始資料", () => {
     assert.equal(JSON.stringify(source), before);
 });
 test("10. 活動總頁保留完整來源，特定動漫頁只取高信心結果", () => {
-    const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+    const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
     const allEvents = [unrelated, { id:"correct", title:`《${anime.title}》期間限定展` }];
     assert.equal(allEvents.length, 2);
     assert.equal(V.filterEventsForAnime(allEvents, anime).length, 1);
@@ -86,7 +87,7 @@ test("11. 官方 sourceTitle 可作為強匹配", () => {
     assert.ok(result.score >= 80);
 });
 test("12. 最終過濾器逐筆套用門檻且不接受 medium", () => {
-    const source = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+    const source = fs.readFileSync(appSourcePath("index.html"), "utf8");
     assert.match(source, /result\.matched === true && result\.confidence === "high" && result\.score >= 80/);
     assert.match(source, /const result = matchEventToAnime\(event, anime\)/);
 });

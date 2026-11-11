@@ -1,11 +1,12 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
-const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const start = html.indexOf("function stripDisplayYear");
 const end = html.indexOf("async function searchWikipedia", start);
 assert.ok(start >= 0 && end > start, "找不到標題產生函式");
@@ -653,9 +654,9 @@ test("metadata whitelist excludes all user-managed fields", () => {
 });
 
 test("metadata sync resolves AniList ID without replacing the local ID", () => {
-    assert.match(html, /AnimeTrackerV11\.collectActiveAnimeAniListIds\(animeList\)/u);
-    assert.equal(typeof V.collectActiveAnimeAniListIds, "function");
-    assert.match(html, /!anime\.deletedAt && updates\.get\(getAniListMediaId\(anime\)\)/u);
+    assert.match(html, /getMetadataSyncTargets\(readMetadataSyncSnapshot\(\)\.list\)/u);
+    assert.equal(typeof V.getConfirmedAnimeAniListId, "function");
+    assert.match(html, /before\?\.mediaId !== target\.mediaId/u);
     assert.match(html, /requestAniList\(ID_QUERY, \{ id: Number\(animeMediaId\) \}\)/u);
 });
 

@@ -1,13 +1,14 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const root = path.resolve(__dirname, "..");
-const source = fs.readFileSync(path.join(root, "spotify-themes.js"), "utf8");
+const source = fs.readFileSync(appSourcePath("spotify-themes.js"), "utf8");
 const CACHE_KEY = "anime_theme_lookup_cache_v1";
 let passed = 0;
 
@@ -240,7 +241,7 @@ function loadThemeSongs(fetchImpl, seed = {}) {
     });
 
     await test("21. 搜尋新增紀錄保存明確 AniList identity", () => {
-        const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+        const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
         const start = html.indexOf("function buildAnimeRecordFromMedia");
         const end = html.indexOf("function directRelationMediaIds", start);
         const builder = html.slice(start, end);

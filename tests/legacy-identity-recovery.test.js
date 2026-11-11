@@ -1,11 +1,12 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
-const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const titleStart = html.indexOf("function stripDisplayYear");
 const titleEnd = html.indexOf("async function searchWikipedia", titleStart);
 const migrationStart = html.indexOf("function isMediaClearlyNotYetReleased");
@@ -40,6 +41,7 @@ const anime = (id, title, extra = {}) => ({
 });
 const entry = (id, sourceId, title, extra = {}) => ({
     id,
+    source:"anilist",
     sourceId:String(sourceId),
     mediaType:"anime",
     title,
@@ -65,7 +67,7 @@ test("2. unique matching work media sourceId safely recovers identity", () => {
     const result = recover([anime(100, "作品")], [entry(100, 200, "作品")]);
     assert.equal(result.recoveredCount, 1);
     assert.equal(result.list[0].anilistId, 200);
-    assert.equal(result.list[0].identitySource, "legacy-work-sourceId");
+    assert.equal(result.list[0].identitySource, "verified-work-anilist");
 });
 
 test("3. recovery never changes local anime.id", () => {
@@ -131,7 +133,7 @@ test("10. watchHistory keeps its stable local animeId reference", () => {
 test("11. 109261 and 182255 never cross-contaminate", () => {
     const result = recover(
         [anime(109261, "五等分の花嫁∬"), anime("frieren-local", "葬送のフリーレン 第2期")],
-        [entry(109261, 109261, "五等分の花嫁∬"), entry("frieren-local", 182255, "葬送のフリーレン 第2期")]
+        [entry(109261, 109261, "五等分の花嫁∬", { anilistId:109261 }), entry("frieren-local", 182255, "葬送のフリーレン 第2期")]
     );
     assert.deepEqual(result.list.map(V.getAnimeAniListIdentity), ["109261", "182255"]);
 });

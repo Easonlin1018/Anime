@@ -1,8 +1,9 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 const before = "2026-10-01T00:00:00.000Z";
 const at = "2026-11-08T12:00:00.000Z";

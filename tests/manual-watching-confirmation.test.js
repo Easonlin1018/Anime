@@ -1,13 +1,14 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
-const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const at = "2026-10-08T13:00:00.000Z";
 const before = "2026-10-01T00:00:00.000Z";
 const copy = value => JSON.parse(JSON.stringify(value));
@@ -113,9 +114,10 @@ function runtime(list = [legacy()], options = {}) {
     const guardedV = { ...V, migrateList:() => { migratedCalls.push("migrateList"); throw new Error("Confirmation must not migrate unrelated records"); } };
     const context = vm.createContext({
         animeList:copy(list), STORAGE_KEY:V.STORAGE_KEY, localStorage,
+        runAnimeStorageWrite:operation => operation(),
         EVENT_OVERRIDES_KEY:"anime_event_overrides_v10", EVENT_ANIME_OVERRIDES_KEY:"anime_event_anime_overrides_v11",
         eventOverrides:{}, eventAnimeOverrides:{}, eventSettings:{}, animeListSort:"watching-first",
-        AnimeTrackerV11:guardedV, window:{ AnimeTrackerV11:guardedV },
+        AnimeTrackerV11:guardedV, window:{ AnimeTrackerV11:guardedV, withAnimeStorageWrite:operation => operation() },
         document:{ addEventListener:(type, handler) => { if (type === "click") trace.clickHandlers.push(handler); } },
         confirm:message => {
             trace.confirms.push(message);
@@ -158,7 +160,7 @@ function runtime(list = [legacy()], options = {}) {
                 }
             };
         } };
-        const ui = fs.readFileSync(path.join(__dirname, "..", "v11-ui.js"), "utf8");
+        const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
         const uiFunction = name => {
             const start = ui.search(new RegExp(`    (?:async )?function ${name}\\(`));
             assert.ok(start >= 0, `Missing UI function ${name}`);
@@ -536,7 +538,7 @@ test("real startup and v11 bootstrap preserve confirmed raw progress and timesta
     });
     vm.runInContext(between("function loadStoredAnime", "function saveAndRender"), reloaded.api);
     reloaded.api.loadStoredAnime();
-    const ui = fs.readFileSync(path.join(__dirname, "..", "v11-ui.js"), "utf8");
+    const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
     vm.runInContext(ui.slice(0, ui.indexOf("const originalSaveAndRender")) + "\n})();", reloaded.api);
     const stored = JSON.parse(run.localStorage.getItem(V.STORAGE_KEY))[0];
     const visible = reloaded.api.animeList[0];

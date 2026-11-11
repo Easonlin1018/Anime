@@ -1,14 +1,15 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 const root = path.resolve(__dirname, "..");
-const ui = fs.readFileSync(path.join(root, "v11-ui.js"), "utf8");
-const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
+const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
 const clone = value => JSON.parse(JSON.stringify(value));
 const at = "2026-11-08T01:00:00.000Z";
 
@@ -87,19 +88,21 @@ function runtime(list = [], options = {}) {
         installAnimeStartupRecoveryGuard:() => { traces.guardInstalled++; },
         warnAnimeStartupStorage:(...args) => traces.warnings.push(args)
     });
+    context.window.runAnimeStorageWrite = operation => operation();
     context.window.assertAnimeStartupWritable = () => { if (context.window.__ANIME_STARTUP_STORAGE__.recoveryPending) throw Error("Recovery pending"); };
     context.window.warnAnimeStartupStorage = context.warnAnimeStartupStorage;
     const indexFunctions = ["escapeHtml", "getAniListMediaId", "getAnimeTitlePresentation", "formatAiringDateTime", "buildAnimeItem",
         "restoreAnimeStartupStorage", "isAnimeStartupSnapshot", "commitAnimeStartupChanges"].map(name => productionFunction(html, name));
     vm.runInContext(indexFunctions.join("\n"), context);
     const prefix = ui.slice(0, ui.indexOf("    const originalSaveAndRender"));
-    const uiFunctions = ["animeCategoryLabel", "animeCategoryOptions", "currentlyWatchingPage", "renderCurrentlyWatching", "showPage", "safeUrl", "renderFilterChips", "renderStats"].map(name => productionFunction(ui, name, "    "));
+    const uiFunctions = ["animeCategoryLabel", "animeCategoryOptions", "currentlyWatchingPage", "renderCurrentlyWatching", "showPage", "renderFilterChips", "renderStats"].map(name => productionFunction(ui, name, "    "));
+    const poster = between(ui, "    const ANIME_POSTER_PLACEHOLDER", "    function renderReminders");
     const progress = between(ui, "    updateProgress = function", "    deleteAnime = function");
     const wrappers = between(ui, "    const originalBuildAnimeItem", "    function animeCategoryLabel");
-    const syncAndSave = between(ui, "    const originalSaveAndRender", "    const originalMoveCategory");
+    const syncAndSave = between(ui, "    const originalSaveAndRender", "    updateProgress = function");
     const refresh = productionFunction(ui, "refreshV11", "    ");
-    vm.runInContext(prefix + "\n" + uiFunctions.join("\n") + "\n" + syncAndSave + "\n" + wrappers + "\n" + progress + "\n" + refresh
-        + "\nwindow.__ui={renderCurrentlyWatching,currentlyWatchingPage,showPage,animeCategoryOptions,getHistory:()=>watchHistory};\n})();", context);
+    vm.runInContext(prefix + "\n" + uiFunctions.join("\n") + "\n" + poster + "\n" + syncAndSave + "\n" + wrappers + "\n" + progress + "\n" + refresh
+        + "\nwindow.__ui={renderCurrentlyWatching,currentlyWatchingPage,showPage,animeCategoryOptions,handleAnimePosterError,getHistory:()=>watchHistory};\n})();", context);
     localStorage.trace.length = 0;
     return { api:context, localStorage, node, pages, buttons, timers, traces,
         flush:() => { for (const [id, fn] of timers) { timers.delete(id); fn(); } } };
@@ -127,6 +130,85 @@ test("legacy in-progress entries render individually with posters, titles, progr
     assert.match(markup, /data-progress-action="increment"/); assert.match(markup, /data-progress-action="decrement"/);
     assert.doesNotMatch(markup, /Synthetic movie/);
     assert.deepEqual(run.localStorage.snapshot(), before, "Rendering derives membership without storing another list");
+    assert.deepEqual(run.localStorage.trace, []);
+});
+
+test("legacy relative cover paths stay same-origin and unsafe paths are rejected", () => {
+    const options = { baseUrl:"https://example.invalid/Anime/" };
+    assert.deepEqual(V.resolvePosterUrls({
+        large:"./covers/one.png",
+        medium:"https://example.invalid/Anime/covers/one.png"
+    }, options), ["https://example.invalid/Anime/covers/one.png"]);
+    assert.equal(V.resolvePosterUrl("/Anime/covers/two.jpg?size=2", options),
+        "https://example.invalid/Anime/covers/two.jpg?size=2");
+    for (const unsafe of ["//outside.invalid/cover.png", "%2f%2foutside.invalid/cover.png",
+        "../cover.png", "covers/%2e%2e/cover.png", "covers\\cover.png", "arbitrary",
+        "javascript:cover.png", "https://user:pass@example.invalid/cover.png"]) {
+        assert.deepEqual(V.resolvePosterUrls(unsafe, options), [], unsafe);
+    }
+    assert.equal(V.resolvePosterUrl("./covers/one.png", { ...options, httpsOnly:true }), "");
+});
+
+test("currently-watching covers resolve legacy candidates independently and use a local image when absent", () => {
+    const dataImage = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E";
+    const rows = [
+        anime("one", { title:'Legacy "cover" & <name>', poster:{ large:" ", medium:"https://example.invalid/medium.png?x=1&y=2" } }),
+        anime("two", { poster:"not-a-url", coverImage:dataImage }),
+        anime("three", { poster:{ large:"javascript:alert(1)", medium:{} }, coverImage:"//outside.invalid/missing.png" })
+    ];
+    const run = runtime(rows);
+    const before = run.localStorage.snapshot();
+    run.api.window.__ui.renderCurrentlyWatching();
+    const markup = run.node("v11-currently-list").innerHTML;
+    assert.match(markup, /data-open-detail="one"[^>]*><img[^>]*src="https:\/\/example\.invalid\/medium\.png\?x=1&amp;y=2" alt="Legacy &quot;cover&quot; &amp; &lt;name&gt; 封面" data-v11-poster="\[\]">/);
+    assert.ok(markup.includes('src="' + dataImage + '" alt="Synthetic two 封面" data-v11-poster="[]"'));
+    assert.match(markup, /data-open-detail="three"[^>]*><img loading="lazy" decoding="async" src="data:image\/svg\+xml,[^"]+" alt="Synthetic three 封面">/);
+    assert.doesNotMatch(markup, /src="[^"]*(not-a-url|missing\.png|\[object Object\]|javascript:)/);
+    assert.deepEqual(run.localStorage.snapshot(), before);
+    assert.deepEqual(run.localStorage.trace, []);
+});
+
+test("currently-watching orders and deduplicates legacy and confirmed AniList cover candidates", () => {
+    const medium = "https://example.invalid/medium.webp?x=1&y=2";
+    const remote = "https://example.invalid/anilist.jpg";
+    const rows = [
+        anime("one", {
+            poster:{ large:"./covers/old.png", medium },
+            coverImage:{ large:"http://localhost/isolated/covers/old.png", medium },
+            source:"anilist", sourceId:101, anilistCover:{ id:"101", large:medium, medium:remote }
+        }),
+        anime("two", { anilistCover:{ id:"101", large:"https://example.invalid/wrong.jpg" } }),
+        anime("three", { anilistId:null, anilistCover:{ id:"101", large:"https://example.invalid/unknown.jpg" } })
+    ];
+    const run = runtime(rows), before = run.localStorage.snapshot();
+    run.api.window.__ui.renderCurrentlyWatching();
+    const markup = run.node("v11-currently-list").innerHTML;
+    assert.match(markup, /src="http:\/\/localhost\/isolated\/covers\/old\.png" alt="Synthetic one 封面" data-v11-poster="\[&quot;https:\/\/example\.invalid\/medium\.webp\?x=1&amp;y=2&quot;,&quot;https:\/\/example\.invalid\/anilist\.jpg&quot;\]"/);
+    assert.doesNotMatch(markup, /wrong\.jpg|unknown\.jpg/);
+    assert.deepEqual(run.localStorage.snapshot(), before);
+    assert.deepEqual(run.localStorage.trace, []);
+});
+
+test("failed poster loads try each remaining candidate once before the local placeholder", () => {
+    const run = runtime([anime()]), before = run.localStorage.snapshot();
+    const handler = run.api.window.__ui.handleAnimePosterError;
+    const writes = [];
+    const candidates = ["https://example.invalid/medium.webp", "https://example.invalid/anilist.jpg"];
+    let queue = JSON.stringify(candidates);
+    const failed = {
+        matches: selector => queue !== null && selector === "img[data-v11-poster]",
+        getAttribute: key => { assert.equal(key, "data-v11-poster"); return queue; },
+        setAttribute: (key, value) => { assert.equal(key, "data-v11-poster"); queue = value; },
+        removeAttribute: key => { assert.equal(key, "data-v11-poster"); queue = null; },
+        set src(value) { writes.push(value); }
+    };
+    for (let i = 0; i < 5; i++) handler({ target:failed });
+    handler({ target:{ matches:() => false, set src(_) { assert.fail("Unrelated image changed"); } } });
+    assert.equal(queue, null);
+    assert.equal(writes.length, 3);
+    assert.deepEqual(writes.slice(0, 2), candidates);
+    assert.match(decodeURIComponent(writes[2]), /^data:image\/svg\+xml,<svg[^>]* width="200" height="300"/);
+    assert.deepEqual(run.localStorage.snapshot(), before);
     assert.deepEqual(run.localStorage.trace, []);
 });
 
@@ -250,7 +332,7 @@ test("mobile card controls retain touch targets and source IDs containing dollar
     const run=runtime([anime("safe-$&",{currentEpisode:1})]);run.api.window.__ui.renderCurrentlyWatching();
     const markup=run.node("v11-currently-list").innerHTML;
     assert.match(markup,/data-anime-id="safe-\$&amp;"/);assert.equal((markup.match(/data-progress-action="decrement"/g)||[]).length,1);
-    const css=fs.readFileSync(path.join(root,"v11-styles.css"),"utf8");assert.match(css,/\.v11-currently-page \.btn-group button \{ min-height:44px/);assert.match(css,/@media\(max-width:480px\)\{\.v11-currently-card/);
+    const css=fs.readFileSync(appSourcePath("v11-styles.css"),"utf8");assert.match(css,/\.v11-currently-page \.btn-group button \{ min-height:44px/);assert.match(css,/@media\(max-width:480px\)\{\.v11-currently-card/);
 });
 
 test("progress saves the latest persisted raw rows without leaking display defaults or unrelated stale edits",()=>{

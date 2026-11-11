@@ -1,9 +1,10 @@
 "use strict";
 
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const V = require("../v11-core.js");
+const V = require(appSourcePath("v11-core.js"));
 
 let passed = 0;
 function test(name, fn) {
@@ -147,7 +148,7 @@ test("11. 年份 badge 使用 startDate.year", () => {
 
 test("12. title 已含同年時畫面去除尾端年份，不重複顯示", () => {
     assert.deepEqual(V.getAnimeTitlePresentation({title:"五等分的新娘（2019）",startDate:{year:2019}}), {title:"五等分的新娘",year:2019});
-    const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+    const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
     assert.match(html, /anime-year-badge/u);
     assert.match(html, /\.filter\(anime => !anime\.deletedAt\)/u);
 });

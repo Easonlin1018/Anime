@@ -1,4 +1,5 @@
 "use strict";
+const appSourcePath = require("./release-path.cjs");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -14,6 +15,6 @@ test("5. limit 固定 5 且不超過 10", () => { const match=source.match(/SPOT
 test("6. 上游回應先以 text 安全解析", () => { assert.match(source,/await upstreamResponse\.text\(\)/); assert.match(source,/JSON\.parse\(spotifyText\)/); assert.match(source,/spotifyText\.slice\(0,\s*300\)/); });
 test("7. 公開錯誤物件不包含敏感欄位", () => { const publicReturn=source.match(/return response\(request, env, \{ error: error\.message, stage:[\s\S]*?\}, 502\)/)?.[0]||""; assert.ok(publicReturn); assert.doesNotMatch(publicReturn,/CLIENT_ID|CLIENT_SECRET|Authorization|access_token|tokenCache/); });
 test("8. Worker 不記錄憑證或 token", () => { assert.doesNotMatch(source,/console\.(?:log|error|warn)/); });
-test("9. 前端顯示安全的 Spotify 階段與狀態", () => { const frontend=fs.readFileSync(path.resolve(__dirname,"..","spotify-themes.js"),"utf8"); assert.match(frontend,/payload\.stage/); assert.match(frontend,/payload\.spotifyStatus/); assert.match(frontend,/payload\.spotifyError/); assert.match(frontend,/payload\.spotifyMessage/); });
+test("9. 前端顯示安全的 Spotify 階段與狀態", () => { const frontend=fs.readFileSync(appSourcePath("spotify-themes.js"),"utf8"); assert.match(frontend,/payload\.stage/); assert.match(frontend,/payload\.spotifyStatus/); assert.match(frontend,/payload\.spotifyError/); assert.match(frontend,/payload\.spotifyMessage/); });
 
 if (!process.exitCode) console.log(`\nSpotify worker tests passed: ${passed}/9`);
