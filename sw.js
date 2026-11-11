@@ -12,7 +12,7 @@ const READY_URL = releaseUrl(".shell-ready");
 
 // SHA-256 of the immutable UTF-8 release files, normalizing CRLF to LF.
 const SHELL_HASHES = {
-    "index.html": "6c9e7a6b4a1764ba97d4d6710ea8fd15382f8cd476c2d928d246eced290a7bc1",
+    "index.html": "b0ece63b2200fcd1518f3d1b45915a162889949571e3e660ed9f4a8244dfcd5d",
     "vendor/opencc-js-1.4.1-full.js": "f04e8f700d3a36b01a32bb0f051e6e5aff4b29dd1cb19f0787bb0c959abe36a8",
     "v11-core.js": "cfd2e2a0360f56fe620d11539f2ee7b32e118b27dfddc4893db8a8f06c1bef7f",
     "v11-ui.js": "17d3d543b12ebe55767c0b736b2c3a2c0635542af849648ef2e285b6d130d8c2",

@@ -197,6 +197,17 @@ test("the existing batch backfills only its confirmed active record and preserve
     assert.equal(run.store.get(V.HISTORY_KEY), run.history);
 });
 
+test("ordinary metadata refresh leaves a stored AniList cover for the dedicated recovery check", async () => {
+    const savedCover = { id:"101", large:"https://covers.example.invalid/saved-cover.jpg" };
+    const original = V.migrateList([anime(101, { anilistCover:savedCover })], at);
+    const run = runtime(original, [{ ...media(101), status:"FINISHED" }]);
+    await run.api.syncAnimeMetadata();
+    assert.deepEqual(run.errors, []);
+    const saved = JSON.parse(run.store.get(V.STORAGE_KEY))[0];
+    assert.equal(saved.status, "FINISHED");
+    assert.deepEqual(saved.anilistCover, savedCover);
+});
+
 
 test("two tabs preserve per-field edits, a tombstone, and history saved during the request", async () => {
     const original = [anime(101, { poster:"./covers/old.jpg" }), anime(102), anime(103)];

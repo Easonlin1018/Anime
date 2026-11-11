@@ -90,7 +90,7 @@ const get = (data, id) => data.rows.find(row => row.id === "fixture-" + id);
 const app = () => origin + scope;
 const nav = '[data-v11-page="currently-watching"]';
 
-async function setup(browser, disableLocks = false) {
+async function setup(browser, { disableLocks = false, rows = [60101,60102,60103].map(fixture), coverRoutes = new Map() } = {}) {
     const context = await browser.newContext({ viewport:{ width:390,height:844 }, isMobile:true, hasTouch:true });
     await context.route("**/*", route => {
         const target = new URL(route.request().url());
@@ -99,7 +99,13 @@ async function setup(browser, disableLocks = false) {
             return route.fulfill({ contentType:"text/javascript", body:"/* synthetic SDK */" });
         }
         if (target.origin === "https://images.example.invalid") {
-            return route.fulfill({ status:404, body:"Synthetic missing image" });
+            const kind = coverRoutes.get(target.pathname);
+            if (kind === "valid") return route.fulfill({ contentType:"image/svg+xml",
+                body:'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="30"><rect width="20" height="30" fill="red"/></svg>' });
+            if (kind === "nonimage") return route.fulfill({ contentType:"text/html", body:"<h1>Synthetic CDN error</h1>" });
+            if (kind === "corrupt") return route.fulfill({ contentType:"image/png", body:"Synthetic damaged image bytes" });
+            if (kind === "aborted") return route.abort();
+            return route.fulfill({ status:404, contentType:"text/plain", body:"Synthetic missing image" });
         }
         return route.abort();
     });
@@ -118,7 +124,7 @@ async function setup(browser, disableLocks = false) {
             if (target.origin !== origin) throw Error("External test fetch blocked");
             return native(resource, options);
         };
-    }, { origin, rows:[60101,60102,60103].map(fixture), main:V.STORAGE_KEY, history:V.HISTORY_KEY, now, disableLocks });
+    }, { origin, rows, main:V.STORAGE_KEY, history:V.HISTORY_KEY, now, disableLocks });
     const legacy = await context.newPage();
     await legacy.goto(app());
     await until(() => legacy.evaluate(async () =>
@@ -217,6 +223,82 @@ async function twoTabs(context) {
     } finally { await a.close(); await b.close(); }
 }
 
+async function recoverFailedSavedCovers(browser) {
+    const cover = name => `https://images.example.invalid/${name}`;
+    const withSavedCover = (id, large, medium = "", extra = {}) => ({ ...fixture(id), poster:"",
+        notes:"Synthetic preserved notes", favorite:true, rating:8,
+        anilistCover:{ id:String(id), large:cover(large), medium:medium && cover(medium) }, ...extra });
+    const rows = [
+        withSavedCover(60111, "404.svg", "", { poster:cover("user.svg") }),
+        withSavedCover(60112, "text.svg"),
+        withSavedCover(60113, "aborted.svg"),
+        withSavedCover(60114, "corrupt.png"),
+        withSavedCover(60115, "404.svg", "retained-medium.svg"),
+        withSavedCover(60116, "404.svg"),
+        withSavedCover(60117, "404.svg"),
+        withSavedCover(60120, "text.svg", "", { id:"synthetic-duplicate", aniListId:60117 }),
+        { ...fixture(60118), source:"", sourceId:"", anilistId:"", anilistIdentitySource:"",
+            poster:cover("404.svg") },
+        withSavedCover(60119, "404.svg", "", { deletedAt:new Date().toISOString(), category:"_deleted" })
+    ];
+    const coverRoutes = new Map([
+        ["/user.svg","valid"], ["/text.svg","nonimage"], ["/aborted.svg","aborted"], ["/corrupt.png","corrupt"],
+        ["/retained-medium.svg","valid"], ["/new-60111.svg","valid"], ["/new-60112.svg","valid"],
+        ["/new-60113.svg","valid"], ["/new-60114.svg","valid"]
+    ]);
+    const requestCount = received.length;
+    const { context, legacy } = await setup(browser, { rows, coverRoutes });
+    try {
+        await legacy.close();
+        const page = await openRelease(context);
+        await page.locator(nav).click();
+        const button = page.locator('[data-v11-page-group="currently-watching"] [data-v11-recover-covers]');
+        const coverImage = id => page.locator(`.v11-currently-cover[data-open-detail="fixture-${id}"] img`);
+        const hasDisplayedCover = async (id, url) => coverImage(id).evaluate((image, expected) => {
+            image.scrollIntoView({ block:"nearest" });
+            return image.currentSrc === expected && image.naturalWidth > 0;
+        }, url);
+        await until(() => hasDisplayedCover(60115, cover("retained-medium.svg")), "valid old medium fallback");
+        const before = await storage(page);
+        assert.ok(before.rows.some(row => row.id === "synthetic-duplicate" && V.getAnimeAniListClaims(row).includes("60117")));
+        assert.ok(get(before,60119).deletedAt);
+        assert.equal(received.length, requestCount, "startup must not query records that already have a URL");
+        const requested = deferred();
+        pending = { started:requested.resolve, release:Promise.resolve(), media:[60111,60112,60113,60114,60115,60116,60117,60118,60119].map(id => ({
+            id, type:"ANIME", coverImage:id === 60112 ? { large:cover("corrupt.png"), medium:cover("new-60112.svg") }
+                : { large:cover(id === 60116 ? "text.svg" : `new-${id}.svg`) }
+        })) };
+        await button.click();
+        const request = await waitForRequest({ requested:requested.promise });
+        assert.match(request.query, /query AnimeCoverRecovery/);
+        assert.deepEqual(request.variables.ids, [60111,60112,60113,60114,60116]);
+        await button.waitFor({ state:"visible" });
+        await until(() => button.isEnabled(), "manual cover recovery completed");
+        assert.equal(received.length, requestCount + 1);
+        const after = await storage(page);
+        assert.deepEqual(after.history, before.history);
+        for (const row of before.rows) {
+            const saved = after.rows.find(item => item.id === row.id);
+            if ([60111,60112,60113,60114].some(id => row.id === `fixture-${id}`)) {
+                const { anilistCover, ...unchanged } = saved;
+                const { anilistCover:old, ...original } = row;
+                assert.deepEqual(unchanged, original);
+                assert.notDeepEqual(anilistCover, old);
+                assert.deepEqual(V.getStoredAniListPosterUrls(saved), [cover(`new-${row.anilistId}.svg`)]);
+            } else {
+                assert.deepEqual(saved, row);
+            }
+        }
+        for (const [id, image] of [[60111,"user.svg"],[60112,"new-60112.svg"],[60113,"new-60113.svg"],
+            [60114,"new-60114.svg"],[60115,"retained-medium.svg"]]) {
+            await until(() => hasDisplayedCover(id, cover(image)), `displayed synthetic cover ${id}`);
+        }
+    } finally {
+        pending = null;
+        await context.close();
+    }
+}
+
 (async () => {
     await new Promise(resolve => server.listen(0,"127.0.0.1",resolve));
     origin = "http://127.0.0.1:" + server.address().port;
@@ -240,7 +322,7 @@ async function twoTabs(context) {
             await twoTabs(context);
             console.log("PASS real two-tab add, edit, progress, cover, delete, metadata and queued write");
         } finally { await context.close(); }
-        const unsupported = await setup(browser,true);
+        const unsupported = await setup(browser, { disableLocks:true });
         try {
             await unsupported.legacy.close();
             const page = await openRelease(unsupported.context);
@@ -251,6 +333,8 @@ async function twoTabs(context) {
             assert.equal(received.length,count);
             console.log("PASS missing Web Locks fails closed before a write or batch request");
         } finally { await unsupported.context.close(); }
+        await recoverFailedSavedCovers(browser);
+        console.log("PASS manual recovery validates saved and fresh covers, retains valid images and protects records and history");
     } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; }).finally(() => {
     server.closeAllConnections();

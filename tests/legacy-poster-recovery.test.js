@@ -49,7 +49,7 @@ function runtime(rows, options = {}) {
     ]);
     const store = new Map(initial);
     const session = options.session || new Map();
-    const requests = [], writes = [], renders = [], messages = [], warnings = [];
+    const requests = [], writes = [], renders = [], messages = [], warnings = [], imageChecks = [];
     let locked = false;
     const api = vm.createContext({
         AnimeTrackerV11:V,
@@ -65,6 +65,22 @@ function runtime(rows, options = {}) {
         },
         location:{ href:"https://app.example.invalid/Anime/" },
         navigator:{ onLine:!options.offline },
+        Image:class {
+            set src(url) {
+                assert.equal(locked, false);
+                imageChecks.push(url);
+                const result = options.images?.has(url) ? options.images.get(url) : true;
+                if (result === null) return;
+                queueMicrotask(() => {
+                    this.naturalWidth = result ? 100 : 0;
+                    if (result) this.onload?.();
+                    else this.onerror?.();
+                });
+            }
+            removeAttribute(name) { assert.equal(name, "src"); }
+        },
+        setTimeout:callback => setTimeout(callback, 25),
+        clearTimeout,
         console:{ warn:(...args) => warnings.push(args) },
         localStorage:{
             getItem:key => store.get(key) ?? null,
@@ -107,7 +123,7 @@ function runtime(rows, options = {}) {
     });
     vm.runInContext(production, api, { filename:"legacy-poster-recovery-production.js" });
     return {
-        api, initial, store, session, requests, writes, renders, messages, warnings,
+        api, initial, store, session, requests, writes, renders, messages, warnings, imageChecks,
         recover:manual => api.window.recoverAnimeCovers(manual),
         persisted:() => JSON.parse(store.get(STORAGE_KEY))
     };
@@ -157,12 +173,55 @@ test("manual repair supplements a saved poster and legacy coverImage without rep
     const run = runtime(rows);
     assert.equal(await run.recover(), 0);
     assert.equal(run.requests.length, 0);
+    assert.deepEqual(run.imageChecks, []);
     assert.equal(await run.recover(true), 1);
     assert.deepEqual(run.requests.map(request => request.variables.ids), [[101]]);
     assert.deepEqual(run.persisted(), [
         { ...rows[0], anilistCover:{ id:"101", large:coverUrl, medium:"" } },
         rows[1]
     ]);
+});
+
+test("manual recovery replaces a failed saved AniList cover only with a newly loadable image", async () => {
+    const medium = "https://cover.example.invalid/working-medium.jpg";
+    const badFresh = "https://cover.example.invalid/bad-fresh.jpg";
+    const rows = [
+        anime(101, { poster:"./original.png", anilistCover:{ id:101, large:oldCover } }),
+        anime(102, { anilistCover:{ id:102, large:oldCover, medium } }),
+        anime(103, { anilistCover:{ id:103, large:oldCover } }),
+        anime(104, { anilistCover:{ id:104, large:oldCover }, dataSource:"mal" }),
+        anime(105, { anilistCover:{ id:105, large:oldCover } }),
+        anime(105, { id:"duplicate-105" })
+    ];
+    const run = runtime(rows, {
+        images:new Map([[oldCover, false], [badFresh, false]]),
+        response:ids => ids.map(id => media(id, { coverImage:{ large:badFresh, medium:id === 101 ? coverUrl : oldCover } }))
+    });
+    assert.equal(await run.recover(), 0);
+    assert.deepEqual(run.requests, []);
+    assert.deepEqual(run.imageChecks, []);
+    assert.equal(await run.recover(true), 1);
+    assert.deepEqual(run.requests.map(request => request.variables.ids), [[101,103]]);
+    assert.deepEqual(run.imageChecks, [oldCover, medium, badFresh, coverUrl]);
+    assert.deepEqual(run.persisted(), [
+        { ...rows[0], anilistCover:{ id:"101", large:"", medium:coverUrl } },
+        ...rows.slice(1)
+    ]);
+    assert.deepEqual(run.writes, [STORAGE_KEY]);
+    for (const [key, value] of run.initial) {
+        if (key !== STORAGE_KEY) assert.equal(run.store.get(key), value);
+    }
+});
+
+test("a timed-out saved image remains untouched and a failed new image is never stored by recovery", async () => {
+    const rows = [anime(101, { anilistCover:{ id:101, large:oldCover } }), anime(102)];
+    const run = runtime(rows, { images:new Map([[oldCover, null], [coverUrl, false]]) });
+    assert.equal(await run.recover(true), 0);
+    assert.deepEqual(run.requests.map(request => request.variables.ids), [[102]]);
+    assert.equal(await run.recover(), 0);
+    assert.deepEqual(run.requests.map(request => request.variables.ids), [[102],[102]]);
+    assert.deepEqual(run.store, run.initial);
+    assert.deepEqual(run.renders, []);
 });
 
 test("duplicate, foreign, wrong-type and invalid cover results are ignored", async () => {

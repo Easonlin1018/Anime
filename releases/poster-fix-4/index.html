@@ -2357,7 +2357,8 @@ function buildMediaMetadataPatch(anime, media, syncedAt = new Date().toISOString
     };
 
     const cover = getAniListCover(media);
-    if (cover && AnimeTrackerV11.getConfirmedAnimeAniListId(anime) === cover.id) {
+    if (cover && AnimeTrackerV11.getConfirmedAnimeAniListId(anime) === cover.id
+        && !AnimeTrackerV11.getStoredAniListPosterUrls(anime).length) {
         patch.anilistCover = cover;
     }
 
@@ -3700,6 +3701,31 @@ function claimAutomaticAnimeCoverRecovery() {
     return true;
 }
 
+function probeAnimeCover(url) {
+    return new Promise(resolve => {
+        const image = new Image();
+        const finish = result => {
+            clearTimeout(timer);
+            image.onload = image.onerror = null;
+            if (result === null) image.removeAttribute("src");
+            resolve(result);
+        };
+        const timer = setTimeout(() => finish(null), 5000);
+        image.onload = () => finish(image.naturalWidth > 0);
+        image.onerror = () => finish(false);
+        image.src = url;
+    });
+}
+
+async function collectAnimeCoverResults(items, inspect) {
+    const results = [];
+    for (let i = 0; i < items.length; i += 8) {
+        const batch = await Promise.all(items.slice(i, i + 8).map(inspect));
+        results.push(...batch.filter(Boolean));
+    }
+    return results;
+}
+
 async function recoverAnimeCovers(showMessage = false) {
     if (animeCoverRecoveryRunning) {
         if (showMessage) showToast("正在恢復舊封面，請稍候。");
@@ -3713,12 +3739,29 @@ async function recoverAnimeCovers(showMessage = false) {
     try {
         assertAnimeStorageAvailable();
         const requested = getMetadataSyncTargets(readMetadataSyncSnapshot().list);
-        const ids = [...requested.values()].filter(({ anime }) => showMessage
-            ? !AnimeTrackerV11.getStoredAniListPosterUrls(anime).length
-            : !AnimeTrackerV11.getAnimePosterCandidates(anime, { baseUrl:globalThis.location?.href }).length
-        ).map(({ mediaId }) => mediaId);
+        const probes = new Map();
+        const checkImage = url => {
+            if (!probes.has(url)) probes.set(url, probeAnimeCover(url));
+            return probes.get(url);
+        };
+        const targets = [...requested.values()];
+        let ids;
+        if (showMessage) {
+            showToast("正在檢查 AniList 舊封面……");
+            ids = await collectAnimeCoverResults(targets, async ({ anime, mediaId }) => {
+                for (const url of AnimeTrackerV11.getStoredAniListPosterUrls(anime)) {
+                    // A decoded image or an inconclusive timeout keeps the stored cover.
+                    if (await checkImage(url) !== false) return null;
+                }
+                return mediaId;
+            });
+        } else {
+            ids = targets.filter(({ anime }) =>
+                !AnimeTrackerV11.getAnimePosterCandidates(anime, { baseUrl:globalThis.location?.href }).length
+            ).map(({ mediaId }) => mediaId);
+        }
         if (!ids.length) {
-            if (showMessage) showToast("沒有可自動補圖的作品。舊作品若尚未連結，可從詳細資料確認 AniList 作品。", 5000);
+            if (showMessage) showToast("這次沒有找到可更新的封面。尚未連結的作品可從詳細資料確認，連線不穩時可稍後再試。", 5000);
             return 0;
         }
         if (!showMessage && !claimAutomaticAnimeCoverRecovery()) return 0;
@@ -3740,14 +3783,19 @@ async function recoverAnimeCovers(showMessage = false) {
             if (i + 50 < ids.length) await delay(800);
         }
 
-        const count = covers.size ? await withAnimeStorageWrite(() => {
+        const verifiedCovers = new Map((await collectAnimeCoverResults([...covers.values()], async ({ id, large, medium }) => {
+            const verifiedLarge = large && await checkImage(large) === true ? large : "";
+            const verifiedMedium = medium && await checkImage(medium) === true ? medium : "";
+            return verifiedLarge || verifiedMedium ? [id, { id, large:verifiedLarge, medium:verifiedMedium }] : null;
+        })));
+        const count = verifiedCovers.size ? await withAnimeStorageWrite(() => {
             const latest = readMetadataSyncSnapshot();
             if (latest.raw === null) return 0;
             const current = getMetadataSyncTargets(latest.list);
             const replacements = new Map();
             for (const [localId, target] of current) {
                 const before = requested.get(localId);
-                const cover = covers.get(target.mediaId);
+                const cover = verifiedCovers.get(target.mediaId);
                 if (!cover || before?.mediaId !== target.mediaId) continue;
                 const { anime } = target;
                 if (AnimeTrackerV11.animeAniListIdentitySnapshot(anime)
