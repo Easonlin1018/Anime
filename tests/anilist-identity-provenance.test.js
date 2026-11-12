@@ -161,22 +161,29 @@ test("automatic reconciliation and import preserve duplicated and title-matched 
 
 function wireConfirmation(initial, response, failLock = false) {
     const inputs = new Map();
-    for (const selector of ["input", "[data-v11-anilist-lookup]", "[data-v11-anilist-confirm]", "[role='status']"]) {
+    for (const selector of ["input", "[data-v11-anilist-lookup]", "[data-v11-anilist-confirm]", "[role='status']", "[data-v11-anilist-preview]"]) {
         const actions = new Map();
+        const attributes = new Map();
         inputs.set(selector, {
-            actions, value:"", textContent:"", hidden:true, disabled:false,
-            addEventListener(type, fn) { actions.set(type, fn); }
+            actions, attributes, value:"", textContent:"", hidden:true, disabled:false,
+            addEventListener(type, fn) { actions.set(type, fn); },
+            setAttribute(name, value) { attributes.set(name, value); },
+            removeAttribute(name) { attributes.delete(name); }
         });
     }
     const input = inputs.get("input");
     const lookup = inputs.get("[data-v11-anilist-lookup]");
     const confirm = inputs.get("[data-v11-anilist-confirm]");
     const status = inputs.get("[role='status']");
+    const image = inputs.get("[data-v11-anilist-preview]");
+    const form = {};
+    const session = { storedRecord:JSON.stringify(initial[0]), identity:V.getAnimeAniListIdentity(initial[0]), values:new Map([["notes","Synthetic note"]]) };
     let rows = initial;
     let lockHeld = false;
     const queries = [], writes = [];
     const runtime = vm.createContext({
-        V, STORAGE_KEY:V.STORAGE_KEY, animeList:initial, ID_QUERY:"exact-query",
+        V, AnimeTrackerV11:V, STORAGE_KEY:V.STORAGE_KEY, animeList:initial, ID_QUERY:"exact-query",
+        detailEditSessions:new WeakMap([[form, session]]),
         localStorage:{ getItem:() => JSON.stringify(rows) },
         requestAniList:async (query, variables) => {
             queries.push([query, variables.id]);
@@ -197,10 +204,11 @@ function wireConfirmation(initial, response, failLock = false) {
         },
         renderList() {}, refreshV11() {}, requestAnimeAutoSync() {}
     });
-    vm.runInContext(section(ui, "    function wireAnimeAniListIdentity", "    function openAnimeDetail"), runtime);
-    runtime.wireAnimeAniListIdentity({ querySelector:selector => inputs.get(selector) }, initial[0].id);
+    vm.runInContext(section(html, "function getAniListCover", "function buildMediaMetadataPatch")
+        + section(ui, "    function wireAnimeAniListIdentity", "    function openAnimeDetail"), runtime);
+    runtime.wireAnimeAniListIdentity({ querySelector:selector => inputs.get(selector) }, initial[0].id, initial[0], form);
     return {
-        input, lookup, confirm, status, queries, writes,
+        input, lookup, confirm, status, image, session, queries, writes,
         lookupClick:() => lookup.actions.get("click")(), confirmClick:() => confirm.actions.get("click")(),
         getRows:() => rows, setRows:value => { rows = value; }
     };
@@ -229,6 +237,62 @@ test("manual exact-ID preview is read-only, then confirmation preserves the late
     }
     assert.equal(updated.anilistCover, undefined);
     assert.deepEqual(unaffected, other);
+});
+
+test("legacy numeric IDs prefill a suggestion, then explicit confirmation restores only the confirmed cover", async () => {
+    const first = record(432, { poster:"", coverImage:"", favorite:true });
+    const other = record("local-other");
+    const coverImage = { large:"https://example.invalid/poster.jpg", medium:"https://example.invalid/medium.jpg" };
+    const run = wireConfirmation([first, other], {
+        id:432, type:"ANIME", title:{ native:"Synthetic remote" }, format:"TV", startDate:{ year:2024 }, coverImage
+    });
+    assert.equal(run.input.value, "432");
+    assert.match(run.status.textContent, /建議查詢 ID 432/u);
+    assert.deepEqual(run.queries, []);
+    assert.deepEqual(run.writes, []);
+    await run.lookupClick();
+    assert.equal(run.image.hidden, false);
+    assert.equal(run.image.src, coverImage.large);
+    assert.equal(run.image.attributes.get("data-v11-poster"), JSON.stringify([coverImage.medium]));
+    assert.match(run.status.textContent, /Synthetic remote.*2024／TV/u);
+    assert.deepEqual(run.writes, []);
+    await run.confirmClick();
+    assert.equal(run.writes.length, 1);
+    const [updated, unaffected] = run.getRows();
+    assert.equal(V.getConfirmedAnimeAniListId(updated), "432");
+    assert.deepEqual(updated.anilistCover, { id:"432", ...coverImage });
+    for (const key of ["id", "title", "notes", "poster", "coverImage", "category", "currentEpisode", "watched", "favorite"]) {
+        assert.deepEqual(updated[key], first[key], key);
+    }
+    assert.deepEqual(unaffected, other);
+    assert.deepEqual(JSON.parse(run.session.storedRecord), updated);
+    assert.equal(run.session.identity,"432");
+    assert.equal(run.session.values.get("notes"),first.notes);
+    assert.equal(run.image.hidden,true);
+});
+
+test("manual lookup preserves a newer or already paired stored cover, as well as the original poster", async () => {
+    const coverImage = { large:"https://example.invalid/fetched.jpg" };
+    const existing = { id:432, large:"https://example.invalid/existing.jpg" };
+    const response = { id:432, type:"ANIME", title:{ native:"Synthetic remote" }, coverImage };
+    for (const existingAtLookup of [true,false]) {
+        const original = record("legacy", { anilistId:432, ...(existingAtLookup ? { anilistCover:existing } : {}) });
+        const run = wireConfirmation([original], response);
+        assert.equal(run.input.value, "432");
+        await run.lookupClick();
+        if (!existingAtLookup) run.setRows([{ ...original, anilistCover:existing }]);
+        await run.confirmClick();
+        assert.equal(run.writes.length, 1);
+        assert.deepEqual(run.getRows()[0].anilistCover, existing);
+        assert.deepEqual(run.getRows()[0].poster, original.poster);
+    }
+});
+
+test("a conflicting legacy ID is not preselected and no automatic request is made", () => {
+    const run = wireConfirmation([record(432, { anilistId:433, aniListId:434 })], {});
+    assert.equal(run.input.value, "");
+    assert.deepEqual(run.queries, []);
+    assert.deepEqual(run.writes, []);
 });
 
 test("a mismatched or malformed AniList result never enables confirmation", async () => {

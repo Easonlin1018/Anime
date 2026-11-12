@@ -11,9 +11,11 @@ const repo = path.resolve(process.env.POSTER_REPO || path.join(__dirname, "../..
 const gitRepo = path.resolve(process.env.POSTER_GIT_REPO || repo);
 const engine = process.env.POSTER_ENGINE === "webkit" ? "webkit" : "edge";
 const legacySha = "53f12d5abca2ee8b29a965a2cede2d6b4421d868";
+const previousSha = "db93b42a6e0260a1593778748f83054f35aee767";
+const previous = "poster-fix-3";
 const old = "currently-watching-1";
 const legacyCache = "anime-tracker-v11-" + old;
-const version = "poster-fix-3";
+const version = "poster-fix-4";
 const release = "releases/" + version + "/";
 const currentCache = "anime-tracker-v11-" + version;
 const area = "/Anime/";
@@ -23,8 +25,16 @@ const rootFiles = ["index.html","v11-core.js","v11-ui.js","v11-styles.css","cros
     "vendor/opencc-js-1.4.1-full.js","manifest.webmanifest","icons/app-icon.svg"];
 const legacySource = file => execFileSync("git",["show",legacySha + ":" + file],{cwd:gitRepo,maxBuffer:8*1024*1024});
 const legacyWorker = legacySource("sw.js");
+const previousSource = file => execFileSync("git",["show",previousSha + ":" + file],{cwd:gitRepo,maxBuffer:8*1024*1024});
+const previousWorker = previousSource("sw.js");
 const root = Object.fromEntries(rootFiles.map(file => [file,fs.readFileSync(path.join(repo,file))]));
 const immutable = Object.fromEntries(releaseFiles.map(file => [file,fs.readFileSync(path.join(repo,release,file))]));
+const previousAssets = Object.fromEntries(releaseFiles.map(file => {
+    const name = "releases/" + previous + "/" + file;
+    const oldBytes = previousSource(name);
+    assert.deepEqual(fs.readFileSync(path.join(repo,name)).toString("utf8").replace(/\r\n/g,"\n"),oldBytes.toString("utf8"));
+    return [name,oldBytes];
+}));
 const digest = value => createHash("sha256").update(value).digest("hex");
 const canonicalDigest = bytes => digest(bytes.toString("utf8").replace(/^\uFEFF/u,"").replace(/\r\n/g,"\n"));
 for (const file of rootFiles) assert.equal(canonicalDigest(root[file]), canonicalDigest(legacySource(file)), file + " legacy compatibility");
@@ -55,12 +65,14 @@ const server = http.createServer((req,res) => {
     trace.push({phase,fault,file,query:url.search});
     if (file === "sw.js") {
         if (phase === "next" && fault === "worker") return respond(res,503,file,"Synthetic unavailable new worker");
-        return respond(res,200,file,phase === "legacy" ? legacyWorker : worker);
+        const source = phase === "legacy" ? legacyWorker : phase === "previous" ? previousWorker : worker;
+        return respond(res,200,file,source);
     }
     if (root[file]) return respond(res,200,file,root[file]);
     if (file === "sync-config.js" || file === "spotify-config.js") return respond(res,200,file,"/* empty synthetic config */");
     if (file === "events.json") return fault === "events"
         ? respond(res,503,file,"Synthetic unavailable event feed") : respond(res,200,file,JSON.stringify(events));
+    if (previousAssets[file]) return respond(res,200,file,previousAssets[file]);
     if (!file.startsWith(release) || phase !== "next") return respond(res,404,file,"No release fixture");
     const subpath = file.slice(release.length);
     if (subpath === "v11-core.js") {
@@ -76,6 +88,7 @@ const at = "2026-11-01T00:00:00.000Z";
 const record = V.migrateAnime({id:"fixture-one",title:"Synthetic direct upgrade",anilistId:781246,source:"anilist",sourceId:781246,
     category:"watching",categorySource:"manual",categoryManuallyEdited:true,format:"TV",status:"RELEASING",
     episodes:12,totalEpisodes:12,releasedEpisodes:6,watched:3,currentEpisode:3,rating:8,note:"Synthetic retained note",
+    poster:"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'/%3E",
     notes:"Synthetic retained note",createdAt:at,addedAt:at,updatedAt:at,lastWatchedAt:at},at);
 const mainKey = V.STORAGE_KEY, historyKey = V.HISTORY_KEY, undoKey = "anime_tracker_last_undo_v11";
 const app = () => origin + area;
@@ -143,7 +156,7 @@ const safe = async page => (await message(page,"CHECK_STORAGE_CLIENTS"))?.safe;
 async function assertShell(page,expected) {
     await page.locator(nav).waitFor({state:"visible"});
     assert.ok(page.url().startsWith(app()));
-    const scriptPath = file => expected === old ? file + "?v=" + old : release + file;
+    const scriptPath = file => expected === old ? file + "?v=" + old : "releases/" + expected + "/" + file;
     const assets = await page.evaluate(() => [...document.querySelectorAll("script[src],link[rel=stylesheet]")]
         .map(node => node.getAttribute("src") || node.getAttribute("href")));
     for (const file of ["v11-core.js","v11-ui.js","cross-media.js","spotify-themes.js","v11-styles.css"]) {
@@ -280,6 +293,42 @@ async function gate(context) {
     await until(async()=>await safe(latest)===true,"legacy client gone and safety gate open");
     return {firstLegacyNotClaimed:true,blockedWhileUncontrolledLegacyOpen:true,unblockedAfterClose:true};
 }
+async function upgradeCurrentProduction(context) {
+    phase = "previous";
+    const starter = await context.newPage();
+    await starter.goto(origin + "/__probe");
+    await starter.evaluate(() => navigator.serviceWorker.register("/Anime/sw.js?v=poster-fix-3"));
+    await until(() => starter.evaluate(url => navigator.serviceWorker.getRegistration(url)
+        .then(reg => reg?.active?.state === "activated"),app()),"production v3 worker activated");
+    await starter.close();
+    const prior = await context.newPage();
+    await prior.goto(app());
+    await assertShell(prior,previous);
+    assert.equal(await getCache(prior),"anime-tracker-v11-" + previous);
+    const before = await snapshot(prior);
+    assert.deepEqual(await prior.evaluate(()=>fetch("events.json?t=1").then(r=>r.json())),events);
+    phase = "next";
+    fault = "missing";
+    const start = trace.length;
+    await askUpdate(prior);
+    await until(() => trace.slice(start).some(item => item.file === release+"v11-core.js"),"v4 requests arrived");
+    await until(() => prior.evaluate(()=>navigator.serviceWorker.getRegistration()
+        .then(reg=>!reg.installing && !reg.waiting)),"failed v4 install settled");
+    assert.equal(await getCache(prior),"anime-tracker-v11-" + previous);
+    offline = true;
+    await prior.reload();
+    await assertShell(prior,previous);
+    assert.deepEqual(await snapshot(prior),before);
+    offline = false;
+    fault = "";
+    await askUpdate(prior);
+    await until(() => prior.evaluate(()=>navigator.serviceWorker.getRegistration().then(reg=>!!reg.waiting)),"v4 waiting");
+    const latest = await currentTab(context,prior,true);
+    await assertShell(latest,version);
+    assert.deepEqual(await snapshot(latest),before);
+    assert.deepEqual(await latest.evaluate(()=>fetch("events.json?t=2").then(r=>r.json())),events);
+    return {productionV3Offline:true,v4Offline:true,storageIdentical:true,eventsRetained:true};
+}
 async function run(name,scenario) {
     phase = "legacy"; fault = ""; offline = false;
     const context = await newContext();
@@ -311,6 +360,7 @@ async function run(name,scenario) {
     }
     await run("Online recovery after physical cache eviction",repair);
     await run("First-install storage client gate",gate);
+    await run("Direct production v3 to v4 upgrade preserves offline data on interrupted install",upgradeCurrentProduction);
 })().catch(error=>{ report.environmentError = error.stack; }).finally(async()=>{
     await browser?.close().catch(()=>{});
     server.closeAllConnections();

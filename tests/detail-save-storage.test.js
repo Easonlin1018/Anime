@@ -115,7 +115,7 @@ function runtime(list = [anime()], options = {}) {
     context.window.warnAnimeStartupStorage = (...args) => traces.warnings.push(args);
     vm.runInContext(["escapeHtml", "restoreAnimeStartupStorage", "commitAnimeStartupChanges"].map(name => productionFunction(html, name)).join("\n"), context);
     vm.runInContext(ui.slice(ui.indexOf("    const ANIME_POSTER_PLACEHOLDER"), ui.indexOf("    function renderReminders")), context);
-    vm.runInContext(["requestAnimeAutoSync", "wireAnimeAniListIdentity", "openAnimeDetail", "saveDetail", "saveDetailLocked"].map(name => productionFunction(ui, name, "    ")).join("\n"), context);
+    vm.runInContext(["requestAnimeAutoSync", "wireAnimeAniListIdentity", "suggestAnimeAniListLookupId", "sameAnimeDetailData", "openAnimeDetail", "saveDetail", "saveDetailLocked"].map(name => productionFunction(ui, name, "    ")).join("\n"), context);
     context.openAnimeDetail(form.dataset.id);
     if (options.writerError) context.commitAnimeStartupChanges = () => { throw Error("Synthetic safe writer/journal failure"); };
     if (options.missingWriter) context.commitAnimeStartupChanges = undefined;
@@ -243,6 +243,26 @@ test("a cloud or other-tab update after form opening cannot be overwritten by a 
     assert.deepEqual(run.localStorage.snapshot(), before);
     assert.equal(run.writes.length, 0);
     assert.ok(run.traces.toasts.some(message => message.includes("作品已更新")));
+});
+
+test("a cover-only recovery after form opening preserves the new cover and allows saving the user's edit", () => {
+    const first = anime("one", { source:"anilist", sourceId:101 });
+    const second = anime("two");
+    const run = runtime([first, second]);
+    const candidate = { id:"101", large:"https://example.invalid/recovered.jpg" };
+    run.set("notes", "User's in-progress detail edit");
+    run.localStorage.setItem(V.STORAGE_KEY, JSON.stringify([{ ...first, anilistCover:candidate }, second]));
+    run.writes.length = 0;
+    const original = run.localStorage.snapshot();
+    assert.equal(run.save(), true);
+    const [saved, unaffected] = JSON.parse(run.localStorage.getItem(V.STORAGE_KEY));
+    assert.deepEqual(saved.anilistCover, candidate);
+    assert.equal(saved.notes,"User's in-progress detail edit");
+    assert.equal(saved.currentEpisode,first.currentEpisode);
+    assert.deepEqual(unaffected,second);
+    for (const key of Object.keys(original).filter(key => key !== V.STORAGE_KEY)) {
+        assert.equal(run.localStorage.getItem(key), original[key]);
+    }
 });
 
 test("a deleted target or ambiguous duplicate IDs cannot be modified through an already-open form", () => {

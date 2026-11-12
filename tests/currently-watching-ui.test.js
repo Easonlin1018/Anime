@@ -120,6 +120,27 @@ test("the main navigation contains a true currently-watching page alongside ever
     assert.deepEqual(run.pages.filter(page => !page.hidden).map(page => page.dataset.v11PageGroup), ["manga"]);
 });
 
+test("both anime toolbars call one recovery operation and show progress while it runs", async () => {
+    const run = runtime();
+    assert.match(run.api.window.__ui.currentlyWatchingPage(), /data-v11-recover-covers>恢復舊封面/u);
+    assert.match(between(ui, "    function insertAnimeTools", "    function enableDebouncedSearch"), /data-v11-recover-covers>恢復舊封面/u);
+    const buttons = [{ disabled:false, textContent:"恢復舊封面" }, { disabled:false, textContent:"恢復舊封面" }];
+    let finish;
+    const calls = [];
+    const context = vm.createContext({
+        document:{ querySelectorAll(selector) { assert.equal(selector, "[data-v11-recover-covers]"); return buttons; } },
+        window:{ recoverAnimeCovers(manual) { calls.push(manual); return new Promise(resolve => { finish = resolve; }); } }
+    });
+    vm.runInContext(between(ui, "    async function restoreSavedAnimeCovers", "    function delegatedChange"), context);
+    const recovery = context.restoreSavedAnimeCovers(buttons[0]);
+    await context.restoreSavedAnimeCovers(buttons[1]);
+    assert.deepEqual(calls, [true]);
+    assert.ok(buttons.every(button => button.disabled && button.textContent === "正在恢復封面…"));
+    finish();
+    await recovery;
+    assert.ok(buttons.every(button => !button.disabled && button.textContent === "恢復舊封面"));
+});
+
 test("legacy in-progress entries render individually with posters, titles, progress and direct +/- actions", () => {
     const list = [anime("one", { poster:"https://example.invalid/poster.png" }), anime("two", { currentEpisode:5, watched:5 }), anime("movie", { currentEpisode:0, watched:0 })];
     const run = runtime(list), before = run.localStorage.snapshot();
