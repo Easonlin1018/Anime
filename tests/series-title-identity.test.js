@@ -22,6 +22,12 @@ function relation(relationType, id, format = "TV") {
     return { relationType, node:{ id, format, type:"ANIME", title:{} } };
 }
 
+function assignVerifiedSeriesIdentity(records) {
+    return V.assignAnimeSeriesIdentity(records.map(row => row.anilistId == null ? row : {
+        ...row, source:"anilist", sourceId:row.anilistId
+    }));
+}
+
 test("1. 完整 OpenCC 將簡體作品名轉成臺灣繁體", () => {
     assert.equal(V.toTraditionalChinese("86－不存在的战区－"), "86－不存在的戰區－");
     assert.equal(V.toTraditionalChinese("辉夜大小姐想让我告白"), "輝夜大小姐想讓我告白");
@@ -53,7 +59,7 @@ test("5. 不同 AniList ID 即使標題相同也不合併", () => {
 });
 
 test("6. PREQUEL／SEQUEL 關聯的不同 Media 共用 seriesKey", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"a", anilistId:100, title:"第一季", relations:[relation("SEQUEL", 101)] },
         { id:"b", anilistId:101, title:"第二季", relations:[relation("PREQUEL", 100)] }
     ]);
@@ -63,7 +69,7 @@ test("6. PREQUEL／SEQUEL 關聯的不同 Media 共用 seriesKey", () => {
 });
 
 test("7. 簡繁標題不同仍由 relation identity 分在同系列", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"a", anilistId:200, title:"不存在的战区", relations:[relation("SEQUEL", 201)] },
         { id:"b", anilistId:201, title:"不存在的戰區 Part 2", relations:[relation("PREQUEL", 200)] }
     ]);
@@ -71,7 +77,7 @@ test("7. 簡繁標題不同仍由 relation identity 分在同系列", () => {
 });
 
 test("8. 完全不同翻譯但相同 relation graph 仍共用 seriesKey", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"a", anilistId:300, title:"中文譯名", relations:[relation("SEQUEL", 301)] },
         { id:"b", anilistId:301, title:"Entirely Different Title", relations:[relation("PREQUEL", 300)] }
     ]);
@@ -79,7 +85,7 @@ test("8. 完全不同翻譯但相同 relation graph 仍共用 seriesKey", () => 
 });
 
 test("9. 同名但沒有 relation graph 的不同 AniList Media 不會分組", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"a", anilistId:400, title:"相同名字" },
         { id:"b", anilistId:401, title:"相同名字" }
     ]);
@@ -87,7 +93,7 @@ test("9. 同名但沒有 relation graph 的不同 AniList Media 不會分組", (
 });
 
 test("10. SIDE_STORY 直接項目加入同一系列 component", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"a", anilistId:500, title:"本傳", relations:[relation("SIDE_STORY", 501)] },
         { id:"b", anilistId:501, title:"外傳" }
     ]);
@@ -101,8 +107,8 @@ test("10a. ALTERNATIVE 後的深度 SIDE_STORY 共享 seriesKey 且保持三筆 
         { id:"b", anilistId:124080, title:"B", relations:[relation("SIDE_STORY", 163132)] },
         { id:"c", anilistId:163132, title:"C" }
     ];
-    const result = V.assignAnimeSeriesIdentity(records);
-    const shuffled = V.assignAnimeSeriesIdentity([records[2], records[0], records[1]]);
+    const result = assignVerifiedSeriesIdentity(records);
+    const shuffled = assignVerifiedSeriesIdentity([records[2], records[0], records[1]]);
     const second = V.assignAnimeSeriesIdentity(JSON.parse(JSON.stringify(result.list)));
     assert.equal(new Set(result.list.map(item => item.seriesKey)).size, 1);
     assert.equal(result.list[0].seriesKey, "anilist-series:14753");
@@ -115,7 +121,7 @@ test("10a. ALTERNATIVE 後的深度 SIDE_STORY 共享 seriesKey 且保持三筆 
 });
 
 test("10b. SIDE_STORY target 是 collect-only，不沿 target 關聯擴散", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"a", anilistId:1000, title:"A", relations:[relation("ALTERNATIVE", 1001)] },
         { id:"b", anilistId:1001, title:"B", relations:[relation("SIDE_STORY", 1002)] },
         { id:"c", anilistId:1002, title:"C", relations:[relation("SEQUEL", 1003)] },
@@ -128,7 +134,7 @@ test("10b. SIDE_STORY target 是 collect-only，不沿 target 關聯擴散", () 
 
 test("10c. SPIN_OFF／CHARACTER／ADAPTATION 不建立 series identity edge", () => {
     for (const relationType of ["SPIN_OFF", "CHARACTER", "ADAPTATION"]) {
-        const result = V.assignAnimeSeriesIdentity([
+        const result = assignVerifiedSeriesIdentity([
             { id:`a-${relationType}`, anilistId:1100, title:"A", relations:[relation(relationType, 1101)] },
             { id:`b-${relationType}`, anilistId:1101, title:"B" }
         ]);
@@ -137,7 +143,7 @@ test("10c. SPIN_OFF／CHARACTER／ADAPTATION 不建立 series identity edge", ()
 });
 
 test("10d. traverse relation cycle 由 visited Set 正常結束", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"cycle-a", anilistId:1200, title:"A", relations:[relation("ALTERNATIVE", 1201)] },
         { id:"cycle-b", anilistId:1201, title:"B", relations:[relation("SEQUEL", 1202)] },
         { id:"cycle-c", anilistId:1202, title:"C", relations:[relation("PREQUEL", 1200)] }
@@ -146,17 +152,17 @@ test("10d. traverse relation cycle 由 visited Set 正常結束", () => {
     assert.equal(new Set(result.list.map(item => item.seriesKey)).size, 1);
 });
 
-test("11. 無 external ID 的 legacy 簡繁變體可保守共用 fallback key", () => {
+test("11. 無已確認 AniList 身分時，簡繁變體不會自動分組", () => {
     const result = V.assignAnimeSeriesIdentity([
         { id:"legacy-a", title:"辉夜大小姐想让我告白" },
         { id:"legacy-b", title:"輝夜大小姐想讓我告白 第二季" }
     ]);
-    assert.equal(result.list[0].seriesKey, result.list[1].seriesKey);
-    assert.equal(result.list[0].seriesKeySource, "legacy-title");
+    assert.notEqual(result.list[0].seriesKey, result.list[1].seriesKey);
+    assert.equal(result.list[0].seriesKeySource, "local-record");
 });
 
 test("12. 86 本傳與 Part 2 保留兩筆但共用系列 identity", () => {
-    const result = V.assignAnimeSeriesIdentity([
+    const result = assignVerifiedSeriesIdentity([
         { id:"86-a", anilistId:116589, title:"86－不存在的戰區－", relations:[relation("SEQUEL", 131586)] },
         { id:"86-b", anilistId:131586, title:"86－不存在的戰區－ Part 2", relations:[relation("PREQUEL", 116589)] }
     ]);
@@ -215,7 +221,7 @@ test("17. series identity migration 可重複執行", () => {
         { id:"a", anilistId:600, title:"第一季", relations:[relation("SEQUEL", 601)] },
         { id:"b", anilistId:601, title:"第二季", relations:[relation("PREQUEL", 600)] }
     ];
-    const first = V.assignAnimeSeriesIdentity(records);
+    const first = assignVerifiedSeriesIdentity(records);
     const second = V.assignAnimeSeriesIdentity(JSON.parse(JSON.stringify(first.list)));
     assert.equal(first.changedCount, 2);
     assert.equal(second.changedCount, 0);
@@ -239,10 +245,10 @@ test("19. tombstone 狀態在 series migration 後保持", () => {
 test("20. Service Worker 離線快取固定版 OpenCC 與 series graph cache", () => {
     const sw = fs.readFileSync(path.resolve(__dirname, "..", "sw.js"), "utf8");
     const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
-    assert.match(sw, /anime-tracker-v11-poster-fix-4/u);
+    assert.match(sw, /anime-tracker-v11-series-identity-1/u);
     assert.match(sw, /vendor\/opencc-js-1\.4\.1-full\.js/u);
     assert.match(sw, /"v11-core\.js": "[a-f0-9]{64}"/u);
-    assert.match(ui, /reloadVersion = "poster-fix-4"/u);
+    assert.match(ui, /reloadVersion = "series-identity-1"/u);
 });
 
 test("21. TV 可從安全 synonym 辨識季數", () => {
@@ -298,8 +304,8 @@ test("25. relation graph 輸入順序不同仍產生相同 deterministic root", 
         { id:"c", anilistId:902, title:"第三部", relations:[relation("PREQUEL", 901)] },
         { id:"d", anilistId:999, title:"共同標題", relations:[] }
     ];
-    const forward = V.assignAnimeSeriesIdentity(records).list;
-    const shuffled = V.assignAnimeSeriesIdentity([records[2], records[0], records[3], records[1]]).list;
+    const forward = assignVerifiedSeriesIdentity(records).list;
+    const shuffled = assignVerifiedSeriesIdentity([records[2], records[0], records[3], records[1]]).list;
     const forwardKeys = new Map(forward.map(item => [String(item.anilistId), item.seriesKey]));
     const shuffledKeys = new Map(shuffled.map(item => [String(item.anilistId), item.seriesKey]));
     assert.deepEqual(shuffledKeys, forwardKeys);

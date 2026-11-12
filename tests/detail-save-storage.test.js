@@ -115,7 +115,7 @@ function runtime(list = [anime()], options = {}) {
     context.window.warnAnimeStartupStorage = (...args) => traces.warnings.push(args);
     vm.runInContext(["escapeHtml", "restoreAnimeStartupStorage", "commitAnimeStartupChanges"].map(name => productionFunction(html, name)).join("\n"), context);
     vm.runInContext(ui.slice(ui.indexOf("    const ANIME_POSTER_PLACEHOLDER"), ui.indexOf("    function renderReminders")), context);
-    vm.runInContext(["requestAnimeAutoSync", "wireAnimeAniListIdentity", "suggestAnimeAniListLookupId", "sameAnimeDetailData", "openAnimeDetail", "saveDetail", "saveDetailLocked"].map(name => productionFunction(ui, name, "    ")).join("\n"), context);
+    vm.runInContext(["requestAnimeAutoSync", "wireAnimeAniListIdentity", "suggestAnimeAniListLookupId", "sameAnimeDetailData", "showAnimeSeriesReview", "openAnimeDetail", "saveDetail", "saveDetailLocked"].map(name => productionFunction(ui, name, "    ")).join("\n"), context);
     context.openAnimeDetail(form.dataset.id);
     if (options.writerError) context.commitAnimeStartupChanges = () => { throw Error("Synthetic safe writer/journal failure"); };
     if (options.missingWriter) context.commitAnimeStartupChanges = undefined;
