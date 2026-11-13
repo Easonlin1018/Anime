@@ -3,32 +3,64 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-12T07:07:30.634Z",
-    "lastSuccessfulUpdateAt": "2026-11-12T07:07:30.634Z",
+    "updatedAt": "2026-11-13T06:41:56.818Z",
+    "lastSuccessfulUpdateAt": "2026-11-13T06:41:56.818Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 235,
+    "fetchedExternalItemCount": 234,
     "uniqueNewsCount": 449,
     "articleCandidateCount": 139,
-    "articleFetchSuccessCount": 39,
+    "articleFetchSuccessCount": 38,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 8,
-    "newEventCount": 0,
-    "cachedEventCount": 54,
+    "matchedEventCount": 12,
+    "newEventCount": 4,
+    "cachedEventCount": 53,
     "rateLimitedCount": 0,
     "archiveCount": 1,
-    "storedEventCount": 61,
+    "storedEventCount": 64,
     "expiredRemovedCount": 6,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 34,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 87,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 84,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
+    {
+      "id": "gnn-314508",
+      "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場",
+      "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314508",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "新北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-05T04:50:20.000Z",
+      "eventStartDate": "2026-11-13",
+      "eventEndDate": "2026-12-27",
+      "eventStatus": "ongoing",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "新北歡樂耶誕城",
+        "聖誕禮物屋",
+        "叮叮噹禮物到"
+      ],
+      "searchCorpus": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場 卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
+      "dateConfidence": "high",
+      "dateSource": "11 月 13 日起到 12 月 27 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+    },
     {
       "id": "gnn-314595",
       "title": "《KERORO 軍曹☆》期間限定主題 Café 即日起正式在台登場",
@@ -91,8 +123,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
       "id": "gnn-314431",
@@ -153,8 +185,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
       "id": "ext-357be6ef64d9ab44",
@@ -212,8 +244,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
       "id": "gnn-313100",
@@ -1051,38 +1083,6 @@
       "lastSeenAt": "2026-11-04T06:17:08.332Z"
     },
     {
-      "id": "gnn-314508",
-      "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場",
-      "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=314508",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "新北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-11-05T04:50:20.000Z",
-      "eventStartDate": "2026-11-13",
-      "eventEndDate": "2026-12-27",
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "新北歡樂耶誕城",
-        "聖誕禮物屋",
-        "叮叮噹禮物到"
-      ],
-      "searchCorpus": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場 卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
-      "dateConfidence": "high",
-      "dateSource": "11 月 13 日起到 12 月 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
-    },
-    {
       "id": "gnn-312209",
       "title": "《活俠傳》音樂會門票今日開賣隨即秒殺 官方緊急宣布 11/13 加場演出",
       "summary": "即將於 11 月登場的武俠角色扮演遊戲《活俠傳》音樂會「君所願兮江湖行」今（22）日展開售票，三分鐘內就銷售一空，官方晚間緊急宣布，將於 11 月 13 日加場演出，售票時間將於日後公布。 《活俠傳》由台灣獨立遊戲團隊原始鳥熊 Obb Studio 開發的武俠角色扮演遊戲。主角趙活並非天選之人，而是一名資質平凡、長年未能成為入室弟子的",
@@ -1112,6 +1112,37 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-09-23T04:43:29.841Z",
       "lastSeenAt": "2026-09-23T04:43:29.841Z"
+    },
+    {
+      "id": "gnn-314972",
+      "title": "《超時空輝耀姬！》聯名咖啡廳下周起於台北登場「特殊浴衣」限定造型首度登場",
+      "summary": "《超時空輝耀姬！》攜手 OU-EN （日文：應援；讀音：歐 AN）推出聯名咖啡廳，將於 2026 年 11 月 16 日至 12 月 16 日在 OU-EN 信義松菸店期間限定登場。本次活動由 CAPSULE 旗下 IP 事業營運的 OU-EN 主辦，亮點為台灣首度亮相的「特殊浴衣」造型。酒寄彩葉、輝耀與月見八千代換上和風浴衣，邀請粉絲一同感受充滿作品魅力的節慶氛圍。 《超時空",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314972",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-13T06:32:54.000Z",
+      "eventStartDate": "2026-11-16",
+      "eventEndDate": "2026-12-16",
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "超時空輝耀姬！",
+        "特殊浴衣"
+      ],
+      "searchCorpus": "《超時空輝耀姬！》聯名咖啡廳下周起於台北登場「特殊浴衣」限定造型首度登場 《超時空輝耀姬！》攜手 OU-EN （日文：應援；讀音：歐 AN）推出聯名咖啡廳，將於 2026 年 11 月 16 日至 12 月 16 日在 OU-EN 信義松菸店期間限定登場。本次活動由 CAPSULE 旗下 IP 事業營運的 OU-EN 主辦，亮點為台灣首度亮相的「特殊浴衣」造型。酒寄彩葉、輝耀與月見八千代換上和風浴衣，邀請粉絲一同感受充滿作品魅力的節慶氛圍。 《超時空",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 11 月 16 日至 12 月 16 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
       "id": "gnn-314094",
@@ -1173,8 +1204,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
       "id": "gnn-313300",
@@ -1391,37 +1422,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-11-05T06:42:55.444Z",
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
-    },
-    {
-      "id": "ext-99194c34f716b0e6",
-      "title": "【盛宴狂歡】「NU: カーニバル 快閃店 in 台北」台北快閃店正式進駐信義松菸推出限定特典商品",
-      "summary": "webook.com.tw",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9pck1VLXJ6c0RydFExSE5iYlNGb0NCbGtFeG9KMEFYTmV5ZmtmTmItbDNUVGYyNUlUbVZEWlgxbU5BaWtHaENCX2FHSzJCXzZrSFVXSUltZ0VtNXNYNkFnaERNSWlKazV1M1FkTjFR?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-28T06:29:23.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "松菸",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "NU: カーニバル 快閃店 in 台北",
-        "盛宴狂歡"
-      ],
-      "searchCorpus": "【盛宴狂歡】「NU: カーニバル 快閃店 in 台北」台北快閃店正式進駐信義松菸推出限定特典商品 webook.com.tw",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-11T05:44:24.040Z",
-      "lastSeenAt": "2026-10-11T05:44:24.040Z"
     },
     {
       "id": "ext-ebd33d6b7ec72353",
@@ -1688,8 +1688,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1926,39 +1926,137 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-12T07:07:30.634Z",
-      "lastSeenAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+    },
+    {
+      "id": "ext-f4144be79680257a",
+      "title": "吉伊卡哇診所真的開到台灣了！「ちいかわクリニック」快閃店12 月進駐華山吉友們準備好看診了嗎？",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBadTh2TzVtQkYyc3hwWnJsbDRmMDg5dmNJUnhpVFhyY0d2eGRDc3RGZ3RONFRlS0hQZzhaenFGbFBOMDhBbTI5UDY0LXB3Y2l3UGZYWjRpMFJaQmxNcTUwd3NmdEw1ZU1iZFpQdlBn?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-12T04:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "華山吉友們準備好看診了嗎？ SouNov",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "ちいかわクリニック"
+      ],
+      "searchCorpus": "吉伊卡哇診所真的開到台灣了！「ちいかわクリニック」快閃店12 月進駐華山吉友們準備好看診了嗎？ SouNova 少女星",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+    },
+    {
+      "id": "gnn-314955",
+      "title": "VTuber 星街彗星宣布亞巡 2027 年舉行 粉絲見面會「星詠者睡衣派對」明年 3 月台北登場",
+      "summary": "人氣 VTuber 星街彗星今日舉行的「HOSHIMACHI SUISEI ARENA TOUR 2026 Once Upon a Stellar 福岡公演」，隨著活動邁入尾聲，官方宣布將於 2027 年舉行亞洲巡演與多人巡演的消息。此外，活動中也同時宣布了個人粉絲見面會「星詠者睡衣派對 Vol.2」將首度跨足海外，2027 年 3 月來到台北國際會議中心舉行。 今日隨著「HOSHIMACHI SUISEI ARENA TOUR 2026 Once Upon a Stella",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314955",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-12T13:05:57.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "星詠者睡衣派對",
+        "HOSHIMACHI SUISEI ARENA TOUR 2026 Once Upon a Stellar 福岡公演",
+        "星詠者睡衣派對 Vol.2"
+      ],
+      "searchCorpus": "VTuber 星街彗星宣布亞巡 2027 年舉行 粉絲見面會「星詠者睡衣派對」明年 3 月台北登場 人氣 VTuber 星街彗星今日舉行的「HOSHIMACHI SUISEI ARENA TOUR 2026 Once Upon a Stellar 福岡公演」，隨著活動邁入尾聲，官方宣布將於 2027 年舉行亞洲巡演與多人巡演的消息。此外，活動中也同時宣布了個人粉絲見面會「星詠者睡衣派對 Vol.2」將首度跨足海外，2027 年 3 月來到台北國際會議中心舉行。 今日隨著「HOSHIMACHI SUISEI ARENA TOUR 2026 Once Upon a Stella",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+    },
+    {
+      "id": "gnn-314960",
+      "title": "《審判之眼》主演木村拓哉明起北流連唱兩天 超過 800 名歌迷熱情接機",
+      "summary": "曾在 SEGA《審判之眼》系列中飾演主角「八神隆之」、並為吉卜力動畫電影《霍爾的移動城堡》中的霍爾獻聲的日本知名藝人木村拓哉，今（12）日下午抵達台北松山機場，準備迎接 11 月 13、14 日在臺北流行音樂中心表演廳舉辦的「TAKUYA KIMURA Live Tour 2026 Checkpoint」in TAIPEI。這是他出道 35 年來首度在台灣舉辦個人演唱會，現場湧入超過 800 名",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314960",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-12T15:58:36.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "流行音樂中心表演廳舉辦的「TAKUYA KIMU",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "審判之眼",
+        "霍爾的移動城堡",
+        "八神隆之",
+        "TAKUYA KIMURA Live Tour 2026 Checkpoint"
+      ],
+      "searchCorpus": "《審判之眼》主演木村拓哉明起北流連唱兩天 超過 800 名歌迷熱情接機 曾在 SEGA《審判之眼》系列中飾演主角「八神隆之」、並為吉卜力動畫電影《霍爾的移動城堡》中的霍爾獻聲的日本知名藝人木村拓哉，今（12）日下午抵達台北松山機場，準備迎接 11 月 13、14 日在臺北流行音樂中心表演廳舉辦的「TAKUYA KIMURA Live Tour 2026 Checkpoint」in TAIPEI。這是他出道 35 年來首度在台灣舉辦個人演唱會，現場湧入超過 800 名",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-13T06:41:56.818Z",
+      "lastSeenAt": "2026-11-13T06:41:56.818Z"
     }
   ],
   "archive": [
     {
-      "id": "ext-97c762ded8f5f27c",
-      "title": "華碩微星亮相非洲動漫展 台灣電競品牌搶攻南非市場",
-      "summary": "放言Fount Media",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBibjB2MTI4YjNubDNqXzdzbnpIQnZsdGdiNGZwTUxDOElBdnBLRGhwdDlidllLZmZRcUpPYnRFQml3bHRJT1FWdWF0UHFkS0xfZWc?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
+      "id": "ext-99194c34f716b0e6",
+      "title": "【盛宴狂歡】「NU: カーニバル 快閃店 in 台北」台北快閃店正式進駐信義松菸推出限定特典商品",
+      "summary": "webook.com.tw",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9pck1VLXJ6c0RydFExSE5iYlNGb0NCbGtFeG9KMEFYTmV5ZmtmTmItbDNUVGYyNUlUbVZEWlgxbU5BaWtHaENCX2FHSzJCXzZrSFVXSUltZ0VtNXNYNkFnaERNSWlKazV1M1FkTjFR?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
-      "type": "大型展會",
+      "type": "快閃店",
       "locations": [
-        "台灣"
+        "台北"
       ],
-      "confidence": "candidate",
-      "publishedAt": "2026-09-27T07:00:00.000Z",
+      "confidence": "high",
+      "publishedAt": "2026-09-28T06:29:23.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "",
+      "venue": "松菸",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "華碩微星亮相非洲動漫展 台灣電競品牌搶攻南非市場 放言Fount Media",
+      "workTitles": [
+        "NU: カーニバル 快閃店 in 台北",
+        "盛宴狂歡"
+      ],
+      "searchCorpus": "【盛宴狂歡】「NU: カーニバル 快閃店 in 台北」台北快閃店正式進駐信義松菸推出限定特典商品 webook.com.tw",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z",
-      "archivedAt": "2026-11-12T07:07:30.634Z"
+      "discoveredAt": "2026-10-11T05:44:24.040Z",
+      "lastSeenAt": "2026-10-11T05:44:24.040Z",
+      "archivedAt": "2026-11-13T06:41:56.818Z"
     }
   ]
 }
