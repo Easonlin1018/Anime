@@ -11,11 +11,11 @@ const repo = path.resolve(process.env.POSTER_REPO || path.join(__dirname, "../..
 const gitRepo = path.resolve(process.env.POSTER_GIT_REPO || repo);
 const engine = process.env.POSTER_ENGINE === "webkit" ? "webkit" : "edge";
 const legacySha = "53f12d5abca2ee8b29a965a2cede2d6b4421d868";
-const previousSha = "db93b42a6e0260a1593778748f83054f35aee767";
-const previous = "poster-fix-3";
+const previousSha = "e70bb8dba3fff37a6f7828a328e3a508c4ddfb16";
+const previous = "poster-fix-4";
 const old = "currently-watching-1";
 const legacyCache = "anime-tracker-v11-" + old;
-const version = "poster-fix-4";
+const version = "series-identity-1";
 const release = "releases/" + version + "/";
 const currentCache = "anime-tracker-v11-" + version;
 const area = "/Anime/";
@@ -297,9 +297,9 @@ async function upgradeCurrentProduction(context) {
     phase = "previous";
     const starter = await context.newPage();
     await starter.goto(origin + "/__probe");
-    await starter.evaluate(() => navigator.serviceWorker.register("/Anime/sw.js?v=poster-fix-3"));
+    await starter.evaluate(releaseVersion => navigator.serviceWorker.register("/Anime/sw.js?v=" + releaseVersion),previous);
     await until(() => starter.evaluate(url => navigator.serviceWorker.getRegistration(url)
-        .then(reg => reg?.active?.state === "activated"),app()),"production v3 worker activated");
+        .then(reg => reg?.active?.state === "activated"),app()),"production " + previous + " worker activated");
     await starter.close();
     const prior = await context.newPage();
     await prior.goto(app());
@@ -311,9 +311,9 @@ async function upgradeCurrentProduction(context) {
     fault = "missing";
     const start = trace.length;
     await askUpdate(prior);
-    await until(() => trace.slice(start).some(item => item.file === release+"v11-core.js"),"v4 requests arrived");
+    await until(() => trace.slice(start).some(item => item.file === release+"v11-core.js"),version + " requests arrived");
     await until(() => prior.evaluate(()=>navigator.serviceWorker.getRegistration()
-        .then(reg=>!reg.installing && !reg.waiting)),"failed v4 install settled");
+        .then(reg=>!reg.installing && !reg.waiting)),"failed " + version + " install settled");
     assert.equal(await getCache(prior),"anime-tracker-v11-" + previous);
     offline = true;
     await prior.reload();
@@ -322,12 +322,13 @@ async function upgradeCurrentProduction(context) {
     offline = false;
     fault = "";
     await askUpdate(prior);
-    await until(() => prior.evaluate(()=>navigator.serviceWorker.getRegistration().then(reg=>!!reg.waiting)),"v4 waiting");
+    await until(() => prior.evaluate(()=>navigator.serviceWorker.getRegistration().then(reg=>!!reg.waiting)),version + " waiting");
     const latest = await currentTab(context,prior,true);
     await assertShell(latest,version);
     assert.deepEqual(await snapshot(latest),before);
     assert.deepEqual(await latest.evaluate(()=>fetch("events.json?t=2").then(r=>r.json())),events);
-    return {productionV3Offline:true,v4Offline:true,storageIdentical:true,eventsRetained:true};
+    return {previousRelease:previous,currentRelease:version,previousOffline:true,currentOffline:true,
+        storageIdentical:true,eventsRetained:true};
 }
 async function run(name,scenario) {
     phase = "legacy"; fault = ""; offline = false;
@@ -360,7 +361,7 @@ async function run(name,scenario) {
     }
     await run("Online recovery after physical cache eviction",repair);
     await run("First-install storage client gate",gate);
-    await run("Direct production v3 to v4 upgrade preserves offline data on interrupted install",upgradeCurrentProduction);
+    await run("Direct production " + previous + " to " + version + " upgrade preserves offline data on interrupted install",upgradeCurrentProduction);
 })().catch(error=>{ report.environmentError = error.stack; }).finally(async()=>{
     await browser?.close().catch(()=>{});
     server.closeAllConnections();

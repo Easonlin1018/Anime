@@ -393,7 +393,7 @@ test("舊資料無 AniList ID 時只用 title＋year＋format 保守去重", asy
 });
 
 test("renderList 只在系列群組內套用結構化日期排序", () => {
-    assert.match(html, /for \(const \[seriesKey, group\] of seriesMap\.entries\(\)\) \{[\s\S]*?const series = group\.items;\s*series\.sort\(compareSeriesMediaByStartDate\)/u);
+    assert.match(html, /for \(const \[seriesKey, series\] of seriesMap\) \{\s*series\.sort\(AnimeTrackerV11\.compareAnimeSeriesRelease\)/u);
     assert.match(html, /AnimeTrackerV11\.getAnimeSeriesKey\(anime\)/u);
     assert.doesNotMatch(html, /compareSeriesMediaByStartDate\([^)]*title/u);
 });

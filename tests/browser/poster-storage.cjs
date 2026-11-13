@@ -7,7 +7,7 @@ const path = require("node:path");
 const { chromium, webkit } = require(process.env.POSTER_PLAYWRIGHT || "playwright");
 
 const repo = path.resolve(process.env.POSTER_TEST_REPO || path.join(__dirname, "../.."));
-const release = "poster-fix-4";
+const release = "series-identity-1";
 const releasePath = "releases/" + release;
 const V = require(path.join(repo, releasePath, "v11-core.js"));
 const scope = "/Anime/";
@@ -39,6 +39,9 @@ const server = http.createServer(async (req, res) => {
         const chunks = [];
         for await (const chunk of req) chunks.push(chunk);
         const body = JSON.parse(Buffer.concat(chunks));
+        if (/\bquery AnimeSeriesMetadata\b/u.test(body.query)) {
+            return reply(res, 200, "application/json", '{"data":{"Page":{"media":[]}}}');
+        }
         received.push(body);
         const request = pending;
         if (!request) return reply(res, 409, "text/plain", "Unexpected synthetic API request");
