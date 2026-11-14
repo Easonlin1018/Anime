@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111827">
+    <title>Anime Tracker 私人系列驗收</title>
+    <link rel="stylesheet" href="/preview.css">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <script defer src="/vendor/opencc.js"></script>
+    <script defer src="/v11-core.js"></script>
+    <script defer src="/model.js"></script>
+    <script defer src="/preview.js"></script>
+</head>
+<body>
+    <main>
+        <h1>Anime Tracker 私人系列驗收</h1>
+        <p>用正式站匯出的 JSON 核對系列分組。檔案只在這台裝置讀取，測試副本和編輯均保存在這個獨立網站的瀏覽器儲存空間。</p>
+        <p id="offline" role="status">正在準備離線資源……</p>
+        <div class="controls">
+            <label>匯入正式資料副本<input type="file" id="backup-file" accept=".json,application/json" disabled></label>
+            <button type="button" id="clear-copy" disabled>清除測試副本</button>
+        </div>
+        <p id="status" role="status"></p>
+        <p id="summary" role="status">尚未匯入任何作品。</p>
+        <div id="search-tools" hidden>
+            <label for="search">搜尋系列、名稱或別名</label>
+            <input id="search" type="search" autocomplete="off">
+        </div>
+        <div id="report"></div>
+    </main>
+</body>
+</html>
