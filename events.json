@@ -3,64 +3,32 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-13T06:41:56.818Z",
-    "lastSuccessfulUpdateAt": "2026-11-13T06:41:56.818Z",
+    "updatedAt": "2026-11-14T06:19:21.439Z",
+    "lastSuccessfulUpdateAt": "2026-11-14T06:19:21.439Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 234,
-    "uniqueNewsCount": 449,
+    "fetchedExternalItemCount": 230,
+    "uniqueNewsCount": 443,
     "articleCandidateCount": 139,
-    "articleFetchSuccessCount": 38,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 12,
-    "newEventCount": 4,
-    "cachedEventCount": 53,
+    "matchedEventCount": 10,
+    "newEventCount": 1,
+    "cachedEventCount": 55,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 64,
+    "archiveCount": 2,
+    "storedEventCount": 62,
     "expiredRemovedCount": 6,
     "recapRemovedCount": 0,
     "undatedOldRemovedCount": 34,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
+    "foreignRemovedCount": 1,
     "nonActivityRemovedCount": 84,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
-    {
-      "id": "gnn-314508",
-      "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場",
-      "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=314508",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "新北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-11-05T04:50:20.000Z",
-      "eventStartDate": "2026-11-13",
-      "eventEndDate": "2026-12-27",
-      "eventStatus": "ongoing",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "新北歡樂耶誕城",
-        "聖誕禮物屋",
-        "叮叮噹禮物到"
-      ],
-      "searchCorpus": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店宣布 11/13 登場 卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，宣布將從 11 月 13 日起到 12 月 27 日為止在新北板橋耶誕城登場，以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍才可愛呢？四大拍攝秘訣",
-      "dateConfidence": "high",
-      "dateSource": "11 月 13 日起到 12 月 27 日",
-      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
-    },
     {
       "id": "gnn-314595",
       "title": "《KERORO 軍曹☆》期間限定主題 Café 即日起正式在台登場",
@@ -95,6 +63,38 @@
       "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
+      "id": "gnn-315007",
+      "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店 今日起正式登場",
+      "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，今日（11 月 13 日）起於新北板橋耶誕城登場正式登場，活動將持續到 12 月 27 日為止。本次以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315007",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "新北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-13T09:09:17.000Z",
+      "eventStartDate": "2026-11-13",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "新北歡樂耶誕城",
+        "聖誕禮物屋",
+        "叮叮噹禮物到"
+      ],
+      "searchCorpus": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店 今日起正式登場 卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，今日（11 月 13 日）起於新北板橋耶誕城登場正式登場，活動將持續到 12 月 27 日為止。本次以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 13 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+    },
+    {
       "id": "gnn-314506",
       "title": "《家庭教師 HITMAN REBORN！》《藥師少女的獨語》限定快閃店即日起台北西門地下市開幕",
       "summary": "由 Anique Taiwan 主辦，自即日（11/5）起在台北西門地下市 6 號店鋪推出《家庭教師 HITMAN REBORN！》與《藥師少女的獨語》限定快閃店。 本次《家庭教師 HITMAN REBORN！》以全新主題「覺悟」登場。正因為有想要守護的事物，人才能變得堅強。即使心中仍有迷惘與恐懼，也要為了夥伴向前踏出一步――。透過阿綱一行人將各自的信念化為火焰、挺",
@@ -123,8 +123,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
     },
     {
       "id": "gnn-314431",
@@ -244,8 +244,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
     },
     {
       "id": "gnn-313100",
@@ -1204,8 +1204,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
     },
     {
       "id": "gnn-313300",
@@ -1424,62 +1424,6 @@
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
     },
     {
-      "id": "ext-ebd33d6b7ec72353",
-      "title": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票",
-      "summary": "ETtoday遊戲雲",
-      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE14YUZzZHBMMmlfdEVOREFpQkhzaVJWNFhUQUlfWWZScV9nX0ZTQmhIRWNMdXdYNGQxbTd5OXRNUHZWSjBSbjM4V2g2cktEdXdTV1JrMDduONIBTEFVX3lxTE5KMTVvd3FWb1VBUW5GYnJPaERHYXlZMWFwTnozbFpPR3FVY3JlT2M2MERtTldJZ21RMFhhZjV1OXpPYVI3cjNXTkg4Umk?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T04:49:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票 ETtoday遊戲雲",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z"
-    },
-    {
-      "id": "ext-318a3b4d7bcbcb26",
-      "title": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1aSFdta3JyWnBTenYyQXIwczBUSldDNlFFWVNVVmFtcG9xczFkV1FNVVJReGJscjFldnRQbnk3Z2UtSkhrS0luXzdKWVHSAVJBVV95cUxOdEhkQ2ZGZ1kxSjlBSU5DM1pVcGEtZU5mcHUyWGowM3lXb0ZwMmZ3QXl5MmhmaFBQb3JqMVZJdEhIYlg1cDF4bWFxT1dkT2ZUWHFB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "688元",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-04T06:17:08.332Z",
-      "lastSeenAt": "2026-11-04T06:17:08.332Z"
-    },
-    {
       "id": "ext-bf19739780c7e9db",
       "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
       "summary": "遊戲基地Gamebase",
@@ -1688,8 +1632,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1926,8 +1870,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1956,8 +1900,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-13T06:41:56.818Z",
-      "lastSeenAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-14T06:19:21.439Z",
+      "lastSeenAt": "2026-11-14T06:19:21.439Z"
     },
     {
       "id": "gnn-314955",
@@ -2027,36 +1971,62 @@
   ],
   "archive": [
     {
-      "id": "ext-99194c34f716b0e6",
-      "title": "【盛宴狂歡】「NU: カーニバル 快閃店 in 台北」台北快閃店正式進駐信義松菸推出限定特典商品",
-      "summary": "webook.com.tw",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9pck1VLXJ6c0RydFExSE5iYlNGb0NCbGtFeG9KMEFYTmV5ZmtmTmItbDNUVGYyNUlUbVZEWlgxbU5BaWtHaENCX2FHSzJCXzZrSFVXSUltZ0VtNXNYNkFnaERNSWlKazV1M1FkTjFR?oc=5",
+      "id": "ext-318a3b4d7bcbcb26",
+      "title": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1aSFdta3JyWnBTenYyQXIwczBUSldDNlFFWVNVVmFtcG9xczFkV1FNVVJReGJscjFldnRQbnk3Z2UtSkhrS0luXzdKWVHSAVJBVV95cUxOdEhkQ2ZGZ1kxSjlBSU5DM1pVcGEtZU5mcHUyWGowM3lXb0ZwMmZ3QXl5MmhmaFBQb3JqMVZJdEhIYlg1cDF4bWFxT1dkT2ZUWHFB?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
-      "type": "快閃店",
+      "type": "大型展會",
       "locations": [
-        "台北"
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-28T06:29:23.000Z",
+      "publishedAt": "2026-09-29T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "松菸",
+      "venue": "",
       "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "NU: カーニバル 快閃店 in 台北",
-        "盛宴狂歡"
-      ],
-      "searchCorpus": "【盛宴狂歡】「NU: カーニバル 快閃店 in 台北」台北快閃店正式進駐信義松菸推出限定特典商品 webook.com.tw",
+      "feeText": "688元",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮 NOWnews今日新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-11T05:44:24.040Z",
-      "lastSeenAt": "2026-10-11T05:44:24.040Z",
-      "archivedAt": "2026-11-13T06:41:56.818Z"
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z",
+      "archivedAt": "2026-11-14T06:19:21.439Z"
+    },
+    {
+      "id": "ext-ebd33d6b7ec72353",
+      "title": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票",
+      "summary": "ETtoday遊戲雲",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE14YUZzZHBMMmlfdEVOREFpQkhzaVJWNFhUQUlfWWZScV9nX0ZTQmhIRWNMdXdYNGQxbTd5OXRNUHZWSjBSbjM4V2g2cktEdXdTV1JrMDduONIBTEFVX3lxTE5KMTVvd3FWb1VBUW5GYnJPaERHYXlZMWFwTnozbFpPR3FVY3JlT2M2MERtTldJZ21RMFhhZjV1OXpPYVI3cjNXTkg4Umk?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-29T04:49:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票 ETtoday遊戲雲",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-28T05:39:48.631Z",
+      "lastSeenAt": "2026-10-28T05:39:48.631Z",
+      "archivedAt": "2026-11-14T06:19:21.439Z"
     }
   ]
 }
