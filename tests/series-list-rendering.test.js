@@ -14,7 +14,7 @@ const sourceOf = (start, end) => {
     assert.ok(from >= 0 && to > from, start);
     return html.slice(from, to);
 };
-const listRenderer = sourceOf("function renderList()", "function exportData()")
+const listRenderer = sourceOf("function renderList(", "function exportData()")
     + sourceOf("function normalizeAnimeSearchText", "function animeProgress");
 
 const related = (relationType, id) => ({ relationType, node:{ id, type:"ANIME", format:"MOVIE" } });

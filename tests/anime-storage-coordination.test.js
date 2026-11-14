@@ -37,7 +37,7 @@ function fixture() {
         const controller = {
             postMessage(message, [port]) {
                 assert.equal(message.type, "CHECK_STORAGE_CLIENTS");
-                queueMicrotask(() => port.reply({ type:"ANIME_SW_STORAGE_CLIENTS", release:"series-identity-1", safe }));
+                queueMicrotask(() => port.reply({ type:"ANIME_SW_STORAGE_CLIENTS", release:"legacy-series-2", safe }));
             }
         };
         class Channel {
