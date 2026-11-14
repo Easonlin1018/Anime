@@ -11,11 +11,11 @@ const repo = path.resolve(process.env.POSTER_REPO || path.join(__dirname, "../..
 const gitRepo = path.resolve(process.env.POSTER_GIT_REPO || repo);
 const engine = process.env.POSTER_ENGINE === "webkit" ? "webkit" : "edge";
 const legacySha = "53f12d5abca2ee8b29a965a2cede2d6b4421d868";
-const previousSha = "e70bb8dba3fff37a6f7828a328e3a508c4ddfb16";
-const previous = "poster-fix-4";
+const previousSha = "b5c43d73500df5971f4c42165871d19939a83487";
+const previous = "series-identity-1";
 const old = "currently-watching-1";
 const legacyCache = "anime-tracker-v11-" + old;
-const version = "series-identity-1";
+const version = "legacy-series-1";
 const release = "releases/" + version + "/";
 const currentCache = "anime-tracker-v11-" + version;
 const area = "/Anime/";
