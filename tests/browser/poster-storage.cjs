@@ -7,7 +7,7 @@ const path = require("node:path");
 const { chromium, webkit } = require(process.env.POSTER_PLAYWRIGHT || "playwright");
 
 const repo = path.resolve(process.env.POSTER_TEST_REPO || path.join(__dirname, "../.."));
-const release = "legacy-series-1";
+const release = "legacy-series-2";
 const releasePath = "releases/" + release;
 const V = require(path.join(repo, releasePath, "v11-core.js"));
 const scope = "/Anime/";

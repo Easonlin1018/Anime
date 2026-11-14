@@ -47,12 +47,37 @@ test("backup parser retains exact records, ID types, history and relationship ev
 test("the audit reports both series from raw legacy records and retains ambiguity", () => {
     const copy = exampleCopy(), previous = JSON.stringify(copy);
     const { items, groups } = audit.reportSeries(copy);
-    assert.deepEqual(items.map(x => x.result),["grouped","grouped","grouped","grouped","review","conflict","independent"]);
+    assert.deepEqual(items.map(x => x.result),["grouped","grouped","grouped","grouped","suggestion","conflict","independent"]);
     assert.equal(groups.get(items[0].key).length,2);
     assert.equal(groups.get(items[2].key).length,2);
     assert.ok(items[3].warnings.some(text => text.includes("舊系列")));
     assert.deepEqual(items[4].candidates,[2,3]);
     assert.equal(JSON.stringify(copy),previous);
+});
+
+test("a title or date mismatch is separate from a grouping decision", () => {
+    const row = { ...examples[0], source:"AniList", sourceId:101291,
+        seriesMetadata:V.buildVerifiedAnimeSeriesMetadata({
+            id:101291, type:"ANIME", title:{ native:rascal }, startDate:{ year:2019 }, format:"TV"
+        },101291) };
+    const { items, stats } = audit.reportSeries(exampleCopy([row]));
+    assert.equal(items[0].result,"independent");
+    assert.equal(stats.metadata,1);
+    assert.equal(stats.needsReview,0);
+});
+
+test("multiple corroborated originals are true review, while matching names alone are optional", () => {
+    const name = "小島日誌";
+    const copy = exampleCopy([
+        { id:"s1a", title:name, groupTitle:name, year:2017 },
+        { id:"s1b", title:name, groupTitle:name, year:2018 },
+        { id:"s2", title:name + " 第二季", groupTitle:name, year:2020 },
+        { id:"noise1", title:"無關同名" },
+        { id:"noise2", title:"無關同名" }
+    ]);
+    const { items, stats } = audit.reportSeries(copy);
+    assert.deepEqual(items.map(item => item.result), ["review","review","suggestion","suggestion","suggestion"]);
+    assert.deepEqual(stats, { automatic:0, suggestions:3, needsReview:2, metadata:0 });
 });
 
 test("verified relationships from the backup are evaluated without reassigning IDs in the original", () => {

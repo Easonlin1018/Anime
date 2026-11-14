@@ -10,7 +10,7 @@ const port = Number(portArg || 43219);
 if (!/^[a-f0-9]{40}$/u.test(revision || "") || !Number.isInteger(port) || port < 1 || port > 65535) {
     throw new Error("Usage: node tools/private-series-preview/serve.cjs <full-commit-sha> [port]");
 }
-const app = "releases/legacy-series-1/";
+const app = "releases/legacy-series-2/";
 const tool = "tools/private-series-preview/";
 const file = path => execFileSync("git", ["show", revision + ":" + path], { cwd:repo, maxBuffer:16 * 1024 * 1024 });
 const scripts = "text/javascript; charset=utf-8";
@@ -48,6 +48,8 @@ createServer((request, response) => {
     if (!route) { response.writeHead(404, common); return response.end(); }
     const [body, type] = route;
     const csp = request.url === "/sw.js" ? "default-src 'none'; connect-src 'self'; script-src 'self'" : policy;
-    response.writeHead(200, { ...common, "Content-Type":type, "Content-Security-Policy":csp, "Content-Length":body.length });
+    const disposition = type.startsWith("text/html;") ? { "Content-Disposition":"inline" } : {};
+    response.writeHead(200, { ...common, ...disposition, "Content-Type":type,
+        "Content-Security-Policy":csp, "Content-Length":body.length });
     return response.end(request.method === "HEAD" ? undefined : body);
 }).listen(port, "127.0.0.1", () => console.log(`Private preview ${revision} ready on http://127.0.0.1:${port}/`));

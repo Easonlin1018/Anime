@@ -108,12 +108,17 @@ const storedCopy = page => page.evaluate(() => new Promise((resolve, reject) => 
 const keysInUse = page => page.evaluate(() => Object.keys(localStorage).sort());
 
 async function boot(page) {
+    const downloads = [];
+    page.on("download", download => downloads.push(download.suggestedFilename()));
     const response = await page.goto(entry.href, { waitUntil:"domcontentloaded", timeout:30000 });
     assert.equal(response.status(), 200);
+    assert.equal(response.headers()["content-type"],"text/html; charset=utf-8");
+    assert.equal(response.headers()["content-disposition"],"inline");
     await page.locator("#backup-file").waitFor({ state:"attached" });
     await page.locator("#offline").filter({ hasText:"離線資源已就緒" }).waitFor({ timeout:30000 });
     await page.waitForFunction(() => navigator.serviceWorker.controller !== null, undefined, { timeout:30000 });
     await page.waitForFunction(() => !document.getElementById("backup-file").disabled, undefined, { timeout:30000 });
+    assert.deepEqual(downloads,[]);
     return response;
 }
 
@@ -149,6 +154,11 @@ async function main() {
         assert.deepEqual(await keysInUse(page), []);
         assert.equal(await row(page, 0).count(), 0);
         assert.equal(await storedCopy(page), null);
+        const reloaded = await page.reload({ waitUntil:"domcontentloaded" });
+        assert.equal(reloaded.status(),200);
+        assert.equal(reloaded.headers()["content-type"],"text/html; charset=utf-8");
+        assert.equal(reloaded.headers()["content-disposition"],"inline");
+        await page.waitForFunction(() => !document.getElementById("backup-file").disabled);
         await page.evaluate(() => localStorage.setItem("private-preview-test-sentinel", "leave this key alone"));
 
         // Import and all work with the backup must succeed behind a complete
@@ -162,7 +172,7 @@ async function main() {
         await expectBucket(page, 1, "grouped");
         await expectBucket(page, 2, "grouped");
         await expectBucket(page, 3, "grouped");
-        await expectBucket(page, 4, "review");
+        await expectBucket(page, 4, "suggestion");
         await expectBucket(page, 7, "deleted");
         await expectBucket(page, 8, "conflict");
         await expectBucket(page, 9, "independent");

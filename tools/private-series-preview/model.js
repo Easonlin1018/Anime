@@ -1,6 +1,6 @@
 (function (root, factory) {
     const api = factory(typeof module === "object" && module.exports
-        ? require("../../releases/legacy-series-1/v11-core.js") : root.AnimeTrackerV11);
+        ? require("../../releases/legacy-series-2/v11-core.js") : root.AnimeTrackerV11);
     if (typeof module === "object" && module.exports) module.exports = api;
     else root.PrivateSeriesPreview = api;
 })(globalThis, function (V) {
@@ -35,7 +35,7 @@
     function reportSeries(copy) {
         const rows = verificationRows(copy);
         const { list } = V.recoverLegacyAnimeIdentities(rows, copy.original);
-        const projected = V.projectAnimeSeries(list);
+        const { projected, reviewByIndex } = V.describeAnimeSeriesProjection(list);
         const local = new Map(), claims = new Map(), suggestions = new Map(), groups = new Map();
         const add = (map, key, index) => {
             if (!key) return;
@@ -45,7 +45,8 @@
         const deleted = row => Boolean(row.deletedAt || row.category === "_deleted");
         const normalized = value => V.normalizeText(V.toTraditionalChinese(text(value)));
         const nameKeys = row => [...new Set([
-            row.groupTitle, row.seriesGroupTitle, row.title,
+            row.groupTitle, row.seriesGroupTitle, row.title, row.canonicalTitle,
+            ...(Array.isArray(row.aliases) ? row.aliases : [row.aliases]),
             text(row.title).replace(/\s*[（(]\s*(?:19|20)\d{2}\s*[）)]\s*$/u, "")
                 .replace(/\s*(?:第\s*[一二三四五六七八九十\d]+[季期]|Season\s*\d+|Part\s*\d+|[（(]劇場版[）)])\s*$/iu, "")
         ].map(normalized).filter(Boolean))];
@@ -70,19 +71,40 @@
                 warnings.push("來源或作品 ID 有矛盾");
             }
             if (V.getAnimeAniListClaims(list[index]).some(claim => claims.get(claim)?.length > 1)) warnings.push("多筆紀錄使用同一 AniList ID");
-            if (V.getAnimeSeriesMetadataReview(list[index])) warnings.push("已存名稱、日期或形式與 AniList 資料不一致");
+            const metadata = V.getAnimeSeriesMetadataReview(list[index]);
+            const metadataWarnings = [
+                metadata?.titleConflict && !metadata.manualTitle ? "作品名稱與已存 AniList 資料不一致" : "",
+                metadata?.dateConflict ? "首播日期與已存 AniList 資料不一致" : "",
+                metadata?.formatConflict ? "作品形式與已存 AniList 資料不一致" : ""
+            ].filter(Boolean);
             if (peers.some(other => other !== index && normalized(rows[other].title) === normalized(row.title))) {
                 warnings.push("同一群組內有同名作品");
             }
-            if (peers.length > 1 && projected[index].seriesKeySource === "legacy-group") warnings.push("依舊系列欄位組合，請核對成員");
-            const conflict = warnings.some(value => value !== "依舊系列欄位組合，請核對成員");
+            const conflict = warnings.length > 0;
+            const manual = row.seriesMembership?.mode === "separate" || row.seriesMembership?.mode === "link";
+            const actionable = !manual && reviewByIndex.has(index);
+            if (actionable) warnings.push(...reviewByIndex.get(index));
+            const optional = !manual && peers.length < 2 && candidates.length > 0;
+            if (peers.length > 1 && projected[index].seriesKeySource === "legacy-group") warnings.push("依舊系列欄位與作品資料復原");
             const result = deleted(row) ? "deleted" : conflict ? "conflict" : peers.length > 1 ? "grouped"
-                : candidates.length && row.seriesMembership?.mode !== "separate" ? "review" : "independent";
-            return { index, row, result, warnings, candidates, canEdit:!deleted(row) && Boolean(id && local.get(id).length === 1),
+                : actionable ? "review" : optional ? "suggestion" : "independent";
+            return { index, row, result, warnings, metadataWarnings, candidates, actionable,
+                canEdit:!deleted(row) && Boolean(id && local.get(id).length === 1),
                 key:V.getAnimeSeriesKey(projected[index]), label:V.getAnimeSeriesDisplayLabel(projected[index]),
                 identityRecovered:!V.getConfirmedAnimeAniListId(row) && Boolean(V.getConfirmedAnimeAniListId(list[index])) };
         });
-        return { items, groups, projected };
+        const automatic = new Map();
+        for (const item of items) {
+            if (item.result === "grouped" && item.row.seriesMembership?.mode !== "link") {
+                automatic.set(item.key, (automatic.get(item.key) || 0) + 1);
+            }
+        }
+        return { items, groups, projected, stats:{
+            automatic:[...automatic.values()].filter(count => count > 1).length,
+            suggestions:items.filter(item => item.result === "suggestion").length,
+            needsReview:items.filter(item => item.result !== "deleted" && (item.result === "conflict" || item.actionable)).length,
+            metadata:items.filter(item => item.result !== "deleted" && item.metadataWarnings.length).length
+        } };
     }
 
     function changeCopy(copy, index, action, values, now) {

@@ -126,3 +126,60 @@ test("explicit membership storage writes only its field, refusing stale confirma
     await assert.rejects(ctx.saveAnimeSeriesMembership("a",first,null,null),/作品或系列已變更/u);
     assert.equal(commits,1);
 });
+
+test("legacy, PR8, and current projections separate homonyms and recover date-backed sequels with missing relations", () => {
+    const root = require("node:path").resolve(__dirname, "..");
+    const oldCore = require(root + "/releases/poster-fix-4/v11-core.js");
+    const pr8 = require(root + "/releases/series-identity-1/v11-core.js");
+    const pr9 = require(root + "/releases/legacy-series-1/v11-core.js");
+    const title = "架空灣日誌";
+    const rows = [
+        old("original",title,{ groupTitle:title, year:2018, format:"TV", category:"completed", watched:12 }),
+        old("sequel",title + " S2",{ seriesGroupTitle:title, year:2021, format:"TV", watched:3 }),
+        old("film",title,{ groupTitle:title, year:2023, format:"MOVIE", category:"waiting" }),
+        old("subtitle",title + "：北灣篇",{ groupTitle:title, year:2025, format:"TV", category:"review" }),
+        old("homonym",title,{ year:2026, format:"TV" }),
+        old("other",title,{ year:2017, format:"TV" })
+    ];
+    const before = JSON.stringify(rows);
+    const keys = (core, project) => project(rows).map(core.getAnimeSeriesKey);
+    const legacy = keys(oldCore, list => oldCore.assignAnimeSeriesIdentity(list).list);
+    const released = keys(pr8, list => pr8.assignAnimeSeriesIdentity(list).list);
+    const prior = keys(pr9, pr9.projectAnimeSeries);
+    const current = keys(V, V.projectAnimeSeries);
+    assert.equal(legacy[0],legacy[4],"legacy label could absorb a homonym");
+    assert.equal(new Set(released).size,rows.length);
+    assert.ok(new Set(prior.slice(0,4)).size > 1);
+    assert.equal(new Set(current.slice(0,4)).size,1);
+    assert.equal(new Set([current[0],...current.slice(4)]).size,3);
+    assert.equal(JSON.stringify(rows),before);
+});
+
+test("one verified anchor can extend through an entire reciprocal legacy chain", () => {
+    const rows = [
+        old("first","航線前篇",{ source:"anilist", sourceId:43001, anilistId:43001,
+            relations:[edge("SEQUEL",43002,"航線續作")] }),
+        old("middle","航線續作",{ anilistId:43002, relations:[edge("PREQUEL",43001,"航線前篇"),edge("SEQUEL",43003,"航線終章")] }),
+        old("last","航線終章",{ anilistId:43003, relations:[edge("PREQUEL",43002,"航線續作")] })
+    ];
+    assert.equal(new Set(membership(rows)).size,1);
+    assert.equal(V.getConfirmedAnimeAniListId(rows[2]),"");
+    const ambiguous = [...rows.slice(0,2), { ...rows[2],relations:[edge("PREQUEL",43002,"航線續作")] },
+        old("second-anchor","另一個航線",{ source:"anilist", sourceId:43004, anilistId:43004,
+            relations:[edge("SEQUEL",43003,"航線終章")] })];
+    const report = V.describeAnimeSeriesProjection(ambiguous);
+    assert.notEqual(V.getAnimeSeriesKey(report.projected[0]),V.getAnimeSeriesKey(report.projected[3]));
+});
+
+test("verified known sequel IDs supplement missing stored edges and reject a local ID guess", () => {
+    const rows = [
+        old("s1","戀上換裝娃娃",{ anilistId:132405, format:"TV", year:2022 }),
+        old("s2","更衣人偶墜入愛河 第二季",{ anilistId:154768, format:"TV", year:2025 }),
+        old(104157,"青春豬頭少年不會夢到懷夢美少女",{ format:"MOVIE",year:2019 }),
+        old("tv","青春豬頭少年不會夢見兔女郎學姊",{ source:"anilist", anilistId:101291, sourceId:101291, format:"TV",year:2018 })
+    ];
+    const keys = membership(rows);
+    assert.equal(keys[0],keys[1]);
+    assert.notEqual(keys[2],keys[3]);
+    assert.equal(V.getConfirmedAnimeAniListId(rows[0]),"");
+});

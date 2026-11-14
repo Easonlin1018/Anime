@@ -10,7 +10,7 @@ const offline = document.getElementById("offline");
 const search = document.getElementById("search");
 const report = document.getElementById("report");
 const resultLabels = {
-    grouped:"成功分組", independent:"維持獨立", review:"需要人工確認",
+    grouped:"成功分組", independent:"維持獨立", suggestion:"可選的分組建議", review:"需要人工確認",
     conflict:"可能的錯誤分組或身分衝突", deleted:"備份中的已刪除紀錄"
 };
 const categoryLabels = { watching:"正在連載", backlog:"補番中", review:"複習中",
@@ -152,6 +152,7 @@ function renderItem(item, expanded) {
         element("p", `筆記 ${row.notes ?? row.note ?? "未填"}`));
     if (identityRecovered) body.append(element("p","使用備份內的作品關聯作為系列佐證。","muted"));
     if (warnings.length) body.append(element("p",warnings.join("。"),"warning"));
+    if (item.metadataWarnings.length) body.append(element("p","作品資料核對 · " + item.metadataWarnings.join("。"),"muted"));
     if (item.result === "conflict" && result.groups.get(item.key)?.length > 1) {
         const peers = result.groups.get(item.key).filter(position => position !== index)
             .map(position => originalTitle(result.items[position].row));
@@ -173,8 +174,8 @@ function render() {
     const { records, history } = copy.original;
     const counts = Object.fromEntries(Object.keys(resultLabels).map(key => [key,0]));
     for (const item of result.items) counts[item.result]++;
-    const grouped = [...result.groups.values()].filter(indexes => indexes.length > 1).length;
-    summary.textContent = `已匯入 ${records.length} 筆作品、${history.length} 筆觀看歷史。副本保留 ${result.items.length} 筆作品及原始 ID。找到 ${grouped} 個系列。`;
+    const { automatic, suggestions, needsReview, metadata } = result.stats;
+    summary.textContent = `已匯入 ${records.length} 筆作品、${history.length} 筆觀看歷史。自動分組 ${automatic} 個系列、可選建議 ${suggestions} 筆、需要人工處理 ${needsReview} 筆。另有 ${metadata} 筆作品資料可核對。`;
     const needle = V.normalizeText(V.toTraditionalChinese(search.value));
     const visible = item => !needle || V.normalizeText(V.toTraditionalChinese([
         item.label, item.row.title, item.row.id, item.row.groupTitle, item.row.canonicalTitle,
@@ -203,6 +204,13 @@ function render() {
         if (!entries.length) section.append(element("p","沒有符合的紀錄。","muted"));
         report.append(section);
     }
+    const metadataSection = element("details","","report-section");
+    metadataSection.dataset.result = "metadata";
+    metadataSection.append(element("summary", `作品資料核對（${metadata}）`));
+    for (const item of result.items.filter(item => item.result !== "deleted" && item.metadataWarnings.length && visible(item))) {
+        metadataSection.append(element("p",originalTitle(item.row) + " · " + item.metadataWarnings.join("。")));
+    }
+    report.append(metadataSection);
 }
 
 picker.addEventListener("change", async () => {
@@ -233,9 +241,9 @@ search.addEventListener("input", () => {
 
 async function start() {
     try {
-        if (!(await navigator.serviceWorker.getRegistration("/"))) {
-            await navigator.serviceWorker.register("/sw.js", { updateViaCache:"none" });
-        }
+        const existing = await navigator.serviceWorker.getRegistration("/");
+        if (!existing) await navigator.serviceWorker.register("/sw.js", { updateViaCache:"none" });
+        else if (navigator.onLine) void existing.update().catch(() => {});
         await navigator.serviceWorker.ready;
         if (!navigator.serviceWorker.controller) {
             await new Promise(resolve => navigator.serviceWorker.addEventListener("controllerchange", resolve, { once:true }));
