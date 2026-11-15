@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-14T06:19:21.439Z",
-    "lastSuccessfulUpdateAt": "2026-11-14T06:19:21.439Z",
+    "updatedAt": "2026-11-15T06:27:01.820Z",
+    "lastSuccessfulUpdateAt": "2026-11-15T06:27:01.820Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
     "fetchedExternalItemCount": 230,
-    "uniqueNewsCount": 443,
-    "articleCandidateCount": 139,
-    "articleFetchSuccessCount": 37,
+    "uniqueNewsCount": 445,
+    "articleCandidateCount": 138,
+    "articleFetchSuccessCount": 38,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 10,
     "newEventCount": 1,
     "cachedEventCount": 55,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
-    "storedEventCount": 62,
+    "archiveCount": 0,
+    "storedEventCount": 63,
     "expiredRemovedCount": 6,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 34,
+    "undatedOldRemovedCount": 35,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 84,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 82,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -91,8 +91,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "gnn-314506",
@@ -123,8 +123,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "gnn-314431",
@@ -244,8 +244,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "gnn-313100",
@@ -1204,8 +1204,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "gnn-313300",
@@ -1632,8 +1632,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1870,8 +1870,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1900,8 +1900,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-14T06:19:21.439Z",
-      "lastSeenAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     },
     {
       "id": "gnn-314955",
@@ -1967,66 +1967,39 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-11-13T06:41:56.818Z",
       "lastSeenAt": "2026-11-13T06:41:56.818Z"
-    }
-  ],
-  "archive": [
-    {
-      "id": "ext-318a3b4d7bcbcb26",
-      "title": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1aSFdta3JyWnBTenYyQXIwczBUSldDNlFFWVNVVmFtcG9xczFkV1FNVVJReGJscjFldnRQbnk3Z2UtSkhrS0luXzdKWVHSAVJBVV95cUxOdEhkQ2ZGZ1kxSjlBSU5DM1pVcGEtZU5mcHUyWGowM3lXb0ZwMmZ3QXl5MmhmaFBQb3JqMVZJdEhIYlg1cDF4bWFxT1dkT2ZUWHFB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-29T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "688元",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節曼迪福袋688元！柯南、孤獨搖滾周邊必買 滿額抽好禮 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-04T06:17:08.332Z",
-      "lastSeenAt": "2026-11-04T06:17:08.332Z",
-      "archivedAt": "2026-11-14T06:19:21.439Z"
     },
     {
-      "id": "ext-ebd33d6b7ec72353",
-      "title": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票",
-      "summary": "ETtoday遊戲雲",
-      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE14YUZzZHBMMmlfdEVOREFpQkhzaVJWNFhUQUlfWWZScV9nX0ZTQmhIRWNMdXdYNGQxbTd5OXRNUHZWSjBSbjM4V2g2cktEdXdTV1JrMDduONIBTEFVX3lxTE5KMTVvd3FWb1VBUW5GYnJPaERHYXlZMWFwTnozbFpPR3FVY3JlT2M2MERtTldJZ21RMFhhZjV1OXpPYVI3cjNXTkg4Umk?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
+      "id": "gnn-315024",
+      "title": "木村拓哉出道 35 年首度台北開唱 在台慶生秀親筆中文訊息",
+      "summary": "曾為吉卜力動畫《霍爾的移動城堡》男主角霍爾配音、並在 SEGA《審判之眼》系列遊戲中飾演主角八神隆之的日本知名藝人木村拓哉，於 11 月 13、14 日在台北流行音樂中心舉辦「TAKUYA KIMURA Live Tour 2026 Checkpoint」台北演唱會。這是他出道 35 年來首度以個人歌手身分在台灣開唱，兩天共吸引約 1 萬名歌迷入場。首場演出更適逢他 54 歲生日，除",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315024",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
       "locations": [
-        "高雄"
+        "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-29T04:49:00.000Z",
+      "publishedAt": "2026-11-14T15:55:48.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
+      "eventStatus": "date-unknown",
+      "venue": "流行音樂中心舉辦「TAKUYA KIMURA L",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節10月開跑！柯南迷狂喜 主題樂園、特別篇還有展覽限定票 ETtoday遊戲雲",
+      "workTitles": [
+        "霍爾的移動城堡",
+        "審判之眼",
+        "TAKUYA KIMURA Live Tour 2026 Checkpoint"
+      ],
+      "searchCorpus": "木村拓哉出道 35 年首度台北開唱 在台慶生秀親筆中文訊息 曾為吉卜力動畫《霍爾的移動城堡》男主角霍爾配音、並在 SEGA《審判之眼》系列遊戲中飾演主角八神隆之的日本知名藝人木村拓哉，於 11 月 13、14 日在台北流行音樂中心舉辦「TAKUYA KIMURA Live Tour 2026 Checkpoint」台北演唱會。這是他出道 35 年來首度以個人歌手身分在台灣開唱，兩天共吸引約 1 萬名歌迷入場。首場演出更適逢他 54 歲生日，除",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-28T05:39:48.631Z",
-      "lastSeenAt": "2026-10-28T05:39:48.631Z",
-      "archivedAt": "2026-11-14T06:19:21.439Z"
+      "discoveredAt": "2026-11-15T06:27:01.820Z",
+      "lastSeenAt": "2026-11-15T06:27:01.820Z"
     }
-  ]
+  ],
+  "archive": []
 }
