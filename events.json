@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-16T06:25:01.746Z",
-    "lastSuccessfulUpdateAt": "2026-11-16T06:25:01.746Z",
+    "updatedAt": "2026-11-17T07:52:39.859Z",
+    "lastSuccessfulUpdateAt": "2026-11-17T07:52:39.859Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 235,
-    "uniqueNewsCount": 449,
-    "articleCandidateCount": 140,
-    "articleFetchSuccessCount": 37,
+    "fetchedExternalItemCount": 232,
+    "uniqueNewsCount": 448,
+    "articleCandidateCount": 142,
+    "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 11,
-    "newEventCount": 1,
-    "cachedEventCount": 54,
+    "matchedEventCount": 14,
+    "newEventCount": 4,
+    "cachedEventCount": 50,
     "rateLimitedCount": 0,
-    "archiveCount": 2,
-    "storedEventCount": 62,
-    "expiredRemovedCount": 7,
+    "archiveCount": 5,
+    "storedEventCount": 60,
+    "expiredRemovedCount": 5,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 36,
+    "undatedOldRemovedCount": 34,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 80,
+    "nonActivityRemovedCount": 85,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -91,8 +91,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-16T06:25:01.746Z",
-      "lastSeenAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "gnn-314506",
@@ -123,8 +123,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-16T06:25:01.746Z",
-      "lastSeenAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "gnn-314431",
@@ -480,6 +480,36 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
+      "id": "ext-583ea8fcd9aa73e4",
+      "title": "台中國際動漫博覽會「漫味食光」規劃四大主題展區 9/17 起開幕",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1DeUtzLWJHY1JpMEdmdV9ZYUZRa3RaTjNsQktkU1NyOXBWbVhVRUthcktHNkR3Y3FwWkVTd29fQVB1Yms3ZS0yZ3UzRFJ4VklwRVRkUGMzQXg?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T07:00:00.000Z",
+      "eventStartDate": "2026-09-17",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "漫味食光"
+      ],
+      "searchCorpus": "台中國際動漫博覽會「漫味食光」規劃四大主題展區 9/17 起開幕 GNN 新聞網",
+      "dateConfidence": "medium",
+      "dateSource": "9/17",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+    },
+    {
       "id": "gnn-311707",
       "title": "「《孤獨搖滾！》POP-UP STORE」高雄夢時代 9/17 起登場",
       "summary": "「《孤獨搖滾！》POP-UP STORE」，將於 9/17 起於高雄夢時代購物中心 8F 開幕。本次活動現場精心規劃了多個充滿「小孤獨氣息」的沉浸式拍照打卡點，除了展現團結 Band 青春活力的主視覺拍照牆，動畫中最具代表性的「完熟芒果箱」也將在現場真實重現。現場特別開放粉絲親自走入這個充滿安全感的紙箱內部拍照，讓大家能一秒化身為「吉",
@@ -547,36 +577,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-05T05:37:27.563Z",
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
-      "id": "ext-5f235300259b09ab",
-      "title": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPV210SEVMZjd5enhsUUx2eUxGMDhpbTJYNVlkLTJLTjJ2TFllVjBnU2wzcVJQQWVBY042MnA2N2FyY29aM3ptSkktaHBfU2NfZjZhRDdaRTFaZmpRa29FdzB6bTRsOHBRMzFoSEVPUmZ2bkwzUG03dXktUGQ2RVNjZFVYYWdOc1U4?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "快閃店",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-11T08:38:00.000Z",
-      "eventStartDate": "2026-09-12",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "三創生活園區",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "家庭教師HITMAN REBORN!"
-      ],
-      "searchCorpus": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場 Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "9/12",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z"
     },
     {
       "id": "gnn-310633",
@@ -1115,6 +1115,79 @@
       "lastSeenAt": "2026-10-29T05:45:16.760Z"
     },
     {
+      "id": "gnn-315132",
+      "title": "ORION GAME 遊戲特展 11/27 起於台北高雄展開 展出《航海王》等多款桌遊",
+      "summary": "Orion Game 獵戶遊戲宣布，將於 2026 年 11 月 27 日至 12 月 21 日，攜手 animate 於「animate 西門站 POPUP SHOP」、「animate 高雄站 POPUP SHOP」舉辦 「ORION GAME 遊戲特展」，以「鋼彈戰棋 &times; TCG &times; Pok&eacute;mon Plakoro &times; 桌遊」為主題，集結《航海王》、《鋼彈》、《數碼寶貝》、《UNION ARENA》等人氣卡牌遊戲及戰棋等，並結合《吸爆鬆餅》、《金",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315132",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-17T03:45:44.000Z",
+      "eventStartDate": "2026-11-27",
+      "eventEndDate": "2026-12-21",
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "航海王",
+        "鋼彈",
+        "數碼寶貝",
+        "UNION ARENA",
+        "吸爆鬆餅",
+        "animate 西門站 POPUP SHOP",
+        "animate 高雄站 POPUP SHOP",
+        "ORION GAME 遊戲特展",
+        "鋼彈戰棋 &times; TCG &times; Pok&eacute;mon Plakoro &times; 桌遊"
+      ],
+      "searchCorpus": "ORION GAME 遊戲特展 11/27 起於台北高雄展開 展出《航海王》等多款桌遊 Orion Game 獵戶遊戲宣布，將於 2026 年 11 月 27 日至 12 月 21 日，攜手 animate 於「animate 西門站 POPUP SHOP」、「animate 高雄站 POPUP SHOP」舉辦 「ORION GAME 遊戲特展」，以「鋼彈戰棋 &times; TCG &times; Pok&eacute;mon Plakoro &times; 桌遊」為主題，集結《航海王》、《鋼彈》、《數碼寶貝》、《UNION ARENA》等人氣卡牌遊戲及戰棋等，並結合《吸爆鬆餅》、《金",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 11 月 27 日至 12 月 21 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+    },
+    {
+      "id": "gnn-315156",
+      "title": "雪人龍貓首度亮相 12/1 起橡子共和國快閃店登陸板橋大遠百 全台感謝祭同步開跑",
+      "summary": "隨著年末佳節將至，吉卜力工作室周邊商品專賣店「橡子共和國」宣布，「橡子共和國板橋大遠百快閃店」將於 2026 年 12 月 1 日至 12 月 30 日限時登場。首度亮相的「雪人龍貓」與大龍貓變身可愛拍照點一起迎接粉絲。為感謝粉絲們長久以來的支持，「橡子共和國感謝祭」也將於 12 月 1 日起全台開跑，北中南共 6 家常設店、線上商店及板",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315156",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "快閃店",
+      "locations": [
+        "新北",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-17T07:26:31.000Z",
+      "eventStartDate": "2026-12-01",
+      "eventEndDate": "2026-12-30",
+      "eventStatus": "upcoming",
+      "venue": "12/1 起橡子共和國快閃店登陸板橋大遠百 全台感謝祭同步開跑 隨著年",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "橡子共和國",
+        "橡子共和國板橋大遠百",
+        "雪人龍貓",
+        "橡子共和國感謝祭"
+      ],
+      "searchCorpus": "雪人龍貓首度亮相 12/1 起橡子共和國快閃店登陸板橋大遠百 全台感謝祭同步開跑 隨著年末佳節將至，吉卜力工作室周邊商品專賣店「橡子共和國」宣布，「橡子共和國板橋大遠百快閃店」將於 2026 年 12 月 1 日至 12 月 30 日限時登場。首度亮相的「雪人龍貓」與大龍貓變身可愛拍照點一起迎接粉絲。為感謝粉絲們長久以來的支持，「橡子共和國感謝祭」也將於 12 月 1 日起全台開跑，北中南共 6 家常設店、線上商店及板",
+      "dateConfidence": "high",
+      "dateSource": "2026 年 12 月 1 日至 12 月 30 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+    },
+    {
       "id": "gnn-313424",
       "title": "《given 被贈與的未來》 × 日本彩妝品牌 iCouleur Collaboration 限定快閃店 12/4 在台登場",
       "summary": "人氣 BL 樂團作品《given 被贈與的未來》與日本彩妝品牌 iCouleur 聯名合作，限定週邊商品快閃店將自 12/4 起於西門町草咖啡限時登場。 日本的 iCouleur 品牌概念為「以我的推，點亮彩繪我的人生」，推出的彩妝商品經常成為話題，其延伸的彩妝意象商品也深受喜愛，此次將 given 的 8 位角色融入質感週邊中，不論是日常實用還是收藏，都能讓",
@@ -1142,8 +1215,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-15T06:27:01.820Z",
-      "lastSeenAt": "2026-11-15T06:27:01.820Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "gnn-313300",
@@ -1394,125 +1467,6 @@
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
     },
     {
-      "id": "ext-bf19739780c7e9db",
-      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
-      "summary": "遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-10T07:14:43.998Z",
-      "lastSeenAt": "2026-11-10T07:14:43.998Z"
-    },
-    {
-      "id": "ext-98c880fa22bfcf62",
-      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "1000元起",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-04T06:17:08.332Z",
-      "lastSeenAt": "2026-11-04T06:17:08.332Z"
-    },
-    {
-      "id": "ext-fec5eb36ece51cf1",
-      "title": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Vl9xZmZmOFJwX2tJR3FJNi03RnU3UnlqZmh1M0ZvRmRuMng0a1d4SFRYZnU2bHUwSDhPWExtX21FejVpZllwZXNJZERjejIteTJVaHpEdUc?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026 高雄國際動漫節",
-        "日本展"
-      ],
-      "searchCorpus": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z"
-    },
-    {
-      "id": "ext-ed1c9c5566bc5e18",
-      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "棕色塵埃2",
-        "Brown Dust2"
-      ],
-      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-31T05:38:06.697Z",
-      "lastSeenAt": "2026-10-31T05:38:06.697Z"
-    },
-    {
       "id": "ext-0bc936f6ef584ef3",
       "title": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假",
       "summary": "Zeek玩家誌",
@@ -1602,8 +1556,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-16T06:25:01.746Z",
-      "lastSeenAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1780,8 +1734,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-16T06:25:01.746Z",
-      "lastSeenAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1840,8 +1794,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-16T06:25:01.746Z",
-      "lastSeenAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1870,8 +1824,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-16T06:25:01.746Z",
-      "lastSeenAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-11-17T07:52:39.859Z",
+      "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
       "id": "gnn-314955",
@@ -1973,68 +1927,158 @@
   ],
   "archive": [
     {
-      "id": "gnn-312209",
-      "title": "《活俠傳》音樂會門票今日開賣隨即秒殺 官方緊急宣布 11/13 加場演出",
-      "summary": "即將於 11 月登場的武俠角色扮演遊戲《活俠傳》音樂會「君所願兮江湖行」今（22）日展開售票，三分鐘內就銷售一空，官方晚間緊急宣布，將於 11 月 13 日加場演出，售票時間將於日後公布。 《活俠傳》由台灣獨立遊戲團隊原始鳥熊 Obb Studio 開發的武俠角色扮演遊戲。主角趙活並非天選之人，而是一名資質平凡、長年未能成為入室弟子的",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312209",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
+      "id": "ext-bf19739780c7e9db",
+      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
+      "summary": "遊戲基地Gamebase",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
       "locations": [
-        "台灣"
+        "高雄"
       ],
-      "confidence": "candidate",
-      "publishedAt": "2026-09-22T11:51:14.000Z",
-      "eventStartDate": "2026-11-13",
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
-      "admissionType": "購票入場",
+      "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [
-        "活俠傳",
-        "君所願兮江湖行"
-      ],
-      "searchCorpus": "《活俠傳》音樂會門票今日開賣隨即秒殺 官方緊急宣布 11/13 加場演出 即將於 11 月登場的武俠角色扮演遊戲《活俠傳》音樂會「君所願兮江湖行」今（22）日展開售票，三分鐘內就銷售一空，官方晚間緊急宣布，將於 11 月 13 日加場演出，售票時間將於日後公布。 《活俠傳》由台灣獨立遊戲團隊原始鳥熊 Obb Studio 開發的武俠角色扮演遊戲。主角趙活並非天選之人，而是一名資質平凡、長年未能成為入室弟子的",
-      "dateConfidence": "medium",
-      "dateSource": "11/13",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-23T04:43:29.841Z",
-      "lastSeenAt": "2026-09-23T04:43:29.841Z",
-      "archivedAt": "2026-11-16T06:25:01.746Z"
+      "workTitles": [],
+      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-10T07:14:43.998Z",
+      "lastSeenAt": "2026-11-10T07:14:43.998Z",
+      "archivedAt": "2026-11-17T07:52:39.859Z"
     },
     {
-      "id": "gnn-311520",
-      "title": "《哈利波特》快閃店今日起於台中草悟廣場 PARK2 登場",
-      "summary": "配合電影第一部上映 25 週年之際，《哈利波特》快閃店今日起（9 月 11 日）於台中 PARK2 草悟廣場登場，活動將持續至 11 月 1 日為止，現場設置七大打卡點、並且推出近 70 款全新商品，以下資訊提供給有興趣的粉絲參考。 首先在打卡點的部分，入口處「護法主視覺」震撼吸睛，若隱若現的霍格華茲城堡前，有著雄鹿、傑克羅素梗犬及水獺",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311520",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
+      "id": "ext-98c880fa22bfcf62",
+      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
+      "summary": "NOWnews今日新聞",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
       "locations": [
-        "台中"
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-11T10:07:03.000Z",
-      "eventStartDate": "2026-09-11",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "1000元起",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z",
+      "archivedAt": "2026-11-17T07:52:39.859Z"
+    },
+    {
+      "id": "ext-fec5eb36ece51cf1",
+      "title": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Vl9xZmZmOFJwX2tJR3FJNi03RnU3UnlqZmh1M0ZvRmRuMng0a1d4SFRYZnU2bHUwSDhPWExtX21FejVpZllwZXNJZERjejIteTJVaHpEdUc?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "哈利波特",
-        "護法主視覺"
+        "2026 高雄國際動漫節",
+        "日本展"
       ],
-      "searchCorpus": "《哈利波特》快閃店今日起於台中草悟廣場 PARK2 登場 配合電影第一部上映 25 週年之際，《哈利波特》快閃店今日起（9 月 11 日）於台中 PARK2 草悟廣場登場，活動將持續至 11 月 1 日為止，現場設置七大打卡點、並且推出近 70 款全新商品，以下資訊提供給有興趣的粉絲參考。 首先在打卡點的部分，入口處「護法主視覺」震撼吸睛，若隱若現的霍格華茲城堡前，有著雄鹿、傑克羅素梗犬及水獺",
+      "searchCorpus": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-03T06:44:46.321Z",
+      "lastSeenAt": "2026-11-03T06:44:46.321Z",
+      "archivedAt": "2026-11-17T07:52:39.859Z"
+    },
+    {
+      "id": "ext-ed1c9c5566bc5e18",
+      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-02T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "棕色塵埃2",
+        "Brown Dust2"
+      ],
+      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-31T05:38:06.697Z",
+      "lastSeenAt": "2026-10-31T05:38:06.697Z",
+      "archivedAt": "2026-11-17T07:52:39.859Z"
+    },
+    {
+      "id": "ext-5f235300259b09ab",
+      "title": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPV210SEVMZjd5enhsUUx2eUxGMDhpbTJYNVlkLTJLTjJ2TFllVjBnU2wzcVJQQWVBY042MnA2N2FyY29aM3ptSkktaHBfU2NfZjZhRDdaRTFaZmpRa29FdzB6bTRsOHBRMzFoSEVPUmZ2bkwzUG03dXktUGQ2RVNjZFVYYWdOc1U4?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-11T08:38:00.000Z",
+      "eventStartDate": "2026-09-12",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "三創生活園區",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "家庭教師HITMAN REBORN!"
+      ],
+      "searchCorpus": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場 Paradaily",
       "dateConfidence": "medium",
-      "dateSource": "9 月 11 日",
+      "dateSource": "9/12",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z",
-      "archivedAt": "2026-11-16T06:25:01.746Z"
+      "discoveredAt": "2026-09-29T05:42:19.377Z",
+      "lastSeenAt": "2026-09-29T05:42:19.377Z",
+      "archivedAt": "2026-11-17T07:52:39.859Z"
     }
   ]
 }
