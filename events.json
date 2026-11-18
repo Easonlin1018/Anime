@@ -3,27 +3,27 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-17T07:52:39.859Z",
-    "lastSuccessfulUpdateAt": "2026-11-17T07:52:39.859Z",
+    "updatedAt": "2026-11-18T07:25:30.248Z",
+    "lastSuccessfulUpdateAt": "2026-11-18T07:25:30.248Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 232,
-    "uniqueNewsCount": 448,
-    "articleCandidateCount": 142,
+    "fetchedExternalItemCount": 231,
+    "uniqueNewsCount": 447,
+    "articleCandidateCount": 143,
     "articleFetchSuccessCount": 36,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 14,
-    "newEventCount": 4,
-    "cachedEventCount": 50,
+    "newEventCount": 3,
+    "cachedEventCount": 51,
     "rateLimitedCount": 0,
-    "archiveCount": 5,
-    "storedEventCount": 60,
+    "archiveCount": 1,
+    "storedEventCount": 61,
     "expiredRemovedCount": 5,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 34,
+    "undatedOldRemovedCount": 36,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
+    "foreignRemovedCount": 1,
     "nonActivityRemovedCount": 85,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
@@ -63,6 +63,38 @@
       "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
+      "id": "gnn-315210",
+      "title": "《神明便利商店》跨足實體收藏 虎爺、黑虎將軍公仔正式開放預購",
+      "summary": "由漫畫家謝東霖創作、鏡文學授權的《神明便利商店》，憑藉融合台灣民間信仰與便利商店日常的獨特世界觀，陸續發展出音樂劇、手機遊戲等多元形式。如今，維肯娛樂將這股跨界熱潮延伸至實體收藏領域，宣布推出虎爺『餅安虎』與黑虎將軍『好額虎』兩款正版授權搪膠公仔，並於 2026 年 11 月 18 日中午 12:00，在嘖嘖平台正式開放預購",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315210",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-11-18T04:17:54.000Z",
+      "eventStartDate": "2026-11-18",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "神明便利商店",
+        "餅安虎",
+        "好額虎"
+      ],
+      "searchCorpus": "《神明便利商店》跨足實體收藏 虎爺、黑虎將軍公仔正式開放預購 由漫畫家謝東霖創作、鏡文學授權的《神明便利商店》，憑藉融合台灣民間信仰與便利商店日常的獨特世界觀，陸續發展出音樂劇、手機遊戲等多元形式。如今，維肯娛樂將這股跨界熱潮延伸至實體收藏領域，宣布推出虎爺『餅安虎』與黑虎將軍『好額虎』兩款正版授權搪膠公仔，並於 2026 年 11 月 18 日中午 12:00，在嘖嘖平台正式開放預購",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 11 月 18 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+    },
+    {
       "id": "gnn-315007",
       "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店 今日起正式登場",
       "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，今日（11 月 13 日）起於新北板橋耶誕城登場正式登場，活動將持續到 12 月 27 日為止。本次以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍",
@@ -91,8 +123,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "gnn-314506",
@@ -123,8 +155,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "gnn-314431",
@@ -244,8 +276,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-15T06:27:01.820Z",
-      "lastSeenAt": "2026-11-15T06:27:01.820Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "gnn-313100",
@@ -506,8 +538,8 @@
       "dateConfidence": "medium",
       "dateSource": "9/17",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "gnn-311707",
@@ -672,38 +704,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-15T04:36:00.593Z",
       "lastSeenAt": "2026-10-15T04:36:00.593Z"
-    },
-    {
-      "id": "ext-577a1ba967b49720",
-      "title": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaENrX3dja2tFeE5MWUc4VS1SSkJCdTRKb3B1a3U2SzNFeGtYRmFkQjQzQmR2aXgwQjNzcHV4ZXRha1hrMTgxd0NTb0Y0YlZCeWE0WDUzdUkySnZLUXd1aWNobHAwMWtKbUlnYlR5a1BfNjdIVzQ2eGdIUF95aEE2RzN6MWRUOGxi?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-14T07:00:00.000Z",
-      "eventStartDate": "2026-07-15",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "三創園區正式開展！ Paradaily",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "迷宮飯",
-        "迷宮探索展",
-        "開箱"
-      ],
-      "searchCorpus": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 15 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z"
     },
     {
       "id": "gnn-308120",
@@ -1215,8 +1215,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "gnn-313300",
@@ -1250,6 +1250,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-13T06:46:02.845Z",
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
+    },
+    {
+      "id": "ext-5d61d76774a721c9",
+      "title": "用閃亮的歌聲開始現場演唱！《真珠美人魚》POP-UP SHOP 快閃店 12 月 18 日重磅降臨華山",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1ReS1rNlRWbXh3d2xjYVJIZjNnOV9DVUdfdDhMRXhkUnBGcTZ5Q3gtR3FRWjNxYUhMcWtXZ1VWUHhCbmtIZERfaDFlY1hXd3ZreXRHRXRtS2NCMWk1SlN0V2xKM19QVTZRUndFa3ktN2VrVXlQZDdhWUlR?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-17T07:30:00.000Z",
+      "eventStartDate": "2026-12-18",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "華山 SouNova 少女星",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "真珠美人魚"
+      ],
+      "searchCorpus": "用閃亮的歌聲開始現場演唱！《真珠美人魚》POP-UP SHOP 快閃店 12 月 18 日重磅降臨華山 SouNova 少女星",
+      "dateConfidence": "medium",
+      "dateSource": "12 月 18 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "ext-7589f44a2b0fbf10",
@@ -1556,8 +1586,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1734,8 +1764,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1794,8 +1824,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1927,158 +1957,37 @@
   ],
   "archive": [
     {
-      "id": "ext-bf19739780c7e9db",
-      "title": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲",
-      "summary": "遊戲基地Gamebase",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBEMkVwT0UzMkF0czJkV01VUTdKSzlJOHJ1NmVCWkZJd2JwTnZMcFdBSzF6THI4SmhmZjhFUFI1X0JaOERuZUNza3NCSTBCMDNLdlk0aHc2UjNLTm1iQ1E?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄動漫節木棉花熱鬧登場，七大超值福袋、六重滿額贈，國慶連假獻給南台灣粉絲 遊戲基地Gamebase",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-10T07:14:43.998Z",
-      "lastSeenAt": "2026-11-10T07:14:43.998Z",
-      "archivedAt": "2026-11-17T07:52:39.859Z"
-    },
-    {
-      "id": "ext-98c880fa22bfcf62",
-      "title": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶",
-      "summary": "NOWnews今日新聞",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTFBERm8wX1pDNVlhN1oxYlpsdjZHeEZMM2xqMGlxV0dYNnk1TERvcU1aUGpoUHExY01UQ3puOUJZbWZJSzVMeGYxWmhwaHHSAVJBVV95cUxPQXBaMURoZ3BFWFdES3hKck1seE00R2E2RmN2TW9KeHI0SWphYmt6a3BmbFJibVlvTUlFWG1MS3Y1cHp3cjFxazRKMHpUSE93WTVB?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "1000元起",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節木棉花福袋1000元起！獵人純金執照登場 周邊30元挖寶 NOWnews今日新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-04T06:17:08.332Z",
-      "lastSeenAt": "2026-11-04T06:17:08.332Z",
-      "archivedAt": "2026-11-17T07:52:39.859Z"
-    },
-    {
-      "id": "ext-fec5eb36ece51cf1",
-      "title": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE04Vl9xZmZmOFJwX2tJR3FJNi03RnU3UnlqZmh1M0ZvRmRuMng0a1d4SFRYZnU2bHUwSDhPWExtX21FejVpZllwZXNJZERjejIteTJVaHpEdUc?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "2026 高雄國際動漫節",
-        "日本展"
-      ],
-      "searchCorpus": "Anique 宣布參展「2026 高雄國際動漫節」與台北信義 A11「日本展」帶來多樣週邊商品販售 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-03T06:44:46.321Z",
-      "lastSeenAt": "2026-11-03T06:44:46.321Z",
-      "archivedAt": "2026-11-17T07:52:39.859Z"
-    },
-    {
-      "id": "ext-ed1c9c5566bc5e18",
-      "title": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》",
-      "summary": "GNN 新聞網",
-      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5tdlZPZkNPTmZ3Vy1ZSTRnV2JiRXN0UkJVZGVhbjZhcHZaUVNCT0NnMk1zNVY1Ymx0VGU3R1ptZnBad0ZpcjJNQW56Tzd4N0pqUU1GU2JtU1M?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-02T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "棕色塵埃2",
-        "Brown Dust2"
-      ],
-      "searchCorpus": "《棕色塵埃2》進軍 2026 高雄國際動漫節台韓越人氣Coser 集結公開活動限定週邊、舞台活動《Brown Dust2》 GNN 新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-31T05:38:06.697Z",
-      "lastSeenAt": "2026-10-31T05:38:06.697Z",
-      "archivedAt": "2026-11-17T07:52:39.859Z"
-    },
-    {
-      "id": "ext-5f235300259b09ab",
-      "title": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場",
+      "id": "ext-577a1ba967b49720",
+      "title": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！",
       "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPV210SEVMZjd5enhsUUx2eUxGMDhpbTJYNVlkLTJLTjJ2TFllVjBnU2wzcVJQQWVBY042MnA2N2FyY29aM3ptSkktaHBfU2NfZjZhRDdaRTFaZmpRa29FdzB6bTRsOHBRMzFoSEVPUmZ2bkwzUG03dXktUGQ2RVNjZFVYYWdOc1U4?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaENrX3dja2tFeE5MWUc4VS1SSkJCdTRKb3B1a3U2SzNFeGtYRmFkQjQzQmR2aXgwQjNzcHV4ZXRha1hrMTgxd0NTb0Y0YlZCeWE0WDUzdUkySnZLUXd1aWNobHAwMWtKbUlnYlR5a1BfNjdIVzQ2eGdIUF95aEE2RzN6MWRUOGxi?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
-      "type": "快閃店",
+      "type": "展覽",
       "locations": [
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-11T08:38:00.000Z",
-      "eventStartDate": "2026-09-12",
+      "publishedAt": "2026-07-14T07:00:00.000Z",
+      "eventStartDate": "2026-07-15",
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "三創生活園區",
+      "venue": "三創園區正式開展！ Paradaily",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "家庭教師HITMAN REBORN!"
+        "迷宮飯",
+        "迷宮探索展",
+        "開箱"
       ],
-      "searchCorpus": "粉絲熱情召喚！《家庭教師HITMAN REBORN!》動畫 20 週年快閃店台北站 9/12 三創生活園區熱血登場 Paradaily",
+      "searchCorpus": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！ Paradaily",
       "dateConfidence": "medium",
-      "dateSource": "9/12",
+      "dateSource": "7 月 15 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-29T05:42:19.377Z",
-      "lastSeenAt": "2026-09-29T05:42:19.377Z",
-      "archivedAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-09-16T04:47:27.285Z",
+      "lastSeenAt": "2026-09-16T04:47:27.285Z",
+      "archivedAt": "2026-11-18T07:25:30.248Z"
     }
   ]
 }
