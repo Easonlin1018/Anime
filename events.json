@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-18T07:25:30.248Z",
-    "lastSuccessfulUpdateAt": "2026-11-18T07:25:30.248Z",
+    "updatedAt": "2026-11-19T07:21:45.016Z",
+    "lastSuccessfulUpdateAt": "2026-11-19T07:21:45.016Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 231,
-    "uniqueNewsCount": 447,
+    "fetchedExternalItemCount": 232,
+    "uniqueNewsCount": 449,
     "articleCandidateCount": 143,
-    "articleFetchSuccessCount": 36,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 14,
+    "matchedEventCount": 15,
     "newEventCount": 3,
-    "cachedEventCount": 51,
+    "cachedEventCount": 52,
     "rateLimitedCount": 0,
     "archiveCount": 1,
-    "storedEventCount": 61,
+    "storedEventCount": 62,
     "expiredRemovedCount": 5,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 36,
+    "undatedOldRemovedCount": 35,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
-    "nonActivityRemovedCount": 85,
+    "foreignRemovedCount": 0,
+    "nonActivityRemovedCount": 86,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -61,6 +61,37 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-11-06T06:40:09.861Z",
       "lastSeenAt": "2026-11-06T06:40:09.861Z"
+    },
+    {
+      "id": "gnn-315268",
+      "title": "《櫻蘭高校男公關部》20 周年聯名主題餐廳 即日於 FANFANS CAFÉ 展開",
+      "summary": "經典懷舊少女動畫《櫻蘭高校男公關部》迎來 20 周年，FANFANS CAF&Eacute; 推出《櫻蘭高校男公關部》20 周年聯名主題餐廳，今日（11 月 19 日）起於台北西門店，11月20日起於高雄店登場。 《櫻蘭高校男公關部》以櫻蘭高校為舞台，描繪治斐與男公關部成員之間既爆笑又令人心動的校園日常。這次 FANFANS CAF&Eacute; 將作品經典元素融入主題空間。",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315268",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "主題餐廳／咖啡廳",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-19T06:09:50.000Z",
+      "eventStartDate": "2026-11-19",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "櫻蘭高校男公關部"
+      ],
+      "searchCorpus": "《櫻蘭高校男公關部》20 周年聯名主題餐廳 即日於 FANFANS CAFÉ 展開 經典懷舊少女動畫《櫻蘭高校男公關部》迎來 20 周年，FANFANS CAF&Eacute; 推出《櫻蘭高校男公關部》20 周年聯名主題餐廳，今日（11 月 19 日）起於台北西門店，11月20日起於高雄店登場。 《櫻蘭高校男公關部》以櫻蘭高校為舞台，描繪治斐與男公關部成員之間既爆笑又令人心動的校園日常。這次 FANFANS CAF&Eacute; 將作品經典元素融入主題空間。",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 19 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "gnn-315210",
@@ -123,8 +154,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "gnn-314506",
@@ -155,8 +186,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "gnn-314431",
@@ -1083,6 +1114,41 @@
       "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
+      "id": "gnn-315270",
+      "title": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊",
+      "summary": "2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315270",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "簽名會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-19T06:47:57.000Z",
+      "eventStartDate": "2026-11-20",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "美味佳餚Ω吱吱叫",
+        "糖果色的戀愛反論",
+        "美味佳餚&Omega;吱吱叫",
+        "特裝版",
+        "親簽組",
+        "TiCA27"
+      ],
+      "searchCorpus": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊 2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
+      "dateConfidence": "medium",
+      "dateSource": "11/20",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
+    },
+    {
       "id": "gnn-314094",
       "title": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕",
       "summary": "人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
@@ -1215,8 +1281,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "gnn-313300",
@@ -1278,8 +1344,8 @@
       "dateConfidence": "medium",
       "dateSource": "12 月 18 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "ext-7589f44a2b0fbf10",
@@ -1497,34 +1563,6 @@
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
     },
     {
-      "id": "ext-0bc936f6ef584ef3",
-      "title": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假",
-      "summary": "Zeek玩家誌",
-      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4tVGg1b1V6dTJ3WllvY0tpMnNOTHo4Xy03SzNXNVRSeTBwWElfRmltaG9oUE5tYnNnejM4TmM2ajJqOVBVaWxaaVpGNlBmT1cwQ2c?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-04T16:39:43.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假 Zeek玩家誌",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-04T06:17:08.332Z",
-      "lastSeenAt": "2026-11-04T06:17:08.332Z"
-    },
-    {
       "id": "gnn-312921",
       "title": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲",
       "summary": "日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
@@ -1586,8 +1624,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "ext-ad36b19a9eda0780",
@@ -1764,8 +1802,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1824,8 +1862,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1854,8 +1892,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-17T07:52:39.859Z",
-      "lastSeenAt": "2026-11-17T07:52:39.859Z"
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
       "id": "gnn-314955",
@@ -1957,37 +1995,33 @@
   ],
   "archive": [
     {
-      "id": "ext-577a1ba967b49720",
-      "title": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！",
-      "summary": "Paradaily",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaENrX3dja2tFeE5MWUc4VS1SSkJCdTRKb3B1a3U2SzNFeGtYRmFkQjQzQmR2aXgwQjNzcHV4ZXRha1hrMTgxd0NTb0Y0YlZCeWE0WDUzdUkySnZLUXd1aWNobHAwMWtKbUlnYlR5a1BfNjdIVzQ2eGdIUF95aEE2RzN6MWRUOGxi?oc=5",
+      "id": "ext-0bc936f6ef584ef3",
+      "title": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假",
+      "summary": "Zeek玩家誌",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4tVGg1b1V6dTJ3WllvY0tpMnNOTHo4Xy03SzNXNVRSeTBwWElfRmltaG9oUE5tYnNnejM4TmM2ajJqOVBVaWxaaVpGNlBmT1cwQ2c?oc=5",
       "source": "Google News－官方主辦單位",
       "discoverySource": "Google News－官方主辦單位",
       "sourceTag": "外部來源",
-      "type": "展覽",
+      "type": "大型展會",
       "locations": [
-        "台北"
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-07-14T07:00:00.000Z",
-      "eventStartDate": "2026-07-15",
+      "publishedAt": "2026-10-04T16:39:43.000Z",
+      "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "三創園區正式開展！ Paradaily",
+      "venue": "",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [
-        "迷宮飯",
-        "迷宮探索展",
-        "開箱"
-      ],
-      "searchCorpus": "【開箱】人氣動畫《迷宮飯》「迷宮探索展」x 九井諒子展台灣站 7 月 15 日三創園區正式開展！ Paradaily",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 15 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-09-16T04:47:27.285Z",
-      "lastSeenAt": "2026-09-16T04:47:27.285Z",
-      "archivedAt": "2026-11-18T07:25:30.248Z"
+      "workTitles": [],
+      "searchCorpus": "2026高雄國際動漫節盛大展開！木棉花集結七大福袋、六重滿額禮與強檔周邊迎接國慶連假 Zeek玩家誌",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-04T06:17:08.332Z",
+      "lastSeenAt": "2026-11-04T06:17:08.332Z",
+      "archivedAt": "2026-11-19T07:21:45.016Z"
     }
   ]
 }
