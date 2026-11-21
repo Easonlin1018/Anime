@@ -3,34 +3,29 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-20T07:11:56.169Z",
-    "lastSuccessfulUpdateAt": "2026-11-20T07:11:56.169Z",
-    "fetchStatus": "partial",
+    "updatedAt": "2026-11-21T07:03:11.788Z",
+    "lastSuccessfulUpdateAt": "2026-11-21T07:03:11.788Z",
+    "fetchStatus": "success",
     "fetchedRssCount": 30,
-    "fetchedTagItemCount": 189,
-    "fetchedExternalItemCount": 288,
-    "uniqueNewsCount": 484,
-    "articleCandidateCount": 144,
+    "fetchedTagItemCount": 209,
+    "fetchedExternalItemCount": 240,
+    "uniqueNewsCount": 455,
+    "articleCandidateCount": 143,
     "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 12,
-    "newEventCount": 0,
-    "cachedEventCount": 54,
+    "matchedEventCount": 11,
+    "newEventCount": 1,
+    "cachedEventCount": 51,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 62,
-    "expiredRemovedCount": 6,
+    "archiveCount": 4,
+    "storedEventCount": 59,
+    "expiredRemovedCount": 4,
     "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 38,
+    "undatedOldRemovedCount": 40,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 86,
-    "sourceErrors": [
-      {
-        "source": "標籤 快閃店 第 1 頁",
-        "error": "HTTP 500 Internal Server Error"
-      }
-    ],
+    "foreignRemovedCount": 1,
+    "nonActivityRemovedCount": 84,
+    "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
   "events": [
@@ -99,38 +94,6 @@
       "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
-      "id": "gnn-315210",
-      "title": "《神明便利商店》跨足實體收藏 虎爺、黑虎將軍公仔正式開放預購",
-      "summary": "由漫畫家謝東霖創作、鏡文學授權的《神明便利商店》，憑藉融合台灣民間信仰與便利商店日常的獨特世界觀，陸續發展出音樂劇、手機遊戲等多元形式。如今，維肯娛樂將這股跨界熱潮延伸至實體收藏領域，宣布推出虎爺『餅安虎』與黑虎將軍『好額虎』兩款正版授權搪膠公仔，並於 2026 年 11 月 18 日中午 12:00，在嘖嘖平台正式開放預購",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=315210",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-11-18T04:17:54.000Z",
-      "eventStartDate": "2026-11-18",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "神明便利商店",
-        "餅安虎",
-        "好額虎"
-      ],
-      "searchCorpus": "《神明便利商店》跨足實體收藏 虎爺、黑虎將軍公仔正式開放預購 由漫畫家謝東霖創作、鏡文學授權的《神明便利商店》，憑藉融合台灣民間信仰與便利商店日常的獨特世界觀，陸續發展出音樂劇、手機遊戲等多元形式。如今，維肯娛樂將這股跨界熱潮延伸至實體收藏領域，宣布推出虎爺『餅安虎』與黑虎將軍『好額虎』兩款正版授權搪膠公仔，並於 2026 年 11 月 18 日中午 12:00，在嘖嘖平台正式開放預購",
-      "dateConfidence": "medium",
-      "dateSource": "2026 年 11 月 18 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-18T07:25:30.248Z",
-      "lastSeenAt": "2026-11-18T07:25:30.248Z"
-    },
-    {
       "id": "gnn-315007",
       "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店 今日起正式登場",
       "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，今日（11 月 13 日）起於新北板橋耶誕城登場正式登場，活動將持續到 12 月 27 日為止。本次以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍",
@@ -159,8 +122,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-19T07:21:45.016Z",
-      "lastSeenAt": "2026-11-19T07:21:45.016Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "gnn-314506",
@@ -191,8 +154,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-19T07:21:45.016Z",
-      "lastSeenAt": "2026-11-19T07:21:45.016Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "gnn-314431",
@@ -606,42 +569,6 @@
       "searchCorpus": "「《孤獨搖滾！》POP-UP STORE」高雄夢時代 9/17 起登場 「《孤獨搖滾！》POP-UP STORE」，將於 9/17 起於高雄夢時代購物中心 8F 開幕。本次活動現場精心規劃了多個充滿「小孤獨氣息」的沉浸式拍照打卡點，除了展現團結 Band 青春活力的主視覺拍照牆，動畫中最具代表性的「完熟芒果箱」也將在現場真實重現。現場特別開放粉絲親自走入這個充滿安全感的紙箱內部拍照，讓大家能一秒化身為「吉",
       "dateConfidence": "medium",
       "dateSource": "9/17",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z"
-    },
-    {
-      "id": "gnn-311261",
-      "title": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場",
-      "summary": "緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311261",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "台北",
-        "台中",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-09T04:00:27.000Z",
-      "eventStartDate": "2026-09-16",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "高雄夢時代",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "JOJO 的奇妙冒險 星塵遠征軍",
-        "JOJO的奇妙冒險 星塵遠征軍",
-        "人形大立牌區",
-        "DIO VS 星塵遠征軍",
-        "星塵遠征軍櫥窗區"
-      ],
-      "searchCorpus": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場 緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
-      "dateConfidence": "medium",
-      "dateSource": "9/16",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-05T05:37:27.563Z",
       "lastSeenAt": "2026-10-05T05:37:27.563Z"
@@ -1286,8 +1213,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-19T07:21:45.016Z",
-      "lastSeenAt": "2026-11-19T07:21:45.016Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "gnn-313300",
@@ -1349,8 +1276,8 @@
       "dateConfidence": "medium",
       "dateSource": "12 月 18 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "ext-7589f44a2b0fbf10",
@@ -1568,71 +1495,6 @@
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
     },
     {
-      "id": "gnn-312921",
-      "title": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲",
-      "summary": "日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312921",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-06T04:09:23.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "靈異教師神眉",
-        "真天地開闢集團-慈愚挫愚",
-        "行腳巡禮 MISOGI ～番外篇～ in 台灣"
-      ],
-      "searchCorpus": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲 日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-06T06:18:28.410Z",
-      "lastSeenAt": "2026-10-06T06:18:28.410Z"
-    },
-    {
-      "id": "ext-a009f9af507a034e",
-      "title": "「2026高雄動漫節」國慶連假熱鬧登場！木棉花《葬送的芙莉蓮》《家庭教師》《魔法少女小圓》強作齊聚！七大超值福袋、六重滿額贈攻略懶人包",
-      "summary": "oneone宇宙",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBlUzFXV0psX3I0TE5OTnJSTl9JTThBUzZxVHA4VlNGa0JzbzNCY2YxVHZodlUyTmFfZFFLMHMyVEVnd2gyQUJ3cElJOVA2eTN6Q2R3?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-06T09:35:27.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "葬送的芙莉蓮",
-        "家庭教師",
-        "魔法少女小圓",
-        "2026高雄動漫節"
-      ],
-      "searchCorpus": "「2026高雄動漫節」國慶連假熱鬧登場！木棉花《葬送的芙莉蓮》《家庭教師》《魔法少女小圓》強作齊聚！七大超值福袋、六重滿額贈攻略懶人包 oneone宇宙",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
-    },
-    {
       "id": "ext-ad36b19a9eda0780",
       "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
       "summary": "立報傳媒",
@@ -1657,8 +1519,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "ext-c660ed55ec6f232c",
@@ -1807,8 +1669,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1867,8 +1729,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1996,7 +1858,176 @@
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-11-16T06:25:01.746Z",
       "lastSeenAt": "2026-11-16T06:25:01.746Z"
+    },
+    {
+      "id": "gnn-315369",
+      "title": "【TiCA27】青春靈異漫畫《靈靈總總拍不到》作者コノシマルカ將來台舉辦簽名會",
+      "summary": "第 15 屆台北國際動漫節將於 2027 年 1 月 28 起在台北世貿一館熱鬧登場，台灣角川今日公開本屆舞台活動陣容──將邀請日本漫畫家コノシマルカ來台舉辦《靈靈總總拍不到》簽名會，與台灣讀者見面，並於台北動漫節現場首賣最新作《靈靈總總拍不到》第 7 集首刷特裝版與相關周邊，關於簽名會詳細時間與參加辦法與簽名套組完整內容將",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315369",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：動漫節",
+      "sourceTag": "動漫節",
+      "type": "簽名會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-20T09:50:13.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "台北世貿一館",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "靈靈總總拍不到",
+        "TiCA27"
+      ],
+      "searchCorpus": "【TiCA27】青春靈異漫畫《靈靈總總拍不到》作者コノシマルカ將來台舉辦簽名會 第 15 屆台北國際動漫節將於 2027 年 1 月 28 起在台北世貿一館熱鬧登場，台灣角川今日公開本屆舞台活動陣容──將邀請日本漫畫家コノシマルカ來台舉辦《靈靈總總拍不到》簽名會，與台灣讀者見面，並於台北動漫節現場首賣最新作《靈靈總總拍不到》第 7 集首刷特裝版與相關周邊，關於簽名會詳細時間與參加辦法與簽名套組完整內容將",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-315210",
+      "title": "《神明便利商店》跨足實體收藏 虎爺、黑虎將軍公仔正式開放預購",
+      "summary": "由漫畫家謝東霖創作、鏡文學授權的《神明便利商店》，憑藉融合台灣民間信仰與便利商店日常的獨特世界觀，陸續發展出音樂劇、手機遊戲等多元形式。如今，維肯娛樂將這股跨界熱潮延伸至實體收藏領域，宣布推出虎爺『餅安虎』與黑虎將軍『好額虎』兩款正版授權搪膠公仔，並於 2026 年 11 月 18 日中午 12:00，在嘖嘖平台正式開放預購",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315210",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-11-18T04:17:54.000Z",
+      "eventStartDate": "2026-11-18",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "神明便利商店",
+        "餅安虎",
+        "好額虎"
+      ],
+      "searchCorpus": "《神明便利商店》跨足實體收藏 虎爺、黑虎將軍公仔正式開放預購 由漫畫家謝東霖創作、鏡文學授權的《神明便利商店》，憑藉融合台灣民間信仰與便利商店日常的獨特世界觀，陸續發展出音樂劇、手機遊戲等多元形式。如今，維肯娛樂將這股跨界熱潮延伸至實體收藏領域，宣布推出虎爺『餅安虎』與黑虎將軍『好額虎』兩款正版授權搪膠公仔，並於 2026 年 11 月 18 日中午 12:00，在嘖嘖平台正式開放預購",
+      "dateConfidence": "medium",
+      "dateSource": "2026 年 11 月 18 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-18T07:25:30.248Z",
+      "lastSeenAt": "2026-11-18T07:25:30.248Z",
+      "archivedAt": "2026-11-21T07:03:11.788Z"
+    },
+    {
+      "id": "ext-a009f9af507a034e",
+      "title": "「2026高雄動漫節」國慶連假熱鬧登場！木棉花《葬送的芙莉蓮》《家庭教師》《魔法少女小圓》強作齊聚！七大超值福袋、六重滿額贈攻略懶人包",
+      "summary": "oneone宇宙",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBlUzFXV0psX3I0TE5OTnJSTl9JTThBUzZxVHA4VlNGa0JzbzNCY2YxVHZodlUyTmFfZFFLMHMyVEVnd2gyQUJ3cElJOVA2eTN6Q2R3?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-06T09:35:27.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "葬送的芙莉蓮",
+        "家庭教師",
+        "魔法少女小圓",
+        "2026高雄動漫節"
+      ],
+      "searchCorpus": "「2026高雄動漫節」國慶連假熱鬧登場！木棉花《葬送的芙莉蓮》《家庭教師》《魔法少女小圓》強作齊聚！七大超值福袋、六重滿額贈攻略懶人包 oneone宇宙",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-20T07:11:56.169Z",
+      "lastSeenAt": "2026-11-20T07:11:56.169Z",
+      "archivedAt": "2026-11-21T07:03:11.788Z"
+    },
+    {
+      "id": "gnn-312921",
+      "title": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲",
+      "summary": "日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312921",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-06T04:09:23.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "靈異教師神眉",
+        "真天地開闢集團-慈愚挫愚",
+        "行腳巡禮 MISOGI ～番外篇～ in 台灣"
+      ],
+      "searchCorpus": "「-真天地開闢集團-慈愚挫愚」台北開唱 帶來《靈異教師神眉》主題曲 日本樂團「-真天地開闢集團-慈愚挫愚」今（4）日首度登上 Zepp New Taipei，舉行「行腳巡禮 MISOGI ～番外篇～ in 台灣」，不僅是成軍以來第一次台北專場，更是樂團首次海外演唱會，滿場歌迷以熱烈歡呼迎接三人現身，共同見證樂團成軍 10 年來別具意義的一刻。 演出一開始，漆黑的會場內響起強勁風聲，隨著清冽鈴聲迴盪，命 -mikoto-、龍矢",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-06T06:18:28.410Z",
+      "lastSeenAt": "2026-10-06T06:18:28.410Z",
+      "archivedAt": "2026-11-21T07:03:11.788Z"
+    },
+    {
+      "id": "gnn-311261",
+      "title": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場",
+      "summary": "緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=311261",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北",
+        "台中",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-09T04:00:27.000Z",
+      "eventStartDate": "2026-09-16",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "高雄夢時代",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "JOJO 的奇妙冒險 星塵遠征軍",
+        "JOJO的奇妙冒險 星塵遠征軍",
+        "人形大立牌區",
+        "DIO VS 星塵遠征軍",
+        "星塵遠征軍櫥窗區"
+      ],
+      "searchCorpus": "《JOJO 的奇妙冒險 星塵遠征軍》快閃店 9/16 高雄夢時代壓軸登場 緊接著在台北、台中後，《JOJO的奇妙冒險 星塵遠征軍》快閃店將於 9/16 進駐高雄夢時代。店內打造五大宿命打卡點，從超過 200 公分高、集結星塵遠征軍全員的「人形大立牌區」迎接各位開始，再到重現與最強反派 DIO 展開宿命對決的巨幅「DIO VS 星塵遠征軍」，還有承太郎、白金之星等角色與替身並肩現身的「星塵遠征軍櫥窗區」。快閃",
+      "dateConfidence": "medium",
+      "dateSource": "9/16",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-05T05:37:27.563Z",
+      "lastSeenAt": "2026-10-05T05:37:27.563Z",
+      "archivedAt": "2026-11-21T07:03:11.788Z"
+    }
+  ]
 }
