@@ -3,7 +3,7 @@
 const cacheName = "anime-private-series-__REVISION__";
 const documents = new Set(["/", "/index.html"]);
 const files = [...documents, "/preview.css", "/preview.js", "/model.js", "/v11-core.js",
-    "/vendor/opencc.js", "/manifest.webmanifest", "/icon.svg"];
+    "/poster-fix-4-core.js", "/save-poster-fix-4.js", "/vendor/opencc.js", "/manifest.webmanifest", "/icon.svg"];
 
 async function fetchAsset(path, signal) {
     // The worker only ever sends fixed, credential-free asset requests.

@@ -5,6 +5,7 @@ const test = require("node:test");
 const core = require("./release-path.cjs")("v11-core.js");
 const V = require(core);
 const audit = require("../tools/private-series-preview/model.js");
+const posterFix4 = require("../releases/poster-fix-4/v11-core.js");
 
 const rascal = "青春豬頭少年不會夢見兔女郎學姊";
 const movie = "青春豬頭少年不會夢到懷夢美少女";
@@ -116,4 +117,66 @@ test("progress and series edits are copy-only and never rewrite the raw record o
     assert.equal(result.items[4].key,result.items[2].key);
     assert.throws(() => audit.changeCopy(confirmed,2,"membership",{ membership:"link:4" },date));
     assert.throws(() => audit.changeCopy(confirmed,4,"save",{ notes:"", progress:"-1" },date));
+});
+
+test("A/B baseline uses the original poster-fix-4 keys and shows exact cross-category member differences", () => {
+    const rows = [
+        ...examples.slice(0,5),
+        { id:"archived", title:dress, groupTitle:dress, watched:2, deletedAt:date }
+    ];
+    const copy = exampleCopy(rows), before = JSON.stringify(copy);
+    const { comparison } = audit.reportSeries(copy);
+    const old = posterFix4.assignAnimeSeriesIdentity(rows).list;
+    const oldRascalKey = posterFix4.getAnimeSeriesKey(old[0]);
+    const oldDressKey = posterFix4.getAnimeSeriesKey(old[2]);
+    assert.deepEqual(comparison.oldGroups.map(group => [group.key, group.members]), [
+        [oldRascalKey, [0,1]], [oldDressKey, [2,3,4]]
+    ]);
+    assert.deepEqual(comparison.restored.map(group => group.members), [[0,1]]);
+    assert.deepEqual(comparison.split.map(group => group.members), [[2,3,4]]);
+    assert.deepEqual(comparison.split[0].oldParts.map(part => part.members), [[2,3,4]]);
+    assert.deepEqual(comparison.split[0].newParts.map(part => part.members), [[2,3], [4]]);
+    assert.deepEqual(comparison.review, []);
+    assert.deepEqual(comparison.possibleMerges, []);
+    assert.equal(JSON.stringify(copy), before);
+});
+
+test("A/B flags a newly joined legacy series for inspection while leaving a verified relation and manual links out of the warning", () => {
+    const title = "季度動畫";
+    const rows = [
+        { id:"a", title, groupTitle:title, year:2017, format:"TV", source:"AniList", sourceId:303001, anilistId:303001 },
+        { id:"b", title:title + " 第二季", groupTitle:title, year:2018, format:"TV", source:"AniList", sourceId:303002, anilistId:303002 },
+        { id:"id-conflict", title:"有矛盾的作品", source:"AniList", anilistId:303003, sourceId:303004 },
+        { id:"other-provider", title:"其他網站作品", source:"MyAnimeList", sourceId:"external-id" }
+    ];
+    const copy = exampleCopy(rows);
+    const { comparison, stats } = audit.reportSeries(copy);
+    assert.deepEqual(comparison.possibleMerges.map(group => group.members), [[0,1]]);
+    assert.deepEqual(comparison.possibleMerges[0].oldParts.map(part => part.members), [[0],[1]]);
+    assert.deepEqual(comparison.possibleMerges[0].newParts.map(part => part.members), [[0,1]]);
+    assert.deepEqual(comparison.review.map(item => item.index), [2]);
+    assert.match(comparison.review[0].reasons.join(), /ID/u);
+    assert.equal(stats.needsReview, 1);
+    const manual = audit.changeCopy(copy,1,"membership",{ membership:"link:0" },date);
+    assert.deepEqual(audit.reportSeries(manual).comparison.possibleMerges, []);
+    const relation = [ { ...rows[0], relations:[edge("SEQUEL",303002,rows[1].title,"TV")] }, rows[1] ];
+    assert.deepEqual(audit.reportSeries(exampleCopy(relation)).comparison.possibleMerges, []);
+});
+
+test("backup provenance distinguishes regenerated fields, older keys, and unmarked backups", () => {
+    const rows = [ { id:"old", title:"輕小說改編", groupTitle:"輕小說改編" },
+        { id:"after", title:"輕小說改編 第二季", groupTitle:"輕小說改編" } ];
+    const stored = posterFix4.assignAnimeSeriesIdentity(rows).list;
+    const first = audit.reportSeries(exampleCopy(stored)).comparison;
+    assert.equal(first.provenance.status, "legacy-fields");
+    assert.equal(first.provenance.legacyCount, 2);
+    const second = audit.reportSeries(exampleCopy([
+        stored[0], { ...stored[1], seriesKey:'local-series:"after"', seriesKeySource:"local-record" }
+    ])).comparison;
+    assert.equal(second.provenance.status, "newer-fields");
+    assert.equal(second.provenance.newerCount, 1);
+    assert.equal(second.provenance.legacyCount, 1);
+    assert.match(second.provenance.warning, /無法還原更新前/u);
+    assert.deepEqual(second.oldGroups.map(group => group.members), [[0,1]]);
+    assert.equal(audit.reportSeries(exampleCopy(rows)).comparison.provenance.status, "unknown");
 });

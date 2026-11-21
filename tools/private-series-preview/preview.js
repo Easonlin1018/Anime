@@ -9,6 +9,8 @@ const summary = document.getElementById("summary");
 const offline = document.getElementById("offline");
 const search = document.getElementById("search");
 const report = document.getElementById("report");
+const comparison = document.getElementById("comparison");
+const comparisonResults = document.getElementById("comparison-results");
 const resultLabels = {
     grouped:"成功分組", independent:"維持獨立", suggestion:"可選的分組建議", review:"需要人工確認",
     conflict:"可能的錯誤分組或身分衝突", deleted:"備份中的已刪除紀錄"
@@ -165,10 +167,70 @@ function renderItem(item, expanded) {
     return details;
 }
 
+function memberLabel(row) {
+    return [originalTitle(row), row.startDate?.year || row.year, row.format,
+        row.id == null ? "" : "#" + row.id].filter(Boolean).join(" · ");
+}
+
+function renderMembershipSide(title, parts, side) {
+    const column = element("div", "", "comparison-side");
+    column.dataset.side = side;
+    column.append(element("h3", title));
+    for (const part of parts) {
+        const group = element("div", "", "comparison-part");
+        group.append(element("strong", part.label || "未命名系列"));
+        const list = element("ul");
+        for (const index of part.members) list.append(element("li", memberLabel(result.items[index].row)));
+        group.append(list);
+        column.append(group);
+    }
+    return column;
+}
+
+function renderComparison(visible) {
+    const { oldGroups, restored, split, possibleMerges, review, provenance } = result.comparison;
+    document.getElementById("comparison-limitations").textContent = provenance.warning;
+    const expanded = new Set([...comparisonResults.querySelectorAll("[data-comparison][open]")]
+        .map(section => section.dataset.comparison));
+    comparisonResults.replaceChildren();
+    const sections = [
+        ["restored", "新版恢復或保留的系列", restored],
+        ["split", "新版仍拆開的系列", split],
+        ["merge", "新版可能誤併的系列", possibleMerges],
+        ["manual", "需要人工確認的作品", review],
+        ["old", "poster-fix-4 依這份備份重算的系列", oldGroups]
+    ];
+    for (const [key, heading, entries] of sections) {
+        const section = element("details", "", "report-section");
+        section.dataset.comparison = key;
+        section.open = expanded.has(key);
+        section.append(element("summary", `${heading}（${entries.length}）`));
+        const matching = entries.filter(entry => (key === "manual" ? [entry.index] : entry.members)
+            .some(index => visible(result.items[index])));
+        if (!matching.length) section.append(element("p", "沒有符合的紀錄。", "muted"));
+        for (const entry of matching) {
+            if (key === "manual") {
+                section.append(element("p", memberLabel(result.items[entry.index].row) + " · " + entry.reasons.join("。")));
+                continue;
+            }
+            const container = element("details", "", "group");
+            container.append(element("summary", (entry.label || "未命名系列") + `（${entry.members.length} 部）`));
+            const membership = element("div", "", "comparison-membership");
+            membership.append(renderMembershipSide("poster-fix-4 重算", entry.oldParts, "poster-fix-4"),
+                renderMembershipSide("新版", entry.newParts, "updated"));
+            container.append(membership);
+            section.append(container);
+        }
+        comparisonResults.append(section);
+    }
+}
+
 function render() {
     const expanded = new Set([...report.querySelectorAll("[data-row-index][open]")].map(node => node.dataset.rowIndex));
     report.replaceChildren();
     document.getElementById("search-tools").hidden = !result;
+    comparison.hidden = !result;
+    if (!result) comparisonResults.replaceChildren();
     clear.disabled = !copy || busy;
     if (!result) { summary.textContent = "尚未匯入任何作品。"; return; }
     const { records, history } = copy.original;
@@ -181,6 +243,7 @@ function render() {
         item.label, item.row.title, item.row.id, item.row.groupTitle, item.row.canonicalTitle,
         ...[].concat(item.row.aliases || []), ...[].concat(V.getVerifiedAnimeSeriesMetadata(result.projected[item.index])?.aliases || [])
     ].join(" "))).includes(needle);
+    renderComparison(visible);
     for (const [key, heading] of Object.entries(resultLabels)) {
         const section = element("details","","report-section");
         section.dataset.result = key;

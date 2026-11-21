@@ -38,3 +38,8 @@ button:disabled { opacity: .62; }
 .row-body fieldset { margin: .7rem 0; padding: .55rem .7rem; border: 1px solid #64748b; border-radius: .4rem; }
 .muted { color: #cbd5e1; }
 .warning { color: #fde68a; }
+.comparison-membership { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: .75rem; }
+.comparison-side { min-width: 0; padding: .55rem .65rem; background: #172439; border-radius: .4rem; }
+.comparison-side h3 { font-size: 1rem; margin: 0 0 .5rem; }
+.comparison-part { overflow-wrap: anywhere; }
+.comparison-part ul { margin: .3rem 0 .75rem; padding-left: 1.2rem; }

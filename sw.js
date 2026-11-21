@@ -1,5 +1,5 @@
-const SHELL_RELEASE = "legacy-series-2";
-const CACHE_VERSION = "anime-tracker-v11-legacy-series-2";
+const SHELL_RELEASE = "legacy-series-3";
+const CACHE_VERSION = "anime-tracker-v11-legacy-series-3";
 const SHELL_CACHE_PREFIX = `${CACHE_VERSION}-shell-`;
 const LEGACY_CACHE = "anime-tracker-v11-currently-watching-1";
 const DATA_CACHE = "anime-tracker-runtime-v1";
@@ -12,10 +12,10 @@ const READY_URL = releaseUrl(".shell-ready");
 
 // SHA-256 of the immutable UTF-8 release files, normalizing CRLF to LF.
 const SHELL_HASHES = {
-    "index.html": "b52cadabef234641728b7c400d7642a962f2b0cd5c4968af982efe5ae119f73a",
+    "index.html": "92d9d9d780cb0d5215244485b661290087d431b34849de6749a4f083175ea582",
     "vendor/opencc-js-1.4.1-full.js": "f04e8f700d3a36b01a32bb0f051e6e5aff4b29dd1cb19f0787bb0c959abe36a8",
-    "v11-core.js": "14dac229aa6c68b125299272ad643e1fdb04d834aa0fd4b61d364e8753417b2a",
-    "v11-ui.js": "3be53df5c01a94e78978cee67c73a164f73715ff8c00c9f743f35dc77563179f",
+    "v11-core.js": "61e2306cd4d49b417d80e50a182782a7044d80ace31319f0b9fcf9162c3d1511",
+    "v11-ui.js": "945560dd91e8b4d1a98a9ffc499b9de522a53cf923bd875e1691e25c13a8e071",
     "v11-styles.css": "8adb744d039b17dcd0b3471bb046a74f66d18611fb16478f831ec43a349b6f6a",
     "cross-media.js": "43717652508d44b16d6b192c49c82acedd3530bad71f2bf611532dfcf127ea01",
     "spotify-themes.js": "2dd7675165a560fa08c8484aed89216ca4dcbe83d550baab19251f286f87c301"

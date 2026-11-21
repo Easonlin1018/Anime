@@ -183,3 +183,60 @@ test("verified known sequel IDs supplement missing stored edges and reject a loc
     assert.notEqual(keys[2],keys[3]);
     assert.equal(V.getConfirmedAnimeAniListId(rows[0]),"");
 });
+
+test("poster-fix-4 keys, dated titles, seasonal markers and movie roles recover without provider metadata", () => {
+    const baseline = require("../releases/poster-fix-4/v11-core.js");
+    const rows = [
+        { id:"first", title:"辉夜大小姐想让我告白（2019）", category:"completed", watched:12, rating:9 },
+        { id:"second", title:"輝夜大小姐想讓我告白 第二季（2020）", category:"backlog", watched:3, episodes:12, notes:"保留筆記" },
+        { id:"third", title:"劇場版 輝夜大小姐想讓我告白（2023）", category:"waiting", favorite:true },
+        { id:"gone", title:"輝夜大小姐想讓我告白", category:"_deleted", deletedAt:at }
+    ];
+    const original = structuredClone(rows);
+    const stored = baseline.assignAnimeSeriesIdentity(rows).list;
+    const oldKey = stored[0].seriesKey;
+    assert.ok(stored.every(row => row.seriesKey === oldKey));
+    const migrated = V.assignAnimeSeriesIdentity(stored);
+    assert.deepEqual(migrated.list,stored,"startup retains authentic legacy keys");
+    assert.equal(membership(stored)[0],oldKey);
+    assert.deepEqual(membership(rows).slice(0,3),[oldKey,oldKey,oldKey]);
+    assert.notEqual(membership(rows)[3],oldKey,"a tombstone is not a series member");
+    assert.deepEqual(rows,original);
+});
+
+test("both explicit legacy label fields bridge distinct official names without fabricating AniList media IDs", () => {
+    const rows = [
+        { id:"tv", title:"青春豬頭少年不會夢見兔女郎學姊", groupTitle:"青春猪头少年", format:"TV", year:2018, category:"completed", watched:12 },
+        { id:"film-19", title:"青春豬頭少年不會夢到懷夢美少女", seriesGroupTitle:"青春豬頭少年", format:"MOVIE", year:2019 },
+        { id:"film-summer", title:"青春豬頭少年不會夢到嬌憐外出妹", groupTitle:"青春豬頭少年", format:"MOVIE", year:2023, category:"backlog", watched:1 },
+        { id:"film-winter", title:"青春豬頭少年不會夢到紅書包女孩", groupTitle:"青春豬頭少年", format:"MOVIE", year:2023, category:"review", notes:"冬季劇場版" },
+        { id:"custom", title:"青春豬頭少年筆記}", groupTitle:"青春豬頭少年", titleSource:"manual", format:"TV", year:2025 },
+        { id:"other", title:"青春豬頭少年與無關的同名作品", format:"TV", year:2024 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,4)).size,1);
+    assert.equal(new Set([keys[0],...keys.slice(4)]).size,3);
+    assert.equal(report.reviewByIndex.size,0);
+    for (const item of report.projected) assert.equal(V.getConfirmedAnimeAniListId(item),"");
+    assert.deepEqual(report.projected.map(row => row.notes),rows.map(row => row.notes));
+});
+
+test("inferred title grouping requires a dated sequence and ambiguous original works get an actionable reason", () => {
+    const rows = [
+        { id:"main", title:"晴海列車", year:2016 },
+        { id:"same-name", title:"晴海列車", year:2017 },
+        { id:"second", title:"晴海列車 第二季", year:2020 },
+        { id:"third", title:"晴海列車 Season 3", year:2024 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,3)).size,3);
+    assert.equal(keys[2],keys[3]);
+    assert.deepEqual([...report.reviewByIndex.keys()],[0,1]);
+    assert.notEqual(...membership([{ ...rows[0], year:undefined }, rows[2]]));
+    assert.notEqual(...membership([rows[0],{ ...rows[2], title:"晴海港口 第二季" }]));
+    const providerCollision = { ...rows[2], anilistId:601, source:"anilist", sourceId:602 };
+    assert.notEqual(...membership([rows[0],providerCollision]));
+    assert.ok(V.describeAnimeSeriesProjection([rows[0],providerCollision]).reviewByIndex.has(1));
+});

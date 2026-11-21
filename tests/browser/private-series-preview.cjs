@@ -9,7 +9,8 @@ const at = "2026-08-12T10:00:00.000Z";
 const privateMarker = "LOCAL-REVIEW-ONLY-7d83f9";
 const externalImage = `https://private-preview.invalid/${privateMarker}.svg`;
 const entry = new URL(process.argv[2] || process.env.PRIVATE_SERIES_PREVIEW_URL || "http://127.0.0.1:43217/");
-assert.ok((entry.protocol === "https:" && entry.hostname.endsWith(".trycloudflare.com"))
+assert.ok((entry.protocol === "https:" && (entry.hostname.endsWith(".trycloudflare.com")
+    || /^anime-series-ab-preview\.[a-z0-9-]+\.chatgpt\.site$/u.test(entry.hostname)))
     || (entry.protocol === "http:" && ["127.0.0.1","localhost"].includes(entry.hostname)),
     "Set a loopback or Cloudflare tunnel URL for the isolated preview");
 const engine = process.env.POSTER_ENGINE === "webkit" ? webkit : chromium;
@@ -48,7 +49,15 @@ function makeBackup() {
         anime("conflicting-provider", "同名無關作品", "", 2026, "waiting", 0, {
             source:"anilist", dataSource:"mal", anilistId:333333, sourceId:333333
         }),
-        anime("isolated", "無關獨立作品", "", 2024, "review", 8)
+        anime("isolated", "無關獨立作品", "", 2024, "review", 8, {
+            seriesKey:'local-series:["isolated"]', seriesKeySource:"local-record"
+        }),
+        anime("possible-merge-first", "架空季別比對", "架空季別比對", 2017, "completed", 12, {
+            format:"TV", source:"anilist", anilistId:227001, sourceId:227001
+        }),
+        anime("possible-merge-second", "架空季別比對 第二季", "架空季別比對", 2020, "backlog", 3, {
+            format:"TV", source:"anilist", anilistId:227002, sourceId:227002
+        })
     ];
     return {
         schemaVersion:11, exportedAt:at, anime_list_v8_8:rows,
@@ -89,7 +98,8 @@ function checksum(file) {
     return createHash("sha256").update(file.buffer).digest("hex");
 }
 
-const row = (page, index) => page.locator(`#report [data-row-index="${index}"]`);
+const row = (page, index) => page.locator(`#report details[data-row-index="${index}"]`);
+const comparison = (page, section) => page.locator(`[data-comparison="${section}"]`);
 const storedCopy = page => page.evaluate(() => new Promise((resolve, reject) => {
     const request = indexedDB.open("anime-series-private-preview");
     request.onerror = () => reject(request.error);
@@ -136,6 +146,22 @@ async function openRecord(page, index) {
     return record;
 }
 
+async function assertSeriesComparison(page) {
+    const film = "青春豬頭少年不會夢到懷夢美少女";
+    const series = "戀上換裝娃娃";
+    await comparison(page, "old").filter({ hasText:film }).waitFor({ state:"attached" });
+    await comparison(page, "restored").filter({ hasText:film }).waitFor({ state:"attached" });
+    await comparison(page, "split").filter({ hasText:"我的換裝筆記" }).waitFor({ state:"attached" });
+    await comparison(page, "merge").filter({ hasText:"架空季別比對 第二季" }).waitFor({ state:"attached" });
+    await comparison(page, "manual").filter({ hasText:"來源或作品 ID 有矛盾" }).waitFor({ state:"attached" });
+    const limitation = page.locator("#comparison-limitations");
+    await limitation.filter({ hasText:/新版|改寫|新版本/u }).waitFor({ state:"attached" });
+    assert.match(await limitation.textContent(), /重算|限制|無法|不能/u);
+    const restored = comparison(page, "restored");
+    assert.match(await restored.locator('[data-side="poster-fix-4"]').first().textContent(), /青春豬頭少年/u);
+    assert.match(await comparison(page, "split").locator('[data-side="updated"]').first().textContent(), new RegExp(series, "u"));
+}
+
 async function main() {
     const executablePath = process.env.POSTER_EDGE_EXECUTABLE;
     const browser = await engine.launch({
@@ -176,7 +202,13 @@ async function main() {
         await expectBucket(page, 7, "deleted");
         await expectBucket(page, 8, "conflict");
         await expectBucket(page, 9, "independent");
-        assert.equal(await page.locator("#report [data-row-index]").count(), makeBackup().anime_list_v8_8.length);
+        assert.equal(await page.locator("#report details[data-row-index]").count(), makeBackup().anime_list_v8_8.length);
+        const dressGroup = page.locator('#report [data-result="grouped"] .group').filter({ has:row(page, 2) });
+        assert.equal(await dressGroup.locator('[data-row-index="3"]').count(), 1);
+        assert.match(await dressGroup.locator('[data-row-index="2"]').textContent(), /已追完/u);
+        assert.match(await dressGroup.locator('[data-row-index="3"]').textContent(), /補番中 · 正在看/u);
+        await page.locator("#summary").filter({ hasText:"需要人工處理 1 筆" }).waitFor();
+        await assertSeriesComparison(page);
         const copy = await storedCopy(page);
         assert.deepEqual(copy.original, expectedOriginal());
         assert.ok(!JSON.stringify(copy).includes(`${privateMarker}@example.invalid`));
@@ -203,10 +235,13 @@ async function main() {
         await dressSecondSeason.locator('[data-action="save"]').click();
         await waitForEdits(page, edited);
         const possibleMatch = await openRecord(page, 4);
+        const oldMembership = comparison(page, "old").locator('[data-side="poster-fix-4"]');
+        const baselineBeforeEdit = await oldMembership.allTextContents();
         await possibleMatch.locator('[name="membership"]').selectOption("link:2");
         await possibleMatch.locator('[data-action="membership"]').click();
         await expectBucket(page, 4, "grouped");
         assert.deepEqual((await storedCopy(page)).original, copy.original);
+        assert.deepEqual(await oldMembership.allTextContents(), baselineBeforeEdit);
         const unsynced = await openRecord(stale, 3);
         await unsynced.locator('[name="notes"]').fill("較舊分頁不應覆蓋進度");
         await unsynced.locator('[data-action="save"]').click();
@@ -256,6 +291,7 @@ async function main() {
         assert.deepEqual((await storedCopy(reopened)).original, copy.original);
         await confirmClear(reopened, true);
         await row(reopened, 3).waitFor({ state:"detached" });
+        await comparison(reopened, "old").waitFor({ state:"detached" });
         assert.equal(await storedCopy(reopened), null);
         assert.deepEqual(await keysInUse(reopened), ["private-preview-test-sentinel"]);
         await context.setOffline(true);
@@ -264,7 +300,7 @@ async function main() {
         assert.equal(await storedCopy(reopened), null);
         assertPrivateTransport(requests);
         console.log(JSON.stringify({ engine:browser.version(), backupUnchanged:true, isolatedEdits:true,
-            realShapeGrouping:true, offlineImportAndRestart:true, clearedOnlyPreview:true,
+            realShapeGrouping:true, seriesComparison:true, offlineImportAndRestart:true, clearedOnlyPreview:true,
             capturedRequests:requests.length, outboundPrivateRequests:0 }));
     } finally {
         await browser.close();
