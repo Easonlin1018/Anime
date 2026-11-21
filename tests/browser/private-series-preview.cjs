@@ -203,7 +203,8 @@ async function main() {
         await expectBucket(page, 8, "conflict");
         await expectBucket(page, 9, "independent");
         assert.equal(await page.locator("#report details[data-row-index]").count(), makeBackup().anime_list_v8_8.length);
-        const dressGroup = page.locator('#report [data-result="grouped"] .group').filter({ has:row(page, 2) });
+        const dressGroup = page.locator('#report [data-result="grouped"] .group')
+            .filter({ has:page.locator('[data-row-index="2"]') });
         assert.equal(await dressGroup.locator('[data-row-index="3"]').count(), 1);
         assert.match(await dressGroup.locator('[data-row-index="2"]').textContent(), /已追完/u);
         assert.match(await dressGroup.locator('[data-row-index="3"]').textContent(), /補番中 · 正在看/u);
