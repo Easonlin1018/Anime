@@ -14,7 +14,7 @@ const sourceOf = (start, end) => {
     assert.ok(from >= 0 && to > from, start);
     return html.slice(from, to);
 };
-const listRenderer = sourceOf("function renderList()", "function exportData()")
+const listRenderer = sourceOf("function renderList(", "function exportData()")
     + sourceOf("function normalizeAnimeSearchText", "function animeProgress");
 
 const related = (relationType, id) => ({ relationType, node:{ id, type:"ANIME", format:"MOVIE" } });
@@ -73,7 +73,7 @@ const cardIds = element => [...element.innerHTML.matchAll(/data-test-id="([^"]+)
 test("a mixed-category series has one chronological group and leaves each source record intact", () => {
     const rows = fixture();
     const original = structuredClone(rows);
-    const seriesKey = V.getAnimeSeriesKey(rows.find(row => row.id === "first-tv"));
+    const seriesKey = V.getAnimeSeriesKey(V.projectAnimeSeries(rows).find(row => row.id === "first-tv"));
     const nodes = render(rows, { expanded:[seriesKey] });
     assert.deepEqual(cardIds(nodes["list-completed"]), ["first-tv","first-film","june-film","december-film"]);
     assert.match(nodes["list-completed"].innerHTML, /data-groupkey="[^"]+" open/u);
@@ -99,7 +99,8 @@ test("an alias or category filter leaves hidden series members outside the cards
     assert.equal(nodes["anime-list-summary"].textContent,"顯示 1／5 部");
 
     const filtered = rows.map(row => row.category === "completed" ? { ...row, category:"_v11_filtered" } : row);
-    const moved = render(filtered, { expanded:[V.getAnimeSeriesKey(rows[0])] });
+    const projectedFilm = V.projectAnimeSeries(filtered).find(row => row.id === "december-film");
+    const moved = render(filtered, { expanded:[V.getAnimeSeriesKey(projectedFilm)] });
     assert.deepEqual(cardIds(moved["list-backlog"]), ["first-film","june-film","december-film"]);
     assert.match(moved["list-backlog"].innerHTML, /data-groupkey="[^"]+" open/u);
     assert.deepEqual(cardIds(moved["list-completed"]), []);
