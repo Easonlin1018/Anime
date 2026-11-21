@@ -6,8 +6,8 @@ const files = [...documents, "/preview.css", "/preview.js", "/model.js", "/v11-c
     "/poster-fix-4-core.js", "/save-poster-fix-4.js", "/vendor/opencc.js", "/manifest.webmanifest", "/icon.svg"];
 
 async function fetchAsset(path, signal) {
-    // The worker only ever sends fixed, credential-free asset requests.
-    const response = await fetch(new Request(path, { cache:"no-store", redirect:"error", credentials:"omit", signal }));
+    // Owner-only hosting needs its same-origin session to read these fixed assets.
+    const response = await fetch(new Request(path, { cache:"no-store", redirect:"error", credentials:"same-origin", signal }));
     if (!response.ok || response.headers.get("X-Anime-Preview-Commit") !== "__REVISION__") {
         throw new Error("驗收資源版本不一致");
     }
