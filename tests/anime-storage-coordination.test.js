@@ -37,7 +37,7 @@ function fixture() {
         const controller = {
             postMessage(message, [port]) {
                 assert.equal(message.type, "CHECK_STORAGE_CLIENTS");
-                queueMicrotask(() => port.reply({ type:"ANIME_SW_STORAGE_CLIENTS", release:"series-identity-1", safe }));
+                queueMicrotask(() => port.reply({ type:"ANIME_SW_STORAGE_CLIENTS", release:"storage-quota-1", safe }));
             }
         };
         class Channel {
@@ -117,7 +117,7 @@ test("an import quota failure under the same lock rolls back the list and auxili
     tab.window.__ANIME_STARTUP_STORAGE__ = { persisted:true, warnings:[] };
     const ui = fs.readFileSync(appSourcePath("v11-ui.js"), "utf8");
     vm.runInContext(html.slice(html.indexOf("function restoreAnimeStartupStorage"), html.indexOf("function warnAnimeStartupStorage"))
-        + ui.slice(ui.indexOf("    function applyImportedData"), ui.indexOf("    function renderRestorePoints")), tab);
+        + ui.slice(ui.indexOf("    function applyImportedData"), ui.indexOf("    async function runDurableChange")), tab);
     const write = env.store.setItem;
     env.store.setItem = (name, value) => {
         if (name === V.WORKS_KEY) throw new Error("Synthetic works quota");
