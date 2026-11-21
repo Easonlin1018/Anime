@@ -180,3 +180,71 @@ test("backup provenance distinguishes regenerated fields, older keys, and unmark
     assert.deepEqual(second.oldGroups.map(group => group.members), [[0,1]]);
     assert.equal(audit.reportSeries(exampleCopy(rows)).comparison.provenance.status, "unknown");
 });
+
+test("the report counts one verified transitive chain across categories and detects a saved manual split", () => {
+    const tracked = (id, title, category, format, relations) => ({
+        id:"fixture-work-" + id, title, category, format, relations, source:"AniList", sourceId:id, anilistId:id
+    });
+    const copy = exampleCopy([
+        tracked(993001, "始發", "completed", "TV", [edge("SEQUEL", 993002, "旅程續篇", "OVA")]),
+        tracked(993002, "旅程續篇", "backlog", "OVA", [edge("SEQUEL", 993003, "終章", "MOVIE")]),
+        tracked(993003, "終章", "review", "MOVIE", [])
+    ]);
+    const before = JSON.stringify(copy);
+    const first = audit.reportSeries(copy);
+    assert.deepEqual(first.comparison.chainComplete.map(group => group.members), [[0,1,2]]);
+    assert.deepEqual(first.comparison.chainSplits, []);
+    assert.deepEqual(first.comparison.unresolved, []);
+
+    const manual = audit.changeCopy(copy,2,"membership",{ membership:"separate" },date);
+    const { comparison } = audit.reportSeries(manual);
+    assert.deepEqual(comparison.chainComplete, []);
+    assert.deepEqual(comparison.chainSplits.map(group => group.members), [[0,1,2]]);
+    assert.deepEqual(comparison.chainSplits[0].newParts.map(group => group.members), [[0,1],[2]]);
+    assert.deepEqual(comparison.unresolved.map(entry => [entry.id, entry.aniListIds]), [
+        ["fixture-work-993001", ["993001"]], ["fixture-work-993002", ["993002"]], ["fixture-work-993003", ["993003"]]
+    ]);
+    assert.match(comparison.unresolved[2].reasons.join(), /手動/u);
+    assert.deepEqual(comparison.review, []);
+    assert.equal(JSON.stringify(copy), before);
+});
+
+test("unresolved work IDs and reasons distinguish optional names from actual identity conflicts", () => {
+    const copy = exampleCopy([
+        { id:"full-identifier-unverified-one", title:"僅有同名" },
+        { id:"full-identifier-unverified-two", title:"僅有同名" },
+        { id:"full-identifier-provider-conflict", title:"提供者資料矛盾", source:"AniList", sourceId:994003,
+            anilistId:994004, notes:"保留備註" },
+        { id:"full-identifier-deleted", title:"僅有同名", deletedAt:date }
+    ]);
+    const { comparison, stats } = audit.reportSeries(copy);
+    assert.deepEqual(comparison.unresolved.map(entry => entry.id), [
+        "full-identifier-unverified-one", "full-identifier-unverified-two", "full-identifier-provider-conflict"
+    ]);
+    assert.match(comparison.unresolved[0].reasons.join(), /現有證據不足/u);
+    assert.deepEqual(comparison.unresolved[2].aniListIds, ["994004","994003"]);
+    assert.deepEqual(comparison.review.map(entry => entry.index), [2]);
+    assert.equal(stats.needsReview,1);
+    assert.equal(stats.suggestions,2);
+});
+
+test("a local record claiming an unconfirmed chain ID prevents a partial chain from being counted as complete", () => {
+    const copy = exampleCopy([
+        { id:"beginning", title:"起點", category:"completed", format:"TV", source:"AniList", sourceId:995001,
+            relations:[edge("SEQUEL",995002,"轉折","OVA")] },
+        { id:"uncorroborated-middle-record", title:"自訂中篇", titleManuallyEdited:true, anilistId:995002,
+            category:"waiting", format:"TV" },
+        { id:"ending", title:"終點", category:"review", format:"MOVIE", source:"AniList", sourceId:995003,
+            relations:[edge("PREQUEL",995002,"轉折","OVA")] }
+    ]);
+    const before = JSON.stringify(copy);
+    const { items, comparison } = audit.reportSeries(copy);
+    assert.equal(items[0].key, items[2].key);
+    assert.notEqual(items[0].key, items[1].key);
+    assert.deepEqual(comparison.chainComplete, []);
+    assert.deepEqual(comparison.chainPending.map(group => group.unconfirmed), [[1]]);
+    const unresolved = comparison.unresolved.find(entry => entry.id === "uncorroborated-middle-record");
+    assert.deepEqual(unresolved.aniListIds, ["995002"]);
+    assert.match(unresolved.reasons.join(), /尚未能唯一核對/u);
+    assert.equal(JSON.stringify(copy), before);
+});

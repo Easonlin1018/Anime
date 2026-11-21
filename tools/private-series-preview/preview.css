@@ -43,3 +43,5 @@ button:disabled { opacity: .62; }
 .comparison-side h3 { font-size: 1rem; margin: 0 0 .5rem; }
 .comparison-part { overflow-wrap: anywhere; }
 .comparison-part ul { margin: .3rem 0 .75rem; padding-left: 1.2rem; }
+.comparison-records { padding-left: 1.2rem; overflow-wrap: anywhere; }
+.comparison-records p { margin: .15rem 0 .75rem; }

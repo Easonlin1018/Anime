@@ -12,7 +12,7 @@ const report = document.getElementById("report");
 const comparison = document.getElementById("comparison");
 const comparisonResults = document.getElementById("comparison-results");
 const resultLabels = {
-    grouped:"成功分組", independent:"維持獨立", suggestion:"可選的分組建議", review:"需要人工確認",
+    grouped:"目前分組結果", independent:"維持獨立", suggestion:"可選的分組建議", review:"需要人工確認",
     conflict:"可能的錯誤分組或身分衝突", deleted:"備份中的已刪除紀錄"
 };
 const categoryLabels = { watching:"正在連載", backlog:"補番中", review:"複習中",
@@ -167,9 +167,11 @@ function renderItem(item, expanded) {
     return details;
 }
 
-function memberLabel(row) {
+function memberLabel(item) {
+    const { row, id, aniListIds } = item;
     return [originalTitle(row), row.startDate?.year || row.year, row.format,
-        row.id == null ? "" : "#" + row.id].filter(Boolean).join(" · ");
+        id ? "作品 ID " + id : "作品 ID 缺漏", aniListIds.length ? "AniList ID " + aniListIds.join("、") : ""]
+        .filter(Boolean).join(" · ");
 }
 
 function renderMembershipSide(title, parts, side) {
@@ -180,7 +182,7 @@ function renderMembershipSide(title, parts, side) {
         const group = element("div", "", "comparison-part");
         group.append(element("strong", part.label || "未命名系列"));
         const list = element("ul");
-        for (const index of part.members) list.append(element("li", memberLabel(result.items[index].row)));
+        for (const index of part.members) list.append(element("li", memberLabel(result.items[index])));
         group.append(list);
         column.append(group);
     }
@@ -188,14 +190,18 @@ function renderMembershipSide(title, parts, side) {
 }
 
 function renderComparison(visible) {
-    const { oldGroups, restored, split, possibleMerges, review, provenance } = result.comparison;
+    const { oldGroups, restored, split, possibleMerges, review, chainComplete, chainSplits, chainPending, unresolved, provenance } = result.comparison;
     document.getElementById("comparison-limitations").textContent = provenance.warning;
     const expanded = new Set([...comparisonResults.querySelectorAll("[data-comparison][open]")]
         .map(section => section.dataset.comparison));
     comparisonResults.replaceChildren();
     const sections = [
+        ["chain-complete", "備份中的完整 AniList 前後作鏈", chainComplete],
+        ["chain-split", "被拆開的 AniList 前後作鏈", chainSplits],
+        ["chain-pending", "前後作鏈中有待核對的身分", chainPending],
+        ["unresolved", "尚未解決的作品 ID 與原因", unresolved],
         ["restored", "新版恢復或保留的系列", restored],
-        ["split", "新版仍拆開的系列", split],
+        ["split", "舊版重算曾同組，新版分到不同組", split],
         ["merge", "新版可能誤併的系列", possibleMerges],
         ["manual", "需要人工確認的作品", review],
         ["old", "poster-fix-4 依這份備份重算的系列", oldGroups]
@@ -205,22 +211,36 @@ function renderComparison(visible) {
         section.dataset.comparison = key;
         section.open = expanded.has(key);
         section.append(element("summary", `${heading}（${entries.length}）`));
-        const matching = entries.filter(entry => (key === "manual" ? [entry.index] : entry.members)
+        const reasonsOnly = key === "manual" || key === "unresolved";
+        const matching = entries.filter(entry => (reasonsOnly ? [entry.index] : [...entry.members, ...(entry.unconfirmed || [])])
             .some(index => visible(result.items[index])));
         if (!matching.length) section.append(element("p", "沒有符合的紀錄。", "muted"));
+        const recordList = reasonsOnly ? element("ul", "", "comparison-records") : null;
         for (const entry of matching) {
-            if (key === "manual") {
-                section.append(element("p", memberLabel(result.items[entry.index].row) + " · " + entry.reasons.join("。")));
+            if (reasonsOnly) {
+                const item = element("li");
+                item.append(element("strong", memberLabel(result.items[entry.index])),
+                    element("p", entry.reasons.join("。")));
+                recordList.append(item);
                 continue;
             }
             const container = element("details", "", "group");
             container.append(element("summary", (entry.label || "未命名系列") + `（${entry.members.length} 部）`));
+            if (entry.mediaIds?.length) {
+                container.append(element("p", "AniList 關聯圖 ID " + entry.mediaIds.join("、"), "muted"));
+            }
+            if (entry.unconfirmed?.length) {
+                const unknown = element("ul");
+                for (const index of entry.unconfirmed) unknown.append(element("li", memberLabel(result.items[index])));
+                container.append(element("p", "身分待核對"), unknown);
+            }
             const membership = element("div", "", "comparison-membership");
             membership.append(renderMembershipSide("poster-fix-4 重算", entry.oldParts, "poster-fix-4"),
                 renderMembershipSide("新版", entry.newParts, "updated"));
             container.append(membership);
             section.append(container);
         }
+        if (recordList?.childElementCount) section.append(recordList);
         comparisonResults.append(section);
     }
 }
@@ -236,20 +256,27 @@ function render() {
     const { records, history } = copy.original;
     const counts = Object.fromEntries(Object.keys(resultLabels).map(key => [key,0]));
     for (const item of result.items) counts[item.result]++;
-    const { automatic, suggestions, needsReview, metadata } = result.stats;
-    summary.textContent = `已匯入 ${records.length} 筆作品、${history.length} 筆觀看歷史。自動分組 ${automatic} 個系列、可選建議 ${suggestions} 筆、需要人工處理 ${needsReview} 筆。另有 ${metadata} 筆作品資料可核對。`;
+    const { suggestions, needsReview, metadata } = result.stats;
+    const { chainComplete, chainSplits, chainPending } = result.comparison;
+    summary.textContent = `已匯入 ${records.length} 筆作品、${history.length} 筆觀看歷史。已核對完整前後作鏈 ${chainComplete.length} 組、仍有拆組 ${chainSplits.length} 組。可選建議 ${suggestions} 筆、需要人工處理 ${needsReview} 筆。另有 ${metadata} 筆作品資料可核對。`;
     const needle = V.normalizeText(V.toTraditionalChinese(search.value));
     const visible = item => !needle || V.normalizeText(V.toTraditionalChinese([
         item.label, item.row.title, item.row.id, item.row.groupTitle, item.row.canonicalTitle,
+        ...item.aniListIds,
         ...[].concat(item.row.aliases || []), ...[].concat(V.getVerifiedAnimeSeriesMetadata(result.projected[item.index])?.aliases || [])
     ].join(" "))).includes(needle);
     renderComparison(visible);
+    const completeKeys = new Set(chainComplete.flatMap(group => group.newKeys));
+    const splitKeys = new Set(chainSplits.flatMap(group => group.newKeys));
+    const pendingKeys = new Set(chainPending.flatMap(group => group.newKeys));
+    const numberOfGroups = new Set(result.items.filter(item => item.result === "grouped").map(item => item.key)).size;
     for (const [key, heading] of Object.entries(resultLabels)) {
         const section = element("details","","report-section");
         section.dataset.result = key;
         section.open = key !== "deleted";
         const entries = result.items.filter(item => item.result === key && visible(item));
-        section.append(element("summary", `${heading}（${counts[key]}）`));
+        section.append(element("summary", key === "grouped"
+            ? `${heading}（${numberOfGroups} 組、${counts[key]} 部）` : `${heading}（${counts[key]}）`));
         if (key === "grouped") {
             const groups = new Map();
             for (const item of entries) {
@@ -259,7 +286,13 @@ function render() {
             for (const group of groups.values()) {
                 group.sort((a,b) => V.compareAnimeSeriesRelease(result.projected[a.index],result.projected[b.index]));
                 const container = element("div","","group");
-                container.append(element("strong",`${group.find(item => item.label)?.label || originalTitle(group[0].row)}（${result.groups.get(group[0].key).length} 部）`));
+                const key = group[0].key;
+                const label = group.find(item => item.label)?.label || originalTitle(group[0].row);
+                const evidence = splitKeys.has(key) ? "前後作鏈跨組"
+                    : pendingKeys.has(key) ? "前後作鏈有身分待核對"
+                    : completeKeys.has(key) ? "已核對備份中的前後作"
+                    : "依本機資料分組，前後作完整性待核對";
+                container.append(element("strong",`${label}（${result.groups.get(key).length} 部）`), element("p", evidence, "muted"));
                 container.append(...group.map(item => renderItem(item,expanded)));
                 section.append(container);
             }

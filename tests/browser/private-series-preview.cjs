@@ -89,6 +89,35 @@ function assertPrivateTransport(requests) {
     assert.ok(requests.every(request => !request.body && !request.url.includes(privateMarker)), JSON.stringify(requests));
 }
 
+async function verifyKnownFranchises(page) {
+    const franchises = [
+        [103572, 109261, 163327, 131520, 177191, 211709],
+        [116267, 127371, 141212, 141208, 166104],
+        [101291, 104157, 154967, 161474, 171046, 199340]
+    ];
+    const categories = ["completed", "review", "waiting", "backlog", "watching"];
+    const records = franchises.flat().map((anilistId, index) => ({
+        id:"synthetic-work-" + anilistId, source:"anilist", sourceId:anilistId, anilistId,
+        anilistIdentitySource:"anilist-api", title:"合成作品 " + index,
+        groupTitle:index % 2 ? "合成譯名乙" : "合成譯名甲",
+        category:categories[index % categories.length], watched:index % 3, notes:privateMarker + " " + index,
+        rating:8, favorite:true
+    }));
+    const history = [{ id:"synthetic-history", animeId:records[0].id, at, delta:1 }];
+    await page.locator("#backup-file").setInputFiles({
+        name:"verified-franchises-synthetic.json", mimeType:"application/json",
+        buffer:Buffer.from(JSON.stringify({ anime_list_v8_8:records, watchHistory:history }))
+    });
+    await page.locator("#status").filter({ hasText:"匯入完成" }).waitFor();
+    const groups = await page.locator('#report [data-result="grouped"] .group').evaluateAll(entries =>
+        entries.map(group => [...group.querySelectorAll("[data-row-index]")].map(item => Number(item.dataset.rowIndex))));
+    assert.deepEqual(groups.map(group => group.map(index => records[index].anilistId).sort((a,b) => a-b)),
+        franchises.map(group => group.slice().sort((a,b) => a-b)), "Each documented franchise must render as one complete group");
+    const original = (await storedCopy(page)).original;
+    assert.deepEqual(original.records, records);
+    assert.deepEqual(original.history, history);
+}
+
 function expectedOriginal() {
     const backup = makeBackup();
     return { records:backup.anime_list_v8_8, history:backup.watchHistory, works:backup.works, mediaEntries:[] };
@@ -299,9 +328,11 @@ async function main() {
         await boot(reopened);
         assert.equal(await row(reopened, 0).count(), 0);
         assert.equal(await storedCopy(reopened), null);
+        await verifyKnownFranchises(reopened);
         assertPrivateTransport(requests);
         console.log(JSON.stringify({ engine:browser.version(), backupUnchanged:true, isolatedEdits:true,
-            realShapeGrouping:true, seriesComparison:true, offlineImportAndRestart:true, clearedOnlyPreview:true,
+            realShapeGrouping:true, seriesComparison:true, confirmedFranchises:[6,5,6],
+            offlineImportAndRestart:true, clearedOnlyPreview:true,
             capturedRequests:requests.length, outboundPrivateRequests:0 }));
     } finally {
         await browser.close();

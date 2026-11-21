@@ -240,3 +240,57 @@ test("inferred title grouping requires a dated sequence and ambiguous original w
     assert.notEqual(...membership([rows[0],providerCollision]));
     assert.ok(V.describeAnimeSeriesProjection([rows[0],providerCollision]).reviewByIndex.has(1));
 });
+
+test("verified continuation overrides side-story collection without touching stored identity or tracking", () => {
+    const confirmed = (id, category, format, title, relations) => ({
+        id:`local-${id}`, source:"anilist", sourceId:id, anilistId:id,
+        category, format, title, relations, watched:3, rating:8, notes:"本機筆記"
+    });
+    const rows = [
+        confirmed(76001, "completed", "TV", "獨立外傳推薦", [edge("SIDE_STORY",76002,"續作")]),
+        confirmed(76002, "review", "TV", "續作", [
+            edge("SEQUEL",76003,"映画", "MOVIE"), edge("SEQUEL",76005,"中間未追蹤作品")
+        ]),
+        confirmed(76003, "waiting", "MOVIE", "映画", []),
+        confirmed(76004, "backlog", "OVA", "不同譯名", [edge("PREQUEL",76005,"中間未追蹤作品")]),
+        confirmed(76006, "waiting", "TV", "無關作品", [edge("ADAPTATION",76002,"續作")])
+    ];
+    // A newer verified metadata snapshot can be partial.
+    rows[1].seriesMetadata = { id:"76002", source:"anilist", title:"續作", relations:[] };
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(1,4)).size,1);
+    assert.equal(new Set([keys[0],keys[1],keys[4]]).size,3);
+    assert.deepEqual(report.relationComponents[0].members,[1,2,3]);
+    assert.deepEqual(report.relationComponents[0].mediaIds,["76002","76003","76004","76005"]);
+    assert.deepEqual(rows,before);
+});
+
+test("contradictory intermediary remains a diagnostic member while confirmed sides stay independent", () => {
+    const verified = (id, relations) => ({
+        id:`record-${id}`, source:"anilist", sourceId:id, anilistId:id, title:`作品 ${id}`, relations
+    });
+    const rows = [
+        verified(78001,[edge("SEQUEL",78002,"作品 78002")]),
+        verified(78003,[edge("PREQUEL",78002,"作品 78002")]),
+        { ...verified(78002,[]), sourceId:78004 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.equal(new Set(report.projected.map(V.getAnimeSeriesKey)).size,3);
+    assert.deepEqual(report.relationComponents[0].members,[0,2,1]);
+    assert.match([...report.reviewByIndex.get(2)].join(" "), /AniList ID 有矛盾/u);
+});
+
+test("an explicitly labelled and dated OVA or special can complete a legacy series without an AniList guess", () => {
+    const rows = [
+        { id:"one", groupTitle:"海宮", title:"海宮", category:"completed", format:"TV", year:2012 },
+        { id:"two", seriesGroupTitle:"海宮", title:"海宮（OVA）（2014）", category:"backlog", format:"OVA", year:2014 },
+        { id:"three", groupTitle:"海宮", title:"海宮（特別篇）（2016）", category:"review", format:"SPECIAL", year:2016 },
+        { id:"four", groupTitle:"海宮", title:"海宮收藏筆記", category:"waiting", year:2016, titleSource:"manual" }
+    ];
+    const keys = membership(rows);
+    assert.equal(new Set(keys.slice(0,3)).size,1);
+    assert.notEqual(keys[0],keys[3]);
+    assert.ok(rows.every(row => !V.getConfirmedAnimeAniListId(row)));
+});

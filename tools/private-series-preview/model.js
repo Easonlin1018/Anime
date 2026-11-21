@@ -1,6 +1,6 @@
 (function (root, factory) {
     if (typeof module === "object" && module.exports) {
-        module.exports = factory(require("../../releases/legacy-series-3/v11-core.js"), require("../../releases/poster-fix-4/v11-core.js"));
+        module.exports = factory(require("../../releases/legacy-series-4/v11-core.js"), require("../../releases/poster-fix-4/v11-core.js"));
     } else {
         root.PrivateSeriesPreview = factory(root.AnimeTrackerV11, root.PosterFix4Core);
     }
@@ -56,7 +56,7 @@
         return { status, newerCount, legacyCount, warning };
     }
 
-    function compareSeries(records, rows, baseline, projected, items) {
+    function compareSeries(records, rows, baseline, projected, items, relationComponents, claims) {
         const old = new Map(), next = new Map();
         rows.forEach((row, index) => {
             if (deleted(row)) return;
@@ -75,19 +75,66 @@
             const from = oldParts(group.members), to = newParts(group.members);
             return { ...group, oldKeys:from.map(part => part.key), newKeys:to.map(part => part.key), oldParts:from, newParts:to };
         };
+        const relationDiagnostics = relationComponents.map(component => {
+            const { key, members, mediaIds } = component;
+            const first = items[members[0]];
+            const label = component.label || first?.label || text(first?.row.title);
+            const memberSet = new Set(members);
+            const unconfirmed = [...new Set(mediaIds.flatMap(id => claims.get(String(id)) || []))]
+                .filter(index => !memberSet.has(index));
+            return withParts({ key, label, members, mediaIds, unconfirmed });
+        });
+        const chainSplits = relationDiagnostics.filter(group => group.newParts.length > 1);
+        const chainPending = relationDiagnostics.filter(group => group.unconfirmed.length > 0);
+        const incompleteKeys = new Set([...chainSplits, ...chainPending].flatMap(group => group.newKeys));
+        const chainComplete = relationDiagnostics.filter(group =>
+            group.members.length > 1 && group.newParts.length === 1 && !incompleteKeys.has(group.newKeys[0])
+            && group.members.every(index => items[index].result === "grouped"));
         const oldGroups = [...old.values()].filter(group => group.members.length > 1).map(withParts);
         const restored = oldGroups.filter(group => group.newParts.length === 1 && group.newParts[0].members.length === group.members.length
-            && group.members.every(index => items[index].result === "grouped"));
+            && !incompleteKeys.has(group.newKeys[0]) && group.members.every(index => items[index].result === "grouped"));
         const split = oldGroups.filter(group => group.newParts.length > 1);
         const relationSources = new Set(["anilist-relations", "legacy-relations"]);
+        const chainOf = new Map(relationComponents.flatMap(({ key, members }) => members.map(index => [index,key])));
         const possibleMerges = [...next.values()].filter(group => group.members.length > 1).map(withParts)
             .filter(group => {
                 const automatic = group.members.filter(index => rows[index].seriesMembership?.mode !== "link");
-                return oldParts(automatic).length > 1 && !automatic.every(index => relationSources.has(projected[index].seriesKeySource));
+                const chains = new Set(automatic.map(index => chainOf.get(index)).filter(Boolean));
+                return chains.size > 1 || (oldParts(automatic).length > 1
+                    && !automatic.every(index => relationSources.has(projected[index].seriesKeySource)));
             });
         const review = items.filter(item => item.result === "review" || item.result === "conflict")
             .map(item => ({ index:item.index, reasons:[...new Set(item.warnings)] }));
-        return { oldGroups, restored, split, possibleMerges, review, provenance:assessBaseline(records) };
+        const unresolvedByIndex = new Map(review.map(({ index, reasons }) => [index, new Set(reasons)]));
+        const addReason = (index, reason) => {
+            if (!unresolvedByIndex.has(index)) unresolvedByIndex.set(index, new Set());
+            unresolvedByIndex.get(index).add(reason);
+        };
+        for (const item of items) {
+            if (item.result === "suggestion") addReason(item.index, "名稱、別名或舊系列欄位有候選，現有證據不足以確認歸屬");
+        }
+        for (const group of split) {
+            for (const index of group.members) {
+                if (items[index].result === "independent" && rows[index].seriesMembership?.mode !== "separate") {
+                    addReason(index, "舊版重算落在同組，缺少可核對的前後作或分組依據");
+                }
+            }
+        }
+        for (const group of chainSplits) {
+            for (const index of group.members) {
+                const mode = rows[index].seriesMembership?.mode;
+                addReason(index, mode === "separate" ? "手動設定為獨立作品，AniList 前後作鏈因此跨組"
+                    : mode === "link" ? "手動指定系列與前後作鏈的分組不同"
+                    : "同一 AniList 前後作鏈目前仍跨越多個顯示群組");
+            }
+        }
+        for (const group of chainPending) {
+            for (const index of group.unconfirmed) addReason(index, "AniList ID 指向此鏈，但該筆作品身分尚未能唯一核對");
+        }
+        const unresolved = [...unresolvedByIndex].sort(([a], [b]) => a - b)
+            .map(([index, reasons]) => ({ index, reasons:[...reasons], id:items[index].id, aniListIds:items[index].aniListIds }));
+        return { oldGroups, restored, split, possibleMerges, review, chainComplete, chainSplits, chainPending, unresolved,
+            provenance:assessBaseline(records) };
     }
 
     function reportSeries(copy) {
@@ -96,7 +143,7 @@
         // categories without replaying old app migrations or writing changes.
         const baseline = posterFix4.assignAnimeSeriesIdentity(rows).list;
         const { list } = V.recoverLegacyAnimeIdentities(rows, copy.original);
-        const { projected, reviewByIndex } = V.describeAnimeSeriesProjection(list);
+        const { projected, reviewByIndex, relationComponents = [] } = V.describeAnimeSeriesProjection(list);
         const local = new Map(), claims = new Map(), suggestions = new Map(), groups = new Map();
         const add = (map, key, index) => {
             if (!key) return;
@@ -147,7 +194,7 @@
             if (peers.length > 1 && projected[index].seriesKeySource === "legacy-group") warnings.push("依舊系列欄位與作品資料復原");
             const result = deleted(row) ? "deleted" : conflict ? "conflict" : actionable ? "review"
                 : peers.length > 1 ? "grouped" : optional ? "suggestion" : "independent";
-            return { index, row, result, warnings, metadataWarnings, candidates, actionable,
+            return { index, row, id, aniListIds:V.getAnimeAniListClaims(list[index]), result, warnings, metadataWarnings, candidates, actionable,
                 canEdit:!deleted(row) && Boolean(id && local.get(id).length === 1),
                 key:V.getAnimeSeriesKey(projected[index]), label:V.getAnimeSeriesDisplayLabel(projected[index]),
                 identityRecovered:!V.getConfirmedAnimeAniListId(row) && Boolean(V.getConfirmedAnimeAniListId(list[index])) };
@@ -158,7 +205,7 @@
                 automatic.set(item.key, (automatic.get(item.key) || 0) + 1);
             }
         }
-        const comparison = compareSeries(copy.original.records, rows, baseline, projected, items);
+        const comparison = compareSeries(copy.original.records, rows, baseline, projected, items, relationComponents, claims);
         return { items, groups, projected, comparison, stats:{
             automatic:[...automatic.values()].filter(count => count > 1).length,
             suggestions:items.filter(item => item.result === "suggestion").length,
