@@ -419,6 +419,36 @@ test("a split cour differs from its same-season first part in corroborated legac
     assert.deepEqual([...report.reviewByIndex],[]);
 });
 
+test("exact AniList claims with older ownership annotations are corroborated for display only", () => {
+    const legacy = (id, title, year, claim) => ({
+        id, title, year, format:"TV", category:"backlog", watched:2, notes:"留在本機", ...claim
+    });
+    const rows = [
+        legacy(146065,"無職轉生 第二季",2023,{anilistId:146065,identitySource:"legacy-title-year-format"}),
+        legacy(178789,"無職轉生 第三季",2026,{dataSource:"anilist",sourceId:178789}),
+        legacy(1698,"交響情人夢",2007,{anilistId:1698,identitySource:"legacy-work-sourceId"}),
+        legacy(4477,"交響情人夢（2008）",2008,{aniListId:4477,identitySource:"legacy-title-year-format"})
+    ];
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.deepEqual(report.membershipEvidence.map(entry => entry.id),["146065","178789","1698","4477"]);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(keys[0],keys[1]);
+    assert.equal(keys[2],keys[3]);
+    assert.notEqual(keys[0],keys[2]);
+    assert.deepEqual([...report.reviewByIndex],[]);
+    assert.ok(rows.every(row => !V.getConfirmedAnimeAniListId(row)));
+    assert.deepEqual(rows,before);
+
+    const contested = [
+        legacy(146065,"無職轉生 第二季",2023,{}),
+        legacy(178789,"無職轉生 第三季",2026,{source:"mal",sourceId:178789}),
+        legacy(1698,"交響情人夢",2007,{anilistId:1698,sourceId:90802}),
+        legacy(4477,"交響情人夢（2008）",2008,{anilistId:4477,identitySource:"legacy-title-year-format",format:"OVA"})
+    ];
+    assert.deepEqual(V.describeAnimeSeriesProjection(contested).membershipEvidence,[null,null,null,null]);
+});
+
 test("official alternate adaptations and extras attach without making a bridge between franchises", () => {
     const verified = (id, title, groupTitle, format, year, relations = []) => ({
         id:`work-${id}`, anilistId:id, sourceId:id, source:"anilist", title, groupTitle, format, year, relations,

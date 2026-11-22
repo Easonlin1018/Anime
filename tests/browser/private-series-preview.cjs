@@ -130,6 +130,7 @@ async function verifyRelatedFormats(page) {
     const rows = published.map(([id,title,year,format], index) => ({
         id, title, year, format, category:["completed","review","backlog"][index % 3],
         source:"anilist", sourceId:id, anilistId:id, anilistIdentitySource:"anilist-api",
+        ...([0,3,5].includes(index) ? {identitySource:"legacy-title-year-format"} : {}),
         groupTitle:index < 3 ? "堀與宮村" : "徹夜之歌",
         watched:index, rating:7, note:privateMarker
     }));

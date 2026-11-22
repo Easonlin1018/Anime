@@ -5,7 +5,7 @@ const { createServer } = require("node:http");
 const { resolve } = require("node:path");
 
 const repo = resolve(__dirname, "../..");
-const app = "releases/legacy-series-6/";
+const app = "releases/legacy-series-7/";
 const tool = "tools/private-series-preview/";
 const scripts = "text/javascript; charset=utf-8";
 function previewRoutes(revision) {

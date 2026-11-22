@@ -1,6 +1,6 @@
 (function (root, factory) {
     if (typeof module === "object" && module.exports) {
-        module.exports = factory(require("../../releases/legacy-series-6/v11-core.js"),
+        module.exports = factory(require("../../releases/legacy-series-7/v11-core.js"),
             require("../../releases/poster-fix-4/v11-core.js"), require("../../releases/legacy-series-5/v11-core.js"));
     } else {
         root.PrivateSeriesPreview = factory(root.AnimeTrackerV11, root.PosterFix4Core, root.LegacySeries5Core);
