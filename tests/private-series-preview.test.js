@@ -81,7 +81,7 @@ test("multiple corroborated originals are true review, while matching names alon
     assert.deepEqual(stats, { automatic:0, suggestions:3, needsReview:2, metadata:0 });
 });
 
-test("before and after review report removes legacy first-season false positives but retains real identity conflicts", () => {
+test("the Quintuplets false positive stays resolved against the latest PR9 baseline and true conflicts remain", () => {
     const series = "五等分的新娘";
     const copy = exampleCopy([
         { id:"legacy-season-one", anilistId:103572, title:series, groupTitle:series, category:"completed", year:2019 },
@@ -91,18 +91,72 @@ test("before and after review report removes legacy first-season false positives
     ]);
     const original = structuredClone(copy);
     const { comparison:{ reviewChanges }, items } = audit.reportSeries(copy);
-    assert.equal(reviewChanges.before,3);
+    assert.equal(reviewChanges.before,1);
     assert.equal(reviewChanges.after,1);
-    assert.deepEqual(reviewChanges.resolved.map(entry => items[entry.index].aniListIds), [["103572"],["109261"]]);
-    for (const entry of reviewChanges.resolved) {
-        assert.ok(entry.before.some(reason => reason.includes("同名首作")));
-        assert.deepEqual(entry.after, []);
-    }
+    assert.deepEqual(reviewChanges.resolved,[]);
     assert.deepEqual(reviewChanges.remaining.map(entry => items[entry.index].id), ["actual-identity-conflict"]);
     assert.deepEqual(reviewChanges.remaining[0].before, reviewChanges.remaining[0].after);
+    assert.equal(reviewChanges.remaining[0].status,"wrong");
     assert.deepEqual(reviewChanges.added,[]);
     assert.equal(items[0].key, items[1].key);
     assert.deepEqual(copy, original);
+});
+
+test("A/B lists exact previous same-slot and first-release warnings cleared by verified relationships", () => {
+    const mushoku = "無職轉生", nodame = "交響情人夢";
+    const legacy = (id, year, title, groupTitle) => ({ id, title, groupTitle, year, format:"TV", anilistId:id });
+    const rows = [
+        legacy(108465,2021,mushoku,mushoku),
+        legacy(146065,2023,mushoku + " 第二季",mushoku),
+        legacy(166873,2024,mushoku + " 第二季",mushoku),
+        legacy(178789,2026,mushoku + " 第三季",mushoku),
+        legacy(217434,2027,mushoku + " 第三季",mushoku),
+        legacy(1698,2007,nodame,nodame),
+        legacy(4477,2008,nodame,nodame),
+        { ...legacy(5690,2010,nodame + " 第三季",nodame), source:"AniList", sourceId:5690 }
+    ];
+    const copy = exampleCopy(rows), before = JSON.stringify(copy);
+    const { items, comparison } = audit.reportSeries(copy);
+    const requested = new Map([["146065","相同季別"],["178789","相同季別"],["1698","同名首作"],["4477","同名首作"]]);
+    const resolved = comparison.reviewChanges.resolved.filter(item => requested.has(item.afterIds[0]));
+    assert.equal(resolved.length,4);
+    for (const entry of resolved) {
+        assert.deepEqual(entry.beforeIds,entry.afterIds);
+        assert.ok(entry.before.some(reason => reason.includes(requested.get(entry.afterIds[0]))));
+        assert.deepEqual(entry.after,[]);
+        assert.equal(entry.status,"confirmed");
+    }
+    assert.deepEqual(comparison.reviewChanges.added,[]);
+    assert.equal(items[1].key,items[2].key);
+    assert.equal(items[3].key,items[4].key);
+    assert.equal(items[5].key,items[6].key);
+    assert.deepEqual([items[1].evidence.season,items[2].evidence.part],["SUMMER","第 2 季 Part 2"]);
+    assert.equal(JSON.stringify(copy),before);
+});
+
+test("group audit distinguishes verified edits and supplements from unsupported groups and definite ID errors", () => {
+    const tracked = (id, year, format, title) => ({ id, source:"AniList", sourceId:id, anilistId:id, title, year, format });
+    const rows = [
+        tracked(14753,2012,"OVA","堀與宮村"), tracked(124080,2021,"TV","堀與宮村"),
+        tracked(163132,2023,"TV","堀與宮村 -piece-"), tracked(141391,2022,"TV","徹夜之歌"),
+        tracked(175914,2025,"TV","徹夜之歌 第二季"), tracked(150583,2022,"ONA","徹夜之歌 迷你動畫"),
+        {id:"unverified-1",title:"不足",groupTitle:"不足",year:2011},
+        {id:"unverified-2",title:"不足 第二季",groupTitle:"不足",year:2013},
+        {id:"wrong-id",title:"真正身分錯誤",source:"AniList",sourceId:82114,anilistId:82115}
+    ];
+    const copy = exampleCopy(rows), before = JSON.stringify(copy);
+    const { items, comparison } = audit.reportSeries(copy);
+    const audited = comparison.groupingEvidence;
+    assert.deepEqual(audited.filter(group => group.status === "confirmed").map(group => group.members),[[0,1,2],[3,4,5]]);
+    assert.deepEqual(audited.filter(group => group.status === "insufficient").map(group => group.members),[[6,7]]);
+    assert.deepEqual(audited.filter(group => group.status === "wrong").map(group => group.members),[[8]]);
+    assert.ok(items[0].evidence.via.some(edge => edge.type === "ALTERNATIVE" && edge.id === "124080"));
+    assert.equal(items[2].evidence.format,"TV");
+    assert.ok(items[5].evidence.via.some(edge => edge.type === "PARENT" && edge.id === "141391"));
+    assert.equal(items[5].evidence.format,"ONA");
+    assert.equal(items[5].evidence.year,2022);
+    assert.ok(comparison.possibleMerges.every(group => group.members.every(index => index > 5)));
+    assert.equal(JSON.stringify(copy),before);
 });
 
 test("verified relationships from the backup are evaluated without reassigning IDs in the original", () => {

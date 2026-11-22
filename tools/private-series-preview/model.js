@@ -1,9 +1,9 @@
 (function (root, factory) {
     if (typeof module === "object" && module.exports) {
-        module.exports = factory(require("../../releases/legacy-series-5/v11-core.js"),
-            require("../../releases/poster-fix-4/v11-core.js"), require("../../releases/legacy-series-4/v11-core.js"));
+        module.exports = factory(require("../../releases/legacy-series-6/v11-core.js"),
+            require("../../releases/poster-fix-4/v11-core.js"), require("../../releases/legacy-series-5/v11-core.js"));
     } else {
-        root.PrivateSeriesPreview = factory(root.AnimeTrackerV11, root.PosterFix4Core, root.LegacySeries4Core);
+        root.PrivateSeriesPreview = factory(root.AnimeTrackerV11, root.PosterFix4Core, root.LegacySeries5Core);
     }
 })(globalThis, function (V, posterFix4, previousPR9) {
     "use strict";
@@ -62,18 +62,35 @@
             .map(item => ({ index:item.index, reasons:[...new Set(item.warnings)] }));
     }
 
-    function compareReview(previous, current) {
+    function compareReview(previous, current, previousItems, items) {
         const was = new Map(previous.map(item => [item.index, item.reasons]));
         const now = new Map(current.map(item => [item.index, item.reasons]));
+        const entry = index => ({
+            index, before:was.get(index) || [], after:now.get(index) || [],
+            beforeIds:previousItems[index].aniListIds, afterIds:items[index].aniListIds,
+            status:items[index].identityConflicts.length ? "wrong"
+                : !now.has(index) && items[index].evidence?.component ? "confirmed" : "insufficient"
+        });
         return {
             before:previous.length, after:current.length,
-            resolved:previous.filter(item => !now.has(item.index))
-                .map(({ index, reasons }) => ({ index, before:reasons, after:[] })),
-            remaining:current.filter(item => was.has(item.index))
-                .map(({ index, reasons }) => ({ index, before:was.get(index), after:reasons })),
-            added:current.filter(item => !was.has(item.index))
-                .map(({ index, reasons }) => ({ index, before:[], after:reasons }))
+            resolved:previous.filter(item => !now.has(item.index)).map(item => entry(item.index)),
+            remaining:current.filter(item => was.has(item.index)).map(item => entry(item.index)),
+            added:current.filter(item => !was.has(item.index)).map(item => entry(item.index))
         };
+    }
+
+    function assessGroup(members, items) {
+        const records = members.map(index => items[index]);
+        const conflicts = records.flatMap(item => item.identityConflicts);
+        if (conflicts.length) return { status:"wrong", reasons:[...new Set(conflicts)] };
+        const components = records.map(item => item.evidence?.component);
+        if (records.length > 1 && records.every(item => item.evidence?.id)
+            && components[0] && components.every(key => key === components[0])) {
+            return { status:"confirmed", reasons:["已核對相同系列的 AniList 作品關係。前後作、番外與不同改編各自顯示。"] };
+        }
+        return { status:"insufficient", reasons:[records.some(item => !item.evidence?.id)
+            ? "至少一筆作品缺少可核實的 AniList 身分，請核對其完整 ID。"
+            : "作品身分已核實，現有關係還不足以確認整組作品屬於同一系列。"] };
     }
 
     function compareSeries(records, rows, baseline, projected, items, relationComponents, claims) {
@@ -116,9 +133,13 @@
         const split = oldGroups.filter(group => group.newParts.length > 1);
         const relationSources = new Set(["anilist-relations", "legacy-relations"]);
         const chainOf = new Map(relationComponents.flatMap(({ key, members }) => members.map(index => [index,key])));
+        const groupingEvidence = [...next.values()]
+            .filter(group => group.members.length > 1 || group.members.some(index => items[index].identityConflicts.length))
+            .map(group => ({ ...group, ...assessGroup(group.members,items) }));
         const possibleMerges = [...next.values()].filter(group => group.members.length > 1).map(withParts)
             .filter(group => {
                 const automatic = group.members.filter(index => rows[index].seriesMembership?.mode !== "link");
+                if (assessGroup(automatic,items).status !== "insufficient") return false;
                 const chains = new Set(automatic.map(index => chainOf.get(index)).filter(Boolean));
                 return chains.size > 1 || (oldParts(automatic).length > 1
                     && !automatic.every(index => relationSources.has(projected[index].seriesKeySource)));
@@ -152,13 +173,13 @@
         }
         const unresolved = [...unresolvedByIndex].sort(([a], [b]) => a - b)
             .map(([index, reasons]) => ({ index, reasons:[...reasons], id:items[index].id, aniListIds:items[index].aniListIds }));
-        return { oldGroups, restored, split, possibleMerges, review, chainComplete, chainSplits, chainPending, unresolved,
+        return { oldGroups, restored, split, possibleMerges, groupingEvidence, review, chainComplete, chainSplits, chainPending, unresolved,
             provenance:assessBaseline(records) };
     }
 
     function analyzeSeries(copy, rows, V) {
         const { list } = V.recoverLegacyAnimeIdentities(rows, copy.original);
-        const { projected, reviewByIndex, relationComponents = [] } = V.describeAnimeSeriesProjection(list);
+        const { projected, reviewByIndex, relationComponents = [], membershipEvidence = [] } = V.describeAnimeSeriesProjection(list);
         const local = new Map(), claims = new Map(), suggestions = new Map(), groups = new Map();
         const add = (map, key, index) => {
             if (!key) return;
@@ -201,7 +222,8 @@
                 metadata?.dateConflict ? "首播日期與已存 AniList 資料不一致" : "",
                 metadata?.formatConflict ? "作品形式與已存 AniList 資料不一致" : ""
             ].filter(Boolean);
-            const conflict = warnings.length > 0;
+            const identityConflicts = [...warnings];
+            const conflict = identityConflicts.length > 0;
             const manual = row.seriesMembership?.mode === "separate" || row.seriesMembership?.mode === "link";
             const actionable = !manual && reviewByIndex.has(index);
             if (actionable) warnings.push(...reviewByIndex.get(index));
@@ -209,7 +231,8 @@
             if (peers.length > 1 && projected[index].seriesKeySource === "legacy-group") warnings.push("依舊系列欄位與作品資料復原");
             const result = deleted(row) ? "deleted" : conflict ? "conflict" : actionable ? "review"
                 : peers.length > 1 ? "grouped" : optional ? "suggestion" : "independent";
-            return { index, row, id, aniListIds:V.getAnimeAniListClaims(list[index]), result, warnings, metadataWarnings, candidates, actionable,
+            return { index, row, id, aniListIds:V.getAnimeAniListClaims(list[index]), evidence:membershipEvidence[index] || null,
+                result, warnings, identityConflicts, metadataWarnings, candidates, actionable,
                 canEdit:!deleted(row) && Boolean(id && local.get(id).length === 1),
                 key:V.getAnimeSeriesKey(projected[index]), label:V.getAnimeSeriesDisplayLabel(projected[index]),
                 identityRecovered:!V.getConfirmedAnimeAniListId(row) && Boolean(V.getConfirmedAnimeAniListId(list[index])) };
@@ -223,8 +246,8 @@
         const baseline = posterFix4.assignAnimeSeriesIdentity(rows).list;
         const { items, groups, projected, relationComponents, claims } = analyzeSeries(copy, rows, V);
         const comparison = compareSeries(copy.original.records, rows, baseline, projected, items, relationComponents, claims);
-        const beforeReview = reviewEntries(analyzeSeries(copy, rows, previousPR9).items);
-        comparison.reviewChanges = compareReview(beforeReview, comparison.review);
+        const previous = analyzeSeries(copy, rows, previousPR9);
+        comparison.reviewChanges = compareReview(reviewEntries(previous.items), comparison.review, previous.items, items);
         const automatic = new Map();
         for (const item of items) {
             if (item.result === "grouped" && item.row.seriesMembership?.mode !== "link") {

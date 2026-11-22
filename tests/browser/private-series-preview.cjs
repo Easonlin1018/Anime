@@ -118,6 +118,45 @@ async function verifyKnownFranchises(page) {
     assert.deepEqual(original.history, history);
 }
 
+async function verifyRelatedFormats(page) {
+    const published = [
+        [14753, "堀與宮村", 2012, "OVA"],
+        [124080, "堀與宮村（2021）", 2021, "TV"],
+        [163132, "堀與宮村 -piece-（2023）", 2023, "TV"],
+        [141391, "徹夜之歌", 2022, "TV"],
+        [150583, "徹夜之歌（ONA）（2022）", 2022, "ONA"],
+        [175914, "徹夜之歌 第二季（2025）", 2025, "TV"]
+    ];
+    const rows = published.map(([id,title,year,format], index) => ({
+        id, title, year, format, category:["completed","review","backlog"][index % 3],
+        source:"anilist", sourceId:id, anilistId:id, anilistIdentitySource:"anilist-api",
+        groupTitle:index < 3 ? "堀與宮村" : "徹夜之歌",
+        watched:index, rating:7, note:privateMarker
+    }));
+    const history = [{ id:"related-works-history", animeId:rows[0].id, at, delta:1 }];
+    await page.locator("#backup-file").setInputFiles({
+        name:"synthetic-related-works.json", mimeType:"application/json",
+        buffer:Buffer.from(JSON.stringify({anime_list_v8_8:rows,watchHistory:history}))
+    });
+    await page.locator("#status").filter({hasText:"匯入完成"}).waitFor();
+    const confirmed = comparison(page,"merge-confirmed");
+    const groupedTitles = await confirmed.locator(":scope > details").allTextContents();
+    assert.equal(groupedTitles.length, 2);
+    for (const [title, ids] of [["堀與宮村", published.slice(0,3)], ["徹夜之歌", published.slice(3)]]) {
+        const family = groupedTitles.find(text => text.startsWith(title));
+        assert.ok(family, title);
+        for (const [id,,year,format] of ids) {
+            assert.match(family, new RegExp("\\b" + id + "\\b"));
+            assert.match(family, new RegExp("\\b" + year + "\\b"));
+            assert.match(family, new RegExp("\\b" + format + "\\b"));
+        }
+        assert.match(family, /SIDE_STORY|外傳/u);
+        if (title === "堀與宮村") assert.match(family, /ALTERNATIVE|另行改編/u);
+    }
+    assert.deepEqual((await storedCopy(page)).original.records,rows);
+    assert.deepEqual((await storedCopy(page)).original.history,history);
+}
+
 async function testPermanentDeletion(page) {
     const file = page.locator("#backup-file");
     const old = makeBackup();
@@ -379,9 +418,12 @@ async function main() {
         assert.equal(await storedCopy(reopened), null);
         await testPermanentDeletion(reopened);
         await verifyKnownFranchises(reopened);
+        await confirmClear(reopened, true);
+        await reopened.locator("#status").filter({hasText:"已清除測試副本"}).waitFor();
+        await verifyRelatedFormats(reopened);
         assertPrivateTransport(requests);
         console.log(JSON.stringify({ engine:browser.version(), backupUnchanged:true, isolatedEdits:true,
-            realShapeGrouping:true, seriesComparison:true, confirmedFranchises:[6,5,6],
+            realShapeGrouping:true, seriesComparison:true, confirmedFranchises:[6,5,6], verifiedRelatedFormats:[3,3],
             offlineImportAndRestart:true, clearedOnlyPreview:true, permanentDeletionAndReimportGuard:true,
             capturedRequests:requests.length, outboundPrivateRequests:0 }));
     } finally {

@@ -9,8 +9,8 @@ const { webcrypto } = require("node:crypto");
 
 const root = path.resolve(__dirname, "..");
 const source = fs.readFileSync(path.join(root, "sw.js"), "utf8");
-const RELEASE = "legacy-series-5";
-const VERSION = "anime-tracker-v11-legacy-series-5";
+const RELEASE = "legacy-series-6";
+const VERSION = "anime-tracker-v11-legacy-series-6";
 const LEGACY = "anime-tracker-v11-currently-watching-1";
 const base = "https://isolated.example/Anime/";
 const release = "releases/" + RELEASE + "/";

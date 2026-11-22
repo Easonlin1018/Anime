@@ -367,3 +367,89 @@ test("an explicitly labelled and dated OVA or special can complete a legacy seri
     assert.notEqual(keys[0],keys[3]);
     assert.ok(rows.every(row => !V.getConfirmedAnimeAniListId(row)));
 });
+
+test("verified cour and Paris identities beat old duplicate-name warnings without writing new identity fields", () => {
+    const previous = require("../releases/legacy-series-5/v11-core.js");
+    const legacy = (anilistId, title, groupTitle, year, category) => ({
+        id:`legacy-${anilistId}`, anilistId, title, groupTitle, year, format:"TV", category,
+        watched:3, rating:8, notes:"保留本機觀看資料"
+    });
+    const fantasy = "無職轉生～到了異世界就拿出真本事～";
+    const nodame = "交響情人夢";
+    const rows = [
+        legacy(146065,`${fantasy} 第二季（2023）`,fantasy,2023,"completed"),
+        legacy(166873,`${fantasy} 第二季（2024）`,fantasy,2024,"backlog"),
+        legacy(178789,`${fantasy} 第三季（2026）`,fantasy,2026,"review"),
+        legacy(217434,`${fantasy} 第三季（2027）`,fantasy,2027,"waiting"),
+        legacy(1698,nodame,nodame,2007,"completed"),
+        legacy(4477,`${nodame}（2008）`,nodame,2008,"review"),
+        legacy(5690,`${nodame} 第三季（2010）`,nodame,2010,"backlog"),
+        { ...legacy(8038,`${nodame}（特別篇）（2010）`,nodame,2010,"backlog"), format:"SPECIAL" },
+        { ...legacy(8190,`${nodame}（OVA）（2010）`,nodame,2010,"backlog"), format:"OVA" },
+        legacy(127720,"無職轉生 ~到了異世界就拿出真本事~【異世界行ったら本気だす 第2クール】（2021）",fantasy,2021,"completed")
+    ];
+    const before = structuredClone(rows);
+    const oldReview = previous.describeAnimeSeriesProjection(rows).reviewByIndex;
+    for (const index of [0,2,4,5]) assert.ok(oldReview.has(index), `legacy review for ${rows[index].anilistId}`);
+
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.deepEqual([...report.reviewByIndex],[]);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,4)).size,1);
+    assert.equal(new Set(keys.slice(4,9)).size,1);
+    assert.equal(keys[0],keys[9]);
+    assert.notEqual(keys[0],keys[4]);
+    assert.deepEqual(report.membershipEvidence.map(item => item.id),rows.map(row => String(row.anilistId)));
+    assert.equal(report.membershipEvidence[1].part,"第 2 季 Part 2");
+    assert.equal(report.membershipEvidence[5].part,"巴黎篇");
+    assert.ok(report.membershipEvidence[5].via.some(link => link.type === "PREQUEL" && link.id === "1698" && !link.incoming));
+    assert.ok(report.projected.every(row => !V.getConfirmedAnimeAniListId(row)));
+    assert.deepEqual(rows,before);
+});
+
+test("a split cour differs from its same-season first part in corroborated legacy names", () => {
+    const record = (id,title,year) => ({ id,title,year,format:"TV",groupTitle:"合成長篇",category:"waiting" });
+    const rows = [
+        record("original","合成長篇",2020),
+        record("season-two","合成長篇 第二季",2022),
+        record("season-two-cour-two","合成長篇 第二季（Cour 2）",2022)
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.equal(new Set(report.projected.map(V.getAnimeSeriesKey)).size,1);
+    assert.deepEqual([...report.reviewByIndex],[]);
+});
+
+test("official alternate adaptations and extras attach without making a bridge between franchises", () => {
+    const verified = (id, title, groupTitle, format, year, relations = []) => ({
+        id:`work-${id}`, anilistId:id, sourceId:id, source:"anilist", title, groupTitle, format, year, relations,
+        watched:2, notes:"保留觀看資料"
+    });
+    const hori = "堀與宮村", night = "徹夜之歌";
+    const rows = [
+        verified(14753,hori,hori,"OVA",2012),
+        verified(124080,hori,hori,"TV",2021),
+        verified(163132,`${hori} -piece-`,hori,"TV",2023),
+        verified(141391,night,night,"TV",2022),
+        verified(175914,`${night} 第二季`,night,"TV",2025),
+        verified(150583,`${night} Mini`,night,"ONA",2022)
+    ];
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,3)).size,1);
+    assert.equal(new Set(keys.slice(3)).size,1);
+    assert.notEqual(keys[0],keys[3]);
+    assert.deepEqual(report.relationComponents.map(group => group.members),[[3,4]]);
+    assert.deepEqual(report.membershipEvidence.map(item => item.kind),
+        ["alternative-edition","edition-anchor","satellite","continuation","continuation","satellite"]);
+    assert.ok(report.membershipEvidence.every(item => item.yearVerified && item.formatVerified && item.component));
+    assert.ok(report.membershipEvidence[0].via.some(link => link.type === "ALTERNATIVE" && link.id === "124080"));
+    assert.ok(report.membershipEvidence[5].via.some(link => link.type === "PARENT" && link.id === "141391"));
+    assert.deepEqual(rows,before);
+
+    const unrelated = verified(990005,"無關但同型的作品",night,"TV",2025);
+    const misleadingSatellite = { ...rows[5], relations:[edge("SEQUEL",990005,unrelated.title,"TV")] };
+    const splitKeys = membership([...rows.slice(0,5),misleadingSatellite,unrelated]);
+    assert.notEqual(splitKeys[3],splitKeys[6],"an attachment cannot link two transitive chains");
+    assert.notEqual(splitKeys[3],splitKeys[5],"contradictory chain must not be absorbed through a weak attachment");
+});

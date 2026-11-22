@@ -3,7 +3,7 @@
 const cacheName = "anime-private-series-__REVISION__";
 const documents = new Set(["/", "/index.html"]);
 const files = [...documents, "/preview.css", "/preview.js", "/model.js", "/v11-core.js",
-    "/poster-fix-4-core.js", "/save-poster-fix-4.js", "/legacy-series-4-core.js", "/save-legacy-series-4.js",
+    "/poster-fix-4-core.js", "/save-poster-fix-4.js", "/legacy-series-5-core.js", "/save-legacy-series-5.js",
     "/purge.js", "/vendor/opencc.js", "/manifest.webmanifest", "/icon.svg"];
 
 async function fetchAsset(path, signal) {

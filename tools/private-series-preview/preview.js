@@ -200,6 +200,36 @@ function memberLabel(item) {
         .filter(Boolean).join(" · ");
 }
 
+const evidenceStatus = { wrong:"確定錯誤", insufficient:"證據不足", confirmed:"已確認正確" };
+const relationLabels = {
+    PREQUEL:"前作", SEQUEL:"續作", SIDE_STORY:"番外或補篇", PARENT:"本篇",
+    ALTERNATIVE:"不同改編版本", CONTINUATION_ROOT:"同一前後作鏈"
+};
+const seasonLabels = { WINTER:"冬季", SPRING:"春季", SUMMER:"夏季", FALL:"秋季" };
+
+function appendRecordEvidence(node, item) {
+    const evidence = item.evidence;
+    if (!evidence?.id) {
+        node.append(element("p", "現有紀錄尚無足夠證據核實 AniList 身分。", "muted"));
+        return;
+    }
+    const metadata = [`核實 AniList ID ${evidence.id}`,
+        evidence.year ? `${evidence.yearVerified ? "AniList 首播" : "備份年份"} ${evidence.year} 年` : "",
+        seasonLabels[evidence.season] || evidence.season, evidence.part,
+        evidence.format ? `${evidence.formatVerified ? "AniList 形式" : "備份形式"} ${evidence.format}` : ""].filter(Boolean);
+    node.append(element("p", metadata.join(" · ")));
+    const relations = (evidence.via || []).map(({ id, type, incoming }) =>
+        `${relationLabels[type] || type} (${type}) · ${incoming ? "AniList ID " + id + " 指向本作" : "AniList ID " + id}`);
+    if (relations.length) node.append(element("p", "關係 · " + relations.join("、"), "muted"));
+    else node.append(element("p", "作品身分已核實，這筆紀錄未提供可用的系列關係。", "muted"));
+    const year = Number(item.row.startDate?.year || item.row.year);
+    const format = String(item.row.format || "").trim().toUpperCase();
+    const warnings = [...item.metadataWarnings];
+    if (evidence.yearVerified && year && year !== Number(evidence.year)) warnings.push("備份年份與 AniList 首播年份不同。");
+    if (evidence.formatVerified && format && format !== evidence.format) warnings.push("備份形式與 AniList 形式不同。");
+    for (const warning of warnings) node.append(element("p", warning, "warning"));
+}
+
 function renderMembershipSide(title, parts, side) {
     const column = element("div", "", "comparison-side");
     column.dataset.side = side;
@@ -221,7 +251,7 @@ function renderReviewChanges(visible, expanded) {
     section.dataset.comparison = "review-changes";
     section.open = expanded.has("review-changes");
     section.append(element("summary", `人工確認差異（前次 ${changes.before} 筆，這次 ${changes.after} 筆）`),
-        element("p", "兩次結果皆使用目前這份備份重算。", "muted"));
+        element("p", "兩次結果皆使用目前這份備份重算，前次為 PR #9 的 legacy-series-5。", "muted"));
     const outcomes = [["resolved", "已解除"], ["remaining", "仍需確認"], ["added", "新增需確認"]];
     for (const [key, label] of outcomes) {
         const group = element("div");
@@ -230,9 +260,16 @@ function renderReviewChanges(visible, expanded) {
         const list = element("ul", "", "comparison-records");
         for (const entry of changes[key].filter(entry => visible(result.items[entry.index]))) {
             const item = element("li");
-            item.append(element("strong", memberLabel(result.items[entry.index])),
+            item.dataset.evidenceStatus = entry.status;
+            const record = result.items[entry.index];
+            item.append(element("strong", memberLabel(record)),
+                element("p", evidenceStatus[entry.status]),
                 element("p", "前次原因 · " + (entry.before.join("。") || "無")),
                 element("p", "這次原因 · " + (entry.after.join("。") || "無")));
+            if (entry.beforeIds.join() !== entry.afterIds.join()) {
+                item.append(element("p", `前次 AniList ID ${entry.beforeIds.join("、") || "無"} · 這次 AniList ID ${entry.afterIds.join("、") || "無"}`));
+            }
+            if (record.evidence) appendRecordEvidence(item, record);
             list.append(item);
         }
         group.append(list.childElementCount ? list : element("p", "沒有符合的紀錄。", "muted"));
@@ -241,13 +278,43 @@ function renderReviewChanges(visible, expanded) {
     comparisonResults.append(section);
 }
 
+function renderGroupingEvidence(visible, expanded) {
+    const sections = [["wrong", "merge-error"], ["insufficient", "merge"], ["confirmed", "merge-confirmed"]];
+    for (const [status, key] of sections) {
+        const entries = result.comparison.groupingEvidence.filter(entry => entry.status === status);
+        const section = element("details", "", "report-section");
+        section.dataset.comparison = key;
+        section.open = expanded.has(key);
+        section.append(element("summary", `分組證據 · ${evidenceStatus[status]}（${entries.length}）`));
+        const matching = entries.filter(entry => entry.members.some(index => visible(result.items[index])));
+        if (!matching.length) section.append(element("p", "沒有符合的紀錄。", "muted"));
+        for (const entry of matching) {
+            const card = element("details", "", "group");
+            card.append(element("summary", `${entry.label || "未命名系列"}（${entry.members.length} 部）`),
+                element("p", entry.reasons.join("。"), "muted"));
+            const records = element("ul", "", "comparison-records");
+            for (const index of entry.members) {
+                const row = result.items[index];
+                const record = element("li");
+                record.append(element("strong", memberLabel(row)));
+                appendRecordEvidence(record, row);
+                records.append(record);
+            }
+            card.append(records);
+            section.append(card);
+        }
+        comparisonResults.append(section);
+    }
+}
+
 function renderComparison(visible) {
-    const { oldGroups, restored, split, possibleMerges, review, chainComplete, chainSplits, chainPending, unresolved, provenance } = result.comparison;
+    const { oldGroups, restored, split, review, chainComplete, chainSplits, chainPending, unresolved, provenance } = result.comparison;
     document.getElementById("comparison-limitations").textContent = provenance.warning;
     const expanded = new Set([...comparisonResults.querySelectorAll("[data-comparison][open]")]
         .map(section => section.dataset.comparison));
     comparisonResults.replaceChildren();
     renderReviewChanges(visible, expanded);
+    renderGroupingEvidence(visible, expanded);
     const sections = [
         ["chain-complete", "備份中的完整 AniList 前後作鏈", chainComplete],
         ["chain-split", "被拆開的 AniList 前後作鏈", chainSplits],
@@ -255,7 +322,6 @@ function renderComparison(visible) {
         ["unresolved", "尚未解決的作品 ID 與原因", unresolved],
         ["restored", "新版恢復或保留的系列", restored],
         ["split", "舊版重算曾同組，新版分到不同組", split],
-        ["merge", "新版可能誤併的系列", possibleMerges],
         ["manual", "需要人工確認的作品", review],
         ["old", "poster-fix-4 依這份備份重算的系列", oldGroups]
     ];
