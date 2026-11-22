@@ -11,8 +11,11 @@
     <script defer src="/vendor/opencc.js"></script>
     <script defer src="/poster-fix-4-core.js"></script>
     <script defer src="/save-poster-fix-4.js"></script>
+    <script defer src="/legacy-series-4-core.js"></script>
+    <script defer src="/save-legacy-series-4.js"></script>
     <script defer src="/v11-core.js"></script>
     <script defer src="/model.js"></script>
+    <script defer src="/purge.js"></script>
     <script defer src="/preview.js"></script>
 </head>
 <body>
@@ -36,6 +39,10 @@
             <div id="comparison-results"></div>
         </div>
         <div id="report"></div>
+        <details id="deleted-diagnostics" class="report-section" hidden>
+            <summary id="deleted-count"></summary>
+            <div id="deleted-records"></div>
+        </details>
     </main>
 </body>
 </html>

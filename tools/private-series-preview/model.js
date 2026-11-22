@@ -1,10 +1,11 @@
 (function (root, factory) {
     if (typeof module === "object" && module.exports) {
-        module.exports = factory(require("../../releases/legacy-series-4/v11-core.js"), require("../../releases/poster-fix-4/v11-core.js"));
+        module.exports = factory(require("../../releases/legacy-series-5/v11-core.js"),
+            require("../../releases/poster-fix-4/v11-core.js"), require("../../releases/legacy-series-4/v11-core.js"));
     } else {
-        root.PrivateSeriesPreview = factory(root.AnimeTrackerV11, root.PosterFix4Core);
+        root.PrivateSeriesPreview = factory(root.AnimeTrackerV11, root.PosterFix4Core, root.LegacySeries4Core);
     }
-})(globalThis, function (V, posterFix4) {
+})(globalThis, function (V, posterFix4, previousPR9) {
     "use strict";
 
     const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
@@ -56,6 +57,25 @@
         return { status, newerCount, legacyCount, warning };
     }
 
+    function reviewEntries(items) {
+        return items.filter(item => item.result === "review" || item.result === "conflict")
+            .map(item => ({ index:item.index, reasons:[...new Set(item.warnings)] }));
+    }
+
+    function compareReview(previous, current) {
+        const was = new Map(previous.map(item => [item.index, item.reasons]));
+        const now = new Map(current.map(item => [item.index, item.reasons]));
+        return {
+            before:previous.length, after:current.length,
+            resolved:previous.filter(item => !now.has(item.index))
+                .map(({ index, reasons }) => ({ index, before:reasons, after:[] })),
+            remaining:current.filter(item => was.has(item.index))
+                .map(({ index, reasons }) => ({ index, before:was.get(index), after:reasons })),
+            added:current.filter(item => !was.has(item.index))
+                .map(({ index, reasons }) => ({ index, before:[], after:reasons }))
+        };
+    }
+
     function compareSeries(records, rows, baseline, projected, items, relationComponents, claims) {
         const old = new Map(), next = new Map();
         rows.forEach((row, index) => {
@@ -103,8 +123,7 @@
                 return chains.size > 1 || (oldParts(automatic).length > 1
                     && !automatic.every(index => relationSources.has(projected[index].seriesKeySource)));
             });
-        const review = items.filter(item => item.result === "review" || item.result === "conflict")
-            .map(item => ({ index:item.index, reasons:[...new Set(item.warnings)] }));
+        const review = reviewEntries(items);
         const unresolvedByIndex = new Map(review.map(({ index, reasons }) => [index, new Set(reasons)]));
         const addReason = (index, reason) => {
             if (!unresolvedByIndex.has(index)) unresolvedByIndex.set(index, new Set());
@@ -137,11 +156,7 @@
             provenance:assessBaseline(records) };
     }
 
-    function reportSeries(copy) {
-        const rows = verificationRows(copy);
-        // Both grouping passes start with the same rows. Compare keys across
-        // categories without replaying old app migrations or writing changes.
-        const baseline = posterFix4.assignAnimeSeriesIdentity(rows).list;
+    function analyzeSeries(copy, rows, V) {
         const { list } = V.recoverLegacyAnimeIdentities(rows, copy.original);
         const { projected, reviewByIndex, relationComponents = [] } = V.describeAnimeSeriesProjection(list);
         const local = new Map(), claims = new Map(), suggestions = new Map(), groups = new Map();
@@ -199,13 +214,23 @@
                 key:V.getAnimeSeriesKey(projected[index]), label:V.getAnimeSeriesDisplayLabel(projected[index]),
                 identityRecovered:!V.getConfirmedAnimeAniListId(row) && Boolean(V.getConfirmedAnimeAniListId(list[index])) };
         });
+        return { items, groups, projected, relationComponents, claims };
+    }
+
+    function reportSeries(copy) {
+        const rows = verificationRows(copy);
+        // Every pass evaluates the same local copy without writing changes.
+        const baseline = posterFix4.assignAnimeSeriesIdentity(rows).list;
+        const { items, groups, projected, relationComponents, claims } = analyzeSeries(copy, rows, V);
+        const comparison = compareSeries(copy.original.records, rows, baseline, projected, items, relationComponents, claims);
+        const beforeReview = reviewEntries(analyzeSeries(copy, rows, previousPR9).items);
+        comparison.reviewChanges = compareReview(beforeReview, comparison.review);
         const automatic = new Map();
         for (const item of items) {
             if (item.result === "grouped" && item.row.seriesMembership?.mode !== "link") {
                 automatic.set(item.key, (automatic.get(item.key) || 0) + 1);
             }
         }
-        const comparison = compareSeries(copy.original.records, rows, baseline, projected, items, relationComponents, claims);
         return { items, groups, projected, comparison, stats:{
             automatic:[...automatic.values()].filter(count => count > 1).length,
             suggestions:items.filter(item => item.result === "suggestion").length,

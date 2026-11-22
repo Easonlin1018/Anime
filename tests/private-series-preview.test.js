@@ -81,6 +81,30 @@ test("multiple corroborated originals are true review, while matching names alon
     assert.deepEqual(stats, { automatic:0, suggestions:3, needsReview:2, metadata:0 });
 });
 
+test("before and after review report removes legacy first-season false positives but retains real identity conflicts", () => {
+    const series = "五等分的新娘";
+    const copy = exampleCopy([
+        { id:"legacy-season-one", anilistId:103572, title:series, groupTitle:series, category:"completed", year:2019 },
+        { id:"legacy-season-two", anilistId:109261, title:series + "∬（2021）", groupTitle:series, category:"backlog", year:2021 },
+        { id:"unverified-sequel", title:series + " 第三季", groupTitle:series, category:"waiting", year:2025 },
+        { id:"actual-identity-conflict", source:"AniList", sourceId:101, anilistId:102, title:"兩個作品 ID" }
+    ]);
+    const original = structuredClone(copy);
+    const { comparison:{ reviewChanges }, items } = audit.reportSeries(copy);
+    assert.equal(reviewChanges.before,3);
+    assert.equal(reviewChanges.after,1);
+    assert.deepEqual(reviewChanges.resolved.map(entry => items[entry.index].aniListIds), [["103572"],["109261"]]);
+    for (const entry of reviewChanges.resolved) {
+        assert.ok(entry.before.some(reason => reason.includes("同名首作")));
+        assert.deepEqual(entry.after, []);
+    }
+    assert.deepEqual(reviewChanges.remaining.map(entry => items[entry.index].id), ["actual-identity-conflict"]);
+    assert.deepEqual(reviewChanges.remaining[0].before, reviewChanges.remaining[0].after);
+    assert.deepEqual(reviewChanges.added,[]);
+    assert.equal(items[0].key, items[1].key);
+    assert.deepEqual(copy, original);
+});
+
 test("verified relationships from the backup are evaluated without reassigning IDs in the original", () => {
     const rows = [examples[0],{ ...examples[1], anilistId:undefined, relations:[] }];
     const evidence = { mediaType:"anime", id:"local-movie", title:movie, source:"AniList", sourceId:104157, anilistId:104157 };

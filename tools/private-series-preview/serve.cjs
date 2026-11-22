@@ -5,7 +5,7 @@ const { createServer } = require("node:http");
 const { resolve } = require("node:path");
 
 const repo = resolve(__dirname, "../..");
-const app = "releases/legacy-series-4/";
+const app = "releases/legacy-series-5/";
 const tool = "tools/private-series-preview/";
 const scripts = "text/javascript; charset=utf-8";
 function previewRoutes(revision) {
@@ -17,6 +17,9 @@ function previewRoutes(revision) {
         ["/model.js", [file(tool + "model.js"), scripts]],
         ["/poster-fix-4-core.js", [file("releases/poster-fix-4/v11-core.js"), scripts]],
         ["/save-poster-fix-4.js", [Buffer.from("globalThis.PosterFix4Core = globalThis.AnimeTrackerV11;\n"), scripts]],
+        ["/legacy-series-4-core.js", [file("releases/legacy-series-4/v11-core.js"), scripts]],
+        ["/save-legacy-series-4.js", [Buffer.from("globalThis.LegacySeries4Core = globalThis.AnimeTrackerV11;\n"), scripts]],
+        ["/purge.js", [file(tool + "purge.js"), scripts]],
         ["/v11-core.js", [file(app + "v11-core.js"), scripts]],
         ["/vendor/opencc.js", [file(app + "vendor/opencc-js-1.4.1-full.js"), scripts]],
         ["/icon.svg", [file("icons/app-icon.svg"), "image/svg+xml"]],

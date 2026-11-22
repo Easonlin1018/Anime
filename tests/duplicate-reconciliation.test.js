@@ -150,7 +150,7 @@ test("12. title 已含同年時畫面去除尾端年份，不重複顯示", () =
     assert.deepEqual(V.getAnimeTitlePresentation({title:"五等分的新娘（2019）",startDate:{year:2019}}), {title:"五等分的新娘",year:2019});
     const html = fs.readFileSync(appSourcePath("index.html"), "utf8");
     assert.match(html, /anime-year-badge/u);
-    assert.match(html, /\.filter\(anime => !anime\.deletedAt\)/u);
+    assert.match(html, /\.filter\(anime => !anime\.deletedAt && anime\.category !== "_deleted"\)/u);
 });
 
 test("13. 人工名稱含不同年份時不改字串也不再加衝突 badge", () => {

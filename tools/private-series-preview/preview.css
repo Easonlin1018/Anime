@@ -29,6 +29,7 @@ input[type="file"] { max-width: min(100%, 21rem); }
 textarea, select, input[type="search"] { width: 100%; }
 button:not(:disabled), summary { cursor: pointer; }
 button:disabled { opacity: .62; }
+.danger { border-color: #f87171; color: #fecaca; }
 .report-section { border-top: 1px solid #334155; margin-top: 1rem; padding-top: .65rem; }
 .report-section > summary { font-size: 1.1rem; font-weight: 700; }
 .row, .group { margin: .55rem 0; padding: .52rem .7rem; border: 1px solid #334155; border-radius: .45rem; }

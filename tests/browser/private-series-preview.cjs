@@ -118,6 +118,52 @@ async function verifyKnownFranchises(page) {
     assert.deepEqual(original.history, history);
 }
 
+async function testPermanentDeletion(page) {
+    const file = page.locator("#backup-file");
+    const old = makeBackup();
+    old.watchHistory.push({id:"deleted-work-history",animeId:"deleted",at,delta:1});
+    old.mediaEntries = [{id:"deleted",mediaType:"anime"},{id:"deleted",mediaType:"manga"}];
+    const upload = () => file.setInputFiles({name:"purge-fixture.json",mimeType:"application/json",
+        buffer:Buffer.from(JSON.stringify(old))});
+    await upload();
+    await page.locator("#status").filter({hasText:"匯入完成"}).waitFor();
+    const current = await storedCopy(page);
+    const diagnostics = page.locator("#deleted-diagnostics");
+    const remove = diagnostics.locator('[data-action="purge-copy"]');
+    await diagnostics.locator("summary").first().click();
+    await diagnostics.locator("[data-row-index] summary").first().click();
+    const confirmPurge = async second => {
+        let count = 0;
+        const handler = dialog => ++count === 1 || second ? dialog.accept() : dialog.dismiss();
+        page.on("dialog", handler);
+        try { await remove.click(); } finally { page.off("dialog", handler); }
+        assert.equal(count, 2);
+    };
+    await confirmPurge(false);
+    assert.deepEqual(await storedCopy(page), current);
+    await confirmPurge(true);
+    await page.locator("#status").filter({hasText:"已永久刪除"}).waitFor();
+    const cleaned = (await storedCopy(page)).original;
+    assert.deepEqual(cleaned.records, current.original.records.filter(row => row.id !== "deleted"));
+    assert.deepEqual(cleaned.history, current.original.history.filter(row => row.animeId !== "deleted"));
+    assert.deepEqual(cleaned.mediaEntries, [{id:"deleted",mediaType:"manga"}]);
+    assert.deepEqual(cleaned.works, current.original.works);
+
+    await confirmClear(page, true);
+    await page.locator("#status").filter({hasText:"已清除測試副本"}).waitFor();
+    await page.reload({waitUntil:"domcontentloaded"});
+    await page.waitForFunction(() => !document.getElementById("backup-file").disabled);
+    // The previously exported backup predates normal deletion and still marks this work active.
+    const restored = old.anime_list_v8_8.find(row => row.id === "deleted");
+    restored.deletedAt = null;
+    restored.category = "backlog";
+    await upload();
+    await page.locator("#status").filter({hasText:"匯入完成"}).waitFor();
+    assert.deepEqual((await storedCopy(page)).original, cleaned);
+    await confirmClear(page, true);
+    await page.locator("#status").filter({hasText:"已清除測試副本"}).waitFor();
+}
+
 function expectedOriginal() {
     const backup = makeBackup();
     return { records:backup.anime_list_v8_8, history:backup.watchHistory, works:backup.works, mediaEntries:[] };
@@ -228,10 +274,13 @@ async function main() {
         await expectBucket(page, 2, "grouped");
         await expectBucket(page, 3, "grouped");
         await expectBucket(page, 4, "suggestion");
-        await expectBucket(page, 7, "deleted");
+        const deletedDiagnostics = page.locator("#deleted-diagnostics");
+        await deletedDiagnostics.locator("summary").first().filter({hasText:"1"}).waitFor();
+        assert.equal(await deletedDiagnostics.getAttribute("open"), null);
+        assert.equal(await page.locator("#report").getByText("已刪除記錄", {exact:true}).count(), 0);
         await expectBucket(page, 8, "conflict");
         await expectBucket(page, 9, "independent");
-        assert.equal(await page.locator("#report details[data-row-index]").count(), makeBackup().anime_list_v8_8.length);
+        assert.equal(await page.locator("#report details[data-row-index]").count(), makeBackup().anime_list_v8_8.length - 1);
         const dressGroup = page.locator('#report [data-result="grouped"] .group')
             .filter({ has:page.locator('[data-row-index="2"]') });
         assert.equal(await dressGroup.locator('[data-row-index="3"]').count(), 1);
@@ -328,11 +377,12 @@ async function main() {
         await boot(reopened);
         assert.equal(await row(reopened, 0).count(), 0);
         assert.equal(await storedCopy(reopened), null);
+        await testPermanentDeletion(reopened);
         await verifyKnownFranchises(reopened);
         assertPrivateTransport(requests);
         console.log(JSON.stringify({ engine:browser.version(), backupUnchanged:true, isolatedEdits:true,
             realShapeGrouping:true, seriesComparison:true, confirmedFranchises:[6,5,6],
-            offlineImportAndRestart:true, clearedOnlyPreview:true,
+            offlineImportAndRestart:true, clearedOnlyPreview:true, permanentDeletionAndReimportGuard:true,
             capturedRequests:requests.length, outboundPrivateRequests:0 }));
     } finally {
         await browser.close();

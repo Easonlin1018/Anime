@@ -2,6 +2,7 @@
 
 const V = window.AnimeTrackerV11;
 const preview = window.PrivateSeriesPreview;
+const purge = window.PrivateSeriesPurge;
 const picker = document.getElementById("backup-file");
 const clear = document.getElementById("clear-copy");
 const status = document.getElementById("status");
@@ -11,9 +12,12 @@ const search = document.getElementById("search");
 const report = document.getElementById("report");
 const comparison = document.getElementById("comparison");
 const comparisonResults = document.getElementById("comparison-results");
+const deletedDiagnostics = document.getElementById("deleted-diagnostics");
+const deletedCount = document.getElementById("deleted-count");
+const deletedRecords = document.getElementById("deleted-records");
 const resultLabels = {
     grouped:"目前分組結果", independent:"維持獨立", suggestion:"可選的分組建議", review:"需要人工確認",
-    conflict:"可能的錯誤分組或身分衝突", deleted:"備份中的已刪除紀錄"
+    conflict:"可能的錯誤分組或身分衝突"
 };
 const categoryLabels = { watching:"正在連載", backlog:"補番中", review:"複習中",
     waiting:"等待中", completed:"已追完", _deleted:"已刪除" };
@@ -51,15 +55,19 @@ function transaction(update) {
     return new Promise((resolve, reject) => {
         const tx = db.transaction("copy", update ? "readwrite" : "readonly");
         const store = tx.objectStore("copy");
-        const request = store.get("active");
+        const active = store.get("active");
+        const exclusions = store.get("purged");
         let next, failure;
-        request.onsuccess = () => {
+        exclusions.onsuccess = () => {
             try {
-                next = request.result || null;
+                const markers = exclusions.result ?? [];
+                const copy = active.result ? purge.applyMarkers(active.result, markers) : null;
+                next = { copy, markers };
                 if (!update) return;
                 next = update(next);
-                if (next) store.put(next, "active");
+                if (next.copy) store.put(next.copy, "active");
                 else store.delete("active");
+                if (next.markers !== markers) store.put(next.markers, "purged");
             } catch (error) { failure = error; tx.abort(); }
         };
         tx.oncomplete = () => resolve(next);
@@ -73,17 +81,17 @@ function setCopy(next) {
     render();
 }
 
-async function save(operation, message) {
+async function saveState(operation, message) {
     if (busy) return;
     busy = picker.disabled = clear.disabled = true;
     try {
         const expected = copy?.revision;
         const next = await transaction(current => {
-            if (current?.revision !== expected) throw new Error("測試副本已在另一個分頁變更，請重新整理後再試。");
+            if (current.copy?.revision !== expected) throw new Error("測試副本已在另一個分頁變更，請重新整理後再試。");
             const value = operation(current);
-            return value ? { ...value, revision:crypto.randomUUID() } : null;
+            return { ...value, copy:value.copy ? { ...value.copy, revision:crypto.randomUUID() } : null };
         });
-        setCopy(next);
+        setCopy(next.copy);
         status.textContent = message;
     } catch (error) {
         status.textContent = error.name === "QuotaExceededError"
@@ -93,6 +101,17 @@ async function save(operation, message) {
         busy = picker.disabled = false;
         clear.disabled = !copy;
     }
+}
+
+function save(operation, message) {
+    return saveState(current => ({ ...current, copy:operation(current.copy, current.markers) }), message);
+}
+
+function permanentDelete(item) {
+    if (busy || !purge.canPurge(copy, item.index)) return;
+    if (!confirm("要永久刪除這筆已刪除作品的驗收副本及可安全對應的資料嗎？")) return;
+    if (!confirm(`再確認一次，永久刪除「${originalTitle(item.row)}」的驗收副本？此操作只影響這個瀏覽器內的驗收資料，無法復原。`)) return;
+    void saveState(current => purge.purgeCopy(current.copy, current.markers, item.index), "已永久刪除這筆驗收資料。");
 }
 
 function editor(body, item) {
@@ -163,6 +182,13 @@ function renderItem(item, expanded) {
     const renderEditor = () => { if (item.canEdit) editor(body,item); };
     if (expanded.has(String(index))) { details.open = true; renderEditor(); }
     else details.addEventListener("toggle", () => { if (details.open) renderEditor(); }, { once:true });
+    if (item.result === "deleted" && purge.canPurge(copy, index)) {
+        const erase = element("button", "永久刪除這筆驗收副本", "danger");
+        erase.type = "button";
+        erase.dataset.action = "purge-copy";
+        erase.onclick = () => permanentDelete(item);
+        body.append(erase);
+    }
     details.append(label,body);
     return details;
 }
@@ -189,12 +215,39 @@ function renderMembershipSide(title, parts, side) {
     return column;
 }
 
+function renderReviewChanges(visible, expanded) {
+    const { reviewChanges:changes } = result.comparison;
+    const section = element("details", "", "report-section");
+    section.dataset.comparison = "review-changes";
+    section.open = expanded.has("review-changes");
+    section.append(element("summary", `人工確認差異（前次 ${changes.before} 筆，這次 ${changes.after} 筆）`),
+        element("p", "兩次結果皆使用目前這份備份重算。", "muted"));
+    const outcomes = [["resolved", "已解除"], ["remaining", "仍需確認"], ["added", "新增需確認"]];
+    for (const [key, label] of outcomes) {
+        const group = element("div");
+        group.dataset.reviewOutcome = key;
+        group.append(element("h3", `${label}（${changes[key].length}）`));
+        const list = element("ul", "", "comparison-records");
+        for (const entry of changes[key].filter(entry => visible(result.items[entry.index]))) {
+            const item = element("li");
+            item.append(element("strong", memberLabel(result.items[entry.index])),
+                element("p", "前次原因 · " + (entry.before.join("。") || "無")),
+                element("p", "這次原因 · " + (entry.after.join("。") || "無")));
+            list.append(item);
+        }
+        group.append(list.childElementCount ? list : element("p", "沒有符合的紀錄。", "muted"));
+        section.append(group);
+    }
+    comparisonResults.append(section);
+}
+
 function renderComparison(visible) {
     const { oldGroups, restored, split, possibleMerges, review, chainComplete, chainSplits, chainPending, unresolved, provenance } = result.comparison;
     document.getElementById("comparison-limitations").textContent = provenance.warning;
     const expanded = new Set([...comparisonResults.querySelectorAll("[data-comparison][open]")]
         .map(section => section.dataset.comparison));
     comparisonResults.replaceChildren();
+    renderReviewChanges(visible, expanded);
     const sections = [
         ["chain-complete", "備份中的完整 AniList 前後作鏈", chainComplete],
         ["chain-split", "被拆開的 AniList 前後作鏈", chainSplits],
@@ -245,17 +298,30 @@ function renderComparison(visible) {
     }
 }
 
+function renderDeletedDiagnostics() {
+    deletedRecords.replaceChildren();
+    const records = result?.items.filter(item => item.result === "deleted") ?? [];
+    deletedDiagnostics.hidden = !records.length || Boolean(search.value.trim());
+    if (deletedDiagnostics.hidden) { deletedDiagnostics.open = false; return; }
+    deletedCount.textContent = `刪除標記診斷（${records.length}）`;
+    if (!deletedDiagnostics.open) return;
+    deletedRecords.append(element("p", "這些標記用於辨識備份中已刪除的作品。永久刪除只處理這個瀏覽器內的驗收副本。", "muted"));
+    const expanded = new Set();
+    for (const item of records) deletedRecords.append(renderItem(item, expanded));
+}
+
 function render() {
     const expanded = new Set([...report.querySelectorAll("[data-row-index][open]")].map(node => node.dataset.rowIndex));
     report.replaceChildren();
     document.getElementById("search-tools").hidden = !result;
     comparison.hidden = !result;
+    renderDeletedDiagnostics();
     if (!result) comparisonResults.replaceChildren();
     clear.disabled = !copy || busy;
     if (!result) { summary.textContent = "尚未匯入任何作品。"; return; }
     const { records, history } = copy.original;
     const counts = Object.fromEntries(Object.keys(resultLabels).map(key => [key,0]));
-    for (const item of result.items) counts[item.result]++;
+    for (const item of result.items) if (item.result !== "deleted") counts[item.result]++;
     const { suggestions, needsReview, metadata } = result.stats;
     const { chainComplete, chainSplits, chainPending } = result.comparison;
     summary.textContent = `已匯入 ${records.length} 筆作品、${history.length} 筆觀看歷史。已核對完整前後作鏈 ${chainComplete.length} 組、仍有拆組 ${chainSplits.length} 組。可選建議 ${suggestions} 筆、需要人工處理 ${needsReview} 筆。另有 ${metadata} 筆作品資料可核對。`;
@@ -273,7 +339,7 @@ function render() {
     for (const [key, heading] of Object.entries(resultLabels)) {
         const section = element("details","","report-section");
         section.dataset.result = key;
-        section.open = key !== "deleted";
+        section.open = true;
         const entries = result.items.filter(item => item.result === key && visible(item));
         section.append(element("summary", key === "grouped"
             ? `${heading}（${numberOfGroups} 組、${counts[key]} 部）` : `${heading}（${counts[key]}）`));
@@ -320,7 +386,8 @@ picker.addEventListener("change", async () => {
         preview.reportSeries({ original, edits:{} });
         busy = false;
         search.value = "";
-        await save(() => ({ original, edits:{} }), "匯入完成。請核對系列驗收報告。");
+        deletedDiagnostics.open = false;
+        await save((_copy, markers) => purge.applyMarkers({ original, edits:{} }, markers), "匯入完成。請核對系列驗收報告。");
     } catch {
         status.textContent = "無法讀取這份 Anime Tracker JSON 備份，已保留現有測試副本。";
         busy = picker.disabled = false;
@@ -328,8 +395,11 @@ picker.addEventListener("change", async () => {
     }
 });
 clear.addEventListener("click", () => {
-    if (confirm("要清除這個網站的測試副本和測試編輯嗎？")) void save(() => null,"已清除測試副本。");
+    if (confirm("要清除這個網站的測試副本和測試編輯嗎？防止再次匯入已永久刪除作品的精簡標記會保留。")) {
+        void save(() => null,"已清除測試副本。");
+    }
 });
+deletedDiagnostics.addEventListener("toggle", renderDeletedDiagnostics);
 search.addEventListener("input", () => {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(render, 120);
@@ -346,7 +416,7 @@ async function start() {
         }
         offline.textContent = "離線資源已就緒。可在飛航模式下匯入或重新開啟此頁。";
         db = await openDatabase();
-        setCopy(await transaction());
+        setCopy((await transaction()).copy);
         picker.disabled = false;
     } catch {
         offline.textContent = "離線資源或本機儲存無法使用。請在一般 Safari 分頁重新開啟。";

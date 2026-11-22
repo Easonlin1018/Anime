@@ -241,6 +241,79 @@ test("inferred title grouping requires a dated sequence and ambiguous original w
     assert.ok(V.describeAnimeSeriesProjection([rows[0],providerCollision]).reviewByIndex.has(1));
 });
 
+test("the Quintuplets seasons use verified continuation evidence before legacy same-name candidates", () => {
+    const previous = require("../releases/legacy-series-4/v11-core.js");
+    const rows = [
+        { id:"legacy-tv-1", anilistId:103572, title:"五等分的新娘", groupTitle:"五等分的新娘",
+            category:"completed", year:2019, watched:12, rating:9, notes:"第一季" },
+        { id:"legacy-tv-2", anilistId:109261, title:"五等分的新娘∬（2021）", groupTitle:"五等分的新娘",
+            category:"backlog", year:2021, watched:3, rating:8, notes:"第二季" },
+        { id:"unverified-followup", title:"五等分的新娘 第三季", groupTitle:"五等分的新娘",
+            category:"waiting", year:2025 }
+    ];
+    const before = structuredClone(rows);
+    const oldReport = previous.describeAnimeSeriesProjection(rows);
+    assert.deepEqual([...oldReport.reviewByIndex].map(([index, reasons]) => [rows[index].anilistId, [...reasons]]), [
+        [103572,["有多部同名首作符合舊系列紀錄"]], [109261,["有多部同名首作符合舊系列紀錄"]]
+    ]);
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.equal(report.reviewByIndex.has(0),false);
+    assert.equal(report.reviewByIndex.has(1),false);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(keys[0],keys[1]);
+    assert.deepEqual(report.relationComponents[0].members,[0,1]);
+    assert.equal(V.getConfirmedAnimeAniListId(report.projected[0]),"","catalogue evidence does not write a provider claim");
+    assert.deepEqual(rows,before);
+});
+
+test("verified original works ignore name-only warnings without hiding real provider conflicts", () => {
+    const known = (id, provider, year) => ({
+        id, title:"玻璃海", groupTitle:"玻璃海", source:"anilist", anilistId:provider, sourceId:provider,
+        year, category:"completed"
+    });
+    const rows = [
+        known("verified-original-1",88001,2018),
+        known("verified-original-2",88002,2020),
+        { id:"unknown-original", title:"玻璃海", groupTitle:"玻璃海", year:2021 },
+        { id:"dated-followup", title:"玻璃海 第二季", groupTitle:"玻璃海", year:2024 },
+        { ...known("contradictory-provider",88003,2023), sourceId:88004 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys).size,rows.length,"a shared name is insufficient to merge these records");
+    assert.equal(report.reviewByIndex.has(0),false);
+    assert.equal(report.reviewByIndex.has(1),false);
+    assert.match([...report.reviewByIndex.get(2)].join(" "),/有多部同名首作/u);
+    assert.match([...report.reviewByIndex.get(4)].join(" "),/AniList ID 有矛盾/u);
+});
+
+test("deleted duplicates do not challenge an active AniList chain but still reserve their identity for writes", () => {
+    const verified = (id, provider, relations = []) => ({
+        id, source:"anilist", sourceId:provider, anilistId:provider, title:id, relations, category:"completed"
+    });
+    const first = verified("active-first", 88101, [edge("SEQUEL",88102,"active-second")]);
+    const second = verified("active-second", 88102);
+    const deletedByDate = { ...verified("removed-first",88101), deletedAt:at, notes:"保留刪除紀錄" };
+    const deletedByCategory = { ...verified("removed-second",88102), category:"_deleted" };
+    const rows = [first,second,deletedByDate,deletedByCategory];
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(keys[0],keys[1]);
+    assert.deepEqual(report.relationComponents[0].members,[0,1]);
+    assert.equal(report.reviewByIndex.size,0);
+    assert.equal(new Set(keys).size,3);
+    assert.ok(rows.slice(0,2).every(item => !V.hasUniqueConfirmedAnimeAniListId(rows,item)),
+        "the stored delete records still reserve provider identities outside display projection");
+    assert.deepEqual(V.assignAnimeSeriesIdentity(rows).entries.map(entry => entry.mediaId),["","","",""]);
+    assert.deepEqual(rows,before);
+
+    const revivedDuplicate = { ...deletedByDate, deletedAt:null };
+    const contested = V.describeAnimeSeriesProjection([first,second,revivedDuplicate,deletedByCategory]);
+    assert.notEqual(V.getAnimeSeriesKey(contested.projected[0]),V.getAnimeSeriesKey(contested.projected[1]));
+    assert.deepEqual([...contested.reviewByIndex.keys()],[0,2],"both active claimants still require review");
+});
+
 test("verified continuation overrides side-story collection without touching stored identity or tracking", () => {
     const confirmed = (id, category, format, title, relations) => ({
         id:`local-${id}`, source:"anilist", sourceId:id, anilistId:id,
