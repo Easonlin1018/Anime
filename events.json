@@ -3,27 +3,27 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-22T06:44:22.323Z",
-    "lastSuccessfulUpdateAt": "2026-11-22T06:44:22.323Z",
+    "updatedAt": "2026-11-23T07:34:03.977Z",
+    "lastSuccessfulUpdateAt": "2026-11-23T07:34:03.977Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 269,
-    "uniqueNewsCount": 491,
-    "articleCandidateCount": 144,
-    "articleFetchSuccessCount": 38,
+    "fetchedExternalItemCount": 237,
+    "uniqueNewsCount": 450,
+    "articleCandidateCount": 143,
+    "articleFetchSuccessCount": 37,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 8,
-    "newEventCount": 0,
-    "cachedEventCount": 52,
+    "matchedEventCount": 11,
+    "newEventCount": 2,
+    "cachedEventCount": 46,
     "rateLimitedCount": 0,
-    "archiveCount": 1,
-    "storedEventCount": 58,
+    "archiveCount": 5,
+    "storedEventCount": 55,
     "expiredRemovedCount": 5,
-    "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 42,
+    "recapRemovedCount": 0,
+    "undatedOldRemovedCount": 40,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 1,
+    "foreignRemovedCount": 0,
     "nonActivityRemovedCount": 84,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
@@ -61,6 +61,39 @@
       "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
       "discoveredAt": "2026-11-06T06:40:09.861Z",
       "lastSeenAt": "2026-11-06T06:40:09.861Z"
+    },
+    {
+      "id": "gnn-315391",
+      "title": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則",
+      "summary": "日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315391",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "舞台／演出",
+      "locations": [
+        "台北",
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-23T02:44:00.000Z",
+      "eventStartDate": "2026-11-21",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "無安可",
+        "水啦",
+        "在正式演出燃燒殆盡、不唱安可"
+      ],
+      "searchCorpus": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則 日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 21 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "gnn-315268",
@@ -122,8 +155,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-22T06:44:22.323Z",
-      "lastSeenAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "gnn-314506",
@@ -154,8 +187,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-22T06:44:22.323Z",
-      "lastSeenAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "gnn-314431",
@@ -575,67 +608,6 @@
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
     },
     {
-      "id": "ext-5dee1a2d64b8561a",
-      "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-05-29T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！動畫展",
-        "團結Band"
-      ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
-      "dateConfidence": "medium",
-      "dateSource": "7/20",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z"
-    },
-    {
-      "id": "ext-60341764dad0f6d6",
-      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "台中中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！"
-      ],
-      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
-    },
-    {
       "id": "gnn-308120",
       "title": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開",
       "summary": "日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
@@ -1013,41 +985,6 @@
       "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
-      "id": "gnn-315270",
-      "title": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊",
-      "summary": "2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=315270",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "簽名會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-11-19T06:47:57.000Z",
-      "eventStartDate": "2026-11-20",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "美味佳餚Ω吱吱叫",
-        "糖果色的戀愛反論",
-        "美味佳餚&Omega;吱吱叫",
-        "特裝版",
-        "親簽組",
-        "TiCA27"
-      ],
-      "searchCorpus": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊 2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
-      "dateConfidence": "medium",
-      "dateSource": "11/20",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-19T07:21:45.016Z",
-      "lastSeenAt": "2026-11-19T07:21:45.016Z"
-    },
-    {
       "id": "gnn-314094",
       "title": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕",
       "summary": "人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
@@ -1153,6 +1090,37 @@
       "lastSeenAt": "2026-11-17T07:52:39.859Z"
     },
     {
+      "id": "gnn-315418",
+      "title": "THE GUNDAM BASE TAIWAN 年末再度登陸高雄 12/3 起於夢時代開展",
+      "summary": "「THE GUNDAM BASE TAIWAN」宣布將於 12 月 3 日起進駐高雄夢時代購物中心 3F 蛋型空間，展開為期 11 天的期間限定快閃活動，集結超過 150 款旗艦店限定商品、巨型鋼彈頭打卡景點、全新桌遊《GUNDAM ASSEMBLE》體驗會等活動。 本次快閃店商品集結超過 150 款 THE GUNDAM BASE 限定商品，其中更有多達 70 款商品首度於高雄販售。除了 THE GUNDAM BASE 限定商品",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315418",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "快閃店",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-23T06:48:43.000Z",
+      "eventStartDate": "2026-12-03",
+      "eventEndDate": "2026-12-13",
+      "eventStatus": "upcoming",
+      "venue": "夢時代購物中心",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "GUNDAM ASSEMBLE",
+        "THE GUNDAM BASE TAIWAN"
+      ],
+      "searchCorpus": "THE GUNDAM BASE TAIWAN 年末再度登陸高雄 12/3 起於夢時代開展 「THE GUNDAM BASE TAIWAN」宣布將於 12 月 3 日起進駐高雄夢時代購物中心 3F 蛋型空間，展開為期 11 天的期間限定快閃活動，集結超過 150 款旗艦店限定商品、巨型鋼彈頭打卡景點、全新桌遊《GUNDAM ASSEMBLE》體驗會等活動。 本次快閃店商品集結超過 150 款 THE GUNDAM BASE 限定商品，其中更有多達 70 款商品首度於高雄販售。除了 THE GUNDAM BASE 限定商品",
+      "dateConfidence": "high",
+      "dateSource": "12 月 3 日",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+    },
+    {
       "id": "gnn-313424",
       "title": "《given 被贈與的未來》 × 日本彩妝品牌 iCouleur Collaboration 限定快閃店 12/4 在台登場",
       "summary": "人氣 BL 樂團作品《given 被贈與的未來》與日本彩妝品牌 iCouleur 聯名合作，限定週邊商品快閃店將自 12/4 起於西門町草咖啡限時登場。 日本的 iCouleur 品牌概念為「以我的推，點亮彩繪我的人生」，推出的彩妝商品經常成為話題，其延伸的彩妝意象商品也深受喜愛，此次將 given 的 8 位角色融入質感週邊中，不論是日常實用還是收藏，都能讓",
@@ -1180,8 +1148,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-21T07:03:11.788Z",
-      "lastSeenAt": "2026-11-21T07:03:11.788Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "gnn-313300",
@@ -1243,8 +1211,8 @@
       "dateConfidence": "medium",
       "dateSource": "12 月 18 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-22T06:44:22.323Z",
-      "lastSeenAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "ext-7589f44a2b0fbf10",
@@ -1462,62 +1430,6 @@
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
     },
     {
-      "id": "ext-ad36b19a9eda0780",
-      "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
-      "summary": "立報傳媒",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1iWGZ2SEJwZ0JWaEtMR0FqWlQ0RzBWNWpIemZVbFpMcEF6MjJRYWQya0VCMWV2Smt1TjJRS21YcjFRVDFOSEk4N0tmZFLSAUxBVV95cUxNYlhmdkhCcGdCVmhLTEdBalpUNEcwVjVqSHpmVWxaTHBBejIyUWFkMmtFQjFldkprdU4yUUttWHIxUVQxTkhJODdLZmRS?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-08T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理 立報傳媒",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-21T07:03:11.788Z",
-      "lastSeenAt": "2026-11-21T07:03:11.788Z"
-    },
-    {
-      "id": "ext-c660ed55ec6f232c",
-      "title": "高雄動漫節福袋藏好康- 時尚消費- 中國時報",
-      "summary": "中時新聞網",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA1b2pHeExiaW8wRmJKdFZkTXlkdmUxODYyUXh4RGIxV2tWdEFfXzJ1OEpiaXFmdGZ1aUJUeU9MVzFrYlRLWEhNVFNWeVE0X1N3U2tTeHMxenk0bVhpZTVTdHk5QUdBakotcV8w?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-08T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節福袋藏好康- 時尚消費- 中國時報 中時新聞網",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-30T05:45:27.811Z",
-      "lastSeenAt": "2026-10-30T05:45:27.811Z"
-    },
-    {
       "id": "ext-482caefbe8eb9b75",
       "title": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場",
       "summary": "迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
@@ -1636,8 +1548,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-22T06:44:22.323Z",
-      "lastSeenAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1696,8 +1608,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-22T06:44:22.323Z",
-      "lastSeenAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1854,44 +1766,167 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-22T06:44:22.323Z",
-      "lastSeenAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-311707",
-      "title": "「《孤獨搖滾！》POP-UP STORE」高雄夢時代 9/17 起登場",
-      "summary": "「《孤獨搖滾！》POP-UP STORE」，將於 9/17 起於高雄夢時代購物中心 8F 開幕。本次活動現場精心規劃了多個充滿「小孤獨氣息」的沉浸式拍照打卡點，除了展現團結 Band 青春活力的主視覺拍照牆，動畫中最具代表性的「完熟芒果箱」也將在現場真實重現。現場特別開放粉絲親自走入這個充滿安全感的紙箱內部拍照，讓大家能一秒化身為「吉",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=311707",
+      "id": "gnn-315270",
+      "title": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊",
+      "summary": "2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315270",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "簽名會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-19T06:47:57.000Z",
+      "eventStartDate": "2026-11-20",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "美味佳餚Ω吱吱叫",
+        "糖果色的戀愛反論",
+        "美味佳餚&Omega;吱吱叫",
+        "特裝版",
+        "親簽組",
+        "TiCA27"
+      ],
+      "searchCorpus": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊 2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
+      "dateConfidence": "medium",
+      "dateSource": "11/20",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-19T07:21:45.016Z",
+      "lastSeenAt": "2026-11-19T07:21:45.016Z",
+      "archivedAt": "2026-11-23T07:34:03.977Z"
+    },
+    {
+      "id": "ext-ad36b19a9eda0780",
+      "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
+      "summary": "立報傳媒",
+      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1iWGZ2SEJwZ0JWaEtMR0FqWlQ0RzBWNWpIemZVbFpMcEF6MjJRYWQya0VCMWV2Smt1TjJRS21YcjFRVDFOSEk4N0tmZFLSAUxBVV95cUxNYlhmdkhCcGdCVmhLTEdBalpUNEcwVjVqSHpmVWxaTHBBejIyUWFkMmtFQjFldkprdU4yUUttWHIxUVQxTkhJODdLZmRS?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
       "locations": [
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-09-15T06:59:00.000Z",
-      "eventStartDate": "2026-09-17",
+      "publishedAt": "2026-10-08T07:00:00.000Z",
+      "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
-      "venue": "夢時代購物中心",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理 立報傳媒",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-21T07:03:11.788Z",
+      "lastSeenAt": "2026-11-21T07:03:11.788Z",
+      "archivedAt": "2026-11-23T07:34:03.977Z"
+    },
+    {
+      "id": "ext-c660ed55ec6f232c",
+      "title": "高雄動漫節福袋藏好康- 時尚消費- 中國時報",
+      "summary": "中時新聞網",
+      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA1b2pHeExiaW8wRmJKdFZkTXlkdmUxODYyUXh4RGIxV2tWdEFfXzJ1OEpiaXFmdGZ1aUJUeU9MVzFrYlRLWEhNVFNWeVE0X1N3U2tTeHMxenk0bVhpZTVTdHk5QUdBakotcV8w?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "大型展會",
+      "locations": [
+        "高雄"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-08T07:00:00.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [],
+      "searchCorpus": "高雄動漫節福袋藏好康- 時尚消費- 中國時報 中時新聞網",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-10-30T05:45:27.811Z",
+      "lastSeenAt": "2026-10-30T05:45:27.811Z",
+      "archivedAt": "2026-11-23T07:34:03.977Z"
+    },
+    {
+      "id": "ext-60341764dad0f6d6",
+      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
+      "summary": "SouNova 少女星",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-07-17T07:00:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "台中中友百貨",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "孤獨搖滾！",
-        "《孤獨搖滾！》POP-UP STORE",
-        "小孤獨氣息",
-        "完熟芒果箱"
+        "孤獨搖滾！"
       ],
-      "searchCorpus": "「《孤獨搖滾！》POP-UP STORE」高雄夢時代 9/17 起登場 「《孤獨搖滾！》POP-UP STORE」，將於 9/17 起於高雄夢時代購物中心 8F 開幕。本次活動現場精心規劃了多個充滿「小孤獨氣息」的沉浸式拍照打卡點，除了展現團結 Band 青春活力的主視覺拍照牆，動畫中最具代表性的「完熟芒果箱」也將在現場真實重現。現場特別開放粉絲親自走入這個充滿安全感的紙箱內部拍照，讓大家能一秒化身為「吉",
+      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
       "dateConfidence": "medium",
-      "dateSource": "9/17",
+      "dateSource": "7 月 20 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-05T05:37:27.563Z",
-      "lastSeenAt": "2026-10-05T05:37:27.563Z",
-      "archivedAt": "2026-11-22T06:44:22.323Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z",
+      "archivedAt": "2026-11-23T07:34:03.977Z"
+    },
+    {
+      "id": "ext-5dee1a2d64b8561a",
+      "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
+      "summary": "4Gamers",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "展覽",
+      "locations": [
+        "台中"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-05-29T07:00:00.000Z",
+      "eventStartDate": "2026-07-20",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "中友百貨",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "孤獨搖滾！動畫展",
+        "團結Band"
+      ],
+      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
+      "dateConfidence": "medium",
+      "dateSource": "7/20",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-27T05:01:18.722Z",
+      "lastSeenAt": "2026-10-27T05:01:18.722Z",
+      "archivedAt": "2026-11-23T07:34:03.977Z"
     }
   ]
 }
