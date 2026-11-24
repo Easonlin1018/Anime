@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-23T07:34:03.977Z",
-    "lastSuccessfulUpdateAt": "2026-11-23T07:34:03.977Z",
+    "updatedAt": "2026-11-24T09:51:52.539Z",
+    "lastSuccessfulUpdateAt": "2026-11-24T09:51:52.539Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
-    "fetchedTagItemCount": 209,
-    "fetchedExternalItemCount": 237,
-    "uniqueNewsCount": 450,
-    "articleCandidateCount": 143,
-    "articleFetchSuccessCount": 37,
+    "fetchedTagItemCount": 210,
+    "fetchedExternalItemCount": 323,
+    "uniqueNewsCount": 542,
+    "articleCandidateCount": 146,
+    "articleFetchSuccessCount": 38,
     "articleFetchFailureCount": 0,
     "matchedEventCount": 11,
     "newEventCount": 2,
-    "cachedEventCount": 46,
+    "cachedEventCount": 44,
     "rateLimitedCount": 0,
-    "archiveCount": 5,
-    "storedEventCount": 55,
+    "archiveCount": 4,
+    "storedEventCount": 53,
     "expiredRemovedCount": 5,
-    "recapRemovedCount": 0,
-    "undatedOldRemovedCount": 40,
+    "recapRemovedCount": 1,
+    "undatedOldRemovedCount": 41,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 84,
+    "nonActivityRemovedCount": 83,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -63,39 +63,6 @@
       "lastSeenAt": "2026-11-06T06:40:09.861Z"
     },
     {
-      "id": "gnn-315391",
-      "title": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則",
-      "summary": "日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=315391",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-11-23T02:44:00.000Z",
-      "eventStartDate": "2026-11-21",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "無安可",
-        "水啦",
-        "在正式演出燃燒殆盡、不唱安可"
-      ],
-      "searchCorpus": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則 日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
-      "dateConfidence": "medium",
-      "dateSource": "11 月 21 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
-    },
-    {
       "id": "gnn-315268",
       "title": "《櫻蘭高校男公關部》20 周年聯名主題餐廳 即日於 FANFANS CAFÉ 展開",
       "summary": "經典懷舊少女動畫《櫻蘭高校男公關部》迎來 20 周年，FANFANS CAF&Eacute; 推出《櫻蘭高校男公關部》20 周年聯名主題餐廳，今日（11 月 19 日）起於台北西門店，11月20日起於高雄店登場。 《櫻蘭高校男公關部》以櫻蘭高校為舞台，描繪治斐與男公關部成員之間既爆笑又令人心動的校園日常。這次 FANFANS CAF&Eacute; 將作品經典元素融入主題空間。",
@@ -127,6 +94,36 @@
       "lastSeenAt": "2026-11-19T07:21:45.016Z"
     },
     {
+      "id": "gnn-315489",
+      "title": "「MUNDO PIXAR 皮克斯世界巡迴展」即將登場 台灣站將推限定小彩蛋商品",
+      "summary": "備受粉絲期待的「MUNDO PIXAR 皮克斯世界巡迴展」台灣站即將登場，由 30 人組成的國際原廠團隊於 11 月 16 日正式進駐台灣展區，展開大型場景搭建、展件組裝與現場細節工程。屆時，皮克斯粉絲們除了欣賞展覽，還能化身為電影故事中的一員，走進最喜愛的經典場景，親身感受皮克斯動畫 40 年來帶給觀眾的驚喜與感動。 為迎接「MUNDO PIXAR",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315489",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-11-24T08:55:15.000Z",
+      "eventStartDate": "2026-11-16",
+      "eventEndDate": null,
+      "eventStatus": "ongoing-unconfirmed",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "MUNDO PIXAR 皮克斯世界巡迴展"
+      ],
+      "searchCorpus": "「MUNDO PIXAR 皮克斯世界巡迴展」即將登場 台灣站將推限定小彩蛋商品 備受粉絲期待的「MUNDO PIXAR 皮克斯世界巡迴展」台灣站即將登場，由 30 人組成的國際原廠團隊於 11 月 16 日正式進駐台灣展區，展開大型場景搭建、展件組裝與現場細節工程。屆時，皮克斯粉絲們除了欣賞展覽，還能化身為電影故事中的一員，走進最喜愛的經典場景，親身感受皮克斯動畫 40 年來帶給觀眾的驚喜與感動。 為迎接「MUNDO PIXAR",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 16 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+    },
+    {
       "id": "gnn-315007",
       "title": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店 今日起正式登場",
       "summary": "卡娜赫拉的小動物「新北歡樂耶誕城」快閃店，今日（11 月 13 日）起於新北板橋耶誕城登場正式登場，活動將持續到 12 月 27 日為止。本次以閃閃星光與禮物打造驚喜聖誕禮物屋，現場打造兩大拍照打卡點，並推出近 60 款全新周邊。 快閃店打造「聖誕禮物屋」與「叮叮噹禮物到」兩大拍照打卡點，怎麼拍",
@@ -155,8 +152,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     },
     {
       "id": "gnn-314506",
@@ -187,8 +184,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     },
     {
       "id": "gnn-314431",
@@ -985,38 +982,6 @@
       "lastSeenAt": "2026-11-13T06:41:56.818Z"
     },
     {
-      "id": "gnn-314094",
-      "title": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕",
-      "summary": "人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=314094",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台北",
-        "全台"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-29T02:51:06.000Z",
-      "eventStartDate": "2026-11-21",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "95 元",
-      "workTitles": [
-        "吉伊卡哇大判燒",
-        "CHIIKAWA OBANYAKI in TAIPEI"
-      ],
-      "searchCorpus": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕 人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
-      "dateConfidence": "medium",
-      "dateSource": "11 月 21 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z"
-    },
-    {
       "id": "gnn-315132",
       "title": "ORION GAME 遊戲特展 11/27 起於台北高雄展開 展出《航海王》等多款桌遊",
       "summary": "Orion Game 獵戶遊戲宣布，將於 2026 年 11 月 27 日至 12 月 21 日，攜手 animate 於「animate 西門站 POPUP SHOP」、「animate 高雄站 POPUP SHOP」舉辦 「ORION GAME 遊戲特展」，以「鋼彈戰棋 &times; TCG &times; Pok&eacute;mon Plakoro &times; 桌遊」為主題，集結《航海王》、《鋼彈》、《數碼寶貝》、《UNION ARENA》等人氣卡牌遊戲及戰棋等，並結合《吸爆鬆餅》、《金",
@@ -1148,8 +1113,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     },
     {
       "id": "gnn-313300",
@@ -1211,8 +1176,8 @@
       "dateConfidence": "medium",
       "dateSource": "12 月 18 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     },
     {
       "id": "ext-7589f44a2b0fbf10",
@@ -1369,6 +1334,40 @@
       "lastSeenAt": "2026-10-06T06:18:28.410Z"
     },
     {
+      "id": "gnn-315486",
+      "title": "【TiCA27】《Love Live! Superstar!!》聲優岬奈子 將於動漫節舉行見面會",
+      "summary": "日本聲優岬奈子（Misaki Nako）日前宣布，將於 2027 年 1 月 30 日（六）來台舉辦「ATC Special Stage 岬奈子 聲優見面會」。以飾演《Love Live! Superstar!!》「嵐千砂都」廣為人知的她，本次將登上台北世貿一館「2027 台北國際動漫節 Passionate World」大會 B 舞台與台灣粉絲見面，門票預計於 2026 年 11 月 28 日（六）中午 11 點在 KKTIX 及全家便利商店 Famipor",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315486",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-24T08:04:34.000Z",
+      "eventStartDate": "2027-01-30",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "台北世貿一館",
+      "admissionType": "購票入場",
+      "feeText": "",
+      "workTitles": [
+        "Love Live! Superstar!!",
+        "ATC Special Stage 岬奈子 聲優見面會",
+        "嵐千砂都",
+        "2027 台北國際動漫節 Passionate World",
+        "TiCA27"
+      ],
+      "searchCorpus": "【TiCA27】《Love Live! Superstar!!》聲優岬奈子 將於動漫節舉行見面會 日本聲優岬奈子（Misaki Nako）日前宣布，將於 2027 年 1 月 30 日（六）來台舉辦「ATC Special Stage 岬奈子 聲優見面會」。以飾演《Love Live! Superstar!!》「嵐千砂都」廣為人知的她，本次將登上台北世貿一館「2027 台北國際動漫節 Passionate World」大會 B 舞台與台灣粉絲見面，門票預計於 2026 年 11 月 28 日（六）中午 11 點在 KKTIX 及全家便利商店 Famipor",
+      "dateConfidence": "medium",
+      "dateSource": "2027 年 1 月 30 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+    },
+    {
       "id": "gnn-312978",
       "title": "《尼爾》交響音樂會再次訪台 確定 10/13 中午正式啟售",
       "summary": "全球銷量突破 1,000 萬套的現象級遊戲《尼爾：自動人形（NieR:Automata）》最新巡演「NieR:Orchestra Concert 12026 [YoRHa]」將於 2027 年 2 月 20 日（六）在台北國際會議中心（TICC）大會堂登場。 《NieR:Orchestra Concert 12026 [YoRHa]》將於 2027 年 2 月在 TICC 登場／凡事策劃提供 《尼爾》系列憑藉獨樹一幟的哲學敘事與被玩家譽為「神作等級」的遊戲，在全球",
@@ -1428,64 +1427,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-11-05T06:42:55.444Z",
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
-    },
-    {
-      "id": "ext-482caefbe8eb9b75",
-      "title": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場",
-      "summary": "迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
-      "url": "https://news.google.com/rss/articles/CBMirAJBVV95cUxOeGJ2Y181UzJ4QzBPREVGazBvM2l3WU5mMElYZnhKVkNGajdISW1BRDBnTGZidUZ4QVJENmx1blRwRzlhblhJbzl4RzU0eFQtOEwzV2M3R1UxRHBKdmpqa3l2M0JtRThuYWstSkxCa1FURUN6eW4yRS1SbTRDbmVnbmlCWmdIaXdpY1BfUXYzNEhxQTc5SVlqM2xYdzFVOGhVQ0F1Z2Z6aTdoNVE4NDQzUFJEc2JXTTJVVnRhSzM5TGVXLWRQN1YydUdzUkN1bGhyUkZMNFV1T1E5dktJNVlwb0tPTGhib2dvRy1BLXJVVlQ4cFgxMXZCRTJwMTF5QTRsVkZyOUo4WndZeEZjLXcxUkxxVGNEN2ZiWld1dFlPWHFnVjVHOUxicGVyZUU?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-09T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場 迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-30T05:45:27.811Z",
-      "lastSeenAt": "2026-10-30T05:45:27.811Z"
-    },
-    {
-      "id": "ext-fbbc400ad3ccb14f",
-      "title": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報",
-      "summary": "LINE TODAY",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE80QlVfTWJnckRMMzFyMC11cWgzZkJtQURBX3U3bmd0bFFLMU1DSjRkMERoQWt4aTBBLWEzV2xoQ1JSLTQ0NGNKbVdmVExFS1hZdmdGeHlR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-09T07:27:32.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "振奮人心、帶來希望"
-      ],
-      "searchCorpus": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報 LINE TODAY",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z"
     },
     {
       "id": "gnn-313171",
@@ -1548,8 +1489,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1608,8 +1549,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1744,7 +1685,7 @@
       "summary": "第 15 屆台北國際動漫節將於 2027 年 1 月 28 起在台北世貿一館熱鬧登場，台灣角川今日公開本屆舞台活動陣容──將邀請日本漫畫家コノシマルカ來台舉辦《靈靈總總拍不到》簽名會，與台灣讀者見面，並於台北動漫節現場首賣最新作《靈靈總總拍不到》第 7 集首刷特裝版與相關周邊，關於簽名會詳細時間與參加辦法與簽名套組完整內容將",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=315369",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：動漫節",
+      "discoverySource": "標籤：動漫節",
       "sourceTag": "動漫節",
       "type": "簽名會",
       "locations": [
@@ -1766,90 +1707,123 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-24T09:51:52.539Z",
+      "lastSeenAt": "2026-11-24T09:51:52.539Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-315270",
-      "title": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊",
-      "summary": "2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=315270",
+      "id": "gnn-315391",
+      "title": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則",
+      "summary": "日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315391",
       "source": "巴哈姆特 GNN",
       "discoverySource": "RSS",
       "sourceTag": "",
-      "type": "簽名會",
+      "type": "舞台／演出",
       "locations": [
-        "台北"
+        "台北",
+        "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-11-19T06:47:57.000Z",
-      "eventStartDate": "2026-11-20",
+      "publishedAt": "2026-11-23T02:44:00.000Z",
+      "eventStartDate": "2026-11-21",
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "美味佳餚Ω吱吱叫",
-        "糖果色的戀愛反論",
-        "美味佳餚&Omega;吱吱叫",
-        "特裝版",
-        "親簽組",
-        "TiCA27"
+        "無安可",
+        "水啦",
+        "在正式演出燃燒殆盡、不唱安可"
       ],
-      "searchCorpus": "【TiCA27】長鴻公開《美味佳餚Ω吱吱叫》、《糖果色的戀愛反論》簽名會套組販售資訊 2027 台北國際動漫節，長鴻出版社再次邀請兩位日本日本 BL 漫畫家《美味佳餚&Omega;吱吱叫》作者はなさわ浪雄與《糖果色的戀愛反論》作者夏目イサク，來到台灣舉行現場簽名會。配合簽名會本次也推出了收錄多項限定周邊的「特裝版」與「親簽組」，更邀請了兩位作者為台灣粉絲繪製全新彩圖。兩組簽名資格組將在 11/20（五） 開放登記",
+      "searchCorpus": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則 日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
       "dateConfidence": "medium",
-      "dateSource": "11/20",
+      "dateSource": "11 月 21 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-19T07:21:45.016Z",
-      "lastSeenAt": "2026-11-19T07:21:45.016Z",
-      "archivedAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-11-23T07:34:03.977Z",
+      "lastSeenAt": "2026-11-23T07:34:03.977Z",
+      "archivedAt": "2026-11-24T09:51:52.539Z"
     },
     {
-      "id": "ext-ad36b19a9eda0780",
-      "title": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理",
-      "summary": "立報傳媒",
-      "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE1iWGZ2SEJwZ0JWaEtMR0FqWlQ0RzBWNWpIemZVbFpMcEF6MjJRYWQya0VCMWV2Smt1TjJRS21YcjFRVDFOSEk4N0tmZFLSAUxBVV95cUxNYlhmdkhCcGdCVmhLTEdBalpUNEcwVjVqSHpmVWxaTHBBejIyUWFkMmtFQjFldkprdU4yUUttWHIxUVQxTkhJODdLZmRS?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "id": "gnn-314094",
+      "title": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕",
+      "summary": "人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=314094",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS",
+      "sourceTag": "",
+      "type": "見面會",
+      "locations": [
+        "台北",
+        "全台"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-10-29T02:51:06.000Z",
+      "eventStartDate": "2026-11-21",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "95 元",
+      "workTitles": [
+        "吉伊卡哇大判燒",
+        "CHIIKAWA OBANYAKI in TAIPEI"
+      ],
+      "searchCorpus": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕 人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
+      "dateConfidence": "medium",
+      "dateSource": "11 月 21 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-10-29T05:45:16.760Z",
+      "lastSeenAt": "2026-10-29T05:45:16.760Z",
+      "archivedAt": "2026-11-24T09:51:52.539Z"
+    },
+    {
+      "id": "ext-fbbc400ad3ccb14f",
+      "title": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報",
+      "summary": "LINE TODAY",
+      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE80QlVfTWJnckRMMzFyMC11cWgzZkJtQURBX3U3bmd0bFFLMU1DSjRkMERoQWt4aTBBLWEzV2xoQ1JSLTQ0NGNKbVdmVExFS1hZdmdGeHlR?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-08T07:00:00.000Z",
+      "publishedAt": "2026-10-09T07:27:32.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
       "venue": "",
       "admissionType": "待確認",
       "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "高雄動漫節開展前先看木棉花攻略 福袋、滿額贈、電影票一次整理 立報傳媒",
+      "workTitles": [
+        "振奮人心、帶來希望"
+      ],
+      "searchCorpus": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報 LINE TODAY",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-21T07:03:11.788Z",
-      "lastSeenAt": "2026-11-21T07:03:11.788Z",
-      "archivedAt": "2026-11-23T07:34:03.977Z"
+      "discoveredAt": "2026-10-15T04:36:00.593Z",
+      "lastSeenAt": "2026-10-15T04:36:00.593Z",
+      "archivedAt": "2026-11-24T09:51:52.539Z"
     },
     {
-      "id": "ext-c660ed55ec6f232c",
-      "title": "高雄動漫節福袋藏好康- 時尚消費- 中國時報",
-      "summary": "中時新聞網",
-      "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFA1b2pHeExiaW8wRmJKdFZkTXlkdmUxODYyUXh4RGIxV2tWdEFfXzJ1OEpiaXFmdGZ1aUJUeU9MVzFrYlRLWEhNVFNWeVE0X1N3U2tTeHMxenk0bVhpZTVTdHk5QUdBakotcV8w?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
+      "id": "ext-482caefbe8eb9b75",
+      "title": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場",
+      "summary": "迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
+      "url": "https://news.google.com/rss/articles/CBMirAJBVV95cUxOeGJ2Y181UzJ4QzBPREVGazBvM2l3WU5mMElYZnhKVkNGajdISW1BRDBnTGZidUZ4QVJENmx1blRwRzlhblhJbzl4RzU0eFQtOEwzV2M3R1UxRHBKdmpqa3l2M0JtRThuYWstSkxCa1FURUN6eW4yRS1SbTRDbmVnbmlCWmdIaXdpY1BfUXYzNEhxQTc5SVlqM2xYdzFVOGhVQ0F1Z2Z6aTdoNVE4NDQzUFJEc2JXTTJVVnRhSzM5TGVXLWRQN1YydUdzUkN1bGhyUkZMNFV1T1E5dktJNVlwb0tPTGhib2dvRy1BLXJVVlQ4cFgxMXZCRTJwMTF5QTRsVkZyOUo4WndZeEZjLXcxUkxxVGNEN2ZiWld1dFlPWHFnVjVHOUxicGVyZUU?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
       "sourceTag": "外部來源",
       "type": "大型展會",
       "locations": [
         "高雄"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-08T07:00:00.000Z",
+      "publishedAt": "2026-10-09T07:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
@@ -1857,76 +1831,13 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [],
-      "searchCorpus": "高雄動漫節福袋藏好康- 時尚消費- 中國時報 中時新聞網",
+      "searchCorpus": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場 迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
       "discoveredAt": "2026-10-30T05:45:27.811Z",
       "lastSeenAt": "2026-10-30T05:45:27.811Z",
-      "archivedAt": "2026-11-23T07:34:03.977Z"
-    },
-    {
-      "id": "ext-60341764dad0f6d6",
-      "title": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場",
-      "summary": "SouNova 少女星",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nbWR4bkJOTUhXRXg1YWxxZklmaEtQeFhMSDlhdC04UThTVmN2TTFaRXZHc1JTZE5PcjhzXzlaYXJPVmpGMU1zVzRoYVJPd0lfVHV3TWxIVzhmODlweDhSeFhKZUw2aVJpOERmdWZVUW9TS0ow?oc=5",
-      "source": "Google News－官方主辦單位",
-      "discoverySource": "Google News－官方主辦單位",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-07-17T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "台中中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！"
-      ],
-      "searchCorpus": "《孤獨搖滾！》動畫展 7 月 20 日登陸台中中友百貨 STARRY 舞台、限定周邊與沉浸體驗同步登場 SouNova 少女星",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 20 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z",
-      "archivedAt": "2026-11-23T07:34:03.977Z"
-    },
-    {
-      "id": "ext-5dee1a2d64b8561a",
-      "title": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動",
-      "summary": "4Gamers",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSEVhYlAzVlZVTHp5N3dzUk14ejNoalZ1YnpGMnRnWENJQ3NRYjlVTkJacjZHTEd3ZDRaek9hM3hXeVFKWDg1XzhtbHdRRTNlcXF0U2hHaG1ZRGJibGVEZGJZZ0EzaVNPTDA5MEVsalFyZ1FBeUNHanFzTFZhU0lzVE9KZ2JyZ09NU3AySWhXLWVVbzJNd0lpUG1RMGFkSEwwSDhDWDd2aVJyd2xV?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "展覽",
-      "locations": [
-        "台中"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-05-29T07:00:00.000Z",
-      "eventStartDate": "2026-07-20",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "中友百貨",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "孤獨搖滾！動畫展",
-        "團結Band"
-      ],
-      "searchCorpus": "台中《孤獨搖滾！動畫展》7/20降臨中友百貨 重溫「團結Band」搖滾感動 4Gamers",
-      "dateConfidence": "medium",
-      "dateSource": "7/20",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-27T05:01:18.722Z",
-      "lastSeenAt": "2026-10-27T05:01:18.722Z",
-      "archivedAt": "2026-11-23T07:34:03.977Z"
+      "archivedAt": "2026-11-24T09:51:52.539Z"
     }
   ]
 }
