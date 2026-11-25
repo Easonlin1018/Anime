@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-24T09:51:52.539Z",
-    "lastSuccessfulUpdateAt": "2026-11-24T09:51:52.539Z",
+    "updatedAt": "2026-11-25T08:29:53.147Z",
+    "lastSuccessfulUpdateAt": "2026-11-25T08:29:53.147Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 210,
-    "fetchedExternalItemCount": 323,
-    "uniqueNewsCount": 542,
-    "articleCandidateCount": 146,
-    "articleFetchSuccessCount": 38,
+    "fetchedExternalItemCount": 362,
+    "uniqueNewsCount": 582,
+    "articleCandidateCount": 184,
+    "articleFetchSuccessCount": 35,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 11,
-    "newEventCount": 2,
+    "matchedEventCount": 16,
+    "newEventCount": 4,
     "cachedEventCount": 44,
     "rateLimitedCount": 0,
-    "archiveCount": 4,
-    "storedEventCount": 53,
-    "expiredRemovedCount": 5,
-    "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 41,
+    "archiveCount": 1,
+    "storedEventCount": 52,
+    "expiredRemovedCount": 10,
+    "recapRemovedCount": 0,
+    "undatedOldRemovedCount": 35,
     "missingDateRemovedCount": 0,
-    "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 83,
+    "foreignRemovedCount": 2,
+    "nonActivityRemovedCount": 113,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -152,8 +152,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-24T09:51:52.539Z",
-      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "gnn-314506",
@@ -184,8 +184,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-24T09:51:52.539Z",
-      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "gnn-314431",
@@ -1176,8 +1176,8 @@
       "dateConfidence": "medium",
       "dateSource": "12 月 18 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-24T09:51:52.539Z",
-      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "ext-7589f44a2b0fbf10",
@@ -1429,40 +1429,6 @@
       "lastSeenAt": "2026-11-05T06:42:55.444Z"
     },
     {
-      "id": "gnn-313171",
-      "title": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場",
-      "summary": "為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=313171",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "見面會",
-      "locations": [
-        "台北"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-10T15:59:44.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "date-unknown",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "寶可夢",
-        "PokéXciting! in 台北",
-        "Pok&eacute;Xciting! in 台北",
-        "參加寶可夢最大的派對吧！",
-        "Pok&eacute;Xciting! 夜間特別舞台秀"
-      ],
-      "searchCorpus": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場 為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-12T05:54:52.213Z",
-      "lastSeenAt": "2026-10-12T05:54:52.213Z"
-    },
-    {
       "id": "ext-afedd8ddd1643f2b",
       "title": "排球少年、膽大膽12月來台展出 《玩偶遊戲》快閃店華山登場",
       "summary": "ETtoday新聞雲",
@@ -1489,8 +1455,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-24T09:51:52.539Z",
-      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "ext-7528ceaeeb551aa7",
@@ -1505,7 +1471,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-11-03T10:10:00.000Z",
+      "publishedAt": "2026-11-03T08:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1517,8 +1483,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-11T06:14:04.782Z",
-      "lastSeenAt": "2026-11-11T06:14:04.782Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "gnn-314501",
@@ -1549,8 +1515,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-24T09:51:52.539Z",
-      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1565,7 +1531,7 @@
         "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-11-12T04:00:00.000Z",
+      "publishedAt": "2026-11-12T08:00:00.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "date-unknown",
@@ -1579,8 +1545,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     },
     {
       "id": "gnn-314955",
@@ -1707,92 +1673,25 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-24T09:51:52.539Z",
-      "lastSeenAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-11-25T08:29:53.147Z",
+      "lastSeenAt": "2026-11-25T08:29:53.147Z"
     }
   ],
   "archive": [
     {
-      "id": "gnn-315391",
-      "title": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則",
-      "summary": "日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=315391",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS",
-      "sourceTag": "",
-      "type": "舞台／演出",
-      "locations": [
-        "台北",
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-11-23T02:44:00.000Z",
-      "eventStartDate": "2026-11-21",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "無安可",
-        "水啦",
-        "在正式演出燃燒殆盡、不唱安可"
-      ],
-      "searchCorpus": "UVERworld 成軍 26 年首度海外專場日前落幕 破天荒打破「無安可」鐵則 日本人氣搖滾樂團 UVERworld 於 11 月 21 日在 Zepp New Taipei 舉辦成軍 26 年來的首場海外專場演唱會。繼先前赴高雄參與大港開唱及今年 8 月參與台北 CENTRAL 音樂活動後，藉由專場演出第三度訪台的他們，不僅大秀苦練的中文與台語「水啦」，向來堅持「在正式演出燃燒殆盡、不唱安可」的 UVERworld，更因不敵台灣歌迷的驚人熱情破例重返舞台，",
-      "dateConfidence": "medium",
-      "dateSource": "11 月 21 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-23T07:34:03.977Z",
-      "lastSeenAt": "2026-11-23T07:34:03.977Z",
-      "archivedAt": "2026-11-24T09:51:52.539Z"
-    },
-    {
-      "id": "gnn-314094",
-      "title": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕",
-      "summary": "人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=314094",
+      "id": "gnn-313171",
+      "title": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場",
+      "summary": "為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=313171",
       "source": "巴哈姆特 GNN",
       "discoverySource": "RSS",
       "sourceTag": "",
       "type": "見面會",
       "locations": [
-        "台北",
-        "全台"
+        "台北"
       ],
       "confidence": "high",
-      "publishedAt": "2026-10-29T02:51:06.000Z",
-      "eventStartDate": "2026-11-21",
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "95 元",
-      "workTitles": [
-        "吉伊卡哇大判燒",
-        "CHIIKAWA OBANYAKI in TAIPEI"
-      ],
-      "searchCorpus": "全台首間「吉伊卡哇大判燒」11 月 21 日起台北赤峰街美味開幕 人氣 IP 角色吉伊卡哇、小八貓、兔兔化身香噴噴、熱騰騰的大判燒，要在微涼秋日與台北的粉絲見面了。全台首間「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店，將於 2026 年 11 月 21 日（六）在台北赤峰街正式開幕。以三位人氣角色臉部造型打造的大判燒，新開幕主打奶油、紅豆、地瓜三款口味，單顆售價 95 元。店內另有台灣冷泡茶及",
-      "dateConfidence": "medium",
-      "dateSource": "11 月 21 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-10-29T05:45:16.760Z",
-      "lastSeenAt": "2026-10-29T05:45:16.760Z",
-      "archivedAt": "2026-11-24T09:51:52.539Z"
-    },
-    {
-      "id": "ext-fbbc400ad3ccb14f",
-      "title": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報",
-      "summary": "LINE TODAY",
-      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE80QlVfTWJnckRMMzFyMC11cWgzZkJtQURBX3U3bmd0bFFLMU1DSjRkMERoQWt4aTBBLWEzV2xoQ1JSLTQ0NGNKbVdmVExFS1hZdmdGeHlR?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-09T07:27:32.000Z",
+      "publishedAt": "2026-10-10T15:59:44.000Z",
       "eventStartDate": null,
       "eventEndDate": null,
       "eventStatus": "expired",
@@ -1800,44 +1699,19 @@
       "admissionType": "待確認",
       "feeText": "",
       "workTitles": [
-        "振奮人心、帶來希望"
+        "寶可夢",
+        "PokéXciting! in 台北",
+        "Pok&eacute;Xciting! in 台北",
+        "參加寶可夢最大的派對吧！",
+        "Pok&eacute;Xciting! 夜間特別舞台秀"
       ],
-      "searchCorpus": "高雄動漫節登場 立委黃捷說動漫台詞能「振奮人心、帶來希望」 | 自由電子報 LINE TODAY",
+      "searchCorpus": "寶可夢 30 週年大型慶典「PokéXciting! in 台北」於信義區熱鬧登場 為慶祝《寶可夢》系列問世 30 週年，The Pok&eacute;mon Company 於今（10）日起一連兩天在台北市信義區香堤大道及周邊舉辦大型實體活動「Pok&eacute;Xciting! in 台北」。活動以「參加寶可夢最大的派對吧！」為主題，集結寶可夢大遊行、皮卡丘舞蹈表演、寶可夢見面會、遊戲體驗與拍照景點，並於晚間推出「Pok&eacute;Xciting! 夜間特別舞台秀」，由",
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-15T04:36:00.593Z",
-      "lastSeenAt": "2026-10-15T04:36:00.593Z",
-      "archivedAt": "2026-11-24T09:51:52.539Z"
-    },
-    {
-      "id": "ext-482caefbe8eb9b75",
-      "title": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場",
-      "summary": "迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
-      "url": "https://news.google.com/rss/articles/CBMirAJBVV95cUxOeGJ2Y181UzJ4QzBPREVGazBvM2l3WU5mMElYZnhKVkNGajdISW1BRDBnTGZidUZ4QVJENmx1blRwRzlhblhJbzl4RzU0eFQtOEwzV2M3R1UxRHBKdmpqa3l2M0JtRThuYWstSkxCa1FURUN6eW4yRS1SbTRDbmVnbmlCWmdIaXdpY1BfUXYzNEhxQTc5SVlqM2xYdzFVOGhVQ0F1Z2Z6aTdoNVE4NDQzUFJEc2JXTTJVVnRhSzM5TGVXLWRQN1YydUdzUkN1bGhyUkZMNFV1T1E5dktJNVlwb0tPTGhib2dvRy1BLXJVVlQ4cFgxMXZCRTJwMTF5QTRsVkZyOUo4WndZeEZjLXcxUkxxVGNEN2ZiWld1dFlPWHFnVjVHOUxicGVyZUU?oc=5",
-      "source": "Google News－台灣動漫活動",
-      "discoverySource": "Google News－台灣動漫活動",
-      "sourceTag": "外部來源",
-      "type": "大型展會",
-      "locations": [
-        "高雄"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-10-09T07:00:00.000Z",
-      "eventStartDate": null,
-      "eventEndDate": null,
-      "eventStatus": "expired",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [],
-      "searchCorpus": "動漫迷衝了！高雄國際動漫節高雄巨蛋登場 迷衝了！高雄國際動漫節高雄巨蛋登場 Yahoo新聞",
-      "dateConfidence": "unknown",
-      "dateSource": "",
-      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-10-30T05:45:27.811Z",
-      "lastSeenAt": "2026-10-30T05:45:27.811Z",
-      "archivedAt": "2026-11-24T09:51:52.539Z"
+      "discoveredAt": "2026-10-12T05:54:52.213Z",
+      "lastSeenAt": "2026-10-12T05:54:52.213Z",
+      "archivedAt": "2026-11-25T08:29:53.147Z"
     }
   ]
 }
