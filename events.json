@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-26T08:13:55.763Z",
-    "lastSuccessfulUpdateAt": "2026-11-26T08:13:55.763Z",
+    "updatedAt": "2026-11-27T08:27:07.568Z",
+    "lastSuccessfulUpdateAt": "2026-11-27T08:27:07.568Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 210,
-    "fetchedExternalItemCount": 333,
-    "uniqueNewsCount": 546,
-    "articleCandidateCount": 192,
-    "articleFetchSuccessCount": 39,
+    "fetchedExternalItemCount": 276,
+    "uniqueNewsCount": 499,
+    "articleCandidateCount": 146,
+    "articleFetchSuccessCount": 40,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 14,
-    "newEventCount": 4,
-    "cachedEventCount": 44,
+    "matchedEventCount": 13,
+    "newEventCount": 5,
+    "cachedEventCount": 47,
     "rateLimitedCount": 0,
     "archiveCount": 0,
-    "storedEventCount": 55,
-    "expiredRemovedCount": 12,
+    "storedEventCount": 58,
+    "expiredRemovedCount": 5,
     "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 51,
+    "undatedOldRemovedCount": 38,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 110,
+    "nonActivityRemovedCount": 86,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -152,8 +152,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "gnn-314506",
@@ -184,8 +184,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "gnn-314431",
@@ -246,8 +246,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 1 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "ext-357be6ef64d9ab44",
@@ -305,8 +305,8 @@
       "dateConfidence": "medium",
       "dateSource": "10/23",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "gnn-313100",
@@ -339,8 +339,8 @@
       "dateConfidence": "medium",
       "dateSource": "10 月 8 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-05T06:42:55.444Z",
-      "lastSeenAt": "2026-11-05T06:42:55.444Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "gnn-313027",
@@ -1113,8 +1113,40 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+    },
+    {
+      "id": "gnn-315692",
+      "title": "《東京復仇者》亞洲巡迴快閃活動今日起正式於台北 OU-EN 松菸二號店登場",
+      "summary": "電視動畫《東京復仇者》亞洲巡迴快閃活動「Tokyo Revengers BAKUSO POP UP ASIA TOUR -Taipei-」，今（27）日正式在 OU-EN 信義松菸二號店登場，活動將會持續至 12 月 6 日（日），活動期間每日 11:00 至 21:00 開放，採免費入場。 為紀念《東京復仇者》的系列最終章，電視動畫《東京復仇者 三天戰爭篇》自 2026 年 10 月 3 日（六）起推出，官方將於首爾、",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315692",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-27T04:57:57.000Z",
+      "eventStartDate": "2026-12-06",
+      "eventEndDate": null,
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "免費入場",
+      "feeText": "",
+      "workTitles": [
+        "東京復仇者",
+        "東京復仇者 三天戰爭篇",
+        "Tokyo Revengers BAKUSO POP UP ASIA TOUR -Taipei"
+      ],
+      "searchCorpus": "《東京復仇者》亞洲巡迴快閃活動今日起正式於台北 OU-EN 松菸二號店登場 電視動畫《東京復仇者》亞洲巡迴快閃活動「Tokyo Revengers BAKUSO POP UP ASIA TOUR -Taipei-」，今（27）日正式在 OU-EN 信義松菸二號店登場，活動將會持續至 12 月 6 日（日），活動期間每日 11:00 至 21:00 開放，採免費入場。 為紀念《東京復仇者》的系列最終章，電視動畫《東京復仇者 三天戰爭篇》自 2026 年 10 月 3 日（六）起推出，官方將於首爾、",
+      "dateConfidence": "medium",
+      "dateSource": "12 月 6 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "gnn-313300",
@@ -1180,6 +1212,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-11-26T08:13:55.763Z",
       "lastSeenAt": "2026-11-26T08:13:55.763Z"
+    },
+    {
+      "id": "ext-4bdc12db351c0ed8",
+      "title": "台灣角川「2026 偶像盛典感謝祭」松菸快閃店 12/11 起限時四日開啟應援",
+      "summary": "GNN 新聞網",
+      "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9qSlVPU3BqSXdxYkQxdDVUdFZyVzlIXzVtaVFucmVvV0c3ay1hc19kRHNkcGFWaUxCeVdvWUdPNEVTcF9EVU1zbzlrWWhra2NSaUh1NXBlS0M?oc=5",
+      "source": "Google News－台灣動漫活動",
+      "discoverySource": "Google News－台灣動漫活動",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-27T06:51:36.000Z",
+      "eventStartDate": "2026-12-11",
+      "eventEndDate": "2026-12-14",
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026 偶像盛典感謝祭"
+      ],
+      "searchCorpus": "台灣角川「2026 偶像盛典感謝祭」松菸快閃店 12/11 起限時四日開啟應援 GNN 新聞網",
+      "dateConfidence": "high",
+      "dateSource": "12/11",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "ext-5d61d76774a721c9",
@@ -1580,8 +1642,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     },
     {
       "id": "ext-b1ba5d9d3ae5a5ee",
@@ -1766,8 +1828,41 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+    },
+    {
+      "id": "gnn-315690",
+      "title": "「劇場版《鏈鋸人 蕾潔篇》PLAZA」快閃店 12 月西門町開幕 多項主題限定商品登台",
+      "summary": "傑仕登今日宣布，已在日本各大城市巡迴的《鏈鋸人》官方快閃店即將來台。本次以《劇場版 鏈鋸人 蕾潔篇》為主題，舉辦「劇場版《鏈鋸人 蕾潔篇》PLAZA」(CHAINSAW MAN PLAZA TheMovie:RezeArc)，並將於 12 月於台北西門地下市登場。 「劇場版《鏈鋸人 蕾潔篇》PLAZA」以活動專屬的全新視覺及插畫為概念，從壓克力立牌、徽章，到貼紙、海報等多",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=315690",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-27T04:38:55.000Z",
+      "eventStartDate": null,
+      "eventEndDate": null,
+      "eventStatus": "date-unknown",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "鏈鋸人 蕾潔篇",
+        "鏈鋸人",
+        "劇場版 鏈鋸人 蕾潔篇",
+        "劇場版《鏈鋸人 蕾潔篇》PLAZA"
+      ],
+      "searchCorpus": "「劇場版《鏈鋸人 蕾潔篇》PLAZA」快閃店 12 月西門町開幕 多項主題限定商品登台 傑仕登今日宣布，已在日本各大城市巡迴的《鏈鋸人》官方快閃店即將來台。本次以《劇場版 鏈鋸人 蕾潔篇》為主題，舉辦「劇場版《鏈鋸人 蕾潔篇》PLAZA」(CHAINSAW MAN PLAZA TheMovie:RezeArc)，並將於 12 月於台北西門地下市登場。 「劇場版《鏈鋸人 蕾潔篇》PLAZA」以活動專屬的全新視覺及插畫為概念，從壓克力立牌、徽章，到貼紙、海報等多",
+      "dateConfidence": "unknown",
+      "dateSource": "",
+      "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
+      "discoveredAt": "2026-11-27T08:27:07.568Z",
+      "lastSeenAt": "2026-11-27T08:27:07.568Z"
     }
   ],
   "archive": []
