@@ -222,6 +222,47 @@ test("startup journal creation failure occurs before main or auxiliary data writ
     assert.equal(store.trace.filter(entry => entry.committed && Object.hasOwn(initial, entry.key)).length, 0);
 });
 
+test("durable startup preserves every original byte if the migration backup cannot be archived", async () => {
+    const initial = duplicateSeed(), store = storage(initial), run = runtime(store);
+    const quota = new DOMException("Synthetic vault quota", "QuotaExceededError");
+    let archiveAttempts = 0;
+    await run.api.loadStoredAnime({
+        async archiveStartupBackup(_key, snapshot) {
+            archiveAttempts++;
+            assert.deepEqual(copy(snapshot.animeList), JSON.parse(initial[V.STORAGE_KEY]));
+            assert.deepEqual(copy(snapshot.watchHistory), JSON.parse(initial[V.HISTORY_KEY]));
+            throw quota;
+        },
+        async durableCommit() { assert.fail("Must archive the original before writing migrations"); }
+    });
+    assert.equal(archiveAttempts, 1);
+    assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__.persisted, false);
+    assert.equal(run.api.window.__ANIME_STARTUP_STORAGE__.warnings[0].name, "QuotaExceededError");
+    assert.deepEqual(copy(run.api.animeList), JSON.parse(initial[V.STORAGE_KEY]));
+    originalKeysUnchanged(store, initial);
+});
+
+for (const state of [0, 1]) {
+    test(`durable startup recovers an interrupted transaction with marker state ${state}`, async () => {
+        const initial = duplicateSeed();
+        const originals = { [V.STORAGE_KEY]:initial[V.STORAGE_KEY], [V.HISTORY_KEY]:initial[V.HISTORY_KEY] };
+        const changed = { [V.STORAGE_KEY]:JSON.stringify([anime(111)]), [V.HISTORY_KEY]:"[]" };
+        const store = storage({ ...initial, ...changed, [PENDING_KEY]:JSON.stringify({ vault:1, id:"simulation", state }) });
+        const run = runtime(store);
+        const calls = [];
+        run.api.animeWriteLockHeld = false;
+        run.api.testVault = {
+            async get(key) { calls.push(["get", key]); return { originals }; },
+            async remove(key) { calls.push(["remove", key]); }
+        };
+        vm.runInContext("Object.assign(animeStorageVault, testVault)", run.api);
+        await run.api.recoverAnimeDurableStorage();
+        assert.deepEqual(store.snapshot(), state ? { ...initial, ...changed } : initial);
+        assert.deepEqual(calls, state ? [["remove", "pending:simulation"]] :
+            [["get", "pending:simulation"], ["remove", "pending:simulation"]]);
+    });
+}
+
 test("real total-size quota after the main write rolls back growing UUID history references without deleting data", () => {
     const initial = seed([anime(101, { id:"same" }), anime(202, { id:"same" })], {
         [V.HISTORY_KEY]:JSON.stringify(Array.from({ length:100 }, (_, n) => ({
