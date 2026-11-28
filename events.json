@@ -3,28 +3,28 @@
     "schemaVersion": 7,
     "sourceName": "巴哈姆特 GNN＋Google News 多來源",
     "sourceUrl": "https://gnn.gamer.com.tw/rss.xml",
-    "updatedAt": "2026-11-27T08:27:07.568Z",
-    "lastSuccessfulUpdateAt": "2026-11-27T08:27:07.568Z",
+    "updatedAt": "2026-11-28T07:45:00.207Z",
+    "lastSuccessfulUpdateAt": "2026-11-28T07:45:00.207Z",
     "fetchStatus": "success",
     "fetchedRssCount": 30,
     "fetchedTagItemCount": 210,
-    "fetchedExternalItemCount": 276,
-    "uniqueNewsCount": 499,
-    "articleCandidateCount": 146,
+    "fetchedExternalItemCount": 352,
+    "uniqueNewsCount": 554,
+    "articleCandidateCount": 186,
     "articleFetchSuccessCount": 40,
     "articleFetchFailureCount": 0,
-    "matchedEventCount": 13,
-    "newEventCount": 5,
-    "cachedEventCount": 47,
+    "matchedEventCount": 11,
+    "newEventCount": 2,
+    "cachedEventCount": 48,
     "rateLimitedCount": 0,
-    "archiveCount": 0,
-    "storedEventCount": 58,
-    "expiredRemovedCount": 5,
+    "archiveCount": 2,
+    "storedEventCount": 57,
+    "expiredRemovedCount": 12,
     "recapRemovedCount": 1,
-    "undatedOldRemovedCount": 38,
+    "undatedOldRemovedCount": 53,
     "missingDateRemovedCount": 0,
     "foreignRemovedCount": 0,
-    "nonActivityRemovedCount": 86,
+    "nonActivityRemovedCount": 108,
     "sourceErrors": [],
     "note": "只保留正在進行、即將開始，或近期發布但日期待確認的台灣實體動漫活動。舊活動、已落幕文章與被相鄰文章污染的摘要會被排除。"
   },
@@ -152,8 +152,8 @@
       "dateConfidence": "medium",
       "dateSource": "11 月 13 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "gnn-314506",
@@ -184,8 +184,8 @@
       "dateConfidence": "medium",
       "dateSource": "11/5",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "gnn-314431",
@@ -505,42 +505,6 @@
       "lastSeenAt": "2026-11-20T07:11:56.169Z"
     },
     {
-      "id": "gnn-312190",
-      "title": "「曼迪動漫派對」新北、新竹 9/23 登場《名偵探柯南》《Fate/strange Fake》注目周邊到貨",
-      "summary": "「曼迪動漫派對」宣布將連開兩場，9/23 起新店裕隆城、10/3 起在新竹巨城帶來熱門動漫周邊。《名偵探柯南》《Fate/Strange Fake》《Silent Witch 沉默魔女的秘密》《孤獨搖滾！》台日版周邊集結，不只有多款注目商品限量到貨，還有更多現場才看得到的驚喜周邊，提供給有興趣的人參考。 1/10 曼迪動漫派對快閃店資訊 活動期間 地點 營業時間 2",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=312190",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "標籤：快閃店",
-      "sourceTag": "快閃店",
-      "type": "快閃店",
-      "locations": [
-        "新北",
-        "新竹"
-      ],
-      "confidence": "high",
-      "publishedAt": "2026-09-22T08:52:32.000Z",
-      "eventStartDate": "2026-09-23",
-      "eventEndDate": null,
-      "eventStatus": "ongoing-unconfirmed",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "名偵探柯南",
-        "Fate/strange Fake",
-        "Fate/Strange Fake",
-        "Silent Witch 沉默魔女的秘密",
-        "孤獨搖滾！",
-        "曼迪動漫派對"
-      ],
-      "searchCorpus": "「曼迪動漫派對」新北、新竹 9/23 登場《名偵探柯南》《Fate/strange Fake》注目周邊到貨 「曼迪動漫派對」宣布將連開兩場，9/23 起新店裕隆城、10/3 起在新竹巨城帶來熱門動漫周邊。《名偵探柯南》《Fate/Strange Fake》《Silent Witch 沉默魔女的秘密》《孤獨搖滾！》台日版周邊集結，不只有多款注目商品限量到貨，還有更多現場才看得到的驚喜周邊，提供給有興趣的人參考。 1/10 曼迪動漫派對快閃店資訊 活動期間 地點 營業時間 2",
-      "dateConfidence": "medium",
-      "dateSource": "9/23",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-20T07:11:56.169Z",
-      "lastSeenAt": "2026-11-20T07:11:56.169Z"
-    },
-    {
       "id": "ext-583ea8fcd9aa73e4",
       "title": "台中國際動漫博覽會「漫味食光」規劃四大主題展區 9/17 起開幕",
       "summary": "GNN 新聞網",
@@ -603,36 +567,6 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-10-13T06:46:02.845Z",
       "lastSeenAt": "2026-10-13T06:46:02.845Z"
-    },
-    {
-      "id": "gnn-308120",
-      "title": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開",
-      "summary": "日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
-      "url": "https://gnn.gamer.com.tw/detail.php?sn=308120",
-      "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：展覽",
-      "sourceTag": "展覽",
-      "type": "展覽",
-      "locations": [
-        "台灣"
-      ],
-      "confidence": "candidate",
-      "publishedAt": "2026-07-14T03:31:49.000Z",
-      "eventStartDate": "2026-07-25",
-      "eventEndDate": null,
-      "eventStatus": "upcoming",
-      "venue": "",
-      "admissionType": "待確認",
-      "feeText": "",
-      "workTitles": [
-        "麻宮騎亞 40th Arts Exhibition In 台灣 2026"
-      ],
-      "searchCorpus": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開 日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
-      "dateConfidence": "medium",
-      "dateSource": "7 月 25 日",
-      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-07-14T07:26:12.868Z",
-      "lastSeenAt": "2026-07-14T07:26:12.868Z"
     },
     {
       "id": "gnn-309443",
@@ -1113,8 +1047,8 @@
       "dateConfidence": "medium",
       "dateSource": "12/4",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "gnn-315692",
@@ -1122,7 +1056,7 @@
       "summary": "電視動畫《東京復仇者》亞洲巡迴快閃活動「Tokyo Revengers BAKUSO POP UP ASIA TOUR -Taipei-」，今（27）日正式在 OU-EN 信義松菸二號店登場，活動將會持續至 12 月 6 日（日），活動期間每日 11:00 至 21:00 開放，採免費入場。 為紀念《東京復仇者》的系列最終章，電視動畫《東京復仇者 三天戰爭篇》自 2026 年 10 月 3 日（六）起推出，官方將於首爾、",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=315692",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -1145,8 +1079,8 @@
       "dateConfidence": "medium",
       "dateSource": "12 月 6 日",
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "gnn-313300",
@@ -1212,6 +1146,36 @@
       "verification": "只擷取到開始日期，結束日期請查看原文確認。",
       "discoveredAt": "2026-11-26T08:13:55.763Z",
       "lastSeenAt": "2026-11-26T08:13:55.763Z"
+    },
+    {
+      "id": "ext-31ca80626e240920",
+      "title": "台灣角川「2026偶像盛典感謝祭」松菸快閃店12/11~12/14盛大登場！",
+      "summary": "Paradaily",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1yRG4tbE4wZG5DSGJtdG1nbmUwOVlRVXNlam9EVlR6a0FWenRMUUswLUtYUjhsR1puT1FWWGllOG4tMDJlUDdodFRaU1RnUTI4Ri1pOURDUWdRLUltUE9GdnVpZjNkZnJDZlpzS0NrNXZVTTZjY0lGUHp0TQ?oc=5",
+      "source": "Google News－官方主辦單位",
+      "discoverySource": "Google News－台灣動漫活動、Google News－官方主辦單位",
+      "sourceTag": "外部來源",
+      "type": "快閃店",
+      "locations": [
+        "台北"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-11-27T06:26:18.000Z",
+      "eventStartDate": "2026-12-11",
+      "eventEndDate": "2026-12-14",
+      "eventStatus": "upcoming",
+      "venue": "松菸",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "2026偶像盛典感謝祭"
+      ],
+      "searchCorpus": "台灣角川「2026偶像盛典感謝祭」松菸快閃店12/11~12/14盛大登場！ Paradaily",
+      "dateConfidence": "high",
+      "dateSource": "12/11~12/14",
+      "verification": "已自動擷取活動期間，仍請以原文與主辦方公告為準。",
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "ext-4bdc12db351c0ed8",
@@ -1642,8 +1606,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "ext-b1ba5d9d3ae5a5ee",
@@ -1670,8 +1634,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-26T08:13:55.763Z",
-      "lastSeenAt": "2026-11-26T08:13:55.763Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "ext-f4144be79680257a",
@@ -1828,8 +1792,8 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     },
     {
       "id": "gnn-315690",
@@ -1837,7 +1801,7 @@
       "summary": "傑仕登今日宣布，已在日本各大城市巡迴的《鏈鋸人》官方快閃店即將來台。本次以《劇場版 鏈鋸人 蕾潔篇》為主題，舉辦「劇場版《鏈鋸人 蕾潔篇》PLAZA」(CHAINSAW MAN PLAZA TheMovie:RezeArc)，並將於 12 月於台北西門地下市登場。 「劇場版《鏈鋸人 蕾潔篇》PLAZA」以活動專屬的全新視覺及插畫為概念，從壓克力立牌、徽章，到貼紙、海報等多",
       "url": "https://gnn.gamer.com.tw/detail.php?sn=315690",
       "source": "巴哈姆特 GNN",
-      "discoverySource": "RSS、標籤：快閃店",
+      "discoverySource": "標籤：快閃店",
       "sourceTag": "快閃店",
       "type": "快閃店",
       "locations": [
@@ -1861,9 +1825,78 @@
       "dateConfidence": "unknown",
       "dateSource": "",
       "verification": "文章近期發布，但程式無法確認完整活動日期，請先查看原文。",
-      "discoveredAt": "2026-11-27T08:27:07.568Z",
-      "lastSeenAt": "2026-11-27T08:27:07.568Z"
+      "discoveredAt": "2026-11-28T07:45:00.207Z",
+      "lastSeenAt": "2026-11-28T07:45:00.207Z"
     }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "gnn-312190",
+      "title": "「曼迪動漫派對」新北、新竹 9/23 登場《名偵探柯南》《Fate/strange Fake》注目周邊到貨",
+      "summary": "「曼迪動漫派對」宣布將連開兩場，9/23 起新店裕隆城、10/3 起在新竹巨城帶來熱門動漫周邊。《名偵探柯南》《Fate/Strange Fake》《Silent Witch 沉默魔女的秘密》《孤獨搖滾！》台日版周邊集結，不只有多款注目商品限量到貨，還有更多現場才看得到的驚喜周邊，提供給有興趣的人參考。 1/10 曼迪動漫派對快閃店資訊 活動期間 地點 營業時間 2",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=312190",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "標籤：快閃店",
+      "sourceTag": "快閃店",
+      "type": "快閃店",
+      "locations": [
+        "新北",
+        "新竹"
+      ],
+      "confidence": "high",
+      "publishedAt": "2026-09-22T08:52:32.000Z",
+      "eventStartDate": "2026-09-23",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "名偵探柯南",
+        "Fate/strange Fake",
+        "Fate/Strange Fake",
+        "Silent Witch 沉默魔女的秘密",
+        "孤獨搖滾！",
+        "曼迪動漫派對"
+      ],
+      "searchCorpus": "「曼迪動漫派對」新北、新竹 9/23 登場《名偵探柯南》《Fate/strange Fake》注目周邊到貨 「曼迪動漫派對」宣布將連開兩場，9/23 起新店裕隆城、10/3 起在新竹巨城帶來熱門動漫周邊。《名偵探柯南》《Fate/Strange Fake》《Silent Witch 沉默魔女的秘密》《孤獨搖滾！》台日版周邊集結，不只有多款注目商品限量到貨，還有更多現場才看得到的驚喜周邊，提供給有興趣的人參考。 1/10 曼迪動漫派對快閃店資訊 活動期間 地點 營業時間 2",
+      "dateConfidence": "medium",
+      "dateSource": "9/23",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-11-20T07:11:56.169Z",
+      "lastSeenAt": "2026-11-20T07:11:56.169Z",
+      "archivedAt": "2026-11-28T07:45:00.207Z"
+    },
+    {
+      "id": "gnn-308120",
+      "title": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開",
+      "summary": "日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
+      "url": "https://gnn.gamer.com.tw/detail.php?sn=308120",
+      "source": "巴哈姆特 GNN",
+      "discoverySource": "RSS、標籤：展覽",
+      "sourceTag": "展覽",
+      "type": "展覽",
+      "locations": [
+        "台灣"
+      ],
+      "confidence": "candidate",
+      "publishedAt": "2026-07-14T03:31:49.000Z",
+      "eventStartDate": "2026-07-25",
+      "eventEndDate": null,
+      "eventStatus": "expired",
+      "venue": "",
+      "admissionType": "待確認",
+      "feeText": "",
+      "workTitles": [
+        "麻宮騎亞 40th Arts Exhibition In 台灣 2026"
+      ],
+      "searchCorpus": "「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展 預定 7 月 25 日展開 日本漫畫家、插畫家與角色設計大師麻宮騎亞，為迎接創作生涯 40 週年，宣布將舉辦「麻宮騎亞 40th Arts Exhibition In 台灣 2026」特展的消息。本次活動以連貫性的展出形式集結歷年經典作品與創作素材，帶領民眾回望麻宮騎亞這四十年間持續進化的藝術軌跡。展覽將透過大型立體雕塑藝術、原畫、複製原畫、多媒體沉浸式空間演繹，重新梳",
+      "dateConfidence": "medium",
+      "dateSource": "7 月 25 日",
+      "verification": "只擷取到開始日期，結束日期請查看原文確認。",
+      "discoveredAt": "2026-07-14T07:26:12.868Z",
+      "lastSeenAt": "2026-07-14T07:26:12.868Z",
+      "archivedAt": "2026-11-28T07:45:00.207Z"
+    }
+  ]
 }
