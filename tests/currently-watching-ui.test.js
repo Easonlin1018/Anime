@@ -91,7 +91,7 @@ function runtime(list = [], options = {}) {
     context.window.runAnimeStorageWrite = operation => operation();
     context.window.assertAnimeStartupWritable = () => { if (context.window.__ANIME_STARTUP_STORAGE__.recoveryPending) throw Error("Recovery pending"); };
     context.window.warnAnimeStartupStorage = context.warnAnimeStartupStorage;
-    const indexFunctions = ["escapeHtml", "getAniListMediaId", "getAnimeTitlePresentation", "formatAiringDateTime", "buildAnimeItem",
+    const indexFunctions = ["escapeHtml", "getAniListMediaId", "getAnimeTitlePresentation", "formatAiringDateTime", "buildAnimeItem", "getAnimeSeriesHeading",
         "restoreAnimeStartupStorage", "isAnimeStartupSnapshot", "commitAnimeStartupChanges"].map(name => productionFunction(html, name));
     vm.runInContext(indexFunctions.join("\n"), context);
     const prefix = ui.slice(0, ui.indexOf("    const originalSaveAndRender"));

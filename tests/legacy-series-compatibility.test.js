@@ -1,0 +1,485 @@
+"use strict";
+
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const vm = require("node:vm");
+const { test } = require("node:test");
+const appSourcePath = require("./release-path.cjs");
+const V = require(appSourcePath("v11-core.js"));
+
+const at = "2026-11-14T03:00:00.000Z";
+const old = (id, title, extra = {}) => ({
+    id, title, watched:0, episodes:12, note:"舊版短評", rating:8, favorite:true,
+    category:"backlog", airDate:"2020年4月", addedAt:"2020-02-01T00:00:00.000Z", ...extra
+});
+const edge = (relationType, id, title, format = "TV") => ({ relationType, node:{ id, format, title:{ native:title } } });
+const membership = rows => V.projectAnimeSeries(rows).map(row => V.getAnimeSeriesKey(row));
+
+test("v10 numeric local IDs with exact reciprocal relations recover display grouping only", () => {
+    const rows = [
+        old(43001, "海岸記事", { category:"completed", watched:12, relations:[edge("SEQUEL",43002,"海岸記事 2")] }),
+        old(43002, "海岸記事 2", { watched:3, airDate:"2023年7月", relations:[edge("PREQUEL",43001,"海岸記事")] })
+    ];
+    const before = JSON.stringify(rows);
+    const keys = membership(rows);
+    assert.equal(keys[0],keys[1]);
+    assert.equal(JSON.stringify(rows),before);
+    assert.equal(V.getConfirmedAnimeAniListId(rows[0]),"");
+    assert.equal(V.getConfirmedAnimeAniListId(rows[1]),"");
+    assert.equal(V.isAnimeCurrentlyWatching(rows[1]),true);
+    assert.notEqual(...membership([rows[0],{ ...rows[1],title:"另一部電影" }]));
+    assert.notEqual(...membership([rows[0],{ ...rows[1],relations:[] }]));
+});
+
+test("v11 bare anilistId, missing sourceId and a verified inbound relation retain independent tracking", () => {
+    const rows = [
+        old("v11-1","航線", { anilistId:43001, source:"anilist", sourceId:43001, relations:[edge("SEQUEL",43002,"航線 第二季")] }),
+        old("v11-2","航線 第二季", { anilistId:43002, source:"anilist", watched:3 })
+    ];
+    const result = V.projectAnimeSeries(rows);
+    assert.equal(V.getAnimeSeriesKey(result[0]),V.getAnimeSeriesKey(result[1]));
+    assert.equal(V.getConfirmedAnimeAniListId(result[1]),"");
+    assert.equal(result[1].watched,3);
+    assert.equal(result[1].sourceId,undefined);
+    assert.equal(result[1].id,"v11-2");
+    const conflicting = { ...rows[1],dataSource:"mal" };
+    assert.notEqual(...membership([rows[0],conflicting]));
+    assert.notEqual(...membership([rows[0],rows[1],{ ...rows[1],id:"duplicate-claim" }]).slice(0,2));
+});
+
+test("explicit legacy group labels corroborated by season and movie separate a homonym and an unrelated manual title", () => {
+    const rows = [
+        old("orig","雨岸食堂", { groupTitle:"雨岸食堂", category:"completed", watched:12, year:2018 }),
+        old("s2","雨岸食堂 第二季", { groupTitle:"雨岸食堂", category:"review", watched:12, reviewWatched:2, year:2023 }),
+        old("film","雨岸食堂（劇場版・2024）", { groupTitle:"雨岸食堂", category:"waiting", format:"MOVIE", year:2024 }),
+        old("other","雨岸食堂", { year:2025 }),
+        old("custom","我的雨岸食堂筆記", { groupTitle:"雨岸食堂", titleSource:"manual" })
+    ];
+    const result = V.projectAnimeSeries(rows);
+    assert.equal(new Set(membership(rows).slice(0,3)).size,1);
+    assert.equal(new Set(membership(rows).slice(2)).size,3);
+    assert.ok(result.slice(0,3).every(item => V.getAnimeSeriesDisplayLabel(item) === "雨岸食堂"));
+    assert.deepEqual(result.map(row => row.category),rows.map(row => row.category));
+    assert.equal(result[4].title,rows[4].title);
+    assert.deepEqual(V.getAnimeSeriesSuggestions(rows,"custom").map(row => row.id),["orig","s2","film","other"]);
+    assert.notEqual(...membership([old("a","海岸記事"),old("b","海岸記事 第二季")]));
+});
+
+test("unrelated provider identities cannot be joined by legacy label and a tombstone is never an anchor", () => {
+    const rows = [
+        old("a","同名", { groupTitle:"同名", anilistId:43001, source:"anilist", sourceId:43001 }),
+        old("b","同名 Season 2", { groupTitle:"同名", anilistId:43002, source:"anilist", sourceId:43002 }),
+        old("deleted","同名劇場版", { category:"_deleted", format:"MOVIE", groupTitle:"同名", year:2025 })
+    ];
+    assert.equal(new Set(membership(rows)).size,3);
+    assert.equal(V.prepareAnimeSeriesMembership(rows,"b","deleted",at),null);
+    assert.equal(V.prepareAnimeSeriesMembership(rows,"b","b",at),null);
+});
+
+test("manual link, separation, reset and cross-device merge leave original tracking independent", () => {
+    const rows = [old("a","我的筆記", { titleManuallyEdited:true, watched:4 }),
+        old("b","動畫", { watched:2, notes:"另一部的筆記", updatedAt:"2026-11-14T04:00:00.000Z" })];
+    const link = V.prepareAnimeSeriesMembership(rows,"a","b",at);
+    assert.deepEqual(link,{ mode:"link",anchor:"b",updatedAt:at });
+    const linked = [{ ...rows[0], seriesMembership:link },rows[1]];
+    assert.equal(...membership(linked));
+    assert.equal(V.prepareAnimeSeriesMembership(linked,"b","a",at),null);
+    assert.notEqual(...membership([{ ...linked[0],seriesMembership:V.prepareAnimeSeriesMembership(linked,"a",null,at) },rows[1]]));
+    const merged = V.mergeById([{ ...rows[0], updatedAt:"2026-11-14T04:00:00.000Z" },rows[1]],linked);
+    assert.deepEqual(merged[0].seriesMembership,link);
+    assert.equal(merged[0].title,"我的筆記");
+    assert.equal(merged[0].watched,4);
+    assert.equal(merged[1].notes,"另一部的筆記");
+    const reset = V.prepareAnimeSeriesMembership(linked,"a","","2026-11-14T05:00:00.000Z");
+    assert.deepEqual(V.mergeById(linked,[{ ...rows[0],seriesMembership:reset }])[0].seriesMembership,reset);
+});
+
+test("explicit membership storage writes only its field, refusing stale confirmation and quota", async () => {
+    const html = fs.readFileSync(appSourcePath("index.html"),"utf8");
+    const body = html.slice(html.indexOf("function saveAnimeSeriesMembership"),html.indexOf("function editAnimeReview"));
+    const rows = [old("a","第一部",{ category:"review", reviewWatched:2 }),old("b","第二部",{ watched:3 })];
+    let stored = structuredClone(rows), fail = false, commits = 0;
+    const ctx = vm.createContext({
+        AnimeTrackerV11:V, STORAGE_KEY:V.STORAGE_KEY, animeList:rows,
+        withAnimeStorageWrite:async operation => operation(),
+        readMetadataSyncSnapshot:() => ({ list:structuredClone(stored) }),
+        commitAnimeStartupChanges(writes) {
+            if (fail) throw Error("quota");
+            assert.deepEqual([...writes.map(entry => entry.key)],[V.STORAGE_KEY]);
+            stored = JSON.parse(writes[0].value); commits++;
+        },
+        startupAnimeView:list => list
+    });
+    vm.runInContext(body,ctx);
+    const first = V.animeSeriesMemberStamp(rows[0]), second = V.animeSeriesMemberStamp(rows[1]);
+    stored[0].note = "另一分頁先存的筆記";
+    const original = structuredClone(stored);
+    fail = true;
+    await assert.rejects(ctx.saveAnimeSeriesMembership("a",first,"b",second),/quota/u);
+    assert.deepEqual(stored,original);
+    assert.deepEqual(ctx.animeList,rows);
+    fail = false;
+    await ctx.saveAnimeSeriesMembership("a",first,"b",second);
+    assert.equal(commits,1);
+    assert.deepEqual(stored,[{ ...original[0], seriesMembership:stored[0].seriesMembership },original[1]]);
+    assert.equal(stored[0].seriesMembership.anchor,"b");
+    await assert.rejects(ctx.saveAnimeSeriesMembership("a",first,null,null),/作品或系列已變更/u);
+    assert.equal(commits,1);
+});
+
+test("legacy, PR8, and current projections separate homonyms and recover date-backed sequels with missing relations", () => {
+    const root = require("node:path").resolve(__dirname, "..");
+    const oldCore = require(root + "/releases/poster-fix-4/v11-core.js");
+    const pr8 = require(root + "/releases/series-identity-1/v11-core.js");
+    const pr9 = require(root + "/releases/legacy-series-1/v11-core.js");
+    const title = "架空灣日誌";
+    const rows = [
+        old("original",title,{ groupTitle:title, year:2018, format:"TV", category:"completed", watched:12 }),
+        old("sequel",title + " S2",{ seriesGroupTitle:title, year:2021, format:"TV", watched:3 }),
+        old("film",title,{ groupTitle:title, year:2023, format:"MOVIE", category:"waiting" }),
+        old("subtitle",title + "：北灣篇",{ groupTitle:title, year:2025, format:"TV", category:"review" }),
+        old("homonym",title,{ year:2026, format:"TV" }),
+        old("other",title,{ year:2017, format:"TV" })
+    ];
+    const before = JSON.stringify(rows);
+    const keys = (core, project) => project(rows).map(core.getAnimeSeriesKey);
+    const legacy = keys(oldCore, list => oldCore.assignAnimeSeriesIdentity(list).list);
+    const released = keys(pr8, list => pr8.assignAnimeSeriesIdentity(list).list);
+    const prior = keys(pr9, pr9.projectAnimeSeries);
+    const current = keys(V, V.projectAnimeSeries);
+    assert.equal(legacy[0],legacy[4],"legacy label could absorb a homonym");
+    assert.equal(new Set(released).size,rows.length);
+    assert.ok(new Set(prior.slice(0,4)).size > 1);
+    assert.equal(new Set(current.slice(0,4)).size,1);
+    assert.equal(new Set([current[0],...current.slice(4)]).size,3);
+    assert.equal(JSON.stringify(rows),before);
+});
+
+test("one verified anchor can extend through an entire reciprocal legacy chain", () => {
+    const rows = [
+        old("first","航線前篇",{ source:"anilist", sourceId:43001, anilistId:43001,
+            relations:[edge("SEQUEL",43002,"航線續作")] }),
+        old("middle","航線續作",{ anilistId:43002, relations:[edge("PREQUEL",43001,"航線前篇"),edge("SEQUEL",43003,"航線終章")] }),
+        old("last","航線終章",{ anilistId:43003, relations:[edge("PREQUEL",43002,"航線續作")] })
+    ];
+    assert.equal(new Set(membership(rows)).size,1);
+    assert.equal(V.getConfirmedAnimeAniListId(rows[2]),"");
+    const ambiguous = [...rows.slice(0,2), { ...rows[2],relations:[edge("PREQUEL",43002,"航線續作")] },
+        old("second-anchor","另一個航線",{ source:"anilist", sourceId:43004, anilistId:43004,
+            relations:[edge("SEQUEL",43003,"航線終章")] })];
+    const report = V.describeAnimeSeriesProjection(ambiguous);
+    assert.notEqual(V.getAnimeSeriesKey(report.projected[0]),V.getAnimeSeriesKey(report.projected[3]));
+});
+
+test("verified known sequel IDs supplement missing stored edges and reject a local ID guess", () => {
+    const rows = [
+        old("s1","戀上換裝娃娃",{ anilistId:132405, format:"TV", year:2022 }),
+        old("s2","更衣人偶墜入愛河 第二季",{ anilistId:154768, format:"TV", year:2025 }),
+        old(104157,"青春豬頭少年不會夢到懷夢美少女",{ format:"MOVIE",year:2019 }),
+        old("tv","青春豬頭少年不會夢見兔女郎學姊",{ source:"anilist", anilistId:101291, sourceId:101291, format:"TV",year:2018 })
+    ];
+    const keys = membership(rows);
+    assert.equal(keys[0],keys[1]);
+    assert.notEqual(keys[2],keys[3]);
+    assert.equal(V.getConfirmedAnimeAniListId(rows[0]),"");
+});
+
+test("poster-fix-4 keys, dated titles, seasonal markers and movie roles recover without provider metadata", () => {
+    const baseline = require("../releases/poster-fix-4/v11-core.js");
+    const rows = [
+        { id:"first", title:"辉夜大小姐想让我告白（2019）", category:"completed", watched:12, rating:9 },
+        { id:"second", title:"輝夜大小姐想讓我告白 第二季（2020）", category:"backlog", watched:3, episodes:12, notes:"保留筆記" },
+        { id:"third", title:"劇場版 輝夜大小姐想讓我告白（2023）", category:"waiting", favorite:true },
+        { id:"gone", title:"輝夜大小姐想讓我告白", category:"_deleted", deletedAt:at }
+    ];
+    const original = structuredClone(rows);
+    const stored = baseline.assignAnimeSeriesIdentity(rows).list;
+    const oldKey = stored[0].seriesKey;
+    assert.ok(stored.every(row => row.seriesKey === oldKey));
+    const migrated = V.assignAnimeSeriesIdentity(stored);
+    assert.deepEqual(migrated.list,stored,"startup retains authentic legacy keys");
+    assert.equal(membership(stored)[0],oldKey);
+    assert.deepEqual(membership(rows).slice(0,3),[oldKey,oldKey,oldKey]);
+    assert.notEqual(membership(rows)[3],oldKey,"a tombstone is not a series member");
+    assert.deepEqual(rows,original);
+});
+
+test("both explicit legacy label fields bridge distinct official names without fabricating AniList media IDs", () => {
+    const rows = [
+        { id:"tv", title:"青春豬頭少年不會夢見兔女郎學姊", groupTitle:"青春猪头少年", format:"TV", year:2018, category:"completed", watched:12 },
+        { id:"film-19", title:"青春豬頭少年不會夢到懷夢美少女", seriesGroupTitle:"青春豬頭少年", format:"MOVIE", year:2019 },
+        { id:"film-summer", title:"青春豬頭少年不會夢到嬌憐外出妹", groupTitle:"青春豬頭少年", format:"MOVIE", year:2023, category:"backlog", watched:1 },
+        { id:"film-winter", title:"青春豬頭少年不會夢到紅書包女孩", groupTitle:"青春豬頭少年", format:"MOVIE", year:2023, category:"review", notes:"冬季劇場版" },
+        { id:"custom", title:"青春豬頭少年筆記}", groupTitle:"青春豬頭少年", titleSource:"manual", format:"TV", year:2025 },
+        { id:"other", title:"青春豬頭少年與無關的同名作品", format:"TV", year:2024 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,4)).size,1);
+    assert.equal(new Set([keys[0],...keys.slice(4)]).size,3);
+    assert.equal(report.reviewByIndex.size,0);
+    for (const item of report.projected) assert.equal(V.getConfirmedAnimeAniListId(item),"");
+    assert.deepEqual(report.projected.map(row => row.notes),rows.map(row => row.notes));
+});
+
+test("inferred title grouping requires a dated sequence and ambiguous original works get an actionable reason", () => {
+    const rows = [
+        { id:"main", title:"晴海列車", year:2016 },
+        { id:"same-name", title:"晴海列車", year:2017 },
+        { id:"second", title:"晴海列車 第二季", year:2020 },
+        { id:"third", title:"晴海列車 Season 3", year:2024 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,3)).size,3);
+    assert.equal(keys[2],keys[3]);
+    assert.deepEqual([...report.reviewByIndex.keys()],[0,1]);
+    assert.notEqual(...membership([{ ...rows[0], year:undefined }, rows[2]]));
+    assert.notEqual(...membership([rows[0],{ ...rows[2], title:"晴海港口 第二季" }]));
+    const providerCollision = { ...rows[2], anilistId:601, source:"anilist", sourceId:602 };
+    assert.notEqual(...membership([rows[0],providerCollision]));
+    assert.ok(V.describeAnimeSeriesProjection([rows[0],providerCollision]).reviewByIndex.has(1));
+});
+
+test("the Quintuplets seasons use verified continuation evidence before legacy same-name candidates", () => {
+    const previous = require("../releases/legacy-series-4/v11-core.js");
+    const rows = [
+        { id:"legacy-tv-1", anilistId:103572, title:"五等分的新娘", groupTitle:"五等分的新娘",
+            category:"completed", year:2019, watched:12, rating:9, notes:"第一季" },
+        { id:"legacy-tv-2", anilistId:109261, title:"五等分的新娘∬（2021）", groupTitle:"五等分的新娘",
+            category:"backlog", year:2021, watched:3, rating:8, notes:"第二季" },
+        { id:"unverified-followup", title:"五等分的新娘 第三季", groupTitle:"五等分的新娘",
+            category:"waiting", year:2025 }
+    ];
+    const before = structuredClone(rows);
+    const oldReport = previous.describeAnimeSeriesProjection(rows);
+    assert.deepEqual([...oldReport.reviewByIndex].map(([index, reasons]) => [rows[index].anilistId, [...reasons]]), [
+        [103572,["有多部同名首作符合舊系列紀錄"]], [109261,["有多部同名首作符合舊系列紀錄"]]
+    ]);
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.equal(report.reviewByIndex.has(0),false);
+    assert.equal(report.reviewByIndex.has(1),false);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(keys[0],keys[1]);
+    assert.deepEqual(report.relationComponents[0].members,[0,1]);
+    assert.equal(V.getConfirmedAnimeAniListId(report.projected[0]),"","catalogue evidence does not write a provider claim");
+    assert.deepEqual(rows,before);
+});
+
+test("verified original works ignore name-only warnings without hiding real provider conflicts", () => {
+    const known = (id, provider, year) => ({
+        id, title:"玻璃海", groupTitle:"玻璃海", source:"anilist", anilistId:provider, sourceId:provider,
+        year, category:"completed"
+    });
+    const rows = [
+        known("verified-original-1",88001,2018),
+        known("verified-original-2",88002,2020),
+        { id:"unknown-original", title:"玻璃海", groupTitle:"玻璃海", year:2021 },
+        { id:"dated-followup", title:"玻璃海 第二季", groupTitle:"玻璃海", year:2024 },
+        { ...known("contradictory-provider",88003,2023), sourceId:88004 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys).size,rows.length,"a shared name is insufficient to merge these records");
+    assert.equal(report.reviewByIndex.has(0),false);
+    assert.equal(report.reviewByIndex.has(1),false);
+    assert.match([...report.reviewByIndex.get(2)].join(" "),/有多部同名首作/u);
+    assert.match([...report.reviewByIndex.get(4)].join(" "),/AniList ID 有矛盾/u);
+});
+
+test("deleted duplicates do not challenge an active AniList chain but still reserve their identity for writes", () => {
+    const verified = (id, provider, relations = []) => ({
+        id, source:"anilist", sourceId:provider, anilistId:provider, title:id, relations, category:"completed"
+    });
+    const first = verified("active-first", 88101, [edge("SEQUEL",88102,"active-second")]);
+    const second = verified("active-second", 88102);
+    const deletedByDate = { ...verified("removed-first",88101), deletedAt:at, notes:"保留刪除紀錄" };
+    const deletedByCategory = { ...verified("removed-second",88102), category:"_deleted" };
+    const rows = [first,second,deletedByDate,deletedByCategory];
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(keys[0],keys[1]);
+    assert.deepEqual(report.relationComponents[0].members,[0,1]);
+    assert.equal(report.reviewByIndex.size,0);
+    assert.equal(new Set(keys).size,3);
+    assert.ok(rows.slice(0,2).every(item => !V.hasUniqueConfirmedAnimeAniListId(rows,item)),
+        "the stored delete records still reserve provider identities outside display projection");
+    assert.deepEqual(V.assignAnimeSeriesIdentity(rows).entries.map(entry => entry.mediaId),["","","",""]);
+    assert.deepEqual(rows,before);
+
+    const revivedDuplicate = { ...deletedByDate, deletedAt:null };
+    const contested = V.describeAnimeSeriesProjection([first,second,revivedDuplicate,deletedByCategory]);
+    assert.notEqual(V.getAnimeSeriesKey(contested.projected[0]),V.getAnimeSeriesKey(contested.projected[1]));
+    assert.deepEqual([...contested.reviewByIndex.keys()],[0,2],"both active claimants still require review");
+});
+
+test("verified continuation overrides side-story collection without touching stored identity or tracking", () => {
+    const confirmed = (id, category, format, title, relations) => ({
+        id:`local-${id}`, source:"anilist", sourceId:id, anilistId:id,
+        category, format, title, relations, watched:3, rating:8, notes:"本機筆記"
+    });
+    const rows = [
+        confirmed(76001, "completed", "TV", "獨立外傳推薦", [edge("SIDE_STORY",76002,"續作")]),
+        confirmed(76002, "review", "TV", "續作", [
+            edge("SEQUEL",76003,"映画", "MOVIE"), edge("SEQUEL",76005,"中間未追蹤作品")
+        ]),
+        confirmed(76003, "waiting", "MOVIE", "映画", []),
+        confirmed(76004, "backlog", "OVA", "不同譯名", [edge("PREQUEL",76005,"中間未追蹤作品")]),
+        confirmed(76006, "waiting", "TV", "無關作品", [edge("ADAPTATION",76002,"續作")])
+    ];
+    // A newer verified metadata snapshot can be partial.
+    rows[1].seriesMetadata = { id:"76002", source:"anilist", title:"續作", relations:[] };
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(1,4)).size,1);
+    assert.equal(new Set([keys[0],keys[1],keys[4]]).size,3);
+    assert.deepEqual(report.relationComponents[0].members,[1,2,3]);
+    assert.deepEqual(report.relationComponents[0].mediaIds,["76002","76003","76004","76005"]);
+    assert.deepEqual(rows,before);
+});
+
+test("contradictory intermediary remains a diagnostic member while confirmed sides stay independent", () => {
+    const verified = (id, relations) => ({
+        id:`record-${id}`, source:"anilist", sourceId:id, anilistId:id, title:`作品 ${id}`, relations
+    });
+    const rows = [
+        verified(78001,[edge("SEQUEL",78002,"作品 78002")]),
+        verified(78003,[edge("PREQUEL",78002,"作品 78002")]),
+        { ...verified(78002,[]), sourceId:78004 }
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.equal(new Set(report.projected.map(V.getAnimeSeriesKey)).size,3);
+    assert.deepEqual(report.relationComponents[0].members,[0,2,1]);
+    assert.match([...report.reviewByIndex.get(2)].join(" "), /AniList ID 有矛盾/u);
+});
+
+test("an explicitly labelled and dated OVA or special can complete a legacy series without an AniList guess", () => {
+    const rows = [
+        { id:"one", groupTitle:"海宮", title:"海宮", category:"completed", format:"TV", year:2012 },
+        { id:"two", seriesGroupTitle:"海宮", title:"海宮（OVA）（2014）", category:"backlog", format:"OVA", year:2014 },
+        { id:"three", groupTitle:"海宮", title:"海宮（特別篇）（2016）", category:"review", format:"SPECIAL", year:2016 },
+        { id:"four", groupTitle:"海宮", title:"海宮收藏筆記", category:"waiting", year:2016, titleSource:"manual" }
+    ];
+    const keys = membership(rows);
+    assert.equal(new Set(keys.slice(0,3)).size,1);
+    assert.notEqual(keys[0],keys[3]);
+    assert.ok(rows.every(row => !V.getConfirmedAnimeAniListId(row)));
+});
+
+test("verified cour and Paris identities beat old duplicate-name warnings without writing new identity fields", () => {
+    const previous = require("../releases/legacy-series-5/v11-core.js");
+    const legacy = (anilistId, title, groupTitle, year, category) => ({
+        id:`legacy-${anilistId}`, anilistId, title, groupTitle, year, format:"TV", category,
+        watched:3, rating:8, notes:"保留本機觀看資料"
+    });
+    const fantasy = "無職轉生～到了異世界就拿出真本事～";
+    const nodame = "交響情人夢";
+    const rows = [
+        legacy(146065,`${fantasy} 第二季（2023）`,fantasy,2023,"completed"),
+        legacy(166873,`${fantasy} 第二季（2024）`,fantasy,2024,"backlog"),
+        legacy(178789,`${fantasy} 第三季（2026）`,fantasy,2026,"review"),
+        legacy(217434,`${fantasy} 第三季（2027）`,fantasy,2027,"waiting"),
+        legacy(1698,nodame,nodame,2007,"completed"),
+        legacy(4477,`${nodame}（2008）`,nodame,2008,"review"),
+        legacy(5690,`${nodame} 第三季（2010）`,nodame,2010,"backlog"),
+        { ...legacy(8038,`${nodame}（特別篇）（2010）`,nodame,2010,"backlog"), format:"SPECIAL" },
+        { ...legacy(8190,`${nodame}（OVA）（2010）`,nodame,2010,"backlog"), format:"OVA" },
+        legacy(127720,"無職轉生 ~到了異世界就拿出真本事~【異世界行ったら本気だす 第2クール】（2021）",fantasy,2021,"completed")
+    ];
+    const before = structuredClone(rows);
+    const oldReview = previous.describeAnimeSeriesProjection(rows).reviewByIndex;
+    for (const index of [0,2,4,5]) assert.ok(oldReview.has(index), `legacy review for ${rows[index].anilistId}`);
+
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.deepEqual([...report.reviewByIndex],[]);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,4)).size,1);
+    assert.equal(new Set(keys.slice(4,9)).size,1);
+    assert.equal(keys[0],keys[9]);
+    assert.notEqual(keys[0],keys[4]);
+    assert.deepEqual(report.membershipEvidence.map(item => item.id),rows.map(row => String(row.anilistId)));
+    assert.equal(report.membershipEvidence[1].part,"第 2 季 Part 2");
+    assert.equal(report.membershipEvidence[5].part,"巴黎篇");
+    assert.ok(report.membershipEvidence[5].via.some(link => link.type === "PREQUEL" && link.id === "1698" && !link.incoming));
+    assert.ok(report.projected.every(row => !V.getConfirmedAnimeAniListId(row)));
+    assert.deepEqual(rows,before);
+});
+
+test("a split cour differs from its same-season first part in corroborated legacy names", () => {
+    const record = (id,title,year) => ({ id,title,year,format:"TV",groupTitle:"合成長篇",category:"waiting" });
+    const rows = [
+        record("original","合成長篇",2020),
+        record("season-two","合成長篇 第二季",2022),
+        record("season-two-cour-two","合成長篇 第二季（Cour 2）",2022)
+    ];
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.equal(new Set(report.projected.map(V.getAnimeSeriesKey)).size,1);
+    assert.deepEqual([...report.reviewByIndex],[]);
+});
+
+test("exact AniList claims with older ownership annotations are corroborated for display only", () => {
+    const legacy = (id, title, year, claim) => ({
+        id, title, year, format:"TV", category:"backlog", watched:2, notes:"留在本機", ...claim
+    });
+    const rows = [
+        legacy(146065,"無職轉生 第二季",2023,{anilistId:146065,identitySource:"legacy-title-year-format"}),
+        legacy(178789,"無職轉生 第三季",2026,{dataSource:"anilist",sourceId:178789}),
+        legacy(1698,"交響情人夢",2007,{anilistId:1698,identitySource:"legacy-work-sourceId"}),
+        legacy(4477,"交響情人夢（2008）",2008,{aniListId:4477,identitySource:"legacy-title-year-format"})
+    ];
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    assert.deepEqual(report.membershipEvidence.map(entry => entry.id),["146065","178789","1698","4477"]);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(keys[0],keys[1]);
+    assert.equal(keys[2],keys[3]);
+    assert.notEqual(keys[0],keys[2]);
+    assert.deepEqual([...report.reviewByIndex],[]);
+    assert.ok(rows.every(row => !V.getConfirmedAnimeAniListId(row)));
+    assert.deepEqual(rows,before);
+
+    const contested = [
+        legacy(146065,"無職轉生 第二季",2023,{}),
+        legacy(178789,"無職轉生 第三季",2026,{source:"mal",sourceId:178789}),
+        legacy(1698,"交響情人夢",2007,{anilistId:1698,sourceId:90802}),
+        legacy(4477,"交響情人夢（2008）",2008,{anilistId:4477,identitySource:"legacy-title-year-format",format:"OVA"})
+    ];
+    assert.deepEqual(V.describeAnimeSeriesProjection(contested).membershipEvidence,[null,null,null,null]);
+});
+
+test("official alternate adaptations and extras attach without making a bridge between franchises", () => {
+    const verified = (id, title, groupTitle, format, year, relations = []) => ({
+        id:`work-${id}`, anilistId:id, sourceId:id, source:"anilist", title, groupTitle, format, year, relations,
+        watched:2, notes:"保留觀看資料"
+    });
+    const hori = "堀與宮村", night = "徹夜之歌";
+    const rows = [
+        verified(14753,hori,hori,"OVA",2012),
+        verified(124080,hori,hori,"TV",2021),
+        verified(163132,`${hori} -piece-`,hori,"TV",2023),
+        verified(141391,night,night,"TV",2022),
+        verified(175914,`${night} 第二季`,night,"TV",2025),
+        verified(150583,`${night} Mini`,night,"ONA",2022)
+    ];
+    const before = structuredClone(rows);
+    const report = V.describeAnimeSeriesProjection(rows);
+    const keys = report.projected.map(V.getAnimeSeriesKey);
+    assert.equal(new Set(keys.slice(0,3)).size,1);
+    assert.equal(new Set(keys.slice(3)).size,1);
+    assert.notEqual(keys[0],keys[3]);
+    assert.deepEqual(report.relationComponents.map(group => group.members),[[3,4]]);
+    assert.deepEqual(report.membershipEvidence.map(item => item.kind),
+        ["alternative-edition","edition-anchor","satellite","continuation","continuation","satellite"]);
+    assert.ok(report.membershipEvidence.every(item => item.yearVerified && item.formatVerified && item.component));
+    assert.ok(report.membershipEvidence[0].via.some(link => link.type === "ALTERNATIVE" && link.id === "124080"));
+    assert.ok(report.membershipEvidence[5].via.some(link => link.type === "PARENT" && link.id === "141391"));
+    assert.deepEqual(rows,before);
+
+    const unrelated = verified(990005,"無關但同型的作品",night,"TV",2025);
+    const misleadingSatellite = { ...rows[5], relations:[edge("SEQUEL",990005,unrelated.title,"TV")] };
+    const splitKeys = membership([...rows.slice(0,5),misleadingSatellite,unrelated]);
+    assert.notEqual(splitKeys[3],splitKeys[6],"an attachment cannot link two transitive chains");
+    assert.notEqual(splitKeys[3],splitKeys[5],"contradictory chain must not be absorbed through a weak attachment");
+});
